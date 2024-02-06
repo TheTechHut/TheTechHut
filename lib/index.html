@@ -1,19 +1,84 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
     <head>
-        <meta charset="UTF 8"/>
-        <title> AI Study Pal</title>
-        <link href="style.css"  rel="stylesheet"/>
-        <script src="app.ts"></script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>The Tech Hut</title>
+        <link rel="stylesheet" href="style.css"> <!-- Link to external CSS file -->
     </head>
+
     <body>
-        <img src="../assets/m_logo_icon.png" id="image_icon"/>
-        <h1 id="centre_text">Coming soon</h1>
-        <img src="../assets/ai_study_pal_banner.png" id="banner_image"/>
-        <span>Join Early Adopters</span>
-        <form>
-            <input type="text" aria-label="Enter phone number"/>
-            <input type="button" aria-label="Join"/>
-        </form>
+        <header>
+            <nav>
+                <div id="logo">
+                    <img src="../assets/m_logo_icon.png" alt="The Tech Hut Logo">
+                    <!-- Replace this with the path to the actual Tech Hut Logo -->
+                </div>
+                <ul>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About Apex Tech</a></li>
+                    <li><a href="#training">Training Programs</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </nav>
+            <div id="landing-hero">
+                <h1>Welcome to The Tech Hut</h1>
+                <p>Your pathway to employing top tech talent and innovative solutions.</p>
+                <a href="#contact" class="btn-get-started">Get Started</a>
+            </div>
+        </header>
+
+        <section id="services">
+            <h2>Our Services</h2>
+            <p>We provide specialized training and staffing solutions tailored to your organization's needs.</p>
+            <!-- Images related to the services -->
+            <img src="../assets/m_logo_icon.png" alt="Specialized Training">
+            <img src="../assets/m_logo_icon.png" alt="Staffing Solutions">
+        </section>
+
+        <section id="about">
+            <h2>About Apex Tech</h2>
+            <p>Apex Tech specializes in IT, UI/UX Design, and SaaS Solutions, working closely with The Tech Hut to
+                ensure quality training and opportunities for each trainee.</p>
+            <!-- Image for Apex Tech -->
+            <img src="../assets/m_logo_icon.png" alt="Apex Tech">
+        </section>
+
+        <section id="training">
+            <h2>Training Programs</h2>
+            <p>Our comprehensive training programs prepare you for a bright future in technology. Trainees have the
+                potential to join Apex Tech or get outsourced to our vast network of organizations.</p>
+            <!-- Images for training programs -->
+            <img src="../assets/m_logo_icon.png" alt="Training Programs">
+        </section>
+
+        <section id="entrepreneurship">
+            <h2>For Entrepreneurs</h2>
+            <p>Join us to work on building innovative solutions that empower society through technology.</p>
+            <!-- Image for entrepreneurship -->
+            <img src="../assets/m_logo_icon.png" alt="Entrepreneurship at The Tech Hut">
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <form id="contact-form">
+                <!-- Form fields -->
+                <div class="form-group">
+                    <label for="name">Name</label><br/>
+                    <input type="text" id="name" name="name" required><br />
+                    <label for="email">Email</label> <br/>
+                    <input type="email" id="email" name="email" required> <br />
+                    <input type="submit" value="Submit" id="submit-btn"> <br />
+                </div>
+            </form>
+        </section>
+
+        <footer>
+            <p>&copy; 2023 The Tech Hut Smart Software. All rights reserved.</p>
+        </footer>
+
+        <script src="app.ts"></script> <!-- Link to external JS file -->
     </body>
+
 </html>
