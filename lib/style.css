@@ -1,15 +1,6 @@
 /* Certainly ! Here is an example of basic CSS (styles.css) that you can use to style the landing page for THE TECH HUT: ```css */
 /* Global Styles */
 
-
-
-* 
-{
-box-sizing: border-box;
-margin: 0;
-padding: 0;
-}
-
 img{
     width: 10%;
     height: 10%;
@@ -98,10 +89,18 @@ position: relative;
 }
 
 
-#services, #training, #about, #entrepreneurship {
+ .body_text {
     margin-top: 40px;
     margin-bottom: 40px;
     margin-left: 20%;
+}
+
+#services,
+#training,
+#about,
+#entrepreneurship {
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 p{
@@ -208,6 +207,7 @@ footer {
 display: flex;
 flex-direction: column;
 align-items: center;
+width: 100%;
 padding: 20px;
 background-color: #f1f1f1;
 }
