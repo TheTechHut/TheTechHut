@@ -15,6 +15,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 padding: 20px;
+margin: 0.5%;
 }
 
 h1 {
@@ -34,12 +35,12 @@ color: #23527c;
 /* Header Styles */
 
 header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: #f1f1f1;
-    border-radius: 5px;
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 20px;
+background-color: #f1f1f1;
+border-radius: 5px;
 }
 
 nav {
@@ -47,7 +48,6 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 padding: 20px;
-z-index: 1;
 }
 
 .btn-get-started {
@@ -79,12 +79,31 @@ color: #337ab7;
 
 /* Hero Section Styles */
 
+.landing-hero {
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 20px;
+background-image: linear-gradient(90deg, #f5f5f5, #e0e0e0);
+background-size: 100% 500px;
+position: relative;
+}
 
 
  .body_text {
     margin-top: 40px;
     margin-bottom: 40px;
     margin-left: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+video{
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
+    border-radius: 24px;
 }
 
 #services,
@@ -92,33 +111,7 @@ color: #337ab7;
 #about,
 #entrepreneurship {
     margin-top: 40px;
-    margin-bottom: 20px;
-}
-
-
-.landing-hero {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-image: linear-gradient(90deg, #f5f5f5, #e0e0e0);
-    background-size: 100% 500px;
-    position: relative;
-}
-
-#landing-video {
-    width: 50%;
-    object-fit: cover;
-    border-radius: 24px;
-    position: relative;
-    scale: 0.9;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-}
-
-.caption{
-    z-index: 1;
+    margin-bottom: 40px;
 }
 
 p{
@@ -146,31 +139,6 @@ background-color: #23527c;
 
 /* Training Section Styles */
 
-/* #training {
-margin-bottom: 40px;
-} */
-
-/* h2 {
-margin-top: 0;
-} */
-
-/* .training-image {
-display: inline-block;
-margin-right: 20px;
-}
-
-.training-image img {
-width: 100%;
-height: 300px;
-object-fit: cover;
-border-radius: 5px;
-} */
-
-/* About Apex Tech Styles */
-
-/* #about-apex-tech {
-margin-bottom: 40px;
-} */
 
 h2 {
 margin-top: 0;
@@ -187,12 +155,6 @@ height: 300px;
 object-fit: cover;
 border-radius: 5px;
 }
-
-/* Contact Styles */
-
-/* #contact {
-margin-bottom: 40px;
-} */
 
 form {
 display: flex;
