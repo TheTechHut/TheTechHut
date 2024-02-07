@@ -34,12 +34,12 @@ color: #23527c;
 /* Header Styles */
 
 header {
-display: flex;
-flex-direction: column;
-align-items: center;
-padding: 20px;
-background-color: #f1f1f1;
-border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
 }
 
 nav {
@@ -47,6 +47,7 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 padding: 20px;
+z-index: 1;
 }
 
 .btn-get-started {
@@ -78,15 +79,6 @@ color: #337ab7;
 
 /* Hero Section Styles */
 
-#landing-hero {
-display: flex;
-flex-direction: column;
-align-items: center;
-padding: 20px;
-background-image: linear-gradient(90deg, #f5f5f5, #e0e0e0);
-background-size: 100% 500px;
-position: relative;
-}
 
 
  .body_text {
@@ -100,7 +92,33 @@ position: relative;
 #about,
 #entrepreneurship {
     margin-top: 40px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
+}
+
+
+.landing-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-image: linear-gradient(90deg, #f5f5f5, #e0e0e0);
+    background-size: 100% 500px;
+    position: relative;
+}
+
+#landing-video {
+    width: 50%;
+    object-fit: cover;
+    border-radius: 24px;
+    position: relative;
+    scale: 0.9;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.caption{
+    z-index: 1;
 }
 
 p{

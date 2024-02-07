@@ -6,6 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>The Tech Hut</title>
         <link rel="stylesheet" href="style.css"> 
+        <meta name="description" content="The Tech Hut is a leading Ed Tech and Talent Sourcing company.">
+        <link rel="icon" href="assets/logo.png" type="image/x-icon"> <!-- Link to favicon -->
         <!-- Link to external CSS file -->
 
         <script src="app.ts"></script> <!-- Link to external JS file -->
@@ -13,9 +15,10 @@
 
     <body>
         <header>
+            
             <nav>
                 <div id="logo">
-                    <img src="../assets/m_logo_icon.png" alt="The Tech Hut Logo">
+                    <img src="./assets/logo.png" alt="The Tech Hut Logo">
                     <!-- Replace this with the path to the actual Tech Hut Logo -->
                 </div>
                 <ul>
@@ -25,10 +28,14 @@
                     <li><a href="#contact">Contact Us</a></li>
                 </ul>
             </nav>
-            <div id="landing-hero">
-                <h1>Welcome to The Tech Hut</h1>
-                <p>Your pathway to employing top tech talent and innovative solutions.</p>
-                <a href="#contact" class="btn-get-started">Get Started</a>
+            <div class="landing-hero">
+                
+                <div class="caption">
+                    <h1>Welcome to The Tech Hut</h1>
+                    <p>Your pathway to employing top tech talent and innovative solutions.</p>
+                    <a href="#contact" class="btn-get-started">Get Started</a>
+                </div>
+                
             </div>
         </header>
 
@@ -55,7 +62,9 @@
                 <p>Our comprehensive training programs prepare you for a bright future in technology. Trainees have the
                     potential to join Apex Tech or get outsourced to our vast network of organizations.</p>
                 <!-- Images for training programs -->
-                <img src="../assets/m_logo_icon.png" alt="Training Programs">
+                <video id="landing-video" autoplay muted loop>
+                    <source src="./assets/demo_video.mp4" type="video/mp4">
+                </video>
             </section>
 
             <section id="entrepreneurship">
