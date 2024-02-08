@@ -2,12 +2,18 @@
 /* Global Styles */
 
 img{
-    width: 10%;
-    height: 10%;
+    width: 25%;
+    height: 25%;
     object-fit: cover;
     border-radius: 5px;
 }
 
+@media screen and (max-width: 600px) {
+    img{
+        width: 100%;
+        height: 100%;
+    } 
+}
 
 body {
 font-family: Arial, sans-serif;
@@ -31,6 +37,7 @@ color: #337ab7;
 a:hover {
 color: #23527c;
 }
+
 
 /* Header Styles */
 
@@ -94,9 +101,26 @@ position: relative;
     margin-top: 40px;
     margin-bottom: 40px;
     margin-left: 20%;
-    display: flex;
+    display: flex-box;
     flex-direction: column;
     align-items: center;
+}
+
+.project_images img{
+    width: 25%;
+    height: 25%;
+    object-fit: cover;
+    border-radius: 24px;
+    padding: 8px;
+}
+
+.project_images{
+    display: flexbox;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+    margin-bottom: 16px;
 }
 
 video{

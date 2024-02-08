@@ -3,7 +3,7 @@
 // import { navigateTo } from 'your-routing-library';
 
 // Function to handle clicking the 'Get Started' button
-function handleGetStartedClick(): void {
+function handleGetStartedClick() {
     // Logic to handle the action after the 'Get Started' button is clicked
     // For the purpose of this example, we'll just log to the console
     console.log('Get Started button clicked!');
