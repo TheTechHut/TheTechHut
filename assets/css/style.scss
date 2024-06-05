@@ -244,7 +244,7 @@ body
         margin: 0;
         padding: 0;
         background: linear-gradient(221deg, darken($primary-color, 30) 22%,darken($primary-color, 35) 80%);
-        overflow-x: hidden;
+        overflow-x: hidden !important;
     header
     {
         background: transparent;
@@ -254,7 +254,7 @@ body
         display: inline-flex;
         justify-content: space-between;
         box-sizing: border-box;
-        padding: .5%;
+        padding: 1%;
         backdrop-filter: blur(10px);
         position: sticky;
         z-index: 999;
@@ -263,7 +263,7 @@ body
         .logo
         {
             height: 100%;
-            width: 80%;
+            width: 100%;
             display: inline-flex;
             justify-content: center;
             justify-items: center;
@@ -271,13 +271,14 @@ body
 
             img
             {
-                height: 100%;
+                height: 80%;
             }
 
             p
             {
                 margin-left: 10px;
-                font-size: 1em;
+                width: 100%;
+                font-size: 10px;
                 font-weight: bold;
                 letter-spacing: 1px;
                 text-transform: uppercase;
@@ -288,6 +289,7 @@ body
         {
             margin-right: 3px;
             margin-left: 5%;
+            grid-template-columns: repeat(1, 1fr);
             a
             {
                 padding: 5px 40px;
@@ -317,7 +319,7 @@ body
 
             h1
             {
-                font-size: 2.5em;
+                font-size: 2em;
                 width: 100%;
                 text-align: center;
             }
@@ -393,7 +395,7 @@ body
                             border: 1px solid darken(rgba(darken($primary-color, 3), .8), 5);
                             border-radius: inherit;
                             height: 60%;
-                            width: 80%;
+                            width: 90%;
                             backdrop-filter: blur(10px);
                             box-sizing: border-box;
                             padding: 10px;
@@ -406,7 +408,7 @@ body
                             p
                             {
                                     margin-left: 1%;
-                                    font-size: 2rem;
+                                    font-size: 1.5rem;
                                     font-weight: bold;
                                     width: 80%;
                                     text-align: center;
