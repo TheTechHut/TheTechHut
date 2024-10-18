@@ -1,0 +1,80 @@
+/* <sup className="rounded-full text-xs cursor-pointer [&>*]:!text-white h-4 w-4 px-1 bg-zinc-400 hover:bg-zinc-500 dark:bg-zinc-700 hover:dark:bg-zinc-600">[2](https://www.codewithfaraz.com/content/423/quick-and-easy-countdown-timer-with-html-css-and-javascript)</sup>  */
+
+
+body {
+    background-color: #093e76;
+    color: #fff;
+}
+
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #093e76;
+    font-family: Arial, sans-serif;
+}
+
+.timer {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.time-block {
+    background-color: #2ecc71;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    margin: 0 1rem;
+    text-align: center;
+}
+
+.time-block span {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.time-block p {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+}
+
+.time-block.expired span {
+    color: red;
+}
+
+
+@media (max-width: 768px) {
+    .timer {
+        flex-wrap: wrap;
+    }
+
+    .time-block {
+        margin: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    .time-block span {
+        font-size: 2rem;
+    }
+
+    .time-block p {
+        font-size: 0.8rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+}
