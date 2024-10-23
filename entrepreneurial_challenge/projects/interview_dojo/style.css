@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: 100%;
+    height: 100%;
+    z-index: -100;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #333;
+    opacity: 0.9;
+    color: #fff;
+}
+
+header {
+    background-color: #333;
+    opacity: 0.9;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+    font-size: 48px;
+}
+
+.hero {
+    display: flex;
+}
+
+@media screen and (max-width: 600px) {
+    .hero {
+        flex-direction: column;
+    }
+
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #333;
+    opacity: 0.9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    min-width: 200px;
+    max-width: 400px;
+    margin: 20px;
+}
+
+.cta {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #333;
+    opacity: 0.9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    min-width: 200px;
+    max-width: 400px;
+    margin: 20px;
+}
+
+.cta img {
+    height: auto;
+    width: 100%;
+    margin: 20px;
+    border-radius: 16px;
+}
+
+#cta-btn {
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #333;
+    border: none;
+    border-radius: 16px;
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+    align-self: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+main {
+    align-content: center;
+    align-self: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #333;
+    opacity: 0.9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+h2 {
+    font-size: 32px;
+}
+
+p {
+    line-height: 1.5;
+    font-size: 18px;
+    font-weight: lighter;
+    font-style: italic;
+    font-family: 'Roboto', sans-serif;
+}
+
+form {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+}
+
+input[type="email"] {
+    padding: 10px;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 10px;
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    max-width: 400px;
+    align-self: center;
+    border: none;
+}
+
+button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #333;
+    border: none;
+    border-radius: 16px;
+    width: 100%;
+    height: auto;
+    font-family: 'Roboto', sans-serif;
+    max-width: 400px;
+    cursor: pointer;
+    align-self: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
