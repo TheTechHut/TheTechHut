@@ -6,6 +6,10 @@ const daysElement = document.getElementById("days");
 const hoursElement = document.getElementById("hours");
 const minutesElement = document.getElementById("minutes");
 const secondsElement = document.getElementById("seconds");
+let degrees = -45;
+const colors = ["#e3242b", "#333", "#e3242b", "#fff", "#2ecc71", "#093e76", "#e3242b", "#333"];
+let currentColorIndex = 0;
+let nextColorIndex = 1;
 
 const countdownTimer = setInterval(function () {
     const now = new Date().getTime();
@@ -21,6 +25,16 @@ const countdownTimer = setInterval(function () {
     minutesElement.textContent = minutes;
     secondsElement.textContent = seconds;
 
+    if (days == "00") {
+        document.getElementById("days").style.display = "none";
+        document.getElementsByClassName("time-block")[0].style.display = "none";
+        document.getElementsByClassName("time-block")[1].style.background = "#e3242b";
+        document.getElementsByClassName("time-block")[2].style.background = "#e3242b";
+        document.getElementsByClassName("time-block")[3].style.background = "#e3242b";
+    }
+
+
+
     if (distance < 0) {
         clearInterval(countdownTimer);
         daysElement.textContent = "00";
@@ -29,3 +43,14 @@ const countdownTimer = setInterval(function () {
         secondsElement.textContent = "00";
     }
 }, 1000);
+
+
+
+function changeColor() {
+    degrees += 10;
+    document.getElementsByClassName("container")[0].style.background = "linear-gradient(" + degrees + "deg," + colors[currentColorIndex] + "," + colors[nextColorIndex] + ")";
+    currentColorIndex = (currentColorIndex + 1) % colors.length;
+    nextColorIndex = (nextColorIndex + 1) % colors.length;
+}
+setInterval(changeColor(), 200);
+

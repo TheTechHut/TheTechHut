@@ -38,6 +38,8 @@ h1 {
     text-align: center;
 }
 
+
+
 .time-block span {
     font-size: 3rem;
     font-weight: bold;
@@ -48,9 +50,6 @@ h1 {
     font-size: 1rem;
 }
 
-.time-block.expired span {
-    color: red;
-}
 
 
 @media (max-width: 768px) {
