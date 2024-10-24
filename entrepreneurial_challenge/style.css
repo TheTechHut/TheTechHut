@@ -2,7 +2,10 @@
 
 
 body {
-    background-color: #093e76;
+    overflow: hidden;
+    background: linear-gradient(45deg, #FF6347, #e3242b, #093e76, #e3242b, #2ecc71, #093e76, #093e76, #e3242b, #093e76);
+    background-size: 800% 800%;
+    animation: gradientAnimation 30s ease infinite;
     color: #fff;
 }
 
@@ -13,13 +16,40 @@ h1 {
     text-align: center;
 }
 
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    25% {
+        background-position: 50% 75%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    75% {
+        background-position: 50% 25%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #093e76;
+    overflow: hidden;
+    background: linear-gradient(45deg, #FF6347, #e3242b, #093e76, #e3242b, #2ecc71, #093e76, #093e76, #e3242b, #093e76);
+    background-size: 800% 800%;
+    animation: gradientAnimation 30s ease infinite;
     font-family: Arial, sans-serif;
 }
 
