@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feature Requests - Interview Dojo</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #093e76;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        h1 {
+            color: #093e76;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 1;
+        }
+
+        input,
+        textarea {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #2ecc71;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #24b658;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background-color: #333;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.2;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-30px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Feature Requests for Interview Dojo</h1>
+    <p>Your feedback is important. It helps us serve you better!</p>
+
+    <form id="featureRequestForm" action="https://formspree.io/f/mbljlvdk" method="POST">
+        <input name="Username" type="text" placeholder="UserName" required>
+        <textarea name="Feature Request" rows="4" placeholder="Feature Request..." required></textarea>
+        <button type="submit">Submit Request</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('featureRequestForm');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            handleSubmit(e);
+            alert('Thank you for your feature request!');
+            form.reset();
+        });
+
+        function createCircles() {
+            for (let i = 0; i < 10; i++) {
+                const circle = document.createElement('div');
+                circle.classList.add('circle');
+                const size = Math.random() * 100 + 50; // Random size between 50px and 150px
+                circle.style.width = circle.style.height = `${size}px`;
+                circle.style.top = Math.random() * 100 + '%'; // Random position
+                circle.style.left = Math.random() * 100 + '%'; // Random position
+                circle.style.animationDuration = `${Math.random() * 3 + 3}s`; // Random duration between 3s and 6s
+                document.body.appendChild(circle);
+            }
+        }
+
+        createCircles();
+
+
+        async function handleSubmit(event) {
+            const form = document.getElementById('featureRequestForm');
+            event.preventDefault();
+            // var status = document.getElementById("my-form-status");
+            var data = new FormData(event.target);
+            fetch(event.target.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    alert("Thank you for sharing your story!");
+                    form.reset()
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            alert(data["errors"].map(error => error["message"]).join(", "));
+                        } else {
+                            alert("Oops! There was a problem submitting your form")
+                        }
+                    })
+                }
+            }).catch(error => {
+                alert("Oops! There was a problem submitting your form" + error.toString());
+            });
+        }
+    </script>
+</body>
+
+</html>
