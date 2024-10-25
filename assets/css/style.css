@@ -652,7 +652,7 @@ body section:nth-of-type(2) .grid-container .grid-item p {
 
 body footer {
     width: 100%;
-    height: 50vh;
+    height: 50%;
     background-color: rgba(1, 38, 17, .9568627451);
     box-sizing: border-box;
     padding: 1% 2%
@@ -683,6 +683,8 @@ body footer .container .branding div:first-of-type {
 
 body footer .container .branding div:first-of-type p {
     color: rgba(250, 255, 251, .9333333333);
+    font-size: 2rem;
+    font-weight: bold;
     position: relative;
     margin-top: .5%;
     margin-left: 10px;
@@ -691,7 +693,6 @@ body footer .container .branding div:first-of-type p {
 
 body footer .container .branding div:last-of-type a .i {
     color: rgba(250, 255, 251, .9333333333);
-    font-size: 3em;
     margin-left: 20px
 }
 
@@ -902,7 +903,7 @@ body footer .container .links a {
 
     body footer {
         width: 100%;
-        height: 250vh;
+        height: auto;
         background-color: rgba(1, 38, 17, .9568627451);
         box-sizing: border-box;
         padding: 1% 2%;
@@ -935,7 +936,9 @@ body footer .container .links a {
     }
 
     body footer .container .branding img {
-        width: 100%
+        width: 20%;
+        height: 20%;
+        border-radius: 50%
     }
 
     body footer .container .branding div:first-of-type {
