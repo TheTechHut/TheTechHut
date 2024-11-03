@@ -597,8 +597,8 @@ body section .img {
 body main .img img,
 body .showcase .img img,
 body section .img img {
-    width: 80%;
-    height: 80%;
+    width: 100%;
+    height: 100%;
     border-radius: 20px
 }
 
@@ -839,7 +839,11 @@ body footer .container .links a {
         display: none;
         width: 100%;
         height: 100%;
-        border-radius: 20px
+        border-radius: 20px;
+    }
+
+    #hero_image {
+        object-fit: contain;
     }
 
     body section {
