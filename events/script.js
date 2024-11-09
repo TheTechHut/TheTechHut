@@ -17,9 +17,9 @@ function createCircles() {
         circle.style.left = Math.random() * 100 + '%'; // Random position
         circle.style.animationDuration = `${Math.random() * 3 + 3}s`; // Random duration between 3s and 6s
         body.appendChild(circle);
-        if (i % 2 === 0) {
-            circle.style.backgroundColor = '#24b658';
-        }
+        // if (i % 2 === 0) {
+        //     circle.style.backgroundColor = '#24b658';
+        // }
     }
 }
 
