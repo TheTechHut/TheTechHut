@@ -2,12 +2,15 @@
 <html lang="en">
 
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@2" async defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Successful</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: "Roboto Condensed", sans-serif;
             text-align: center;
             padding: 2rem;
             background-color: #093e76;
@@ -33,20 +36,6 @@
             font-size: 1.1rem;
             font-style: italic;
         }
-
-        /* .btn {
-            display: inline-block;
-            background-color: #093e76;
-            color: #fff;
-            text-decoration: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn:hover {
-            background-color: #27ae60;
-        } */
     </style>
 </head>
 
@@ -55,8 +44,11 @@
         <h1>Payment Successful!</h1>
         <p>Thank you for your payment.</p>
         <p>Your transaction has been completed successfully.</p>
-        <p>You will receive a confirmation email shortly with the details of your purchase.</p>
-        <!-- <a href="#" class="btn">Continue Shopping</a> -->
+        <p>Be on the look out on your email for more updates.</p>
+        <add-to-calendar-button name="The Entrepreneurial Masterclass" description="A nice description does not hurt"
+            startDate="2024-11-16" endDate="2024-11-16" startTime="19:00" endTime="21:30" location="TBD"
+            options="['Apple','Google','iCal','Microsoft365','Outlook.com','Yahoo']" timeZone="Africa/Nairobi"
+            trigger="click" inline listStyle="modal" iCalFileName="Reminder-Event" />
     </div>
 </body>
 
