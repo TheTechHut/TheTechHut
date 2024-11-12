@@ -1,9 +1,9 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('eventForm');
-    form.addEventListener('submit', (ev) =>
-        handleSubmit(ev)
-    );
-});
+// document.addEventListener('DOMContentLoaded', function () {
+//     const form = document.getElementById('eventForm');
+//     form.addEventListener('submit', (ev) =>
+//         handleSubmit(ev)
+//     );
+// });
 
 
 function createCircles() {
