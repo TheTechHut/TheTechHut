@@ -5,13 +5,15 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    /* border: 1px solid #fff !important; */
 }
 
 
 
 
 body {
-    margin: 4%;
+    margin: 4% auto;
+    overflow-x: hidden;
     background: #093e76;
     color: #fff;
     display: flex;
@@ -19,7 +21,7 @@ body {
     flex-direction: column;
     align-items: start;
     height: 100%;
-    width: 100%;
+    width: 96%;
     text-align: left;
 }
 
@@ -55,7 +57,8 @@ h1 {
     justify-content: center;
     align-items: start;
     height: 100%;
-    width: 100%;
+    width: 90%;
+    align-self: center;
 }
 
 
@@ -69,7 +72,7 @@ h1 {
     text-align: center;
     justify-content: start;
     align-items: start;
-    margin: 2%;
+    margin: 2% auto !important;
 }
 
 .event_title {
@@ -141,11 +144,11 @@ li {
     justify-content: start;
     align-items: start;
     height: fit-content;
-    margin: 20px;
+    /* margin: 20px; */
     padding: 20px;
     border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    background-color: rgba(255, 255, 255, 0.1);
+    /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); */
+    /* background-c\olor: rgba(255, 255, 255, 0.1); */
     text-align: center;
 }
 
@@ -247,7 +250,8 @@ textarea:focus {
     }
 
     .event_container {
-        width: 85%;
+        width: 96%;
+        margin: 2% auto !important;
     }
 
     .pay_container {
@@ -255,6 +259,7 @@ textarea:focus {
     }
 
     .event_card {
+        width: 100%;
         flex-direction: column;
     }
 
