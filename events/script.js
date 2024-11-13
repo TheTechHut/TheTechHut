@@ -7,7 +7,7 @@
 
 
 function createCircles() {
-    const body = document.body;
+    const body = document.querySelector('.circle-parent');
     for (let i = 0; i < 20; i++) {
         const circle = document.createElement('div');
         circle.classList.add('circle');
