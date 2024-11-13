@@ -12,10 +12,11 @@
     position: fixed;
     width: 100vw;
     height: 100vh;
-    /* overflow: auto; */
-/* } */
+    overflow: auto;
+} */
 
-*/ body {
+
+body {
     margin: 4% auto;
     overflow-x: hidden;
     background: #093e76;
