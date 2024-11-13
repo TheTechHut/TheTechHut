@@ -196,6 +196,13 @@ li {
 
 a {
     width: 100%;
+    text-decoration: none;
+    color: #24b658;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #d6a811;
 }
 
 button {
