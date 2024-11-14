@@ -21,13 +21,14 @@
             max-width: 500px;
             margin: 0 auto;
             background-color: #2ecc71;
+            opacity: 0.8;
             padding: 2rem;
             border-radius: 8px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
-            color: #fff;
+            color: #d6a811;
             margin-bottom: 1rem;
         }
 
@@ -36,10 +37,35 @@
             font-size: 1.1rem;
             font-style: italic;
         }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
     </style>
 </head>
 
 <body>
+
+
+
     <div class="container">
         <h1>Payment Successful!</h1>
         <p>Thank you for your payment.</p>
@@ -49,6 +75,13 @@
             startDate="2024-11-16" endDate="2024-11-16" startTime="19:00" endTime="21:30" location="TBD"
             options="['Apple','Google','iCal','Microsoft365','Outlook.com','Yahoo']" timeZone="Africa/Nairobi"
             trigger="click" inline listStyle="modal" iCalFileName="Reminder-Event" />
+    </div>
+    <h1>Speaker Line-up</h1>
+    <div class="grid">
+        <img src="./assets/img/Caleb_Speaker_One.png">
+        <img src="./assets/img/Robi_Speaker_Two.png">
+        <img src="./assets/img/Peter_Speaker_Three.png">
+        <img src="./assets/img/Okemwa_Speaker_One.png">
     </div>
 </body>
 
