@@ -46,6 +46,7 @@ h2 {
     font-weight: 700;
     text-align: left;
     color: #24b658;
+    padding: 0;
 }
 
 h1 {
@@ -161,7 +162,7 @@ li {
     align-items: start;
     height: fit-content;
     /* margin: 20px; */
-    padding: 20px;
+    padding: 16px;
     border-radius: 15px;
     /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); */
     /* background-c\olor: rgba(255, 255, 255, 0.1); */
@@ -169,13 +170,12 @@ li {
 }
 
 .event_info {
+    margin-left: 16px;
     display: flex;
     justify-content: left;
     flex-direction: column;
     align-items: self-start;
     height: 100%;
-    margin: 20px;
-    padding: 20px;
     text-align: start;
     /* border: 1px solid #d6a811; */
     width: 100%;
@@ -219,16 +219,15 @@ img {
 }
 
 .event_image {
-    display: flex;
-    align-self: center;
-    justify-content: left;
-    flex-direction: column;
-    align-items: self-start;
-    text-align: start;
     width: 50%;
-    object-fit: cover;
-    border-radius: 8px;
     /* border: 1px solid #d6a811; */
+}
+
+.event_image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
 }
 
 a {
