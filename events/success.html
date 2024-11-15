@@ -18,8 +18,15 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
         body {
-            font-family: "Roboto Condensed", sans-serif;
+            /* font-family: "Roboto Condensed", sans-serif; */
             text-align: center;
             padding: 2rem;
             background-color: #093e76;
@@ -39,16 +46,19 @@
 
         h1 {
             color: #d6a811;
-            margin-bottom: 1rem;
+            margin: 1.5rem;
+            text-align: left;
+            font-size: 2.5rem;
         }
 
         p {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             font-size: 1.1rem;
             font-style: italic;
         }
 
         .grid {
+            margin: 1.5rem;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 1rem;
@@ -67,6 +77,7 @@
         @media screen and (max-width: 768px) {
             .grid {
                 grid-template-columns: repeat(1, 1fr);
+                margin: 1.5rem;
             }
         }
     </style>
@@ -77,24 +88,31 @@
 
 
     <div class="container">
-        <h1>We've received your payment!</h1>
+        <h1 style="text-align: center;">🎊🎊<br /> We've received your payment!</h1>
         <p>
             Be on the look out on your email for more updates on the event! <br />
             We can't wait to see you there! <br />
             Tell a friend to tell a friend let's learn and grow together! <br />
             Meanwhile, add the event to your calendar below! <br />
         </p>
-        <add-to-calendar-button name="The Entrepreneurial Masterclass" description="A nice description does not hurt"
-            startDate="2024-11-16" endDate="2024-11-16" startTime="19:00" endTime="21:30" location="TBD"
+        <add-to-calendar-button name="The Entrepreneurial Masterclass"
+            description="The Entrepreneurial Masterclass - Valuable events by the tech hut." startDate="2024-11-16"
+            endDate="2024-11-16" startTime="19:00" endTime="21:30" location="TBD"
             options="['Apple','Google','iCal','Microsoft365','Outlook.com','Yahoo']" timeZone="Africa/Nairobi"
-            trigger="click" inline listStyle="modal" iCalFileName="Reminder-Event" />
+            trigger="click" inline listStyle="modal" iCalFileName="Reminder-Event" buttonStyle="round"
+            lightMode="system" />
     </div>
-    <h1>Speaker Line-up</h1>
+    <h1 style="color: #2ecc71;">Speaker Line-up</h1>
     <div class="grid">
         <img src="./assets/img/Caleb_Speaker_One.png">
         <img src="./assets/img/Robi_Speaker_Two.png">
         <img src="./assets/img/Peter_Speaker_Three.png">
         <img src="./assets/img/Okemwa_Speaker_Four.png">
+        <img src="./assets/img/Valarie_Speaker_Five.png">
+    </div>
+    <h1 style="color: #d6a811;">Moderator</h1>
+    <div class="grid">
+        <img src="./assets/img/Ivy_The_Moderator.png">
     </div>
 </body>
 
