@@ -1,6 +1,6 @@
 {/* <sup className="rounded-full text-xs cursor-pointer [&>*]:!text-white h-4 w-4 px-1 bg-zinc-400 hover:bg-zinc-500 dark:bg-zinc-700 hover:dark:bg-zinc-600">[6](https://dev.to/sameer8saini/countdown-timer-using-html-css-and-javascript-22d3)</sup> */ }
 
-const countdownDate = new Date("Oct 24, 2024 24:00:00").getTime();
+const countdownDate = new Date("Nov 16, 2024 18:30:00").getTime();
 
 const daysElement = document.getElementById("days");
 const hoursElement = document.getElementById("hours");
@@ -24,9 +24,9 @@ const countdownTimer = setInterval(function () {
     if (days == "00") {
         document.getElementById("days").style.display = "none";
         document.getElementsByClassName("time-block")[0].style.display = "none";
-        document.getElementsByClassName("time-block")[1].style.background = "#e3242b";
-        document.getElementsByClassName("time-block")[2].style.background = "#e3242b";
-        document.getElementsByClassName("time-block")[3].style.background = "#e3242b";
+        //     document.getElementsByClassName("time-block")[1].style.background = "#e3242b";
+        //     document.getElementsByClassName("time-block")[2].style.background = "#e3242b";
+        //     document.getElementsByClassName("time-block")[3].style.background = "#e3242b";
     }
 
 
