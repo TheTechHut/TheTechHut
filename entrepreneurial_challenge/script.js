@@ -1,6 +1,6 @@
 {/* <sup className="rounded-full text-xs cursor-pointer [&>*]:!text-white h-4 w-4 px-1 bg-zinc-400 hover:bg-zinc-500 dark:bg-zinc-700 hover:dark:bg-zinc-600">[6](https://dev.to/sameer8saini/countdown-timer-using-html-css-and-javascript-22d3)</sup> */ }
 
-const countdownDate = new Date("Nov 16, 2024 18:30:00").getTime();
+const countdownDate = new Date("Nov 16, 2024 18:50:00").getTime();
 
 const daysElement = document.getElementById("days");
 const hoursElement = document.getElementById("hours");
