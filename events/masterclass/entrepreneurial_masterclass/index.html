@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Open Graph (OG) Meta Tags -->
+    <meta property="og:title" content="The Entrepreneurial Masterclass Pre-sale">
+    <meta property="og:description" content="Join industry leaders and entrepreneurs at the top of their game!">
+    <meta property="og:url" content="https://your-website.com">
+    <meta property="og:image" content="https://example.com/your-image.jpg"> <!-- Replace with your actual image URL -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="The Entrepreneurial Masterclass">
+    <title>The Entrepreneurial Masterclass Pre-sale</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            /* border: 1px solid #fff !important; */
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(rgba(9, 62, 118, 0.8),
+                    rgba(9, 62, 118, 0.8)), url('../../assets/img/Caleb_Speaker_One.png'), url('../../assets/img/Ivy_The_Moderator.png'), url('../../assets/img/Okemwa_Speaker_Four.png'), url('../../assets/img/Valarie_Speaker_Five.png'), url('../../assets/img/Peter_Speaker_Three.png'), url('../../assets/img/Peter_Speaker_Three.png');
+            background-size: contain, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%;
+            background-position: center, 0 0, 50% 50%, 100% 100%, 100% 0%, 0 100%, 50% 100%;
+            background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            /* backdrop-filter: blur(10px); */
+            /* Optional: adds a blur effect */
+        }
+
+        h1 {
+            color: #093e76;
+        }
+
+        .tagline {
+            font-size: 28px;
+            color: #24b658;
+            margin: 20px 0;
+        }
+
+        .discount {
+            font-size: 24px;
+            color: #d6a811;
+            margin: 20px 0;
+        }
+
+        .countdown {
+            font-size: 20px;
+            margin: 10px 0;
+            color: #e74c3c;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #2ecc71;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #24b658;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>The Entrepreneurial Masterclass Pre-sale</h1>
+        <p class="tagline">Access the masterclass of a lifetime!</p>
+        <p class="discount">Limited Time Discount: 50% Off!</p>
+        <div class="countdown" id="countdown"></div>
+        <button onclick="purchase()">Purchase Now</button>
+    </div>
+
+    <script>
+        // Set the end date for the presale
+        const presaleEndDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days from now
+
+        // Function to update the countdown timer
+        function updateCountdown() {
+            const now = new Date();
+            const timeLeft = presaleEndDate - now;
+
+            if (timeLeft <= 0) {
+                document.getElementById("countdown").innerText = "Presale has ended!";
+                clearInterval(countdownInterval);
+            } else {
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                document.getElementById("countdown").innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            }
+        }
+
+        // Function to simulate purchase
+        function purchase() {
+            alert("Thank you for your purchase! Stay tuned for the masterclass.");
+        }
+
+        // Start the countdown
+        updateCountdown();
+        const countdownInterval = setInterval(updateCountdown, 1000);
+    </script>
+
+</body>
+
+</html>
