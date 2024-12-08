@@ -25,6 +25,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    const appButton = document.getElementById('launch-app-btn');
+
+    appButton.addEventListener('click', () => {
+        launchApp();
+    });
+
 
 });
 
@@ -58,3 +64,7 @@ async function handleSubmit(event) {
     });
 }
 
+async function launchApp() {
+    const url = 'https://interviewdojo.thetechhut.co';
+    window.open(url, '_blank');
+}

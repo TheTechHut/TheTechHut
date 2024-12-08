@@ -113,7 +113,6 @@ const keywordToUrlMap = {
     'spirituality': "https://www.enlightened-spirituality.org/",
     'christianity': "https://www.christianity.com/",
     'got-questions': "https://www.gotquestions.org/"
-
 };
 
 // Get the button element
