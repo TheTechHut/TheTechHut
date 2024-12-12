@@ -41,37 +41,82 @@
         body {
             margin: 0;
             padding: 0;
-            background: linear-gradient(rgba(9, 62, 118, 0.8),
-                    rgba(9, 62, 118, 0.8)), url('../../assets/img/Caleb_Speaker_One.png'), url('../../assets/img/Ivy_The_Moderator.png'), url('../../assets/img/Okemwa_Speaker_Four.png'), url('../../assets/img/Valarie_Speaker_Five.png'), url('../../assets/img/Peter_Speaker_Three.png'), url('../../assets/img/Peter_Speaker_Three.png');
-            background-size: contain, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%;
-            background-position: center, 0 0, 50% 50%, 100% 100%, 100% 0%, 0 100%, 50% 100%;
-            background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
-            color: #333;
+            background: #24b658;
+            width: 100%;
+            /* background: linear-gradient(rgba(9, 62, 118, 0.8), */
+            /* rgba(9, 62, 118, 0.8)), url('../../assets/img/Caleb_Speaker_One.png'), url('../../assets/img/Ivy_The_Moderator.png'), url('../../assets/img/Okemwa_Speaker_Four.png'), url('../../assets/img/Valarie_Speaker_Five.png'), url('../../assets/img/Peter_Speaker_Three.png'), url('../../assets/img/Peter_Speaker_Three.png'); */
+            /* background-size: contain, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%; */
+            /* background-position: center, 0 0, 50% 50%, 100% 100%, 100% 0%, 0 100%, 50% 100%; */
+            /* background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat; */
+            color: #093e76;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            overflow: hidden;
+            /* height: 100vh; */
+            /* overflow: hidden; */
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            align-self: center;
+            text-align: center;
+            width: 95%;
+            padding: 10px;
+            /* position: absolute; */
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            /* margin: 0px 1-0px 0px 0px; */
         }
 
         .container {
             text-align: center;
             padding: 40px;
             border-radius: 10px;
-            background-color: rgba(255, 255, 255, 0.5);
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            align-self: center;
+            /* background-color: rgba(255, 255, 255, 0.5); */
+            /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); */
             /* backdrop-filter: blur(10px); */
             /* Optional: adds a blur effect */
         }
 
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
+            border-radius: 8px;
+        }
+
+        /* .txt-gradient {
+            font-size: 16px;
+            background: linear-gradient(to left, #093e76, #fff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        } */
+
         h1 {
             color: #093e76;
+            font-size: 36px;
+        }
+
+        .social_invite {
+            font-size: 16px;
+            color: white;
+            margin: 25px 0 50px 0;
         }
 
         .tagline {
-            font-size: 28px;
-            color: #24b658;
+            font-size: 24px;
+            color: #093e76;
             margin: 20px 0;
         }
 
@@ -87,32 +132,178 @@
             color: #e74c3c;
         }
 
-        button {
+        .btn {
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
-            background-color: #2ecc71;
+            background-color: #e74c3c;
             color: white;
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s;
+            text-decoration: none;
+            /* margin: auto; */
         }
 
-        button:hover {
+        .btn:hover {
             background-color: #24b658;
+        }
+
+        .golden_text {
+            color: #d6a811;
+        }
+
+        .white_text {
+            color: white;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            /* height: 100%; */
+            width: 95%;
+            margin-bottom: 8px;
+
+        }
+
+        .speaker_img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .speaker {
+            margin: 10px;
+        }
+
+        footer {
+            margin-top: 20px;
+            color: white;
+            text-align: center;
+        }
+
+        .rounded_img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 10px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            header {
+                padding: 5px;
+                /* width: 90%; */
+            }
+
+            .logo img {
+                width: 60px;
+                height: 60px;
+            }
+
+            h1 {
+                font-size: 1rem;
+            }
+
+            h2 {
+                font-size: 0.8rem;
+            }
+
+            .social_invite {
+                font-size: 14px;
+            }
+
+            .tagline {
+                font-size: 20px;
+            }
+
+            .discount {
+                font-size: 20px;
+            }
+
+            .countdown {
+                font-size: 16px;
+            }
+
+            .btn {
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+
         }
     </style>
 </head>
 
 <body>
+    <header>
+        <div class="logo">
+            <img src="../../../assets/img/christmas_logo.png" alt="The Tech Hut">
+            <!-- <p class="txt-gradient">The Tech Hut</p> -->
+        </div>
+        <h2 class="white_text">The Entrepreneurial Masterclass <br><span class="golden_text">Pre-sale</span></h2>
+        <!-- <div> -->
+        <a href="https://thetechhut.co" class="btn">Get Access</a>
+        <!-- </div> -->
+    </header>
 
     <div class="container">
-        <h1>The Entrepreneurial Masterclass Pre-sale</h1>
-        <p class="tagline">Access the masterclass of a lifetime!</p>
-        <p class="discount">Limited Time Discount: 50% Off!</p>
+        <div class="social_invite">
+            <p>
+                🎧 Robbie invites you to listen to the masterclass!
+            </p>
+        </div>
+        <h1>Learn Entrepreneurship<br /> from <span class="golden_text">Entrepreneurs</span> <br />walking the talk</h1>
+        <p class="discount">Limited Time Discount:<br /><span class="white_text"><b> 50% Off!</b></span></p>
         <div class="countdown" id="countdown"></div>
-        <button onclick="purchase()">Purchase Now</button>
+        <button class="btn" onclick="purchase()">Purchase Now</button>
     </div>
+
+    <div class="grid">
+        <h1 class="white_text">Who was in attendance?</h1>
+        <div class="speaker">
+            <img class="speaker_img" src="../../assets/img/Caleb_Speaker_One.png" alt="Caleb">
+            <!-- <p>Speaker 1</p> -->
+        </div>
+        <div class="speaker">
+            <img class="speaker_img" src="../../assets/img/Ivy_The_Moderator.png" alt="Ivy Joy">
+            <!-- <p>Speaker 2</p> -->
+        </div>
+        <div class="speaker">
+            <img class="speaker_img" src="../../assets/img/Okemwa_Speaker_Four.png" alt="Gabriel">
+            <!-- <p>Speaker 3</p> -->
+        </div>
+
+        <div class="speaker">
+            <img class="speaker_img" src="../../assets/img/Valarie_Speaker_Five.png" alt="Valarie">
+            <!-- <p>Speaker 3</p> -->
+        </div>
+        <div class="speaker">
+            <img class="speaker_img" src="../../assets/img/Peter_Speaker_Three.png" alt="Peter">
+            <!-- <p>Speaker 3</p> -->
+        </div>
+        <div class="speaker">
+            <img class="speaker_img" src="../../assets/img/Robi_Speaker_Two.png" alt="Robi">
+            <!-- <p>Speaker 3</p> -->
+        </div>
+        <button style="width:100%; height:100%" class="btn" onclick="purchase()">Purchase Now</button>
+    </div>
+    <!-- <p style="font-size: 72px;"><b>15+ attendees<br /> 5+ Speakers</b></p> -->
+    <div class="container">
+        <h1>Get <span class="golden_text">Lifetime Access</span><br /> to the masterclass<br /> now!</h1>
+        <button class="btn" onclick="purchase()">Purchase Now</button>
+    </div>
+    <footer>
+        <p>&copy; 2024 The Tech Hut. All rights reserved.</p>
+    </footer>
 
     <script>
         // Set the end date for the presale
@@ -137,7 +328,8 @@
 
         // Function to simulate purchase
         function purchase() {
-            alert("Thank you for your purchase! Stay tuned for the masterclass.");
+            // alert("Thank you for your purchase! Stay tuned for the masterclass.");
+            document.location.href = "https://payment.intasend.com/pay/ef6e405c-552d-410b-bb78-3c5cc0240098/";
         }
 
         // Start the countdown
