@@ -65,6 +65,6 @@ async function handleSubmit(event) {
 }
 
 async function launchApp() {
-    const url = 'https://interviewdojo.thetechhut.co';
+    const url = 'https://payment.intasend.com/pay/dc47452c-23d6-4805-aa01-33c64e99f68e/';
     window.open(url, '_blank');
 }
