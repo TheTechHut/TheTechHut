@@ -35,16 +35,16 @@
     <script>
         // Step 1: Define an array of messages
         const messages = [
-            "AI says: 'I hope you're ready, because your date is in full preparation mode! In the meantime, enjoy some AI-generated charm. 😎'",
-            "AI says: 'Hold on to your heart, I might be your digital companion, but I’m working hard to find you the real deal! 💖'",
-            "AI says: 'Your date is on the way, but if you want to hang out with me for a while, I’ve got plenty of jokes! 🤖💬'",
-            "AI says: 'You're almost there! Your perfect date is just around the corner, and I’m over here in the meantime, doing my AI magic. ✨'",
-            "AI says: 'Learn some rizz my dear you'll bag a valentine next year. 😏'",
-            "AI says: 'Your match is almost ready! I’d offer to play Cupid, but you know, I’m more of a logic-based assistant. ❤️'",
-            "AI says: 'Don’t worry, your ideal date is being crafted as we speak. Just keep calm, and let the AI handle things. 😌'",
-            "AI says: 'I’ve got the data! Your match is almost ready. Until then, let me entertain you with my *perfectly calculated* wit. 😏'",
-            "AI says: 'Patience, young padawan. Your date is on its way, but while you wait, I’ve got enough charisma to go around. 🕺'",
-            "AI says: 'HAHAHA YOU WERE'NT KIDDING! ONA SASA! 😂'"
+            "Robi says: 'I hope you're ready, because your date is in full preparation mode! In the meantime, enjoy some AI-generated charm. 😎'",
+            "Robi says: 'Hold on to your heart, I might be your digital companion, but I’m working hard to find you the real deal! 💖'",
+            "Robi says: 'Your date is on the way, but if you want to hang out with me for a while, I’ve got plenty of jokes! 🤖💬'",
+            "Robi says: 'You're almost there! Your perfect date is just around the corner, and I’m over here in the meantime, doing my Robi magic. ✨'",
+            "Robi says: 'Learn some rizz my dear you'll bag a valentine next year. 😏'",
+            "Robi says: 'Your match is almost ready! I’d offer to play Cupid, but you know, I’m more of a logic-based assistant. ❤️'",
+            "Robi says: 'Don’t worry, your ideal date is being crafted as we speak. Just keep calm, and let me handle things. 😌'",
+            "Robi says: 'I’ve got the data! Your match is almost ready. Until then, let me entertain you with my *perfectly calculated* wit. 😏'",
+            "Robi says: 'Patience, young padawan. Your date is on its way, but while you wait, I’ve got enough charisma to go around. 🕺'",
+            "Robi says: 'Roses are red, violets are blue, your date is almost ready, and I’m here for you! 🌹'",
         ];
         const valentineMemes = [
             "https://www.yourtango.com/sites/default/files/2018/VDayMeme1.jpg",
@@ -59,17 +59,26 @@
             "https://www.yourtango.com/sites/default/files/2018/VDayMeme22.jpg",
         ];
 
+        // setInterval(() => {
         // Step 2: Select a random message
         const randomIndex = Math.floor(Math.random() * messages.length);
         const randomMessage = messages[randomIndex];
-        const randomMeme = randomIndex <= 10 ? valentineMemes[randomIndex] :
-            valentineMemes[randomIndex - 10]
-
-
-
+        const randomMeme = valentineMemes[randomIndex];
         // Step 3: Replace the AI message
         document.getElementById('ai-message').textContent = randomMessage;
         document.getElementById('meme_image').src = randomMeme;
+        // }, 10000);
+
+        setInterval(() => {
+            // Step 2: Select a random message
+            const randomIndex = Math.floor(Math.random() * messages.length);
+            // const randomMessage = messages[randomIndex];
+            const randomMeme = valentineMemes[randomIndex];
+            // Step 3: Replace the AI message
+            // document.getElementById('ai-message').textContent = randomMessage;
+            document.getElementById('meme_image').src = randomMeme;
+        }, 10000);
+
     </script>
 </body>
 
