@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hire a Valentine for Valentine's</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Hire a Valentine for Valentine's Day</h1>
+            <p>Make this Valentine's Day unforgettable with the perfect companion!</p>
+        </header>
+
+        <!-- Marquee section for possible Valentines -->
+        <section class="Valentine-marquee">
+            <marquee behavior="scroll" direction="left">
+                Available Valentines: James, Chris, Daniel, Alex, Michael, Ryan, Luke, Oliver.
+            </marquee>
+        </section>
+
+        <main>
+            <form id="valentineform" action="https://formspree.io/f/myzkdlqo" method="POST">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Your Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="date">Preferred Date:</label>
+                <input type="date" id="date" name="date" required>
+
+                <label for="preferences">Your Preferences:</label>
+                <textarea id="preferences" name="preferences" rows="4"
+                    placeholder="Describe your ideal companion..."></textarea>
+
+                <button type="submit" href="./boyfriend.html">Find My Date</button>
+            </form>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Hire a Valentine for Valentine's. All rights reserved.</p>
+        </footer>
+    </div>
+    <script src="./scripts.js"></script>
+</body>
+
+</html>

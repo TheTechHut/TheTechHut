@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Date is Ready!</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>You've Found Your Date!</h1>
+            <p>Hold onto your heart, your Valentine's Day just got a lot more interesting!</p>
+        </header>
+
+        <section class="humor">
+            <p id="ai-message"><strong>AI says:</strong> "Congratulations! You've just matched with the most charming
+                and captivating
+                companion of the season... Me! Oh, wait... you wanted a *real* date? Fine, fine... your date is in the
+                works, but remember, I'm always here if you need a digital companion. 😏"</p>
+        </section>
+
+        <!-- Random Valentine Meme Section -->
+        <section class="meme">
+            <h2>Here's your Valentine's meme for the day:</h2>
+            <img id="meme_image" alt="Valentine Meme" style="max-width: 100%; height: auto;">
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Hire a Boyfriend for Valentine's. All rights reserved.</p>
+        </footer>
+    </div>
+    <script>
+        // Step 1: Define an array of messages
+        const messages = [
+            "AI says: 'I hope you're ready, because your date is in full preparation mode! In the meantime, enjoy some AI-generated charm. 😎'",
+            "AI says: 'Hold on to your heart, I might be your digital companion, but I’m working hard to find you the real deal! 💖'",
+            "AI says: 'Your date is on the way, but if you want to hang out with me for a while, I’ve got plenty of jokes! 🤖💬'",
+            "AI says: 'You're almost there! Your perfect date is just around the corner, and I’m over here in the meantime, doing my AI magic. ✨'",
+            "AI says: 'Learn some rizz my dear you'll bag a valentine next year. 😏'",
+            "AI says: 'Your match is almost ready! I’d offer to play Cupid, but you know, I’m more of a logic-based assistant. ❤️'",
+            "AI says: 'Don’t worry, your ideal date is being crafted as we speak. Just keep calm, and let the AI handle things. 😌'",
+            "AI says: 'I’ve got the data! Your match is almost ready. Until then, let me entertain you with my *perfectly calculated* wit. 😏'",
+            "AI says: 'Patience, young padawan. Your date is on its way, but while you wait, I’ve got enough charisma to go around. 🕺'",
+            "AI says: 'HAHAHA YOU WERE'NT KIDDING! ONA SASA! 😂'",
+            "AI says: 'Looking for love in all the wrong places? Good thing I'm on the case! Your date is coming soon. 💌'",
+            "AI says: 'This might be the start of a great story... or at least a very interesting algorithm. Stay tuned. 📲'",
+            "AI says: 'Your perfect date is being optimized for your specific preferences... Yes, I know, I’m good. 😏'",
+            "AI says: 'No need to rush; your match is almost at the door, but I can still keep you entertained with my AI-powered charm. 😁'",
+            "AI says: 'Your date will be arriving soon, but for now, how about enjoying my quick wit while I work my AI magic? ✨'",
+            "AI says: 'Waiting for your date like... but hey, I can still offer top-tier banter in the meantime! 🧑‍💻💬'",
+            "AI says: 'Your date’s being prepared with love (and by love, I mean data). Just a little more patience. 💌'",
+            "AI says: 'Almost there! Your future Valentine is in the works—don’t worry, they’ve got nothing on my wit! 😏'",
+            "AI says: 'I’m not saying I’m Cupid, but... I do have some good algorithms for matchmaking. 🏹'",
+            "AI says: 'HAHAHA YOU WERE'NT KIDDING! ONA SASA! 😂'"
+        ];
+        const valentineMemes = [
+            "https://www.yourtango.com/sites/default/files/2018/VDayMeme1.jpg",
+            "https://www.yourtango.com/sites/default/files/2018/VDayMeme3.jpg",
+            "https://www.yourtango.com/sites/default/files/2018/VDayMeme8.jpg",
+            "https://www.yourtango.com/sites/default/files/2018/VDayMeme14.jpg",
+            "https://parade.com/.image/c_limit%2Ccs_srgb%2Cq_auto:good%2Cw_1400/MjA5MDk5Mjc1MzgzMTU0Mjg4/witty-rizz-line.webp",
+            "https://www.dreamsquote.com/wp-content/uploads/2022/03/sarcastic-sayings-on-valentine-day-Funny-Valentine-Memes-To-Make-You-Laugh-For-Hilarious-Valentines-Memes.jpg",
+            "https://www.dreamsquote.com/wp-content/uploads/2022/03/valentine-day%E2%80%99s-cat-meme-Funny-Valentine-Memes-To-Make-You-Laugh-For-Hilarious-Valentines-Memes.jpg",
+            "https://images3.memedroid.com/images/UPLOADED803/67a67cc6d6af4.webp",
+            "https://www.dreamsquote.com/wp-content/uploads/2022/03/valentine-day%E2%80%99s-meme-Funny-Valentine-Memes-To-Make-You-Laugh-For-Hilarious-Valentines-Memes.jpg",
+            "https://www.yourtango.com/sites/default/files/2018/VDayMeme22.jpg"
+        ];
+
+        // Step 2: Select a random message
+        const randomIndex = Math.floor(Math.random() * messages.length);
+        const randomMessage = messages[randomIndex];
+        const randomMeme = randomIndex <= 10 ? valentineMemes[randomIndex] :
+            valentineMemes[randomIndex - 10]
+
+
+
+        // Step 3: Replace the AI message
+        document.getElementById('ai-message').textContent = randomMessage;
+        document.getElementById('meme_image').src = randomMeme;
+    </script>
+</body>
+
+</html>

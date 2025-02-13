@@ -1,0 +1,96 @@
+/* Import a romantic Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Great Vibes', cursive;
+    background-color: #fff0f5;
+    color: #800000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.container {
+    text-align: center;
+    background-color: #ffe4e1;
+    border: 2px solid #ff69b4;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.2em;
+}
+
+header p {
+    font-size: 1.2em;
+    margin-bottom: 1em;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    margin-top: 10px;
+    font-size: 1.2em;
+    text-align: left;
+    width: 82%;
+}
+
+input,
+textarea {
+    width: 80%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ff69b4;
+    border-radius: 5px;
+    font-family: 'Great Vibes', cursive;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #ff69b4;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #ff1493;
+}
+
+
+/* HTML: <div class="loader"></div> */
+.loader {
+    width: 60px;
+    aspect-ratio: 1;
+    background: linear-gradient(#dc1818 0 0) bottom/100% 0% no-repeat #ccc;
+    -webkit-mask:
+        radial-gradient(circle at 60% 65%, #000 62%, #0000 65%) top left,
+        radial-gradient(circle at 40% 65%, #000 62%, #0000 65%) top right,
+        linear-gradient(to bottom left, #000 42%, #0000 43%) bottom left,
+        linear-gradient(to bottom right, #000 42%, #0000 43%) bottom right;
+    -webkit-mask-size: 50% 50%;
+    -webkit-mask-repeat: no-repeat;
+    animation: l19 2s infinite linear;
+}
+
+@keyframes l19 {
+
+    90%,
+    100% {
+        background-size: 100% 100%
+    }
+}
