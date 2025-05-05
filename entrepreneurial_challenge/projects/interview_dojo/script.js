@@ -7,8 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log(ctaButton);
     console.log(emailInput);
     ctaButton.addEventListener('click', () => {
-        form.scrollIntoView({ behavior: 'smooth' });
-        emailInput.focus();
+        launchApp();
     });
 
     form.addEventListener('submit', (e) => {
