@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Tech Hut Apprenticeship Journey</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- 
+    Infographic Narrative Plan:
+    1.  Introduction: Hook with big stats (8 Weeks, 10 Stages, 2 Phases).
+    2.  The Two Phases: Visually separate the Foundational and Collaborative phases using a donut chart.
+    3.  The Journey Timeline: A detailed HTML/CSS flowchart showing the 10 stages of progression, split into the two phases.
+    4.  Skill Progression: Use a radar chart to show how key skills develop over the apprenticeship.
+    5.  Weekly Focus Breakdown: A stacked bar chart visualizing the shift in focus from individual learning to collaborative building over the 8 weeks.
+    6.  Conclusion: A final encouraging message.
+    
+    Visualization Choices:
+    -   KPIs (8 Weeks, 10 Stages): Goal: Inform. Method: Large styled text. Justification: High-impact, immediate understanding.
+    -   Phase Composition (50/50 Split): Goal: Compare. Method: Chart.js Donut Chart. Justification: Excellent for showing simple proportions of a whole. NO SVG.
+    -   Stage Progression (10 Stages): Goal: Organize. Method: HTML/CSS Flowchart. Justification: Clearly shows a process/timeline without using prohibited libraries like Mermaid JS or SVG graphics.
+    -   Skill Growth (5 skill areas): Goal: Change/Compare. Method: Chart.js Radar Chart. Justification: Ideal for comparing multiple variables (skills) from a central point, showing growth over time. NO SVG.
+    -   Weekly Focus (8 Weeks): Goal: Compare. Method: Chart.js Stacked Bar Chart. Justification: Perfect for showing the changing composition of tasks week by week. NO SVG.
+    
+    NO SVG or Mermaid JS was used in this document. All visuals are rendered via Canvas or implemented with standard HTML/CSS.
+    
+    Color Palette Name: Energetic & Playful
+    HEX Codes: #FF6B6B, #FFD166, #06D6A0, #118AB2, #073B4C 
+    -->
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+            color: #073B4C;
+        }
+        .stat-card {
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(7, 59, 76, 0.1);
+            border: 2px solid transparent;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: #06D6A0;
+        }
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1;
+            color: #118AB2;
+        }
+        .stat-label {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #073B4C;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 350px;
+            width: 100%;
+            max-width: 400px;
+        }
+        .timeline-container {
+            position: relative;
+            padding: 2rem 0;
+        }
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: #118AB2;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding-bottom: 40px;
+        }
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 40px;
+            text-align: right;
+        }
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 40px;
+            text-align: left;
+        }
+        .timeline-dot {
+            position: absolute;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            background-color: #FFD166;
+            border: 4px solid #118AB2;
+            border-radius: 50%;
+        }
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -12px;
+        }
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -12px;
+        }
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 15px rgba(7, 59, 76, 0.08);
+            border: 2px solid #06D6A0;
+        }
+        .timeline-stage {
+            font-weight: 700;
+            color: #FF6B6B;
+            margin-bottom: 0.5rem;
+        }
+        .timeline-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #073B4C;
+            margin-bottom: 0.5rem;
+        }
+        .timeline-deliverable {
+            font-style: italic;
+            font-size: 0.9rem;
+            color: #118AB2;
+        }
+        @media (max-width: 768px) {
+            .timeline-line {
+                left: 12px;
+            }
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 50px;
+                padding-right: 0;
+                text-align: left !important;
+            }
+            .timeline-dot {
+                left: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-16">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-[#073B4C] mb-4">The Apprenticeship Journey</h1>
+            <p class="text-xl md:text-2xl text-[#118AB2]">An 8-Week Transformation at The Tech Hut</p>
+        </header>
+
+        <section class="mb-20">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="stat-card">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">Impactful Weeks</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10</div>
+                    <div class="stat-label">Task-Based Stages</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">Transformative Phases</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow-lg p-6 md:p-10 mb-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="text-center md:text-left">
+                    <h2 class="text-3xl font-bold text-[#073B4C] mb-4">Two Phases of Transformation</h2>
+                    <p class="text-lg text-gray-600 mb-2"><strong class="text-[#118AB2]">Phase 1: Foundational Building (Weeks 1-4)</strong><br>The first half of your journey focuses on solidifying core coding concepts through individual tasks. We equip you with robust programming fundamentals to ensure you're ready for any challenge.</p>
+                    <p class="text-lg text-gray-600"><strong class="text-[#06D6A0]">Phase 2: Collaborative Building (Weeks 5-8)</strong><br>In the second half, you'll apply your skills in a team environment. You'll work together on a real-world company project, developing vital collaborative skills and creating a portfolio-ready piece.</p>
+                </div>
+                <div>
+                    <div class="chart-container">
+                        <canvas id="phasesChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-[#073B4C] mb-3">The 10-Stage Journey</h2>
+                <p class="text-lg text-gray-600">From core fundamentals to a full-scale collaborative project.</p>
+            </div>
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-stage">Stage 1-2</div>
+                        <div class="timeline-title">The Launchpad</div>
+                        <p class="timeline-deliverable">Deliverable: First Git commit & completed coding challenges.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-stage">Stage 3</div>
+                        <div class="timeline-title">Logic & Structure</div>
+                        <p class="timeline-deliverable">Deliverable: A program built with modular, reusable functions.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-stage">Stage 4</div>
+                        <div class="timeline-title">Data Mastery</div>
+                        <p class="timeline-deliverable">Deliverable: A small data management system.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-stage">Stage 5</div>
+                        <div class="timeline-title">Individual Showcase</div>
+                        <p class="timeline-deliverable">Deliverable: A fully functional individual application.</p>
+                    </div>
+                </div>
+                 <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-stage">Stage 6-7</div>
+                        <div class="timeline-title">Project Kick-off & Design</div>
+                        <p class="timeline-deliverable">Deliverable: Team charter and initial core feature commits.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-stage">Stage 8</div>
+                        <div class="timeline-title">Collaborative Sprint</div>
+                        <p class="timeline-deliverable">Deliverable: Working, integrated features on main branch.</p>
+                    </div>
+                </div>
+                 <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-stage">Stage 9</div>
+                        <div class="timeline-title">Refinement & Testing</div>
+                        <p class="timeline-deliverable">Deliverable: A stable, tested, and optimized project build.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-stage">Stage 10</div>
+                        <div class="timeline-title">The Grand Finale</div>
+                        <p class="timeline-deliverable">Deliverable: Final project presentation and graduation!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 items-center">
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-10">
+                 <div class="text-center mb-6">
+                    <h2 class="text-3xl font-bold text-[#073B4C]">Skill Progression</h2>
+                    <p class="text-gray-600">See your expertise grow from the start of the apprenticeship to graduation day. This chart illustrates the targeted development across key competency areas.</p>
+                </div>
+                <div class="chart-container !h-[400px] !max-w-[450px]">
+                    <canvas id="skillsRadarChart"></canvas>
+                </div>
+            </div>
+             <div class="bg-white rounded-2xl shadow-lg p-6 md:p-10">
+                 <div class="text-center mb-6">
+                    <h2 class="text-3xl font-bold text-[#073B4C]">Weekly Focus Breakdown</h2>
+                    <p class="text-gray-600">This chart shows the shift in focus throughout the 8 weeks, moving from foundational individual learning to intense team-based feature development and testing.</p>
+                </div>
+                <div class="chart-container !h-[400px] !max-w-full">
+                    <canvas id="weeklyFocusChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center mt-16 py-8 border-t-2 border-[#118AB2]">
+            <h3 class="text-3xl font-bold text-[#073B4C]">Ready to Unleash Your Greatness?</h3>
+            <p class="text-lg text-gray-700 mt-6">The Tech Hut apprenticeship is your launchpad into a successful tech career.</p>
+            <a href="https://forms.gle/FtThPaJUpLfxwKAaA" target="_blank" class="inline-block mt-8 px-10 py-4 bg-[#06D6A0] text-white text-xl font-bold rounded-full shadow-lg hover:bg-[#05a880] transition duration-300 transform hover:scale-105">
+                Apply Now!
+            </a>
+        </footer>
+
+    </div>
+
+    <script>
+        const chartTooltipCallback = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                              return label.join(' ');
+                            } else {
+                              return label;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        function initPhasesChart() {
+            const ctx = document.getElementById('phasesChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Phase 1: Foundational', 'Phase 2: Collaborative'],
+                    datasets: [{
+                        label: 'Program Focus',
+                        data: [50, 50],
+                        backgroundColor: ['#118AB2', '#06D6A0'],
+                        borderColor: '#ffffff',
+                        borderWidth: 4,
+                        hoverOffset: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: { size: 14, weight: '600' }
+                            }
+                        },
+                         ...chartTooltipCallback.plugins
+                    },
+                    cutout: '60%'
+                }
+            });
+        }
+
+        function initSkillsRadarChart() {
+            const ctx = document.getElementById('skillsRadarChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Coding Fundamentals', 'Algorithms & Data Structures', 'Project Design', 'Collaboration & Git', 'Testing & QA'],
+                    datasets: [{
+                        label: 'Start of Apprenticeship',
+                        data: [2, 1, 1, 2, 1],
+                        borderColor: '#FF6B6B',
+                        backgroundColor: 'rgba(255, 107, 107, 0.2)',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#FF6B6B',
+                        pointRadius: 4
+                    }, {
+                        label: 'End of Apprenticeship',
+                        data: [5, 4, 4, 5, 4],
+                        borderColor: '#06D6A0',
+                        backgroundColor: 'rgba(6, 214, 160, 0.2)',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#06D6A0',
+                        pointRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(7, 59, 76, 0.2)' },
+                            grid: { color: 'rgba(7, 59, 76, 0.2)' },
+                            pointLabels: { font: { size: 12, weight: '600' } },
+                            ticks: {
+                                backdropColor: 'white',
+                                stepSize: 1
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 5
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { font: { size: 14, weight: '600' } }
+                        },
+                        ...chartTooltipCallback.plugins
+                    }
+                }
+            });
+        }
+        
+        function initWeeklyFocusChart() {
+            const ctx = document.getElementById('weeklyFocusChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Wk 1', 'Wk 2', 'Wk 3', 'Wk 4', 'Wk 5', 'Wk 6', 'Wk 7', 'Wk 8'],
+                    datasets: [{
+                        label: 'Individual Learning',
+                        data: [80, 70, 60, 100, 20, 10, 0, 0],
+                        backgroundColor: '#118AB2',
+                    }, {
+                        label: 'Team Collaboration',
+                        data: [10, 20, 30, 0, 70, 80, 50, 40],
+                        backgroundColor: '#06D6A0',
+                    }, {
+                        label: 'Testing & QA',
+                        data: [10, 10, 10, 0, 10, 10, 50, 20],
+                        backgroundColor: '#FFD166',
+                    },{
+                        label: 'Presentation',
+                        data: [0, 0, 0, 0, 0, 0, 0, 40],
+                        backgroundColor: '#FF6B6B',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            stacked: true,
+                            grid: { display: false },
+                            ticks: { font: { weight: '600' }}
+                        },
+                        y: {
+                            stacked: true,
+                            ticks: {
+                                callback: function(value) { return value + '%' }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { font: { size: 14, weight: '600' } }
+                        },
+                        ...chartTooltipCallback.plugins
+                    }
+                }
+            });
+        }
+
+        window.onload = function () {
+            initPhasesChart();
+            initSkillsRadarChart();
+            initWeeklyFocusChart();
+        };
+    </script>
+</body>
+</html>
