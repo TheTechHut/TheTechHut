@@ -30,7 +30,7 @@
         }
         .canvas-container {
             border: 2px solid #fff;
-            border-radius: 0.75rem;
+            border-radius: 0.75rem; /* Applied to the container */
             overflow: hidden;
             background-color: #093e76; /* Base color for canvas background, matching brand blue */
             position: relative;
@@ -44,15 +44,15 @@
             display: none;
         }
         .custom-file-upload {
-            background-color: #2ecc71; /* Brand Green */
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-weight: 600;
-            text-align: center;
-        }
+                background-color: #2ecc71; /* Brand Green */
+                color: white;
+                padding: 0.75rem 1.5rem;
+                border-radius: 0.5rem;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+                font-weight: 600;
+                text-align: center;
+            }
         .custom-file-upload:hover {
             background-color: #27ae60; /* Darker green on hover */
         }
@@ -107,7 +107,8 @@
             </div>
         </div>
 
-        <div class="lg:w-1/2 flex justify-center items-center p-4">
+        <div class="lg:w-1/2 flex flex-col justify-center items-center p-4">
+            <!-- Removed clickable logo image from here -->
             <div class="canvas-container w-full h-auto">
                 <canvas id="posterCanvas" width="1200" height="630"></canvas>
             </div>
@@ -124,7 +125,8 @@
         const ctx = canvas.getContext('2d');
 
         let profileImage = null; // Initialize profileImage as null
-
+        // Removed logoImage declaration and loading logic as it's no longer used
+        
         // Initial draw when page loads, showing placeholder text
         drawImage();
 
@@ -174,6 +176,23 @@
         function drawImage() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+            const borderRadius = 30; // Define a consistent border radius for the canvas content
+
+            // Clip the entire canvas content to have rounded corners
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(borderRadius, 0);
+            ctx.lineTo(canvas.width - borderRadius, 0);
+            ctx.quadraticCurveTo(canvas.width, 0, canvas.width, borderRadius);
+            ctx.lineTo(canvas.width, canvas.height - borderRadius);
+            ctx.quadraticCurveTo(canvas.width, canvas.height, canvas.width - borderRadius, canvas.height);
+            ctx.lineTo(borderRadius, canvas.height);
+            ctx.quadraticCurveTo(0, canvas.height, 0, canvas.height - borderRadius);
+            ctx.lineTo(0, borderRadius);
+            ctx.quadraticCurveTo(0, 0, borderRadius, 0);
+            ctx.closePath();
+            ctx.clip();
+
             // Background Gradient (using Tech Hut brand blues)
             const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
             gradient.addColorStop(0, '#093e76'); // Dark blue
@@ -181,22 +200,38 @@
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+            // Add subtle background circles/patterns
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)'; // Very light white for subtle patterns
+            ctx.lineWidth = 2;
+            for (let i = 0; i < 10; i++) {
+                ctx.beginPath();
+                ctx.arc(Math.random() * canvas.width, Math.random() * canvas.height, 50 + Math.random() * 150, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+
             // "I'M ATTENDING..." text
-            ctx.font = 'bold 48px Inter';
+            ctx.font = 'bold 55px Inter'; /* Slightly larger */
             ctx.fillStyle = '#ffffff';
             ctx.textAlign = 'left';
             ctx.fillText("I'M ATTENDING...", 80, 100);
 
             // Main Announcement Text: "THE TECH HUT APPRENTICESHIP"
-            ctx.font = 'bold 72px Inter';
+            ctx.font = 'bold 75px Inter'; /* Made smaller */
             ctx.fillStyle = '#d6a811'; // Brand Yellow/Gold for emphasis
-            ctx.fillText("THE TECH HUT", 80, 250);
-            ctx.fillText("APPRENTICESHIP", 80, 350);
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; /* Subtle shadow */
+            ctx.shadowBlur = 10;
+            ctx.shadowOffsetX = 5;
+            ctx.shadowOffsetY = 5;
+            ctx.fillText("THE TECH HUT", 80, 250); 
+            ctx.fillText("APPRENTICESHIP", 80, 330); /* Adjusted Y position for smaller font */
+            ctx.shadowBlur = 0; /* Reset shadow */
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
 
             // Call to action text
-            ctx.font = 'bold 40px Inter';
+            ctx.font = 'bold 45px Inter'; /* Slightly larger */
             ctx.fillStyle = '#ffffff';
-            ctx.fillText("UNLEASH YOUR GREATNESS!", 80, 480);
+            ctx.fillText("UNLEASH YOUR GREATNESS!", 80, 430); /* Adjusted Y position */
 
             // Draw the profile picture circle
             const circleX = canvas.width - 250;
@@ -207,7 +242,14 @@
             ctx.arc(circleX, circleY, circleRadius, 0, Math.PI * 2, true);
             ctx.closePath();
             ctx.fillStyle = '#ffffff'; // White circle background
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.3)'; /* Add shadow to circle */
+            ctx.shadowBlur = 15;
+            ctx.shadowOffsetX = 8;
+            ctx.shadowOffsetY = 8;
             ctx.fill();
+            ctx.shadowBlur = 0; /* Reset shadow */
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
 
             // Draw profile picture inside the circle or placeholder text
             if (profileImage) {
@@ -250,9 +292,9 @@
                 ctx.restore();
             }
 
-            // Add decorative circles/lines (simplified from original image)
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
-            ctx.lineWidth = 5;
+            // Add decorative circles/lines (more prominent)
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)'; /* Slightly more opaque */
+            ctx.lineWidth = 6; /* Slightly thicker */
             ctx.beginPath();
             ctx.arc(circleX, circleY, circleRadius + 20, 0, Math.PI * 2);
             ctx.stroke();
@@ -260,7 +302,34 @@
             ctx.beginPath();
             ctx.arc(circleX, circleY, circleRadius + 40, 0, Math.PI * 2);
             ctx.stroke();
+
+            ctx.beginPath(); /* Added another circle */
+            ctx.arc(circleX, circleY, circleRadius + 60, 0, Math.PI * 2);
+            ctx.stroke();
+            
+            // Banner at the bottom
+            const bannerHeight = 80;
+            const bannerY = canvas.height - bannerHeight;
+            const bannerTextLine1 = "Join me in this journey by visiting:";
+            const bannerTextLine2 = "thetechhut.co/apprenticeship"; // The actual link text
+            const bannerDates = "July 7th - August 31st"; // Apprenticeship dates
+
+            ctx.fillStyle = '#093e76'; // Dark blue for banner background
+            ctx.fillRect(0, bannerY, canvas.width, bannerHeight);
+
+            ctx.font = 'bold 22px Inter'; // Adjust font size as needed
+            ctx.fillStyle = '#ffffff';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(bannerTextLine1, canvas.width / 2, bannerY + bannerHeight / 2 - 20); 
+
+            ctx.font = 'bold 22px Inter'; 
+            ctx.fillStyle = '#d6a811'; // Brand Yellow for the link
+            ctx.fillText(bannerTextLine2, canvas.width / 2, bannerY + bannerHeight / 2 + 5); 
+
+            ctx.font = 'normal 18px Inter'; // Font for dates
+            ctx.fillStyle = '#ffffff';
+            ctx.fillText(bannerDates, canvas.width / 2, bannerY + bannerHeight / 2 + 30); 
+
+            ctx.restore(); // Restore the context after clipping for the entire canvas content
         }
-    </script>
-</body>
-</html>
