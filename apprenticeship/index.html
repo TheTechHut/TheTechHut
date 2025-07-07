@@ -102,6 +102,24 @@
             line-height: 1;
             margin-right: 0.5rem;
         }
+        /* Responsive iframe for YouTube */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 1rem; /* Match card border radius */
+            box-shadow: 0 8px 20px rgba(7, 59, 76, 0.08);
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
     </style>
 </head>
 <body class="antialiased leading-normal">
@@ -114,7 +132,7 @@
                 Unleash Your Greatness: <br class="hidden md:inline">The Tech Hut Apprenticeship Awaits!
             </h1>
             <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto opacity-90">
-                Dive into an intensive 8-week journey designed to transform you into a proficient software developer, equipped with foundational skills and real-world project experience.
+                Dive into an intensive 8-week journey designed to transform you into a proficient professional in various tech fields, equipped with foundational skills and real-world project experience.
             </p>
             <a href="https://forms.gle/FtThPaJUpLfxwKAaA" target="_blank" class="btn-primary inline-block">
                 Apply Now!
@@ -127,23 +145,40 @@
         <div class="container mx-auto px-4 text-center">
             <h2 class="section-title">What You'll Gain</h2>
             <p class="text-lg text-gray-600 mb-12 max-w-2xl mx-auto">
-                Our apprenticeship is meticulously crafted to provide you with a comprehensive skillset and invaluable experience.
+                Our apprenticeship is meticulously crafted to provide you with a comprehensive skillset and invaluable experience across multiple tracks.
             </p>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="card">
+                    <img src="https://placehold.co/400x250/06D6A0/ffffff?text=Software+Dev+Techies" alt="Group of software developers coding" class="rounded-lg mb-4 w-full h-auto">
                     <div class="feature-icon">🚀</div>
-                    <h3 class="text-xl font-bold text-[#073B4C] mb-3">Solid Foundations</h3>
+                    <h3 class="text-xl font-bold text-[#073B4C] mb-3">Software Development</h3>
                     <p class="text-gray-600">Master core coding concepts, data structures, and algorithms essential for any developer.</p>
+                </div>
+                <div class="card">
+                    <div class="feature-icon">📈</div>
+                    <h3 class="text-xl font-bold text-[#073B4C] mb-3">Digital Marketing</h3>
+                    <p class="text-gray-600">Learn strategies for online presence, SEO, social media, and content promotion.</p>
+                </div>
+                <div class="card">
+                    <img src="https://placehold.co/400x250/118AB2/ffffff?text=UI/UX+Design+Techie" alt="Person designing UI on a laptop" class="rounded-lg mb-4 w-full h-auto">
+                    <div class="feature-icon">🎨</div>
+                    <h3 class="text-xl font-bold text-[#073B4C] mb-3">UI/UX Design</h3>
+                    <p class="text-gray-600">Develop skills in user interface and user experience design, creating intuitive products.</p>
+                </div>
+                <div class="card">
+                    <div class="feature-icon">✍️</div>
+                    <h3 class="text-xl font-bold text-[#073B4C] mb-3">Content Creation</h3>
+                    <p class="text-gray-600">Craft engaging narratives, visual content, and compelling stories for digital platforms.</p>
                 </div>
                 <div class="card">
                     <div class="feature-icon">💡</div>
                     <h3 class="text-xl font-bold text-[#073B4C] mb-3">Real-World Project Experience</h3>
-                    <p class="text-gray-600">Collaborate on a significant company project, building a portfolio-ready application.</p>
+                    <p class="text-gray-600">Collaborate on a significant company project, building a portfolio-ready application or campaign.</p>
                 </div>
                 <div class="card">
                     <div class="feature-icon">🤝</div>
                     <h3 class="text-xl font-bold text-[#073B4C] mb-3">Team Collaboration Skills</h3>
-                    <p class="text-gray-600">Learn effective teamwork, Git workflows, and communication in a development environment.</p>
+                    <p class="text-gray-600">Learn effective teamwork, industry-standard workflows, and communication in a professional environment.</p>
                 </div>
             </div>
         </div>
@@ -162,19 +197,19 @@
                     <ul class="list-none p-0">
                         <li class="flex items-start mb-3">
                             <span class="bullet-point">●</span>
-                            <p class="text-gray-700">**Stage 1-2: The Launchpad** - Onboarding, environment setup, core programming fundamentals.</p>
+                            <p class="text-gray-700">**Stage 1-2: The Launchpad** - Onboarding, environment setup, core fundamentals specific to your chosen track.</p>
                         </li>
                         <li class="flex items-start mb-3">
                             <span class="bullet-point">●</span>
-                            <p class="text-gray-700">**Stage 3: Logic & Structure** - Mastering functions and modular programming.</p>
+                            <p class="text-gray-700">**Stage 3: Core Concepts** - Deep dive into essential theories and practices of your track.</p>
                         </li>
                         <li class="flex items-start mb-3">
                             <span class="bullet-point">●</span>
-                            <p class="text-gray-700">**Stage 4: Data Mastery** - Exploring data structures and basic algorithms.</p>
+                            <p class="text-gray-700">**Stage 4: Specialized Skills** - Mastering key tools and techniques relevant to your field.</p>
                         </li>
                         <li class="flex items-start">
                             <span class="bullet-point">●</span>
-                            <p class="text-gray-700">**Stage 5: Individual Showcase** - Building a personal project to prove your skills.</p>
+                            <p class="text-gray-700">**Stage 5: Individual Showcase** - Building a personal project or portfolio piece to prove your skills.</p>
                         </li>
                     </ul>
                 </div>
@@ -183,15 +218,15 @@
                     <ul class="list-none p-0">
                         <li class="flex items-start mb-3">
                             <span class="bullet-point">●</span>
-                            <p class="text-gray-700">**Stage 6-7: Project Kick-off & Design** - Team formation, requirements analysis, initial implementation.</p>
+                            <p class="text-gray-700">**Stage 6-7: Project Kick-off & Design** - Team formation, requirements analysis, initial implementation for a cross-functional project.</p>
                         </li>
                         <li class="flex items-start mb-3">
                             <span class="bullet-point">●</span>
-                            <p class="text-gray-700">**Stage 8: Collaborative Sprint** - Feature development, integration, and continuous testing.</p>
+                            <p class="text-gray-700">**Stage 8: Collaborative Sprint** - Feature development, content creation, design iteration, and continuous testing within your team.</p>
                         </li>
                         <li class="flex items-start mb-3">
                             <span class="bullet-point">●</span>
-                            <p class="text-gray-700">**Stage 9: Refinement & Testing** - Quality assurance, bug fixing, and optimization.</p>
+                            <p class="text-gray-700">**Stage 9: Refinement & Testing** - Quality assurance, bug fixing/optimization, and final content/design review.</p>
                         </li>
                         <li class="flex items-start">
                             <span class="bullet-point">●</span>
@@ -203,8 +238,28 @@
         </div>
     </section>
 
-    <!-- Why The Tech Hut Section -->
+    <!-- Cohort One Testimonials Section -->
     <section class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="section-title">Hear From Our Cohort One Grads!</h2>
+            <p class="text-lg text-gray-600 mb-12 max-w-2xl mx-auto">
+                Don't just take our word for it. See what our successful Cohort One apprentices have to say about their journey and transformation.
+            </p>
+            <div class="video-container mx-auto max-w-3xl">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/ntCbgYgSXtM?si=IUawwlSvwaFrL9D2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            <p class="text-lg text-gray-600 mt-8 max-w-2xl mx-auto">
+                Ready to write your own success story? Join the next cohort!
+            </p>
+            <br/>
+             <a href="https://forms.gle/FtThPaJUpLfxwKAaA" target="_blank" class="btn-primary inline-block">
+                Apply Now!
+            </a>
+        </div>
+    </section>
+
+    <!-- Why The Tech Hut Section -->
+    <section class="py-16 md:py-24 bg-[#f0f4f8]">
         <div class="container mx-auto px-4 text-center">
             <h2 class="section-title">Why Choose The Tech Hut?</h2>
             <p class="text-lg text-gray-600 mb-12 max-w-2xl mx-auto">
@@ -213,19 +268,19 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="card text-left">
                     <h3 class="text-xl font-bold text-[#073B4C] mb-3">Expert Mentorship</h3>
-                    <p class="text-gray-600">Learn directly from experienced developers and industry professionals who are passionate about teaching.</p>
+                    <p class="text-gray-600">Learn directly from experienced professionals and industry experts passionate about teaching in each track.</p>
                 </div>
                 <div class="card text-left">
                     <h3 class="text-xl font-bold text-[#073B4C] mb-3">Hands-On Learning</h3>
-                    <p class="text-gray-600">Our task-based approach ensures you're always building, doing, and applying your knowledge.</p>
+                    <p class="text-gray-600">Our task-based approach ensures you're always building, doing, and applying your knowledge in your chosen field.</p>
                 </div>
                 <div class="card text-left">
                     <h3 class="text-xl font-bold text-[#073B4C] mb-3">Portfolio-Ready Projects</h3>
-                    <p class="text-gray-600">Walk away with a tangible project that showcases your abilities to future employers.</p>
+                    <p class="text-gray-600">Walk away with tangible projects or campaigns that showcase your abilities to future employers.</p>
                 </div>
                 <div class="card text-left">
                     <h3 class="text-xl font-bold text-[#073B4C] mb-3">Vibrant Community</h3>
-                    <p class="text-gray-600">Join a supportive network of fellow apprentices and Tech Hut alumni.</p>
+                    <p class="text-gray-600">Join a supportive network of fellow apprentices and Tech Hut alumni across all disciplines.</p>
                 </div>
             </div>
         </div>
