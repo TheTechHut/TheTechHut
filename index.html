@@ -70,20 +70,41 @@
     <meta name="description" content="The Tech Hut is a leading Ed Tech and Talent Sourcing company based in Kenya.">
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>The Tech Hut</title>
+
+    <style>
+        .nav-link {
+            color: white;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: #06D6A0; /* Vibrant green underline */
+            transition: width 0.3s ease, left 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+    </style>
 </head>
 
 <body>
     <header>
-        <div class="logo">
-            <img src="./assets/img/christmas_logo.png" alt="The Tech Hut">
-            <p class="txt-gradient">The Tech Hut</p>
-        </div>
-
-        <div class="grid-2">
-            <!-- <a href="https://myqrcode.com/qr/154659b2/view" class="btn-transparent-white">Get Involved</a> -->
-            <a href="https://job-hunter-app.vercel.app" class="btn-gradient">Student Projects</a>
-            <a href="./entrepreneurial_challenge/index.html" class="btn-transparent-white">Challenges</a>
-        </div>
+        <nav class="flex flex-wrap justify-center md:justify-end gap-6">
+            <!-- Replaced "Student Projects" with "Community" and linked to WhatsApp channel -->
+            <a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" target="_blank" rel="noopener noreferrer" class="nav-link">Community</a>
+            <!-- Updated "Events" link -->
+            <a href="https://thetechhut.co/events" class="nav-link">Events</a>
+            <a href="https://thetechhut.co/apprenticeship" class="nav-link">Apprenticeship</a>
+        </nav>
     </header>
 
     <main class="showcase">
