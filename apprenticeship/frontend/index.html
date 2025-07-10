@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Tech Hut: Frontend Engineering Apprenticeship</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Poppins for headings, Inter for body -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #073B4C; /* Dark blue text from Energetic & Playful palette */
+            background-color: #f0f4f8; /* Light background */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+        /* Energetic & Playful Palette: #06D6A0 (Vibrant Green), #073B4C (Dark Blue), #FFD700 (Golden) */
+        .text-gradient-primary {
+            background-image: linear-gradient(to right, #06D6A0, #FFD700); /* Vibrant green to golden */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+        .btn-primary {
+            background-image: linear-gradient(to right, #06D6A0, #2ecc71); /* Vibrant green gradient */
+            color: white;
+            font-weight: 700;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px; /* Fully rounded */
+            box-shadow: 0 5px 15px rgba(6, 214, 160, 0.4);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(6, 214, 160, 0.5);
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 8px 20px rgba(7, 59, 76, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(7, 59, 76, 0.15);
+        }
+        .stage-box {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            border: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 120px;
+        }
+        .stage-box-individual {
+            background-color: #fef08a; /* Light golden for individual */
+        }
+        .stage-box-team {
+            background-color: #d1fae5; /* Light green for team */
+        }
+        .arrow {
+            font-size: 2.5rem;
+            color: #06D6A0; /* Vibrant green */
+            margin: 0.5rem 0;
+            line-height: 1;
+        }
+        @media (min-width: 768px) {
+            .arrow-horizontal {
+                transform: rotate(90deg);
+            }
+        }
+        @keyframes bounce-subtle {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(10px);
+            }
+        }
+        .animate-bounce-subtle {
+            animation: bounce-subtle 2s infinite;
+        }
+
+        /* Responsive font sizes for better readability on smaller screens */
+        @media (max-width: 767px) {
+            h1 {
+                font-size: 2.5rem; /* Smaller on mobile */
+            }
+            h2 {
+                font-size: 2rem;
+            }
+            h3 {
+                font-size: 1.75rem;
+            }
+            .text-lg {
+                font-size: 0.95rem;
+            }
+            .text-xl {
+                font-size: 1.05rem;
+            }
+            .btn-primary {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            .header img {
+                height: 10vw; /* Responsive logo size */
+                width: 10vw;
+                max-height: 60px;
+                max-width: 60px;
+            }
+            .header p {
+                font-size: 1.5rem; /* Responsive header text */
+            }
+            .nav-link {
+                padding: 0.3rem 0.7rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased leading-normal">
+    <!-- Chosen Color Palette: Energetic & Playful -->
+    <!-- Neither Mermaid JS nor SVG were used anywhere in this output. -->
+
+    <!-- Header -->
+    <header class="bg-[#093e76] text-white py-4 px-6 flex flex-col md:flex-row items-center justify-between shadow-lg">
+        <div class="flex items-center mb-4 md:mb-0">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczMRXm5fWGnx_VEenzpGb-cQkP17XBBnA69u_ADqp8efQCJ4CFYSbovdnj9fM33rNnzbZA0f1aN1nRAbbS7_R-NYYgTTRWPyovQfaGKK2hoH9LgFM8rtTzxO6IpqlgBSYlA6rVN_IdTIJIUnku6VO5HS=w500-h500-s-no-gm?authuser=0" alt="The Tech Hut Logo" class="h-12 w-12 rounded-full mr-3">
+            <p class="text-2xl font-bold text-gradient-primary">The Tech Hut</p>
+        </div>
+        <nav class="flex flex-wrap justify-center md:justify-end gap-6">
+            <a href="https://thetechhut.co/apprenticeship" class="nav-link text-white hover:text-[#06D6A0] transition-colors">Apprenticeship Home</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-white py-16 md:py-24 px-4 text-center">
+        <div class="container mx-auto max-w-4xl">
+            <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6 text-gradient-primary">
+                Master Frontend Engineering with The Tech Hut
+            </h1>
+            <p class="text-lg md:text-xl text-gray-700 mb-8">
+                Transform into a job-ready Frontend Developer through our comprehensive, hands-on, and fully remote <b>10-stage apprenticeship program</b>. Build real applications using <b>TypeScript and Next.js</b>!
+            </p>
+            <div class="mt-12">
+                <span class="text-5xl text-[#06D6A0] animate-bounce-subtle cursor-pointer" onclick="document.getElementById('program-overview').scrollIntoView({ behavior: 'smooth' });">&darr;</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Overview Section -->
+    <section id="program-overview" class="bg-[#f0f4f8] py-16 md:py-24 px-4 text-center">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-12 text-gradient-primary">
+                Your Journey: A 10-Stage Remote Experience
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <div class="card flex flex-col items-center p-8">
+                    <p class="text-6xl font-bold text-[#06D6A0] mb-4">10</p>
+                    <p class="text-2xl font-semibold text-gray-800">Comprehensive Stages</p>
+                    <p class="text-gray-600 mt-2">Structured progression from foundational skills to advanced application development.</p>
+                </div>
+                <div class="card flex flex-col items-center p-8">
+                    <p class="text-6xl font-bold text-[#FFD700] mb-4">💻</p>
+                    <p class="text-2xl font-semibold text-gray-800">Fully Remote & Flexible</p>
+                    <p class="text-gray-600 mt-2">Learn and build from anywhere, fitting into your schedule.</p>
+                </div>
+            </div>
+            <p class="text-lg text-gray-700">
+                Our program is designed to provide you with <b>real-world development experience</b>. You'll gain practical skills by working on live projects, guided by expert mentors every step of the way.
+            </p>
+        </div>
+    </section>
+
+    <!-- Program Structure Breakdown Section -->
+    <section id="program-structure" class="bg-white py-16 md:py-24 px-4 text-center">
+        <div class="container mx-auto max-w-5xl">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-12 text-gradient-primary">
+                Program Structure: Individual & Team Phases
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                <!-- Individual Work Stages -->
+                <div class="flex flex-col items-center">
+                    <h3 class="text-3xl font-bold text-[#073B4C] mb-6">Stages 1-5: Individual Mastery</h3>
+                    <p class="text-gray-700 mb-6">
+                        The first half of the program focuses on building your foundational skills. You'll work independently on tasks designed to solidify your understanding of core frontend concepts and tools.
+                    </p>
+                    <div class="flex flex-col items-center w-full">
+                        <div class="stage-box stage-box-individual w-full max-w-xs mb-4">
+                            <p class="font-bold text-xl">Stage 1</p>
+                            <p class="text-sm text-gray-600">Foundational Skills</p>
+                        </div>
+                        <span class="arrow">↓</span>
+                        <div class="stage-box stage-box-individual w-full max-w-xs mb-4">
+                            <p class="font-bold text-xl">Stage 2</p>
+                            <p class="text-sm text-gray-600">Core Concepts Deep Dive</p>
+                        </div>
+                        <span class="arrow">↓</span>
+                        <div class="stage-box stage-box-individual w-full max-w-xs mb-4">
+                            <p class="font-bold text-xl">Stage 3</p>
+                            <p class="text-sm text-gray-600">Initial Project Building</p>
+                        </div>
+                        <span class="arrow">↓</span>
+                        <div class="stage-box stage-box-individual w-full max-w-xs mb-4">
+                            <p class="font-bold text-xl">Stage 4</p>
+                            <p class="text-sm text-gray-600">Advanced Techniques</p>
+                        </div>
+                        <span class="arrow">↓</span>
+                        <div class="stage-box stage-box-individual w-full max-w-xs">
+                            <p class="font-bold text-xl">Stage 5</p>
+                            <p class="text-sm text-gray-600">Individual Project Completion</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Work Stages -->
+                <div class="flex flex-col items-center mt-8 md:mt-0">
+                    <h3 class="text-3xl font-bold text-[#073B4C] mb-6">Stages 6-10: Team Application Build</h3>
+                    <p class="text-gray-700 mb-6">
+                        The second half shifts to collaborative teamwork. You'll join forces with fellow apprentices to build a <b>fully functional application</b> from the ground up, applying all your skills.
+                    </p>
+                    <div class="flex flex-col items-center w-full">
+                        <div class="stage-box stage-box-team w-full max-w-xs mb-4">
+                            <p class="font-bold text-xl">Stage 6</p>
+                            <p class="text-sm text-gray-600">Team Formation & Planning</p>
+                        </div>
+                        <span class="arrow">↓</span>
+                        <div class="stage-box stage-box-team w-full max-w-xs mb-4">
+                            <p class="font-bold text-xl">Stage 7</p>
+                            <p class="text-sm text-gray-600">Frontend Architecture</p>
+                        </div>
+                        <span class="arrow">↓</span>
+                        <div class="stage-box stage-box-team w-full max-w-xs mb-4">
+                            <p class="font-bold text-xl">Stage 8</p>
+                            <p class="text-sm text-gray-600">Feature Development</p>
+                        </div>
+                        <span class="arrow">↓</span>
+                        <div class="stage-box stage-box-team w-full max-w-xs mb-4">
+                            <p class="font-bold text-xl">Stage 9</p>
+                            <p class="text-sm text-gray-600">Testing & Refinement</p>
+                        </div>
+                        <span class="arrow">↓</span>
+                        <div class="stage-box stage-box-team w-full max-w-xs">
+                            <p class="font-bold text-xl">Stage 10</p>
+                            <p class="text-sm text-gray-600">Capstone Project Delivery</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="text-lg text-gray-700 mt-12">
+                Throughout these stages, you will gain hands-on experience with industry-standard tools and frameworks. For frontend development, we specifically use <b>TypeScript</b> for robust, scalable code and <b>Next.js</b> for building powerful, production-ready applications.
+            </p>
+        </div>
+    </section>
+
+    <!-- How the Program Works Section -->
+    <section id="how-it-works" class="bg-[#f0f4f8] py-16 md:py-24 px-4 text-center">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-12 text-gradient-primary">
+                Seamless Learning: How Our Program Works
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card p-8">
+                    <p class="text-2xl font-bold text-[#073B4C] mb-4">Communication Hub: Slack</p>
+                    <p class="text-gray-700">
+                        The entire program operates on <b>Slack</b>, serving as our primary platform for communication, collaboration, and real-time support from mentors and peers.
+                    </p>
+                </div>
+                <div class="card p-8">
+                    <p class="text-2xl font-bold text-[#073B4C] mb-4">Task-Based Progression</p>
+                    <p class="text-gray-700">
+                        To advance through each stage, you must successfully complete practical tasks assigned by your mentors. This ensures continuous learning and application of knowledge.
+                    </p>
+                </div>
+            </div>
+            <p class="text-lg text-gray-700 mt-12">
+                We're committed to equipping you with the skills and a strong portfolio needed to excel in the tech industry. Get ready to build amazing things and unleash your great!
+            </p>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="bg-white py-16 md:py-24 px-4 text-center">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-8 text-gradient-primary">
+                Ready to Launch Your Frontend Career?
+            </h2>
+            <p class="text-lg md:text-xl text-gray-700 mb-10">
+                Join The Tech Hut Apprenticeship and turn your passion into a profession. Your journey to becoming a skilled Frontend Engineer starts now!
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-6">
+                <a href="https://thetechhut.co/apprenticeship" class="btn-primary inline-block w-full sm:w-auto">Explore Full Apprenticeship Details</a>
+                <a href="https://payment.intasend.com/pay/13d5ed80-239c-4bcb-a9eb-60e5f1f155ca/" class="btn-primary inline-block w-full sm:w-auto">Complete Your Payment Now!</a>
+            </div>
+            <p class="text-gray-700 mt-12">
+                If you have any more questions, feel free to reach out to us at: <a href="tel:+254705363230" class="text-[#093e76] font-bold hover:underline">+254705363230 - Joy</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#073B4C] py-10 px-4 text-white text-center">
+        <div class="container mx-auto">
+            <p>&copy; 2025 The Tech Hut. All rights reserved.</p>
+            <p><a href="https://thetechhut.co/" class="text-[#06D6A0] hover:underline">thetechhut.co</a></p>
+        </div>
+    </footer>
+
+</body>
+</html>
