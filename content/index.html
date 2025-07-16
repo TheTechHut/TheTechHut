@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Tech Hut: Unlock Your Potential - Video Content</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Poppins for headings, Inter for body -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #073B4C; /* Dark blue text from brand palette */
+            background-color: #f0f4f8; /* Light background */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+        /* Brand Color Palette: #093e76 (Dark Blue), #06D6A0 (Vibrant Green), #FFD700 (Golden), #073B4C (Dark Blue Text) */
+        .text-gradient-primary {
+            background-image: linear-gradient(to right, #06D6A0, #FFD700); /* Vibrant green to golden */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+        .btn-primary {
+            background-image: linear-gradient(to right, #06D6A0, #2ecc71); /* Vibrant green gradient */
+            color: white;
+            font-weight: 700;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px; /* Fully rounded */
+            box-shadow: 0 5px 15px rgba(6, 214, 160, 0.4);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(6, 214, 160, 0.5);
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 8px 20px rgba(7, 59, 76, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(7, 59, 76, 0.15);
+        }
+        .video-card {
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+        /* Styles for the video preview container */
+        .video-preview-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            background-color: #000; /* Fallback background for video area */
+        }
+        .video-preview-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .video-card-content {
+            padding: 1.5rem;
+            flex-grow: 1; /* Allows content to expand */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .video-card-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #093e76;
+            margin-bottom: 0.5rem;
+        }
+        .video-card-content p {
+            font-size: 0.95rem;
+            color: #4a5568;
+            margin-bottom: 1rem;
+        }
+        .video-card-content .price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #06D6A0;
+            margin-bottom: 1rem;
+        }
+        .coming-soon-card {
+            background-color: #f8f8f8; /* Lighter background for coming soon */
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            min-height: 350px; /* Ensure consistent height with video cards */
+        }
+        .coming-soon-card h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #073B4C;
+            margin-bottom: 1rem;
+        }
+        .coming-soon-card p {
+            font-size: 1rem;
+            color: #4a5568;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 767px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+            h3 {
+                font-size: 1.5rem;
+            }
+            .text-lg {
+                font-size: 0.95rem;
+            }
+            .text-xl {
+                font-size: 1.05rem;
+            }
+            .btn-primary {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            .header img {
+                height: 10vw;
+                width: 10vw;
+                max-height: 60px;
+                max-width: 60px;
+            }
+            .header p {
+                font-size: 1.5rem;
+            }
+            .nav-link {
+                padding: 0.3rem 0.7rem;
+                font-size: 0.85rem;
+            }
+            /* Ensure buttons in video cards stack on small screens */
+            .video-card-content .flex-col {
+                flex-direction: column;
+            }
+            .video-card-content .flex-col > .btn-primary {
+                width: 100%; /* Full width buttons on small screens */
+            }
+            .flex-col.sm:flex-row > .btn-primary {
+                width: 100%; /* Ensure CTA buttons are full width on small screens */
+            }
+        }
+    </style>
+</head>
+<body class="antialiased leading-normal">
+
+    <!-- Header -->
+    <header class="bg-[#093e76] text-white py-4 px-6 flex flex-col md:flex-row items-center justify-between shadow-lg">
+        <div class="flex items-center mb-4 md:mb-0">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczMRXm5fWGnx_VEenzpGb-cQkP17XBBnA69u_ADqp8efQCJ4CFYSbovdnj9fM33rNnzbZA0f1aN1nRAbbS7_R-NYYgTTRWPyovQfaGKK2hoH9LgFM8rtTzxO6IpqlgBSYlA6rVN_IdTIJIUnku6VO5HS=w500-h500-s-no-gm?authuser=0" alt="The Tech Hut Logo" class="h-12 w-12 rounded-full mr-3">
+            <p class="text-2xl font-bold text-gradient-primary">The Tech Hut</p>
+        </div>
+        <nav class="flex flex-wrap justify-center md:justify-end gap-6">
+            <a href="#videos" class="nav-link text-white hover:text-[#06D6A0] transition-colors">Videos</a>
+            <a href="#testimonials" class="nav-link text-white hover:text-[#06D6A0] transition-colors">Testimonials</a>
+            <a href="https://thetechhut.co/test.html" class="nav-link text-white hover:text-[#06D6A0] transition-colors">Our Website</a>
+        </nav>
+    </header>
+
+    <!-- Featured Videos / Categories Section -->
+    <section id="videos" class="bg-[#f0f4f8] py-16 md:py-24 px-4">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-12 text-center text-gradient-primary">
+                Our Top Video Collections
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Video Card: We Minted Our First Millionaire! -->
+                <div class="video-card">
+                    <div class="video-preview-container">
+                        <iframe src="https://www.youtube.com/embed/5oHTW2xQ1dM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <div>
+                            <h3>We Minted Our First Millionaire!</h3>
+                            <p>Hear the incredible story of Caleb Jephunneh, who won KSh 1,000,000+ from opportunities shared by The Tech Hut. A 3-hour deep dive into his journey.</p>
+                        </div>
+                        <div class="flex flex-col gap-2 mt-4"> 
+                            <p class="price">KSh 150</p> 
+                            <a href="https://www.youtube.com/watch?v=5oHTW2xQ1dM" target="_blank" class="btn-primary w-full text-center">Watch Trailer</a>
+                            <!-- Placeholder for full video - replace with actual link when available -->
+                            <a href="https://payment.intasend.com/pay/5a0fcb29-768a-4460-a184-00d2e58dafff/" target="_blank" class="btn-primary w-full text-center bg-[#093e76] hover:bg-[#073B4C] !bg-gradient-to-r !from-[#093e76] !to-[#073B4C]">Buy Full Video</a> 
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coming Soon Card: Entrepreneurial Masterclass -->
+                <div class="coming-soon-card">
+                    <i class="fas fa-hourglass-half text-6xl text-[#FFD700] mb-4"></i>
+                    <h3>Entrepreneurial Masterclass</h3>
+                    <p class="text-lg text-gray-700">Coming Soon! Get ready to transform your ideas into thriving tech ventures with expert guidance.</p>
+                </div>
+
+                <!-- Coming Soon Card: AI Mastery Week -->
+                <div class="coming-soon-card">
+                    <i class="fas fa-robot text-6xl text-[#06D6A0] mb-4"></i>
+                    <h3>AI Mastery Week Recordings</h3>
+                    <p class="text-lg text-gray-700">Coming Soon! All the groundbreaking sessions from our AI Mastery Week, available for you to re-watch and learn.</p>
+                </div>
+
+                <!-- Placeholder for other videos if needed, or remove this section if only the above are desired -->
+                <!-- You can add more video cards here following the structure above -->
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Buy from Us Section -->
+    <!-- <section class="bg-white py-16 md:py-24 px-4 text-center">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-8 text-gradient-primary">
+                Why Choose The Tech Hut Videos?
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="card p-6 flex flex-col items-center">
+                    <i class="fas fa-lightbulb text-5xl text-[#06D6A0] mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-[#093e76]">Expert Insights</h3>
+                    <p class="text-gray-700">Learn directly from industry professionals and experienced mentors.</p>
+                </div>
+                <div class="card p-6 flex flex-col items-center">
+                    <i class="fas fa-cogs text-5xl text-[#FFD700] mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-[#093e76]">Practical Skills</h3>
+                    <p class="text-gray-700">Our content focuses on hands-on application and real-world scenarios.</p>
+                </div>
+                <div class="card p-6 flex flex-col items-center">
+                    <i class="fas fa-infinity text-5xl text-[#073B4C] mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-[#093e76]">Lifetime Access</h3>
+                    <p class="text-gray-700">Purchase once and access your chosen videos anytime, forever.</p>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Testimonials Section -->
+    <!-- <section id="testimonials" class="bg-[#f0f4f8] py-16 md:py-24 px-4 text-center">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-12 text-gradient-primary">
+                What Our Learners Say
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card p-8">
+                    <p class="text-gray-800 italic mb-4">
+                        "The AI Mastery Week recordings were a goldmine! I can re-watch complex concepts and truly grasp them. Worth every shilling!"
+                    </p>
+                    <div class="flex items-center justify-center mt-4">
+                        <img src="https://placehold.co/60x60/06D6A0/FFFFFF?text=L1" alt="Learner 1" class="w-12 h-12 rounded-full object-cover mr-3 border-2 border-[#093e76]">
+                        <h4 class="font-bold text-lg text-[#093e76]">- Jane Wanjiku</h4>
+                    </div>
+                </div>
+
+                <div class="card p-8">
+                    <p class="text-gray-800 italic mb-4">
+                        "I struggled with Next.js until I watched The Tech Hut's deep dive. Their explanations are so clear and practical. My projects are now flying!"
+                    </p>
+                    <div class="flex items-center justify-center mt-4">
+                        <img src="https://placehold.co/60x60/FFD700/073B4C?text=L2" alt="Learner 2" class="w-12 h-12 rounded-full object-cover mr-3 border-2 border-[#093e76]">
+                        <h4 class="font-bold text-lg text-[#093e76]">- David Omondi</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Final Call to Action Section -->
+    <!-- <section class="bg-white py-16 md:py-24 px-4 text-center">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-8 text-gradient-primary">
+                Ready to Level Up Your Skills?
+            </h2>
+            <p class="text-lg md:text-xl text-gray-700 mb-10">
+                Don't just learn, master! Get instant access to premium tech content that empowers your career.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-6">
+                <a href="#videos" class="btn-primary inline-block w-full sm:w-auto">Browse All Videos</a>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Footer -->
+    <footer class="bg-[#073B4C] py-10 px-4 text-white text-center">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+            <!-- Branding/About -->
+            <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                <div class="flex items-center mb-4">
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczMRXm5fWGnx_VEenzpGb-cQkP17XBBnA69u_ADqp8efQCJ4CFYSbovdnj9fM33rNnzbZA0f1aN1nRAbbS7_R-NYYgTTRWPyovQfaGKK2hoH9LgFM8rtTzxO6IpqlgBSYlA6rVN_IdTIJIUnku6VO5HS=w500-h500-s-no-gm?authuser=0" alt="The Tech Hut Logo" class="h-10 w-10 rounded-full mr-2">
+                    <p class="text-xl font-bold text-gradient-primary">The Tech Hut</p>
+                </div>
+                <ul class="list-none p-0 m-0 text-gray-300 text-sm">
+                    <li class="mb-1">Connect with experts.</li>
+                    <li class="mb-1">Work on real projects.</li>
+                    <li>Gain hands-on experience.</li>
+                </ul>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="text-center md:text-left">
+                <h3 class="text-lg font-bold text-white mb-4">Quick Links</h3>
+                <ul class="list-none p-0 m-0 text-gray-300 text-sm space-y-2">
+                    <li><a href="#" class="hover:text-[#06D6A0] transition-colors">Become a mentor</a></li>
+                    <li><a href="#" class="hover:text-[#06D6A0] transition-colors">Find a mentor</a></li>
+                    <li><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" class="hover:text-[#06D6A0] transition-colors">Community</a></li>
+                    <li><a href="https://linkedin.com/company/digital-transformation-partner/" class="hover:text-[#06D6A0] transition-colors">Blog</a></li>
+                    <li><a href="https://thetechhut.co/apprenticeship" class="hover:text-[#06D6A0] transition-colors">Apprenticeship</a></li>
+                </ul>
+            </div>
+
+            <!-- Legal & Contact -->
+            <div class="text-center md:text-left">
+                <h3 class="text-lg font-bold text-white mb-4">Legal & Contact</h3>
+                <ul class="list-none p-0 m-0 text-gray-300 text-sm space-y-2">
+                    <li><a href="#" class="hover:text-[#06D6A0] transition-colors">Terms and conditions</a></li>
+                    <li><a href="mailto:info@thetechhut.co" class="hover:text-[#06D6A0] transition-colors">Contact Us</a></li>
+                    <li><a href="#" class="hover:text-[#06D6A0] transition-colors">Privacy Policy</a></li>
+                </ul>
+                <div class="flex justify-center md:justify-start gap-4 mt-6">
+                    <a href="https://twitter.com/Ekiprop_kimutai" target="_blank" class="text-white hover:text-[#06D6A0] transition-colors text-2xl"><i class="fab fa-twitter"></i></a>
+                    <a href="#" target="_blank" class="text-white hover:text-[#06D6A0] transition-colors text-2xl"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.youtube.com/@TheTechHut" target="_blank" class="text-white hover:text-[#06D6A0] transition-colors text-2xl"><i class="fab fa-youtube"></i></a>
+                    <a href="#" target="_blank" class="text-white hover:text-[#06D6A0] transition-colors text-2xl"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com/company/digital-transformation-partner/" target="_blank" class="text-white hover:text-[#06D6A0] transition-colors text-2xl"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="mt-8 pt-8 border-t border-gray-700 text-gray-400 text-sm">
+            <p>&copy; 2025 The Tech Hut. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
