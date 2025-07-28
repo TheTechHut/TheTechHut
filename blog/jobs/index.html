@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Tech Jobs in Kenya: The Good, The Bad, & The Realities - The Tech Hut</title>
+    <!-- Chosen Palette: Energetic & Playful -->
+    <!-- Application Structure Plan: The SPA is structured to guide users through understanding the Kenyan tech job market. It starts with a comprehensive overview (Hero), then breaks down the pros (Good News), challenges (Harsh Realities), and a strategic guide (Blueprint). A new section, "AI Tools for Your Job Journey," provides interactive LLM-powered utilities for interview prep and networking. The infographic section visualizes key market insights and a strategic roadmap. This structure provides a clear, digestible narrative from market understanding to practical application, enhanced by AI tools. -->
+    <!-- Visualization & Content Choices:
+        - Hero Section: Goal=Inform/Engage, Viz=Text/CTA (HTML/CSS), Justification=Sets context and encourages exploration.
+        - Good News/Harsh Realities/Blueprint: Goal=Inform/Educate, Viz=Text/Cards/Solution Boxes (HTML/CSS), Justification=Presents structured information clearly.
+        - AI Tools Section: Goal=Enable Interaction/Utility, Viz=Input/Output Textareas, Buttons (HTML/CSS/JS), Justification=Provides direct, actionable LLM-powered assistance for job seekers.
+        - Infographic 1 (Key Statistics): Goal=Inform/Summarize, Viz=Icon/Big Number Cards (HTML/CSS), Justification=Highlights critical market facts at a glance.
+        - Infographic 2 (Strategic Roadmap): Goal=Guide/Process, Viz=Timeline (HTML/CSS), Justification=Visually represents the step-by-step blueprint for success.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #073B4C;
+            background-color: #f0f4f8;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+        .text-gradient-primary {
+            background-image: linear-gradient(to right, #06D6A0, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+        .btn-primary {
+            background-image: linear-gradient(to right, #06D6A0, #2ecc71);
+            color: white;
+            font-weight: 700;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            box-shadow: 0 5px 15px rgba(6, 214, 160, 0.4);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(6, 214, 160, 0.5);
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 8px 20px rgba(7, 59, 76, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(7, 59, 76, 0.15);
+        }
+        .solution-box {
+            background-color: #d1fae5;
+            border-left: 5px solid #06D6A0;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin-top: 1rem;
+            font-weight: 500;
+            color: #073B4C;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background-color: #06D6A0;
+            border-radius: 2px;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            background-color: #093e76;
+            border: 3px solid #FFD700;
+            border-radius: 50%;
+            z-index: 10;
+        }
+        .timeline-item:last-child::before {
+            height: 50%;
+        }
+        .timeline-content {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            text-align: left;
+        }
+        .timeline-content h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #073B4C;
+            margin-bottom: 0.5rem;
+        }
+        .timeline-content p {
+            font-size: 1rem;
+            color: #4a5568;
+            margin-bottom: 0.5rem;
+        }
+        .timeline-content ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 0.5rem;
+        }
+        .timeline-content ul li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.25rem;
+            font-size: 0.95rem;
+            color: #2d3748;
+        }
+        .timeline-content ul li::before {
+            content: '•';
+            color: #FFD700;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.1em;
+            line-height: 1;
+        }
+        .llm-input-area textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            border: 1px solid #cbd5e1;
+            font-size: 1rem;
+            min-height: 80px;
+            resize: vertical;
+            margin-bottom: 0.75rem;
+        }
+        .llm-output-area {
+            background-color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            min-height: 100px;
+            font-size: 0.95rem;
+            color: #073B4C;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            text-align: left;
+        }
+        .loading-spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #06D6A0;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 767px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+            h3 {
+                font-size: 1.5rem;
+            }
+            .text-lg {
+                font-size: 0.95rem;
+            }
+            .text-xl {
+                font-size: 1.05rem;
+            }
+            .btn-primary {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            .header img {
+                height: 10vw;
+                width: 10vw;
+                max-height: 60px;
+                max-width: 60px;
+            }
+            .header p {
+                font-size: 1.5rem;
+            }
+            .nav-link {
+                padding: 0.3rem 0.7rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased leading-normal">
+
+    <header class="bg-[#093e76] text-white py-4 px-6 flex flex-col md:flex-row items-center justify-between shadow-lg">
+        <div class="flex items-center mb-4 md:mb-0">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczMRXm5fWGnx_VEenzpGb-cQkP17XBBnA69u_ADqp8efQCJ4CFYSbovdnj9fM33rNnzbZA0f1aN1nRAbbS7_R-NYYgTTRWPyovQfaGKK2hoH9LgFM8rtTzxO6IpqlgBSYlA6rVN_IdTIJIUnku6VO5HS=w500-h500-s-no-gm?authuser=0" alt="The Tech Hut Logo" class="h-12 w-12 rounded-full mr-3">
+            <p class="text-2xl font-bold text-gradient-primary">The Tech Hut</p>
+        </div>
+        <nav class="flex flex-wrap justify-center md:justify-end gap-6">
+            <a href="#good-news" class="nav-link text-white hover:text-[#06D6A0] transition-colors">The Good</a>
+            <a href="#harsh-realities" class="nav-link text-white hover:text-[#06D6A0] transition-colors">The Bad</a>
+            <a href="#blueprint" class="nav-link text-white hover:text-[#06D6A0] transition-colors">The Blueprint</a>
+            <a href="#ai-tools" class="nav-link text-white hover:text-[#06D6A0] transition-colors">AI Tools</a>
+            <a href="#infographics" class="nav-link text-white hover:text-[#06D6A0] transition-colors">Insights</a>
+            <a href="https://thetechhut.co/" class="nav-link text-white hover:text-[#06D6A0] transition-colors">Our Website</a>
+        </nav>
+    </header>
+
+    <section class="bg-white py-16 md:py-24 px-4 text-center">
+        <div class="container mx-auto max-w-4xl">
+            <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6 text-gradient-primary">
+                Landing Tech Jobs in Kenya: The Real Talk
+            </h1>
+            <p class="text-lg md:text-xl text-gray-700 mb-8">
+                The Kenyan tech scene is buzzing! From innovative startups to established enterprises, opportunities are sprouting faster than maize after the long rains. But let's be real: navigating this landscape can feel like a maze. This guide will peel back the layers, discussing the exciting advantages, the tough truths, and a solid blueprint to help you land that dream tech job.
+            </p>
+            <a href="#blueprint" class="btn-primary inline-block">Start Your Journey</a>
+        </div>
+    </section>
+
+    <section id="good-news" class="bg-[#f0f4f8] py-16 md:py-24 px-4">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-12 text-center text-gradient-primary">
+                The Good News: Your Time is NOW!
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <i class="fas fa-robot text-5xl text-[#06D6A0] mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-[#093e76]">AI is Here – Use It!</h3>
+                    <p class="text-gray-700">Artificial Intelligence isn't just a buzzword; it's a powerful co-pilot. Leverage AI tools for learning, coding assistance, content creation for your portfolio, and even optimizing your job applications. It's a force multiplier for your productivity and learning curve. Embrace it, don't fear it.</p>
+                </div>
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <i class="fas fa-bolt text-5xl text-[#FFD700] mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-[#093e76]">You're Young, You Have Execution Energy.</h3>
+                    <p class="text-gray-700">Youth is a superpower in tech. You have the raw energy, adaptability, and often fewer entrenched habits, making you agile learners and quick implementers. This "execution energy" is highly valued – channel it into building, learning, and networking.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="harsh-realities" class="bg-white py-16 md:py-24 px-4">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-12 text-center text-gradient-primary">
+                The Harsh Realities: The Elephant in the Room
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-8">
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold mb-2 text-[#093e76]">The "Known Bird Gets the Job."</h3>
+                    <p class="text-gray-700 mb-4">This is perhaps the biggest reality in Kenya. Networking is not just important; it's often *everything*. Many jobs are filled through referrals or within existing networks before they even hit public job boards.</p>
+                    <div class="solution-box">
+                        <p class="font-bold">Solution: Be the Known Bird!</p>
+                        <p>This isn't about unfairness; it's about strategy. Your goal is to become known within the tech community.</p>
+                    </div>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold mb-2 text-[#093e76]">Your First Job? You'll Likely Be Underpaid.</h3>
+                    <p class="text-gray-700 mb-4">It's a common story. Companies often leverage the high competition and your lack of "local" experience.</p>
+                    <div class="solution-box">
+                        <p class="font-bold">Strategy:</p>
+                        <p>Go in for the experience. Draw clear boundaries on your time and energy to avoid burnout. View it as an accelerated learning bootcamp. Once you have 6-12 months of solid experience, your market value will jump significantly.</p>
+                    </div>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold mb-2 text-[#093e76]">Jobs are Highly Competitive – Monetize Side Projects.</h3>
+                    <p class="text-gray-700 mb-4">With many talented individuals vying for limited positions, standing out is paramount.</p>
+                    <div class="solution-box">
+                        <p class="font-bold">Strategy:</p>
+                        <p>Don't just build side projects; try to monetize them, even if it's a small amount. This demonstrates entrepreneurial spirit, problem-solving, market understanding, and initiative – qualities employers desperately seek. It also gives you a fallback if the job hunt takes longer than expected.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="blueprint" class="bg-[#f0f4f8] py-16 md:py-24 px-4">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-12 text-center text-gradient-primary">
+                The Blueprint for Success: How to Conquer the Tech Job Market
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <div class="text-5xl text-[#093e76] mb-4 font-bold">1</div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#093e76]">Build Skills Based on JDs</h3>
+                    <p class="text-gray-700">Stop learning randomly. Find 5-10 job descriptions for roles you aspire to, highlight recurring skills, and build your learning path around them.</p>
+                </div>
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <div class="text-5xl text-[#093e76] mb-4 font-bold">2</div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#093e76]">Build Online Presence: Personal Brand</h3>
+                    <p class="text-gray-700">Optimize LinkedIn, showcase projects on GitHub/Portfolio, and consider a personal website/blog to house your work and thoughts.</p>
+                </div>
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <div class="text-5xl text-[#093e76] mb-4 font-bold">3</div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#093e76]">Build Offline Presence: Reputation</h3>
+                    <p class="text-gray-700">Attend meetups, workshops, and conferences. Volunteer, contribute to discussions, and genuinely connect with people to build your reputation.</p>
+                </div>
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <div class="text-5xl text-[#093e76] mb-4 font-bold">4</div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#093e76]">Be Active on Tech WhatsApp Groups</h3>
+                    <p class="text-gray-700">These are goldmines in Kenya. Engage in discussions and apply for jobs *immediately* when they are posted. Speed is crucial.</p>
+                </div>
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <div class="text-5xl text-[#093e76] mb-4 font-bold">5</div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#093e76]">Upskill & Share Your Story Publicly</h3>
+                    <p class="text-gray-700">Continuously learn new technologies. Share your journey on LinkedIn, Twitter, a blog, or WhatsApp groups to build your brand and show dedication.</p>
+                </div>
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <div class="text-5xl text-[#093e76] mb-4 font-bold">6</div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#093e76]">In Interviews, Build Relationships</h3>
+                    <p class="text-gray-700">Communicate value ("Here's how I can solve your problems"). Negotiate on value, not your situation. Research salary benchmarks.</p>
+                </div>
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <div class="text-5xl text-[#093e76] mb-4 font-bold">7</div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#093e76]">Lead with Confidence</h3>
+                    <p class="text-gray-700">Believe in your abilities. Even if you're new, project an aura of readiness and competence. Your mindset is contagious; if you believe you belong, others will too.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New AI Tools Section -->
+    <section id="ai-tools" class="bg-white py-16 md:py-24 px-4">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-12 text-center text-gradient-primary">
+                Zana za AI kwa Safari Yako ya Kazi ✨
+            </h2>
+            <p class="text-center text-gray-700 mb-8 max-w-3xl mx-auto">
+                Tumia akili bandia kujiandaa kwa mahojiano na kujenga mtandao wako wa kitaalamu. Hizi hapa zana mbili za kukusaidia!
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Interview Question Generator -->
+                <div class="card p-6">
+                    <h3 class="text-2xl font-semibold mb-4 text-[#093e76]">Tengeneza Maswali ya Interview ✨</h3>
+                    <p class="text-gray-700 mb-4">Ingiza jina la kazi unayoomba (mfano: Software Engineer, Data Analyst) na AI itakupa maswali ya kawaida ya mahojiano.</p>
+                    <div class="llm-input-area">
+                        <textarea id="interviewRoleInput" placeholder="Ingiza Jina la Kazi (mfano: Software Engineer)"></textarea>
+                        <button id="generateInterviewQuestionsBtn" class="btn-primary w-full">Tengeneza Maswali</button>
+                    </div>
+                    <div class="llm-output-area mt-4" id="interviewQuestionsOutput">
+                        Maswali yaliyotengenezwa yataonekana hapa...
+                    </div>
+                </div>
+
+                <!-- Networking Message Drafter -->
+                <div class="card p-6">
+                    <h3 class="text-2xl font-semibold mb-4 text-[#093e76]">Andika Ujumbe wa Networking ✨</h3>
+                    <p class="text-gray-700 mb-4">Eleza muktadha (mfano: Nilikutana naye event, Kutafuta mentorship) na AI itakuandikia ujumbe wa kitaalamu.</p>
+                    <div class="llm-input-area">
+                        <textarea id="networkingContextInput" placeholder="Eleza Muktadha (mfano: Nilikutana naye event)"></textarea>
+                        <button id="generateNetworkingMessageBtn" class="btn-primary w-full">Andika Ujumbe</button>
+                    </div>
+                    <div class="llm-output-area mt-4" id="networkingMessageOutput">
+                        Ujumbe uliotengenezwa utaonekana hapa...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Infographics Section -->
+    <section id="infographics" class="bg-[#f0f4f8] py-16 md:py-24 px-4">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-12 text-center text-gradient-primary">
+                Key Insights & Your Path to Success
+            </h2>
+
+            <div class="mb-16">
+                <h3 class="text-3xl font-bold text-[#073B4C] mb-8 text-center">Understanding the Landscape</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="card p-6 flex flex-col items-center">
+                        <i class="fas fa-users text-5xl text-[#FFD700] mb-4"></i>
+                        <p class="text-4xl font-bold text-[#093e76]">High Competition</p>
+                        <p class="text-gray-700 mt-2">Many talented individuals vying for limited positions.</p>
+                    </div>
+                    <div class="card p-6 flex flex-col items-center">
+                        <i class="fas fa-hand-holding-usd text-5xl text-[#06D6A0] mb-4"></i>
+                        <p class="text-4xl font-bold text-[#093e76]">Initial Underpayment</p>
+                        <p class="text-gray-700 mt-2">Expect lower pay for your first job, focus on experience.</p>
+                    </div>
+                    <div class="card p-6 flex flex-col items-center">
+                        <i class="fas fa-share-alt text-5xl text-[#073B4C] mb-4"></i>
+                        <p class="text-4xl font-bold text-[#093e76]">Networking is Key</p>
+                        <p class="text-gray-700 mt-2">Many jobs are filled through referrals and existing networks.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-3xl font-bold text-[#073B4C] mb-8 text-center">Your Strategic Roadmap</h3>
+                <div class="flex flex-col items-center relative">
+                    <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-[#06D6A0] rounded-full hidden md:block"></div>
+
+                    <div class="timeline-item w-full md:w-3/4 lg:w-2/3">
+                        <div class="timeline-content">
+                            <div class="flex items-center mb-2">
+                                <div class="w-10 h-10 rounded-full bg-[#093e76] text-white flex items-center justify-center font-bold text-lg mr-4 flex-shrink-0">1</div>
+                                <h3 class="text-xl font-semibold text-[#093e76]">Skill Alignment</h3>
+                            </div>
+                            <p class="text-gray-700">Tailor your learning to match specific job descriptions.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item w-full md:w-3/4 lg:w-2/3 md:self-end">
+                        <div class="timeline-content">
+                            <div class="flex items-center mb-2">
+                                <div class="w-10 h-10 rounded-full bg-[#093e76] text-white flex items-center justify-center font-bold text-lg mr-4 flex-shrink-0">2</div>
+                                <h3 class="text-xl font-semibold text-[#093e76]">Online Brand</h3>
+                            </div>
+                            <p class="text-gray-700">Build a strong personal brand on LinkedIn, GitHub, and your own website.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item w-full md:w-3/4 lg:w-2/3">
+                        <div class="timeline-content">
+                            <div class="flex items-center mb-2">
+                                <div class="w-10 h-10 rounded-full bg-[#093e76] text-white flex items-center justify-center font-bold text-lg mr-4 flex-shrink-0">3</div>
+                                <h3 class="text-xl font-semibold text-[#093e76]">Offline Reputation</h3>
+                            </div>
+                            <p class="text-gray-700">Actively participate in tech events and community gatherings.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item w-full md:w-3/4 lg:w-2/3 md:self-end">
+                        <div class="timeline-content">
+                            <div class="flex items-center mb-2">
+                                <div class="w-10 h-10 rounded-full bg-[#093e76] text-white flex items-center justify-center font-bold text-lg mr-4 flex-shrink-0">4</div>
+                                <h3 class="text-xl font-semibold text-[#093e76]">WhatsApp Group Activity</h3>
+                            </div>
+                            <p class="text-gray-700">Engage in local tech WhatsApp groups for job leads and networking.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item w-full md:w-3/4 lg:w-2/3">
+                        <div class="timeline-content">
+                            <div class="flex items-center mb-2">
+                                <div class="w-10 h-10 rounded-full bg-[#093e76] text-white flex items-center justify-center font-bold text-lg mr-4 flex-shrink-0">5</div>
+                                <h3 class="text-xl font-semibold text-[#093e76]">Continuous Upskilling</h3>
+                            </div>
+                            <p class="text-gray-700">Keep learning and publicly share your progress and story.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item w-full md:w-3/4 lg:w-2/3 md:self-end">
+                        <div class="timeline-content">
+                            <div class="flex items-center mb-2">
+                                <div class="w-10 h-10 rounded-full bg-[#093e76] text-white flex items-center justify-center font-bold text-lg mr-4 flex-shrink-0">6</div>
+                                <h3 class="text-xl font-semibold text-[#093e76]">Interview Value</h3>
+                            </div>
+                            <p class="text-gray-700">Communicate value ("Here's how I can solve your problems"). Negotiate on value, not your situation. Research salary benchmarks.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item w-full md:w-3/4 lg:w-2/3">
+                        <div class="timeline-content">
+                            <div class="flex items-center mb-2">
+                                <div class="w-10 h-10 rounded-full bg-[#093e76] text-white flex items-center justify-center font-bold text-lg mr-4 flex-shrink-0">7</div>
+                                <h3 class="text-xl font-semibold text-[#093e76]">Lead with Confidence</h3>
+                            </div>
+                            <p class="text-gray-700">Believe in your abilities. Even if you're new, project an aura of readiness and competence. Your mindset is contagious; if you believe you belong, others will too.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-[#f0f4f8] py-16 md:py-24 px-4 text-center">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-8 text-gradient-primary">
+                Your Journey Starts Now!
+            </h2>
+            <p class="text-lg md:text-xl text-gray-700 mb-10">
+                Landing a tech job in Kenya is a marathon, not a sprint. It requires strategic effort, continuous learning, and a willingness to put yourself out there. Embrace the good, prepare for the harsh realities, and execute on the blueprint. The opportunities are real, and with the right approach, you can carve out an impactful career in Kenya's vibrant tech ecosystem.
+            </p>
+            <a href="https://thetechhut.co/apprenticeship" class="btn-primary inline-block">Connect with The Tech Hut</a>
+        </div>
+    </section>
+
+    <footer class="bg-[#073B4C] py-10 px-4 text-white text-center">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+            <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                <div class="flex items-center mb-4">
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczMRXm5fWGnx_VEenzpGb-cQkP17XBBnA69u_ADqp8efQCJ4CFYSbovdnj9fM33rNnzbZA0f1aN1nRAbbS7_R-NYYgTTRWPyovQfaGKK2hoH9LgFM8rtTzxO6IpqlgBSYlA6rVN_IdTIJIUnku6VO5HS=w500-h500-s-no-gm?authuser=0" alt="The Tech Hut Logo" class="h-10 w-10 rounded-full mr-2">
+                    <p class="text-xl font-bold text-gradient-primary">The Tech Hut</p>
+                </div>
+                <ul class="list-none p-0 m-0 text-gray-300 text-sm">
+                    <li class="mb-1">Connect with experts.</li>
+                    <li class="mb-1">Work on real projects.</li>
+                    <li>Gain hands-on experience.</li>
+                </ul>
+            </div>
+
+            <div class="text-center md:text-left">
+                <h3 class="text-lg font-bold text-white mb-4">Quick Links</h3>
+                <ul class="list-none p-0 m-0 text-gray-300 text-sm space-y-2">
+                    <li><a href="#" class="hover:text-[#06D6A0] transition-colors">Become a mentor</a></li>
+                    <li><a href="#" class="hover:text-[#06D6A0] transition-colors">Find a mentor</a></li>
+                    <li><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" class="hover:text-[#06D6A0] transition-colors">Community</a></li>
+                    <li><a href="https://linkedin.com/company/digital-transformation-partner/" class="hover:text-[#06D6A0] transition-colors">Blog</a></li>
+                    <li><a href="https://thetechhut.co/apprenticeship" class="hover:text-[#06D6A0] transition-colors">Apprenticeship</a></li>
+                </ul>
+            </div>
+
+            <div class="text-center md:text-left">
+                <h3 class="text-lg font-bold text-white mb-4">Legal & Contact</h3>
+                <ul class="list-none p-0 m-0 text-gray-300 text-sm space-y-2">
+                    <li><a href="#" class="hover:text-[#06D6A0] transition-colors">Terms and conditions</a></li>
+                    <li><a href="mailto:info@thetechhut.co" class="hover:text-[#06D6A0] transition-colors">Contact Us</a></li>
+                    <li><a href="#" class="hover:text-[#06D6A0] transition-colors">Privacy Policy</a></li>
+                </ul>
+                <div class="flex justify-center md:justify-start gap-4 mt-6">
+                    <a href="https://twitter.com/Ekiprop_kimutai" target="_blank" class="text-white hover:text-[#06D6A0] transition-colors text-2xl"><i class="fab fa-twitter"></i></a>
+                    <a href="#" target="_blank" class="text-white hover:text-[#06D6A0] transition-colors text-2xl"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.youtube.com/@TheTechHut" target="_blank" class="text-white hover:text-[#06D6A0] transition-colors text-2xl"><i class="fab fa-youtube"></i></a>
+                    <a href="#" target="_blank" class="text-white hover:text-[#06D6A0] transition-colors text-2xl"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com/company/digital-transformation-partner/" target="_blank" class="text-white hover:text-[#06D6A0] transition-colors text-2xl"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="mt-8 pt-8 border-t border-gray-700 text-gray-400 text-sm">
+            <p>&copy; 2025 The Tech Hut. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const generateInterviewQuestionsBtn = document.getElementById('generateInterviewQuestionsBtn');
+            const interviewRoleInput = document.getElementById('interviewRoleInput');
+            const interviewQuestionsOutput = document.getElementById('interviewQuestionsOutput');
+
+            const generateNetworkingMessageBtn = document.getElementById('generateNetworkingMessageBtn');
+            const networkingContextInput = document.getElementById('networkingContextInput');
+            const networkingMessageOutput = document.getElementById('networkingMessageOutput');
+
+            const apiKey = ""; // If you want to use models other than gemini-2.0-flash or imagen-3.0-generate-002, provide an API key here. Otherwise, leave this as-is.
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            // Function to call LLM API
+            async function callGeminiAPI(prompt, outputElement) {
+                outputElement.innerHTML = '<div class="loading-spinner"></div>'; // Show loading spinner
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const result = await response.json();
+
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const text = result.candidates[0].content.parts[0].text;
+                        outputElement.innerText = text; // Display the response
+                    } else {
+                        outputElement.innerText = 'Samahani, kuna tatizo. Jaribu tena. (Sorry, there was an issue. Please try again.)';
+                    }
+                } catch (error) {
+                    console.error('Error calling Gemini API:', error);
+                    outputElement.innerText = 'Samahani, kuna tatizo la mtandao au API. (Sorry, a network or API error occurred.)';
+                }
+            }
+
+            // Event Listener for Interview Question Generator
+            generateInterviewQuestionsBtn.addEventListener('click', function() {
+                const role = interviewRoleInput.value.trim();
+                if (role) {
+                    const prompt = `Generate 5 common interview questions for a ${role} position in a Kenyan tech company. Include a mix of technical and behavioral questions.`;
+                    callGeminiAPI(prompt, interviewQuestionsOutput);
+                } else {
+                    interviewQuestionsOutput.innerText = 'Tafadhali ingiza jina la kazi. (Please enter a job role.)';
+                }
+            });
+
+            // Event Listener for Networking Message Drafter
+            generateNetworkingMessageBtn.addEventListener('click', function() {
+                const context = networkingContextInput.value.trim();
+                if (context) {
+                    const prompt = `Draft a professional networking message (around 50-70 words) for the following context: "${context}". Make it suitable for a tech professional in Kenya.`;
+                    callGeminiAPI(prompt, networkingMessageOutput);
+                } else {
+                    networkingMessageOutput.innerText = 'Tafadhali eleza muktadha. (Please describe the context.)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
