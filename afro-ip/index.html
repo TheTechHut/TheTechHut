@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Afro-IP, Law & Tech Conference Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .flow-arrow {
+            content: '→';
+            font-size: 2rem;
+            color: #118AB2;
+            line-height: 1;
+        }
+        .flow-arrow-down {
+            content: '↓';
+            font-size: 2rem;
+            color: #118AB2;
+            line-height: 1;
+        }
+    </style>
+</head>
+<body class="bg-[#073B4C] text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-black text-white uppercase tracking-wider">Charting <span class="text-[#06D6A0]">Africa's AI Future</span></h1>
+            <p class="text-xl md:text-2xl text-gray-300 mt-4">The Afro-IP, Law & Tech Conference & Competitions</p>
+        </header>
+
+        <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <section class="lg:col-span-3 bg-white/10 rounded-xl shadow-2xl p-6 md:p-8 backdrop-blur-sm border border-white/20">
+                <h2 class="text-3xl font-bold text-white mb-4 text-center">A Unified Vision: From Policy to Code</h2>
+                <p class="text-gray-300 mb-6 text-center max-w-3xl mx-auto">
+                    This initiative bridges the gap between high-level strategy, like the AU's Continental AI Strategy, and tangible, community-driven innovation. It's a multidisciplinary forum designed to ensure Africa's development of AI is inclusive, ethical, and self-determined.
+                </p>
+                <div class="chart-container h-64 md:h-80 mx-auto">
+                    <canvas id="themesChart"></canvas>
+                </div>
+                 <p class="text-center text-gray-400 mt-4 text-sm">This chart illustrates the three core thematic pillars of the event. "Leveraging AI" is the overarching goal, which is achieved by translating "Policy to Code" through the practical application of "Code, Voice, & Map" in the competitions. This shows a clear strategy for turning vision into reality.</p>
+            </section>
+
+            <section class="md:col-span-2 lg:col-span-1 bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-[#073B4C] mb-4">Africa's AI Landscape: Key Challenges</h2>
+                <div class="chart-container h-80">
+                    <canvas id="challengesChart"></canvas>
+                </div>
+                <div class="mt-4 text-sm text-gray-600 space-y-2">
+                    <p><strong>Regulatory Gaps:</strong> A lack of harmonized legal frameworks creates uncertainty, hindering investment and innovation.</p>
+                    <p><strong>Ethical Dilemmas:</strong> Without context-sensitive governance, AI risks amplifying biases and infringing on data rights.</p>
+                    <p><strong>Infrastructure Shortfalls:</strong> Limited digital access and research capacity form a barrier to large-scale AI adoption.</p>
+                    <p><strong>Under-representation:</strong> African voices are often absent in global AI forums, leading to misaligned solutions.</p>
+                </div>
+            </section>
+
+            <section class="md:col-span-2 bg-white rounded-xl shadow-lg p-6 flex flex-col items-center justify-center">
+                <h2 class="text-2xl font-bold text-[#073B4C] mb-6 text-center">The Virtuous Cycle: From Policy to Impact</h2>
+                 <p class="text-center text-gray-600 mb-6 max-w-xl">The conference creates a self-reinforcing cycle where policy informs innovation and practical application refines governance. This integrated approach is key to sustainable development in Africa's AI ecosystem.</p>
+                <div class="w-full flex flex-col md:flex-row items-center justify-around space-y-4 md:space-y-0 md:space-x-4">
+                    <div class="text-center">
+                        <div class="bg-[#118AB2] text-white p-4 rounded-lg shadow-md">Policy Frameworks</div>
+                        <div class="flow-arrow-down md:hidden my-2">↓</div>
+                    </div>
+                    <div class="hidden md:block flow-arrow">→</div>
+                    <div class="text-center">
+                        <div class="bg-[#06D6A0] text-white p-4 rounded-lg shadow-md">Community Innovation</div>
+                         <div class="flow-arrow-down md:hidden my-2">↓</div>
+                    </div>
+                    <div class="hidden md:block flow-arrow">→</div>
+                    <div class="text-center">
+                        <div class="bg-[#FFD166] text-[#073B4C] p-4 rounded-lg shadow-md">Actionable Insights</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-[#073B4C] mb-4 text-center">Conference Audience</h2>
+                <div class="chart-container h-64">
+                    <canvas id="conferenceAudienceChart"></canvas>
+                </div>
+                <p class="text-center text-gray-600 mt-4 text-sm">Engages a broad, multidisciplinary group to foster rich dialogue and cross-sectoral partnerships.</p>
+            </section>
+
+            <section class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-[#073B4C] mb-4 text-center">Competition Participants</h2>
+                <div class="chart-container h-64">
+                    <canvas id="competitionAudienceChart"></canvas>
+                </div>
+                 <p class="text-center text-gray-600 mt-4 text-sm">Targets emerging talent to directly engage the future architects of Africa's digital landscape.</p>
+            </section>
+
+            <section class="lg:col-span-3 bg-white/10 rounded-xl shadow-2xl p-6 md:p-8 backdrop-blur-sm border border-white/20">
+                <h2 class="text-3xl font-bold text-white mb-6 text-center">Fostering Innovation: The Competitions</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 text-center">
+                    <div class="bg-white/90 p-4 rounded-lg shadow-md">
+                        <div class="text-4xl mb-2">⚖️</div>
+                        <h3 class="font-bold text-[#118AB2]">Moot Court</h3>
+                        <p class="text-sm text-gray-600">Advocacy & jurisprudence on IP, data rights & AI ethics.</p>
+                    </div>
+                    <div class="bg-white/90 p-4 rounded-lg shadow-md">
+                        <div class="text-4xl mb-2">🔬</div>
+                        <h3 class="font-bold text-[#118AB2]">Research</h3>
+                        <p class="text-sm text-gray-600">Policy foresight & critical analysis for AI regulation.</p>
+                    </div>
+                    <div class="bg-white/90 p-4 rounded-lg shadow-md">
+                        <div class="text-4xl mb-2">💬</div>
+                        <h3 class="font-bold text-[#118AB2]">Debate</h3>
+                        <p class="text-sm text-gray-600">Strategic argumentation on sovereignty & bias.</p>
+                    </div>
+                    <div class="bg-white/90 p-4 rounded-lg shadow-md">
+                        <div class="text-4xl mb-2">💻</div>
+                        <h3 class="font-bold text-[#118AB2]">Hackathon</h3>
+                        <p class="text-sm text-gray-600">Civic tech innovation for Afrocentric legal needs.</p>
+                    </div>
+                    <div class="bg-white/90 p-4 rounded-lg shadow-md">
+                        <div class="text-4xl mb-2">🗺️</div>
+                        <h3 class="font-bold text-[#118AB2]">Mapperthon</h3>
+                        <p class="text-sm text-gray-600">Data mapping for justice accessibility & infrastructure.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="lg:col-span-3 bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-[#073B4C] mb-4 text-center">Driving Progress: Measurable Outcomes</h2>
+                <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">The conference is designed for tangible impact, moving beyond discussion to generate measurable results in capacity building, policy development, and innovation.</p>
+                <div class="chart-container h-80 mx-auto">
+                    <canvas id="outcomesChart"></canvas>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="text-center mt-12 py-6 border-t border-white/20">
+            <p class="text-gray-400">An initiative by Young Lawyers in Tech Society (YLIT) & The Centre for Afro-IP Law and Policy Research.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const energeticPalette = {
+            red: '#FF6B6B',
+            yellow: '#FFD166',
+            green: '#06D6A0',
+            blue: '#118AB2',
+            darkBlue: '#073B4C',
+            white: '#FFFFFF'
+        };
+
+        function wrapLabel(label, maxWidth) {
+            const words = label.split(' ');
+            let lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + ' ' + word).length > maxWidth) {
+                    lines.push(currentLine);
+                    currentLine = word;
+                } else {
+                    currentLine = currentLine ? currentLine + ' ' + word : word;
+                }
+            });
+            lines.push(currentLine);
+            return lines;
+        }
+        
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+        
+        const defaultChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: energeticPalette.darkBlue
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    ticks: { color: energeticPalette.darkBlue },
+                    grid: { color: 'rgba(7, 59, 76, 0.1)' }
+                },
+                x: {
+                    ticks: { color: energeticPalette.darkBlue },
+                    grid: { display: false }
+                }
+            }
+        };
+
+        const themesCtx = document.getElementById('themesChart').getContext('2d');
+        new Chart(themesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Leveraging AI: An African Perspective', 'From Policy to Code', 'Code, Voice, & Map'],
+                datasets: [{
+                    label: 'Thematic Focus',
+                    data: [100, 85, 70],
+                    backgroundColor: [energeticPalette.blue, energeticPalette.green, energeticPalette.yellow],
+                    borderColor: energeticPalette.darkBlue,
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                },
+                scales: {
+                    y: { ticks: { color: energeticPalette.white, font: { size: 14 } }, grid: { display: false } },
+                    x: { ticks: { color: energeticPalette.white }, grid: { color: 'rgba(255, 255, 255, 0.2)' } }
+                }
+            }
+        });
+
+        const challengesCtx = document.getElementById('challengesChart').getContext('2d');
+        new Chart(challengesCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Regulatory Gaps', 'Ethical Dilemmas', 'Infrastructure Shortfalls', 'Under-representation'],
+                datasets: [{
+                    label: 'Challenge Severity',
+                    data: [8, 9, 7, 8.5],
+                    backgroundColor: 'rgba(255, 107, 107, 0.4)',
+                    borderColor: energeticPalette.red,
+                    pointBackgroundColor: energeticPalette.red,
+                    pointBorderColor: energeticPalette.white,
+                    pointHoverBackgroundColor: energeticPalette.white,
+                    pointHoverBorderColor: energeticPalette.red
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { labels: { color: energeticPalette.darkBlue } },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                },
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(7, 59, 76, 0.2)' },
+                        grid: { color: 'rgba(7, 59, 76, 0.2)' },
+                        pointLabels: { color: energeticPalette.darkBlue, font: { size: 12 } },
+                        ticks: {
+                            color: energeticPalette.darkBlue,
+                            backdropColor: 'rgba(255, 255, 255, 0.75)'
+                        }
+                    }
+                }
+            }
+        });
+
+        const conferenceAudienceCtx = document.getElementById('conferenceAudienceChart').getContext('2d');
+        new Chart(conferenceAudienceCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Legal Scholars', 'Tech Entrepreneurs', 'Policymakers', 'GIS Experts & CSOs'],
+                datasets: [{
+                    data: [30, 25, 25, 20],
+                    backgroundColor: [energeticPalette.blue, energeticPalette.green, energeticPalette.yellow, energeticPalette.red],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { color: energeticPalette.darkBlue, boxWidth: 15 } },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                }
+            }
+        });
+
+        const competitionAudienceCtx = document.getElementById('competitionAudienceChart').getContext('2d');
+        new Chart(competitionAudienceCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['University Students', 'Young Professionals', 'CSOs & Advocates', 'Creative Industry'],
+                datasets: [{
+                    data: [40, 30, 15, 15],
+                    backgroundColor: [energeticPalette.green, energeticPalette.blue, energeticPalette.red, energeticPalette.yellow],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { color: energeticPalette.darkBlue, boxWidth: 15 } },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                }
+            }
+        });
+        
+        const outcomesCtx = document.getElementById('outcomesChart').getContext('2d');
+        const outcomeLabels = ['Policy Briefs Published', 'Prototype Projects Initiated', 'Multi-Sector Partnerships', 'Mentorship Pairings', 'Skills Gained (Participants)'];
+        new Chart(outcomesCtx, {
+            type: 'bar',
+            data: {
+                labels: outcomeLabels.map(label => wrapLabel(label, 16)),
+                datasets: [{
+                    label: 'Targeted Outcomes (Units/Count)',
+                    data: [20, 5, 15, 50, 200],
+                    backgroundColor: [energeticPalette.green, energeticPalette.yellow, energeticPalette.blue, energeticPalette.red, energeticPalette.darkBlue],
+                    borderRadius: 5,
+                }]
+            },
+            options: defaultChartOptions
+        });
+
+    </script>
+</body>
+</html>
