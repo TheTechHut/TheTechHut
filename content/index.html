@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Tech Hut: Unlock Your Potential - Video Content</title>
+    <title>The Tech Hut: Unlock Your Potential - Content</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Poppins for headings, Inter for body -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for icons -->
+    <!-- Font Awesome for icons (e.g., play icon) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* Base styles - will be overridden by dark: classes */
         body {
             font-family: 'Inter', sans-serif;
-            color: #073B4C; /* Dark blue text from brand palette */
-            background-color: #f0f4f8; /* Light background */
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for theme change */
         }
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Poppins', sans-serif;
         }
-        /* Brand Color Palette: #093e76 (Dark Blue), #06D6A0 (Vibrant Green), #FFD700 (Golden), #073B4C (Dark Blue Text) */
+
+        /* Brand Color Palette: #093e76 (Dark Blue), #06D6A0 (Vibrant Green), #FFD700 (Golden) */
+        /* These gradients are generally used on text or buttons, adapting color */
         .text-gradient-primary {
             background-image: linear-gradient(to right, #06D6A0, #FFD700); /* Vibrant green to golden */
             -webkit-background-clip: text;
@@ -40,74 +42,143 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(6, 214, 160, 0.5);
         }
-        .card {
-            background-color: #ffffff;
-            border-radius: 1.5rem;
-            padding: 2rem;
-            box-shadow: 0 8px 20px rgba(7, 59, 76, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .nav-link {
+            color: white;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            position: relative;
         }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(7, 59, 76, 0.15);
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: #06D6A0; /* Vibrant green underline */
+            transition: width 0.3s ease, left 0.3s ease;
         }
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        /* Video Card Styling (YouTube-like) */
         .video-card {
-            background-color: #ffffff;
-            border-radius: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Lighter shadow for default */
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: transform 0.3s ease;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
+            position: relative;
+            background-color: #ffffff; /* Light mode background */
         }
+        .dark .video-card {
+            background-color: #202020; /* Dark mode background */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Darker shadow for dark mode */
+        }
+
         .video-card:hover {
             transform: translateY(-5px);
         }
-        /* Styles for the video preview container */
-        .video-preview-container {
+        .video-card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Lighter hover shadow */
+        }
+        .dark .video-card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Darker hover shadow */
+        }
+
+        /* Thumbnail container */
+        .thumbnail-container {
             position: relative;
             width: 100%;
             padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
+            background-color: #000; /* Consistent black background for video area */
+            display: flex;
+            align-items: center;
+            justify-content: center;
             overflow: hidden;
-            background-color: #000; /* Fallback background for video area */
         }
-        .video-preview-container iframe {
+        .thumbnail-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+        .thumbnail-container iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             border: 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
-        .video-card-content {
-            padding: 1.5rem;
-            flex-grow: 1; /* Allows content to expand */
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+        .thumbnail-container iframe.active {
+            opacity: 1;
         }
-        .video-card-content h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #093e76;
+
+        /* Play overlay icon */
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.9);
+            pointer-events: none;
+            z-index: 10;
+            transition: opacity 0.3s ease;
+        }
+        .video-card:hover .play-overlay {
+            opacity: 0;
+        }
+
+        /* Video info (below thumbnail) */
+        .video-info {
+            padding: 1rem;
+            color: #4A5568; /* Default text color for light mode */
+        }
+        .dark .video-info {
+            color: #E0E0E0; /* Light gray text for dark mode */
+        }
+        .video-info h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
             margin-bottom: 0.5rem;
+            line-height: 1.3;
+            color: #093e76; /* Dark blue title for light mode */
         }
-        .video-card-content p {
-            font-size: 0.95rem;
-            color: #4a5568;
-            margin-bottom: 1rem;
+        .dark .video-info h3 {
+            color: white; /* Brighter white for dark mode title */
         }
-        .video-card-content .price {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #06D6A0;
-            margin-bottom: 1rem;
+        .channel-name {
+            font-size: 0.85rem;
+            color: #718096; /* Medium gray for light mode */
+            margin-bottom: 0.25rem;
         }
+        .dark .channel-name {
+            color: #A0A0A0; /* Medium gray for dark mode */
+        }
+        .video-stats {
+            font-size: 0.8rem;
+            color: #718096; /* Medium gray for light mode */
+        }
+        .dark .video-stats {
+            color: #A0A0A0; /* Medium gray for dark mode */
+        }
+
+        /* Coming Soon Card Styling */
         .coming-soon-card {
-            background-color: #f8f8f8; /* Lighter background for coming soon */
-            border-radius: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Lighter shadow */
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -115,104 +186,150 @@
             justify-content: center;
             text-align: center;
             padding: 2rem;
-            min-height: 350px; /* Ensure consistent height with video cards */
+            min-height: 280px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+            background-color: #f8f8f8; /* Light mode background */
+            color: #073B4C; /* Dark blue text */
+        }
+        .dark .coming-soon-card {
+            background-color: #202020; /* Darker background */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Darker shadow */
+            color: #E0E0E0; /* Light gray text */
         }
         .coming-soon-card h3 {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            color: #073B4C;
+            color: #093e76; /* Dark blue for light mode */
             margin-bottom: 1rem;
         }
+        .dark .coming-soon-card h3 {
+            color: white; /* White for dark mode */
+        }
         .coming-soon-card p {
-            font-size: 1rem;
-            color: #4a5568;
+            font-size: 0.95rem;
+            color: #4a5568; /* Medium gray for light mode */
+        }
+        .dark .coming-soon-card p {
+            color: #A0A0A0; /* Medium gray for dark mode */
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 767px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            h2 {
-                font-size: 2rem;
-            }
-            h3 {
-                font-size: 1.5rem;
-            }
-            .text-lg {
-                font-size: 0.95rem;
-            }
-            .text-xl {
-                font-size: 1.05rem;
-            }
-            .btn-primary {
-                padding: 0.6rem 1.5rem;
-                font-size: 0.9rem;
-            }
-            .header img {
-                height: 10vw;
-                width: 10vw;
-                max-height: 60px;
-                max-width: 60px;
-            }
-            .header p {
-                font-size: 1.5rem;
-            }
-            .nav-link {
-                padding: 0.3rem 0.7rem;
-                font-size: 0.85rem;
-            }
-            /* Ensure buttons in video cards stack on small screens */
-            .video-card-content .flex-col {
-                flex-direction: column;
-            }
-            .video-card-content .flex-col > .btn-primary {
-                width: 100%; /* Full width buttons on small screens */
-            }
-            .flex-col.sm:flex-row > .btn-primary {
-                width: 100%; /* Ensure CTA buttons are full width on small screens */
-            }
+        /* General Card (for Why Choose Us / Testimonials) */
+        .card {
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 8px 20px rgba(7, 59, 76, 0.08); /* Light shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+            background-color: #ffffff; /* Light mode background */
+            color: #073B4C; /* Dark blue text */
+        }
+        .dark .card {
+            background-color: #282828; /* Slightly lighter dark gray for these cards */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Darker shadow */
+            color: #E0E0E0;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card:hover {
+            box-shadow: 0 12px 25px rgba(7, 59, 76, 0.15); /* Lighter hover shadow */
+        }
+        .dark .card:hover {
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3); /* Darker hover shadow */
+        }
+        .card i {
+            color: #06D6A0; /* Vibrant green for icons - consistent */
+        }
+        .card h3 {
+            color: #093e76; /* Dark blue for light mode */
+        }
+        .dark .card h3 {
+            color: white; /* White for dark mode */
+        }
+        .card p {
+            color: #4a5568; /* Gray for light mode */
+        }
+        .dark .card p {
+            color: #A0A0A0; /* Gray for dark mode */
+        }
+
+        /* Footer specific styling */
+        footer {
+            background-color: #181818; /* Consistent dark background for footer */
+            color: #A0A0A0;
+        }
+        footer a {
+            color: #06D6A0; /* Consistent vibrant green for footer links */
         }
     </style>
 </head>
-<body class="antialiased leading-normal">
+<body class="antialiased leading-normal text-gray-800 dark:text-gray-200 bg-gray-100 dark:bg-[#0F0F0F]">
 
-    <!-- Header -->
+    <!-- Header (Brand consistent, so no dark: prefix needed for its direct background) -->
     <header class="bg-[#093e76] text-white py-4 px-6 flex flex-col md:flex-row items-center justify-between shadow-lg">
         <div class="flex items-center mb-4 md:mb-0">
             <img src="https://lh3.googleusercontent.com/pw/AP1GczMRXm5fWGnx_VEenzpGb-cQkP17XBBnA69u_ADqp8efQCJ4CFYSbovdnj9fM33rNnzbZA0f1aN1nRAbbS7_R-NYYgTTRWPyovQfaGKK2hoH9LgFM8rtTzxO6IpqlgBSYlA6rVN_IdTIJIUnku6VO5HS=w500-h500-s-no-gm?authuser=0" alt="The Tech Hut Logo" class="h-12 w-12 rounded-full mr-3">
             <p class="text-2xl font-bold text-gradient-primary">The Tech Hut</p>
         </div>
         <nav class="flex flex-wrap justify-center md:justify-end gap-6">
-            <a href="#videos" class="nav-link text-white hover:text-[#06D6A0] transition-colors">Videos</a>
-            <a href="#testimonials" class="nav-link text-white hover:text-[#06D6A0] transition-colors">Testimonials</a>
-            <a href="https://thetechhut.co/test.html" class="nav-link text-white hover:text-[#06D6A0] transition-colors">Our Website</a>
+            <a href="#content" class="nav-link">Content</a>
+            <a href="#testimonials" class="nav-link">Testimonials</a>
+            <a href="https://thetechhut.co/" class="nav-link">Our Website</a>
         </nav>
     </header>
 
-    <!-- Featured Videos / Categories Section -->
-    <section id="videos" class="bg-[#f0f4f8] py-16 md:py-24 px-4">
+    <!-- Hero Section -->
+    <section id="hero" class="py-20 md:py-32 px-4 text-center
+                              bg-gradient-to-br from-blue-100 to-white
+                              dark:from-[#073B4C] dark:to-[#010101]">
+        <div class="container mx-auto max-w-4xl">
+            <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6 text-gradient-primary">
+                Unlock Insights: Relive Our Exclusive Tech Events!
+            </h1>
+            <p class="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-8">
+                Access valuable content from our hosted masterclasses, mastery weeks, and discussions with great young leaders in Kenya. Some content is free, others are available for purchase.
+            </p>
+            <a href="#content" class="btn-primary inline-block">Explore Content Now!</a>
+        </div>
+    </section>
+
+    <!-- Content Section (YouTube-like grid) -->
+    <section id="content" class="py-16 md:py-24 px-4 bg-gray-100 dark:bg-[#0F0F0F]">
         <div class="container mx-auto max-w-6xl">
             <h2 class="text-4xl md:text-5xl font-extrabold mb-12 text-center text-gradient-primary">
-                Our Top Video Collections
+                Our Top Content Collections
             </h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Video Card: We Minted Our First Millionaire! -->
-                <div class="video-card">
-                    <div class="video-preview-container">
-                        <iframe src="https://www.youtube.com/embed/5oHTW2xQ1dM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Video Card 1: We Minted Our First Millionaire! -->
+                <div class="video-card" data-video-id="5oHTW2xQ1dM">
+                    <div class="thumbnail-container">
+                        <img src="https://img.youtube.com/vi/5oHTW2xQ1dM/maxresdefault.jpg" alt="Video Thumbnail: We Minted Our First Millionaire!">
+                        <div class="play-overlay"><i class="fas fa-play"></i></div>
+                        <div class="video-player-frame"></div> <!-- Container for iframe -->
                     </div>
-                    <div class="video-card-content">
-                        <div>
-                            <h3>We Minted Our First Millionaire!</h3>
-                            <p>Hear the incredible story of Caleb Jephunneh, who won KSh 1,000,000+ from opportunities shared by The Tech Hut. A 3-hour deep dive into his journey.</p>
+                    <div class="video-info">
+                        <h3>We Minted Our First Millionaire! (Full Story)</h3>
+                        <p class="channel-name">The Tech Hut</p>
+                        <p class="video-stats">10K views &bull; 1 month ago</p>
+                        <div class="mt-3">
+                            <a href="https://payment.intasend.com/pay/5a0fcb29-768a-4460-a184-00d2e58dafff/" target="_blank" class="btn-primary text-xs !py-2 !px-4 inline-block">Buy Full Content (Ksh 150)</a>
                         </div>
-                        <div class="flex flex-col gap-2 mt-4"> 
-                            <p class="price">KSh 150</p> 
-                            <a href="https://www.youtube.com/watch?v=5oHTW2xQ1dM" target="_blank" class="btn-primary w-full text-center">Watch Trailer</a>
-                            <!-- Placeholder for full video - replace with actual link when available -->
-                            <a href="https://payment.intasend.com/pay/5a0fcb29-768a-4460-a184-00d2e58dafff/" target="_blank" class="btn-primary w-full text-center bg-[#093e76] hover:bg-[#073B4C] !bg-gradient-to-r !from-[#093e76] !to-[#073B4C]">Buy Full Video</a> 
+                    </div>
+                </div>
+
+                <!-- Video Card 2: AI Mastery Week - Day 1 -->
+                <div class="video-card" data-video-id="M7c-uGfE08Y"> <!-- Placeholder ID for AI Mastery Day 1 -->
+                    <div class="thumbnail-container">
+                        <img src="https://img.youtube.com/vi/M7c-uGfE08Y/maxresdefault.jpg" alt="Video Thumbnail: AI Mastery Week - Day 1">
+                        <div class="play-overlay"><i class="fas fa-play"></i></div>
+                        <div class="video-player-frame"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3>AI Mastery Week: Day 1 - Foundations</h3>
+                        <p class="channel-name">The Tech Hut</p>
+                        <p class="video-stats">8.5K views &bull; 2 days ago</p>
+                        <div class="mt-3">
+                            <a href="YOUR_DAY_1_YOUTUBE_VIDEO_LINK_HERE" target="_blank" class="btn-primary text-xs !py-2 !px-4 inline-block">Watch Day 1 Now!</a>
                         </div>
                     </div>
                 </div>
@@ -221,97 +338,124 @@
                 <div class="coming-soon-card">
                     <i class="fas fa-hourglass-half text-6xl text-[#FFD700] mb-4"></i>
                     <h3>Entrepreneurial Masterclass</h3>
-                    <p class="text-lg text-gray-700">Coming Soon! Get ready to transform your ideas into thriving tech ventures with expert guidance.</p>
+                    <p class="text-lg text-gray-700 dark:text-gray-300">Coming Soon! Get ready to transform your ideas into thriving tech ventures.</p>
                 </div>
 
-                <!-- Coming Soon Card: AI Mastery Week -->
+                <!-- Coming Soon Card: AI Mastery Week - Day 2 -->
                 <div class="coming-soon-card">
                     <i class="fas fa-robot text-6xl text-[#06D6A0] mb-4"></i>
-                    <h3>AI Mastery Week Recordings</h3>
-                    <p class="text-lg text-gray-700">Coming Soon! All the groundbreaking sessions from our AI Mastery Week, available for you to re-watch and learn.</p>
+                    <h3>AI Mastery Week: Day 2 - Advanced Topics</h3>
+                    <p class="text-lg text-gray-700 dark:text-gray-300">Coming Soon! More deep dives into the world of AI.</p>
                 </div>
 
-                <!-- Placeholder for other videos if needed, or remove this section if only the above are desired -->
-                <!-- You can add more video cards here following the structure above -->
+                <!-- Add more video cards or coming soon cards as needed -->
+                <!-- Example of another video card -->
+                <div class="video-card" data-video-id="YOUR_ANOTHER_VIDEO_ID_HERE">
+                    <div class="thumbnail-container">
+                        <img src="https://img.youtube.com/vi/YOUR_ANOTHER_VIDEO_ID_HERE/maxresdefault.jpg" alt="Video Thumbnail: Another Awesome Video">
+                        <div class="play-overlay"><i class="fas fa-play"></i></div>
+                        <div class="video-player-frame"></div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Your Next Amazing Tech Content</h3>
+                        <p class="channel-name">The Tech Hut</p>
+                        <p class="video-stats">5K views &bull; 3 weeks ago</p>
+                        <div class="mt-3">
+                            <a href="YOUR_ANOTHER_VIDEO_LINK_HERE" target="_blank" class="btn-primary text-xs !py-2 !px-4 inline-block">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example of another coming soon card -->
+                <div class="coming-soon-card">
+                    <i class="fas fa-microchip text-6xl text-[#A0A0A0] mb-4"></i>
+                    <h3>Data Science Foundations</h3>
+                    <p class="text-lg text-gray-700 dark:text-gray-300">Upcoming! Dive into the world of data with practical guides.</p>
+                </div>
 
             </div>
         </div>
     </section>
 
     <!-- Why Buy from Us Section -->
-    <!-- <section class="bg-white py-16 md:py-24 px-4 text-center">
+    <section class="py-16 md:py-24 px-4 text-center bg-gray-100 dark:bg-[#0F0F0F]">
         <div class="container mx-auto max-w-4xl">
             <h2 class="text-4xl md:text-5xl font-extrabold mb-8 text-gradient-primary">
-                Why Choose The Tech Hut Videos?
+                Why Choose The Tech Hut Content?
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="card p-6 flex flex-col items-center">
                     <i class="fas fa-lightbulb text-5xl text-[#06D6A0] mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-2 text-[#093e76]">Expert Insights</h3>
-                    <p class="text-gray-700">Learn directly from industry professionals and experienced mentors.</p>
+                    <h3 class="text-xl font-semibold mb-2">Expert Insights</h3>
+                    <p class="text-gray-700 dark:text-gray-400">Learn directly from industry professionals and experienced mentors.</p>
                 </div>
                 <div class="card p-6 flex flex-col items-center">
                     <i class="fas fa-cogs text-5xl text-[#FFD700] mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-2 text-[#093e76]">Practical Skills</h3>
-                    <p class="text-gray-700">Our content focuses on hands-on application and real-world scenarios.</p>
+                    <h3 class="text-xl font-semibold mb-2">Practical Skills</h3>
+                    <p class="text-gray-700 dark:text-gray-400">Our content focuses on hands-on application and real-world scenarios.</p>
                 </div>
                 <div class="card p-6 flex flex-col items-center">
                     <i class="fas fa-infinity text-5xl text-[#073B4C] mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-2 text-[#093e76]">Lifetime Access</h3>
-                    <p class="text-gray-700">Purchase once and access your chosen videos anytime, forever.</p>
+                    <h3 class="text-xl font-semibold mb-2">Lifetime Access</h3>
+                    <p class="text-gray-700 dark:text-gray-400">Purchase once and access your chosen content anytime, forever.</p>
                 </div>
             </div>
         </div>
-    </section> -->
+    </section>
 
     <!-- Testimonials Section -->
-    <!-- <section id="testimonials" class="bg-[#f0f4f8] py-16 md:py-24 px-4 text-center">
+    <section id="testimonials" class="py-16 md:py-24 px-4 text-center bg-gray-100 dark:bg-[#0F0F0F]">
         <div class="container mx-auto max-w-4xl">
-            <h2 class="text-4xl md:text-5xl font-extrabold mb-12 text-gradient-primary">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-12 text-center text-gradient-primary">
                 What Our Learners Say
             </h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="card p-8">
-                    <p class="text-gray-800 italic mb-4">
+                    <p class="text-gray-700 dark:text-gray-200 italic mb-4">
                         "The AI Mastery Week recordings were a goldmine! I can re-watch complex concepts and truly grasp them. Worth every shilling!"
                     </p>
                     <div class="flex items-center justify-center mt-4">
                         <img src="https://placehold.co/60x60/06D6A0/FFFFFF?text=L1" alt="Learner 1" class="w-12 h-12 rounded-full object-cover mr-3 border-2 border-[#093e76]">
-                        <h4 class="font-bold text-lg text-[#093e76]">- Jane Wanjiku</h4>
+                        <h4 class="font-bold text-lg"> - Jane Wanjiku</h4>
                     </div>
                 </div>
 
                 <div class="card p-8">
-                    <p class="text-gray-800 italic mb-4">
+                    <p class="text-gray-700 dark:text-gray-200 italic mb-4">
                         "I struggled with Next.js until I watched The Tech Hut's deep dive. Their explanations are so clear and practical. My projects are now flying!"
                     </p>
                     <div class="flex items-center justify-center mt-4">
                         <img src="https://placehold.co/60x60/FFD700/073B4C?text=L2" alt="Learner 2" class="w-12 h-12 rounded-full object-cover mr-3 border-2 border-[#093e76]">
-                        <h4 class="font-bold text-lg text-[#093e76]">- David Omondi</h4>
+                        <h4 class="font-bold text-lg"> - David Omondi</h4>
                     </div>
                 </div>
             </div>
         </div>
-    </section> -->
+    </section>
 
     <!-- Final Call to Action Section -->
-    <!-- <section class="bg-white py-16 md:py-24 px-4 text-center">
+    <section class="py-16 md:py-24 px-4 text-center
+                              bg-gradient-to-br from-blue-100 to-white
+                              dark:from-[#073B4C] dark:to-[#010101]">
         <div class="container mx-auto max-w-4xl">
             <h2 class="text-4xl md:text-5xl font-extrabold mb-8 text-gradient-primary">
                 Ready to Level Up Your Skills?
             </h2>
-            <p class="text-lg md:text-xl text-gray-700 mb-10">
+            <p class="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-10">
                 Don't just learn, master! Get instant access to premium tech content that empowers your career.
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-6">
-                <a href="#videos" class="btn-primary inline-block w-full sm:w-auto">Browse All Videos</a>
+                <a href="#content" class="btn-primary inline-block w-full sm:w-auto">Browse All Content</a>
             </div>
+            <p class="text-gray-700 dark:text-gray-300 mt-12">
+                If you have any more questions, feel free to reach out to us on WhatsApp: <a href="https://wa.me/254115017058" target="_blank" class="text-[#06D6A0] font-bold hover:underline">+254115017058</a>
+            </p>
         </div>
-    </section> -->
+    </section>
 
     <!-- Footer -->
-    <footer class="bg-[#073B4C] py-10 px-4 text-white text-center">
+    <footer class="bg-[#181818] py-10 px-4 text-white text-center">
         <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
             <!-- Branding/About -->
             <div class="flex flex-col items-center md:items-start text-center md:text-left">
@@ -319,7 +463,7 @@
                     <img src="https://lh3.googleusercontent.com/pw/AP1GczMRXm5fWGnx_VEenzpGb-cQkP17XBBnA69u_ADqp8efQCJ4CFYSbovdnj9fM33rNnzbZA0f1aN1nRAbbS7_R-NYYgTTRWPyovQfaGKK2hoH9LgFM8rtTzxO6IpqlgBSYlA6rVN_IdTIJIUnku6VO5HS=w500-h500-s-no-gm?authuser=0" alt="The Tech Hut Logo" class="h-10 w-10 rounded-full mr-2">
                     <p class="text-xl font-bold text-gradient-primary">The Tech Hut</p>
                 </div>
-                <ul class="list-none p-0 m-0 text-gray-300 text-sm">
+                <ul class="list-none p-0 m-0 text-gray-400 text-sm">
                     <li class="mb-1">Connect with experts.</li>
                     <li class="mb-1">Work on real projects.</li>
                     <li>Gain hands-on experience.</li>
@@ -329,7 +473,7 @@
             <!-- Quick Links -->
             <div class="text-center md:text-left">
                 <h3 class="text-lg font-bold text-white mb-4">Quick Links</h3>
-                <ul class="list-none p-0 m-0 text-gray-300 text-sm space-y-2">
+                <ul class="list-none p-0 m-0 text-gray-400 text-sm space-y-2">
                     <li><a href="#" class="hover:text-[#06D6A0] transition-colors">Become a mentor</a></li>
                     <li><a href="#" class="hover:text-[#06D6A0] transition-colors">Find a mentor</a></li>
                     <li><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" class="hover:text-[#06D6A0] transition-colors">Community</a></li>
@@ -341,7 +485,7 @@
             <!-- Legal & Contact -->
             <div class="text-center md:text-left">
                 <h3 class="text-lg font-bold text-white mb-4">Legal & Contact</h3>
-                <ul class="list-none p-0 m-0 text-gray-300 text-sm space-y-2">
+                <ul class="list-none p-0 m-0 text-gray-400 text-sm space-y-2">
                     <li><a href="#" class="hover:text-[#06D6A0] transition-colors">Terms and conditions</a></li>
                     <li><a href="mailto:info@thetechhut.co" class="hover:text-[#06D6A0] transition-colors">Contact Us</a></li>
                     <li><a href="#" class="hover:text-[#06D6A0] transition-colors">Privacy Policy</a></li>
@@ -355,10 +499,85 @@
                 </div>
             </div>
         </div>
-        <div class="mt-8 pt-8 border-t border-gray-700 text-gray-400 text-sm">
+        <div class="mt-8 pt-8 border-t border-gray-700 text-gray-500 text-sm">
             <p>&copy; 2025 The Tech Hut. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        // Function to set the theme based on system preference
+        function setTheme() {
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
+
+        // Set theme on initial load
+        setTheme();
+
+        // Listen for changes in system color scheme preference
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            setTheme();
+        });
+
+
+        // Get all video cards for hover preview
+        const videoCards = document.querySelectorAll('.video-card');
+
+        videoCards.forEach(card => {
+            const videoId = card.dataset.videoId;
+            const thumbnailContainer = card.querySelector('.thumbnail-container');
+            const thumbnailImg = thumbnailContainer.querySelector('img');
+            const playOverlay = thumbnailContainer.querySelector('.play-overlay');
+            const videoPlayerFrame = thumbnailContainer.querySelector('.video-player-frame'); // New element to hold the iframe
+
+            // Function to load and play video
+            const playVideo = () => {
+                // Check if the iframe is already active to prevent re-creation
+                if (videoPlayerFrame.querySelector('iframe')) {
+                    return;
+                }
+
+                const iframe = document.createElement('iframe');
+                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&loop=1&playlist=${videoId}`;
+                iframe.setAttribute('frameborder', '0');
+                iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture');
+                iframe.setAttribute('allowfullscreen', '');
+                iframe.classList.add('active'); // Add active class for styling if needed
+
+                // Append iframe to the specific frame container
+                videoPlayerFrame.appendChild(iframe);
+
+                // Hide thumbnail and play overlay
+                thumbnailImg.style.opacity = '0';
+                playOverlay.style.opacity = '0';
+            };
+
+            // Function to stop video and show thumbnail
+            const stopVideo = () => {
+                // Remove the iframe from the DOM
+                const iframe = videoPlayerFrame.querySelector('iframe');
+                if (iframe) {
+                    iframe.remove();
+                }
+
+                // Show thumbnail and play overlay
+                thumbnailImg.style.opacity = '1';
+                playOverlay.style.opacity = '1';
+            };
+
+            // Add event listeners for hover (mouseenter and mouseleave)
+            card.addEventListener('mouseenter', playVideo);
+            card.addEventListener('mouseleave', stopVideo);
+
+            // Add click listener to allow direct navigation to YouTube on click
+            card.addEventListener('click', () => {
+                window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+            });
+        });
+    </script>
 
 </body>
 </html>
