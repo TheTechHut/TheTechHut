@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Tech Hut Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #073B4C;
+            background-color: #f0f4f8;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+        .text-gradient-primary {
+            background-image: linear-gradient(to right, #06D6A0, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+        /* Updated button styles with a blue gradient and shadow */
+        .btn-primary {
+            background-image: linear-gradient(to right, #2E86AB, #073B4C);
+            color: white;
+            font-weight: 700;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            box-shadow: 0 5px 15px rgba(46, 134, 171, 0.4);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(46, 134, 171, 0.5);
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 8px 20px rgba(7, 59, 76, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(7, 59, 76, 0.15);
+        }
+
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Header with green background and no shadow -->
+    <header class="bg-[#06D6A0] sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <img src="https://lh3.googleusercontent.com/pw/AP1GczMRXm5fWGnx_VEenzpGb-cQkP17XBBnA69u_ADqp8efQCJ4CFYSbovdnj9fM33rNnzbZA0f1aN1nRAbbS7_R-NYYgTTRWPyovQfaGKK2hoH9LgFM8rtTzxO6IpqlgBSYlA6rVN_IdTIJIUnku6VO5HS=w500-h500-s-no-gm?authuser=0" alt="The Tech Hut Logo" class="h-10 w-auto rounded-md" onerror="this.src='https://placehold.co/150x50/cbd5e0/4299e1?text=The+Tech+Hut'">
+                <!-- Added "Blog" text next to the logo -->
+                <span class="font-bold text-xl text-white ml-2">Blog</span>
+            </div>
+            <nav class="hidden md:flex space-x-6">
+                <!-- Links changed to white with golden-yellow hover -->
+                <a href="#featured" class="text-white hover:text-[#FFD700] transition duration-300">Featured</a>
+                <a href="#blogs" class="text-white hover:text-[#FFD700] transition duration-300">Blogs</a>
+                <a href="#" class="text-white hover:text-[#FFD700] transition duration-300">About</a>
+                <a href="#" class="text-white hover:text-[#FFD700] transition duration-300">Contact</a>
+            </nav>
+            <div class="md:hidden">
+                <!-- Mobile menu button changed to white with golden-yellow hover -->
+                <button id="menu-button" class="text-white hover:text-[#FFD700] focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg py-2">
+            <a href="#featured" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 transition duration-300">Featured</a>
+            <a href="#blogs" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 transition duration-300">Blogs</a>
+            <a href="#" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 transition duration-300">About</a>
+            <a href="#" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 transition duration-300">Contact</a>
+        </div>
+    </header>
+
+    <!-- Hero Section: Updated with a background image and an overlay -->
+    <section class="relative w-full min-h-screen flex items-center justify-center text-center p-8 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+        <!-- Overlay to make the text stand out and maintain the color theme -->
+        <div class="absolute inset-0 bg-[#06D6A0] opacity-80"></div>
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-white mb-4">
+                Tech Insights, Simplified.
+            </h1>
+            <p class="text-lg sm:text-xl text-white max-w-2xl mx-auto mb-8">
+                Your go-to source for the latest in technology, software development, and digital innovation.
+            </p>
+            <a href="#blogs" class="btn-primary inline-block">
+                Explore Blogs
+            </a>
+        </div>
+    </section>
+
+    <!-- Main content container to hold other sections -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Featured Section -->
+        <section id="featured" class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">Featured Story</h2>
+            <!-- The featured post will be dynamically injected here -->
+            <div id="featured-post-container" class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row">
+                <!-- Content will be added by JavaScript -->
+            </div>
+        </section>
+
+        <!-- All Blogs Section -->
+        <section id="blogs">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">All Blogs</h2>
+            <div id="blog-posts-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Blog posts will be dynamically injected here by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer with updated design -->
+    <footer class="bg-[#073B4C] text-gray-200 py-10">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2024 The Tech Hut. All rights reserved.</p>
+            <div class="mt-4 flex justify-center space-x-4 text-sm font-semibold">
+                <a href="#" class="hover:text-[#FFD700] transition duration-300">Twitter</a>
+                <a href="#" class="hover:text-[#FFD700] transition duration-300">LinkedIn</a>
+                <a href="#" class="hover:text-[#FFD700] transition duration-300">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuButton = document.getElementById('menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Sample blog post data with 'likes' count
+            const blogPosts = [
+                {
+                    id: 1,
+                    title: "Demystifying Blockchain Technology",
+                    excerpt: "An easy-to-understand guide to the world of decentralized ledgers and cryptocurrencies.",
+                    author: "John Smith",
+                    date: "April 1, 2024",
+                    image: "https://placehold.co/800x500/cbd5e0/4299e1?text=Blockchain+Technology",
+                    likes: 15
+                },
+                {
+                    id: 2,
+                    title: "Full Stack Development in 2024",
+                    excerpt: "What technologies and skills are essential for a modern full-stack developer?",
+                    author: "Aisha Aden",
+                    date: "March 28, 2024",
+                    image: "https://placehold.co/800x500/cbd5e0/4299e1?text=Full+Stack+Development",
+                    likes: 30
+                },
+                {
+                    id: 3,
+                    title: "The Future of Quantum Computing",
+                    excerpt: "Exploring how quantum mechanics could revolutionize computation and what it means for the future.",
+                    author: "Markus Chen",
+                    date: "March 25, 2024",
+                    image: "https://placehold.co/800x500/cbd5e0/4299e1?text=Quantum+Computing",
+                    likes: 50
+                },
+                {
+                    id: 4,
+                    title: "Cybersecurity Basics for Small Businesses",
+                    excerpt: "Essential tips and best practices to protect your business from common cyber threats.",
+                    author: "Sarah Brown",
+                    date: "March 22, 2024",
+                    image: "https://placehold.co/800x500/cbd5e0/4299e1?text=Cybersecurity+Tips",
+                    likes: 22
+                },
+                {
+                    id: 5,
+                    title: "Intro to Machine Learning with Python",
+                    excerpt: "A beginner's tutorial on building your first machine learning model using Python.",
+                    author: "David Lee",
+                    date: "March 18, 2024",
+                    image: "https://placehold.co/800x500/cbd5e0/4299e1?text=Machine+Learning",
+                    likes: 45
+                },
+                {
+                    id: 6,
+                    title: "The Impact of 5G on IoT",
+                    excerpt: "How the next generation of wireless technology is supercharging the Internet of Things.",
+                    author: "Emily White",
+                    date: "March 15, 2024",
+                    image: "https://placehold.co/800x500/cbd5e0/4299e1?text=5G+and+IoT",
+                    likes: 38
+                },
+            ];
+
+            const container = document.getElementById('blog-posts-container');
+            const featuredContainer = document.getElementById('featured-post-container');
+
+            // Find the blog post with the most likes to make it the featured post
+            const featuredPost = blogPosts.reduce((prev, current) => {
+                return (prev.likes > current.likes) ? prev : current;
+            });
+
+            // Function to render the featured post dynamically
+            function renderFeaturedPost(post) {
+                featuredContainer.innerHTML = `
+                    <a href="#post-${post.id}" class="flex flex-col md:flex-row w-full transition-transform transform hover:scale-105 duration-300">
+                        <div class="md:w-1/2 p-6 md:p-10 flex flex-col justify-center">
+                            <span class="text-sm font-semibold text-[#06D6A0] uppercase mb-2">Featured</span>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">${post.title}</h3>
+                            <p class="text-gray-600 mb-4">${post.excerpt}</p>
+                            <div class="flex items-center text-gray-500 text-sm">
+                                <span>By ${post.author}</span>
+                                <span class="mx-2">•</span>
+                                <span>${post.date}</span>
+                                <span class="mx-2">•</span>
+                                <span>${post.likes} Likes</span>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2">
+                            <img src="${post.image}" alt="Featured blog post image" class="w-full h-full object-cover">
+                        </div>
+                    </a>
+                `;
+            }
+
+            // Function to create a blog post card
+            function createBlogPostCard(post) {
+                const article = document.createElement('a');
+                article.href = `#post-${post.id}`; // Making the entire card a link
+                article.className = 'card overflow-hidden block transition-transform transform hover:scale-105 duration-300';
+                article.innerHTML = `
+                    <img src="${post.image}" alt="Image for ${post.title}" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold text-gray-900 mb-2">${post.title}</h4>
+                        <p class="text-gray-600 text-sm mb-4">${post.excerpt}</p>
+                        <div class="flex items-center text-gray-500 text-xs">
+                            <span>By ${post.author}</span>
+                            <span class="mx-2">•</span>
+                            <span>${post.date}</span>
+                            <span class="mx-2">•</span>
+                            <span>${post.likes} Likes</span>
+                        </div>
+                    </div>
+                `;
+                return article;
+            }
+
+            // Call the functions to populate the page
+            renderFeaturedPost(featuredPost);
+
+            // Populate the container with all blog posts
+            blogPosts.forEach(post => {
+                container.appendChild(createBlogPostCard(post));
+            });
+        });
+    </script>
+</body>
+</html>
