@@ -1,0 +1,311 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Invoice - The Tech Hut</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333333;
+        }
+        table {
+            border-collapse: collapse;
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+        img {
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+            -ms-interpolation-mode: bicubic;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .ExternalClass {
+            width: 100%;
+        }
+        .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {
+            line-height: 100%;
+        }
+        .invoice-container {
+            max-width: 600px;
+            margin: 0 auto; /* Remove top/bottom margin, handled by body padding */
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .header {
+            background-color: #093e76; /* Dark blue from The Tech Hut branding */
+            padding: 20px;
+            text-align: center;
+            color: #ffffff;
+        }
+        .header img {
+            max-width: 70px;
+            height: auto;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 28px;
+            margin: 0;
+            color: #FFD700; /* Golden from The Tech Hut branding */
+        }
+        .section-padding {
+            padding: 20px 30px;
+        }
+        .details-table {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .details-table td {
+            padding: 5px 0;
+            vertical-align: top;
+            font-size: 14px;
+        }
+        .details-table .label {
+            font-weight: bold;
+            width: 120px;
+        }
+        .item-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        .item-table th, .item-table td {
+            border: 1px solid #e0e0e0;
+            padding: 10px;
+            text-align: left;
+            font-size: 14px;
+        }
+        .item-table th {
+            background-color: #f0f4f8; /* Light background from The Tech Hut */
+            font-weight: bold;
+            color: #073B4C; /* Dark blue text */
+        }
+        .item-table .total-row td {
+            font-weight: bold;
+            background-color: #d1fae5; /* Light green from The Tech Hut */
+            color: #073B4C;
+        }
+        .footer {
+            background-color: #073B4C; /* Dark blue from The Tech Hut */
+            color: #cccccc;
+            padding: 20px 30px;
+            text-align: center;
+            font-size: 12px;
+        }
+        .footer a {
+            color: #06D6A0; /* Vibrant green from The Tech Hut */
+            text-decoration: none;
+        }
+        .signature-section {
+            text-align: center;
+            padding: 20px 30px;
+            font-size: 14px;
+            color: #333333;
+        }
+        .signature-section img {
+            max-width: 120px;
+            height: auto;
+            margin-top: 10px;
+            border-radius: 8px;
+        }
+        .download-button-wrapper {
+            text-align: center;
+            padding: 20px 0;
+        }
+        .download-btn {
+            display: inline-block;
+            background-color: #06D6A0; /* Vibrant green */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .download-btn:hover {
+            background-color: #05B38B; /* Slightly darker green on hover */
+        }
+        .download-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        /* Responsive styles */
+        @media only screen and (max-width: 600px) {
+            .invoice-container {
+                margin: 0 auto;
+                border-radius: 0;
+            }
+            .section-padding {
+                padding: 15px 20px;
+            }
+            .header h1 {
+                font-size: 24px;
+            }
+            .details-table td, .item-table th, .item-table td, .signature-section, .footer, .download-btn {
+                font-size: 12px;
+            }
+            .download-btn {
+                padding: 8px 15px;
+            }
+        }
+    </style>
+    <!-- html2pdf.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+</head>
+<body style="margin: 0; padding: 20px 0;">
+    <div class="download-button-wrapper">
+        <button id="downloadPdfBtn" class="download-btn">Download Invoice as PDF</button>
+    </div>
+
+    <div id="invoice-content" class="invoice-container">
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+            <!-- Header -->
+            <tr>
+                <td class="header">
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczMRXm5fWGnx_VEenzpGb-cQkP17XBBnA69u_ADqp8efQCJ4CFYSbovdnj9fM33rNnzbZA0f1aN1nRAbbS7_R-NYYgTTRWPyovQfaGKK2hoH9LgFM8rtTzxO6IpqlgBSYlA6rVN_IdTIJIUnku6VO5HS=w500-h500-s-no-gm?authuser=0" alt="The Tech Hut Logo">
+                    <h1>INVOICE</h1>
+                </td>
+            </tr>
+            <!-- Invoice Details -->
+            <tr>
+                <td class="section-padding">
+                    <table class="details-table">
+                        <tr>
+                            <td class="label">Invoice No:</td>
+                            <td>INV-TTH-2025-07-001</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Date:</td>
+                            <td>July 30, 2025</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Due Date:</td>
+                            <td>August 14, 2025</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <!-- Billed To / From -->
+            <tr>
+                <td class="section-padding" style="padding-top: 0;">
+                    <table width="100%">
+                        <tr>
+                            <td width="50%" style="vertical-align: top;">
+                                <p style="font-weight: bold; margin-bottom: 5px; font-size: 15px; color: #093e76;">Billed To:</p>
+                                <p style="margin: 0; font-size: 14px;">Viewtech Limited</p>
+                                <p style="margin: 0; font-size: 14px;">info@viewtechlimited.co.ke</p>
+                            </td>
+                            <td width="50%" style="vertical-align: top;">
+                                <p style="font-weight: bold; margin-bottom: 5px; font-size: 15px; text-align: right; color: #093e76;">From:</p>
+                                <p style="margin: 0; font-size: 14px; text-align: right;">The Tech Hut Smart Software</p>
+                                <p style="margin: 0; font-size: 14px; text-align: right;">Nairobi, Kenya</p>
+                                <p style="margin: 0; font-size: 14px; text-align: right;">info@thetechhut.co</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <!-- Items Table -->
+            <tr>
+                <td class="section-padding" style="padding-top: 0;">
+                    <table class="item-table">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th width="15%">Quantity</th>
+                                <th width="20%">Unit Price</th>
+                                <th width="20%">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p style="font-weight: bold; margin: 0;">Full Blaze Package (Premium)</p>
+                                    <p style="font-size: 12px; margin: 5px 0 0 0;">Ultimate for: Maximum reach & sustained interaction for your brand!</p>
+                                    <p style="font-size: 12px; margin: 0;">Includes: 6-10+ dedicated posts (Mix of text, images, short videos, polls, Q&A, and more!)</p>
+                                    <p style="font-size: 12px; margin: 0;">Duration: Up to 1 full month of prime placement.</p>
+                                </td>
+                                <td>1</td>
+                                <td>KSh 5,000</td>
+                                <td>KSh 5,000</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td colspan="3" style="text-align: right;">TOTAL:</td>
+                                <td>KSh 5,000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <!-- Payment Instructions -->
+            <tr>
+                <td class="section-padding" style="padding-top: 0;">
+                    <p style="font-weight: bold; margin-bottom: 10px; font-size: 15px; color: #093e76;">Payment Instructions:</p>
+                    <p style="margin: 0; font-size: 14px;">Please make payment of KSh 5,000 through this link: <a href="https://payment.intasend.com/pay/d2048d27-9755-46d1-992e-dac2538c49a4/">Pay Link</a></p>
+                    <p style="margin: 15px 0 0 0; font-size: 14px;">For any queries regarding this invoice, please contact us at info@thetechhut.co or +254115017058.</p>
+                </td>
+            </tr>
+            <!-- Signature -->
+            <tr>
+                <td class="signature-section">
+                    <p style="margin: 0;">Sincerely,</p>
+                    <!-- <img src="https://lh3.googleusercontent.com/pw/AP1GczP2uwasqyIWRLkbJ0jPB9-vKQGiqFEeQb0z_DqR0MTcbZ6h7ue5U87Rsf9EmzoLzRND-VU5yUP28fzxt82vs8lQTLm-Gjg_4TY1-SNuNtGWccRn4_ADm4Mwg19a5eXp8WBanV0_TsR11R2AW7dTLWZ9=w2532-h1688-s-no-gm?authuser=0" alt="Robi's Signature" width="100" style="display: block; margin: 10px auto 0 auto; border-radius: 8px;"> -->
+                    <p style="margin: 5px 0 0 0; font-weight: bold; color: #073B4C;">Emmanuel Kiprop</p>
+                    <p style="margin: 0; font-size: 12px; color: #555555;">Chief Builder, The Tech Hut</p>
+                </td>
+            </tr>
+            <!-- Footer -->
+            <tr>
+                <td class="footer">
+                    <p>&copy; 2025 The Tech Hut. All rights reserved.</p>
+                    <p><a href="https://thetechhut.co/">thetechhut.co</a></p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        document.getElementById('downloadPdfBtn').addEventListener('click', function() {
+            const invoiceContent = document.getElementById('invoice-content');
+            const button = this;
+
+            button.disabled = true;
+            button.textContent = 'Generating PDF...';
+
+            html2pdf().from(invoiceContent).set({
+                margin: [10, 10, 10, 10],
+                filename: 'The_Tech_Hut_Invoice_Viewtech_Limited.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, logging: true, dpi: 192, letterRendering: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            }).save().then(() => {
+                button.disabled = false;
+                button.textContent = 'Download Invoice as PDF';
+            }).catch(error => {
+                console.error('Error generating PDF:', error);
+                button.disabled = false;
+                button.textContent = 'Download Failed (Try Again)';
+                alert('Failed to generate PDF. Please try again.');
+            });
+        });
+    </script>
+</body>
+</html>

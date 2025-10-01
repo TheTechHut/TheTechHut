@@ -70,8 +70,15 @@
     <meta name="description" content="The Tech Hut is a leading Ed Tech and Talent Sourcing company based in Kenya.">
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>The Tech Hut</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <style>
+        body{
+            color: white;
+        }
         .nav-link {
             color: white;
             font-weight: 600;
@@ -98,7 +105,12 @@
 
 <body>
     <header>
+         <div class="flex items-center mb-4 md:mb-0">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczMRXm5fWGnx_VEenzpGb-cQkP17XBBnA69u_ADqp8efQCJ4CFYSbovdnj9fM33rNnzbZA0f1aN1nRAbbS7_R-NYYgTTRWPyovQfaGKK2hoH9LgFM8rtTzxO6IpqlgBSYlA6rVN_IdTIJIUnku6VO5HS=w500-h500-s-no-gm?authuser=0" alt="The Tech Hut Logo" class="h-12 w-12 rounded-full mr-3">
+            <p class="text-2xl font-bold text-gradient-primary">The Tech Hut</p>
+            </div>
         <nav class="flex flex-wrap justify-center md:justify-end gap-6">
+           
             <!-- Replaced "Student Projects" with "Community" and linked to WhatsApp channel -->
             <a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" target="_blank" rel="noopener noreferrer" class="nav-link">Community</a>
             <!-- Updated "Events" link -->
