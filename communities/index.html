@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>African Tech Community Database</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* BRAND COLORS:
+            --dark-blue: #0A3E77;
+            --bright-green: #2DCC70;
+            --gold-yellow: #D9A715;
+        */
+        :root {
+            --dark-blue: #0A3E77;
+            --bright-green: #2DCC70;
+            --gold-yellow: #D9A715;
+            --background-light: #f4f7f9;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header, footer {
+            background-color: var(--dark-blue);
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background-color: var(--dark-blue);
+            color: white;
+            padding: 4rem 0 6rem;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: #c9e0ff; /* Lighter shade of blue for contrast */
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--bright-green);
+            color: var(--dark-blue);
+            padding: 1rem 2.5rem;
+            border-radius: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background-color: #26b162; /* Slightly darker green */
+            transform: translateY(-2px);
+        }
+
+        .social-proof {
+            margin-top: 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gold-yellow);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- CONTENT SECTIONS --- */
+        section {
+            padding: 4rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h3 {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--dark-blue);
+            border-bottom: 3px solid var(--gold-yellow);
+            display: inline-block;
+            padding-bottom: 0.25rem;
+        }
+        
+        .section-header p {
+            max-width: 700px;
+            margin: 1rem auto 0;
+            color: #555;
+        }
+
+        /* Problem/Solution Grid */
+        .problem-solution-grid {
+            display: flex;
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .problem-solution-grid h4 {
+            font-size: 1.5rem;
+            color: var(--dark-blue);
+            margin-top: 0;
+            border-left: 4px solid var(--bright-green);
+            padding-left: 1rem;
+        }
+        
+        .problem-solution-grid ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 1rem;
+        }
+
+        .problem-solution-grid li {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+        }
+        
+        .problem-solution-grid li::before {
+            content: '❌'; /* Problem symbol */
+            margin-right: 0.75rem;
+            font-size: 1.2rem;
+            color: #cc2d2d;
+        }
+        
+        .solution li::before {
+            content: '✅'; /* Solution symbol */
+            color: var(--bright-green);
+        }
+        
+        .solution h4 {
+            border-left: 4px solid var(--gold-yellow);
+        }
+
+        /* --- FEATURE GRID --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-box {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-top: 5px solid var(--bright-green);
+        }
+
+        .feature-box h5 {
+            font-size: 1.25rem;
+            color: var(--dark-blue);
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-box p {
+            color: #666;
+        }
+        
+        /* Icons (using simple text for placeholders) */
+        .icon {
+            font-size: 2rem;
+            color: var(--gold-yellow);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* --- AUDIENCE SECTION --- */
+        .audience {
+            background-color: var(--dark-blue);
+            color: white;
+        }
+
+        .audience .section-header h3 {
+            color: white;
+        }
+        
+        .audience-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .audience-list li {
+            background-color: #1a5196; /* Slightly lighter blue */
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-left: 4px solid var(--bright-green);
+        }
+
+        /* --- PRICING SECTION --- */
+        .pricing {
+            text-align: center;
+        }
+        
+        .price-box {
+            background-color: white;
+            max-width: 400px;
+            margin: 2rem auto 0;
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border: 1px solid #ddd;
+        }
+
+        .price-box p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .price-tag {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--dark-blue);
+            margin: 0;
+            line-height: 1;
+        }
+        
+        .price-tag small {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold-yellow);
+            vertical-align: top;
+            margin-right: 0.5rem;
+        }
+        
+        /* --- FOOTER --- */
+        footer {
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        footer .container {
+            font-size: 0.9rem;
+            color: #c9e0ff;
+        }
+
+        footer a {
+            color: var(--gold-yellow);
+            text-decoration: none;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+
+        /* --- MEDIA QUERIES FOR RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 3rem 0 5rem;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero h2 {
+                font-size: 1.25rem;
+            }
+            
+            .problem-solution-grid {
+                flex-direction: column;
+            }
+
+            .section-header h3 {
+                font-size: 1.75rem;
+            }
+            
+            section {
+                padding: 3rem 0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .cta-button {
+                font-size: 1rem;
+                padding: 0.8rem 1.5rem;
+            }
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Header & Navigation (Simple for a Landing Page) -->
+    <header>
+        <div class="container">
+            <div style="font-size: 1.5rem; font-weight: 700;">The Tech Hut Directory</div>
+        </div>
+    </header>
+
+    <!-- 1. The Hero Section (The "Hook") -->
+    <div class="hero">
+        <div class="container">
+            <h1>Unlock Your Network: The Definitive Directory of Africa's Top Tech Communities</h1>
+            <h2>Stop wasting hours searching. Instantly connect with 100+ vetted, active professional tech groups across the African continent.</h2>
+            <a href="https://payment.intasend.com/pay/6fcb6394-28d1-47f6-bac8-7474cef0cfb1/" class="cta-button">Get the Database Now (Instant Download)</a>
+            <p class="social-proof">Over 100+ Curated Communities | Lifetime Updates Included</p>
+        </div>
+    </div>
+
+    <!-- 2. The Problem & Solution -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <h3>Tired of searching for your tribe?</h3>
+                <p>The African tech ecosystem is booming, but finding the right, active community to join is difficult. We solved it for you.</p>
+            </div>
+            
+            <div class="problem-solution-grid">
+                <div class="problem">
+                    <h4>The Pain Point: The Search</h4>
+                    <ul>
+                        <li>You join ghost groups that offer no value.</li>
+                        <li>You miss out on exclusive job opportunities and mentorship.</li>
+                        <li>You waste time searching platforms instead of building your career.</li>
+                        <li>You struggle to find groups specific to niche stacks or roles.</li>
+                    </ul>
+                </div>
+                <div class="solution">
+                    <h4>The Solution: Your Essential Blueprint</h4>
+                    <p>This isn't just a list—it's a meticulously curated, categorized, and verified database. We've done the hard work so you can skip the search and go straight to connecting, learning, and earning.</p>
+                    <ul>
+                        <li>**100+ Vetted Communities:** Quality over quantity.</li>
+                        <li>**Instant Connectivity:** Go from zero to connected in minutes.</li>
+                        <li>**Verified Activity:** Say goodbye to ghost groups.</li>
+                        <li>**Future-Proof:** Lifetime updates are included with your purchase.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 3. Key Features & Value Proposition -->
+    <section style="background-color: var(--background-light);">
+        <div class="container">
+            <div class="section-header">
+                <h3>What You Get Inside: Detailed Features</h3>
+            </div>
+            
+            <div class="features-grid">
+                
+                <div class="feature-box">
+                    <span class="icon">🏷️</span>
+                    <h5>Filter by Stack & Role</h5>
+                    <p>Easily find groups for **Python, JavaScript, Data Science, Product Management,** Design, and any other niche technology stack or professional role.</p>
+                </div>
+
+                <div class="feature-box">
+                    <span class="icon" style="color: var(--gold-yellow);">🔗</span>
+                    <h5>Direct Access Links</h5>
+                    <p>Instant one-click links to join platforms like Slack, Discord, Telegram, and WhatsApp—no more complicated application processes.</p>
+                </div>
+                
+                <div class="feature-box">
+                    <span class="icon">🌍</span>
+                    <h5>Regional & Pan-African Focus</h5>
+                    <p>Whether you're in **Nairobi, Lagos, Cairo,** or working remotely, find local and continent-wide networks to expand your reach.</p>
+                </div>
+                
+                <div class="feature-box">
+                    <span class="icon" style="color: var(--gold-yellow);">🔄</span>
+                    <h5>Lifetime Updates Included</h5>
+                    <p>The tech world changes fast. Your one-time purchase includes access to **future updates** as new, valuable communities emerge.</p>
+                </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. "Who Is This For?" (Audience Qualification) -->
+    <section class="audience" id="audience">
+        <div class="container">
+            <div class="section-header">
+                <h3>This Digital Resource Is Perfect For:</h3>
+            </div>
+            
+            <ul class="audience-list">
+                <li>Software Developers looking for advanced technical discussions.</li>
+                <li>Product Managers & Designers seeking mentorship and market insights.</li>
+                <li>Tech Founders who need early testing feedback and investor networks.</li>
+                <li>Students & Entry-Level Techies looking for learning resources.</li>
+                <li>Remote Workers seeking local connection in their current base.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 5. Pricing & Final CTA -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-header" style="margin-bottom: 2rem;">
+                <h3 style="color: var(--bright-green);">Ready to Stop Searching and Start Connecting?</h3>
+                <p>The time you'll save and the opportunities you'll gain are worth hundreds of hours.</p>
+            </div>
+
+            <div class="price-box">
+                <p>One-Time Purchase, Lifetime Access (Priced in Kenyan Shillings):</p>
+                <p class="price-tag"><small>Ksh.</small>25</p>
+                <a href="https://payment.intasend.com/pay/6fcb6394-28d1-47f6-bac8-7474cef0cfb1/" class="cta-button" style="margin-top: 1.5rem;">Download the African Tech Database Now!</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 6. Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 The Tech Hut | All Rights Reserved.</p>
+            <p>
+                <a href="#">Terms of Service</a> | 
+                <a href="#">Privacy Policy</a> | 
+                <a href="mailto:support@techhut.com">Support@TechHut.com</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
