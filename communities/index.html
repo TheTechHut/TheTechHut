@@ -5,7 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>African Tech Community Database</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
+
+         .nav-link {
+            color: white;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: #06D6A0; /* Vibrant green underline */
+            transition: width 0.3s ease, left 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
         /* BRAND COLORS:
             --dark-blue: #0A3E77;
             --bright-green: #2DCC70;
@@ -327,9 +350,18 @@
 
     <!-- 1. Header & Navigation (Simple for a Landing Page) -->
     <header>
-        <div class="container">
-            <div style="font-size: 1.5rem; font-weight: 700;">The Tech Hut Directory</div>
-        </div>
+         <div class="flex items-center mb-4 md:mb-0">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczMRXm5fWGnx_VEenzpGb-cQkP17XBBnA69u_ADqp8efQCJ4CFYSbovdnj9fM33rNnzbZA0f1aN1nRAbbS7_R-NYYgTTRWPyovQfaGKK2hoH9LgFM8rtTzxO6IpqlgBSYlA6rVN_IdTIJIUnku6VO5HS=w500-h500-s-no-gm?authuser=0" alt="The Tech Hut Logo" class="h-12 w-12 rounded-full mr-3">
+            <p class="text-2xl font-bold text-gradient-primary">The Tech Hut</p>
+            </div>
+        <nav class="flex flex-wrap justify-center md:justify-end gap-6">
+           
+            <!-- Replaced "Student Projects" with "Community" and linked to WhatsApp channel -->
+            <a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" target="_blank" rel="noopener noreferrer" class="nav-link">Community</a>
+            <!-- Updated "Events" link -->
+            <a href="https://thetechhut.co/events" class="nav-link">Events</a>
+            <a href="https://thetechhut.co/apprenticeship" class="nav-link">Apprenticeship</a>
+        </nav>
     </header>
 
     <!-- 1. The Hero Section (The "Hook") -->
