@@ -7,10 +7,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/pw/AP1GczMvA6poKtPsVOqEpI69CBxzkMKb-C6YH-_8xx4dnChgKRp1kdxv-tpCkfLRmuAQ8uViYfOe8ApruVcddTcuN7YB0P0Y8vzlT6_yJXrIK70giQ4_pp1ExCsePBAkLZOcA4aORRDErShRduiig5a0VeaV=w500-h500-s-no-gm?authuser=0" />
-    <meta property="og:image" content="http://lh3.googleusercontent.com/pw/AP1GczMU4_t-Pyht5BVA3VUAwo_N9WoB7tRQTW8y6pcdxVqGYJsZOx9HElzu8dGH7_reM5B97yPd3-F1OPqusu7Y6mS6Sg-K5xubTLY6OJQFxBuC0XHY-ZhobN9e1cQvI9ezKFYCnZl67DGrJOjt5nMkWVMy=w2852-h1626-s-no-gm?authuser=0" name="image">
+    <meta property="og:image" content="https://lh3.googleusercontent.com/pw/AP1GczMIpSiFeQakusAptuPQLxhWviG1B7-MsgTIIXjSjxZI_iyzFagjpSF9tEiSUJuUtHzur2p-E0tfWeWtZnbYr6a6AIs23o875I_JubsD3BRqnLAs_TGv8G1yWCc0UacNefMXDib08NTikbEJzzMF_Trs=w2768-h1576-s-no-gm?authuser=0" name="image">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:title" content="The African Techie's Secret Weapon: 100+ Communities to Join & Accelerate Your Career">
+    <meta property="og:title" content="The African Techie's Secret Weapon: 50+ Communities to Join & Access Endless Opportunities">
     <meta property="og:description"
         content="Are you an African tech professional, founder, or student looking to genuinely connect with your peers, find your next opportunity, or discover vital market insights? The African tech ecosystem is vast and rapidly growing, but finding the right communities to join can be a time-consuming challenge. This digital resource solves that problem.This is the definitive, curated directory of the most active and valuable tech communities and professional groups across the African continent.">
     <meta property="og:url" content="https://thetechhut.co/communities">
@@ -19,9 +19,9 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:locale:alternate" content="en_GB">
     <meta property="og:image:secure_url"
-        content="http://lh3.googleusercontent.com/pw/AP1GczMU4_t-Pyht5BVA3VUAwo_N9WoB7tRQTW8y6pcdxVqGYJsZOx9HElzu8dGH7_reM5B97yPd3-F1OPqusu7Y6mS6Sg-K5xubTLY6OJQFxBuC0XHY-ZhobN9e1cQvI9ezKFYCnZl67DGrJOjt5nMkWVMy=w2852-h1626-s-no-gm?authuser=0">
+        content="https://lh3.googleusercontent.com/pw/AP1GczMIpSiFeQakusAptuPQLxhWviG1B7-MsgTIIXjSjxZI_iyzFagjpSF9tEiSUJuUtHzur2p-E0tfWeWtZnbYr6a6AIs23o875I_JubsD3BRqnLAs_TGv8G1yWCc0UacNefMXDib08NTikbEJzzMF_Trs=w2768-h1576-s-no-gm?authuser=0">
     <meta property="og:image:type" content="image/png">
-    <meta property="og:image:alt" content="The African Techie's Secret Weapon: 100+ Communities to Join & Accelerate Your Career">
+    <meta property="og:image:alt" content="The African Techie's Secret Weapon: 50+ Communities to Join & Access Endless Opportunities">
     <style>
 
          .nav-link {
@@ -43,6 +43,7 @@
         }
         .nav-link:hover::after {
             width: 100%;
+            background-color: #06D6A0;
             left: 0;
         }
         /* BRAND COLORS:
@@ -155,6 +156,53 @@
             margin: 1rem auto 0;
             color: #555;
         }
+        
+        /* --- DEMO IMAGE SECTION (MARQUEE) --- */
+        .marquee-container {
+            margin-top: 2rem;
+            border-radius: 1rem;
+            overflow: hidden; /* Hide horizontal scrollbar */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 5px solid white; /* Frame effect */
+            background-color: #fff;
+            position: relative;
+        }
+        
+        .marquee-wrapper {
+            display: flex;
+            width: 200%; /* Double the content width for seamless looping of 3 items */
+            animation: marquee-scroll 30s linear infinite; /* Animation speed and style */
+        }
+        
+        .marquee-item {
+            flex: 0 0 33.33333%; /* Each item takes 1/3 of the visible width (100% / 3) */
+            height: auto;
+            overflow: hidden;
+            aspect-ratio: 16 / 9; /* Maintain 16:9 aspect ratio */
+        }
+        
+        .marquee-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Keyframes for Marquee Scroll */
+        @keyframes marquee-scroll {
+            0% {
+                transform: translateX(0%);
+            }
+            100% {
+                /* Scroll exactly 50% of the wrapper (which is 200% width, so 100% of the visible content) */
+                transform: translateX(-50%); 
+            }
+        }
+        
+        /* Stop animation on hover for better viewability */
+        .marquee-container:hover .marquee-wrapper {
+            animation-play-state: paused;
+        }
+        
 
         /* Problem/Solution Grid */
         .problem-solution-grid {
@@ -265,9 +313,37 @@
             border-left: 4px solid var(--bright-green);
         }
 
+        /* --- UPDATES SECTION (NEW) --- */
+        .updates-section {
+            background-color: var(--bright-green);
+            color: var(--dark-blue);
+            text-align: center;
+            padding: 3rem 0;
+            border-radius: 0.75rem;
+            margin-top: -3rem; /* Pull it slightly over the section above */
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .updates-section h3 {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            color: var(--dark-blue);
+        }
+
+        .updates-section p {
+            font-size: 1.25rem;
+            font-weight: 600;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+
         /* --- PRICING SECTION --- */
         .pricing {
             text-align: center;
+            padding-top: 5rem; /* Give space after the floating update section */
         }
         
         .price-box {
@@ -328,6 +404,9 @@
 
         /* --- MEDIA QUERIES FOR RESPONSIVENESS --- */
         @media (max-width: 768px) {
+            header {
+                padding: 0.75rem 0; /* Reduced vertical padding */
+            }
             .hero {
                 padding: 3rem 0 5rem;
             }
@@ -352,12 +431,34 @@
         }
         
         @media (max-width: 480px) {
+            .marquee-item {
+            flex: 0 0 33.33333%; /* Each item takes 1/3 of the visible width (100% / 3) */
+            height: 100%;
+            overflow: hidden;
+            aspect-ratio: 9/ 16; /* Maintain 9:16 aspect ratio for mobile */
+            }
+            .marquee-item img, .marquee-item video {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                display: block;
+            }
+            header {
+                padding: 0.75rem 0; /* Reduced vertical padding */
+                font-size: 0.5rem;
+            }
             .cta-button {
                 font-size: 1rem;
                 padding: 0.8rem 1.5rem;
             }
             .container {
                 padding: 0 1rem;
+            }
+            .updates-section h3 {
+                font-size: 1.5rem;
+            }
+            .updates-section p {
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -367,26 +468,33 @@
     <!-- 1. Header & Navigation (Simple for a Landing Page) -->
     <header>
          <div class="flex items-center mb-4 md:mb-0">
-            <img src="https://lh3.googleusercontent.com/pw/AP1GczMRXm5fWGnx_VEenzpGb-cQkP17XBBnA69u_ADqp8efQCJ4CFYSbovdnj9fM33rNnzbZA0f1aN1nRAbbS7_R-NYYgTTRWPyovQfaGKK2hoH9LgFM8rtTzxO6IpqlgBSYlA6rVN_IdTIJIUnku6VO5HS=w500-h500-s-no-gm?authuser=0" alt="The Tech Hut Logo" class="h-12 w-12 rounded-full mr-3">
-            <p class="text-2xl font-bold text-gradient-primary">The Tech Hut</p>
-            </div>
-        <nav class="flex flex-wrap justify-center md:justify-end gap-6">
-           
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczMRXm5fWGnx_VEenzpGb-cQkP17XBBnA69u_ADqp8efQCJ4CFYSbovdnj9fM33rNnzbZA0f1aN1nRAbbS7_R-NYYgTTRWPyovQfaGKK2hoH9LgFM8rtTzxO6IpqlgBSYlA6rVN_IdTIJIUnku6VO5HS=w500-h500-s-no-gm?authuser=0" alt="The Tech Hut Logo" class="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full mr-3">
+            <p class="text-1xl font-bold text-gradient-primary">The Tech Hut</p>
+            <nav class="flex flex-wrap justify-center md:justify-end gap-6 ml-auto">
             <!-- Replaced "Student Projects" with "Community" and linked to WhatsApp channel -->
             <a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" target="_blank" rel="noopener noreferrer" class="nav-link">Community</a>
             <!-- Updated "Events" link -->
-            <a href="https://thetechhut.co/events" class="nav-link">Events</a>
-            <a href="https://thetechhut.co/apprenticeship" class="nav-link">Apprenticeship</a>
+            <a href="../events/index.html" class="nav-link">Events</a>
+            <a href="../apprenticeship/index.html" class="nav-link">Apprenticeship</a>
         </nav>
+        </div>
+        
     </header>
 
     <!-- 1. The Hero Section (The "Hook") -->
     <div class="hero">
         <div class="container">
-            <h1>Unlock Your Network: The Definitive Directory of Africa's Top Tech Communities</h1>
-            <h2>Stop wasting hours searching. Instantly connect with 20+ vetted, active professional tech groups across the African continent.</h2>
-            <a href="https://payment.intasend.com/pay/6fcb6394-28d1-47f6-bac8-7474cef0cfb1/" class="cta-button">Get the Database Now (Instant Download)</a>
-            <p class="social-proof">Over 20+ Curated Communities | Lifetime Updates Included</p>
+            <!-- HEADLINE: Focusing on opportunities -->
+            <h1>Your Ultimate Tech Plug: A shortcut to getting endless tech opportunities</h1>
+            <!-- UPDATED SUB-HEADLINE: National focus -->
+            <h2>Stop wasting hours searching. Instantly connect with 50+ vetted, active professional tech groups Across the Africa and get daily tech opportunities.</h2>
+            <!-- CTA BUTTON -->
+            <a href="https://payment.intasend.com/pay/6fcb6394-28d1-47f6-bac8-7474cef0cfb1/" class="cta-button">Access 50+ Tech Groups Instantly</a>
+            
+            <!-- SOCIAL PROOF -->
+            <p class="social-proof">
+                ✅ <b>38 HAPPY CUSTOMERS JOINED SO FAR!</b> | Over 50+ Curated Communities | Lifetime Updates Included
+            </p>
         </div>
     </div>
 
@@ -412,10 +520,11 @@
                     <h4>The Solution: Your Essential Blueprint</h4>
                     <p>This isn't just a list—it's a meticulously curated, categorized, and verified database. We've done the hard work so you can skip the search and go straight to connecting, learning, and earning.</p>
                     <ul>
-                        <li>**20+ Vetted Communities:** Quality over quantity.</li>
-                        <li>**Instant Connectivity:** Go from zero to connected in minutes.</li>
-                        <li>**Verified Activity:** Say goodbye to ghost groups.</li>
-                        <li>**Future-Proof:** Lifetime updates are included with your purchase.</li>
+                        <!-- COMMUNITY COUNT -->
+                        <li><b>50+ Vetted Communities:</b> Quality over quantity.</li>
+                        <li><b>Instant Connectivity:</b> Go from zero to connected in minutes.</li>
+                        <li><b>Verified Activity:</b> Say goodbye to ghost groups.</li>
+                        <li><b>Future-Proof:</b> Lifetime updates are included with your purchase.</li>
                     </ul>
                 </div>
             </div>
@@ -434,7 +543,7 @@
                 <div class="feature-box">
                     <span class="icon">🏷️</span>
                     <h5>Filter by Stack & Role</h5>
-                    <p>Easily find groups for **Python, JavaScript, Data Science, Product Management,** Design, and any other niche technology stack or professional role.</p>
+                    <p>Easily find groups for <b>Python, JavaScript, Data Science, Product Management,</b> Design, and any other niche technology stack or professional role.</p>
                 </div>
 
                 <div class="feature-box">
@@ -445,19 +554,85 @@
                 
                 <div class="feature-box">
                     <span class="icon">🌍</span>
-                    <h5>Regional & Pan-African Focus</h5>
-                    <p>Whether you're in **Nairobi, Lagos, Cairo,** or working remotely, find local and continent-wide networks to expand your reach.</p>
+                    <!-- FEATURE FOCUS: National/Local -->
+                    <h5>Regional & Local Focus</h5>
+                    <p>Whether you're in the <b>Capital, a major city,</b> or working remotely, find local networks to expand your reach within the country.</p>
                 </div>
                 
                 <div class="feature-box">
                     <span class="icon" style="color: var(--gold-yellow);">🔄</span>
                     <h5>Lifetime Updates Included</h5>
-                    <p>The tech world changes fast. Your one-time purchase includes access to **future updates** as new, valuable communities emerge.</p>
+                    <p>The tech world changes fast. Your one-time purchase includes access to <b>future updates</b> as new, valuable communities emerge.</p>
                 </p>
                 </div>
             </div>
         </div>
     </section>
+    
+    <!-- UPDATED SECTION: Product Demo Marquee -->
+    <section id="demo-image" style="padding-top: 0;">
+        <div class="container">
+            <div class="section-header">
+                <h3>A Sneak Peek: See How the Database Works</h3>
+                <p>Browse a continuous, live demo of the sortable and filterable structure. Pause the animation by hovering over the images.</p>
+            </div>
+            
+            <div class="marquee-container">
+                <div class="marquee-wrapper">
+                    <!-- Image Set 1 (Visible Content) -->
+                    <div class="marquee-item">
+                        <img src="../assets/img/connection_meme.jpg" 
+                             alt="Database view filtered by Python stack." 
+                             loading="lazy">
+                    </div>
+                     <div class="marquee-item">
+                        <img src="../assets/img/database_picture.png" 
+                             alt="Database view showing direct join links." 
+                             loading="lazy">
+                    </div>
+                    <div class="marquee-item">
+                        <video autoplay muted loop controls>
+                            <source src="../assets/videos/database_video_sneak_peak.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video> 
+                    </div>
+                   
+                    
+                    <!-- Image Set 2 (Duplicated for Seamless Loop) -->
+                     <div class="marquee-item">
+                        <img src="https://placehold.co/1200x600/1e88e5/ffffff?text=1.%20FILTER%20BY%20TECH%20STACK%0A(e.g.,%20Python%20%26%20Data%20Science)" 
+                             alt="Database view filtered by Python stack." 
+                             loading="lazy">
+                    </div>
+                    <div class="marquee-item">
+                        <img src="https://placehold.co/1200x600/f4511e/ffffff?text=2.%20FILTER%20BY%20PLATFORM%0A(Slack,%20Discord%20or%20WhatsApp)" 
+                             alt="Database view filtered by platform." 
+                             loading="lazy">
+                    </div>
+                    <div class="marquee-item">
+                        <img src="https://placehold.co/1200x600/0A3E77/D9A715?text=3.%20DIRECT%20JOIN%20LINKS%0A(One-Click%20Access%20to%20Groups)" 
+                             alt="Database view showing direct join links." 
+                             loading="lazy">
+                    </div>
+                </div>
+                
+               
+                <!-- FINAL CTA -->
+                <a href="https://payment.intasend.com/pay/6fcb6394-28d1-47f6-bac8-7474cef0cfb1/" class="cta-button" style="margin-top: 1.5rem; margin-left: 2rem;">Access 50+ Tech Groups Now</a>
+            
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Bi-Weekly Update Promise -->
+    <section class="updates-section">
+        <div class="container">
+            <h3>Always Growing, Always Current 🚀</h3>
+            <p>We actively scout the country for the best new tech groups and update the database with verified links <b>bi-weekly</b>. Your access never expires!</p>
+        </div>
+    </section>
+
 
     <!-- 4. "Who Is This For?" (Audience Qualification) -->
     <section class="audience" id="audience">
@@ -481,13 +656,14 @@
         <div class="container">
             <div class="section-header" style="margin-bottom: 2rem;">
                 <h3 style="color: var(--bright-green);">Ready to Stop Searching and Start Connecting?</h3>
-                <p>The time you'll save and the opportunities you'll gain are worth hundreds of hours.</p>
+                <p>The time you'll save and the opportunities you'll gain are worth hundreds of hours. Join our 38 happy customers today!</p>
             </div>
 
             <div class="price-box">
                 <p>One-Time Purchase, Lifetime Access (Priced in Kenyan Shillings):</p>
                 <p class="price-tag"><small>Ksh.</small>25</p>
-                <a href="https://payment.intasend.com/pay/6fcb6394-28d1-47f6-bac8-7474cef0cfb1/" class="cta-button" style="margin-top: 1.5rem;">Download the African Tech Database Now!</a>
+                <!-- FINAL CTA -->
+                <a href="https://payment.intasend.com/pay/6fcb6394-28d1-47f6-bac8-7474cef0cfb1/" class="cta-button" style="margin-top: 1.5rem;">Access 50+ Tech Groups Now</a>
             </div>
 
         </div>
