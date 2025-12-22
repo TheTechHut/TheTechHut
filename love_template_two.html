@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Baby ❤️</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #7b0d1e; /* Deep romantic red */
+            font-family: 'Quicksand', sans-serif;
+            color: white;
+            overflow-x: hidden;
+        }
+        .romantic-title { font-family: 'Dancing Script', cursive; }
+        .hidden { display: none; }
+        
+        .card-bg {
+            background: linear-gradient(145deg, #a41324, #7b0d1e);
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        .gift-icon {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .gift-icon:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.2);
+        }
+
+        .heart-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+        }
+        
+        /* Floating Heart Animation */
+        .floating-heart {
+            position: absolute;
+            animation: floatUp 6s linear infinite;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        .letter-border {
+            border: 15px solid transparent;
+            border-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 0C15 0 15 11 0 11V19C15 19 15 30 15 30C15 30 15 19 30 19V11C15 11 15 0 15 0Z' fill='%23ffffff'/%3E%3C/svg%3E") 30 stretch;
+        }
+
+        /* Jar styling */
+        .jar-container {
+            position: relative;
+            width: 120px;
+            height: 160px;
+            margin: 0 auto 20px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 3px solid rgba(255, 255, 255, 0.4);
+            border-radius: 20px 20px 40px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .jar-lid {
+            position: absolute;
+            top: 0;
+            width: 80px;
+            height: 15px;
+            background: #fff;
+            border-radius: 5px;
+            z-index: 2;
+        }
+        .jar-heart {
+            font-size: 24px;
+            margin: 2px;
+            animation: jar-bounce 2s ease-in-out infinite;
+        }
+        @keyframes jar-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <!-- Floating Background Hearts -->
+    <div id="heart-container" class="heart-bg"></div>
+
+    <!-- 1. LANDING PAGE -->
+    <div id="landing-view" class="text-center z-10 w-full max-w-lg">
+        <h2 class="text-3xl md:text-4xl mb-2">Hi Baby,</h2>
+        <h1 class="romantic-title text-6xl md:text-7xl mb-6">Be Mine?</h1>
+        <p class="mb-10 text-pink-200">Will you officially be my girlfriend?</p>
+        
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <button onclick="showView('menu-view')" class="bg-white text-rose-800 font-bold py-3 px-10 rounded-full shadow-lg hover:bg-pink-100 transition-all uppercase tracking-widest text-sm">
+                YES PLEASE
+            </button>
+            <button onclick="showView('retry-view')" class="text-white/70 hover:text-white text-xs uppercase tracking-widest border-b border-white/20 pb-1">
+                No Thanks
+            </button>
+        </div>
+    </div>
+
+    <!-- 2. RETRY VIEW (If she clicks No) -->
+    <div id="retry-view" class="hidden text-center z-10">
+        <div class="text-8xl mb-6">💔</div>
+        <h1 class="text-3xl font-bold mb-4">I promise you will love it</h1>
+        <button onclick="showView('landing-view')" class="bg-white text-rose-800 font-bold py-2 px-8 rounded-full shadow-lg mt-4">
+            TRY AGAIN
+        </button>
+    </div>
+
+    <!-- 3. MAIN MENU (The Gifts) -->
+    <div id="menu-view" class="hidden text-center z-10 w-full max-w-2xl">
+        <h2 class="romantic-title text-5xl mb-2">These are for you</h2>
+        <p class="text-pink-200 mb-12 uppercase tracking-widest text-xs">Click to open</p>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <!-- Jar of Love -->
+            <div onclick="showView('jar-view')" class="gift-icon p-8 rounded-3xl flex flex-col items-center">
+                <span class="text-5xl mb-4">🫙</span>
+                <p class="font-bold">Jar of Love</p>
+            </div>
+            <!-- Music -->
+            <div onclick="showView('music-view')" class="gift-icon p-8 rounded-3xl flex flex-col items-center">
+                <span class="text-5xl mb-4">🎧</span>
+                <p class="font-bold">Our Song</p>
+            </div>
+            <!-- Letter -->
+            <div onclick="showView('letter-view')" class="gift-icon p-8 rounded-3xl flex flex-col items-center">
+                <span class="text-5xl mb-4">✉️</span>
+                <p class="font-bold">The Letter</p>
+            </div>
+        </div>
+        
+        <button onclick="showView('landing-view')" class="mt-16 text-white/50 hover:text-white text-xs uppercase tracking-widest">
+            ← Back
+        </button>
+    </div>
+
+    <!-- 4. JAR OF LOVE VIEW -->
+    <div id="jar-view" class="hidden z-10 w-full max-w-xl">
+        <div class="card-bg p-8 rounded-[3rem] text-center">
+            <h2 class="romantic-title text-4xl mb-4">Jar of Love</h2>
+            
+            <!-- Jar Illustration -->
+            <div class="jar-container">
+                <div class="jar-lid"></div>
+                <div class="jar-heart">❤️</div>
+                <div class="jar-heart" style="animation-delay: 0.5s">💖</div>
+                <div class="jar-heart" style="animation-delay: 1s">💕</div>
+            </div>
+
+            <p class="text-pink-200 mb-8 italic">4 Reasons why I love you</p>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-white/10 p-4 rounded-2xl text-sm border border-white/5">You feel like home</div>
+                <div class="bg-white/10 p-4 rounded-2xl text-sm border border-white/5">You love me gently</div>
+                <div class="bg-white/10 p-4 rounded-2xl text-sm border border-white/5">You show up constantly</div>
+                <div class="bg-white/10 p-4 rounded-2xl text-sm border border-white/5">You are my fairy</div>
+            </div>
+            
+            <button onclick="showView('menu-view')" class="mt-10 bg-white/10 hover:bg-white/20 py-2 px-6 rounded-full text-xs uppercase tracking-widest">
+                Back to Menu
+            </button>
+        </div>
+    </div>
+
+    <!-- 5. MUSIC VIEW -->
+    <div id="music-view" class="hidden z-10 w-full max-w-xl text-center">
+        <h2 class="romantic-title text-4xl mb-6">This song reminds me of you</h2>
+        <div class="aspect-video w-full rounded-3xl overflow-hidden shadow-2xl mb-8">
+            <!-- Replace with your YouTube ID -->
+            <iframe class="w-full h-full" src="https://youtu.be/eaYqWNF1noM?si=l9L4SdqR2UgXgydh" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <button onclick="showView('menu-view')" class="bg-white/10 hover:bg-white/20 py-2 px-6 rounded-full text-xs uppercase tracking-widest">
+            Back to Menu
+        </button>
+    </div>
+
+    <!-- 6. LETTER VIEW -->
+    <div id="letter-view" class="hidden z-10 w-full max-w-xl">
+        <div class="bg-white text-rose-900 p-8 md:p-12 rounded-sm letter-border shadow-2xl">
+            <h2 class="romantic-title text-4xl mb-6 border-b border-rose-100 pb-4">My Dearest,</h2>
+            <div class="space-y-4 leading-relaxed text-sm md:text-base">
+                <p>You are truly the best thing that ever happened to me. Every moment with you feels like a beautiful dream that I never want to wake up from.</p>
+                <p>Thank you for choosing me, for loving me, and for being the light in my life. I promise to be the boyfriend you deserve and to cherish every single second we spend together.</p>
+                <p class="romantic-title text-3xl mt-8">I Love You.</p>
+            </div>
+            <button onclick="showView('menu-view')" class="mt-10 bg-rose-500 text-white py-2 px-6 rounded-full text-xs uppercase tracking-widest">
+                Done Reading
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function showView(viewId) {
+            // Hide all views
+            const views = ['landing-view', 'retry-view', 'menu-view', 'jar-view', 'music-view', 'letter-view'];
+            views.forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            // Show requested view
+            document.getElementById(viewId).classList.remove('hidden');
+        }
+
+        // Generate background hearts
+        const heartContainer = document.getElementById('heart-container');
+        const heartSymbols = ['❤️', '💖', '💕', '🤍', '🌸'];
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.innerText = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+            heart.style.opacity = Math.random() * 0.5 + 0.2;
+            
+            heartContainer.appendChild(heart);
+            
+            // Cleanup
+            setTimeout(() => { heart.remove(); }, 6000);
+        }
+
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>
