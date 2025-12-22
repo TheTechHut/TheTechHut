@@ -8,7 +8,7 @@
             "type": "pwa-chrome", // Changed type to pwa-chrome for better compatibility with Chrome-based browsers
             "request": "launch",
             "name": "Open index.html in Brave", // Updated name for clarity
-            "file": "/Users/robi/Desktop/Robbie/Projects/TheTechHut/events/ai_mastery_week/index.html",
+            "file": "/Users/robi/Desktop/Robbie/Projects/TheTechHut/index.html",
             "runtimeExecutable": "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser" // Full path to Brave Browser executable on macOS
         }
     ]
