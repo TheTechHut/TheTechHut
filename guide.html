@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Tech Hustle: Master Engineering CV Guide Handbook</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --brand-purple: #6366f1;
+            --brand-purple-dark: #4f46e5;
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+            --bg-light: #f8fafc;
+            --border-color: #e2e8f0;
+            --white: #ffffff;
+            --sidebar-width: 320px;
+        }
+
+        /* Basic Layout & Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Navigation Controls / Print Overlay */
+        .control-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+        }
+
+        .logo span {
+            color: var(--brand-purple);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-print {
+            background: var(--brand-purple);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-print:hover {
+            background: var(--brand-purple-dark);
+            transform: translateY(-1px);
+        }
+
+        /* Table of Contents Sticky Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--white);
+            border-right: 1px solid var(--border-color);
+            position: fixed;
+            top: 64px;
+            bottom: 0;
+            left: 0;
+            padding: 32px;
+            overflow-y: auto;
+            z-index: 900;
+        }
+
+        .sidebar h3 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .toc-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .toc-item a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: color 0.2s ease;
+            display: block;
+        }
+
+        .toc-item a:hover {
+            color: var(--brand-purple);
+        }
+
+        .toc-item.active a {
+            color: var(--brand-purple);
+            font-weight: 700;
+        }
+
+        /* Book Content Area */
+        .book-container {
+            margin-left: var(--sidebar-width);
+            padding: 120px 64px 64px 64px;
+            width: 100%;
+            max-width: 1100px;
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
+        }
+
+        /* Book Structural Layout Rules */
+        .chapter {
+            background: var(--white);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            padding: 64px;
+            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.02);
+        }
+
+        .chapter-header {
+            border-bottom: 2px solid var(--bg-light);
+            padding-bottom: 24px;
+            margin-bottom: 32px;
+        }
+
+        .chapter-num {
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: var(--brand-purple);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.15;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 40px 0 20px 0;
+            letter-spacing: -0.5px;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 24px 0 12px 0;
+        }
+
+        p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #334155;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* Specialized Visual Blocks */
+        .callout {
+            background: var(--bg-light);
+            border-left: 4px solid var(--brand-purple);
+            padding: 24px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+        }
+
+        .callout p {
+            margin-bottom: 0;
+            font-style: italic;
+            color: var(--text-dark);
+        }
+
+        .grid-comparison {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            margin: 32px 0;
+        }
+
+        @media (min-width: 768px) {
+            .grid-comparison {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .comparison-card {
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .comparison-card.bad {
+            background: #fff5f5;
+            border-color: #feb2b2;
+        }
+
+        .comparison-card.good {
+            background: #f0fdf4;
+            border-color: #bbf7d0;
+        }
+
+        .comparison-card h4 {
+            font-weight: 700;
+            margin-bottom: 12px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .comparison-card.bad h4 {
+            color: #991b1b;
+        }
+
+        .comparison-card.good h4 {
+            color: #166534;
+        }
+
+        /* Key-Value Tables for STAR and ATS breakdown */
+        .tech-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            font-size: 0.95rem;
+        }
+
+        .tech-table th,
+        .tech-table td {
+            border: 1px solid var(--border-color);
+            padding: 12px 16px;
+            text-align: left;
+        }
+
+        .tech-table th {
+            background: var(--bg-light);
+            font-weight: 700;
+        }
+
+        /* Code/CV Blocks */
+        code,
+        pre {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+        }
+
+        pre {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 24px;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 24px 0;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* CV Blueprint Specific Styles */
+        .cv-template-wrapper {
+            background: var(--bg-light);
+            border: 1px dashed var(--brand-purple);
+            padding: 24px;
+            border-radius: 12px;
+            margin: 32px 0;
+        }
+
+        .cv-template-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 16px;
+        }
+
+        .btn-download-doc {
+            background: #ffffff;
+            color: var(--text-dark);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-download-doc:hover {
+            border-color: var(--brand-purple);
+            color: var(--brand-purple);
+            box-shadow: var(--shadow);
+        }
+
+        .cv-template {
+            background: var(--white);
+            border: 1px solid #cbd5e1;
+            padding: 40px;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            font-family: 'Arial', sans-serif;
+            line-height: 1.4;
+            color: #1e293b;
+        }
+
+        .cv-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .cv-header h4 {
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #000;
+        }
+
+        .cv-header p {
+            font-size: 0.85rem;
+            text-align: center;
+            margin-bottom: 4px;
+            color: #475569;
+        }
+
+        .cv-section-title {
+            font-size: 1rem;
+            font-weight: bold;
+            border-bottom: 1px solid #000;
+            text-transform: uppercase;
+            padding-bottom: 2px;
+            margin: 20px 0 10px 0;
+            color: #000;
+        }
+
+        .cv-item-title {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+            color: #000;
+        }
+
+        .cv-template ul {
+            margin-left: 20px;
+            margin-bottom: 12px;
+        }
+
+        .cv-template li {
+            font-size: 0.88rem;
+            margin-bottom: 4px;
+            color: #334155;
+            text-align: left;
+        }
+
+        /* EXPLICIT PRINT LAYOUT STYLING */
+        @media print {
+            body {
+                background: var(--white);
+                color: #000;
+                display: block;
+            }
+
+            .control-bar,
+            .sidebar,
+            .cv-template-actions {
+                display: none !important;
+            }
+
+            .book-container {
+                margin-left: 0 !important;
+                padding: 0 !important;
+                max-width: 100% !important;
+            }
+
+            .chapter {
+                border: none !important;
+                padding: 0 !important;
+                box-shadow: none !important;
+                page-break-after: always;
+            }
+
+            .cv-template-wrapper {
+                border: none !important;
+                padding: 0 !important;
+                background: none !important;
+            }
+
+            @page {
+                size: A4 portrait;
+                margin: 2cm;
+
+                @bottom-right {
+                    content: counter(page);
+                    font-family: 'Plus Jakarta Sans', sans-serif;
+                    font-size: 9pt;
+                }
+            }
+
+            h1,
+            h2,
+            h3 {
+                page-break-after: avoid;
+                page-break-inside: avoid;
+            }
+
+            p,
+            pre,
+            .callout,
+            .comparison-card,
+            .cv-template,
+            .tech-table {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- STICKY CONTROL BAR -->
+    <div class="control-bar">
+        <div class="logo">The Tech Hut<span>.Communities</span></div>
+        <div class="nav-actions">
+            <button class="btn-print" onclick="window.print()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2">
+                    </path>
+                    <rect x="6" y="14" width="12" height="8"></rect>
+                </svg>
+                Print / Save PDF Handbook
+            </button>
+        </div>
+    </div>
+
+    <!-- TABLE OF CONTENTS SIDEBAR -->
+    <aside class="sidebar">
+        <h3>Guide Modules</h3>
+        <ul class="toc-list">
+            <li class="toc-item active"><a href="#ch1">1. The Corporate Filtering Paradigm</a></li>
+            <li class="toc-item"><a href="#ch1b">2. Next-Gen ATS Penetration Tactics</a></li>
+            <li class="toc-item"><a href="#ch2">3. Engineering Your Core Profile Summary</a></li>
+            <li class="toc-item"><a href="#ch3">4. Quantifying Technical Impact (X-Y-Z)</a></li>
+            <li class="toc-item"><a href="#ch3b">5. Mastering the STAR Narrative Grid</a></li>
+            <li class="toc-item"><a href="#ch4">6. Mapping Skills & Open Source Systems</a></li>
+            <li class="toc-item"><a href="#ch5">7. The Complete Clean Production Blueprint</a></li>
+        </ul>
+    </aside>
+
+    <!-- MAIN MANUSCRIPT CONTAINER -->
+    <main class="book-container">
+
+        <!-- MODULE 1 -->
+        <article id="ch1" class="chapter">
+            <header class="chapter-header">
+                <span class="chapter-num">Module 01</span>
+                <h1>The Corporate Filtering Paradigm</h1>
+            </header>
+            <p>Modern technical recruitment relies on automation before human oversight. When you upload your CV to any
+                tier-one tech entity, it immediately enters an Application Tracking System (ATS). These systems parse
+                your structural copy, translating sentences into an array of system data points. Cluttered grid styling,
+                data maps nested within complex tables, and text strings written into header-footer layers fail to parse
+                correctly—rendering your document empty inside the recruiter's internal review system.</p>
+
+            <div class="callout">
+                <p><strong>The 6-Second Screen Reality:</strong> Once a document successfully passes automated parser
+                    matching metrics, human eyes will evaluate it for an average total duration of less than ten
+                    seconds. Visual noise will instantly cause your profile to be set aside.</p>
+            </div>
+
+            <h2>Deconstructing Parser Behavior</h2>
+            <p>Automated parsers utilize tokenization engines to break sentences down into explicit semantic units. When
+                mapping your past roles, the machine reads the closest nouns to verify timeline patterns. If a job title
+                is listed after dates or locations instead of leading the entry line, semantic sequence weights break,
+                causing data to be entered incorrectly into processing databases.</p>
+        </article>
+
+        <!-- MODULE 1B (NEW: ADVANCED ATS DETAILS) -->
+        <article id="ch1b" class="chapter">
+            <header class="chapter-header">
+                <span class="chapter-num">Module 02</span>
+                <h1>Next-Gen ATS Penetration Tactics</h1>
+            </header>
+            <p>To pass modern screening engines, you must align your engineering language with the exact semantic
+                architecture used by recruitment software. Modern parsers do not just count simple keywords—they run
+                contextual semantic matching algorithms that measure **keyword proximity** and operational context.</p>
+
+            <h2>Critical System Rules for ATS Compliance</h2>
+            <table class="tech-table">
+                <thead>
+                    <tr>
+                        <th>System Element</th>
+                        <th>High-Risk Approach (Rejection Trigger)</th>
+                        <th>ATS Safe Approach (Optimized Pass)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>File Formats</strong></td>
+                        <td>Files exported out of image design systems like Canva or Figma containing unmapped,
+                            flattened vector paths.</td>
+                        <td>Clean text-based PDFs exported directly from MS Word or Markdown parsers where strings
+                            remain explicitly selectable.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Skill Ingestion</strong></td>
+                        <td>Graphic slider bars or progress meters mapping skills as "8/10 Proficiency" (Parsers read
+                            this as blank values).</td>
+                        <td>Clean, comma-delimited raw text arrays grouped by technical domain layers (e.g., Backend,
+                            Infrastructure).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Typography</strong></td>
+                        <td>Uncommon custom web fonts or custom layout bullet characters that break standard system
+                            UTF-8 data encoding.</td>
+                        <td>Standard safe system typefaces (Arial, Calibri, Times New Roman) alongside clean, native
+                            bullet characters (`•`).</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>The Contextual Keyword Rule</h2>
+            <p>If an enterprise job post specifically demands experience with **"AWS cloud architecture"**, your CV will
+                lose relevant ranking scores if your profile only references **"Amazon Web Services"**. The tracking
+                logic actively cross-references explicit string matches. You must scan the target job description text
+                manually and copy technical keyword structures directly into your skills or project modules.</p>
+        </article>
+
+        <!-- MODULE 2 -->
+        <article id="ch2" class="chapter">
+            <header class="chapter-header">
+                <span class="chapter-num">Module 03</span>
+                <h1>Engineering Your Core Profile Summary</h1>
+            </header>
+            <p>Objective statements focused entirely on personal desires are an immediate path to rejection. Your top
+                paragraph must serve as a high-level value pitch, establishing your expertise and summarizing your
+                absolute highest-scale engineering accomplishments cleanly.</p>
+
+            <h2>Value Pitch Transformations</h2>
+            <div class="grid-comparison">
+                <div class="comparison-card bad">
+                    <h4>Weak / Goal-Oriented Focus</h4>
+                    <p>Motivated engineer looking to join a high growth startup where I can learn new languages, advance
+                        my knowledge of backend microservice systems, and help build modern web interfaces.</p>
+                </div>
+                <div class="comparison-card good">
+                    <h4>Strong / System Impact Focus</h4>
+                    <p>Systems Software Engineer with 6+ years of production experience building decoupled distributed
+                        backend applications. Specialized in Go microservices, high-throughput message streaming
+                        systems, and high-concurrency architecture optimization.</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- MODULE 3 -->
+        <article id="ch3" class="chapter">
+            <header class="chapter-header">
+                <span class="chapter-num">Module 04</span>
+                <h1>Quantifying Technical Impact (X-Y-Z)</h1>
+            </header>
+            <p>Engineering contribution should never be described through task checklists. Your documentation points
+                must focus directly on system outcomes and bottom-line impacts. This handbook enforces the system
+                engineering framework popularized by top global teams: the **Google X-Y-Z Formula**.</p>
+
+            <div class="callout">
+                <p><strong>The Mathematical Formula Layout:</strong> Accomplished [X], as measured by [Y], by executing
+                    enterprise development approach [Z].</p>
+            </div>
+
+            <h2>Practical Implementation Samples</h2>
+            <div class="grid-comparison">
+                <div class="comparison-card bad">
+                    <h4>Before (Task Based Logging)</h4>
+                    <p>Responsible for fixing memory leaks, improving old queries inside the PostgreSQL database
+                        cluster, and rewriting API routes inside the Node app.</p>
+                </div>
+                <div class="comparison-card good">
+                    <h4>After (X-Y-Z Structured Impact)</h4>
+                    <p>Optimized core database performance metrics, **reducing API latency by 42%** under peak
+                        production loads, by implementing Redis connection pooling layers and structural query
+                        optimizations.</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- MODULE 3B (NEW: STAR BEHAVIORAL MODEL) -->
+        <article id="ch3b" class="chapter">
+            <header class="chapter-header">
+                <span class="chapter-num">Module 05</span>
+                <h1>Mastering the STAR Narrative Grid</h1>
+            </header>
+            <p>While the X-Y-Z framework is highly optimized for short, single-line CV bullet points, your broader
+                experience summaries and behavioral data entries must align with the **STAR Model** (Situation, Task,
+                Action, Result). This structural design pattern frames your execution methodology into an explicit
+                operational narrative.</p>
+
+            <div class="callout">
+                <p><strong>Deconstructing the STAR Components:</strong><br>
+                    • <strong>Situation:</strong> The explicit system challenge, bottleneck, or operational debt
+                    context.<br>
+                    • <strong>Task:</strong> The explicit core engineering requirement or structural deliverable
+                    assigned to you.<br>
+                    • <strong>Action:</strong> Your execution approach—the systems engineered, tools compiled, and
+                    frameworks scaled.<br>
+                    • <strong>Result:</strong> Definite empirical metric output verifying project success parameters.
+                </p>
+            </div>
+
+            <h2>The STAR System Decomposition</h2>
+            <p>When applying the STAR framework to your project deep-dives or high-level experience cards, map your
+                technical data points according to this structure:</p>
+
+            <table class="tech-table">
+                <thead>
+                    <tr>
+                        <th>STAR Phase</th>
+                        <th>Engineering Translation Layer</th>
+                        <th>Production Level Example String</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Situation</strong></td>
+                        <td>Contextualize legacy pipeline constraints or latency thresholds.</td>
+                        <td>"Legacy relational analytics clusters experienced blocking transaction deadlocks during
+                            global marketing campaigns..."</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Task</strong></td>
+                        <td>Define the clear engineering scope or processing goal.</td>
+                        <td>"...requiring our infrastructure team to redesign data pipelines to process 50M records per
+                            day safely."</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Action</strong></td>
+                        <td>Detail code patterns, tooling choices, and microservice deployments.</td>
+                        <td>"Decoupled transaction execution blocks by implementing an Apache Kafka pub/sub queue and
+                            building parallel worker pools in Go..."</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Result</strong></td>
+                        <td>Provide empirical verification data (cost, speed, or quality).</td>
+                        <td>"...which successfully eliminated system deadlocks and **reduced peak infrastructure
+                            resource costs by 31%**."</td>
+                    </tr>
+                </tbody>
+            </table>
+        </article>
+
+        <!-- MODULE 4 -->
+        <article id="ch4" class="chapter">
+            <header class="chapter-header">
+                <span class="chapter-num">Module 06</span>
+                <h1>Mapping Skills & Open Source Systems</h1>
+            </header>
+            <p>Do not present sprawling, unorganized lists of every tool you have ever tried. Group technical stack tags
+                into defined categorizations to make your profile highly scannable for engineering managers.</p>
+
+            <h2>Example Skills Schema Block</h2>
+            <pre>• Languages: Go (Golang), Rust, TypeScript, Python, SQL (PostgreSQL)
+• Frameworks: Gin, Tokio, Next.js, FastAPI, Node.js, Express
+• Infrastructure: Docker, Kubernetes, AWS (S3, EC2, RDS), Terraform, Redis, Kafka</pre>
+        </article>
+
+        <!-- MODULE 5 -->
+        <article id="ch5" class="chapter">
+            <header class="chapter-header">
+                <span class="chapter-num">Module 07</span>
+                <h1>The Complete Clean Production Blueprint</h1>
+            </header>
+            <p>Below is an editable, standard reference template optimized for production engineering roles. It features
+                zero complex columns, uses simple spacing rules, and guarantees flawless data extraction across all
+                automated filtering engines.</p>
+
+            <!-- EDITABLE CV WRAPPER WITH EMBEDDED DOWNLOAD GENERATOR ENGINE -->
+            <div class="cv-template-wrapper">
+                <div class="cv-template-actions">
+                    <button class="btn-download-doc" onclick="downloadEditableCV()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+                        </svg>
+                        Download as Editable .DOC Word Document
+                    </button>
+                </div>
+
+                <div class="cv-template" id="cvSourceContent">
+                    <div class="cv-header">
+                        <h4>Alex Mercer</h4>
+                        <p>Nairobi, Kenya | +254 700 000000 | alex.mercer@email.com | linkedin.com/in/alex-mercer</p>
+                    </div>
+
+                    <div class="cv-section-title">Professional Summary</div>
+                    <p style="font-size: 0.88rem; text-align: left; color: #334155; margin-bottom: 12px;">
+                        Performance-focused Systems Engineer with over 5 years of production experience scaling cloud
+                        infrastructure and backend systems. Expert in distributed system optimization,
+                        infrastructure-as-code deployments, and automated testing architectures.</p>
+
+                    <div class="cv-section-title">Technical Expertise</div>
+                    <p style="font-size: 0.88rem; text-align: left; color: #334155; margin-bottom: 12px;">
+                        <strong>Languages & Tools:</strong> Go, Python, TypeScript, SQL, Bash, Git, Docker, AWS.<br>
+                        <strong>Core Systems:</strong> Kubernetes, Terraform, PostgreSQL, Redis, Apache Kafka, Linux.
+                    </p>
+
+                    <div class="cv-section-title">Professional Experience</div>
+
+                    <div class="cv-item-title">
+                        <span>Senior Software Engineer — TechHut Solutions</span>
+                        <span>2024 — Present</span>
+                    </div>
+                    <ul>
+                        <li>Designed and deployed a highly concurrent real-time telemetry processing pipeline using Go
+                            and Kafka, increasing message throughput capacities by 180%.</li>
+                        <li>Migrated legacy applications to Kubernetes clusters configured via automated Terraform
+                            scripts, cutting monthly infrastructure cloud spend metrics by 24%.</li>
+                        <li>Refactored critical core database logic structures, decreasing backend application
+                            dependency lock timeouts from 1.2s down to 85ms globally.</li>
+                    </ul>
+
+                    <div class="cv-item-title">
+                        <span>Backend Developer — CoreNode Analytics</span>
+                        <span>2021 — 2024</span>
+                    </div>
+                    <ul>
+                        <li>Spearheaded development of 14 scalable REST API endpoints utilizing Python and FastAPI,
+                            handling peak ingestion spikes of over 10,000 requests per second.</li>
+                        <li>Implemented strict custom automated integration testing suites, increasing system coverage
+                            from 45% up to 92% and preventing 30+ potential downtime incidents.</li>
+                    </ul>
+
+                    <div class="cv-section-title">Education & Certifications</div>
+                    <div class="cv-item-title">
+                        <span>B.Sc. Computer Science — University of Nairobi</span>
+                        <span>Graduated 2021</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- AUTOMATED DOCUMENT CONTROLLER ENGINES -->
+    <script>
+        // Active Sidebar Navigation Syncing
+        window.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    const id = entry.target.getAttribute('id');
+                    if (entry.intersectionRatio > 0.2) {
+                        document.querySelectorAll('.toc-item').forEach(item => item.classList.remove('active'));
+                        const match = document.querySelector(`.toc-item a[href="#${id}"]`);
+                        if (match) match.parentElement.classList.add('active');
+                    }
+                });
+            }, { threshold: [0.1, 0.2, 0.5] });
+
+            document.querySelectorAll('.chapter').forEach((section) => {
+                observer.observe(section);
+            });
+        });
+
+        /**
+         * CLIENT-SIDE EDITABLE MS-WORD GENERATION ENGINE
+         * Converts HTML text nodes contextually into standalone inline binary streams 
+         * using explicit base64 Office HTML formatting wrappers.
+         */
+        function downloadEditableCV() {
+            const sourceHTML = document.getElementById('cvSourceContent').innerHTML;
+
+            // Build absolute standard Microsoft Word schema properties
+            const header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' " +
+                "xmlns:w='urn:schemas-microsoft-com:office:word' " +
+                "xmlns='http://www.w3.org/TR/REC-html40'>" +
+                "<head><title>Editable CV Template</title>" +
+                "<style>" +
+                "body { font-family: Arial, sans-serif; font-size: 11pt; color: #1e293b; line-height: 1.4; }" +
+                ".cv-header { text-align: center; margin-bottom: 18pt; }" +
+                ".cv-header h4 { font-size: 16pt; font-weight: bold; margin: 0 0 4pt 0; text-transform: uppercase; }" +
+                ".cv-header p { font-size: 9.5pt; color: #475569; margin: 0 0 2pt 0; }" +
+                ".cv-section-title { font-size: 11pt; font-weight: bold; border-bottom: 1px solid #000000; text-transform: uppercase; margin: 18pt 0 8pt 0; padding-bottom: 2pt; }" +
+                ".cv-item-title { font-weight: bold; font-size: 10.5pt; margin-bottom: 2pt; }" +
+                "ul { margin-top: 0px; margin-bottom: 8pt; padding-left: 20px; }" +
+                "li { font-size: 10pt; color: #334155; margin-bottom: 3pt; }" +
+                "</style></head><body>";
+
+            const footer = "</body></html>";
+
+            // Assemble standalone document entity
+            const completeDocument = header + sourceHTML + footer;
+
+            // Generate data transmission link configuration
+            const downloadLink = document.createElement("a");
+            document.body.appendChild(downloadLink);
+
+            // Stream binary data directly via application/msword schema wrapper
+            downloadLink.href = 'data:application/msword;charset=utf-8,' + encodeURIComponent(completeDocument);
+            downloadLink.download = 'Alex_Mercer_Tech_CV.doc';
+
+            // Trigger background event execution thread
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        }
+    </script>
+</body>
+
+</html>
