@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chaser | Automated Invoice Follow-Ups for Freelancers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #030712;
+            /* Slate 950 */
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #c084fc 0%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-border {
+            position: relative;
+        }
+
+        .gradient-border::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 0.75rem;
+            padding: 1px;
+            background: linear-gradient(to bottom right, rgba(192, 132, 252, 0.4), rgba(99, 102, 241, 0.1));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body class="text-slate-200 antialiased selection:bg-indigo-500 selection:text-white">
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-900">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2 font-bold text-xl text-white tracking-tight">
+                <div class="h-6 w-6 rounded-md bg-indigo-600 flex items-center justify-center text-xs">⚡</div>
+                chaser<span class="text-indigo-400">.</span>
+            </div>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
+                <a href="#how-it-works" class="hover:text-white transition-colors">How it works</a>
+                <a href="#simulator" class="hover:text-white transition-colors">Live Demo</a>
+                <a href="#pricing" class="hover:text-white transition-colors">Pricing</a>
+            </nav>
+            <div>
+                <a href="#pricing"
+                    class="bg-slate-900 hover:bg-slate-800 border border-slate-800 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-all duration-200">
+                    Start Free Trial
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="pt-32 pb-20 px-6 max-w-5xl mx-auto text-center relative overflow-hidden">
+        <div
+            class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none">
+        </div>
+        <div
+            class="absolute top-1/3 left-1/3 w-[300px] h-[300px] bg-purple-600/10 rounded-full blur-[100px] pointer-events-none">
+        </div>
+
+        <span
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-xs font-medium text-indigo-400 mb-6 animate-pulse">
+            ✨ Never chase a late invoice again
+        </span>
+        <h1 class="text-4xl sm:text-6xl font-bold tracking-tight text-white mb-6 max-w-4xl mx-auto leading-[1.15]">
+            Get paid on time, without the <span class="gradient-text">awkward conversations.</span>
+        </h1>
+        <p class="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+            Chaser securely connects to your Stripe or PayPal account, monitors overdue invoices, and sends automated,
+            friendly reminders. The moment they pay, we stop nagging.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+            <a href="#pricing"
+                class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-8 py-4 rounded-xl shadow-lg shadow-indigo-600/20 transition-all duration-200 text-center">
+                Automate Your Invoices — $19/mo
+            </a>
+            <a href="#simulator"
+                class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 font-semibold px-8 py-4 rounded-xl transition-all duration-200 text-center">
+                See How It Works
+            </a>
+        </div>
+
+        <p class="text-xs uppercase tracking-widest text-slate-500 font-semibold mb-6">Integrates seamlessly with your
+            tools</p>
+        <div class="flex items-center justify-center gap-12 grayscale opacity-40 contrast-200">
+            <span class="font-bold text-xl tracking-tight text-white">stripe</span>
+            <span class="font-bold text-xl tracking-tight text-white">PayPal</span>
+            <span class="font-bold text-xl tracking-tight text-white">LemonSqueezy</span>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="py-20 border-t border-slate-900 bg-slate-950/50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-white mb-4">Set and completely forget.</h2>
+                <p class="text-slate-400 max-w-xl mx-auto">Three steps to eliminating the most stressful part of
+                    freelancing forever.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-slate-900/40 p-8 rounded-2xl border border-slate-900/80 gradient-border">
+                    <div
+                        class="h-10 w-10 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 font-bold mb-6">
+                        1</div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Connect Your Account</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">Securely link Stripe or PayPal in one click via
+                        OAuth. We pull active invoices but never touch your funds.</p>
+                </div>
+                <div class="bg-slate-900/40 p-8 rounded-2xl border border-slate-900/80 gradient-border">
+                    <div
+                        class="h-10 w-10 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 font-bold mb-6">
+                        2</div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Customize the Tone</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">Use our high-conversion templates or write your
+                        own. Set the escalation urgency as days pass by.</p>
+                </div>
+                <div class="bg-slate-900/40 p-8 rounded-2xl border border-slate-900/80 gradient-border">
+                    <div
+                        class="h-10 w-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold mb-6">
+                        3</div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Instant Webhook Halt</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">The second your client pays, our system receives a
+                        live payment webhook and immediately cancels future reminders.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="simulator" class="py-20 px-6 max-w-5xl mx-auto">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-white mb-4">See Chaser in Action</h2>
+            <p class="text-slate-400 max-w-md mx-auto">Click the controls below to simulate an overdue client invoice
+                scenario.</p>
+        </div>
+
+        <div class="bg-slate-900 rounded-2xl border border-slate-800 shadow-2xl overflow-hidden grid md:grid-cols-5">
+            <div class="p-6 bg-slate-950 border-r border-slate-800 md:col-span-2 flex flex-col justify-between">
+                <div>
+                    <h4 class="text-xs uppercase font-semibold text-slate-500 tracking-wider mb-4">Simulation Panel</h4>
+                    <p class="text-xs text-slate-400 mb-6">Invoice #1084 for Acme Corp ($2,500) is currently <strong>1
+                            day overdue</strong>.</p>
+
+                    <div class="space-y-3">
+                        <button id="btn-ghost"
+                            class="w-full bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 text-xs font-semibold py-3 px-4 rounded-lg transition-all flex items-center justify-between">
+                            <span>Simulate 5 Days Passing</span>
+                            <span>⏳</span>
+                        </button>
+                        <button id="btn-pay"
+                            class="w-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold py-3 px-4 rounded-lg transition-all flex items-center justify-between shadow-lg shadow-emerald-600/10">
+                            <span>Client Pays via Stripe</span>
+                            <span>💳</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="pt-6 border-t border-slate-900 mt-6 md:mt-0">
+                    <button id="btn-reset"
+                        class="text-xs text-indigo-400 hover:text-indigo-300 font-medium underline">Reset
+                        Simulation</button>
+                </div>
+            </div>
+
+            <div class="p-6 md:col-span-3 bg-slate-900 flex flex-col justify-between min-h-[320px]">
+                <div>
+                    <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-red-500/20 border border-red-500"
+                                id="status-dot"></span>
+                            <span class="text-xs font-semibold text-slate-300" id="status-text">Status: 1 Day
+                                Overdue</span>
+                        </div>
+                        <span class="text-xs text-slate-500 font-mono" id="timeline-text">Sequence Active</span>
+                    </div>
+
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800/60" id="email-box">
+                        <div class="text-xs text-slate-500 mb-2"><strong>To:</strong> accounting@acmecorp.com</div>
+                        <div class="text-xs text-slate-500 mb-4 pb-2 border-b border-slate-900">
+                            <strong>Subject:</strong> <span id="email-subject"
+                                class="text-slate-300 font-medium">Invoice #1084 Friendly Reminder</span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed" id="email-body">
+                            Hey Acme team, just a friendly note keeping this near the top of your inbox. Let me know if
+                            you need any adjustments to the invoice details!
+                        </p>
+                    </div>
+                </div>
+
+                <div class="text-[11px] text-slate-500 italic mt-4" id="log-msg">
+                    Chaser System Log: Monitoring invoice. Next automated check scheduled in 24 hours.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="py-20 border-t border-slate-900 bg-slate-950/50">
+        <div class="max-w-3xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold text-white mb-4">One plan. Infinite peace of mind.</h2>
+            <p class="text-slate-400 mb-12">Recover your emotional bandwidth for less than the price of a takeout
+                dinner.</p>
+
+            <div
+                class="bg-gradient-to-b from-slate-900 to-slate-950 p-10 rounded-3xl border border-indigo-500/30 shadow-xl relative max-w-md mx-auto">
+                <div
+                    class="absolute -top-3 left-1/2 -translate-x-1/2 bg-indigo-600 text-white font-semibold tracking-wide text-[10px] uppercase px-3 py-1 rounded-full">
+                    Most Popular
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">The Pro Freelancer</h3>
+                <div class="flex items-baseline justify-center gap-1 my-6">
+                    <span class="text-5xl font-extrabold text-white">$19</span>
+                    <span class="text-slate-400 font-medium">/month</span>
+                </div>
+
+                <ul class="text-left space-y-4 text-sm text-slate-300 mb-8 border-t border-b border-slate-800 py-6">
+                    <li class="flex items-center gap-3">
+                        <span class="text-emerald-400">✓</span> Unlimited client invoices monitored
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="text-emerald-400">✓</span> Native Stripe & PayPal OAuth hooks
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="text-emerald-400">✓</span> Fully customizable smart templates
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="text-emerald-400">✓</span> Smart timezone deliverability
+                    </li>
+                </ul>
+
+                <button
+                    class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3.5 px-4 rounded-xl shadow-lg transition-all duration-200"
+                    onclick="alert('Integration workflow triggers here!')">
+                    Start Your 14-Day Free Trial
+                </button>
+                <p class="text-[11px] text-slate-500 mt-3">No credit card required to try.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 border-t border-slate-900 px-6 text-center text-xs text-slate-600">
+        <p>&copy; 2026 Chaser.io. All rights reserved. Built beautifully for independent creators and developers.</p>
+    </footer>
+
+    <script>
+        const btnGhost = document.getElementById('btn-ghost');
+        const btnPay = document.getElementById('btn-pay');
+        const btnReset = document.getElementById('btn-reset');
+
+        const statusDot = document.getElementById('status-dot');
+        const statusText = document.getElementById('status-text');
+        const timelineText = document.getElementById('timeline-text');
+        const emailSubject = document.getElementById('email-subject');
+        const emailBody = document.getElementById('email-body');
+        const logMsg = document.getElementById('log-msg');
+        const emailBox = document.getElementById('email-box');
+
+        btnGhost.addEventListener('click', () => {
+            // Update UI to 6 days overdue state
+            statusDot.className = "w-3 h-3 rounded-full bg-amber-500/20 border border-amber-500";
+            statusText.innerText = "Status: 6 Days Overdue";
+            timelineText.innerText = "Escalated Sequence";
+            emailSubject.innerText = "Urgent: Direct follow-up regarding Invoice #1084";
+            emailBody.innerText = "Hi Acme team, following up on the notice sent earlier this week. This invoice is now overdue. Please let me know when we can expect processing, or if you need to route this to someone else.";
+            logMsg.innerText = "Chaser System Log: First escalation sequence email fired via Resend API.";
+            btnGhost.disabled = true;
+            btnGhost.classList.add('opacity-40', 'cursor-not-allowed');
+        });
+
+        btnPay.addEventListener('click', () => {
+            // Update UI to Paid State
+            statusDot.className = "w-3 h-3 rounded-full bg-emerald-500/20 border border-emerald-500";
+            statusText.innerText = "Status: Paid & Settled";
+            statusText.classList.add('text-emerald-400');
+            timelineText.innerText = "Sequence Halted";
+            timelineText.className = "text-xs text-emerald-400 font-bold font-mono bg-emerald-500/10 px-2 py-0.5 rounded";
+
+            emailBox.className = "bg-slate-950 p-6 rounded-xl border border-emerald-500/20 text-center opacity-90";
+            emailBox.innerHTML = `
+                <div class="text-2xl mb-2">🎉</div>
+                <div class="text-sm font-semibold text-white mb-1">Invoice Fully Paid</div>
+                <p class="text-xs text-slate-400">Stripe webhook 'invoice.paid' processed successfully. Future automated follow-ups killed instantly.</p>
+            `;
+            logMsg.innerText = "Chaser System Log: Secure webhook caught. Terminated background workers for invoice loop loop_#1084.";
+            btnGhost.disabled = true;
+            btnGhost.classList.add('opacity-40', 'cursor-not-allowed');
+            btnPay.disabled = true;
+            btnPay.classList.add('opacity-40', 'cursor-not-allowed');
+        });
+
+        btnReset.addEventListener('click', () => {
+            // Reset to default
+            location.reload();
+        });
+    </script>
+</body>
+
+</html>
