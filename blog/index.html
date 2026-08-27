@@ -64,6 +64,20 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #555;
         }
+    
+        /* Anonymous reactions */
+        .reactions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .reactions button {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600;
+            color: #073B4C; background: #f0f4f8;
+            border: 1px solid rgba(7, 59, 76, 0.14); border-radius: 9999px;
+            padding: 0.35rem 0.9rem; cursor: pointer;
+            transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+        }
+        .reactions button:hover { border-color: #06D6A0; transform: translateY(-1px); }
+        .reactions button.on { background: rgba(6, 214, 160, 0.16); border-color: #06D6A0; }
+        .reactions button span { color: #718096; font-variant-numeric: tabular-nums; }
     </style>
 </head>
 <body class="antialiased">
@@ -315,12 +329,16 @@
                             <span class="mx-2">&bull;</span>
                             <span>${post.likes} Likes</span>
                         </div>
+                        <div id="post-reactions" class="mb-8"></div>
                         <img src="${post.image}" alt="Image for ${post.title}" class="w-full h-64 sm:h-96 object-cover rounded-xl shadow-lg mb-8">
                         ${paragraphs}
                         <a href="/blog/" class="inline-block mt-4 text-sm font-semibold text-[#06D6A0] hover:text-[#073B4C] transition duration-300">&larr; Back to all blogs</a>
                     </article>
                 `;
                 window.scrollTo(0, 0);
+                if (window.TTHReactions) {
+                    window.TTHReactions.attach(document.getElementById('post-reactions'), window.TTHReactions.slug(post.title));
+                }
             }
 
             // Route: single post view when ?title= is present, otherwise the normal listing
@@ -342,5 +360,95 @@
             }
         });
     </script>
+<script>
+(function () {
+  // ── The Tech Hut anonymous reactions ─────────────────────────────────────────
+  // To sync reaction counts for ALL visitors, paste your Firebase web app config
+  // below (Firebase console → Project settings → Your apps → Add web app → config
+  // object) and enable Realtime Database with the rules from the setup notes.
+  // Until then, reactions still work but are saved per visitor on their device.
+  var FIREBASE_CONFIG = null;
+
+  var EMOJIS = [["like", "👍"], ["love", "❤️"], ["fire", "🔥"]];
+  var PAGE = location.pathname.indexOf("/blog/daily") === 0 ? "daily" : "blog";
+  var db = null, ready = null;
+
+  function slug(t) {
+    return (t || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60);
+  }
+  function store(k, v) {
+    try {
+      if (v === undefined) return JSON.parse(localStorage.getItem(k) || "{}");
+      localStorage.setItem(k, JSON.stringify(v));
+    } catch (e) { return {}; }
+  }
+  function loadFirebase() {
+    if (!FIREBASE_CONFIG) return Promise.resolve(null);
+    if (ready) return ready;
+    ready = new Promise(function (res) {
+      var n = 0;
+      ["firebase-app-compat", "firebase-database-compat"].forEach(function (m) {
+        var s = document.createElement("script");
+        s.src = "https://www.gstatic.com/firebasejs/10.12.2/" + m + ".js";
+        s.onload = function () {
+          if (++n === 2) {
+            try { firebase.initializeApp(FIREBASE_CONFIG); db = firebase.database(); } catch (e) { db = null; }
+            res(db);
+          }
+        };
+        s.onerror = function () { res(null); };
+        document.head.appendChild(s);
+      });
+    });
+    return ready;
+  }
+  function attach(container, id) {
+    if (!container || !id || container.querySelector(".reactions")) return;
+    var bar = document.createElement("div");
+    bar.className = "reactions";
+    var mine = store("tth-my-reactions");
+    var counts = store("tth-local-counts");
+    EMOJIS.forEach(function (pair) {
+      var key = pair[0], face = pair[1];
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.setAttribute("aria-label", "React with " + key);
+      var c = (counts[id] && counts[id][key]) || 0;
+      btn.innerHTML = face + " <span>" + c + "</span>";
+      if (mine[id] && mine[id][key]) btn.classList.add("on");
+      btn.addEventListener("click", function () {
+        var m = store("tth-my-reactions");
+        m[id] = m[id] || {};
+        var on = !m[id][key];
+        m[id][key] = on;
+        store("tth-my-reactions", m);
+        btn.classList.toggle("on", on);
+        if (db) {
+          db.ref("reactions/" + PAGE + "/" + id + "/" + key)
+            .transaction(function (v) { return Math.max(0, (v || 0) + (on ? 1 : -1)); });
+        } else {
+          var cs = store("tth-local-counts");
+          cs[id] = cs[id] || {};
+          cs[id][key] = Math.max(0, (cs[id][key] || 0) + (on ? 1 : -1));
+          store("tth-local-counts", cs);
+          btn.querySelector("span").textContent = cs[id][key];
+        }
+      });
+      bar.appendChild(btn);
+    });
+    container.appendChild(bar);
+    loadFirebase().then(function (d) {
+      if (!d) return;
+      d.ref("reactions/" + PAGE + "/" + id).on("value", function (snap) {
+        var v = snap.val() || {};
+        bar.querySelectorAll("button").forEach(function (b, i) {
+          b.querySelector("span").textContent = v[EMOJIS[i][0]] || 0;
+        });
+      });
+    });
+  }
+  window.TTHReactions = { attach: attach, slug: slug };
+})();
+</script>
 </body>
 </html>
