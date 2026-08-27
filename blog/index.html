@@ -161,57 +161,73 @@
             // Sample blog post data with 'likes' count
             const blogPosts = [
                 {
+                    id: 0,
+                    title: "The Daily Savannah \u2014 Kenya Tech, Every Day",
+                    excerpt: "Our automated daily digest of Kenya's tech ecosystem: startups, fintech, policy, and infrastructure. A fresh edition every evening at 9 PM.",
+                    author: "The Tech Hut",
+                    date: "Updated daily",
+                    image: "https://images.unsplash.com/photo-1611348586804-61bf6c080437?q=80&w=800&auto=format&fit=crop",
+                    likes: 99,
+                    url: "/blog/daily/"
+                },
+                {
                     id: 1,
                     title: "Demystifying Blockchain Technology",
+                    content: ["A blockchain is, at its core, a shared ledger that no single party controls. Every transaction is grouped into a block, cryptographically linked to the one before it, and copied across thousands of computers - which is why tampering with one record means rewriting them all.", "In this guide we unpack how consensus mechanisms like proof-of-work and proof-of-stake actually work, what smart contracts make possible, and where blockchain genuinely adds value beyond cryptocurrency - from supply chains to land registries here in Kenya."],
                     excerpt: "An easy-to-understand guide to the world of decentralized ledgers and cryptocurrencies.",
                     author: "John Smith",
                     date: "April 1, 2024",
-                    image: "https://placehold.co/800x500/cbd5e0/4299e1?text=Blockchain+Technology",
+                    image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=800&auto=format&fit=crop",
                     likes: 15
                 },
                 {
                     id: 2,
                     title: "Full Stack Development in 2024",
+                    content: ["The modern full-stack developer's toolkit keeps consolidating: TypeScript across the stack, React or Vue on the front end, Node or serverless functions behind an API, and a managed database underneath.", "We walk through the skills that matter most this year - component-driven UI, API design, CI/CD basics, and enough cloud literacy to ship confidently - plus a practical learning path for each."],
                     excerpt: "What technologies and skills are essential for a modern full-stack developer?",
                     author: "Aisha Aden",
                     date: "March 28, 2024",
-                    image: "https://placehold.co/800x500/cbd5e0/4299e1?text=Full+Stack+Development",
+                    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=800&auto=format&fit=crop",
                     likes: 30
                 },
                 {
                     id: 3,
                     title: "The Future of Quantum Computing",
+                    content: ["Quantum computers trade bits for qubits, which can exist in superpositions of 0 and 1. That single difference lets them explore many possibilities at once, promising breakthroughs in cryptography, materials science, and drug discovery.", "We look at where the technology stands today, what 'quantum advantage' really means, and why post-quantum cryptography is something every engineer should have on their radar now."],
                     excerpt: "Exploring how quantum mechanics could revolutionize computation and what it means for the future.",
                     author: "Markus Chen",
                     date: "March 25, 2024",
-                    image: "https://placehold.co/800x500/cbd5e0/4299e1?text=Quantum+Computing",
+                    image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=800&auto=format&fit=crop",
                     likes: 50
                 },
                 {
                     id: 4,
                     title: "Cybersecurity Basics for Small Businesses",
+                    content: ["Most breaches don't start with sophisticated exploits - they start with a reused password, a missed update, or a convincing phishing email. Small businesses are targeted precisely because attackers assume defenses are thin.", "This checklist covers the essentials: multi-factor authentication everywhere, automatic updates, least-privilege access, offline backups, and training your team to spot social engineering before it lands."],
                     excerpt: "Essential tips and best practices to protect your business from common cyber threats.",
                     author: "Sarah Brown",
                     date: "March 22, 2024",
-                    image: "https://placehold.co/800x500/cbd5e0/4299e1?text=Cybersecurity+Tips",
+                    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800&auto=format&fit=crop",
                     likes: 22
                 },
                 {
                     id: 5,
                     title: "Intro to Machine Learning with Python",
+                    content: ["Machine learning sounds intimidating until you train your first model. With Python, scikit-learn, and a clean dataset, you can go from raw CSV to working predictions in an afternoon.", "This tutorial walks through the full loop - loading data with pandas, splitting train and test sets, fitting a classifier, and honestly evaluating how well it performs - with all the code included."],
                     excerpt: "A beginner's tutorial on building your first machine learning model using Python.",
                     author: "David Lee",
                     date: "March 18, 2024",
-                    image: "https://placehold.co/800x500/cbd5e0/4299e1?text=Machine+Learning",
+                    image: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?q=80&w=800&auto=format&fit=crop",
                     likes: 45
                 },
                 {
                     id: 6,
                     title: "The Impact of 5G on IoT",
+                    content: ["5G isn't just faster phones - its low latency and massive device density are what the Internet of Things has been waiting for. Think thousands of sensors per square kilometre reporting in near real time.", "We explore what that unlocks for smart agriculture, logistics, and city infrastructure in East Africa, and the practical hurdles - coverage, power, and cost - that still stand in the way."],
                     excerpt: "How the next generation of wireless technology is supercharging the Internet of Things.",
                     author: "Emily White",
                     date: "March 15, 2024",
-                    image: "https://placehold.co/800x500/cbd5e0/4299e1?text=5G+and+IoT",
+                    image: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?q=80&w=800&auto=format&fit=crop",
                     likes: 38
                 },
             ];
@@ -229,7 +245,7 @@
                 // Encode title and author for a clean URL
                 const titleEncoded = encodeURIComponent(post.title);
                 const authorEncoded = encodeURIComponent(post.author);
-                const href = `/blog?title=${titleEncoded}&author=${authorEncoded}`;
+                const href = post.url || `/blog?title=${titleEncoded}&author=${authorEncoded}`;
 
                 featuredContainer.innerHTML = `
                     <a href="${href}" class="flex flex-col md:flex-row w-full transition-transform transform hover:scale-105 duration-300">
@@ -257,7 +273,7 @@
                 // Encode title and author for a clean URL
                 const titleEncoded = encodeURIComponent(post.title);
                 const authorEncoded = encodeURIComponent(post.author);
-                const href = `/blog?title=${titleEncoded}&author=${authorEncoded}`;
+                const href = post.url || `/blog?title=${titleEncoded}&author=${authorEncoded}`;
                 
                 const article = document.createElement('a');
                 article.href = href; // Making the entire card a link
@@ -279,13 +295,51 @@
                 return article;
             }
 
-            // Call the functions to populate the page
-            renderFeaturedPost(featuredPost);
+            // Render a single post view for dynamic URLs like /blog/?title=...&author=...
+            function renderSinglePost(post) {
+                document.title = `${post.title} | The Tech Hut Blog`;
+                const hero = document.querySelector('section.min-h-screen');
+                if (hero) hero.style.display = 'none';
+                const main = document.querySelector('main');
+                const paragraphs = (post.content && post.content.length ? post.content : [post.excerpt])
+                    .map(p => `<p class="text-gray-600 leading-relaxed mb-5">${p}</p>`).join('');
+                main.innerHTML = `
+                    <article class="max-w-3xl mx-auto">
+                        <a href="/blog/" class="inline-block mb-6 text-sm font-semibold text-[#06D6A0] hover:text-[#073B4C] transition duration-300">&larr; Back to all blogs</a>
+                        <span class="block text-sm font-semibold text-[#06D6A0] uppercase mb-2">The Tech Hut Blog</span>
+                        <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">${post.title}</h1>
+                        <div class="flex items-center text-gray-500 text-sm mb-8">
+                            <span>By ${post.author}</span>
+                            <span class="mx-2">&bull;</span>
+                            <span>${post.date}</span>
+                            <span class="mx-2">&bull;</span>
+                            <span>${post.likes} Likes</span>
+                        </div>
+                        <img src="${post.image}" alt="Image for ${post.title}" class="w-full h-64 sm:h-96 object-cover rounded-xl shadow-lg mb-8">
+                        ${paragraphs}
+                        <a href="/blog/" class="inline-block mt-4 text-sm font-semibold text-[#06D6A0] hover:text-[#073B4C] transition duration-300">&larr; Back to all blogs</a>
+                    </article>
+                `;
+                window.scrollTo(0, 0);
+            }
 
-            // Populate the container with all blog posts
-            blogPosts.forEach(post => {
-                container.appendChild(createBlogPostCard(post));
-            });
+            // Route: single post view when ?title= is present, otherwise the normal listing
+            const urlParams = new URLSearchParams(window.location.search);
+            const requestedTitle = urlParams.get('title');
+            const requestedPost = requestedTitle
+                ? blogPosts.find(p => p.title.toLowerCase() === requestedTitle.toLowerCase())
+                : null;
+
+            if (requestedPost && requestedPost.url) {
+                window.location.replace(requestedPost.url);
+            } else if (requestedPost) {
+                renderSinglePost(requestedPost);
+            } else {
+                renderFeaturedPost(featuredPost);
+                blogPosts.forEach(post => {
+                    container.appendChild(createBlogPostCard(post));
+                });
+            }
         });
     </script>
 </body>

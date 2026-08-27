@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Daily Savannah | The Tech Hut Blog</title>
+  <meta name="description" content="The Tech Hut's automated daily digest of Kenya's tech ecosystem — startups, fintech, policy, and infrastructure. Fresh every evening at 9:00 PM EAT.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap">
+</head>
+<body>
+<style>
+  :root {
+    --bg: #f0f4f8;
+    --card: #ffffff;
+    --ink: #073B4C;
+    --body: #4a5568;
+    --muted: #718096;
+    --green: #06D6A0;
+    --green-dark: #05b384;
+    --gold: #FFD700;
+    --footer: #073B4C;
+    --shadow: 0 8px 20px rgba(7, 59, 76, 0.08);
+    --shadow-hover: 0 12px 25px rgba(7, 59, 76, 0.15);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--body);
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { font-family: "Poppins", "Inter", sans-serif; color: var(--ink); }
+  a:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; border-radius: 4px; }
+  .shell { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ---- Header (matches blog index) ---- */
+  header.site {
+    background: var(--green);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  header.site .inner {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+  header.site .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 0.55rem;
+    text-decoration: none;
+  }
+  header.site .brand b {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: #ffffff;
+  }
+  header.site .brand span {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--ink);
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 9999px;
+    padding: 0.15rem 0.75rem;
+  }
+  header.site nav { display: flex; gap: 1.5rem; }
+  header.site nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  header.site nav a:hover { color: var(--gold); }
+  @media (max-width: 640px) { header.site nav { display: none; } }
+
+  /* ---- Page title ---- */
+  .pagehead { padding: 2.75rem 0 0.5rem; }
+  .pagehead h1 { font-weight: 800; font-size: clamp(1.9rem, 5vw, 2.8rem); line-height: 1.15; margin-bottom: 0.4rem; }
+  .pagehead h1 em { font-style: normal; color: var(--green-dark); }
+  .pagehead .sub {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.25rem;
+    align-items: center;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .pagehead .auto {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--green-dark);
+    background: rgba(6, 214, 160, 0.12);
+    border: 1px solid rgba(6, 214, 160, 0.4);
+    border-radius: 9999px;
+    padding: 0.2rem 0.85rem;
+    letter-spacing: 0.04em;
+  }
+
+  /* ---- Edition ---- */
+  section.edition { padding-top: 2.25rem; }
+  .edition-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6rem; margin-bottom: 0.35rem; }
+  .edition-head h2 { font-weight: 700; font-size: 1.6rem; }
+  .edition-head .no {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green-dark);
+  }
+  .edition-lede { color: var(--muted); font-size: 0.95rem; margin-bottom: 1.5rem; max-width: 46rem; }
+
+  /* ---- Lead story: split card like the blog's Featured ---- */
+  article.lead {
+    background: var(--card);
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  article.lead:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+  @media (min-width: 768px) { article.lead { flex-direction: row; } }
+  article.lead .txt { padding: 2rem 2.25rem; display: flex; flex-direction: column; justify-content: center; }
+  @media (min-width: 768px) { article.lead .txt { width: 55%; } article.lead .pic { width: 45%; } }
+  .kicker {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green-dark);
+    margin-bottom: 0.5rem;
+  }
+  article.lead h3 { font-weight: 700; font-size: clamp(1.3rem, 3vw, 1.8rem); line-height: 1.25; margin-bottom: 0.7rem; }
+  article.lead p.dek { font-size: 0.96rem; margin-bottom: 0.9rem; }
+  article.lead .pic { background: rgba(6, 214, 160, 0.12); min-height: 12rem; position: relative; }
+  article.lead .pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+  /* ---- Story cards: grid like All Blogs ---- */
+  .story-list { display: grid; grid-template-columns: 1fr; gap: 1.75rem; }
+  @media (min-width: 640px) { .story-list { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1024px) { .story-list { grid-template-columns: 1fr 1fr 1fr; } }
+  article.story {
+    background: var(--card);
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  article.story:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+  .thumb {
+    position: relative;
+    height: 10.5rem;
+    background: linear-gradient(135deg, rgba(6, 214, 160, 0.2), rgba(7, 59, 76, 0.15));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.14em;
+    color: var(--green-dark);
+  }
+  .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  article.story .txt { padding: 1.4rem 1.5rem 1.3rem; display: flex; flex-direction: column; flex: 1; }
+  article.story h3 { font-weight: 700; font-size: 1.05rem; line-height: 1.35; margin-bottom: 0.5rem; }
+  article.story p { font-size: 0.87rem; margin-bottom: 0.8rem; }
+  .story-src { margin-top: auto; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  .story-src a { color: var(--green-dark); text-decoration: none; }
+  .story-src a:hover { color: var(--ink); text-decoration: underline; }
+
+  /* ---- Numbers strip ---- */
+  .numbers {
+    background: var(--card);
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: 1rem;
+    margin-top: 1.75rem;
+    padding: 1.4rem 1.6rem;
+  }
+  .num b {
+    display: block;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 1.55rem;
+    color: var(--green-dark);
+    font-variant-numeric: tabular-nums;
+  }
+  .num span { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* ---- Archive ---- */
+  section.archive { margin-top: 3.25rem; }
+  section.archive > h2 { font-weight: 700; font-size: 1.6rem; margin-bottom: 1rem; }
+  .archive-box { background: var(--card); border-radius: 1rem; box-shadow: var(--shadow); padding: 0.9rem 1.6rem; }
+  .archive-box details { border-top: 1px solid rgba(7, 59, 76, 0.1); }
+  .archive-box details:first-of-type { border-top: none; }
+  .archive-box summary {
+    cursor: pointer;
+    padding: 0.85rem 0;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--ink);
+    transition: color 0.3s ease;
+  }
+  .archive-box summary:hover { color: var(--green-dark); }
+  .archive-box .archive-empty { color: var(--muted); font-style: italic; padding: 0.85rem 0; }
+  .archive-box .story-list { padding-bottom: 1.25rem; }
+  .archive-box article.lead { margin-top: 0.5rem; margin-bottom: 1.5rem; }
+
+  /* ---- Footer (matches blog index) ---- */
+  footer.site {
+    margin-top: 3.5rem;
+    background: var(--footer);
+    color: #e2e8f0;
+    padding: 2.5rem 0;
+    text-align: center;
+  }
+  footer.site .links { margin-top: 1rem; display: flex; justify-content: center; gap: 1.25rem; font-size: 0.85rem; font-weight: 600; }
+  footer.site a { color: #e2e8f0; text-decoration: none; transition: color 0.3s ease; }
+  footer.site a:hover { color: var(--gold); }
+  footer.site .note { margin-top: 1.1rem; font-size: 0.76rem; color: #a0aec0; max-width: 44rem; margin-left: auto; margin-right: auto; padding: 0 1.5rem; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<header class="site">
+  <div class="inner">
+    <a class="brand" href="https://thetechhut.co/blog/"><b>The Tech Hut</b><span>Daily</span></a>
+    <nav>
+      <a href="https://thetechhut.co/">Home</a>
+      <a href="https://thetechhut.co/blog/">Blog</a>
+      <a href="https://thetechhut.co/communities/">Community</a>
+      <a href="https://thetechhut.co/events/">Events</a>
+    </nav>
+  </div>
+</header>
+
+<div class="shell">
+  <div class="pagehead">
+    <h1>The Daily <em>Savannah</em></h1>
+    <div class="sub">
+      <span>Kenya's tech ecosystem, every day — startups, fintech, policy &amp; infrastructure.</span>
+      <span class="auto">AUTO-UPDATES 9:00 PM EAT</span>
+    </div>
+  </div>
+
+  <!-- EDITIONS:START — newest edition first. Each new day: insert a new <section class="edition"> directly below this marker. The day's biggest story is the <article class="lead"> split card; the rest go in the .story-list grid. Move editions older than 7 days into the archive as <details> blocks. -->
+
+  <section class="edition">
+    <div class="edition-head">
+      <h2>Thursday, 27 August 2026</h2>
+      <span class="no">Edition Nº 1 · Launch</span>
+    </div>
+    <p class="edition-lede">Welcome to the first edition: the stories shaping Kenyan tech this season, from a shake-up in Africa's funding league table to M-Pesa's biggest platform overhaul yet. A fresh digest lands here every evening at 9.</p>
+
+    <article class="lead">
+      <div class="txt">
+        <span class="kicker">Featured · Funding</span>
+        <h3>Kenya slips to third in Africa's startup funding table</h3>
+        <p class="dek">Kenya raised $126&nbsp;million in H1 2026 — its weakest half since early 2021 — falling behind Egypt ($327M) and Nigeria ($254M) after leading the continent with $984&nbsp;million in 2025. Africa: The Big Deal data points to investor caution after shutdowns including Koko Networks, Lipa Later, and Ilara Health, with VCs pressing founders on paths to profitability.</p>
+        <p class="story-src">Source: <a href="https://www.businessdailyafrica.com/bd/corporate/companies/kenya-knocked-off-africa-s-startup-funding-top-spot-5546952" target="_blank" rel="noopener">Business Daily Africa</a></p>
+      </div>
+      <div class="pic"><img src="https://images.unsplash.com/photo-1611348586804-61bf6c080437?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Nairobi city skyline" loading="lazy" onerror="this.remove()"></div>
+    </article>
+
+    <div class="story-list">
+      <article class="story">
+        <div class="thumb">FINTECH<img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="" loading="lazy" onerror="this.remove()"></div>
+        <div class="txt">
+          <h3>Safaricom cuts M-Pesa fees for businesses in sweeping tariff revision</h3>
+          <p>From 7 August: Pochi transactions to KSh&nbsp;200 free, Buy Goods free threshold doubled to KSh&nbsp;500 (0.55% above, capped at KSh&nbsp;200), and till transfers down up to 50% — aimed at MSMEs and aligned with CBK pricing principles.</p>
+          <p class="story-src"><a href="https://peopledaily.digital/business/safaricom-announces-sweeping-m-pesa-fee-cuts-for-kenyan-businesses" target="_blank" rel="noopener">People Daily</a></p>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="thumb">POLICY<img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="" loading="lazy" onerror="this.remove()"></div>
+        <div class="txt">
+          <h3>Kenya's national AI policy heads toward Cabinet after public consultation</h3>
+          <p>The draft policy — a National AI Steering Committee, a Kenya AI Safety Institute, a public registry, and AI in Kenyan languages — closed comments on 4 August and now moves toward Cabinet approval alongside the AI Bill in Parliament.</p>
+          <p class="story-src"><a href="https://techweez.com/2026/07/28/kenya-ai-policy-2026-public-consultation/" target="_blank" rel="noopener">Techweez</a> · <a href="https://peopledaily.digital/news/ict-cs-kabogo-launches-public-consultation-on-ai-and-emerging-technologies-policy" target="_blank" rel="noopener">People Daily</a></p>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="thumb">FINTECH<img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="" loading="lazy" onerror="this.remove()"></div>
+        <div class="txt">
+          <h3>Ziidi Trader puts the NSE inside 35 million M-Pesa wallets</h3>
+          <p>Safaricom's in-app stock trading, built with Kestrel Capital, lets users buy NSE shares without a brokerage account — quickly hitting ~40% of trades. The NSE targets 9&nbsp;million retail investors by end of 2029.</p>
+          <p class="story-src"><a href="https://www.cnbcafrica.com/2026/kenyas-safaricom-starts-offering-stock-trading-on-its-m-pesa-platform" target="_blank" rel="noopener">CNBC Africa</a></p>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="thumb">INFRASTRUCTURE<img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="" loading="lazy" onerror="this.remove()"></div>
+        <div class="txt">
+          <h3>M-Pesa's "Fintech 2.0" rebuild targets a $14.5B payments market</h3>
+          <p>Cloud-native with AI fraud detection, capacity up from 4,500 to 6,000 transactions per second (scalable to 12,000). M-Pesa earned KSh&nbsp;161.1B in FY2025 — 44% of Safaricom's service revenue — holding ~90.8% of Kenya's digital payments.</p>
+          <p class="story-src"><a href="https://www.ecofinagency.com/news-digital/2309-48926-safaricom-retools-m-pesa-for-fintech-2-0-eyeing-a-14-5-billion-market" target="_blank" rel="noopener">Ecofin Agency</a></p>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="thumb">GOVERNMENT<img src="https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="" loading="lazy" onerror="this.remove()"></div>
+        <div class="txt">
+          <h3>ICT Authority tightens risk management on national digital programmes</h3>
+          <p>The board and management met 20 August to review delivery risks across public Wi-Fi, institutional connectivity, and digital skills programmes — with a focus on resilience, accountability, and faster delivery.</p>
+          <p class="story-src"><a href="https://techafricanews.com/2026/08/20/kenya-ict-authority-strengthens-risk-management-to-accelerate-digital-programme-delivery/" target="_blank" rel="noopener">TechAfrica News</a></p>
+        </div>
+      </article>
+    </div>
+
+    <div class="numbers">
+      <div class="num"><b>$126M</b><span>Kenya VC, H1 2026</span></div>
+      <div class="num"><b>35M</b><span>M-Pesa users in Kenya</span></div>
+      <div class="num"><b>90.8%</b><span>M-Pesa payments share</span></div>
+      <div class="num"><b>6,000</b><span>Transactions / second</span></div>
+    </div>
+  </section>
+
+  <!-- EDITIONS:END -->
+
+  <section class="archive">
+    <h2>Previous Editions</h2>
+    <div class="archive-box">
+      <!-- ARCHIVE:START — editions older than 7 days move here as: <details><summary>DATE — one-line recap</summary> ...full edition markup... </details> -->
+      <p class="archive-empty">The archive begins tomorrow — every past edition stays browsable here.</p>
+      <!-- ARCHIVE:END -->
+    </div>
+  </section>
+</div>
+
+<footer class="site">
+  <div class="shell">
+    <p>&copy; 2026 The Tech Hut. All rights reserved.</p>
+    <div class="links">
+      <a href="https://thetechhut.co/">Home</a>
+      <a href="https://thetechhut.co/blog/">Blog</a>
+      <a href="https://thetechhut.co/communities/">Community</a>
+      <a href="https://thetechhut.co/events/">Events</a>
+    </div>
+    <p class="note">The Daily Savannah is The Tech Hut's automated daily digest of Kenya's tech ecosystem, researched and written by Claude every evening at 9:00 PM Nairobi time. Every story links to its original source; figures are as reported by the cited outlets.</p>
+  </div>
+</footer>
+</body>
+</html>
