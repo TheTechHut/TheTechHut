@@ -294,7 +294,7 @@
                                 <span class="mx-2">•</span>
                                 <span>${post.date}</span>
                                 <span class="mx-2">•</span>
-                                <span>${post.likes} Likes</span>
+                                <span data-live-likes="${window.TTHReactions.slug(post.title)}">0 Likes</span>
                             </div>
                         </div>
                         <div class="md:w-1/2">
@@ -324,7 +324,7 @@
                             <span class="mx-2">•</span>
                             <span>${post.date}</span>
                             <span class="mx-2">•</span>
-                            <span>${post.likes} Likes</span>
+                            <span data-live-likes="${window.TTHReactions.slug(post.title)}">0 Likes</span>
                         </div>
                     </div>
                 `;
@@ -362,7 +362,7 @@
                             <span class="mx-2">&bull;</span>
                             <span>${post.date}</span>
                             <span class="mx-2">&bull;</span>
-                            <span>${post.likes} Likes</span>
+                            <span data-live-likes="${window.TTHReactions.slug(post.title)}">0 Likes</span>
                         </div>
                         <div id="post-reactions" class="mb-8"></div>
                         <img src="${post.image}" alt="Image for ${post.title}" class="w-full h-64 sm:h-96 object-cover rounded-xl shadow-lg mb-8">
@@ -391,6 +391,15 @@
                 renderFeaturedPost(featuredPost);
                 blogPosts.forEach(post => {
                     container.appendChild(createBlogPostCard(post));
+                });
+            }
+
+            // Live like counts: each card shows the real total of reactions on that post
+            if (window.TTHReactions && window.TTHReactions.watchTotal) {
+                document.querySelectorAll('[data-live-likes]').forEach(el => {
+                    window.TTHReactions.watchTotal(el.getAttribute('data-live-likes'), n => {
+                        el.textContent = `${n} ${n === 1 ? 'Like' : 'Likes'}`;
+                    });
                 });
             }
         });
@@ -468,6 +477,7 @@
           store("tth-local-counts", cs);
           btn.querySelector("span").textContent = cs[id][key];
         }
+        try { document.dispatchEvent(new CustomEvent("tth-reactions-changed", { detail: id })); } catch (err) {}
       });
       bar.appendChild(btn);
     });
@@ -482,7 +492,28 @@
       });
     });
   }
-  window.TTHReactions = { attach: attach, slug: slug };
+  function totalFromLocal(id) {
+    var cs = store("tth-local-counts");
+    var v = cs[id] || {};
+    var t = 0;
+    for (var k in v) t += v[k] || 0;
+    return t;
+  }
+  function watchTotal(id, cb) {
+    cb(totalFromLocal(id));
+    document.addEventListener("tth-reactions-changed", function (e) {
+      if (e.detail === id) cb(totalFromLocal(id));
+    });
+    loadFirebase().then(function (d) {
+      if (!d) return;
+      d.ref("reactions/" + PAGE + "/" + id).on("value", function (snap) {
+        var v = snap.val() || {}, t = 0;
+        for (var k in v) t += v[k] || 0;
+        cb(t);
+      });
+    });
+  }
+  window.TTHReactions = { attach: attach, slug: slug, watchTotal: watchTotal };
 })();
 </script>
 </body>
