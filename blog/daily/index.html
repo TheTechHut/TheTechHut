@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Daily Savannah | The Tech Hut Blog</title>
-  <meta name="description" content="The Tech Hut's automated daily digest of Kenya's tech ecosystem — startups, fintech, policy, and infrastructure. A fresh edition every evening at 9:00 PM EAT.">
+  <meta name="description" content="The Tech Hut&#x27;s automated daily digest of Kenya&#x27;s tech ecosystem — startups, fintech, policy, and infrastructure. A fresh edition every evening at 9:00 PM EAT.">
   <meta name="keywords" content="Kenya tech news, Kenyan startups, M-Pesa, fintech Kenya, Nairobi tech, Silicon Savannah, Safaricom, Kenya AI policy, daily tech digest">
   <meta name="author" content="The Tech Hut">
   <meta name="robots" content="index, follow">
@@ -13,19 +13,19 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="The Tech Hut">
-  <meta property="og:title" content="The Daily Savannah — Kenya Tech, Every Day">
-  <meta property="og:description" content="The Tech Hut's automated daily digest of Kenya's tech ecosystem — startups, fintech, policy, and infrastructure. A fresh edition every evening at 9:00 PM EAT.">
+  <meta property="og:title" content="The Daily Savannah | The Tech Hut Blog">
+  <meta property="og:description" content="The Tech Hut&#x27;s automated daily digest of Kenya&#x27;s tech ecosystem — startups, fintech, policy, and infrastructure. A fresh edition every evening at 9:00 PM EAT.">
   <meta property="og:url" content="https://thetechhut.co/blog/daily/">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1741991110666-88115e724741?q=80&w=1200&h=630&auto=format&fit=crop">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1739271933163-8dcc7c8e8a3e?q=80&amp;w=1200&amp;auto=format&amp;fit=crop">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Nairobi city skyline">
   <meta property="og:locale" content="en_KE">
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="The Daily Savannah — Kenya Tech, Every Day">
-  <meta name="twitter:description" content="Kenya's tech ecosystem, every day: startups, fintech, policy & infrastructure. Fresh at 9 PM EAT.">
-  <meta name="twitter:image" content="https://images.unsplash.com/photo-1741991110666-88115e724741?q=80&w=1200&h=630&auto=format&fit=crop">
+  <meta name="twitter:title" content="The Daily Savannah | The Tech Hut Blog">
+  <meta name="twitter:description" content="The Tech Hut&#x27;s automated daily digest of Kenya&#x27;s tech ecosystem — startups, fintech, policy, and infrastructure. A fresh edition every evening at 9:00 PM EAT.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1739271933163-8dcc7c8e8a3e?q=80&amp;w=1200&amp;auto=format&amp;fit=crop">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap">
 </head>
@@ -279,6 +279,77 @@
   .reactions button.on { background: rgba(6, 214, 160, 0.16); border-color: var(--green); }
   .reactions button span { color: var(--muted); font-variant-numeric: tabular-nums; }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+  /* ---- Edition index cards ---- */
+  .ed-grid { display: grid; grid-template-columns: 1fr; gap: 1.75rem; }
+  @media (min-width: 640px) { .ed-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1024px) { .ed-grid { grid-template-columns: 1fr 1fr 1fr; } }
+  a.ed-card {
+    background: var(--card); border-radius: 1rem; box-shadow: var(--shadow);
+    overflow: hidden; display: flex; flex-direction: column; text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  a.ed-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+  a.ed-card .pic { position: relative; height: 11rem; background: rgba(6,214,160,0.12); }
+  a.ed-card .pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  a.ed-card .txt { padding: 1.4rem 1.5rem 1.3rem; display: flex; flex-direction: column; flex: 1; }
+  a.ed-card .no {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--green-dark); margin-bottom: 0.4rem;
+  }
+  a.ed-card h3 { font-weight: 700; font-size: 1.12rem; line-height: 1.3; margin-bottom: 0.5rem; }
+  a.ed-card p { font-size: 0.86rem; color: var(--body); margin-bottom: 0.8rem; }
+  a.ed-card, a.ed-latest { color: var(--body); }
+  a.ed-card ul { list-style: none; margin: 0 0 0.9rem; padding: 0; }
+  a.ed-card li {
+    font-size: 0.8rem; color: var(--muted); padding-left: 0.9rem; position: relative;
+    margin-bottom: 0.25rem; line-height: 1.45;
+  }
+  a.ed-card li::before { content: "\2022"; position: absolute; left: 0; color: var(--green); }
+  a.ed-card .more {
+    margin-top: auto; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em;
+    color: var(--green-dark);
+  }
+  a.ed-card:hover .more { color: var(--ink); }
+
+  /* Latest edition banner */
+  a.ed-latest {
+    display: flex; flex-direction: column; background: var(--card); border-radius: 1rem;
+    box-shadow: var(--shadow); overflow: hidden; text-decoration: none; margin-bottom: 3rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  a.ed-latest:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+  @media (min-width: 768px) { a.ed-latest { flex-direction: row; }
+    a.ed-latest .txt { width: 55%; } a.ed-latest .pic { width: 45%; } }
+  a.ed-latest .txt { padding: 2rem 2.25rem; display: flex; flex-direction: column; justify-content: center; }
+  a.ed-latest .pic { position: relative; min-height: 13rem; background: rgba(6,214,160,0.12); }
+  a.ed-latest .pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  a.ed-latest h3 { font-weight: 700; font-size: clamp(1.3rem, 3vw, 1.75rem); line-height: 1.22; margin-bottom: 0.6rem; }
+  a.ed-latest p { font-size: 0.95rem; margin-bottom: 0.9rem; color: var(--body); }
+
+  .section-title {
+    font-weight: 700; font-size: 1.35rem; margin-bottom: 1.1rem;
+    padding-bottom: 0.6rem; border-bottom: 2px solid rgba(6,214,160,0.35);
+  }
+
+  /* ---- Edition page nav ---- */
+  .backlink {
+    display: inline-block; margin: 1.75rem 0 0; font-size: 0.82rem; font-weight: 700;
+    letter-spacing: 0.04em; color: var(--green-dark); text-decoration: none;
+  }
+  .backlink:hover { color: var(--ink); }
+  .ed-nav {
+    display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between;
+    margin-top: 2.5rem; padding-top: 1.4rem; border-top: 2px solid rgba(6,214,160,0.35);
+  }
+  .ed-nav a {
+    font-size: 0.86rem; font-weight: 600; color: var(--green-dark); text-decoration: none;
+    max-width: 22rem;
+  }
+  .ed-nav a:hover { color: var(--ink); }
+  .ed-nav a small { display: block; font-size: 0.68rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 0.2rem; }
+  .ed-nav .next { text-align: right; margin-left: auto; }
 </style>
 
 <header class="site">
@@ -298,265 +369,54 @@
     <h1>The Daily <em>Savannah</em></h1>
     <div class="sub">
       <span>Kenya's tech ecosystem, every day — startups, fintech, policy &amp; infrastructure.</span>
-      <span class="auto">AUTO-UPDATES 9:00 PM EAT</span>
+      <span class="auto">NEW EDITION EVERY 9:00 PM EAT</span>
     </div>
   </div>
 
-  <!-- IMAGE GUIDE for new editions: match each image to the story subject, and when people appear
-     prefer African/Kenyan-context photography. Verified Unsplash IDs (all load and show the right thing):
-     declining market chart photo-1611974789855-9c2a0a7236a3 | stock tickers app photo-1651341050677-24dba59ce0fd
-     Kenyan market vendor / mobile money photo-1687422809654-579d81c29d32 | Black woman using phone photo-1680879275304-bbe20f7e28fb, photo-1739271933163-8dcc7c8e8a3e
-     African boardroom meeting photo-1573164574572-cb89e39749b4, photo-1573164574511-73c773193279 | African team casual photo-1655720357872-ce227e4164ba
-     Nairobi skyline day photo-1741991110666-88115e724741, photo-1781504798134-31600e8579ba | Nairobi night photo-1741991109902-98bf764fb35d
-     AI photo-1677442136019-21780ecad995 | data center photo-1558494949-ef010cbdcc31 | code photo-1461749280684-dccba630e2f6
-     Only use a different ID if you can verify what it depicts, not just that it loads. -->
-    <!-- EDITIONS:START — newest edition first. Each new day: insert a new <section class="edition"> directly below this marker. The day's biggest story is the <article class="lead"> split card; the rest go in the .story-list grid. Move editions older than 7 days into the archive as <details> blocks. -->
-  <section class="edition">
-    <div class="edition-head">
-      <h2>Saturday, 29 August 2026</h2>
-      <span class="no">Edition Nº 3</span>
+  <h2 class="section-title" style="margin-top:2.25rem">Latest edition</h2>
+  <a class="ed-latest" href="/blog/daily/2026-08-29/">
+    <div class="txt">
+      <span class="kicker">Edition Nº 3 &middot; Saturday, 29 August 2026</span>
+      <h3>Meta starts charging Kenyan businesses for every WhatsApp reply</h3>
+      <p>Meta puts a price on the business chat window Kenyan banks and retailers have leaned on for free, Nairobi applies to join the bloc writing the world's digital trade rules, and the half-year books show how much of Kenyan banking has already moved onto the phone.</p>
+      <span class="more" style="font-size:0.8rem;font-weight:700;color:var(--green-dark)">Read the full edition &rarr;</span>
     </div>
-    <p class="edition-lede">Meta puts a price on the business chat window Kenyan banks and retailers have leaned on for free, Nairobi applies to join the bloc writing the world's digital trade rules, and the half-year books show how much of Kenyan banking has already moved onto the phone.</p>
+    <div class="pic"><img src="https://images.unsplash.com/photo-1739271933163-8dcc7c8e8a3e?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="A woman replying to messages on her phone" loading="lazy" onerror="this.remove()"></div>
+  </a>
 
-    <article class="lead">
-      <div class="txt">
-        <span class="kicker">Featured · Fintech</span>
-        <h3>Meta starts charging Kenyan businesses for every WhatsApp reply</h3>
-        <p class="dek">From 1 October, businesses on the WhatsApp Business Platform pay $0.0040 — about KES&nbsp;0.52 — for each service or utility message sent outside the 24-hour customer window, with Kenya grouped into Meta's "Rest of Africa" band alongside Uganda, Tanzania and Rwanda. The free WhatsApp Business app is untouched, but banks, airlines and large retailers running chatbots — Equity's EVA among them — now carry a per-reply cost: roughly KES&nbsp;52,000 a month on 100,000 replies, with no volume discounts. Click-to-WhatsApp advertisers get a 72-hour free window instead of 24. Payment methods must be on file by 30 September to avoid interruption.</p>
-        <p class="story-src">Source: <a href="https://tech-ish.com/2026/08/29/kenyan-businesses-to-pay-sh0-52-per-whatsapp-reply-from-october/" target="_blank" rel="noopener">tech-ish</a></p>
-      </div>
-      <div class="pic"><img src="https://images.unsplash.com/photo-1739271933163-8dcc7c8e8a3e?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="A woman replying to messages on her phone" loading="lazy" onerror="this.remove()"></div>
-    </article>
-
-    <div class="story-list">
-      <article class="story">
-        <div class="thumb">POLICY<img src="https://images.unsplash.com/photo-1573164574572-cb89e39749b4?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="" loading="lazy" onerror="this.remove()"></div>
+  <h2 class="section-title">All editions</h2>
+  <div class="ed-grid">
+      <a class="ed-card" href="/blog/daily/2026-08-29/">
+        <div class="pic"><img src="https://images.unsplash.com/photo-1739271933163-8dcc7c8e8a3e?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="A woman replying to messages on her phone" loading="lazy" onerror="this.remove()"></div>
         <div class="txt">
-          <h3>Kenya applies to join the Digital Cooperation Organisation</h3>
-          <p>Kenya is one of eight countries — with Albania, Azerbaijan, Kazakhstan, Lebanon, Palestine, Syria and Zambia — cleared to join the DCO, the intergovernmental bloc on digital inclusion and cross-border data flows. Membership takes effect once Nairobi completes accession and deposits its instrument; the expanded bloc would cover 24 members and roughly 980 million people.</p>
-          <p class="story-src"><a href="https://kenyanwallstreet.com/kenya-dco-membership" target="_blank" rel="noopener">The Kenyan Wall Street</a></p>
+          <span class="no">Edition Nº 3 &middot; 7 stories</span>
+          <h3>Saturday, 29 August 2026</h3>
+          <p>Meta puts a price on the business chat window Kenyan banks and retailers have leaned on for free, Nairobi applies to join the bloc writing the world's digital trade rules, and the half-year books show how much of Kenyan banking has already moved onto the phone.</p>
+          <ul><li>Kenya applies to join the Digital Cooperation Organisation</li><li>I&amp;M's half-year profit climbs 22% as 92% of customers go digital</li><li>Britam profit jumps 52% as it digitises marine cargo cover</li></ul>
+          <span class="more">Read edition &rarr;</span>
         </div>
-      </article>
-
-      <article class="story">
-        <div class="thumb">FINTECH<img src="https://images.unsplash.com/photo-1651341050677-24dba59ce0fd?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="" loading="lazy" onerror="this.remove()"></div>
+      </a>
+      <a class="ed-card" href="/blog/daily/2026-08-28/">
+        <div class="pic"><img src="https://images.unsplash.com/photo-1741991110666-88115e724741?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Nairobi city skyline by day" loading="lazy" onerror="this.remove()"></div>
         <div class="txt">
-          <h3>I&amp;M's half-year profit climbs 22% as 92% of customers go digital</h3>
-          <p>I&amp;M Group posted net profit of KSh&nbsp;10.2 billion for H1 2026, on operating income up 23% to KSh&nbsp;33.7 billion and total assets up 27% to KSh&nbsp;746 billion. The lender says 92% of its customer base is now digitally active, and regional subsidiaries lifted their share of pre-tax profit to 33% from 25%.</p>
-          <p class="story-src"><a href="https://techtrendske.co.ke/2026/08/28/im-group-half-year-profit-rises-22pc-to-sh10-2bn/" target="_blank" rel="noopener">TechTrends KE</a></p>
+          <span class="no">Edition Nº 2 &middot; 7 stories</span>
+          <h3>Friday, 28 August 2026</h3>
+          <p>A regulator draws new lines around the delivery apps, the grid runs perilously thin, and Kenya edges toward the world's main cybercrime treaty — a heavy day for the rules and the wires underneath the ecosystem.</p>
+          <ul><li>Kenya's power reserve margin collapses to 3.34%, reviving rationing fears</li><li>Kenya moves closer to joining the Budapest Convention on cybercrime</li><li>Nairobi's Flowt raises pre-seed to turn messy books into loan-ready data</li></ul>
+          <span class="more">Read edition &rarr;</span>
         </div>
-      </article>
-
-      <article class="story">
-        <div class="thumb">FINTECH<img src="https://images.unsplash.com/photo-1781504798134-31600e8579ba?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="" loading="lazy" onerror="this.remove()"></div>
+      </a>
+      <a class="ed-card" href="/blog/daily/2026-08-27/">
+        <div class="pic"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Stock market chart trending downward" loading="lazy" onerror="this.remove()"></div>
         <div class="txt">
-          <h3>Britam profit jumps 52% as it digitises marine cargo cover</h3>
-          <p>Britam reported pre-tax profit of KSh&nbsp;3.8 billion, up 52%, with the net insurance service result up 36% to KSh&nbsp;1.8 billion — growth from underwriting rather than investment gains. The insurer launched a digital marine cargo platform as Kenya moved to mandatory electronic marine cargo certificates in July.</p>
-          <p class="story-src"><a href="https://techtrendske.co.ke/2026/08/28/britam-profit-before-tax-ksh3-8b-h1-2026/" target="_blank" rel="noopener">TechTrends KE</a></p>
+          <span class="no">Edition Nº 1 · Launch &middot; 6 stories</span>
+          <h3>Thursday, 27 August 2026</h3>
+          <p>Welcome to the first edition: the stories shaping Kenyan tech this season, from a shake-up in Africa's funding league table to M-Pesa's biggest platform overhaul yet. A fresh digest lands here every evening at 9.</p>
+          <ul><li>Safaricom cuts M-Pesa fees for businesses in sweeping tariff revision</li><li>Kenya's national AI policy heads toward Cabinet after public consultation</li><li>Ziidi Trader puts the NSE inside 35 million M-Pesa wallets</li></ul>
+          <span class="more">Read edition &rarr;</span>
         </div>
-      </article>
-
-      <article class="story">
-        <div class="thumb">TELCOS<img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="" loading="lazy" onerror="this.remove()"></div>
-        <div class="txt">
-          <h3>Kenya's carriers are not ready for the next wave of connected devices</h3>
-          <p>With a 5G MacBook rumoured for late 2026, neither Safaricom nor Airtel supports cellular wearables or Wi-Fi calling, and only Safaricom carries 5G alongside eSIM. Bundles are shrinking too — Airtel cut its Smarta 1500 allowance from 90GB to 32GB this month — against 51.5 million mobile broadband subscriptions and just 2.46 million fixed lines.</p>
-          <p class="story-src"><a href="https://tech-ish.com/2026/08/29/macbook-ultra-5g-kenya-carriers/" target="_blank" rel="noopener">tech-ish</a></p>
-        </div>
-      </article>
-
-      <article class="story">
-        <div class="thumb">SKILLS<img src="https://images.unsplash.com/photo-1680879275304-bbe20f7e28fb?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="" loading="lazy" onerror="this.remove()"></div>
-        <div class="txt">
-          <h3>TikTok leans on Kenya's appetite for STEM content</h3>
-          <p>New GWI research commissioned by TikTok puts technology interest among Kenyan users at 56% and science at 31%, with Kenyan users 16 percentage points likelier than non-users to follow science. The platform is pushing a dedicated STEM Feed and the #LearnOnTikTok tag, now past 51 million video creations.</p>
-          <p class="story-src"><a href="https://techtrendske.co.ke/2026/08/28/tiktok-drives-stem-learning-across-sub-saharan-africa/" target="_blank" rel="noopener">TechTrends KE</a></p>
-        </div>
-      </article>
-
-      <article class="story">
-        <div class="thumb">GOVERNMENT<img src="https://images.unsplash.com/photo-1741991109902-98bf764fb35d?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="" loading="lazy" onerror="this.remove()"></div>
-        <div class="txt">
-          <h3>KE plates roll out as NTSA plays down the switch</h3>
-          <p>NTSA says the move from KD to KE registrations is routine alphabetical progression, not a new system — though the plates feed the automated enforcement and vehicle identification databases built since the 2022 new-generation rollout. Kenya registered 207,259 vehicles between January and June, 133,127 of them motorcycles.</p>
-          <p class="story-src"><a href="https://techtrendske.co.ke/2026/08/27/ke-number-plates-kenya/" target="_blank" rel="noopener">TechTrends KE</a></p>
-        </div>
-      </article>
-    </div>
-
-    <div class="numbers">
-      <div class="num"><b>KES 0.52</b><span>Per WhatsApp business reply, 1 Oct</span></div>
-      <div class="num"><b>KSh 10.2B</b><span>I&amp;M half-year net profit, up 22%</span></div>
-      <div class="num"><b>92%</b><span>I&amp;M customers digitally active</span></div>
-      <div class="num"><b>51.5M</b><span>Mobile broadband subscriptions</span></div>
-    </div>
-  </section>
-
-
-  <section class="edition">
-    <div class="edition-head">
-      <h2>Friday, 28 August 2026</h2>
-      <span class="no">Edition Nº 2</span>
-    </div>
-    <p class="edition-lede">A regulator draws new lines around the delivery apps, the grid runs perilously thin, and Kenya edges toward the world's main cybercrime treaty — a heavy day for the rules and the wires underneath the ecosystem.</p>
-
-    <article class="lead">
-      <div class="txt">
-        <span class="kicker">Featured · Policy</span>
-        <h3>CA brings Uber, Bolt and Glovo parcel deliveries under licence</h3>
-        <p class="dek">From 20 September 2026, app-based courier operators must verify sender and recipient identities, record declared parcel contents, offer real-time tracking, and keep delivery records retrievable by the Communications Authority, KRA and police. Licences cost Sh5,000 to apply and Sh100,000 initially, with an annual fee of Sh100,000 or 0.4% of gross turnover — whichever is higher — plus a 0.5% universal service levy. Platforms must compensate for lost or damaged goods within 90 days. Uber applied for a national courier licence in June; Bolt is running a rider licensing programme with Mombasa County.</p>
-        <p class="story-src">Source: <a href="https://techtrendske.co.ke/2026/08/27/kenya-app-based-courier-rules-uber-bolt/" target="_blank" rel="noopener">TechTrends KE</a></p>
-      </div>
-      <div class="pic"><img src="https://images.unsplash.com/photo-1741991110666-88115e724741?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Nairobi city skyline by day" loading="lazy" onerror="this.remove()"></div>
-    </article>
-
-    <div class="story-list">
-      <article class="story">
-        <div class="thumb">INFRASTRUCTURE<img src="https://images.unsplash.com/photo-1741991109902-98bf764fb35d?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="" loading="lazy" onerror="this.remove()"></div>
-        <div class="txt">
-          <h3>Kenya's power reserve margin collapses to 3.34%, reviving rationing fears</h3>
-          <p>KNBS data shows the buffer above peak demand fell from 20.73% in January to 3.34% in June, against a comfortable 20–35% norm. Peak demand hit 2,549MW in July and is projected at 2,680MW by 2027 — leaving data centres and heavy industry exposed to any plant or transmission failure.</p>
-          <p class="story-src"><a href="https://techtrendske.co.ke/2026/08/27/kenya-electricity-rationing-risk/" target="_blank" rel="noopener">TechTrends KE</a></p>
-        </div>
-      </article>
-
-      <article class="story">
-        <div class="thumb">POLICY<img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="" loading="lazy" onerror="this.remove()"></div>
-        <div class="txt">
-          <h3>Kenya moves closer to joining the Budapest Convention on cybercrime</h3>
-          <p>Invited to accede in October 2024 and approved by Cabinet in February 2026, the treaty now awaits parliamentary endorsement. It would open 24-hour channels for cross-border evidence requests — and raises questions about foreign access to Kenyan subscriber and traffic data under the Data Protection Act.</p>
-          <p class="story-src"><a href="https://techweez.com/2026/08/27/kenya-budapest-convention-cybercrime/" target="_blank" rel="noopener">Techweez</a></p>
-        </div>
-      </article>
-
-      <article class="story">
-        <div class="thumb">FUNDING<img src="https://images.unsplash.com/photo-1655720357872-ce227e4164ba?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="" loading="lazy" onerror="this.remove()"></div>
-        <div class="txt">
-          <h3>Nairobi's Flowt raises pre-seed to turn messy books into loan-ready data</h3>
-          <p>Founded by Elana Laichena, Flowt uses AI to read transaction histories and bank statements so lenders can assess climate-smart SMEs in days rather than months. Delta40 Fund I, Impacc and the Argidius Foundation backed the undisclosed round; first client was appliance refurbisher GreenBay.</p>
-          <p class="story-src"><a href="https://disruptafrica.com/2026/08/26/kenyan-ai-startup-flowt-raises-pre-seed-funding-round/" target="_blank" rel="noopener">Disrupt Africa</a></p>
-        </div>
-      </article>
-
-      <article class="story">
-        <div class="thumb">AI<img src="https://images.unsplash.com/photo-1573164574511-73c773193279?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="" loading="lazy" onerror="this.remove()"></div>
-        <div class="txt">
-          <h3>Microsoft names Angela Nganga East Africa country lead</h3>
-          <p>A 20-year Microsoft veteran, formerly regional director of customer success for East and West Africa, Nganga fills the seat vacated by Phyllis Migwi in January. Her brief covers the region's first Azure cloud region and data centre, and making East African firms producers of AI rather than only consumers.</p>
-          <p class="story-src"><a href="https://techtrendske.co.ke/2026/08/27/microsoft-names-angela-nganga-east-africa-lead/" target="_blank" rel="noopener">TechTrends KE</a></p>
-        </div>
-      </article>
-
-      <article class="story">
-        <div class="thumb">GOVERNMENT<img src="https://images.unsplash.com/photo-1687422809654-579d81c29d32?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="" loading="lazy" onerror="this.remove()"></div>
-        <div class="txt">
-          <h3>ANITRAC gives every Kenyan cow, goat and sheep a digital identity</h3>
-          <p>Agriculture CS Mutahi Kagwe is rolling out ear tags and microchips tied to a central database, aimed at livestock theft, disease response and export compliance. Kenya produced 613,627 tonnes of meat worth KSh&nbsp;397&nbsp;billion in 2024, with $145.42M exported and Gulf markets the prize.</p>
-          <p class="story-src"><a href="https://khusoko.com/2026/08/28/kenya-anitrac-digital-livestock-traceability/" target="_blank" rel="noopener">Khusoko</a></p>
-        </div>
-      </article>
-
-      <article class="story">
-        <div class="thumb">FINTECH<img src="https://images.unsplash.com/photo-1680879275304-bbe20f7e28fb?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="" loading="lazy" onerror="this.remove()"></div>
-        <div class="txt">
-          <h3>Absa Next launches a wallet that needs no Absa account</h3>
-          <p>The lifestyle wallet splits into personal and BIZ tiers, adds chama group savings, bill-splitting, and savings paying up to 7% annually credited monthly, plus a NEXT Coins rewards ladder — a bank chasing everyday M-Pesa-adjacent behaviour rather than core banking.</p>
-          <p class="story-src"><a href="https://techweez.com/2026/08/28/absa-next-banking-app-review/" target="_blank" rel="noopener">Techweez</a></p>
-        </div>
-      </article>
-    </div>
-
-    <div class="numbers">
-      <div class="num"><b>3.34%</b><span>Power reserve margin, June</span></div>
-      <div class="num"><b>2,549MW</b><span>Peak demand, July 2026</span></div>
-      <div class="num"><b>Sh100K</b><span>Courier licence, per year</span></div>
-      <div class="num"><b>20 Sep</b><span>Courier rules take effect</span></div>
-    </div>
-  </section>
-
-
-  <section class="edition">
-    <div class="edition-head">
-      <h2>Thursday, 27 August 2026</h2>
-      <span class="no">Edition Nº 1 · Launch</span>
-    </div>
-    <p class="edition-lede">Welcome to the first edition: the stories shaping Kenyan tech this season, from a shake-up in Africa's funding league table to M-Pesa's biggest platform overhaul yet. A fresh digest lands here every evening at 9.</p>
-
-    <article class="lead">
-      <div class="txt">
-        <span class="kicker">Featured · Funding</span>
-        <h3>Kenya slips to third in Africa's startup funding table</h3>
-        <p class="dek">Kenya raised $126&nbsp;million in H1 2026 — its weakest half since early 2021 — falling behind Egypt ($327M) and Nigeria ($254M) after leading the continent with $984&nbsp;million in 2025. Africa: The Big Deal data points to investor caution after shutdowns including Koko Networks, Lipa Later, and Ilara Health, with VCs pressing founders on paths to profitability.</p>
-        <p class="story-src">Source: <a href="https://www.businessdailyafrica.com/bd/corporate/companies/kenya-knocked-off-africa-s-startup-funding-top-spot-5546952" target="_blank" rel="noopener">Business Daily Africa</a></p>
-      </div>
-      <div class="pic"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Stock market chart trending downward" loading="lazy" onerror="this.remove()"></div>
-    </article>
-
-    <div class="story-list">
-      <article class="story">
-        <div class="thumb">FINTECH<img src="https://images.unsplash.com/photo-1687422809654-579d81c29d32?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="" loading="lazy" onerror="this.remove()"></div>
-        <div class="txt">
-          <h3>Safaricom cuts M-Pesa fees for businesses in sweeping tariff revision</h3>
-          <p>From 7 August: Pochi transactions to KSh&nbsp;200 free, Buy Goods free threshold doubled to KSh&nbsp;500 (0.55% above, capped at KSh&nbsp;200), and till transfers down up to 50% — aimed at MSMEs and aligned with CBK pricing principles.</p>
-          <p class="story-src"><a href="https://peopledaily.digital/business/safaricom-announces-sweeping-m-pesa-fee-cuts-for-kenyan-businesses" target="_blank" rel="noopener">People Daily</a></p>
-        </div>
-      </article>
-
-      <article class="story">
-        <div class="thumb">POLICY<img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="" loading="lazy" onerror="this.remove()"></div>
-        <div class="txt">
-          <h3>Kenya's national AI policy heads toward Cabinet after public consultation</h3>
-          <p>The draft policy — a National AI Steering Committee, a Kenya AI Safety Institute, a public registry, and AI in Kenyan languages — closed comments on 4 August and now moves toward Cabinet approval alongside the AI Bill in Parliament.</p>
-          <p class="story-src"><a href="https://techweez.com/2026/07/28/kenya-ai-policy-2026-public-consultation/" target="_blank" rel="noopener">Techweez</a> · <a href="https://peopledaily.digital/news/ict-cs-kabogo-launches-public-consultation-on-ai-and-emerging-technologies-policy" target="_blank" rel="noopener">People Daily</a></p>
-        </div>
-      </article>
-
-      <article class="story">
-        <div class="thumb">FINTECH<img src="https://images.unsplash.com/photo-1651341050677-24dba59ce0fd?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="" loading="lazy" onerror="this.remove()"></div>
-        <div class="txt">
-          <h3>Ziidi Trader puts the NSE inside 35 million M-Pesa wallets</h3>
-          <p>Safaricom's in-app stock trading, built with Kestrel Capital, lets users buy NSE shares without a brokerage account — quickly hitting ~40% of trades. The NSE targets 9&nbsp;million retail investors by end of 2029.</p>
-          <p class="story-src"><a href="https://www.cnbcafrica.com/2026/kenyas-safaricom-starts-offering-stock-trading-on-its-m-pesa-platform" target="_blank" rel="noopener">CNBC Africa</a></p>
-        </div>
-      </article>
-
-      <article class="story">
-        <div class="thumb">INFRASTRUCTURE<img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="" loading="lazy" onerror="this.remove()"></div>
-        <div class="txt">
-          <h3>M-Pesa's "Fintech 2.0" rebuild targets a $14.5B payments market</h3>
-          <p>Cloud-native with AI fraud detection, capacity up from 4,500 to 6,000 transactions per second (scalable to 12,000). M-Pesa earned KSh&nbsp;161.1B in FY2025 — 44% of Safaricom's service revenue — holding ~90.8% of Kenya's digital payments.</p>
-          <p class="story-src"><a href="https://www.ecofinagency.com/news-digital/2309-48926-safaricom-retools-m-pesa-for-fintech-2-0-eyeing-a-14-5-billion-market" target="_blank" rel="noopener">Ecofin Agency</a></p>
-        </div>
-      </article>
-
-      <article class="story">
-        <div class="thumb">GOVERNMENT<img src="https://images.unsplash.com/photo-1573164574572-cb89e39749b4?q=80&amp;w=600&amp;auto=format&amp;fit=crop" alt="" loading="lazy" onerror="this.remove()"></div>
-        <div class="txt">
-          <h3>ICT Authority tightens risk management on national digital programmes</h3>
-          <p>The board and management met 20 August to review delivery risks across public Wi-Fi, institutional connectivity, and digital skills programmes — with a focus on resilience, accountability, and faster delivery.</p>
-          <p class="story-src"><a href="https://techafricanews.com/2026/08/20/kenya-ict-authority-strengthens-risk-management-to-accelerate-digital-programme-delivery/" target="_blank" rel="noopener">TechAfrica News</a></p>
-        </div>
-      </article>
-    </div>
-
-    <div class="numbers">
-      <div class="num"><b>$126M</b><span>Kenya VC, H1 2026</span></div>
-      <div class="num"><b>35M</b><span>M-Pesa users in Kenya</span></div>
-      <div class="num"><b>90.8%</b><span>M-Pesa payments share</span></div>
-      <div class="num"><b>6,000</b><span>Transactions / second</span></div>
-    </div>
-  </section>
-
-  <!-- EDITIONS:END -->
-
-  <section class="archive">
-    <h2>Previous Editions</h2>
-    <div class="archive-box">
-      <!-- ARCHIVE:START — editions older than 7 days move here as: <details><summary>DATE — one-line recap</summary> ...full edition markup... </details> -->
-      <p class="archive-empty">The archive begins tomorrow — every past edition stays browsable here.</p>
-      <!-- ARCHIVE:END -->
-    </div>
-  </section>
+      </a>
+  </div>
 </div>
 
 <footer class="site">
@@ -571,108 +431,5 @@
     <p class="note">The Daily Savannah is The Tech Hut's automated daily digest of Kenya's tech ecosystem, researched and written by Claude every evening at 9:00 PM Nairobi time. Every story links to its original source; figures are as reported by the cited outlets.</p>
   </div>
 </footer>
-
-<script>
-(function () {
-  // ── The Tech Hut anonymous reactions ─────────────────────────────────────────
-  // To sync reaction counts for ALL visitors, paste your Firebase web app config
-  // below (Firebase console → Project settings → Your apps → Add web app → config
-  // object) and enable Realtime Database with the rules from the setup notes.
-  // Until then, reactions still work but are saved per visitor on their device.
-  var FIREBASE_CONFIG = null;
-  // Example:
-  // var FIREBASE_CONFIG = { apiKey: "...", authDomain: "ai-study-pal.firebaseapp.com",
-  //   databaseURL: "https://ai-study-pal-default-rtdb.firebaseio.com",
-  //   projectId: "ai-study-pal", appId: "..." };
-
-  var EMOJIS = [["like", "👍"], ["love", "❤️"], ["fire", "🔥"]];
-  var PAGE = location.pathname.indexOf("/blog/daily") === 0 ? "daily" : "blog";
-  var db = null, ready = null;
-
-  function slug(t) {
-    return (t || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60);
-  }
-  function store(k, v) {
-    try {
-      if (v === undefined) return JSON.parse(localStorage.getItem(k) || "{}");
-      localStorage.setItem(k, JSON.stringify(v));
-    } catch (e) { return {}; }
-  }
-  function loadFirebase() {
-    if (!FIREBASE_CONFIG) return Promise.resolve(null);
-    if (ready) return ready;
-    ready = new Promise(function (res) {
-      var n = 0;
-      ["firebase-app-compat", "firebase-database-compat"].forEach(function (m) {
-        var s = document.createElement("script");
-        s.src = "https://www.gstatic.com/firebasejs/10.12.2/" + m + ".js";
-        s.onload = function () {
-          if (++n === 2) {
-            try { firebase.initializeApp(FIREBASE_CONFIG); db = firebase.database(); } catch (e) { db = null; }
-            res(db);
-          }
-        };
-        s.onerror = function () { res(null); };
-        document.head.appendChild(s);
-      });
-    });
-    return ready;
-  }
-  function attach(container, id) {
-    if (!container || !id || container.querySelector(".reactions")) return;
-    var bar = document.createElement("div");
-    bar.className = "reactions";
-    var mine = store("tth-my-reactions");
-    var counts = store("tth-local-counts");
-    EMOJIS.forEach(function (pair) {
-      var key = pair[0], face = pair[1];
-      var btn = document.createElement("button");
-      btn.type = "button";
-      btn.setAttribute("aria-label", "React with " + key);
-      var c = (counts[id] && counts[id][key]) || 0;
-      btn.innerHTML = face + " <span>" + c + "</span>";
-      if (mine[id] && mine[id][key]) btn.classList.add("on");
-      btn.addEventListener("click", function () {
-        var m = store("tth-my-reactions");
-        m[id] = m[id] || {};
-        var on = !m[id][key];
-        m[id][key] = on;
-        store("tth-my-reactions", m);
-        btn.classList.toggle("on", on);
-        if (db) {
-          db.ref("reactions/" + PAGE + "/" + id + "/" + key)
-            .transaction(function (v) { return Math.max(0, (v || 0) + (on ? 1 : -1)); });
-        } else {
-          var cs = store("tth-local-counts");
-          cs[id] = cs[id] || {};
-          cs[id][key] = Math.max(0, (cs[id][key] || 0) + (on ? 1 : -1));
-          store("tth-local-counts", cs);
-          btn.querySelector("span").textContent = cs[id][key];
-        }
-      });
-      bar.appendChild(btn);
-    });
-    container.appendChild(bar);
-    loadFirebase().then(function (d) {
-      if (!d) return;
-      d.ref("reactions/" + PAGE + "/" + id).on("value", function (snap) {
-        var v = snap.val() || {};
-        bar.querySelectorAll("button").forEach(function (b, i) {
-          b.querySelector("span").textContent = v[EMOJIS[i][0]] || 0;
-        });
-      });
-    });
-  }
-  window.TTHReactions = { attach: attach, slug: slug };
-  function auto() {
-    document.querySelectorAll("article.lead .txt, article.story .txt").forEach(function (txt) {
-      var h = txt.querySelector("h3");
-      if (h) attach(txt, slug(h.textContent));
-    });
-  }
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", auto);
-  else auto();
-})();
-</script>
 </body>
 </html>
