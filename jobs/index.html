@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Jobs | The Tech Hut</title>
+  <meta name="description" content="Remote tech jobs open worldwide — curated for Kenyan developers, designers and data people by The Tech Hut. Updated live from Jobicy and Remote OK.">
+  <meta name="keywords" content="remote tech jobs, Kenya developer jobs, Nairobi tech jobs, remote developer jobs Africa, worldwide remote jobs, The Tech Hut">
+  <meta name="author" content="The Tech Hut">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#06D6A0">
+  <link rel="canonical" href="https://thetechhut.co/jobs/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="The Tech Hut">
+  <meta property="og:title" content="Tech Jobs — Remote roles open worldwide">
+  <meta property="og:description" content="Remote tech jobs open worldwide — curated for Kenyan developers, designers and data people by The Tech Hut.">
+  <meta property="og:url" content="https://thetechhut.co/jobs/">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1741991110666-88115e724741?q=80&w=1200&h=630&auto=format&fit=crop">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Nairobi city skyline">
+  <meta property="og:locale" content="en_KE">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tech Jobs — Remote roles open worldwide">
+  <meta name="twitter:description" content="Remote tech roles a Nairobi-based developer can actually apply to. Updated live.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1741991110666-88115e724741?q=80&w=1200&h=630&auto=format&fit=crop">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap">
+<style>
+  :root {
+    --bg: #f0f4f8; --card: #ffffff; --ink: #073B4C; --body: #4a5568; --muted: #718096;
+    --green: #06D6A0; --green-dark: #05b384; --gold: #FFD700; --footer: #073B4C;
+    --line: rgba(7,59,76,0.10);
+    --shadow: 0 8px 20px rgba(7,59,76,0.08); --shadow-hover: 0 12px 25px rgba(7,59,76,0.15);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--body); font-size: 1rem; line-height: 1.6;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
+  h1,h2,h3,h4 { font-family: "Poppins","Inter",sans-serif; color: var(--ink); }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+    outline: 2px solid var(--green); outline-offset: 2px; border-radius: 4px; }
+  .shell { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  header.site { background: var(--green); position: sticky; top: 0; z-index: 50; }
+  header.site .inner { max-width: 72rem; margin: 0 auto; padding: 1rem 1.5rem;
+    display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+  header.site .brand { display: flex; align-items: baseline; gap: 0.55rem; text-decoration: none; }
+  header.site .brand b { font-family: "Poppins",sans-serif; font-weight: 700; font-size: 1.15rem; color: #fff; }
+  header.site .brand span { font-family: "Poppins",sans-serif; font-weight: 600; font-size: 0.8rem;
+    color: var(--ink); background: rgba(255,255,255,0.35); border-radius: 9999px; padding: 0.15rem 0.75rem; }
+  header.site nav { display: flex; gap: 1.5rem; }
+  header.site nav a { color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color .3s; }
+  header.site nav a:hover { color: var(--gold); }
+  @media (max-width: 640px) { header.site nav { display: none; } }
+
+  /* hero */
+  .hero { text-align: center; padding: 3rem 0 2.25rem; }
+  .hero h1 { font-weight: 800; font-size: clamp(2rem,5.5vw,3rem); line-height: 1.1; margin-bottom: 0.6rem; }
+  .hero h1 em { font-style: normal; color: var(--green-dark); }
+  .hero p.sub { max-width: 34rem; margin: 0 auto 0.5rem; color: var(--muted); }
+  .hero .count { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--green-dark); margin-bottom: 1.5rem; display: block; }
+  .searchbar { display: flex; gap: 0.5rem; max-width: 40rem; margin: 0 auto 1rem; }
+  .searchbar input { flex: 1; min-width: 0; font: inherit; font-size: 0.95rem; color: var(--ink);
+    background: var(--card); border: 1px solid var(--line); border-radius: 9999px;
+    padding: 0.85rem 1.25rem; box-shadow: var(--shadow); }
+  .searchbar input::placeholder { color: var(--muted); }
+  .searchbar button { font-family: "Poppins",sans-serif; font-weight: 700; font-size: 0.9rem; color: #fff;
+    background: var(--green); border: none; border-radius: 9999px; padding: 0.85rem 1.9rem; cursor: pointer;
+    box-shadow: 0 5px 15px rgba(6,214,160,0.35); transition: transform .2s, box-shadow .2s; }
+  .searchbar button:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(6,214,160,0.45); }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; align-items: center;
+    font-size: 0.82rem; color: var(--muted); }
+  .chips button { font: inherit; font-weight: 600; color: var(--ink); background: var(--card);
+    border: 1px solid var(--line); border-radius: 9999px; padding: 0.3rem 0.9rem; cursor: pointer; transition: all .2s; }
+  .chips button:hover { border-color: var(--green); color: var(--green-dark); }
+
+  /* layout */
+  .cols { display: grid; grid-template-columns: 1fr; gap: 2rem; padding-bottom: 3rem; }
+  @media (min-width: 900px) { .cols { grid-template-columns: 15rem minmax(0,1fr); align-items: start; } }
+
+  aside.filters { background: var(--card); border-radius: 1rem; box-shadow: var(--shadow); padding: 1.4rem 1.5rem; }
+  @media (min-width: 900px) { aside.filters { position: sticky; top: 5.5rem; } }
+  aside.filters h2 { font-size: 1rem; font-weight: 700; margin-bottom: 1.1rem; }
+  .fgroup { margin-bottom: 1.3rem; }
+  .fgroup > label { display: block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+  .fgroup select { width: 100%; font: inherit; font-size: 0.88rem; color: var(--ink); background: var(--bg);
+    border: 1px solid var(--line); border-radius: 0.6rem; padding: 0.55rem 0.7rem; cursor: pointer; }
+  .pills { display: flex; flex-direction: column; gap: 0.4rem; }
+  .pills button { font: inherit; font-size: 0.85rem; font-weight: 600; text-align: left; color: var(--ink);
+    background: var(--bg); border: 1px solid transparent; border-radius: 0.6rem; padding: 0.5rem 0.8rem;
+    cursor: pointer; transition: all .2s; }
+  .pills button:hover { border-color: var(--green); }
+  .pills button[aria-pressed="true"] { background: var(--green); color: #fff; box-shadow: 0 4px 12px rgba(6,214,160,0.35); }
+  .clearbtn { width: 100%; font-family: "Poppins",sans-serif; font-weight: 700; font-size: 0.85rem;
+    color: var(--green-dark); background: transparent; border: 1px solid var(--green); border-radius: 9999px;
+    padding: 0.6rem; cursor: pointer; transition: all .2s; }
+  .clearbtn:hover { background: var(--green); color: #fff; }
+
+  .listhead { background: var(--card); border-radius: 1rem; box-shadow: var(--shadow);
+    padding: 1.1rem 1.5rem; margin-bottom: 1.25rem; display: flex; flex-wrap: wrap; gap: 0.75rem;
+    align-items: baseline; justify-content: space-between; }
+  .listhead h2 { font-size: 1.15rem; font-weight: 700; }
+  .listhead h2 span { color: var(--muted); font-weight: 500; font-size: 0.95rem; }
+  .listhead .sortwrap { font-size: 0.8rem; color: var(--muted); }
+  .listhead select { font: inherit; font-size: 0.82rem; color: var(--ink); background: var(--bg);
+    border: 1px solid var(--line); border-radius: 0.5rem; padding: 0.35rem 0.5rem; cursor: pointer; }
+
+  .job { background: var(--card); border-radius: 1rem; box-shadow: var(--shadow); padding: 1.3rem 1.5rem;
+    margin-bottom: 1rem; display: grid; grid-template-columns: 3.25rem minmax(0,1fr); gap: 1.1rem;
+    transition: transform .25s, box-shadow .25s; }
+  .job:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+  @media (min-width: 700px) { .job { grid-template-columns: 3.25rem minmax(0,1fr) auto; align-items: start; } }
+  .logo { width: 3.25rem; height: 3.25rem; border-radius: 0.7rem; overflow: hidden; background: rgba(6,214,160,0.14);
+    display: flex; align-items: center; justify-content: center; font-family: "Poppins",sans-serif;
+    font-weight: 700; font-size: 1.25rem; color: var(--green-dark); }
+  .logo img { width: 100%; height: 100%; object-fit: contain; background: #fff; }
+  .job h3 { font-size: 1.05rem; font-weight: 700; line-height: 1.3; margin-bottom: 0.2rem; }
+  .job h3 a { text-decoration: none; }
+  .job h3 a:hover { color: var(--green-dark); }
+  .job .co { font-size: 0.9rem; font-weight: 600; color: var(--body); margin-bottom: 0.45rem; }
+  .job .meta { display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; font-size: 0.8rem; color: var(--muted);
+    margin-bottom: 0.6rem; }
+  .job .excerpt { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.6rem;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .tags span { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--green-dark); background: rgba(6,214,160,0.13); border-radius: 9999px; padding: 0.2rem 0.65rem; }
+  .tags span.src { color: var(--muted); background: var(--bg); }
+  .apply { align-self: center; }
+  .apply a { display: inline-block; font-family: "Poppins",sans-serif; font-weight: 700; font-size: 0.85rem;
+    color: #fff; background: var(--green); border-radius: 9999px; padding: 0.6rem 1.4rem; text-decoration: none;
+    white-space: nowrap; box-shadow: 0 4px 12px rgba(6,214,160,0.35); transition: transform .2s, box-shadow .2s; }
+  .apply a:hover { transform: translateY(-1px); box-shadow: 0 7px 18px rgba(6,214,160,0.45); }
+  .posted { font-size: 0.72rem; color: var(--muted); text-align: right; margin-bottom: 0.5rem; }
+  @media (max-width: 699px) { .posted { text-align: left; } .apply { align-self: start; } }
+
+  .state { background: var(--card); border-radius: 1rem; box-shadow: var(--shadow); padding: 2.5rem 1.5rem;
+    text-align: center; color: var(--muted); }
+  .state h3 { margin-bottom: 0.5rem; }
+  .skeleton { background: var(--card); border-radius: 1rem; box-shadow: var(--shadow); padding: 1.3rem 1.5rem;
+    margin-bottom: 1rem; display: grid; grid-template-columns: 3.25rem minmax(0,1fr); gap: 1.1rem; }
+  .sk { background: linear-gradient(90deg, #e9eef4 25%, #f4f7fa 50%, #e9eef4 75%);
+    background-size: 200% 100%; animation: sh 1.3s infinite; border-radius: 0.5rem; }
+  @keyframes sh { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+  .more { display: block; margin: 1.5rem auto 0; font-family: "Poppins",sans-serif; font-weight: 700;
+    font-size: 0.88rem; color: var(--green-dark); background: var(--card); border: 1px solid var(--green);
+    border-radius: 9999px; padding: 0.7rem 2rem; cursor: pointer; transition: all .2s; }
+  .more:hover { background: var(--green); color: #fff; }
+
+  .credits { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem 3rem; font-size: 0.78rem; color: var(--muted);
+    text-align: center; line-height: 1.8; }
+  .credits a { color: var(--green-dark); font-weight: 600; }
+
+  footer.site { background: var(--footer); color: #e2e8f0; padding: 2.5rem 0; text-align: center; }
+  footer.site .links { margin-top: 1rem; display: flex; justify-content: center; gap: 1.25rem;
+    font-size: 0.85rem; font-weight: 600; }
+  footer.site a { color: #e2e8f0; text-decoration: none; transition: color .3s; }
+  footer.site a:hover { color: var(--gold); }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="inner">
+    <a class="brand" href="https://thetechhut.co/"><b>The Tech Hut</b><span>Jobs</span></a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/blog/">Blog</a>
+      <a href="/blog/daily/">Daily</a>
+      <a href="/apprenticeship/">Apprenticeship</a>
+      <a href="/communities/">Community</a>
+    </nav>
+  </div>
+</header>
+
+<div class="shell">
+  <div class="hero">
+    <h1>Tech <em>Jobs</em></h1>
+    <p class="sub">Remote roles open worldwide — the ones you can actually take from Nairobi. Refreshed every time you load the page.</p>
+    <span class="count" id="count">Loading roles…</span>
+    <form class="searchbar" id="searchform" role="search">
+      <input id="q" type="search" placeholder="Search roles, companies, or skills…" aria-label="Search jobs">
+      <button type="submit">Search</button>
+    </form>
+    <div class="chips">
+      <span>Popular:</span>
+      <button type="button" data-chip="developer">Developer</button>
+      <button type="button" data-chip="design">Design</button>
+      <button type="button" data-chip="data">Data</button>
+      <button type="button" data-chip="devops">DevOps</button>
+      <button type="button" data-chip="junior">Entry level</button>
+    </div>
+  </div>
+
+  <div class="cols">
+    <aside class="filters">
+      <h2>Filters</h2>
+      <div class="fgroup">
+        <label for="ftype">Job type</label>
+        <select id="ftype"><option value="">All types</option></select>
+      </div>
+      <div class="fgroup">
+        <label for="fcat">Category</label>
+        <select id="fcat"><option value="">All categories</option></select>
+      </div>
+      <div class="fgroup">
+        <label>Date posted</label>
+        <div class="pills" id="fdate">
+          <button type="button" data-days="0" aria-pressed="true">Any time</button>
+          <button type="button" data-days="1" aria-pressed="false">Past 24 hours</button>
+          <button type="button" data-days="3" aria-pressed="false">Last 3 days</button>
+          <button type="button" data-days="7" aria-pressed="false">Past week</button>
+          <button type="button" data-days="30" aria-pressed="false">Past month</button>
+        </div>
+      </div>
+      <button class="clearbtn" id="clear" type="button">Clear filters</button>
+    </aside>
+
+    <main>
+      <div class="listhead">
+        <h2>Available jobs <span id="shown"></span></h2>
+        <span class="sortwrap">Sort
+          <select id="sort">
+            <option value="date">Newest first</option>
+            <option value="title">Title A–Z</option>
+            <option value="company">Company A–Z</option>
+          </select>
+        </span>
+      </div>
+      <div id="list"></div>
+      <button class="more" id="more" type="button" hidden>Show more roles</button>
+    </main>
+  </div>
+</div>
+
+<p class="credits">
+  Listings are pulled live from
+  <a href="https://jobicy.com/" target="_blank" rel="noopener">Jobicy</a> and
+  <a href="https://remoteok.com/" target="_blank" rel="noopener">Remote OK</a>.
+  Every apply button opens the original posting on the source site — The Tech Hut does not host applications
+  and is not the employer. Always verify a role before sharing personal details; never pay to apply.
+</p>
+
+<footer class="site">
+  <div class="shell">
+    <p>&copy; 2026 The Tech Hut. All rights reserved.</p>
+    <div class="links">
+      <a href="/">Home</a><a href="/blog/">Blog</a><a href="/blog/daily/">Daily</a><a href="/communities/">Community</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var PAGE = 20, shownCount = PAGE, all = [], view = [];
+  var state = { q: '', type: '', cat: '', days: 0, sort: 'date' };
+  var $ = function (id) { return document.getElementById(id); };
+
+  // --- helpers -------------------------------------------------------------
+  function clean(s, max) {                      // external text is untrusted: strip markup entirely
+    if (!s) return '';
+    var d = document.createElement('div');
+    d.innerHTML = String(s);
+    var t = (d.textContent || '').replace(/\s+/g, ' ').trim();
+    return max && t.length > max ? t.slice(0, max).replace(/\s\S*$/, '') + '…' : t;
+  }
+  function titleCase(s) {
+    return String(s || '').replace(/[-_]+/g, ' ')
+      .replace(/\b\w/g, function (c) { return c.toUpperCase(); }).trim();
+  }
+  function ago(iso) {
+    var t = Date.parse(iso); if (isNaN(t)) return '';
+    var m = Math.floor((Date.now() - t) / 60000);
+    if (m < 60) return m <= 1 ? 'just now' : m + ' min ago';
+    var h = Math.floor(m / 60); if (h < 24) return h + (h === 1 ? ' hour ago' : ' hours ago');
+    var d = Math.floor(h / 24); if (d < 30) return d + (d === 1 ? ' day ago' : ' days ago');
+    var mo = Math.floor(d / 30); return mo + (mo === 1 ? ' month ago' : ' months ago');
+  }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function safeUrl(u) { return /^https:\/\//i.test(u || '') ? u : ''; }
+
+  // Remote OK's tags are unreliable (a retail role comes tagged "dev"), so roles are
+  // classified on the job TITLE only, in three tiers: strong tech wins outright,
+  // an explicit non-tech word rules a role out, otherwise a looser tech match decides.
+  var STRONG = /(developer|engineer|engineering|software|programmer|devops|\bsre\b|full.?stack|front.?end|back.?end|data scien|data analyst|data engineer|machine learning|\bml\b|\bai\b|cyber ?security|infosec|\bqa\b|\bux\b|\bui\b|product design|product manager|web design|technical writer|solutions architect|cloud|database|sysadmin|system administrator|network admin|it support|help ?desk|scrum|technical support)/i;
+  var NONTECH = /(maintenance|janitor|cleaner|housekeep|store manager|retail|cashier|barista|waiter|waitress|chef|cook|nurse|caregiver|therapist|driver|delivery|warehouse|forklift|teacher|tutor|babysit|nanny|landscap|plumb|electrician|carpent|welder|mechanic|security guard|receptionist|dog |groom)/i;
+  var TECH = /(develop|engineer|software|front.?end|back.?end|full.?stack|data|devops|cloud|security|mobile|ios|android|python|javascript|typescript|react|node|java|golang|rust|ruby|php|design|\bui\b|\bux\b|product|\bqa\b|machine.?learning|\bai\b|\bml\b|analyst|architect|sre|platform|\bapi\b|database|sql|\bit\b|cyber|scrum|webflow|wordpress)/i;
+  function isTechRole(title) {
+    if (STRONG.test(title)) return true;
+    if (NONTECH.test(title)) return false;
+    return TECH.test(title);
+  }
+  function catFromTitle(t) {
+    if (/(devops|\bsre\b|infrastructure|platform|cloud|kubernetes)/i.test(t)) return 'DevOps & Infrastructure';
+    if (/(security|cyber|infosec)/i.test(t)) return 'Cybersecurity';
+    if (/(data|analyst|analytics|machine learning|\bml\b|\bai\b)/i.test(t)) return 'Data & AI';
+    if (/(design|\bux\b|\bui\b)/i.test(t)) return 'Design';
+    if (/(product manager|product owner)/i.test(t)) return 'Product & Operations';
+    if (/(\bqa\b|test)/i.test(t)) return 'QA & Testing';
+    if (/(support|help ?desk)/i.test(t)) return 'Technical Support';
+    return 'Software Engineering';
+  }
+
+  // --- sources -------------------------------------------------------------
+  function fromJobicy(d) {
+    return (d && d.jobs || []).map(function (j) {
+      return {
+        id: 'jobicy-' + j.id,
+        title: clean(j.jobTitle),
+        company: clean(j.companyName),
+        logo: safeUrl(j.companyLogo),
+        location: clean(j.jobGeo) || 'Anywhere',
+        types: [].concat(j.jobType || []).map(clean).filter(Boolean),
+        cats: [].concat(j.jobIndustry || []).map(clean).filter(Boolean),
+        level: clean(j.jobLevel),
+        excerpt: clean(j.jobExcerpt, 190),
+        url: safeUrl(j.url),
+        date: j.pubDate,
+        source: 'Jobicy'
+      };
+    });
+  }
+  function fromRemoteOK(arr) {
+    return (Array.isArray(arr) ? arr : []).filter(function (j) { return j && j.position; })
+      .map(function (j) {
+        var title = clean(j.position);
+        return {
+          id: 'rok-' + j.id,
+          title: title,
+          company: clean(j.company),
+          logo: safeUrl(j.company_logo || j.logo),
+          location: clean(j.location).replace(/,\s*$/, '') || 'Anywhere',
+          types: [],
+          cats: [catFromTitle(title)],
+          level: '',
+          excerpt: clean(j.description, 190),
+          url: safeUrl(j.url || j.apply_url),
+          date: j.date,
+          source: 'Remote OK',
+          _tags: (j.tags || []).map(clean).filter(Boolean)
+        };
+      })
+      .filter(function (j) { return isTechRole(j.title); });
+  }
+
+  function load() {
+    var jobicy = fetch('https://jobicy.com/api/v2/remote-jobs?count=50&geo=anywhere')
+      .then(function (r) { return r.json(); }).then(fromJobicy).catch(function () { return []; });
+    var rok = fetch('https://remoteok.com/api')
+      .then(function (r) { return r.json(); })
+      .then(function (a) { return fromRemoteOK(a.slice(1)); }).catch(function () { return []; });
+
+    return Promise.all([jobicy, rok]).then(function (res) {
+      var merged = res[0].concat(res[1]).filter(function (j) { return j.title && j.url; });
+      var seen = {};
+      merged = merged.filter(function (j) {                 // same role listed on both boards
+        var k = (j.title + '|' + j.company).toLowerCase().replace(/[^a-z0-9|]/g, '');
+        if (seen[k]) return false; seen[k] = 1; return true;
+      });
+      merged.sort(function (a, b) { return (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0); });
+      return merged;
+    });
+  }
+
+  // --- filtering & rendering ----------------------------------------------
+  function apply() {
+    var q = state.q.toLowerCase();
+    view = all.filter(function (j) {
+      if (q) {
+        var hay = (j.title + ' ' + j.company + ' ' + j.cats.join(' ') + ' ' +
+                   (j._tags || []).join(' ') + ' ' + j.excerpt).toLowerCase();
+        if (hay.indexOf(q) === -1) return false;
+      }
+      if (state.type && j.types.indexOf(state.type) === -1) return false;
+      if (state.cat && j.cats.indexOf(state.cat) === -1) return false;
+      if (state.days) {
+        var t = Date.parse(j.date);
+        if (isNaN(t) || t < Date.now() - state.days * 864e5) return false;
+      }
+      return true;
+    });
+    if (state.sort === 'title') view.sort(function (a, b) { return a.title.localeCompare(b.title); });
+    else if (state.sort === 'company') view.sort(function (a, b) { return a.company.localeCompare(b.company); });
+    else view.sort(function (a, b) { return (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0); });
+    shownCount = PAGE;
+    render();
+  }
+
+  function card(j) {
+    var initial = esc((j.company || '?').charAt(0).toUpperCase());
+    var logo = j.logo
+      ? '<img src="' + esc(j.logo) + '" alt="" loading="lazy" onerror="this.remove()">'
+      : '';
+    var chips = j.cats.slice(0, 2).concat(j.types.slice(0, 1)).concat(j.level ? [j.level] : []);
+    return '<article class="job">' +
+      '<div class="logo">' + initial + logo + '</div>' +
+      '<div>' +
+        '<h3><a href="' + esc(j.url) + '" target="_blank" rel="noopener">' + esc(j.title) + '</a></h3>' +
+        '<div class="co">' + esc(j.company || 'Company not listed') + '</div>' +
+        '<div class="meta"><span>📍 ' + esc(j.location) + '</span>' +
+          (j.date ? '<span>🕒 ' + esc(ago(j.date)) + '</span>' : '') + '</div>' +
+        (j.excerpt ? '<p class="excerpt">' + esc(j.excerpt) + '</p>' : '') +
+        '<div class="tags">' +
+          chips.map(function (c) { return '<span>' + esc(c) + '</span>'; }).join('') +
+          '<span class="src">via ' + esc(j.source) + '</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="apply"><a href="' + esc(j.url) + '" target="_blank" rel="noopener">View job</a></div>' +
+    '</article>';
+  }
+
+  function render() {
+    var list = $('list');
+    $('shown').textContent = '(' + view.length + ')';
+    if (!view.length) {
+      list.innerHTML = '<div class="state"><h3>No roles match those filters</h3>' +
+        '<p>Try clearing a filter or searching a broader term.</p></div>';
+      $('more').hidden = true;
+      return;
+    }
+    list.innerHTML = view.slice(0, shownCount).map(card).join('');
+    $('more').hidden = shownCount >= view.length;
+  }
+
+  function fillSelects() {
+    var types = {}, cats = {};
+    all.forEach(function (j) {
+      j.types.forEach(function (t) { types[t] = 1; });
+      j.cats.forEach(function (c) { cats[c] = 1; });
+    });
+    function fill(el, obj, label) {
+      var keys = Object.keys(obj).sort();
+      el.innerHTML = '<option value="">' + label + '</option>' +
+        keys.map(function (k) { return '<option value="' + esc(k) + '">' + esc(k) + '</option>'; }).join('');
+    }
+    fill($('ftype'), types, 'All types');
+    fill($('fcat'), cats, 'All categories');
+  }
+
+  // --- wiring --------------------------------------------------------------
+  $('searchform').addEventListener('submit', function (e) { e.preventDefault(); state.q = $('q').value.trim(); apply(); });
+  $('q').addEventListener('input', function () { state.q = this.value.trim(); apply(); });
+  $('ftype').addEventListener('change', function () { state.type = this.value; apply(); });
+  $('fcat').addEventListener('change', function () { state.cat = this.value; apply(); });
+  $('sort').addEventListener('change', function () { state.sort = this.value; apply(); });
+  $('fdate').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-days]'); if (!b) return;
+    [].forEach.call(this.querySelectorAll('button'), function (x) { x.setAttribute('aria-pressed', 'false'); });
+    b.setAttribute('aria-pressed', 'true');
+    state.days = +b.dataset.days; apply();
+  });
+  document.querySelector('.chips').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-chip]'); if (!b) return;
+    $('q').value = b.dataset.chip; state.q = b.dataset.chip; apply();
+    document.querySelector('.listhead').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  $('clear').addEventListener('click', function () {
+    state = { q: '', type: '', cat: '', days: 0, sort: 'date' };
+    $('q').value = ''; $('ftype').value = ''; $('fcat').value = ''; $('sort').value = 'date';
+    [].forEach.call($('fdate').querySelectorAll('button'), function (x, i) {
+      x.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
+    });
+    apply();
+  });
+  $('more').addEventListener('click', function () { shownCount += PAGE; render(); });
+
+  // --- boot ----------------------------------------------------------------
+  $('list').innerHTML = new Array(5).join('x').split('x').map(function () {
+    return '<div class="skeleton"><div class="sk" style="width:3.25rem;height:3.25rem"></div>' +
+      '<div><div class="sk" style="height:1rem;width:55%;margin-bottom:.55rem"></div>' +
+      '<div class="sk" style="height:.8rem;width:32%;margin-bottom:.55rem"></div>' +
+      '<div class="sk" style="height:.8rem;width:85%"></div></div></div>';
+  }).join('');
+
+  load().then(function (jobs) {
+    all = jobs;
+    if (!all.length) throw new Error('empty');
+    try { localStorage.setItem('tth-jobs', JSON.stringify({ t: Date.now(), jobs: all.slice(0, 60) })); } catch (e) {}
+    $('count').textContent = all.length + ' open roles · updated ' + new Date().toLocaleDateString('en-KE',
+      { day: 'numeric', month: 'short', year: 'numeric' });
+    fillSelects(); apply();
+  }).catch(function () {
+    var cached = null;
+    try { cached = JSON.parse(localStorage.getItem('tth-jobs') || 'null'); } catch (e) {}
+    if (cached && cached.jobs && cached.jobs.length) {
+      all = cached.jobs;
+      $('count').textContent = all.length + ' roles · showing your last saved copy';
+      fillSelects(); apply();
+    } else {
+      $('count').textContent = '';
+      $('list').innerHTML = '<div class="state"><h3>Couldn\'t load roles just now</h3>' +
+        '<p>The job feeds are unreachable from this network. Try again shortly, or browse ' +
+        '<a href="https://jobicy.com/" target="_blank" rel="noopener">Jobicy</a> and ' +
+        '<a href="https://remoteok.com/" target="_blank" rel="noopener">Remote OK</a> directly.</p></div>';
+      $('more').hidden = true;
+    }
+  });
+})();
+</script>
+</body>
+</html>

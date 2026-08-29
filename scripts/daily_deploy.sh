@@ -11,7 +11,7 @@ clean() {
 }
 mkdir -p .git/_to_delete
 clean
-git add -A blog/daily blog/index.html scripts firebase.json
+git add -A blog/daily blog/index.html jobs scripts firebase.json
 clean
 git -c user.name="The Daily Savannah" -c user.email="daily@thetechhut.co" \
     commit -m "${1:-Daily Savannah edition}"
