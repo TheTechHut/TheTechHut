@@ -1,5 +1,5 @@
 #!/bin/sh
-# Commits and pushes the Daily Savannah edition.
+# Commits and pushes The Daily Savannah.
 # The Claude sandbox cannot delete files, so git's leftover lock files are
 # moved into .git/_to_delete/ (safe to empty manually at any time).
 cd "$(dirname "$0")/.." || exit 1
@@ -11,9 +11,10 @@ clean() {
 }
 mkdir -p .git/_to_delete
 clean
-git add blog/daily/index.html
+git add -A blog/daily blog/index.html scripts firebase.json
 clean
-git -c user.name="The Daily Savannah" -c user.email="daily@thetechhut.co" commit -m "${1:-Daily Savannah edition}"
+git -c user.name="The Daily Savannah" -c user.email="daily@thetechhut.co" \
+    commit -m "${1:-Daily Savannah edition}"
 clean
 git push origin chore/redesign
 status=$?

@@ -1,0 +1,451 @@
+<!-- Shared chrome for The Daily Savannah. Edit design here, then run scripts/build_daily.py -->
+<!-- STYLE -->
+<style>
+  :root {
+    --bg: #f0f4f8;
+    --card: #ffffff;
+    --ink: #073B4C;
+    --body: #4a5568;
+    --muted: #718096;
+    --green: #06D6A0;
+    --green-dark: #05b384;
+    --gold: #FFD700;
+    --footer: #073B4C;
+    --shadow: 0 8px 20px rgba(7, 59, 76, 0.08);
+    --shadow-hover: 0 12px 25px rgba(7, 59, 76, 0.15);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--body);
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { font-family: "Poppins", "Inter", sans-serif; color: var(--ink); }
+  a:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; border-radius: 4px; }
+  .shell { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ---- Header (matches blog index) ---- */
+  header.site {
+    background: var(--green);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  header.site .inner {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+  header.site .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 0.55rem;
+    text-decoration: none;
+  }
+  header.site .brand b {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: #ffffff;
+  }
+  header.site .brand span {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--ink);
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 9999px;
+    padding: 0.15rem 0.75rem;
+  }
+  header.site nav { display: flex; gap: 1.5rem; }
+  header.site nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  header.site nav a:hover { color: var(--gold); }
+  @media (max-width: 640px) { header.site nav { display: none; } }
+
+  /* ---- Page title ---- */
+  .pagehead { padding: 2.75rem 0 0.5rem; }
+  .pagehead h1 { font-weight: 800; font-size: clamp(1.9rem, 5vw, 2.8rem); line-height: 1.15; margin-bottom: 0.4rem; }
+  .pagehead h1 em { font-style: normal; color: var(--green-dark); }
+  .pagehead .sub {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.25rem;
+    align-items: center;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .pagehead .auto {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--green-dark);
+    background: rgba(6, 214, 160, 0.12);
+    border: 1px solid rgba(6, 214, 160, 0.4);
+    border-radius: 9999px;
+    padding: 0.2rem 0.85rem;
+    letter-spacing: 0.04em;
+  }
+
+  /* ---- Edition ---- */
+  section.edition { padding-top: 2.25rem; }
+  .edition-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6rem; margin-bottom: 0.35rem; }
+  .edition-head h2 { font-weight: 700; font-size: 1.6rem; }
+  .edition-head .no {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green-dark);
+  }
+  .edition-lede { color: var(--muted); font-size: 0.95rem; margin-bottom: 1.5rem; max-width: 46rem; }
+
+  /* ---- Lead story: split card like the blog's Featured ---- */
+  article.lead {
+    background: var(--card);
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  article.lead:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+  @media (min-width: 768px) { article.lead { flex-direction: row; } }
+  article.lead .txt { padding: 2rem 2.25rem; display: flex; flex-direction: column; justify-content: center; }
+  @media (min-width: 768px) { article.lead .txt { width: 55%; } article.lead .pic { width: 45%; } }
+  .kicker {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green-dark);
+    margin-bottom: 0.5rem;
+  }
+  article.lead h3 { font-weight: 700; font-size: clamp(1.3rem, 3vw, 1.8rem); line-height: 1.25; margin-bottom: 0.7rem; }
+  article.lead p.dek { font-size: 0.96rem; margin-bottom: 0.9rem; }
+  article.lead .pic { background: rgba(6, 214, 160, 0.12); min-height: 12rem; position: relative; }
+  article.lead .pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+  /* ---- Story cards: grid like All Blogs ---- */
+  .story-list { display: grid; grid-template-columns: 1fr; gap: 1.75rem; }
+  @media (min-width: 640px) { .story-list { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1024px) { .story-list { grid-template-columns: 1fr 1fr 1fr; } }
+  article.story {
+    background: var(--card);
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  article.story:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+  .thumb {
+    position: relative;
+    height: 10.5rem;
+    background: linear-gradient(135deg, rgba(6, 214, 160, 0.2), rgba(7, 59, 76, 0.15));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.14em;
+    color: var(--green-dark);
+  }
+  .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  article.story .txt { padding: 1.4rem 1.5rem 1.3rem; display: flex; flex-direction: column; flex: 1; }
+  article.story h3 { font-weight: 700; font-size: 1.05rem; line-height: 1.35; margin-bottom: 0.5rem; }
+  article.story p { font-size: 0.87rem; margin-bottom: 0.8rem; }
+  .story-src { margin-top: auto; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  .story-src a { color: var(--green-dark); text-decoration: none; }
+  .story-src a:hover { color: var(--ink); text-decoration: underline; }
+
+  /* ---- Numbers strip ---- */
+  .numbers {
+    background: var(--card);
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: 1rem;
+    margin-top: 1.75rem;
+    padding: 1.4rem 1.6rem;
+  }
+  .num b {
+    display: block;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 1.55rem;
+    color: var(--green-dark);
+    font-variant-numeric: tabular-nums;
+  }
+  .num span { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* ---- Archive ---- */
+  section.archive { margin-top: 3.25rem; }
+  section.archive > h2 { font-weight: 700; font-size: 1.6rem; margin-bottom: 1rem; }
+  .archive-box { background: var(--card); border-radius: 1rem; box-shadow: var(--shadow); padding: 0.9rem 1.6rem; }
+  .archive-box details { border-top: 1px solid rgba(7, 59, 76, 0.1); }
+  .archive-box details:first-of-type { border-top: none; }
+  .archive-box summary {
+    cursor: pointer;
+    padding: 0.85rem 0;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--ink);
+    transition: color 0.3s ease;
+  }
+  .archive-box summary:hover { color: var(--green-dark); }
+  .archive-box .archive-empty { color: var(--muted); font-style: italic; padding: 0.85rem 0; }
+  .archive-box .story-list { padding-bottom: 1.25rem; }
+  .archive-box article.lead { margin-top: 0.5rem; margin-bottom: 1.5rem; }
+
+  /* ---- Footer (matches blog index) ---- */
+  footer.site {
+    margin-top: 3.5rem;
+    background: var(--footer);
+    color: #e2e8f0;
+    padding: 2.5rem 0;
+    text-align: center;
+  }
+  footer.site .links { margin-top: 1rem; display: flex; justify-content: center; gap: 1.25rem; font-size: 0.85rem; font-weight: 600; }
+  footer.site a { color: #e2e8f0; text-decoration: none; transition: color 0.3s ease; }
+  footer.site a:hover { color: var(--gold); }
+  footer.site .note { margin-top: 1.1rem; font-size: 0.76rem; color: #a0aec0; max-width: 44rem; margin-left: auto; margin-right: auto; padding: 0 1.5rem; }
+  /* ---- Reactions ---- */
+  .reactions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.9rem; }
+  .reactions button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: "Inter", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ink);
+    background: var(--bg);
+    border: 1px solid rgba(7, 59, 76, 0.14);
+    border-radius: 9999px;
+    padding: 0.3rem 0.8rem;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  }
+  .reactions button:hover { border-color: var(--green); transform: translateY(-1px); }
+  .reactions button.on { background: rgba(6, 214, 160, 0.16); border-color: var(--green); }
+  .reactions button span { color: var(--muted); font-variant-numeric: tabular-nums; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+  /* ---- Edition index cards ---- */
+  .ed-grid { display: grid; grid-template-columns: 1fr; gap: 1.75rem; }
+  @media (min-width: 640px) { .ed-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1024px) { .ed-grid { grid-template-columns: 1fr 1fr 1fr; } }
+  a.ed-card {
+    background: var(--card); border-radius: 1rem; box-shadow: var(--shadow);
+    overflow: hidden; display: flex; flex-direction: column; text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  a.ed-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+  a.ed-card .pic { position: relative; height: 11rem; background: rgba(6,214,160,0.12); }
+  a.ed-card .pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  a.ed-card .txt { padding: 1.4rem 1.5rem 1.3rem; display: flex; flex-direction: column; flex: 1; }
+  a.ed-card .no {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--green-dark); margin-bottom: 0.4rem;
+  }
+  a.ed-card h3 { font-weight: 700; font-size: 1.12rem; line-height: 1.3; margin-bottom: 0.5rem; }
+  a.ed-card p { font-size: 0.86rem; color: var(--body); margin-bottom: 0.8rem; }
+  a.ed-card, a.ed-latest { color: var(--body); }
+  a.ed-card ul { list-style: none; margin: 0 0 0.9rem; padding: 0; }
+  a.ed-card li {
+    font-size: 0.8rem; color: var(--muted); padding-left: 0.9rem; position: relative;
+    margin-bottom: 0.25rem; line-height: 1.45;
+  }
+  a.ed-card li::before { content: "\2022"; position: absolute; left: 0; color: var(--green); }
+  a.ed-card .more {
+    margin-top: auto; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em;
+    color: var(--green-dark);
+  }
+  a.ed-card:hover .more { color: var(--ink); }
+
+  /* Latest edition banner */
+  a.ed-latest {
+    display: flex; flex-direction: column; background: var(--card); border-radius: 1rem;
+    box-shadow: var(--shadow); overflow: hidden; text-decoration: none; margin-bottom: 3rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  a.ed-latest:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+  @media (min-width: 768px) { a.ed-latest { flex-direction: row; }
+    a.ed-latest .txt { width: 55%; } a.ed-latest .pic { width: 45%; } }
+  a.ed-latest .txt { padding: 2rem 2.25rem; display: flex; flex-direction: column; justify-content: center; }
+  a.ed-latest .pic { position: relative; min-height: 13rem; background: rgba(6,214,160,0.12); }
+  a.ed-latest .pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  a.ed-latest h3 { font-weight: 700; font-size: clamp(1.3rem, 3vw, 1.75rem); line-height: 1.22; margin-bottom: 0.6rem; }
+  a.ed-latest p { font-size: 0.95rem; margin-bottom: 0.9rem; color: var(--body); }
+
+  .section-title {
+    font-weight: 700; font-size: 1.35rem; margin-bottom: 1.1rem;
+    padding-bottom: 0.6rem; border-bottom: 2px solid rgba(6,214,160,0.35);
+  }
+
+  /* ---- Edition page nav ---- */
+  .backlink {
+    display: inline-block; margin: 1.75rem 0 0; font-size: 0.82rem; font-weight: 700;
+    letter-spacing: 0.04em; color: var(--green-dark); text-decoration: none;
+  }
+  .backlink:hover { color: var(--ink); }
+  .ed-nav {
+    display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between;
+    margin-top: 2.5rem; padding-top: 1.4rem; border-top: 2px solid rgba(6,214,160,0.35);
+  }
+  .ed-nav a {
+    font-size: 0.86rem; font-weight: 600; color: var(--green-dark); text-decoration: none;
+    max-width: 22rem;
+  }
+  .ed-nav a:hover { color: var(--ink); }
+  .ed-nav a small { display: block; font-size: 0.68rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 0.2rem; }
+  .ed-nav .next { text-align: right; margin-left: auto; }
+</style>
+<!-- HEADER -->
+<header class="site">
+  <div class="inner">
+    <a class="brand" href="https://thetechhut.co/blog/"><b>The Tech Hut</b><span>Daily</span></a>
+    <nav>
+      <a href="https://thetechhut.co/">Home</a>
+      <a href="https://thetechhut.co/blog/">Blog</a>
+      <a href="https://thetechhut.co/communities/">Community</a>
+      <a href="https://thetechhut.co/events/">Events</a>
+    </nav>
+  </div>
+</header>
+<!-- FOOTER -->
+<footer class="site">
+  <div class="shell">
+    <p>&copy; 2026 The Tech Hut. All rights reserved.</p>
+    <div class="links">
+      <a href="https://thetechhut.co/">Home</a>
+      <a href="https://thetechhut.co/blog/">Blog</a>
+      <a href="https://thetechhut.co/communities/">Community</a>
+      <a href="https://thetechhut.co/events/">Events</a>
+    </div>
+    <p class="note">The Daily Savannah is The Tech Hut's automated daily digest of Kenya's tech ecosystem, researched and written by Claude every evening at 9:00 PM Nairobi time. Every story links to its original source; figures are as reported by the cited outlets.</p>
+  </div>
+</footer>
+<!-- SCRIPT -->
+<script>
+(function () {
+  // ── The Tech Hut anonymous reactions ─────────────────────────────────────────
+  // To sync reaction counts for ALL visitors, paste your Firebase web app config
+  // below (Firebase console → Project settings → Your apps → Add web app → config
+  // object) and enable Realtime Database with the rules from the setup notes.
+  // Until then, reactions still work but are saved per visitor on their device.
+  var FIREBASE_CONFIG = null;
+  // Example:
+  // var FIREBASE_CONFIG = { apiKey: "...", authDomain: "ai-study-pal.firebaseapp.com",
+  //   databaseURL: "https://ai-study-pal-default-rtdb.firebaseio.com",
+  //   projectId: "ai-study-pal", appId: "..." };
+
+  var EMOJIS = [["like", "👍"], ["love", "❤️"], ["fire", "🔥"]];
+  var PAGE = location.pathname.indexOf("/blog/daily") === 0 ? "daily" : "blog";
+  var db = null, ready = null;
+
+  function slug(t) {
+    return (t || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60);
+  }
+  function store(k, v) {
+    try {
+      if (v === undefined) return JSON.parse(localStorage.getItem(k) || "{}");
+      localStorage.setItem(k, JSON.stringify(v));
+    } catch (e) { return {}; }
+  }
+  function loadFirebase() {
+    if (!FIREBASE_CONFIG) return Promise.resolve(null);
+    if (ready) return ready;
+    ready = new Promise(function (res) {
+      var n = 0;
+      ["firebase-app-compat", "firebase-database-compat"].forEach(function (m) {
+        var s = document.createElement("script");
+        s.src = "https://www.gstatic.com/firebasejs/10.12.2/" + m + ".js";
+        s.onload = function () {
+          if (++n === 2) {
+            try { firebase.initializeApp(FIREBASE_CONFIG); db = firebase.database(); } catch (e) { db = null; }
+            res(db);
+          }
+        };
+        s.onerror = function () { res(null); };
+        document.head.appendChild(s);
+      });
+    });
+    return ready;
+  }
+  function attach(container, id) {
+    if (!container || !id || container.querySelector(".reactions")) return;
+    var bar = document.createElement("div");
+    bar.className = "reactions";
+    var mine = store("tth-my-reactions");
+    var counts = store("tth-local-counts");
+    EMOJIS.forEach(function (pair) {
+      var key = pair[0], face = pair[1];
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.setAttribute("aria-label", "React with " + key);
+      var c = (counts[id] && counts[id][key]) || 0;
+      btn.innerHTML = face + " <span>" + c + "</span>";
+      if (mine[id] && mine[id][key]) btn.classList.add("on");
+      btn.addEventListener("click", function () {
+        var m = store("tth-my-reactions");
+        m[id] = m[id] || {};
+        var on = !m[id][key];
+        m[id][key] = on;
+        store("tth-my-reactions", m);
+        btn.classList.toggle("on", on);
+        if (db) {
+          db.ref("reactions/" + PAGE + "/" + id + "/" + key)
+            .transaction(function (v) { return Math.max(0, (v || 0) + (on ? 1 : -1)); });
+        } else {
+          var cs = store("tth-local-counts");
+          cs[id] = cs[id] || {};
+          cs[id][key] = Math.max(0, (cs[id][key] || 0) + (on ? 1 : -1));
+          store("tth-local-counts", cs);
+          btn.querySelector("span").textContent = cs[id][key];
+        }
+      });
+      bar.appendChild(btn);
+    });
+    container.appendChild(bar);
+    loadFirebase().then(function (d) {
+      if (!d) return;
+      d.ref("reactions/" + PAGE + "/" + id).on("value", function (snap) {
+        var v = snap.val() || {};
+        bar.querySelectorAll("button").forEach(function (b, i) {
+          b.querySelector("span").textContent = v[EMOJIS[i][0]] || 0;
+        });
+      });
+    });
+  }
+  window.TTHReactions = { attach: attach, slug: slug };
+  function auto() {
+    document.querySelectorAll("article.lead .txt, article.story .txt").forEach(function (txt) {
+      var h = txt.querySelector("h3");
+      if (h) attach(txt, slug(h.textContent));
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", auto);
+  else auto();
+})();
+</script>
