@@ -563,8 +563,11 @@ body section .text {
 }
 
 body main .text h1,
+body main .text h2,
 body .showcase .text h1,
-body section .text h1 {
+body .showcase .text h2,
+body section .text h1,
+body section .text h2 {
     font-size: 3em;
     width: 100%
 }
@@ -611,7 +614,8 @@ body section:nth-of-type(2) {
     display: flex !important
 }
 
-body section:nth-of-type(2) h1 {
+body section:nth-of-type(2) h1,
+body section:nth-of-type(2) h2 {
     font-weight: bold;
     font-size: 3em
 }
@@ -799,8 +803,12 @@ body footer .container .links a {
     }
 
     body main .text h1,
+
+    body main .text h2,
     body .showcase .text h1,
-    body section .text h1 {
+    body .showcase .text h2,
+    body section .text h1,
+    body section .text h2 {
         font-size: 2em;
         width: 100%;
         text-align: center
@@ -863,7 +871,8 @@ body footer .container .links a {
         justify-items: center
     }
 
-    body section:nth-of-type(2) h1 {
+    body section:nth-of-type(2) h1,
+body section:nth-of-type(2) h2 {
         font-weight: bold;
         font-size: 2rem;
         width: 100%;

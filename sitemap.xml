@@ -2,39 +2,98 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://thetechhut.co/</loc>
-    <lastmod>2026-06-10</lastmod>
+    <lastmod>2026-08-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.00</priority>
   </url>
   <url>
-    <loc>https://thetechhut.co/content</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://thetechhut.co/blog/</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://thetechhut.co/blog/daily/</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://thetechhut.co/jobs/</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://thetechhut.co/apprenticeship/</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://thetechhut.co/test.html</loc>
-    <lastmod>2026-05-20</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://thetechhut.co/events/</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.70</priority>
   </url>
-
+  <url>
+    <loc>https://thetechhut.co/communities/</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://thetechhut.co/recruiters/</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://thetechhut.co/stories/</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.50</priority>
+  </url>
+  <url>
+    <loc>https://thetechhut.co/roadmap/</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.50</priority>
+  </url>
   <url>
     <loc>https://thetechhut.co/entrepreneurial_challenge/</loc>
-    <lastmod>2026-04-15</lastmod>
+    <lastmod>2026-08-30</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.60</priority>
+    <priority>0.50</priority>
   </url>
   <url>
-    <loc>https://thetechhut.co/entrepreneurial_challenge/projects/</loc>
-    <lastmod>2026-05-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.60</priority>
+    <loc>https://thetechhut.co/data_privacy_policy/</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.30</priority>
   </url>
   <url>
-    <loc>https://thetechhut.co/entrepreneurial_challenge/projects/interview_dojo/</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.80</priority>
+    <loc>https://thetechhut.co/blog/daily/2026-08-30/</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://thetechhut.co/blog/daily/2026-08-29/</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://thetechhut.co/blog/daily/2026-08-28/</loc>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://thetechhut.co/blog/daily/2026-08-27/</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.70</priority>
   </url>
 </urlset>

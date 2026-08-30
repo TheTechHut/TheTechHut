@@ -1,0 +1,14 @@
+# robots.txt for thetechhut.co
+User-agent: *
+Allow: /
+
+# Internal build sources and scratch pages - no value in search results
+Disallow: /blog/daily/_src/
+Disallow: /scripts/
+Disallow: /test.html
+Disallow: /love1.html
+Disallow: /love_template_two.html
+Disallow: /invoice.html
+Disallow: /cv.html
+
+Sitemap: https://thetechhut.co/sitemap.xml
