@@ -124,6 +124,9 @@
             <!-- Updated "Events" link -->
             <a href="https://thetechhut.co/events" class="nav-link">Events</a>
             <a href="https://thetechhut.co/apprenticeship" class="nav-link">Apprenticeship</a>
+            <a href="https://thetechhut.co/blog/" class="nav-link">Blog</a>
+            <a href="https://thetechhut.co/blog/daily/" class="nav-link">Daily</a>
+            <a href="https://thetechhut.co/jobs/" class="nav-link">Jobs</a>
         </nav>
     </header>
 
@@ -226,6 +229,72 @@
         </div>
     </section>
 
+
+    <!-- Explore: links to the blog, daily digest and jobs board.
+         Placed last so the section:nth-of-type(2) rules in style.css keep matching "Our Solutions".
+         Styles are scoped to #explore here so a future SCSS rebuild cannot clobber them. -->
+    <style>
+      /* .flex-container lays children out in a row; force a column so the heading sits above the cards */
+      #explore { width: 100%; padding: 10px 20px 60px; display: flex; flex-direction: column; align-items: center; }
+      #explore > h1 { width: 100%; text-align: center; margin-bottom: 4px; }
+      /* the footer link groups sit in one inline-flex row; let them wrap on narrow widths */
+      body footer .container .links { flex-wrap: wrap; gap: 14px 32px; }
+      body footer .container .links > div { gap: 10px 24px; }
+      #explore .explore-grid {
+        display: grid; grid-template-columns: 1fr; gap: 22px;
+        width: 100%; max-width: 1100px; margin: 30px auto 0;
+      }
+      @media (min-width: 760px) { #explore .explore-grid { grid-template-columns: repeat(3, 1fr); } }
+      #explore .ex-card {
+        display: flex; flex-direction: column; align-items: flex-start; text-align: left;
+        border: 1px solid rgba(4, 97, 44, .8); border-radius: 16px; padding: 26px 24px;
+        background: rgba(255, 255, 255, .04); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+        text-decoration: none; transition: transform .3s ease, border-color .3s ease, background .3s ease;
+      }
+      #explore .ex-card:hover {
+        transform: translateY(-6px); border-color: #2ECC71; background: rgba(255, 255, 255, .08);
+      }
+      #explore .ex-tag {
+        font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+        color: #91FBBF; margin-bottom: 12px;
+      }
+      #explore .ex-card h3 {
+        font-size: 20px; font-weight: 700; margin: 0 0 10px; line-height: 1.25;
+        background: linear-gradient(-45deg, #91FBBF, #2ECC71);
+        background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
+      }
+      #explore .ex-card p {
+        font-size: 14px; font-weight: 300; line-height: 1.65; margin: 0 0 18px;
+        color: rgba(250, 255, 251, .72);
+      }
+      #explore .ex-more { margin-top: auto; font-size: 13px; font-weight: 700; color: #91FBBF; letter-spacing: .03em; }
+      #explore .ex-card:hover .ex-more { color: #fff; }
+      @media (prefers-reduced-motion: reduce) { #explore .ex-card { transition: none; } }
+    </style>
+    <section class="flex-container" id="explore">
+        <h1 class="txt-light txt-gradient txt-bold">Explore The Tech Hut</h1>
+        <div class="explore-grid">
+            <a class="ex-card" href="https://thetechhut.co/blog/">
+                <span class="ex-tag">Read</span>
+                <h3>The Blog</h3>
+                <p>Tutorials, guides and deep dives on building a tech career &mdash; written for people learning by doing.</p>
+                <span class="ex-more">Browse articles &rarr;</span>
+            </a>
+            <a class="ex-card" href="https://thetechhut.co/blog/daily/">
+                <span class="ex-tag">Every day at 9pm</span>
+                <h3>The Daily Savannah</h3>
+                <p>Kenya&rsquo;s tech ecosystem in one daily digest: startups, funding, fintech, policy and infrastructure &mdash; every story sourced.</p>
+                <span class="ex-more">Read today&rsquo;s edition &rarr;</span>
+            </a>
+            <a class="ex-card" href="https://thetechhut.co/jobs/">
+                <span class="ex-tag">Updated live</span>
+                <h3>Tech Jobs</h3>
+                <p>Remote roles open worldwide &mdash; the ones you can actually take from Nairobi. Search and filter by role, type and date.</p>
+                <span class="ex-more">Find your next role &rarr;</span>
+            </a>
+        </div>
+    </section>
+
     <footer>
         <div class='container'>
             <div class='branding'>
@@ -266,10 +335,17 @@
 
             <div class='links'>
                 <div class='grid-4'>
+                    <a href="https://thetechhut.co/blog/">Blog</a>
+                    <a href="https://thetechhut.co/blog/daily/">Daily Savannah</a>
+                    <a href="https://thetechhut.co/jobs/">Tech Jobs</a>
+                    <a href="https://thetechhut.co/apprenticeship">Apprenticeship</a>
+                </div>
+
+                <div class='grid-4'>
+                    <a href="https://thetechhut.co/events">Events</a>
+                    <a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H">Community</a>
                     <a href="">Become a mentor</a>
                     <a href="">Find a mentor</a>
-                    <a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H">Community</a>
-                    <a href="https://linkedin.com/company/digital-transformation-partner/">Blog</a>
                 </div>
 
                 <div class='grid-3'>
