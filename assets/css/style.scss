@@ -393,7 +393,7 @@ body {
             background-color: darken($primary-color, 20);
             box-sizing: border-box;
             padding: 1% 2%;
-            display: none;
+            display: flex;
             flex-direction: column;
 
 

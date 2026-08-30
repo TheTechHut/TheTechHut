@@ -920,7 +920,7 @@ body section:nth-of-type(2) h2 {
         background-color: rgba(1, 38, 17, .9568627451);
         box-sizing: border-box;
         padding: 1% 2%;
-        display: none;
+        display: flex;
         flex-direction: column
     }
 
