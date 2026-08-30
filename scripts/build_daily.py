@@ -125,7 +125,11 @@ for i, d in enumerate(eds):
                 f'<small>Next edition</small>{newer["datetext"]} &rarr;</a>')
     nav = f'<div class="ed-nav">{nav}</div>' if nav else ''
     url = f'{SITE}/blog/daily/{d["slug"]}/'
-    page = head(f'{d["datetext"]} — The Daily Savannah', d['lede'], url, d['img'], d['alt'])
+    lead_t = html.unescape(strip_tags(d['lead_title']))
+    plus = '; '.join(html.unescape(strip_tags(h)) for h in d['heads'])
+    seo_title = f'{lead_t} — The Daily Savannah, {d["datetext"]}'
+    seo_desc = f'{lead_t}. Plus: {plus}.' if plus else d['lede']
+    page = head(seo_title, seo_desc, url, d['img'], d['alt'])
     page += f'''
 {STYLE}
 
