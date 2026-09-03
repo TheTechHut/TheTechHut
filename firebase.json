@@ -9,7 +9,6 @@
       "scripts/**"
     ],
     "cleanUrls": true,
-    "trailingSlash": false,
     "redirects": [
       {
         "source": "/blog/daily/index.html",
