@@ -258,3 +258,39 @@ if os.path.exists(blog_index):
         print(f'Injected {len(rows)} edition(s) into blog/index.html')
     else:
         print('NOTE: DAILY:START/END markers missing in blog/index.html - skipped')
+
+
+# ---- regenerate sitemap.xml so every edition is discoverable -------------
+# Static pages are listed explicitly; daily editions are derived from the
+# fragments, so a new edition reaches the sitemap the moment it is built.
+STATIC_PAGES = [
+    ('/',                            '1.00', 'weekly'),
+    ('/blog/',                       '0.90', 'daily'),
+    ('/blog/daily/',                 '0.90', 'daily'),
+    ('/jobs/',                       '0.90', 'daily'),
+    ('/apprenticeship/',             '0.80', 'monthly'),
+    ('/events/',                     '0.70', 'weekly'),
+    ('/communities/',                '0.60', 'monthly'),
+    ('/recruiters/',                 '0.60', 'monthly'),
+    ('/content/',                    '0.50', 'monthly'),
+    ('/afro-ip/',                    '0.50', 'monthly'),
+    ('/entrepreneurial_challenge/',  '0.50', 'monthly'),
+    ('/data_privacy_policy/',        '0.30', 'yearly'),
+]
+today = datetime.date.today().isoformat()
+rows = []
+for loc, pri, freq in STATIC_PAGES:
+    if loc != '/' and not os.path.isdir(os.path.join(ROOT, loc.strip('/'))):
+        continue                                  # never list a page that isn't on disk
+    rows.append((loc, today, freq, pri))
+for d in eds:                                     # newest first, already sorted
+    rows.append((f'/blog/daily/{d["slug"]}/', d['slug'], 'never', '0.70'))
+
+xml = ['<?xml version="1.0" encoding="UTF-8"?>',
+       '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+for loc, mod, freq, pri in rows:
+    xml += ['  <url>', f'    <loc>{SITE}{loc}</loc>', f'    <lastmod>{mod}</lastmod>',
+            f'    <changefreq>{freq}</changefreq>', f'    <priority>{pri}</priority>', '  </url>']
+xml.append('</urlset>')
+open(os.path.join(ROOT, 'sitemap.xml'), 'w').write('\n'.join(xml) + '\n')
+print(f'sitemap.xml: {len(rows)} URLs ({len(eds)} daily editions)')
