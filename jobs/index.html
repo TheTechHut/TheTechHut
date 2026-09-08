@@ -398,7 +398,7 @@
   function card(j) {
     var initial = esc((j.company || '?').charAt(0).toUpperCase());
     var logo = j.logo
-      ? '<img src="' + esc(j.logo) + '" alt="" loading="lazy" onerror="this.remove()">'
+      ? '<img src="' + esc(j.logo) + '" alt="" decoding="async" onerror="this.remove()">'
       : '';
     var chips = j.cats.slice(0, 2).concat(j.types.slice(0, 1)).concat(j.level ? [j.level] : []);
     return '<article class="job">' +

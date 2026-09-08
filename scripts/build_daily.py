@@ -169,7 +169,7 @@ latest = eds[0]
 def card(d):
     teasers = ''.join(f'<li>{t}</li>' for t in d['heads'])
     return f'''      <a class="ed-card" href="/blog/daily/{d['slug']}/">
-        <div class="pic"><img src="{d['img']}" alt="{html.escape(d['alt'], quote=True)}" loading="lazy" onerror="this.remove()"></div>
+        <div class="pic"><img src="{d['img']}" alt="{html.escape(d['alt'], quote=True)}" decoding="async" onerror="this.remove()"></div>
         <div class="txt">
           <span class="no">{html.escape(d['no'])} &middot; {d['count']} stories</span>
           <h3>{d['datetext']}</h3>
@@ -205,7 +205,7 @@ index += f'''
       <p>{latest['lede']}</p>
       <span class="more" style="font-size:0.8rem;font-weight:700;color:var(--green-dark)">Read the full edition &rarr;</span>
     </div>
-    <div class="pic"><img src="{latest['img']}" alt="{html.escape(latest['alt'], quote=True)}" loading="lazy" onerror="this.remove()"></div>
+    <div class="pic"><img src="{latest['img']}" alt="{html.escape(latest['alt'], quote=True)}" fetchpriority="high" decoding="async" onerror="this.remove()"></div>
   </a>
 
   <h2 class="section-title">All editions</h2>
