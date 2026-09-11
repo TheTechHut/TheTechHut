@@ -112,6 +112,24 @@ if not slugs:
 eds = [load(s) for s in slugs]
 eds.sort(key=lambda d: d['date'], reverse=True)   # newest first
 
+# ---- lead-image reuse check -------------------------------------------------
+# Every edition card on /blog/ and /blog/daily/ shows its lead image, so a
+# repeated one reads as a duplicate post. Warn loudly; never silently ship it.
+_seen = {}
+_dupes = []
+for _d in sorted(eds, key=lambda x: x['date']):
+    _key = re.sub(r'\?.*$', '', _d['img'])
+    if not _key:
+        continue
+    if _key in _seen:
+        _dupes.append('  %s reuses the lead image of %s  (%s)'
+                      % (_d['slug'], _seen[_key], _key.rsplit('/', 1)[-1]))
+    else:
+        _seen[_key] = _d['slug']
+if _dupes:
+    print('build_daily.py: WARNING - duplicate lead images:')
+    print('\n'.join(_dupes))
+
 # ---- per-edition pages ----
 for i, d in enumerate(eds):
     newer = eds[i-1] if i > 0 else None
