@@ -286,6 +286,7 @@ STATIC_PAGES = [
     ('/blog/',                       '0.90', 'daily'),
     ('/blog/daily/',                 '0.90', 'daily'),
     ('/jobs/',                       '0.90', 'daily'),
+    ('/blog/dangote-ipo-fintech/',   '0.70', 'monthly'),
     ('/apprenticeship/',             '0.80', 'monthly'),
     ('/events/',                     '0.70', 'weekly'),
     ('/communities/',                '0.60', 'monthly'),
