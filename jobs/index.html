@@ -251,8 +251,8 @@
   Listings are pulled live from
   <a href="https://jobicy.com/" target="_blank" rel="noopener">Jobicy</a>,
   <a href="https://remoteok.com/" target="_blank" rel="noopener">Remote OK</a>, and the public job-board
-  APIs of employers hiring into Kenya &mdash; M-KOPA, One Acre Fund, Andela,
-  Jumia, Tala, Apollo Agriculture and Zipline.
+  APIs of employers hiring into Kenya &mdash; Sun King, M-KOPA, One Acre Fund,
+  Andela, GiveDirectly, Jumia, Tala, Apollo Agriculture and Zipline.
   Every apply button opens the original posting on the source site — The Tech Hut does not host applications
   and is not the employer. Always verify a role before sharing personal details; never pay to apply.
 </p>
@@ -388,7 +388,9 @@
     { name: 'Jumia',             ats: 'greenhouse', slug: 'jumia' },
     { name: 'Zipline',           ats: 'greenhouse', slug: 'flyzipline' },
     { name: 'Tala',              ats: 'lever',      slug: 'tala' },
-    { name: 'Apollo Agriculture', ats: 'lever',     slug: 'apolloagriculture' }
+    { name: 'Apollo Agriculture', ats: 'lever',     slug: 'apolloagriculture' },
+    { name: 'Sun King',          ats: 'pinpoint',   slug: 'sunking' },
+    { name: 'GiveDirectly',      ats: 'greenhouse', slug: 'givedirectly' }
   ];
   var PER_COMPANY = 25;          // one big global board must not swamp the page
 
@@ -442,14 +444,35 @@
       };
     });
   }
+  function fromPinpoint(d, co) {
+    return (d && d.data || []).map(function (j) {
+      var loc = j.location || {};
+      return {
+        id: 'pp-' + co.slug + '-' + j.id,
+        title: clean(j.title),
+        company: co.name,
+        logo: '',
+        location: clean(loc.name || loc.city) || 'Not stated',
+        types: j.employment_type_text ? [clean(j.employment_type_text)] : [],
+        cats: [catFromTitle(clean(j.title))],
+        level: '',
+        excerpt: clean(String(j.description || '').replace(/<[^>]*>/g, ' '), 190),
+        url: safeUrl(j.url),
+        date: '',                       // Pinpoint's feed carries no posted date
+        source: co.name
+      };
+    });
+  }
   function loadCompany(co) {
     var url = co.ats === 'greenhouse' ? 'https://boards-api.greenhouse.io/v1/boards/' + co.slug + '/jobs'
             : co.ats === 'lever'      ? 'https://api.lever.co/v0/postings/' + co.slug + '?mode=json'
+            : co.ats === 'pinpoint'   ? 'https://' + co.slug + '.pinpointhq.com/postings.json'
             :                           'https://api.ashbyhq.com/posting-api/job-board/' + co.slug;
     return fetch(url).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
       if (!d) return [];
       var jobs = co.ats === 'greenhouse' ? fromGreenhouse(d, co)
                : co.ats === 'lever'      ? fromLever(d, co)
+               : co.ats === 'pinpoint'   ? fromPinpoint(d, co)
                :                           fromAshby(d, co);
       jobs = jobs.filter(function (j) { return j.title && j.url && isTechRole(j.title); });
       jobs.forEach(function (j) { j.region = regionOf(j.location); });
