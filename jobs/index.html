@@ -209,6 +209,15 @@
         <select id="fcat"><option value="">All categories</option></select>
       </div>
       <div class="fgroup">
+        <label>Region</label>
+        <div class="pills" id="fregion">
+          <button type="button" data-region="" aria-pressed="true">Everywhere</button>
+          <button type="button" data-region="Kenya" aria-pressed="false">Kenya</button>
+          <button type="button" data-region="Rest of Africa" aria-pressed="false">Rest of Africa</button>
+          <button type="button" data-region="Remote" aria-pressed="false">Remote</button>
+        </div>
+      </div>
+      <div class="fgroup">
         <label>Date posted</label>
         <div class="pills" id="fdate">
           <button type="button" data-days="0" aria-pressed="true">Any time</button>
@@ -240,8 +249,10 @@
 
 <p class="credits">
   Listings are pulled live from
-  <a href="https://jobicy.com/" target="_blank" rel="noopener">Jobicy</a> and
-  <a href="https://remoteok.com/" target="_blank" rel="noopener">Remote OK</a>.
+  <a href="https://jobicy.com/" target="_blank" rel="noopener">Jobicy</a>,
+  <a href="https://remoteok.com/" target="_blank" rel="noopener">Remote OK</a>, and the public job-board
+  APIs of employers hiring into Kenya &mdash; M-KOPA, One Acre Fund, Andela,
+  Jumia, Tala, Apollo Agriculture and Zipline.
   Every apply button opens the original posting on the source site — The Tech Hut does not host applications
   and is not the employer. Always verify a role before sharing personal details; never pay to apply.
 </p>
@@ -258,7 +269,7 @@
 <script>
 (function () {
   var PAGE = 20, shownCount = PAGE, all = [], view = [];
-  var state = { q: '', type: '', cat: '', days: 0, sort: 'date' };
+  var state = { q: '', type: '', cat: '', region: '', days: 0, sort: 'date' };
   var $ = function (id) { return document.getElementById(id); };
 
   // --- helpers -------------------------------------------------------------
@@ -299,6 +310,19 @@
     if (NONTECH.test(title)) return false;
     return TECH.test(title);
   }
+  // Where is the role? Kenya first, then the rest of Africa, then anywhere-remote.
+  var KE = /(kenya|nairobi|mombasa|kisumu|eldoret|nakuru|nyeri|kakamega|thika|machakos|kilifi|rukanga|sagana|naivasha|malindi)/i;
+  var AF = /(africa|nigeria|lagos|abuja|oyo|ilorin|ghana|accra|uganda|kampala|tanzania|dar es|rwanda|kigali|ethiopia|addis|egypt|cairo|johannesburg|cape town|senegal|dakar|ivory coast|abidjan|zambia|malawi|morocco|benin|togo|zimbabwe|botswana)/i;
+  var RM = /(remote|anywhere|worldwide|distributed|global)/i;
+  var REGION_RANK = { 'Kenya': 0, 'Rest of Africa': 1, 'Remote': 2, 'Elsewhere': 3 };
+  function regionOf(loc) {
+    var l = loc || '';
+    if (KE.test(l)) return 'Kenya';
+    if (AF.test(l)) return 'Rest of Africa';
+    if (RM.test(l)) return 'Remote';
+    return 'Elsewhere';
+  }
+
   function catFromTitle(t) {
     if (/(devops|\bsre\b|infrastructure|platform|cloud|kubernetes)/i.test(t)) return 'DevOps & Infrastructure';
     if (/(security|cyber|infosec)/i.test(t)) return 'Cybersecurity';
@@ -352,6 +376,88 @@
       .filter(function (j) { return isTechRole(j.title); });
   }
 
+  // --- employer ATS boards --------------------------------------------------
+  // Companies hiring into Kenya publish their openings through applicant tracking
+  // systems whose job-board APIs are public, documented and CORS-enabled — so these
+  // are read directly, not scraped. Add a company by putting its board slug here;
+  // find the slug in the careers-page URL (jobs.ashbyhq.com/<slug>, etc).
+  var COMPANIES = [
+    { name: 'M-KOPA',            ats: 'ashby',      slug: 'm-kopa' },
+    { name: 'Andela',            ats: 'ashby',      slug: 'andela' },
+    { name: 'One Acre Fund',     ats: 'greenhouse', slug: 'oneacrefund' },
+    { name: 'Jumia',             ats: 'greenhouse', slug: 'jumia' },
+    { name: 'Zipline',           ats: 'greenhouse', slug: 'flyzipline' },
+    { name: 'Tala',              ats: 'lever',      slug: 'tala' },
+    { name: 'Apollo Agriculture', ats: 'lever',     slug: 'apolloagriculture' }
+  ];
+  var PER_COMPANY = 25;          // one big global board must not swamp the page
+
+  function fromGreenhouse(d, co) {
+    return (d && d.jobs || []).map(function (j) {
+      return {
+        id: 'gh-' + co.slug + '-' + j.id,
+        title: clean(j.title),
+        company: co.name,
+        logo: '',
+        location: clean(j.location && j.location.name) || 'Not stated',
+        types: [], cats: [catFromTitle(clean(j.title))], level: '', excerpt: '',
+        url: safeUrl(j.absolute_url),
+        date: j.updated_at || j.first_published || '',
+        source: co.name
+      };
+    });
+  }
+  function fromLever(arr, co) {
+    return (Array.isArray(arr) ? arr : []).map(function (j) {
+      var c = j.categories || {};
+      return {
+        id: 'lv-' + co.slug + '-' + j.id,
+        title: clean(j.text),
+        company: co.name,
+        logo: '',
+        location: clean(c.location) || 'Not stated',
+        types: c.commitment ? [clean(c.commitment)] : [],
+        cats: [catFromTitle(clean(j.text))], level: '',
+        excerpt: clean(j.descriptionPlain, 190),
+        url: safeUrl(j.hostedUrl),
+        date: j.createdAt ? new Date(j.createdAt).toISOString() : '',
+        source: co.name
+      };
+    });
+  }
+  function fromAshby(d, co) {
+    return (d && d.jobs || []).map(function (j) {
+      return {
+        id: 'ab-' + co.slug + '-' + (j.id || j.title),
+        title: clean(j.title),
+        company: co.name,
+        logo: '',
+        location: clean(j.location) || 'Not stated',
+        types: j.employmentType ? [clean(j.employmentType)] : [],
+        cats: [catFromTitle(clean(j.title))], level: '',
+        excerpt: '',
+        url: safeUrl(j.jobUrl || j.applyUrl),
+        date: j.publishedAt || j.updatedAt || '',
+        source: co.name
+      };
+    });
+  }
+  function loadCompany(co) {
+    var url = co.ats === 'greenhouse' ? 'https://boards-api.greenhouse.io/v1/boards/' + co.slug + '/jobs'
+            : co.ats === 'lever'      ? 'https://api.lever.co/v0/postings/' + co.slug + '?mode=json'
+            :                           'https://api.ashbyhq.com/posting-api/job-board/' + co.slug;
+    return fetch(url).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+      if (!d) return [];
+      var jobs = co.ats === 'greenhouse' ? fromGreenhouse(d, co)
+               : co.ats === 'lever'      ? fromLever(d, co)
+               :                           fromAshby(d, co);
+      jobs = jobs.filter(function (j) { return j.title && j.url && isTechRole(j.title); });
+      jobs.forEach(function (j) { j.region = regionOf(j.location); });
+      jobs.sort(function (a, b) { return REGION_RANK[a.region] - REGION_RANK[b.region]; });
+      return jobs.slice(0, PER_COMPANY);
+    }).catch(function () { return []; });
+  }
+
   function load() {
     var jobicy = fetch('https://jobicy.com/api/v2/remote-jobs?count=50&geo=anywhere')
       .then(function (r) { return r.json(); }).then(fromJobicy).catch(function () { return []; });
@@ -359,8 +465,11 @@
       .then(function (r) { return r.json(); })
       .then(function (a) { return fromRemoteOK(a.slice(1)); }).catch(function () { return []; });
 
-    return Promise.all([jobicy, rok]).then(function (res) {
-      var merged = res[0].concat(res[1]).filter(function (j) { return j.title && j.url; });
+    var boards = COMPANIES.map(loadCompany);
+
+    return Promise.all([jobicy, rok].concat(boards)).then(function (res) {
+      var merged = [].concat.apply([], res).filter(function (j) { return j.title && j.url; });
+      merged.forEach(function (j) { if (!j.region) j.region = regionOf(j.location); });
       var seen = {};
       merged = merged.filter(function (j) {                 // same role listed on both boards
         var k = (j.title + '|' + j.company).toLowerCase().replace(/[^a-z0-9|]/g, '');
@@ -382,6 +491,7 @@
       }
       if (state.type && j.types.indexOf(state.type) === -1) return false;
       if (state.cat && j.cats.indexOf(state.cat) === -1) return false;
+      if (state.region && j.region !== state.region) return false;
       if (state.days) {
         var t = Date.parse(j.date);
         if (isNaN(t) || t < Date.now() - state.days * 864e5) return false;
@@ -452,6 +562,12 @@
   $('ftype').addEventListener('change', function () { state.type = this.value; apply(); });
   $('fcat').addEventListener('change', function () { state.cat = this.value; apply(); });
   $('sort').addEventListener('change', function () { state.sort = this.value; apply(); });
+  $('fregion').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-region]'); if (!b) return;
+    [].forEach.call(this.querySelectorAll('button'), function (x) { x.setAttribute('aria-pressed', 'false'); });
+    b.setAttribute('aria-pressed', 'true');
+    state.region = b.dataset.region; apply();
+  });
   $('fdate').addEventListener('click', function (e) {
     var b = e.target.closest('button[data-days]'); if (!b) return;
     [].forEach.call(this.querySelectorAll('button'), function (x) { x.setAttribute('aria-pressed', 'false'); });
@@ -464,9 +580,12 @@
     document.querySelector('.listhead').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
   $('clear').addEventListener('click', function () {
-    state = { q: '', type: '', cat: '', days: 0, sort: 'date' };
+    state = { q: '', type: '', cat: '', region: '', days: 0, sort: 'date' };
     $('q').value = ''; $('ftype').value = ''; $('fcat').value = ''; $('sort').value = 'date';
     [].forEach.call($('fdate').querySelectorAll('button'), function (x, i) {
+      x.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
+    });
+    [].forEach.call($('fregion').querySelectorAll('button'), function (x, i) {
       x.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
     });
     apply();
@@ -499,8 +618,9 @@
       $('count').textContent = '';
       $('list').innerHTML = '<div class="state"><h3>Couldn\'t load roles just now</h3>' +
         '<p>The job feeds are unreachable from this network. Try again shortly, or browse ' +
-        '<a href="https://jobicy.com/" target="_blank" rel="noopener">Jobicy</a> and ' +
-        '<a href="https://remoteok.com/" target="_blank" rel="noopener">Remote OK</a> directly.</p></div>';
+        '<a href="https://jobicy.com/" target="_blank" rel="noopener">Jobicy</a>, ' +
+        '<a href="https://remoteok.com/" target="_blank" rel="noopener">Remote OK</a> or the employers\' ' +
+        'own careers pages directly.</p></div>';
       $('more').hidden = true;
     }
   });
