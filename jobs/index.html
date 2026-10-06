@@ -84,6 +84,15 @@
   aside.filters { background: var(--card); border-radius: 1rem; box-shadow: var(--shadow); padding: 1.4rem 1.5rem; }
   @media (min-width: 900px) { aside.filters { position: sticky; top: 5.5rem; } }
   aside.filters h2 { font-size: 1rem; font-weight: 700; margin-bottom: 1.1rem; }
+  .direct { margin-top: 1.4rem; padding-top: 1.3rem; border-top: 1px solid rgba(7,59,76,0.1); }
+  .direct h2 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .direct > p { font-size: 0.8rem; color: var(--muted); line-height: 1.5; margin-bottom: 0.9rem; }
+  .direct ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .direct a { display: block; padding: 0.6rem 0.75rem; border-radius: 0.55rem;
+    background: rgba(6,214,160,0.08); color: var(--ink); text-decoration: none;
+    font-weight: 600; font-size: 0.88rem; transition: background 0.15s; }
+  .direct a:hover { background: rgba(6,214,160,0.18); }
+  .direct a span { display: block; font-weight: 400; font-size: 0.74rem; color: var(--muted); margin-top: 0.15rem; }
   .fgroup { margin-bottom: 1.3rem; }
   .fgroup > label { display: block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
     text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
@@ -228,6 +237,20 @@
         </div>
       </div>
       <button class="clearbtn" id="clear" type="button">Clear filters</button>
+
+      <div class="direct">
+        <h2>Employers hiring directly</h2>
+        <p>These employers run recruitment systems we can&rsquo;t read automatically. Their openings
+           are not in the list above &mdash; check their own portals.</p>
+        <ul>
+          <li><a href="https://egjd.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX/jobs" target="_blank" rel="noopener">
+            Safaricom <span>Oracle candidate portal</span></a></li>
+          <li><a href="https://watu.com/corporate/careers/#work-at-watu" target="_blank" rel="noopener">
+            Watu <span>Group careers &mdash; Kenya and 8 other markets</span></a></li>
+          <li><a href="https://britam.taleo.net/careersection/ke/jobsearch.ftl?lang=en" target="_blank" rel="noopener">
+            Britam <span>Kenya job search</span></a></li>
+        </ul>
+      </div>
     </aside>
 
     <main>
