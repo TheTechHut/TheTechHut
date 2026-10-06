@@ -252,7 +252,7 @@
   <a href="https://jobicy.com/" target="_blank" rel="noopener">Jobicy</a>,
   <a href="https://remoteok.com/" target="_blank" rel="noopener">Remote OK</a>, and the public job-board
   APIs of employers hiring into Kenya &mdash; Sun King, M-KOPA, One Acre Fund,
-  Andela, GiveDirectly, Jumia, Tala, Apollo Agriculture and Zipline.
+  Andela, GiveDirectly, ACRE Africa, Jumia, Tala, Apollo Agriculture and Zipline.
   Every apply button opens the original posting on the source site — The Tech Hut does not host applications
   and is not the employer. Always verify a role before sharing personal details; never pay to apply.
 </p>
@@ -390,7 +390,11 @@
     { name: 'Tala',              ats: 'lever',      slug: 'tala' },
     { name: 'Apollo Agriculture', ats: 'lever',     slug: 'apolloagriculture' },
     { name: 'Sun King',          ats: 'pinpoint',   slug: 'sunking' },
-    { name: 'GiveDirectly',      ats: 'greenhouse', slug: 'givedirectly' }
+    { name: 'GiveDirectly',      ats: 'greenhouse', slug: 'givedirectly' },
+    // WordPress careers pages: posts in a named category, read through the site's
+    // own public REST API. `site` is the host, `cat` the category id
+    // (find it at /wp-json/wp/v2/categories?search=careers).
+    { name: 'ACRE Africa',       ats: 'wordpress',  site: 'acreafrica.com', cat: 17 }
   ];
   var PER_COMPANY = 25;          // one big global board must not swamp the page
 
@@ -463,16 +467,46 @@
       };
     });
   }
+  // WordPress posts never expire the way an ATS requisition does, so anything
+  // older than MAX_POST_AGE days is treated as a closed role and dropped.
+  var MAX_POST_AGE = 120;
+  function fromWordPress(arr, co) {
+    var cutoff = Date.now() - MAX_POST_AGE * 864e5;
+    return (Array.isArray(arr) ? arr : []).filter(function (p) {
+      var t = Date.parse(p.modified || p.date);
+      return !isNaN(t) && t >= cutoff;
+    }).map(function (p) {
+      var title = clean(String((p.title && p.title.rendered) || '').replace(/&amp;/g, '&'));
+      return {
+        id: 'wp-' + co.slug + '-' + p.id,
+        title: title,
+        company: co.name,
+        logo: '',
+        location: co.location || 'Kenya',
+        types: [],
+        cats: [catFromTitle(title)],
+        level: '',
+        excerpt: clean(String((p.excerpt && p.excerpt.rendered) || '').replace(/<[^>]*>/g, ' '), 190),
+        url: safeUrl(p.link),
+        date: p.date || '',
+        source: co.name
+      };
+    });
+  }
   function loadCompany(co) {
+    if (!co.slug) co.slug = String(co.site || co.name).replace(/[^a-z0-9]+/gi, '-').toLowerCase();
     var url = co.ats === 'greenhouse' ? 'https://boards-api.greenhouse.io/v1/boards/' + co.slug + '/jobs'
             : co.ats === 'lever'      ? 'https://api.lever.co/v0/postings/' + co.slug + '?mode=json'
             : co.ats === 'pinpoint'   ? 'https://' + co.slug + '.pinpointhq.com/postings.json'
+            : co.ats === 'wordpress'  ? 'https://' + co.site + '/wp-json/wp/v2/posts?categories=' + co.cat +
+                                        '&per_page=20&_fields=id,date,modified,link,title,excerpt'
             :                           'https://api.ashbyhq.com/posting-api/job-board/' + co.slug;
     return fetch(url).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
       if (!d) return [];
       var jobs = co.ats === 'greenhouse' ? fromGreenhouse(d, co)
                : co.ats === 'lever'      ? fromLever(d, co)
                : co.ats === 'pinpoint'   ? fromPinpoint(d, co)
+               : co.ats === 'wordpress'  ? fromWordPress(d, co)
                :                           fromAshby(d, co);
       jobs = jobs.filter(function (j) { return j.title && j.url && isTechRole(j.title); });
       jobs.forEach(function (j) { j.region = regionOf(j.location); });
