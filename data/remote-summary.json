@@ -1,0 +1,125 @@
+{
+ "updated": "2026-10-07",
+ "company_count": 12,
+ "role_count": 300,
+ "local_role_count": 34,
+ "roles_scanned": 2445,
+ "seed": true,
+ "note": "Seed written by hand from a verified probe on 2026-10-07. The daily workflow overwrites this file.",
+ "companies": [
+  {
+   "company": "Canonical",
+   "platform": "greenhouse",
+   "eligible": 234,
+   "total": 311,
+   "locations": [
+    "Home based - EMEA",
+    "Home based - EMEA; Office Based - London, UK",
+    "Home Based - Americas; Home based - EMEA; Home based - Worldwide"
+   ]
+  },
+  {
+   "company": "Supabase",
+   "platform": "ashby",
+   "eligible": 27,
+   "total": 52,
+   "locations": [
+    "Remote, Global",
+    "Remote, EMEA"
+   ]
+  },
+  {
+   "company": "Oyster",
+   "platform": "ashby",
+   "eligible": 11,
+   "total": 20,
+   "locations": [
+    "EMEA"
+   ]
+  },
+  {
+   "company": "ConsenSys",
+   "platform": "greenhouse",
+   "eligible": 7,
+   "total": 8,
+   "locations": [
+    "UNITED STATES - Remote, EMEA - Remote",
+    "UNITED STATES - Remote, EMEA - Remote, CANADA - Remote, LATAM - Remote"
+   ]
+  },
+  {
+   "company": "Zipline",
+   "platform": "greenhouse",
+   "eligible": 6,
+   "total": 345,
+   "locations": [
+    "Remote in Africa",
+    "Remote from Anywhere",
+    "Remote in USA; Remote, EMEA"
+   ]
+  },
+  {
+   "company": "Railway",
+   "platform": "ashby",
+   "eligible": 6,
+   "total": 8,
+   "locations": [
+    "Global"
+   ]
+  },
+  {
+   "company": "Turing",
+   "platform": "greenhouse",
+   "eligible": 2,
+   "total": 31,
+   "locations": [
+    "Global - Remote"
+   ]
+  },
+  {
+   "company": "PostHog",
+   "platform": "ashby",
+   "eligible": 2,
+   "total": 10,
+   "locations": [
+    "Remote (EMEA)"
+   ]
+  },
+  {
+   "company": "Sun King",
+   "platform": "pinpoint",
+   "eligible": 2,
+   "total": 200,
+   "locations": [
+    "Global"
+   ]
+  },
+  {
+   "company": "GitLab",
+   "platform": "greenhouse",
+   "eligible": 1,
+   "total": 210,
+   "locations": [
+    "Remote, EMEA; Remote, France; Remote, Germany; Remote, Ireland"
+   ]
+  },
+  {
+   "company": "Cockroach Labs",
+   "platform": "greenhouse",
+   "eligible": 1,
+   "total": 18,
+   "locations": [
+    "Global"
+   ]
+  },
+  {
+   "company": "Apollo Agriculture",
+   "platform": "lever",
+   "eligible": 1,
+   "total": 3,
+   "locations": [
+    "Anywhere (Remote)"
+   ]
+  }
+ ]
+}

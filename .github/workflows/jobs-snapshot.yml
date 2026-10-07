@@ -1,0 +1,61 @@
+# Daily hiring snapshot.
+#
+# Fetches every employer feed, writes data/remote-summary.json (public proof for
+# the sales page), data/l/<token>.json (the paid list) and data/hiring-index.json
+# (the rolling data a quarterly report is built from), then commits and deploys.
+#
+# Runs on a schedule rather than as a Claude task because this needs to happen
+# every single day without anyone watching, and GitHub's cron does that.
+name: Daily hiring snapshot
+
+'on':
+  schedule:
+    # 03:20 UTC = 06:20 EAT, so the data is fresh before anyone is awake.
+    # Deliberately not on the hour: scheduled runs at :00 queue behind everyone
+    # else's and get delayed.
+    - cron: '20 3 * * *'
+  workflow_dispatch:        # so you can run it by hand from the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: jobs-snapshot
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chore/redesign
+
+      - name: Fetch the feeds and write the snapshot
+        run: python3 scripts/fetch_jobs_snapshot.py
+
+      - name: Commit if anything changed
+        id: commit
+        run: |
+          git config user.name  "The Daily Savannah"
+          git config user.email "daily@thetechhut.co"
+          git add data/
+          if git diff --cached --quiet; then
+            echo "nothing changed today"
+            echo "changed=no" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "Hiring snapshot $(date -u +%F)"
+            git push origin chore/redesign
+            echo "changed=yes" >> "$GITHUB_OUTPUT"
+          fi
+
+      # A push made with GITHUB_TOKEN does not trigger other workflows, so the
+      # hosting deploy has to be called from here or the new data never goes live.
+      - name: Deploy the new data
+        if: steps.commit.outputs.changed == 'yes'
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_AI_STUDY_PAL }}'
+          channelId: live
+          projectId: ai-study-pal

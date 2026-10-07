@@ -6,7 +6,8 @@
       "**/.*",
       "**/node_modules/**",
       "**/_src/**",
-      "scripts/**"
+      "scripts/**",
+      "data/snapshots/**"
     ],
     "cleanUrls": true,
     "redirects": [
