@@ -9,6 +9,10 @@ Disallow: /test.html
 Disallow: /love1.html
 Disallow: /love_template_two.html
 Disallow: /invoice.html
-Disallow: /cv.html
+
+# The CV blueprint's own content, and the members-only remote list. Sales pages
+# are crawlable; what people pay for is not.
+Disallow: /guide.html
+Disallow: /remote/list/
 
 Sitemap: https://thetechhut.co/sitemap.xml

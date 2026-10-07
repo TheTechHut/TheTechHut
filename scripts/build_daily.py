@@ -292,6 +292,10 @@ STATIC_PAGES = [
     ('/ats-pass/',                   '0.75', 'monthly'),
     ('/tools/',                      '0.70', 'monthly'),
     ('/jobs-for-your-community/',    '0.60', 'monthly'),
+    # Paid product pages. Both are root-level .html files, which is why they
+    # never appeared here before the check above was fixed.
+    ('/seo.html',                    '0.75', 'monthly'),
+    ('/cv.html',                     '0.75', 'monthly'),
     ('/early-access/',               '0.75', 'monthly'),
     ('/advertise/',                  '0.70', 'monthly'),
     ('/blog/dangote-ipo-fintech/',   '0.70', 'monthly'),
@@ -307,8 +311,14 @@ STATIC_PAGES = [
 today = datetime.date.today().isoformat()
 rows = []
 for loc, pri, freq in STATIC_PAGES:
-    if loc != '/' and not os.path.isdir(os.path.join(ROOT, loc.strip('/'))):
-        continue                                  # never list a page that isn't on disk
+    # Never list a page that isn't on disk. A trailing-slash path is a directory
+    # with an index.html; a path ending .html is the file itself -- the old check
+    # only accepted directories, so root-level pages like /cv.html were silently
+    # dropped from the sitemap however many times they were added here.
+    if loc != '/':
+        target = os.path.join(ROOT, loc.strip('/'))
+        if not (os.path.isdir(target) or os.path.isfile(target)):
+            continue
     rows.append((loc, today, freq, pri))
 for d in eds:                                     # newest first, already sorted
     rows.append((f'/blog/daily/{d["slug"]}/', d['slug'], 'never', '0.70'))
