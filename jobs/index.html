@@ -93,6 +93,18 @@
     font-weight: 600; font-size: 0.88rem; transition: background 0.15s; }
   .direct a:hover { background: rgba(6,214,160,0.18); }
   .direct a span { display: block; font-weight: 400; font-size: 0.74rem; color: var(--muted); margin-top: 0.15rem; }
+  .promo { margin-top: 1.4rem; padding: 1rem 1rem 1.1rem; border-radius: 0.9rem;
+    background: linear-gradient(180deg, rgba(6,214,160,0.10), rgba(6,214,160,0.03));
+    border: 1px solid rgba(6,214,160,0.25); }
+  .promo h2 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.35rem; }
+  .promo p { font-size: 0.8rem; color: var(--muted); line-height: 1.5; margin-bottom: 0.75rem; }
+  .promo a.go { display: block; text-align: center; text-decoration: none; font-weight: 700;
+    font-size: 0.85rem; padding: 0.6rem 0.8rem; border-radius: 9999px;
+    background: var(--green); color: #fff; box-shadow: 0 4px 12px rgba(6,214,160,0.3); }
+  .promo a.go:hover { filter: brightness(0.95); }
+  .promo a.alt { display: block; text-align: center; text-decoration: none; font-weight: 600;
+    font-size: 0.8rem; margin-top: 0.5rem; color: var(--green-dark); }
+  .promo a.alt:hover { text-decoration: underline; }
   .fgroup { margin-bottom: 1.3rem; }
   .fgroup > label { display: block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
     text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
@@ -181,6 +193,7 @@
       <a href="/">Home</a>
       <a href="/blog/">Blog</a>
       <a href="/blog/daily/">Daily</a>
+      <a href="/cv-pack/">CV Pack</a>
       <a href="/apprenticeship/">Apprenticeship</a>
       <a href="/communities/">Community</a>
     </nav>
@@ -251,6 +264,14 @@
             Britam <span>Kenya job search</span></a></li>
         </ul>
       </div>
+
+      <div class="promo">
+        <h2>Which system reads your CV?</h2>
+        <p>Safaricom runs Oracle. Britam runs Taleo. M-KOPA runs Ashby. The free CV pack maps
+           every employer on this board and the six formatting rules that get you past all of them.</p>
+        <a class="go" href="/cv-pack/">Open the free CV pack</a>
+        <a class="alt" href="/early-access/">Or get these roles 24 hours early &rarr;</a>
+      </div>
     </aside>
 
     <main>
@@ -275,7 +296,7 @@
   <a href="https://jobicy.com/" target="_blank" rel="noopener">Jobicy</a>,
   <a href="https://remoteok.com/" target="_blank" rel="noopener">Remote OK</a>, and the public job-board
   APIs of employers hiring into Kenya &mdash; Sun King, M-KOPA, One Acre Fund,
-  Andela, GiveDirectly, ACRE Africa, Jumia, Tala, Apollo Agriculture and Zipline.
+  Andela, GiveDirectly, ACRE Africa, Jumia, Tala, Apollo Agriculture, Zipline and Canonical.
   Every apply button opens the original posting on the source site — The Tech Hut does not host applications
   and is not the employer. Always verify a role before sharing personal details; never pay to apply.
 </p>
@@ -284,7 +305,7 @@
   <div class="shell">
     <p>&copy; 2026 The Tech Hut. All rights reserved.</p>
     <div class="links">
-      <a href="/">Home</a><a href="/blog/">Blog</a><a href="/blog/daily/">Daily</a><a href="/communities/">Community</a>
+      <a href="/">Home</a><a href="/blog/">Blog</a><a href="/blog/daily/">Daily</a><a href="/cv-pack/">CV Pack</a><a href="/advertise/">For employers</a><a href="/communities/">Community</a>
     </div>
   </div>
 </footer>
@@ -414,6 +435,7 @@
     { name: 'Apollo Agriculture', ats: 'lever',     slug: 'apolloagriculture' },
     { name: 'Sun King',          ats: 'pinpoint',   slug: 'sunking' },
     { name: 'GiveDirectly',      ats: 'greenhouse', slug: 'givedirectly' },
+    { name: 'Canonical',         ats: 'greenhouse', slug: 'canonical' },
     // WordPress careers pages: posts in a named category, read through the site's
     // own public REST API. `site` is the host, `cat` the category id
     // (find it at /wp-json/wp/v2/categories?search=careers).

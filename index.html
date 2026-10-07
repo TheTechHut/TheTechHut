@@ -192,6 +192,7 @@
             <a href="https://thetechhut.co/blog/" class="nav-link">Blog</a>
             <a href="https://thetechhut.co/blog/daily/" class="nav-link">Daily</a>
             <a href="https://thetechhut.co/jobs/" class="nav-link">Jobs</a>
+            <a href="https://thetechhut.co/cv-pack/" class="nav-link">CV Pack</a>
         </nav>
     </header>
 
@@ -306,7 +307,7 @@
          Styles are scoped to #explore here so a future SCSS rebuild cannot clobber them. -->
     <style>
       /* .flex-container lays children out in a row; force a column so the heading sits above the cards */
-      #explore { width: 100%; padding: 10px 20px 60px; display: flex; flex-direction: column; align-items: center; }
+      #explore { box-sizing: border-box; width: 100%; max-width: 100%; padding: 10px 20px 60px; display: flex; flex-direction: column; align-items: center; }
       #explore > h1 { width: 100%; text-align: center; margin-bottom: 4px; }
       /* the footer link groups sit in one inline-flex row; let them wrap on narrow widths */
       body footer .container .links { flex-wrap: wrap; gap: 14px 32px; }
@@ -315,7 +316,8 @@
         display: grid; grid-template-columns: 1fr; gap: 22px;
         width: 100%; max-width: 1100px; margin: 30px auto 0;
       }
-      @media (min-width: 760px) { #explore .explore-grid { grid-template-columns: repeat(3, 1fr); } }
+      @media (min-width: 620px) { #explore .explore-grid { grid-template-columns: repeat(2, 1fr); } }
+      @media (min-width: 1000px) { #explore .explore-grid { grid-template-columns: repeat(4, 1fr); } }
       #explore .ex-card {
         display: flex; flex-direction: column; align-items: flex-start; text-align: left;
         border: 1px solid rgba(4, 97, 44, .8); border-radius: 16px; padding: 26px 24px;
@@ -363,6 +365,12 @@
                 <p>Remote roles open worldwide &mdash; the ones you can actually take from Nairobi. Search and filter by role, type and date.</p>
                 <span class="ex-more">Find your next role &rarr;</span>
             </a>
+            <a class="ex-card" href="https://thetechhut.co/cv-pack/">
+                <span class="ex-tag">Free</span>
+                <h3>The CV Pack</h3>
+                <p>Which applicant tracking system every major Kenyan employer actually runs &mdash; and the six formatting rules that get your CV past all of them.</p>
+                <span class="ex-more">Open the pack &rarr;</span>
+            </a>
         </div>
     </section>
 
@@ -399,24 +407,25 @@
             </div>
 
             <div class='links'>
-                <div class='grid-4'>
+                <div class='grid-5'>
                     <a href="https://thetechhut.co/blog/">Blog</a>
                     <a href="https://thetechhut.co/blog/daily/">Daily Savannah</a>
                     <a href="https://thetechhut.co/jobs/">Tech Jobs</a>
                     <a href="https://thetechhut.co/apprenticeship">Apprenticeship</a>
+                    <a href="https://thetechhut.co/advertise/">Advertise with us</a>
                 </div>
 
                 <div class='grid-4'>
                     <a href="https://thetechhut.co/events">Events</a>
                     <a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H">Community</a>
-                    <a href="">Become a mentor</a>
-                    <a href="">Find a mentor</a>
+                    <a href="https://thetechhut.co/cv-pack/">Free CV Pack</a>
+                    <a href="https://thetechhut.co/early-access/">Early Access</a>
                 </div>
 
                 <div class='grid-3'>
                     <a href="">Terms and conditions</a>
                     <a href="https://linkedin.com/company/digital-transformation-partner/">Contact Us</a>
-                    <a href="">Privacy Policy</a>
+                    <a href="https://thetechhut.co/data_privacy_policy/">Privacy Policy</a>
                 </div>
             </div>
 

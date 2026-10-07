@@ -1,2 +1,4 @@
 .firebase/
 node_modules/
+_to_delete/
+Claude outputs/
