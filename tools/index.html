@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools — getting paid, getting hired, getting better | The Tech Hut</title>
+    <link rel="canonical" href="https://thetechhut.co/tools/">
+
+    <meta name="description" content="The services Kenyan tech people actually use to get paid by foreign employers, to learn, and to build. What each one is for, and where it falls down.">
+    <meta name="keywords" content="get paid from abroad Kenya, Wise Kenya, Payoneer Kenya, employer of record Kenya, remote work payments Kenya, The Tech Hut">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Tools — getting paid, getting hired, getting better">
+    <meta property="og:description" content="What Kenyan tech people use to get paid by foreign employers, to learn, and to build.">
+    <meta property="og:url" content="https://thetechhut.co/tools/">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="https://images.unsplash.com/photo-1698767008609-f5fa6137b9e6?q=80&amp;w=32&amp;h=32&amp;auto=format&amp;fit=crop">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="https://images.unsplash.com/photo-1698767008609-f5fa6137b9e6?q=80&amp;w=180&amp;h=180&amp;auto=format&amp;fit=crop">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #030712;
+            --panel: #0b1220;
+            --panel-2: #111827;
+            --line: #1f2937;
+            --ink: #f1f5f9;
+            --mute: #94a3b8;
+            --dim: #64748b;
+            --indigo: #6366f1;
+            --indigo-soft: rgba(99, 102, 241, .12);
+            --green: #34d399;
+            --rose: #fb7185;
+            --gold: #fbbf24;
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+
+        a { color: inherit; }
+
+        .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+        nav {
+            position: sticky; top: 0; z-index: 50;
+            background: rgba(3, 7, 18, .82);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 255, 255, .06);
+        }
+
+        nav .wrap { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; }
+        .brand { font-weight: 800; font-size: 15px; letter-spacing: -.02em; text-decoration: none; }
+        .brand span { color: var(--indigo); }
+        .navlinks { display: flex; align-items: center; gap: 18px; font-size: 12px; font-weight: 700; }
+        .navlinks a { color: var(--mute); text-decoration: none; }
+        .navlinks a:hover { color: #fff; }
+        .navlinks a.btn { color: #fff; }
+
+        .btn {
+            display: inline-block; background: var(--indigo); color: #fff;
+            font-weight: 700; font-size: 13px; padding: 11px 20px; border-radius: 999px;
+            text-decoration: none; border: 0; cursor: pointer;
+            box-shadow: 0 10px 30px -12px rgba(99, 102, 241, .8);
+            transition: transform .15s ease, background .15s ease;
+        }
+        .btn:hover { background: #4f46e5; transform: translateY(-1px); }
+        .btn.ghost { background: transparent; border: 1px solid var(--line); box-shadow: none; color: var(--ink); }
+        .btn.ghost:hover { background: var(--panel-2); }
+        .btn.light { background: #fff; color: #030712; box-shadow: 0 10px 30px -14px rgba(255,255,255,.4); }
+        .btn.light:hover { background: #e2e8f0; }
+
+        header.hero { padding: 72px 0 56px; border-bottom: 1px solid #0f172a; }
+
+        .pill {
+            display: inline-flex; align-items: center; gap: 7px;
+            font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em;
+            background: rgba(52, 211, 153, .1); color: var(--green);
+            border: 1px solid rgba(52, 211, 153, .22);
+            padding: 6px 12px; border-radius: 999px;
+        }
+
+        h1 {
+            font-size: clamp(30px, 6vw, 52px); line-height: 1.05; letter-spacing: -.03em;
+            font-weight: 800; margin: 22px 0 18px; max-width: 18ch;
+        }
+        h1 em { font-style: normal; background: linear-gradient(90deg, #818cf8, #c084fc, #f472b6);
+                -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+        .lede { font-size: clamp(15px, 2.2vw, 19px); color: var(--mute); max-width: 62ch; margin: 0 0 28px; }
+
+        .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+        .cta-note { font-size: 11px; font-weight: 700; color: var(--dim); text-transform: uppercase; letter-spacing: .1em; }
+
+        section { padding: 60px 0; border-bottom: 1px solid #0f172a; }
+        .eyebrow { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .16em; color: var(--indigo); }
+        h2 { font-size: clamp(23px, 4vw, 34px); letter-spacing: -.025em; font-weight: 800; margin: 10px 0 14px; }
+        h3 { font-size: 16px; font-weight: 800; letter-spacing: -.01em; margin: 0 0 8px; }
+        p { color: var(--mute); font-size: 14.5px; }
+        p.tight { margin-top: 0; }
+
+        .tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 18px; background: rgba(17, 24, 39, .4); }
+        table { width: 100%; border-collapse: collapse; min-width: 640px; }
+        thead tr { background: rgba(3, 7, 18, .6); border-bottom: 1px solid var(--line); }
+        th { text-align: left; padding: 14px; font-size: 10.5px; font-weight: 800; text-transform: uppercase;
+             letter-spacing: .12em; color: var(--dim); white-space: nowrap; }
+        td { padding: 14px; font-size: 13.5px; border-bottom: 1px solid #0d1526; vertical-align: top; color: #cbd5e1; }
+        tbody tr:last-child td { border-bottom: 0; }
+        td.co { font-weight: 800; color: #fff; white-space: nowrap; }
+        .ats { display: inline-block; font-size: 11px; font-weight: 800; padding: 4px 9px; border-radius: 7px;
+               background: var(--indigo-soft); color: #a5b4fc; white-space: nowrap; }
+        .ats.hard { background: rgba(251, 113, 133, .12); color: var(--rose); }
+        .ats.easy { background: rgba(52, 211, 153, .1); color: var(--green); }
+
+        .cards { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); margin-top: 26px; }
+        .card { background: linear-gradient(180deg, rgba(17,24,39,.6), rgba(3,7,18,.6));
+                border: 1px solid #16202f; border-radius: 18px; padding: 22px; }
+        .card .n { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; font-weight: 800;
+                   color: var(--indigo); display: block; margin-bottom: 10px; }
+        .card p { font-size: 13px; margin: 0; }
+
+        .callout { border-radius: 16px; padding: 16px 18px; font-size: 13px; margin: 22px 0 0; }
+        .callout.warn { background: rgba(251, 113, 133, .06); border: 1px solid rgba(251, 113, 133, .2); color: #fda4af; }
+        .callout.tip { background: rgba(52, 211, 153, .06); border: 1px solid rgba(52, 211, 153, .18); color: #6ee7b7; }
+        .callout b { color: #fff; }
+
+        pre.skeleton {
+            background: #060a14; border: 1px solid var(--line); border-radius: 16px;
+            padding: 20px; overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 12.5px; line-height: 1.75; color: #cbd5e1; white-space: pre; margin: 0;
+        }
+        .copybar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+        .copybar small { color: var(--dim); font-size: 11.5px; font-weight: 700; }
+        button.copy { background: var(--panel-2); border: 1px solid var(--line); color: var(--ink);
+                      font-family: inherit; font-size: 11.5px; font-weight: 800; padding: 8px 14px;
+                      border-radius: 9px; cursor: pointer; }
+        button.copy:hover { background: #1b2536; }
+
+        .capture { background: linear-gradient(180deg, rgba(99,102,241,.1), rgba(3,7,18,0));
+                   border: 1px solid rgba(99,102,241,.25); border-radius: 22px; padding: 30px; }
+        form.signup { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 0; }
+        form.signup input {
+            flex: 1 1 210px; background: #060a14; border: 1px solid var(--line); color: var(--ink);
+            font-family: inherit; font-size: 14px; padding: 13px 15px; border-radius: 11px;
+        }
+        form.signup input::placeholder { color: #475569; }
+        form.signup input:focus { outline: 0; border-color: var(--indigo); }
+        form.signup button { flex: 0 0 auto; }
+        .formnote { font-size: 11.5px; color: var(--dim); margin: 12px 0 0; }
+        .formmsg { font-size: 13.5px; font-weight: 700; margin: 14px 0 0; display: none; }
+        .formmsg.ok { display: block; color: var(--green); }
+        .formmsg.bad { display: block; color: var(--rose); }
+
+        .upsell { display: grid; gap: 24px; grid-template-columns: 1.4fr 1fr; align-items: center;
+                  background: linear-gradient(180deg, #0d1424, #060a14); border: 1px solid var(--line);
+                  border-radius: 22px; padding: 30px; }
+        .pricebox { text-align: center; background: #060a14; border: 1px solid var(--line); border-radius: 18px; padding: 22px; }
+        .pricebox .amt { display: block; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+                         font-size: 34px; font-weight: 800; color: #fff; letter-spacing: -.02em; }
+        .pricebox .amt small { font-size: 14px; color: var(--mute); }
+        .pricebox .sub { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: var(--dim); }
+
+        ul.ticks { list-style: none; padding: 0; margin: 16px 0 0; }
+        ul.ticks li { font-size: 13.5px; color: #cbd5e1; padding-left: 26px; position: relative; margin-bottom: 9px; }
+        ul.ticks li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 800; }
+
+        footer { padding: 44px 0 56px; text-align: center; }
+        footer .brand { display: inline-block; margin-bottom: 10px; font-size: 14px; }
+        footer p { font-size: 11.5px; color: #475569; margin: 6px 0; }
+        footer a { color: var(--mute); }
+
+        @media (max-width: 760px) {
+            .tablewrap { border: 0; background: none; overflow-x: visible; }
+            table { min-width: 0; }
+            thead { display: none; }
+            table, tbody, tr, td { display: block; width: 100%; }
+            tbody tr {
+                background: rgba(17, 24, 39, .45); border: 1px solid var(--line);
+                border-radius: 16px; padding: 16px; margin-bottom: 12px;
+            }
+            tbody td { border: 0; padding: 0; }
+            td.co { font-size: 16px; margin-bottom: 8px; white-space: normal; }
+            td[data-label="System"] { margin-bottom: 10px; }
+            td[data-label="What it means"]::before {
+                content: attr(data-label); display: block; font-size: 10px; font-weight: 800;
+                text-transform: uppercase; letter-spacing: .12em; color: var(--dim); margin-bottom: 5px;
+            }
+            .upsell { grid-template-columns: 1fr; }
+            header.hero { padding: 48px 0 40px; }
+            section { padding: 44px 0; }
+            .navlinks a:not(.btn) { display: none; }
+        }
+    </style>
+    <style>
+        .disclose { background: rgba(251,191,36,.06); border: 1px solid rgba(251,191,36,.25);
+                    border-radius: 16px; padding: 18px 20px; font-size: 13px; color: #fcd34d; margin-top: 26px; }
+        .disclose b { color: #fff; }
+
+        .tool { background: linear-gradient(180deg, rgba(17,24,39,.6), rgba(3,7,18,.6));
+                border: 1px solid #16202f; border-radius: 20px; padding: 24px;
+                display: flex; flex-direction: column; }
+        .tool .for { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em;
+                     color: var(--indigo); display: block; margin-bottom: 10px; }
+        .tool h3 { font-size: 17px; margin-bottom: 6px; }
+        .tool p { font-size: 13px; margin: 0 0 12px; }
+        .tool .snag { font-size: 12px; color: var(--gold); background: rgba(251,191,36,.07);
+                      border-left: 2px solid rgba(251,191,36,.4); padding: 8px 11px;
+                      border-radius: 0 8px 8px 0; margin: 0 0 14px; }
+        .tool .go { margin-top: auto; }
+        .tool a.go { display: block; text-align: center; }
+        .grid2 { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); margin-top: 26px; }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="wrap">
+            <a class="brand" href="/">The Tech Hut<span>.</span></a>
+            <div class="navlinks">
+                <a href="#paid">Getting paid</a>
+                <a href="#eor">Employers of record</a>
+                <a href="#learn">Learning</a>
+                <a class="btn" href="/remote/">Remote roles</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="wrap">
+            <span class="pill">🧰 Some links on this page pay us</span>
+            <h1>Getting the job is half of it. <em>Getting paid is the other half.</em></h1>
+            <p class="lede">
+                A Kenyan developer lands a role with a company in Berlin and then discovers the real
+                problem: that company has no legal way to employ them, and the bank transfer costs a
+                fortune. This page is what people actually use to solve that — plus the learning and
+                build tools worth your money.
+            </p>
+            <div class="cta-row">
+                <a class="btn light" href="#paid">Getting paid →</a>
+                <a class="btn ghost" href="/remote/">Find the roles first →</a>
+            </div>
+
+            <div class="disclose">
+                <b>Where we stand:</b> some of the links below earn us a commission if you sign up,
+                and they are marked. It costs you nothing extra and it does not change what we say —
+                every entry has a line about where it falls down, including the ones that pay us.
+                We have left out several popular services because they do not work well from Kenya.
+                Nobody has paid to appear here.
+            </div>
+        </div>
+    </header>
+
+    <section id="paid">
+        <div class="wrap">
+            <span class="eyebrow">Part one</span>
+            <h2>Getting money from abroad into Kenya</h2>
+            <p class="tight" style="max-width:66ch">
+                If you are contracting rather than employed, this is your problem to solve. The
+                question to ask of any service is not "what is the fee" but "can I actually open an
+                account from Kenya, and can I get the money to M-Pesa or a Kenyan bank without
+                losing a week." Check current availability yourself before you commit — these
+                things change country by country, often.
+            </p>
+
+            <div class="grid2">
+                <div class="tool">
+                    <span class="for">For contractors and freelancers</span>
+                    <h3>Wise</h3>
+                    <p>Multi-currency account with real exchange rates. Widely used to receive USD, GBP
+                       and EUR and convert to shillings without a bank eating the difference. Good for
+                       invoicing a foreign client directly.</p>
+                    <p class="snag">Check which receiving currencies are open to Kenyan residents before
+                       you promise a client an account number — the list is not the same everywhere.</p>
+                    <a class="btn ghost go" data-link="wise" href="https://wise.com" target="_blank" rel="noopener">Open Wise</a>
+                </div>
+
+                <div class="tool">
+                    <span class="for">For marketplace and agency work</span>
+                    <h3>Payoneer</h3>
+                    <p>The default for people getting paid through Upwork, Fiverr and similar platforms,
+                       and for agencies paying contractors in bulk. Long-established in Kenya and
+                       accepted by most Western payers without argument.</p>
+                    <p class="snag">Fees are higher than Wise on straight currency conversion. Use it
+                       where the payer insists on it, not as your everyday account.</p>
+                    <a class="btn ghost go" data-link="payoneer" href="https://payoneer.com" target="_blank" rel="noopener">Open Payoneer</a>
+                </div>
+
+                <div class="tool">
+                    <span class="for">For an African-built option</span>
+                    <h3>Grey</h3>
+                    <p>Virtual USD, GBP and EUR accounts aimed squarely at African freelancers, with
+                       local payout into Kenyan accounts. Built by people who had this exact problem,
+                       which shows in the onboarding.</p>
+                    <p class="snag">Younger and smaller than the two above. Some foreign payroll teams
+                       will not recognise it, so have a fallback.</p>
+                    <a class="btn ghost go" data-link="grey" href="https://grey.co" target="_blank" rel="noopener">Open Grey</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="eor">
+        <div class="wrap">
+            <span class="eyebrow">Part two</span>
+            <h2>When the company wants to employ you properly</h2>
+            <p class="tight" style="max-width:66ch">
+                An employer of record is a company that legally employs you in Kenya on behalf of your
+                actual employer abroad — so you get a contract, payslips, NSSF and NHIF deductions and
+                leave, instead of invoicing as a freelancer. <b style="color:#fff">You do not sign up
+                for these yourself.</b> Your employer does. Knowing the names is the point: when a
+                foreign company says "we would love to hire you but we have no entity in Kenya", these
+                are the three words that unblock it.
+            </p>
+
+            <div class="grid2">
+                <div class="tool">
+                    <span class="for">Say this name in the interview</span>
+                    <h3>Deel</h3>
+                    <p>The one most startups already use. If a company is hesitating about hiring in
+                       Kenya, "you could use Deel" is often all it takes — the legwork is theirs and it
+                       takes days, not months.</p>
+                    <p class="snag">Costs the employer a monthly fee per person, so expect it to come
+                       up in salary negotiation. Know the number before you negotiate.</p>
+                    <a class="btn ghost go" data-link="deel" href="https://deel.com" target="_blank" rel="noopener">What Deel is</a>
+                </div>
+
+                <div class="tool">
+                    <span class="for">Say this name in the interview</span>
+                    <h3>Remote</h3>
+                    <p>The other name worth knowing, and the one more established companies tend to
+                       pick. Same idea: they employ you locally and bill your employer.</p>
+                    <p class="snag">Same per-person cost to the employer. Smaller companies sometimes
+                       balk, which is when a contractor arrangement is the realistic fallback.</p>
+                    <a class="btn ghost go" data-link="remote" href="https://remote.com" target="_blank" rel="noopener">What Remote is</a>
+                </div>
+
+                <div class="tool">
+                    <span class="for">Hiring into Africa</span>
+                    <h3>Oyster</h3>
+                    <p>Markets itself specifically at companies hiring across borders into places they
+                       have no entity, and it is currently hiring EMEA roles itself — it appears on our
+                       <a href="/remote/" style="color:var(--indigo)">remote list</a>.</p>
+                    <p class="snag">Less widely recognised in Kenya than the first two. Lead with Deel
+                       or Remote and keep this one in reserve.</p>
+                    <a class="btn ghost go" data-link="oyster" href="https://oysterhr.com" target="_blank" rel="noopener">What Oyster is</a>
+                </div>
+            </div>
+
+            <div class="callout tip">
+                ✅ <b>The sentence that gets people hired.</b> When a foreign employer says they cannot
+                hire in Kenya, reply: <em>"You do not need an entity here — Deel, Remote and Oyster all
+                employ people in Kenya on your behalf, and it takes about a week."</em> Plenty of
+                hiring managers do not know this. Being the candidate who solves their problem is worth
+                more than another line on your CV.
+            </div>
+        </div>
+    </section>
+
+    <section id="learn">
+        <div class="wrap">
+            <span class="eyebrow">Part three</span>
+            <h2>Learning that is worth paying for</h2>
+            <p class="tight" style="max-width:64ch">
+                Most of what you need is free. Pay only where the structure, the feedback or the
+                certificate genuinely buys you something — and be honest with yourself about which
+                of the three you are actually after.
+            </p>
+
+            <div class="grid2">
+                <div class="tool">
+                    <span class="for">Certificates employers recognise</span>
+                    <h3>Coursera</h3>
+                    <p>Worth it for the professional certificates that show up by name in job
+                       descriptions — data analytics, cloud, project management. Financial aid is real
+                       and routinely granted; apply for it before paying full price.</p>
+                    <p class="snag">A certificate is a tiebreaker, not a qualification. It will not
+                       outweigh a portfolio, and anyone telling you otherwise is selling a course.</p>
+                    <a class="btn ghost go" data-link="coursera" href="https://coursera.org" target="_blank" rel="noopener">Browse Coursera</a>
+                </div>
+
+                <div class="tool">
+                    <span class="for">Data and analytics</span>
+                    <h3>DataCamp</h3>
+                    <p>Short, browser-based exercises in Python, SQL and R. Good for drilling syntax
+                       until it is automatic, which is exactly what a technical screen tests.</p>
+                    <p class="snag">Teaches you to complete exercises, not to build things. Pair it
+                       with a real project or it will not change your CV.</p>
+                    <a class="btn ghost go" data-link="datacamp" href="https://datacamp.com" target="_blank" rel="noopener">Browse DataCamp</a>
+                </div>
+
+                <div class="tool">
+                    <span class="for">One specific gap</span>
+                    <h3>Udemy</h3>
+                    <p>Best used surgically: you need Docker by Friday, you buy the Docker course on
+                       sale for a few hundred shillings. Never pay list price — there is always a sale.</p>
+                    <p class="snag">Quality swings wildly between instructors. Read the recent reviews,
+                       not the rating, and check when the course was last updated.</p>
+                    <a class="btn ghost go" data-link="udemy" href="https://udemy.com" target="_blank" rel="noopener">Browse Udemy</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="build">
+        <div class="wrap">
+            <span class="eyebrow">Part four</span>
+            <h2>Hosting the thing you built</h2>
+            <p class="tight" style="max-width:64ch">
+                A portfolio link beats a portfolio section. These are the cheapest credible ways to
+                put something live on your own domain and keep it there.
+            </p>
+
+            <div class="grid2">
+                <div class="tool">
+                    <span class="for">A server you control</span>
+                    <h3>DigitalOcean</h3>
+                    <p>A small droplet runs a side project comfortably and teaches you more about Linux,
+                       deployment and DNS than any course will. Student credit is often available.</p>
+                    <p class="snag">You are now a sysadmin. Set up billing alerts on day one — a
+                       forgotten droplet is a quiet monthly charge.</p>
+                    <a class="btn ghost go" data-link="digitalocean" href="https://digitalocean.com" target="_blank" rel="noopener">See DigitalOcean</a>
+                </div>
+
+                <div class="tool">
+                    <span class="for">Cheap shared hosting</span>
+                    <h3>Hostinger</h3>
+                    <p>If you just need a WordPress site or a static portfolio online for very little
+                       money, this is the pragmatic answer. Accepts cards and works fine from Kenya.</p>
+                    <p class="snag">The headline price is the multi-year rate. Renewal costs
+                       considerably more — diarise it before it surprises you.</p>
+                    <a class="btn ghost go" data-link="hostinger" href="https://hostinger.com" target="_blank" rel="noopener">See Hostinger</a>
+                </div>
+
+                <div class="tool">
+                    <span class="for">Your name, your domain</span>
+                    <h3>Namecheap</h3>
+                    <p>Buy yourname.com and put your email on it. Applying from a personal domain
+                       instead of a numbered Gmail is a small thing that quietly signals seriousness.</p>
+                    <p class="snag">First-year pricing again. And do not buy eleven domains for projects
+                       you have not started — we have all done it.</p>
+                    <a class="btn ghost go" data-link="namecheap" href="https://namecheap.com" target="_blank" rel="noopener">See Namecheap</a>
+                </div>
+            </div>
+
+            <div class="callout warn">
+                ⚠️ <b>Nothing on this page will get you hired by itself.</b> Tools are the easy part and
+                buying them feels like progress. The roles are on the <a href="/remote/">remote list</a>,
+                the CV formatting is in the <a href="/cv-pack/">free pack</a>, and the applying is still
+                the bit that works.
+            </div>
+
+            <div class="cta-row" style="margin-top:26px">
+                <a class="btn ghost" href="/remote/">The Remote-From-Kenya List →</a>
+                <a class="btn ghost" href="/shop/">Everything we sell →</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="wrap">
+            <a class="brand" href="/">The Tech Hut<span>.</span></a>
+            <p>Kenyan tech opportunities, every day. <a href="/jobs/">Jobs</a> · <a href="/shop/">Shop</a> · <a href="/cv-pack/">CV pack</a> · <a href="/remote/">Remote list</a> · <a href="/advertise/">For employers</a></p>
+            <p>&copy; 2026 The Tech Hut Community · <a href="mailto:info@thetechhut.co">info@thetechhut.co</a></p>
+        </div>
+    </footer>
+
+    <script>
+        /* ==================================================================
+           AFFILIATE LINKS  --  the only block on this page you need to edit.
+
+           Paste your tracking URL next to a name and that card's button starts
+           earning, and quietly gains a "commission" note so the page stays
+           honest. Leave one empty and the button simply goes to the company's
+           plain homepage, which is the correct, harmless default.
+
+           Where to apply, as of writing -- verify Kenya eligibility and the
+           current terms yourself before relying on any of them:
+
+             deel          deel.com  ->  Partners / Affiliates
+             remote        remote.com  ->  Partner programme
+             oyster        oysterhr.com  ->  Partners
+             wise          wise.com  ->  Affiliates (via their partner page)
+             payoneer      payoneer.com  ->  Refer a friend / Affiliates
+             grey          grey.co  ->  Referral programme
+             coursera      Impact / Linkshare affiliate network
+             datacamp      datacamp.com  ->  Affiliates
+             udemy         Udemy affiliate (via an affiliate network)
+             digitalocean  digitalocean.com  ->  Referral programme
+             hostinger     hostinger.com  ->  Affiliates
+             namecheap     namecheap.com  ->  Affiliates
+
+           Rule we are keeping: a commission never changes what the card says,
+           and the "where it falls down" line stays on every single one.
+           ================================================================== */
+        var AFFILIATE = {
+            deel: '',
+            remote: '',
+            oyster: '',
+            wise: '',
+            payoneer: '',
+            grey: '',
+            coursera: '',
+            datacamp: '',
+            udemy: '',
+            digitalocean: '',
+            hostinger: '',
+            namecheap: ''
+        };
+
+        Array.prototype.forEach.call(document.querySelectorAll('[data-link]'), function (a) {
+            var key = a.getAttribute('data-link');
+            var url = AFFILIATE[key];
+            if (!url) return;
+            a.setAttribute('href', url);
+            a.setAttribute('rel', 'noopener sponsored');
+            var tag = document.createElement('span');
+            tag.textContent = 'commission link';
+            tag.style.cssText = 'display:block;font-size:10px;font-weight:700;letter-spacing:.08em;' +
+                'text-transform:uppercase;color:var(--dim);margin-top:7px;text-align:center';
+            a.parentNode.appendChild(tag);
+        });
+    </script>
+</body>
+
+</html>
