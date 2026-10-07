@@ -662,7 +662,7 @@
 
             <div class="price-box">
                 <p>One-Time Purchase, Lifetime Access (Priced in Kenyan Shillings):</p>
-                <p class="price-tag"><small>Ksh.</small>25</p>
+                <p class="price-tag" id="priceTag"><small>Ksh.</small>25</p>
                 <!-- FINAL CTA -->
                 <a href="https://payment.intasend.com/pay/6fcb6394-28d1-47f6-bac8-7474cef0cfb1/" class="cta-button" style="margin-top: 1.5rem;">Access 50+ Tech Groups Now</a>
             </div>
@@ -677,9 +677,47 @@
             <p>
                 <a href="#">Terms of Service</a> | 
                 <a href="#">Privacy Policy</a> | 
+                <a href="/shop/">Everything we make</a> | 
+                <a href="/jobs/">Tech Jobs</a> | 
                 <a href="mailto:info@thetechhut.co">info@thetechhut.co</a>
             </p>
         </div>
     </footer>
+
+<script>
+    /* ==================================================================
+       PRICE AND PAYMENT LINK -- the only numbers on this page that matter.
+
+       These two MUST change together. Changing the displayed price without
+       creating a matching payment link means people see one number and get
+       charged another, which is the one mistake worth never making.
+
+       To reprice:
+         1. Create a new payment link for the new amount in IntaSend.
+         2. Paste it into PAY_LINK below.
+         3. Set PRICE to the same number.
+       Both the headline price and every buy button follow from here.
+
+       Worth knowing: at KSh 25 this product has earned roughly KSh 950 in
+       its lifetime across 38 customers. The same database at KSh 250 would
+       almost certainly have sold to the same people -- the objection to a
+       curated list is never that it costs 250 bob.
+       ================================================================== */
+    var PRICE = 25;
+    var PAY_LINK = 'https://payment.intasend.com/pay/6fcb6394-28d1-47f6-bac8-7474cef0cfb1/';
+
+    (function () {
+        var tag = document.getElementById('priceTag');
+        if (tag) { tag.innerHTML = '<small>Ksh.</small>' + PRICE; }
+        Array.prototype.forEach.call(
+            document.querySelectorAll('a[href*="payment.intasend.com"]'),
+            function (a) { a.setAttribute('href', PAY_LINK); }
+        );
+        Array.prototype.forEach.call(
+            document.querySelectorAll('[data-price]'),
+            function (el) { el.textContent = PRICE; }
+        );
+    })();
+</script>
 </body>
 </html>

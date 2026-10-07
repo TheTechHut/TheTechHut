@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Everything we make | The Tech Hut</title>
+    <link rel="canonical" href="https://thetechhut.co/shop/">
+
+    <meta name="description" content="The free jobs board, the free CV pack, the Daily Savannah — and the paid guides, lists and services for people who want to move faster. All in one place.">
+    <meta name="keywords" content="The Tech Hut products, CV guide Kenya, remote jobs list Kenya, SEO kit Kenya, tech community database Africa">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Everything The Tech Hut makes">
+    <meta property="og:description" content="Free jobs board and CV pack. Paid lists, guides and services for people in an active job hunt.">
+    <meta property="og:url" content="https://thetechhut.co/shop/">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="https://images.unsplash.com/photo-1698767008609-f5fa6137b9e6?q=80&amp;w=32&amp;h=32&amp;auto=format&amp;fit=crop">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="https://images.unsplash.com/photo-1698767008609-f5fa6137b9e6?q=80&amp;w=180&amp;h=180&amp;auto=format&amp;fit=crop">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #030712;
+            --panel: #0b1220;
+            --panel-2: #111827;
+            --line: #1f2937;
+            --ink: #f1f5f9;
+            --mute: #94a3b8;
+            --dim: #64748b;
+            --indigo: #6366f1;
+            --indigo-soft: rgba(99, 102, 241, .12);
+            --green: #34d399;
+            --rose: #fb7185;
+            --gold: #fbbf24;
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+
+        a { color: inherit; }
+
+        .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+        nav {
+            position: sticky; top: 0; z-index: 50;
+            background: rgba(3, 7, 18, .82);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 255, 255, .06);
+        }
+
+        nav .wrap { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; }
+        .brand { font-weight: 800; font-size: 15px; letter-spacing: -.02em; text-decoration: none; }
+        .brand span { color: var(--indigo); }
+        .navlinks { display: flex; align-items: center; gap: 18px; font-size: 12px; font-weight: 700; }
+        .navlinks a { color: var(--mute); text-decoration: none; }
+        .navlinks a:hover { color: #fff; }
+        .navlinks a.btn { color: #fff; }
+
+        .btn {
+            display: inline-block; background: var(--indigo); color: #fff;
+            font-weight: 700; font-size: 13px; padding: 11px 20px; border-radius: 999px;
+            text-decoration: none; border: 0; cursor: pointer;
+            box-shadow: 0 10px 30px -12px rgba(99, 102, 241, .8);
+            transition: transform .15s ease, background .15s ease;
+        }
+        .btn:hover { background: #4f46e5; transform: translateY(-1px); }
+        .btn.ghost { background: transparent; border: 1px solid var(--line); box-shadow: none; color: var(--ink); }
+        .btn.ghost:hover { background: var(--panel-2); }
+        .btn.light { background: #fff; color: #030712; box-shadow: 0 10px 30px -14px rgba(255,255,255,.4); }
+        .btn.light:hover { background: #e2e8f0; }
+
+        header.hero { padding: 72px 0 56px; border-bottom: 1px solid #0f172a; }
+
+        .pill {
+            display: inline-flex; align-items: center; gap: 7px;
+            font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em;
+            background: rgba(52, 211, 153, .1); color: var(--green);
+            border: 1px solid rgba(52, 211, 153, .22);
+            padding: 6px 12px; border-radius: 999px;
+        }
+
+        h1 {
+            font-size: clamp(30px, 6vw, 52px); line-height: 1.05; letter-spacing: -.03em;
+            font-weight: 800; margin: 22px 0 18px; max-width: 18ch;
+        }
+        h1 em { font-style: normal; background: linear-gradient(90deg, #818cf8, #c084fc, #f472b6);
+                -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+        .lede { font-size: clamp(15px, 2.2vw, 19px); color: var(--mute); max-width: 62ch; margin: 0 0 28px; }
+
+        .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+        .cta-note { font-size: 11px; font-weight: 700; color: var(--dim); text-transform: uppercase; letter-spacing: .1em; }
+
+        section { padding: 60px 0; border-bottom: 1px solid #0f172a; }
+        .eyebrow { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .16em; color: var(--indigo); }
+        h2 { font-size: clamp(23px, 4vw, 34px); letter-spacing: -.025em; font-weight: 800; margin: 10px 0 14px; }
+        h3 { font-size: 16px; font-weight: 800; letter-spacing: -.01em; margin: 0 0 8px; }
+        p { color: var(--mute); font-size: 14.5px; }
+        p.tight { margin-top: 0; }
+
+        .tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 18px; background: rgba(17, 24, 39, .4); }
+        table { width: 100%; border-collapse: collapse; min-width: 640px; }
+        thead tr { background: rgba(3, 7, 18, .6); border-bottom: 1px solid var(--line); }
+        th { text-align: left; padding: 14px; font-size: 10.5px; font-weight: 800; text-transform: uppercase;
+             letter-spacing: .12em; color: var(--dim); white-space: nowrap; }
+        td { padding: 14px; font-size: 13.5px; border-bottom: 1px solid #0d1526; vertical-align: top; color: #cbd5e1; }
+        tbody tr:last-child td { border-bottom: 0; }
+        td.co { font-weight: 800; color: #fff; white-space: nowrap; }
+        .ats { display: inline-block; font-size: 11px; font-weight: 800; padding: 4px 9px; border-radius: 7px;
+               background: var(--indigo-soft); color: #a5b4fc; white-space: nowrap; }
+        .ats.hard { background: rgba(251, 113, 133, .12); color: var(--rose); }
+        .ats.easy { background: rgba(52, 211, 153, .1); color: var(--green); }
+
+        .cards { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); margin-top: 26px; }
+        .card { background: linear-gradient(180deg, rgba(17,24,39,.6), rgba(3,7,18,.6));
+                border: 1px solid #16202f; border-radius: 18px; padding: 22px; }
+        .card .n { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; font-weight: 800;
+                   color: var(--indigo); display: block; margin-bottom: 10px; }
+        .card p { font-size: 13px; margin: 0; }
+
+        .callout { border-radius: 16px; padding: 16px 18px; font-size: 13px; margin: 22px 0 0; }
+        .callout.warn { background: rgba(251, 113, 133, .06); border: 1px solid rgba(251, 113, 133, .2); color: #fda4af; }
+        .callout.tip { background: rgba(52, 211, 153, .06); border: 1px solid rgba(52, 211, 153, .18); color: #6ee7b7; }
+        .callout b { color: #fff; }
+
+        pre.skeleton {
+            background: #060a14; border: 1px solid var(--line); border-radius: 16px;
+            padding: 20px; overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 12.5px; line-height: 1.75; color: #cbd5e1; white-space: pre; margin: 0;
+        }
+        .copybar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+        .copybar small { color: var(--dim); font-size: 11.5px; font-weight: 700; }
+        button.copy { background: var(--panel-2); border: 1px solid var(--line); color: var(--ink);
+                      font-family: inherit; font-size: 11.5px; font-weight: 800; padding: 8px 14px;
+                      border-radius: 9px; cursor: pointer; }
+        button.copy:hover { background: #1b2536; }
+
+        .capture { background: linear-gradient(180deg, rgba(99,102,241,.1), rgba(3,7,18,0));
+                   border: 1px solid rgba(99,102,241,.25); border-radius: 22px; padding: 30px; }
+        form.signup { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 0; }
+        form.signup input {
+            flex: 1 1 210px; background: #060a14; border: 1px solid var(--line); color: var(--ink);
+            font-family: inherit; font-size: 14px; padding: 13px 15px; border-radius: 11px;
+        }
+        form.signup input::placeholder { color: #475569; }
+        form.signup input:focus { outline: 0; border-color: var(--indigo); }
+        form.signup button { flex: 0 0 auto; }
+        .formnote { font-size: 11.5px; color: var(--dim); margin: 12px 0 0; }
+        .formmsg { font-size: 13.5px; font-weight: 700; margin: 14px 0 0; display: none; }
+        .formmsg.ok { display: block; color: var(--green); }
+        .formmsg.bad { display: block; color: var(--rose); }
+
+        .upsell { display: grid; gap: 24px; grid-template-columns: 1.4fr 1fr; align-items: center;
+                  background: linear-gradient(180deg, #0d1424, #060a14); border: 1px solid var(--line);
+                  border-radius: 22px; padding: 30px; }
+        .pricebox { text-align: center; background: #060a14; border: 1px solid var(--line); border-radius: 18px; padding: 22px; }
+        .pricebox .amt { display: block; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+                         font-size: 34px; font-weight: 800; color: #fff; letter-spacing: -.02em; }
+        .pricebox .amt small { font-size: 14px; color: var(--mute); }
+        .pricebox .sub { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: var(--dim); }
+
+        ul.ticks { list-style: none; padding: 0; margin: 16px 0 0; }
+        ul.ticks li { font-size: 13.5px; color: #cbd5e1; padding-left: 26px; position: relative; margin-bottom: 9px; }
+        ul.ticks li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 800; }
+
+        footer { padding: 44px 0 56px; text-align: center; }
+        footer .brand { display: inline-block; margin-bottom: 10px; font-size: 14px; }
+        footer p { font-size: 11.5px; color: #475569; margin: 6px 0; }
+        footer a { color: var(--mute); }
+
+        @media (max-width: 760px) {
+            .tablewrap { border: 0; background: none; overflow-x: visible; }
+            table { min-width: 0; }
+            thead { display: none; }
+            table, tbody, tr, td { display: block; width: 100%; }
+            tbody tr {
+                background: rgba(17, 24, 39, .45); border: 1px solid var(--line);
+                border-radius: 16px; padding: 16px; margin-bottom: 12px;
+            }
+            tbody td { border: 0; padding: 0; }
+            td.co { font-size: 16px; margin-bottom: 8px; white-space: normal; }
+            td[data-label="System"] { margin-bottom: 10px; }
+            td[data-label="What it means"]::before {
+                content: attr(data-label); display: block; font-size: 10px; font-weight: 800;
+                text-transform: uppercase; letter-spacing: .12em; color: var(--dim); margin-bottom: 5px;
+            }
+            .upsell { grid-template-columns: 1fr; }
+            header.hero { padding: 48px 0 40px; }
+            section { padding: 44px 0; }
+            .navlinks a:not(.btn) { display: none; }
+        }
+    </style>
+    <style>
+        .prod { background: linear-gradient(180deg, rgba(17,24,39,.6), rgba(3,7,18,.6));
+                border: 1px solid #16202f; border-radius: 20px; padding: 24px;
+                display: flex; flex-direction: column; }
+        .prod.free { border-color: rgba(52,211,153,.25); }
+        .prod .kind { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em;
+                      color: var(--indigo); display: block; margin-bottom: 10px; }
+        .prod.free .kind { color: var(--green); }
+        .prod h3 { font-size: 17px; margin-bottom: 6px; }
+        .prod p { font-size: 13px; margin: 0 0 14px; }
+        .prod .tagline { font-size: 12px; color: var(--dim); margin: -2px 0 10px; }
+        .prod .money { margin-top: auto; display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap; }
+        .prod .amt { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 23px;
+                     font-weight: 800; color: #fff; letter-spacing: -.02em; }
+        .prod .amt small { font-size: 12px; color: var(--mute); font-family: 'Plus Jakarta Sans', sans-serif; }
+        .prod .strike { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px;
+                        color: var(--dim); text-decoration: line-through; }
+        .prod .unit { font-size: 11px; font-weight: 700; color: var(--dim); }
+        .prod .go { margin-top: 16px; display: block; text-align: center; }
+        .grid2 { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(265px, 1fr)); margin-top: 26px; }
+
+        .bundle { background: linear-gradient(135deg, rgba(99,102,241,.14), rgba(3,7,18,.4));
+                  border: 1px solid rgba(99,102,241,.4); border-radius: 24px; padding: 34px;
+                  box-shadow: 0 30px 80px -50px rgba(99,102,241,1); margin-top: 26px;
+                  display: grid; gap: 28px; grid-template-columns: 1.3fr 1fr; align-items: center; }
+        .bundle .now { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 44px;
+                       font-weight: 800; color: #fff; letter-spacing: -.03em; display: block; }
+        .bundle .now small { font-size: 16px; color: var(--mute); font-family: 'Plus Jakarta Sans', sans-serif; }
+        .bundle .was { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 16px;
+                       color: var(--dim); text-decoration: line-through; }
+        .bundle .right { text-align: center; background: #060a14; border: 1px solid var(--line);
+                         border-radius: 18px; padding: 24px; }
+        .ledger { list-style: none; padding: 0; margin: 16px 0 0; }
+        .ledger li { display: flex; justify-content: space-between; gap: 12px; font-size: 13px;
+                     padding: 7px 0; border-bottom: 1px dashed #16202f; color: #cbd5e1; }
+        .ledger li:last-child { border-bottom: 0; }
+        .ledger li b { color: #fff; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-weight: 700; }
+        .ledger li.sum { border-top: 1px solid var(--line); margin-top: 6px; padding-top: 11px;
+                         font-weight: 800; color: #fff; }
+        @media (max-width: 780px) { .bundle { grid-template-columns: 1fr; padding: 26px; } }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="wrap">
+            <a class="brand" href="/">The Tech Hut<span>.</span></a>
+            <div class="navlinks">
+                <a href="#free">Free</a>
+                <a href="#bundle">Bundle</a>
+                <a href="#paid">Products</a>
+                <a class="btn" href="/jobs/">Jobs board</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="wrap">
+            <span class="pill">🛒 Everything in one place</span>
+            <h1>Most of what we make <em>is free.</em></h1>
+            <p class="lede">
+                The jobs board, the CV pack, the morning briefing and the tools page cost nothing and
+                always will — they are how you find out whether we are any good. The paid things are
+                for people in an active job hunt who would rather buy back a few weeks.
+            </p>
+            <div class="cta-row">
+                <a class="btn light" href="#free">Start with the free side →</a>
+                <a class="btn ghost" href="#bundle">See the bundle</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="free">
+        <div class="wrap">
+            <span class="eyebrow">Free, permanently</span>
+            <h2>No payment, no email required</h2>
+
+            <div class="grid2">
+                <div class="prod free">
+                    <span class="kind">Free · updated live</span>
+                    <h3>The Jobs Board</h3>
+                    <p class="tagline">thetechhut.co/jobs</p>
+                    <p>Openings read straight from 22 employers' own hiring systems and refreshed every
+                       time you open the page. Filter by Kenya, the rest of Africa or remote.</p>
+                    <div class="money"><span class="amt"><small>KSh</small> 0</span></div>
+                    <a class="btn ghost go" href="/jobs/">Open the board</a>
+                </div>
+
+                <div class="prod free">
+                    <span class="kind">Free</span>
+                    <h3>The CV Pack</h3>
+                    <p class="tagline">Which system reads your CV</p>
+                    <p>The applicant tracking system behind the apply button at every major Kenyan
+                       employer, the six formatting rules that satisfy all of them, and a copy-paste
+                       CV skeleton.</p>
+                    <div class="money"><span class="amt"><small>KSh</small> 0</span></div>
+                    <a class="btn ghost go" href="/cv-pack/">Open the pack</a>
+                </div>
+
+                <div class="prod free">
+                    <span class="kind">Free · every morning</span>
+                    <h3>The Daily Savannah</h3>
+                    <p class="tagline">African tech, in one read</p>
+                    <p>Startups, funding, fintech, policy and infrastructure across the continent.
+                       Every story sourced and linked, no hot takes.</p>
+                    <div class="money"><span class="amt"><small>KSh</small> 0</span></div>
+                    <a class="btn ghost go" href="/blog/daily/">Read today's edition</a>
+                </div>
+
+                <div class="prod free">
+                    <span class="kind">Free</span>
+                    <h3>Tools</h3>
+                    <p class="tagline">Getting paid from abroad</p>
+                    <p>What Kenyan tech people actually use to receive money from foreign employers,
+                       which employer-of-record names to say in an interview, and where each one falls
+                       down.</p>
+                    <div class="money"><span class="amt"><small>KSh</small> 0</span></div>
+                    <a class="btn ghost go" href="/tools/">See the tools</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="bundle">
+        <div class="wrap">
+            <span class="eyebrow">The best value</span>
+            <h2>The Job Hunt Bundle</h2>
+            <p class="tight" style="max-width:62ch">
+                Everything a person in an active search needs, in one payment, instead of buying four
+                things over four weeks.
+            </p>
+
+            <div class="bundle">
+                <div>
+                    <h3 style="font-size:20px">What's inside</h3>
+                    <ul class="ledger">
+                        <li><span>The Remote-From-Kenya List</span> <b>KSh 500</b></li>
+                        <li><span>The CV Blueprint and templates</span> <b>KSh 250</b></li>
+                        <li><span>One ATS Pass — your CV rewritten for one role</span> <b>KSh 1,000</b></li>
+                        <li><span>African Tech Community Database</span> <b>KSh 25</b></li>
+                        <li><span>Early Access, three months</span> <b>KSh 600</b></li>
+                        <li class="sum"><span>Bought separately</span> <b>KSh 2,375</b></li>
+                    </ul>
+                    <p style="font-size:12.5px;margin-top:14px">
+                        The ATS Pass alone takes a week off your search. Everything is yours to keep
+                        except the Early Access months, which run from the day you join.
+                    </p>
+                </div>
+                <div class="right">
+                    <span class="was">KSh 2,375</span>
+                    <span class="now"><small>KSh</small> 1,500</span>
+                    <span style="font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--dim)">ONE PAYMENT · SAVE KSh 875</span>
+                    <a class="btn light" id="bundleBtn" href="#" style="display:block;margin-top:20px">Get the bundle</a>
+                    <p style="font-size:10.5px;color:var(--dim);margin:12px 0 0">M-Pesa or card</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="paid">
+        <div class="wrap">
+            <span class="eyebrow">Individually</span>
+            <h2>For people job hunting</h2>
+
+            <div class="grid2">
+                <div class="prod">
+                    <span class="kind">Launch price</span>
+                    <h3>The Remote-From-Kenya List</h3>
+                    <p class="tagline">Updated every morning</p>
+                    <p>We scanned 2,445 live openings to find the ones that will employ you while you
+                       sit in Nairobi. Company by company, role by role, with the apply link.</p>
+                    <div class="money">
+                        <span class="strike">KSh 1,000</span>
+                        <span class="amt"><small>KSh</small> 500</span>
+                        <span class="unit">one payment · lifetime updates</span>
+                    </div>
+                    <a class="btn go" href="/remote/">See what's on it</a>
+                </div>
+
+                <div class="prod">
+                    <span class="kind">Launch price · 10 slots a week</span>
+                    <h3>ATS Pass</h3>
+                    <p class="tagline">We rewrite it, you send it</p>
+                    <p>Send your CV and the role. In 24 hours it comes back formatted for the exact
+                       hiring system that employer runs, with the keyword set for that role.</p>
+                    <div class="money">
+                        <span class="strike">KSh 2,000</span>
+                        <span class="amt"><small>KSh</small> 1,000</span>
+                        <span class="unit">per CV, per role</span>
+                    </div>
+                    <a class="btn go" href="/ats-pass/">How it works</a>
+                </div>
+
+                <div class="prod">
+                    <span class="kind">Guide and templates</span>
+                    <h3>The CV Blueprint</h3>
+                    <p class="tagline">How to craft a winning CV</p>
+                    <p>The full guide plus ready-to-edit templates, written for engineers, data and
+                       product people applying through machine-read systems.</p>
+                    <div class="money">
+                        <span class="amt"><small>KSh</small> 250</span>
+                        <span class="unit">one payment</span>
+                    </div>
+                    <a class="btn ghost go" href="/cv.html">See the blueprint</a>
+                </div>
+
+                <div class="prod">
+                    <span class="kind">Monthly</span>
+                    <h3>Early Access</h3>
+                    <p class="tagline">Openings a day before everyone</p>
+                    <p>Every role goes to the Early Access group 24 hours before the public channel,
+                       screened, with a Monday shortlist and somewhere to ask questions.</p>
+                    <div class="money">
+                        <span class="amt"><small>KSh</small> 250</span>
+                        <span class="unit">a month · cancel any time</span>
+                    </div>
+                    <a class="btn ghost go" href="/early-access/">See what's in it</a>
+                </div>
+
+                <div class="prod">
+                    <span class="kind">Database · lifetime updates</span>
+                    <h3>African Tech Community Database</h3>
+                    <p class="tagline">50+ vetted groups across Africa</p>
+                    <p>The curated list of active tech communities across the continent, refreshed
+                       fortnightly. Our first product, and still the cheapest thing we sell.</p>
+                    <div class="money">
+                        <span class="amt"><small>KSh</small> 25</span>
+                        <span class="unit">one payment</span>
+                    </div>
+                    <a class="btn ghost go" href="/communities/">See the database</a>
+                </div>
+
+                <div class="prod">
+                    <span class="kind">Course and content</span>
+                    <h3>Content Pack</h3>
+                    <p class="tagline">The full content library</p>
+                    <p>The complete version of our content series, for people who found the free clips
+                       useful and want the rest of it.</p>
+                    <div class="money">
+                        <span class="amt"><small>KSh</small> 150</span>
+                        <span class="unit">one payment</span>
+                    </div>
+                    <a class="btn ghost go" href="/content/">See what's included</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pro">
+        <div class="wrap">
+            <span class="eyebrow">A different audience</span>
+            <h2>For people building something</h2>
+
+            <div class="grid2">
+                <div class="prod">
+                    <span class="kind">Kit and masterclass</span>
+                    <h3>SEO Automation Kit</h3>
+                    <p class="tagline">Build search traffic that compounds</p>
+                    <p>The automation kit and masterclass for people who need a site to actually rank —
+                       founders, marketers and anyone tired of writing fluff that nobody finds.</p>
+                    <div class="money">
+                        <span class="amt"><small>KES</small> 4,500</span>
+                        <span class="unit">one payment · lifetime updates</span>
+                    </div>
+                    <a class="btn ghost go" href="/seo.html">See the curriculum</a>
+                </div>
+
+                <div class="prod">
+                    <span class="kind">For employers</span>
+                    <h3>Reach our audience</h3>
+                    <p class="tagline">8,900 Kenyan tech people</p>
+                    <p>Job blasts, featured roles and sponsorship of the morning briefing. Your public
+                       openings are already on our board free — this buys attention on the day it
+                       matters.</p>
+                    <div class="money">
+                        <span class="amt"><small>from KSh</small> 3,500</span>
+                        <span class="unit">per role</span>
+                    </div>
+                    <a class="btn ghost go" href="/advertise/">See the rate card</a>
+                </div>
+
+                <div class="prod">
+                    <span class="kind">For community builders</span>
+                    <h3>A jobs board for your community</h3>
+                    <p class="tagline">Your domain, your employers</p>
+                    <p>The same self-maintaining board we run, set up for your market. Free feasibility
+                       check first — send ten employers and we tell you how many we can read.</p>
+                    <div class="money">
+                        <span class="amt"><small>from KSh</small> 5,000</span>
+                        <span class="unit">setup, then monthly</span>
+                    </div>
+                    <a class="btn ghost go" href="/jobs-for-your-community/">See how it works</a>
+                </div>
+
+                <div class="prod">
+                    <span class="kind">For hiring teams</span>
+                    <h3>Apprenticeship partnerships</h3>
+                    <p class="tagline">Talent trained to your spec</p>
+                    <p>We reverse-engineer your job descriptions into a curriculum, train a cohort
+                       against it, and you get first access to people built for your roles.</p>
+                    <div class="money"><span class="amt" style="font-size:18px">Let's talk</span></div>
+                    <a class="btn ghost go" href="/recruiters/">See the model</a>
+                </div>
+            </div>
+
+            <div class="callout tip" style="margin-top:28px">
+                ✅ <b>Everything is one payment unless it says otherwise.</b> No subscriptions you have
+                to remember to cancel, no card kept on file, no automatic renewal. Early Access is the
+                only recurring thing we sell, and it stops the moment you stop paying for it.
+            </div>
+
+            <div class="cta-row" style="margin-top:24px">
+                <a class="btn ghost" href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" target="_blank" rel="noopener">Join the free channel →</a>
+                <a class="btn ghost" href="mailto:info@thetechhut.co">Ask us something →</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="wrap">
+            <a class="brand" href="/">The Tech Hut<span>.</span></a>
+            <p>Kenyan tech opportunities, every day. <a href="/jobs/">Jobs</a> · <a href="/blog/daily/">Daily Savannah</a> · <a href="/cv-pack/">CV pack</a> · <a href="/remote/">Remote list</a> · <a href="/tools/">Tools</a> · <a href="/advertise/">For employers</a></p>
+            <p>&copy; 2026 The Tech Hut Community · <a href="mailto:info@thetechhut.co">info@thetechhut.co</a> · +254 115 017 058</p>
+        </div>
+    </footer>
+
+    <script>
+        /* ------------------------------------------------------------------
+           BUNDLE PAYMENT LINK -- create a KSh 1,500 link in IntaSend or
+           Paystack and paste it here. Until then the button goes to WhatsApp.
+           ------------------------------------------------------------------ */
+        var BUNDLE_LINK = '';
+        var WA = 'https://wa.me/254115017058?text=' +
+            encodeURIComponent('I want the Job Hunt Bundle (KSh 1,500)');
+
+        var b = document.getElementById('bundleBtn');
+        b.setAttribute('href', BUNDLE_LINK || WA);
+        if (!BUNDLE_LINK) { b.setAttribute('target', '_blank'); b.setAttribute('rel', 'noopener'); }
+    </script>
+</body>
+
+</html>
