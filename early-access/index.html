@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Early Access — tech openings 24 hours before everyone else | The Tech Hut</title>
+    <link rel="canonical" href="https://thetechhut.co/early-access/">
+
+    <meta name="description"
+        content="Kenyan tech openings 24 hours before the free channel, screened not scraped, plus a weekly digest and direct access to ask. From KSh 250 a month.">
+    <meta name="keywords"
+        content="tech jobs Kenya early access, Kenyan developer jobs alerts, paid job alerts Kenya, tech opportunities WhatsApp Kenya, The Tech Hut">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Early Access — openings 24 hours early">
+    <meta property="og:description" content="The same openings, a day earlier, screened. From KSh 250 a month.">
+    <meta property="og:url" content="https://thetechhut.co/early-access/">
+
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="https://images.unsplash.com/photo-1698767008609-f5fa6137b9e6?q=80&amp;w=32&amp;h=32&amp;auto=format&amp;fit=crop">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="https://images.unsplash.com/photo-1698767008609-f5fa6137b9e6?q=80&amp;w=180&amp;h=180&amp;auto=format&amp;fit=crop">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #030712;
+            --panel: #0b1220;
+            --panel-2: #111827;
+            --line: #1f2937;
+            --ink: #f1f5f9;
+            --mute: #94a3b8;
+            --dim: #64748b;
+            --indigo: #6366f1;
+            --indigo-soft: rgba(99, 102, 241, .12);
+            --green: #34d399;
+            --rose: #fb7185;
+            --gold: #fbbf24;
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+
+        a { color: inherit; }
+
+        .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+        nav {
+            position: sticky; top: 0; z-index: 50;
+            background: rgba(3, 7, 18, .82);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 255, 255, .06);
+        }
+
+        nav .wrap { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; }
+        .brand { font-weight: 800; font-size: 15px; letter-spacing: -.02em; text-decoration: none; }
+        .brand span { color: var(--indigo); }
+        .navlinks { display: flex; align-items: center; gap: 18px; font-size: 12px; font-weight: 700; }
+        .navlinks a { color: var(--mute); text-decoration: none; }
+        .navlinks a:hover { color: #fff; }
+        .navlinks a.btn { color: #fff; }
+
+        .btn {
+            display: inline-block; background: var(--indigo); color: #fff;
+            font-weight: 700; font-size: 13px; padding: 11px 20px; border-radius: 999px;
+            text-decoration: none; border: 0; cursor: pointer;
+            box-shadow: 0 10px 30px -12px rgba(99, 102, 241, .8);
+            transition: transform .15s ease, background .15s ease;
+        }
+        .btn:hover { background: #4f46e5; transform: translateY(-1px); }
+        .btn.ghost { background: transparent; border: 1px solid var(--line); box-shadow: none; color: var(--ink); }
+        .btn.ghost:hover { background: var(--panel-2); }
+        .btn.light { background: #fff; color: #030712; box-shadow: 0 10px 30px -14px rgba(255,255,255,.4); }
+        .btn.light:hover { background: #e2e8f0; }
+
+        header.hero { padding: 72px 0 56px; border-bottom: 1px solid #0f172a; }
+
+        .pill {
+            display: inline-flex; align-items: center; gap: 7px;
+            font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em;
+            background: rgba(52, 211, 153, .1); color: var(--green);
+            border: 1px solid rgba(52, 211, 153, .22);
+            padding: 6px 12px; border-radius: 999px;
+        }
+
+        h1 {
+            font-size: clamp(30px, 6vw, 52px); line-height: 1.05; letter-spacing: -.03em;
+            font-weight: 800; margin: 22px 0 18px; max-width: 18ch;
+        }
+        h1 em { font-style: normal; background: linear-gradient(90deg, #818cf8, #c084fc, #f472b6);
+                -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+        .lede { font-size: clamp(15px, 2.2vw, 19px); color: var(--mute); max-width: 62ch; margin: 0 0 28px; }
+
+        .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+        .cta-note { font-size: 11px; font-weight: 700; color: var(--dim); text-transform: uppercase; letter-spacing: .1em; }
+
+        section { padding: 60px 0; border-bottom: 1px solid #0f172a; }
+        .eyebrow { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .16em; color: var(--indigo); }
+        h2 { font-size: clamp(23px, 4vw, 34px); letter-spacing: -.025em; font-weight: 800; margin: 10px 0 14px; }
+        h3 { font-size: 16px; font-weight: 800; letter-spacing: -.01em; margin: 0 0 8px; }
+        p { color: var(--mute); font-size: 14.5px; }
+        p.tight { margin-top: 0; }
+
+        .tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 18px; background: rgba(17, 24, 39, .4); }
+        table { width: 100%; border-collapse: collapse; min-width: 640px; }
+        thead tr { background: rgba(3, 7, 18, .6); border-bottom: 1px solid var(--line); }
+        th { text-align: left; padding: 14px; font-size: 10.5px; font-weight: 800; text-transform: uppercase;
+             letter-spacing: .12em; color: var(--dim); white-space: nowrap; }
+        td { padding: 14px; font-size: 13.5px; border-bottom: 1px solid #0d1526; vertical-align: top; color: #cbd5e1; }
+        tbody tr:last-child td { border-bottom: 0; }
+        td.co { font-weight: 800; color: #fff; white-space: nowrap; }
+        .ats { display: inline-block; font-size: 11px; font-weight: 800; padding: 4px 9px; border-radius: 7px;
+               background: var(--indigo-soft); color: #a5b4fc; white-space: nowrap; }
+        .ats.hard { background: rgba(251, 113, 133, .12); color: var(--rose); }
+        .ats.easy { background: rgba(52, 211, 153, .1); color: var(--green); }
+
+        .cards { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); margin-top: 26px; }
+        .card { background: linear-gradient(180deg, rgba(17,24,39,.6), rgba(3,7,18,.6));
+                border: 1px solid #16202f; border-radius: 18px; padding: 22px; }
+        .card .n { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; font-weight: 800;
+                   color: var(--indigo); display: block; margin-bottom: 10px; }
+        .card p { font-size: 13px; margin: 0; }
+
+        .callout { border-radius: 16px; padding: 16px 18px; font-size: 13px; margin: 22px 0 0; }
+        .callout.warn { background: rgba(251, 113, 133, .06); border: 1px solid rgba(251, 113, 133, .2); color: #fda4af; }
+        .callout.tip { background: rgba(52, 211, 153, .06); border: 1px solid rgba(52, 211, 153, .18); color: #6ee7b7; }
+        .callout b { color: #fff; }
+
+        pre.skeleton {
+            background: #060a14; border: 1px solid var(--line); border-radius: 16px;
+            padding: 20px; overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 12.5px; line-height: 1.75; color: #cbd5e1; white-space: pre; margin: 0;
+        }
+        .copybar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+        .copybar small { color: var(--dim); font-size: 11.5px; font-weight: 700; }
+        button.copy { background: var(--panel-2); border: 1px solid var(--line); color: var(--ink);
+                      font-family: inherit; font-size: 11.5px; font-weight: 800; padding: 8px 14px;
+                      border-radius: 9px; cursor: pointer; }
+        button.copy:hover { background: #1b2536; }
+
+        .capture { background: linear-gradient(180deg, rgba(99,102,241,.1), rgba(3,7,18,0));
+                   border: 1px solid rgba(99,102,241,.25); border-radius: 22px; padding: 30px; }
+        form.signup { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 0; }
+        form.signup input {
+            flex: 1 1 210px; background: #060a14; border: 1px solid var(--line); color: var(--ink);
+            font-family: inherit; font-size: 14px; padding: 13px 15px; border-radius: 11px;
+        }
+        form.signup input::placeholder { color: #475569; }
+        form.signup input:focus { outline: 0; border-color: var(--indigo); }
+        form.signup button { flex: 0 0 auto; }
+        .formnote { font-size: 11.5px; color: var(--dim); margin: 12px 0 0; }
+        .formmsg { font-size: 13.5px; font-weight: 700; margin: 14px 0 0; display: none; }
+        .formmsg.ok { display: block; color: var(--green); }
+        .formmsg.bad { display: block; color: var(--rose); }
+
+        .upsell { display: grid; gap: 24px; grid-template-columns: 1.4fr 1fr; align-items: center;
+                  background: linear-gradient(180deg, #0d1424, #060a14); border: 1px solid var(--line);
+                  border-radius: 22px; padding: 30px; }
+        .pricebox { text-align: center; background: #060a14; border: 1px solid var(--line); border-radius: 18px; padding: 22px; }
+        .pricebox .amt { display: block; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+                         font-size: 34px; font-weight: 800; color: #fff; letter-spacing: -.02em; }
+        .pricebox .amt small { font-size: 14px; color: var(--mute); }
+        .pricebox .sub { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: var(--dim); }
+
+        ul.ticks { list-style: none; padding: 0; margin: 16px 0 0; }
+        ul.ticks li { font-size: 13.5px; color: #cbd5e1; padding-left: 26px; position: relative; margin-bottom: 9px; }
+        ul.ticks li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 800; }
+
+        footer { padding: 44px 0 56px; text-align: center; }
+        footer .brand { display: inline-block; margin-bottom: 10px; font-size: 14px; }
+        footer p { font-size: 11.5px; color: #475569; margin: 6px 0; }
+        footer a { color: var(--mute); }
+
+        @media (max-width: 760px) {
+            .tablewrap { border: 0; background: none; overflow-x: visible; }
+            table { min-width: 0; }
+            thead { display: none; }
+            table, tbody, tr, td { display: block; width: 100%; }
+            tbody tr {
+                background: rgba(17, 24, 39, .45); border: 1px solid var(--line);
+                border-radius: 16px; padding: 16px; margin-bottom: 12px;
+            }
+            tbody td { border: 0; padding: 0; }
+            td.co { font-size: 16px; margin-bottom: 8px; white-space: normal; }
+            td[data-label="System"] { margin-bottom: 10px; }
+            td[data-label="What it means"]::before {
+                content: attr(data-label); display: block; font-size: 10px; font-weight: 800;
+                text-transform: uppercase; letter-spacing: .12em; color: var(--dim); margin-bottom: 5px;
+            }
+            .upsell { grid-template-columns: 1fr; }
+            header.hero { padding: 48px 0 40px; }
+            section { padding: 44px 0; }
+            .navlinks a:not(.btn) { display: none; }
+        }
+    </style>
+    <style>
+        .plans { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: 28px; }
+        .plan { background: linear-gradient(180deg, rgba(17,24,39,.6), rgba(3,7,18,.6));
+                border: 1px solid #16202f; border-radius: 20px; padding: 26px; text-align: center;
+                display: flex; flex-direction: column; }
+        .plan.best { border-color: rgba(99,102,241,.5); box-shadow: 0 24px 60px -40px rgba(99,102,241,.9); }
+        .plan .tag { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em;
+                     color: var(--dim); display: block; margin-bottom: 12px; }
+        .plan.best .tag { color: var(--indigo); }
+        .plan .amt { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 32px;
+                     font-weight: 800; color: #fff; letter-spacing: -.03em; display: block; }
+        .plan .amt small { font-size: 13px; color: var(--mute); font-family: 'Plus Jakarta Sans', sans-serif; }
+        .plan .per { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .1em;
+                     color: var(--dim); display: block; margin-top: 4px; }
+        .plan .save { font-size: 11.5px; font-weight: 800; color: var(--green); display: block; margin-top: 8px; min-height: 18px; }
+        .plan .go { margin-top: 18px; }
+        .plan ul.ticks { text-align: left; flex: 1 1 auto; }
+
+        .compare td.yes { color: var(--green); font-weight: 700; }
+        .compare td.no { color: #475569; }
+
+        .lead-form { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; margin-top: 20px; }
+        .lead-form input, .lead-form textarea {
+            background: #060a14; border: 1px solid var(--line); color: var(--ink);
+            font-family: inherit; font-size: 14px; padding: 13px 15px; border-radius: 11px; width: 100%;
+        }
+        .lead-form textarea { grid-column: 1 / -1; resize: vertical; min-height: 84px; }
+        .lead-form .full { grid-column: 1 / -1; }
+        .lead-form input::placeholder, .lead-form textarea::placeholder { color: #475569; }
+        .lead-form input:focus, .lead-form textarea:focus { outline: 0; border-color: var(--indigo); }
+
+        .faq { border-top: 1px solid #0f172a; padding-top: 18px; margin-top: 18px; }
+        .faq h3 { font-size: 14.5px; margin-bottom: 4px; }
+        .faq p { margin: 0 0 18px; font-size: 13.5px; }
+
+        @media (max-width: 620px) { .lead-form { grid-template-columns: 1fr; } }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="wrap">
+            <a class="brand" href="/">The Tech Hut<span>.</span></a>
+            <div class="navlinks">
+                <a href="#what">What you get</a>
+                <a href="#plans">Price</a>
+                <a href="/jobs/">Jobs board</a>
+                <a class="btn" href="#plans">Join</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="wrap">
+            <span class="pill">🔓 Early Access · 50 places in the first intake</span>
+            <h1>The same openings. <em>A&nbsp;day&nbsp;earlier.</em></h1>
+            <p class="lede">
+                Everything on the free channel eventually reaches 8,900 people. By the time a good
+                Nairobi role gets there, a hundred applications are already in. Early Access is the
+                small group that sees it first, with the screening already done — and with somewhere
+                to ask whether it is worth applying for at all.
+            </p>
+            <div class="cta-row">
+                <a class="btn light" href="#plans">See the price →</a>
+                <a class="btn ghost" href="#what">What's actually in it</a>
+            </div>
+            <p class="cta-note" style="margin-top:18px">From KSh 250 a month · M-Pesa · cancel any time</p>
+        </div>
+    </header>
+
+    <section id="what">
+        <div class="wrap">
+            <span class="eyebrow">What you get</span>
+            <h2>Four things the free channel does not do</h2>
+
+            <div class="cards" style="margin-top:24px">
+                <div class="card">
+                    <span class="n">01</span>
+                    <h3>24 hours of head start</h3>
+                    <p>Every opening goes to the Early Access group first and to the public channel the next
+                       morning. On a role that closes in a week, being in the first twenty applications
+                       instead of the first two hundred is the whole game.</p>
+                </div>
+                <div class="card">
+                    <span class="n">02</span>
+                    <h3>Screened, not scraped</h3>
+                    <p>No reposted expired listings, no "urgent hiring" schemes, no roles that want five
+                       years of experience for KSh 40,000. Everything is checked against the employer's own
+                       system before it goes out, with the salary where we can find it and the ATS named.</p>
+                </div>
+                <div class="card">
+                    <span class="n">03</span>
+                    <h3>A Monday shortlist</h3>
+                    <p>One message every Monday: the five openings most worth your weekend, why each one,
+                       and what the employer's hiring system will do to your CV. Written, not generated.</p>
+                </div>
+                <div class="card">
+                    <span class="n">04</span>
+                    <h3>Somewhere to ask</h3>
+                    <p>A group, not a broadcast. Ask whether a salary band is real, get a second opinion on
+                       a CV bullet, find out if anyone here has interviewed there. Small enough that your
+                       question gets answered.</p>
+                </div>
+            </div>
+
+            <div class="tablewrap compare" style="margin-top:30px">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>Free channel</th>
+                            <th>Early Access</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="co" data-label="Feature">Daily openings</td>
+                            <td class="yes" data-label="Free">Yes</td>
+                            <td class="yes" data-label="Early Access">Yes, 24 hours earlier</td>
+                        </tr>
+                        <tr>
+                            <td class="co" data-label="Feature">Screened for scams and expiry</td>
+                            <td class="no" data-label="Free">Best effort</td>
+                            <td class="yes" data-label="Early Access">Every single one</td>
+                        </tr>
+                        <tr>
+                            <td class="co" data-label="Feature">Salary and ATS noted</td>
+                            <td class="no" data-label="Free">—</td>
+                            <td class="yes" data-label="Early Access">Where it exists</td>
+                        </tr>
+                        <tr>
+                            <td class="co" data-label="Feature">Monday shortlist</td>
+                            <td class="no" data-label="Free">—</td>
+                            <td class="yes" data-label="Early Access">Yes</td>
+                        </tr>
+                        <tr>
+                            <td class="co" data-label="Feature">Ask questions and get a reply</td>
+                            <td class="no" data-label="Free">Broadcast only</td>
+                            <td class="yes" data-label="Early Access">Yes</td>
+                        </tr>
+                        <tr>
+                            <td class="co" data-label="Feature">CV blueprint and templates</td>
+                            <td class="no" data-label="Free">—</td>
+                            <td class="yes" data-label="Early Access">Included</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout tip">
+                ✅ <b>The free channel is not going anywhere.</b> It stays free, it stays daily, and it keeps
+                getting everything. Early Access is a head start and a filter, not a wall.
+            </div>
+        </div>
+    </section>
+
+    <section id="plans">
+        <div class="wrap">
+            <span class="eyebrow">Price</span>
+            <h2>Less than a matatu fare into town</h2>
+            <p class="tight" style="max-width:60ch">
+                Pay by M-Pesa. Cancel by telling us to stop — no card on file, nothing to chase,
+                nothing renews behind your back.
+            </p>
+
+            <div class="plans">
+                <div class="plan">
+                    <span class="tag">Try it</span>
+                    <span class="amt"><small>KSh</small> 250</span>
+                    <span class="per">per month</span>
+                    <span class="save">&nbsp;</span>
+                    <ul class="ticks">
+                        <li>Everything in Early Access</li>
+                        <li>Pay month by month</li>
+                        <li>Stop whenever you like</li>
+                    </ul>
+                    <a class="btn ghost go" href="#reserve" data-plan="Monthly — KSh 250">Join monthly</a>
+                </div>
+
+                <div class="plan best">
+                    <span class="tag">Most people pick this</span>
+                    <span class="amt"><small>KSh</small> 600</span>
+                    <span class="per">three months</span>
+                    <span class="save">Save KSh 150</span>
+                    <ul class="ticks">
+                        <li>Everything in Early Access</li>
+                        <li>The CV blueprint included free</li>
+                        <li>Roughly one full job search</li>
+                    </ul>
+                    <a class="btn go" href="#reserve" data-plan="Quarterly — KSh 600">Join for three months</a>
+                </div>
+
+                <div class="plan">
+                    <span class="tag">Committed</span>
+                    <span class="amt"><small>KSh</small> 2,000</span>
+                    <span class="per">per year</span>
+                    <span class="save">Save KSh 1,000</span>
+                    <ul class="ticks">
+                        <li>Everything in Early Access</li>
+                        <li>The CV blueprint included free</li>
+                        <li>Price locked for the year</li>
+                    </ul>
+                    <a class="btn ghost go" href="#reserve" data-plan="Annual — KSh 2,000">Join for a year</a>
+                </div>
+            </div>
+
+            <div class="callout warn">
+                🎯 <b>First month, no risk:</b> if the first month does not put a real opening in front of
+                you that you would not have found on your own, say so and you get it back. No form, no
+                argument. We would rather have the feedback than the 250 bob.
+            </div>
+        </div>
+    </section>
+
+    <section id="reserve">
+        <div class="wrap">
+            <div class="capture">
+                <span class="eyebrow">Join</span>
+                <h2 style="margin-bottom:10px">Two steps, about a minute</h2>
+                <p style="max-width:60ch;margin:0">
+                    Send this form and you get payment instructions and the group link back on WhatsApp.
+                    First intake is capped at 50 so the group stays small enough to be worth being in.
+                </p>
+
+                <form class="lead-form" id="eaForm" novalidate>
+                    <input type="text" name="name" placeholder="Your name" required>
+                    <input type="tel" name="whatsapp" placeholder="WhatsApp number (07.. or +254..)" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="text" name="plan" id="planField" placeholder="Plan (monthly / quarterly / annual)">
+                    <textarea name="looking_for" placeholder="What are you looking for? Role, level, and whether you want Kenya, remote or both."></textarea>
+                    <div class="full">
+                        <button class="btn" type="submit" id="eaBtn">Reserve my place</button>
+                    </div>
+                </form>
+                <p class="formmsg" id="eaMsg"></p>
+                <p class="formnote">
+                    Prefer to just message? WhatsApp
+                    <a href="https://wa.me/254115017058?text=I%20want%20to%20join%20Early%20Access" target="_blank" rel="noopener">+254 115 017 058</a>
+                    or email <a href="mailto:info@thetechhut.co?subject=Early%20Access">info@thetechhut.co</a>.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq">
+        <div class="wrap">
+            <span class="eyebrow">Before you ask</span>
+            <h2>Fair questions</h2>
+
+            <div class="faq" style="max-width:68ch">
+                <h3>Is this a job guarantee?</h3>
+                <p>No, and anyone selling you one in Kenya is lying. This buys you earlier sight of real
+                   openings and a sharper CV. The applying is still yours to do.</p>
+
+                <h3>Why not just read the free channel?</h3>
+                <p>You should — it is free and it is good. This exists for people in an active search,
+                   where a day's head start and a filtered list are worth 250 bob a month. If you are not
+                   searching right now, do not pay for it.</p>
+
+                <h3>How do I pay?</h3>
+                <p>M-Pesa. Send the form, we send you the number and the exact amount, you pay, you are in.
+                   No card, no standing order, no automatic renewal.</p>
+
+                <h3>How do I leave?</h3>
+                <p>Tell us, or simply do not pay the next month. Nothing renews by itself, so leaving
+                   requires no effort at all.</p>
+
+                <h3>Do you sell my details to recruiters?</h3>
+                <p>No. Employers pay us to reach the audience, never to receive it. Your number and email
+                   stay with us — see the <a href="/data_privacy_policy/" style="color:var(--indigo)">privacy policy</a>.</p>
+
+                <h3>I am a student with no money. Anything for me?</h3>
+                <p>The free channel, the free <a href="/cv-pack/" style="color:var(--indigo)">CV pack</a> and the
+                   free <a href="/jobs/" style="color:var(--indigo)">jobs board</a>, all of which are genuinely free
+                   and stay that way. Come back when you are earning.</p>
+            </div>
+
+            <div class="cta-row" style="margin-top:26px">
+                <a class="btn ghost" href="/cv-pack/">Start with the free CV pack →</a>
+                <a class="btn ghost" href="/jobs/">Browse the jobs board →</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="wrap">
+            <a class="brand" href="/">The Tech Hut<span>.</span></a>
+            <p>Kenyan tech opportunities, every day. <a href="/jobs/">Jobs</a> · <a href="/blog/daily/">Daily Savannah</a> · <a href="/cv-pack/">CV pack</a> · <a href="/advertise/">For employers</a></p>
+            <p>&copy; 2026 The Tech Hut Community · <a href="mailto:info@thetechhut.co">info@thetechhut.co</a> · +254 115 017 058</p>
+        </div>
+    </footer>
+
+    <script>
+        /* ------------------------------------------------------------------
+           PAYMENT LINKS
+           Leave these empty and every "Join" button sends people to the form,
+           where you reply with M-Pesa details by hand. That works fine and is
+           how the first intake should run.
+           When you create hosted payment links (IntaSend or Paystack — you
+           already use both), paste them here and the buttons become direct
+           checkout instead.
+           ------------------------------------------------------------------ */
+        var PAY = {
+            'Monthly — KSh 250': '',
+            'Quarterly — KSh 600': '',
+            'Annual — KSh 2,000': ''
+        };
+
+        var FORM_ID = 'xrbgbddv';   /* <- swap for a dedicated Formspree form id when you create one */
+
+        /* wire the plan buttons */
+        Array.prototype.forEach.call(document.querySelectorAll('[data-plan]'), function (a) {
+            var plan = a.getAttribute('data-plan');
+            var link = PAY[plan];
+            if (link) {
+                a.setAttribute('href', link);
+                a.setAttribute('target', '_blank');
+                a.setAttribute('rel', 'noopener');
+                return;
+            }
+            a.addEventListener('click', function () {
+                var f = document.getElementById('planField');
+                f.value = plan;
+                f.style.borderColor = '#6366f1';
+            });
+        });
+
+        var form = document.getElementById('eaForm');
+        var msg = document.getElementById('eaMsg');
+        var btn = document.getElementById('eaBtn');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var fd = new FormData(form);
+            var email = (fd.get('email') || '').toString().trim();
+            var wa = (fd.get('whatsapp') || '').toString().replace(/\D/g, '');
+            if (email.indexOf('@') < 1 || email.indexOf('.') < 0 || wa.length < 9) {
+                msg.className = 'formmsg bad';
+                msg.textContent = 'We need a working email and a WhatsApp number we can actually reach you on.';
+                return;
+            }
+            fd.append('_subject', 'EARLY ACCESS signup — ' + (fd.get('name') || email));
+            fd.append('source', 'early-access');
+            btn.disabled = true;
+            btn.textContent = 'Reserving…';
+            msg.className = 'formmsg';
+            msg.textContent = '';
+
+            fetch('https://formspree.io/f/' + FORM_ID, {
+                method: 'POST', body: fd, headers: { 'Accept': 'application/json' }
+            }).then(function (r) {
+                if (!r.ok) throw new Error('bad status');
+                form.reset();
+                msg.className = 'formmsg ok';
+                msg.textContent = 'Place held. Payment details and the group link are coming to your WhatsApp shortly.';
+                btn.textContent = 'Reserved ✓';
+            }).catch(function () {
+                msg.className = 'formmsg bad';
+                msg.innerHTML = 'That did not send. WhatsApp <a href="https://wa.me/254115017058" style="color:var(--rose)">+254 115 017 058</a> and we will sort it out there.';
+                btn.disabled = false;
+                btn.textContent = 'Reserve my place';
+            });
+        });
+    </script>
+</body>
+
+</html>
