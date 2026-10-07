@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Kenyan ATS Pack — which system reads your CV | The Tech Hut</title>
+    <link rel="canonical" href="https://thetechhut.co/cv-pack/">
+
+    <meta name="description"
+        content="Free: the applicant tracking system every major Kenyan tech employer actually runs — Safaricom, Britam, M-KOPA, Andela, Jumia, Tala, Sun King, Watu and more — plus the six formatting rules that get your CV past each one.">
+    <meta name="keywords"
+        content="ATS Kenya, applicant tracking system Kenya, Safaricom careers ATS, Britam Taleo, M-KOPA Ashby, Greenhouse Lever Kenya, ATS friendly CV Kenya, tech jobs Kenya, The Tech Hut">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="The Kenyan ATS Pack — which system reads your CV">
+    <meta property="og:description"
+        content="Safaricom runs Oracle. Britam runs Taleo. M-KOPA runs Ashby. Here is the full map, and what each one does to your CV. Free.">
+    <meta property="og:url" content="https://thetechhut.co/cv-pack/">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="https://images.unsplash.com/photo-1698767008609-f5fa6137b9e6?q=80&amp;w=32&amp;h=32&amp;auto=format&amp;fit=crop">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="https://images.unsplash.com/photo-1698767008609-f5fa6137b9e6?q=80&amp;w=180&amp;h=180&amp;auto=format&amp;fit=crop">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #030712;
+            --panel: #0b1220;
+            --panel-2: #111827;
+            --line: #1f2937;
+            --ink: #f1f5f9;
+            --mute: #94a3b8;
+            --dim: #64748b;
+            --indigo: #6366f1;
+            --indigo-soft: rgba(99, 102, 241, .12);
+            --green: #34d399;
+            --rose: #fb7185;
+            --gold: #fbbf24;
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+
+        a { color: inherit; }
+
+        .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+        nav {
+            position: sticky; top: 0; z-index: 50;
+            background: rgba(3, 7, 18, .82);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 255, 255, .06);
+        }
+
+        nav .wrap { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; }
+        .brand { font-weight: 800; font-size: 15px; letter-spacing: -.02em; text-decoration: none; }
+        .brand span { color: var(--indigo); }
+        .navlinks { display: flex; align-items: center; gap: 18px; font-size: 12px; font-weight: 700; }
+        .navlinks a { color: var(--mute); text-decoration: none; }
+        .navlinks a:hover { color: #fff; }
+        .navlinks a.btn { color: #fff; }
+
+        .btn {
+            display: inline-block; background: var(--indigo); color: #fff;
+            font-weight: 700; font-size: 13px; padding: 11px 20px; border-radius: 999px;
+            text-decoration: none; border: 0; cursor: pointer;
+            box-shadow: 0 10px 30px -12px rgba(99, 102, 241, .8);
+            transition: transform .15s ease, background .15s ease;
+        }
+        .btn:hover { background: #4f46e5; transform: translateY(-1px); }
+        .btn.ghost { background: transparent; border: 1px solid var(--line); box-shadow: none; color: var(--ink); }
+        .btn.ghost:hover { background: var(--panel-2); }
+        .btn.light { background: #fff; color: #030712; box-shadow: 0 10px 30px -14px rgba(255,255,255,.4); }
+        .btn.light:hover { background: #e2e8f0; }
+
+        header.hero { padding: 72px 0 56px; border-bottom: 1px solid #0f172a; }
+
+        .pill {
+            display: inline-flex; align-items: center; gap: 7px;
+            font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em;
+            background: rgba(52, 211, 153, .1); color: var(--green);
+            border: 1px solid rgba(52, 211, 153, .22);
+            padding: 6px 12px; border-radius: 999px;
+        }
+
+        h1 {
+            font-size: clamp(30px, 6vw, 52px); line-height: 1.05; letter-spacing: -.03em;
+            font-weight: 800; margin: 22px 0 18px; max-width: 18ch;
+        }
+        h1 em { font-style: normal; background: linear-gradient(90deg, #818cf8, #c084fc, #f472b6);
+                -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+        .lede { font-size: clamp(15px, 2.2vw, 19px); color: var(--mute); max-width: 62ch; margin: 0 0 28px; }
+
+        .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+        .cta-note { font-size: 11px; font-weight: 700; color: var(--dim); text-transform: uppercase; letter-spacing: .1em; }
+
+        section { padding: 60px 0; border-bottom: 1px solid #0f172a; }
+        .eyebrow { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .16em; color: var(--indigo); }
+        h2 { font-size: clamp(23px, 4vw, 34px); letter-spacing: -.025em; font-weight: 800; margin: 10px 0 14px; }
+        h3 { font-size: 16px; font-weight: 800; letter-spacing: -.01em; margin: 0 0 8px; }
+        p { color: var(--mute); font-size: 14.5px; }
+        p.tight { margin-top: 0; }
+
+        .tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 18px; background: rgba(17, 24, 39, .4); }
+        table { width: 100%; border-collapse: collapse; min-width: 640px; }
+        thead tr { background: rgba(3, 7, 18, .6); border-bottom: 1px solid var(--line); }
+        th { text-align: left; padding: 14px; font-size: 10.5px; font-weight: 800; text-transform: uppercase;
+             letter-spacing: .12em; color: var(--dim); white-space: nowrap; }
+        td { padding: 14px; font-size: 13.5px; border-bottom: 1px solid #0d1526; vertical-align: top; color: #cbd5e1; }
+        tbody tr:last-child td { border-bottom: 0; }
+        td.co { font-weight: 800; color: #fff; white-space: nowrap; }
+        .ats { display: inline-block; font-size: 11px; font-weight: 800; padding: 4px 9px; border-radius: 7px;
+               background: var(--indigo-soft); color: #a5b4fc; white-space: nowrap; }
+        .ats.hard { background: rgba(251, 113, 133, .12); color: var(--rose); }
+        .ats.easy { background: rgba(52, 211, 153, .1); color: var(--green); }
+
+        .cards { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); margin-top: 26px; }
+        .card { background: linear-gradient(180deg, rgba(17,24,39,.6), rgba(3,7,18,.6));
+                border: 1px solid #16202f; border-radius: 18px; padding: 22px; }
+        .card .n { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; font-weight: 800;
+                   color: var(--indigo); display: block; margin-bottom: 10px; }
+        .card p { font-size: 13px; margin: 0; }
+
+        .callout { border-radius: 16px; padding: 16px 18px; font-size: 13px; margin: 22px 0 0; }
+        .callout.warn { background: rgba(251, 113, 133, .06); border: 1px solid rgba(251, 113, 133, .2); color: #fda4af; }
+        .callout.tip { background: rgba(52, 211, 153, .06); border: 1px solid rgba(52, 211, 153, .18); color: #6ee7b7; }
+        .callout b { color: #fff; }
+
+        pre.skeleton {
+            background: #060a14; border: 1px solid var(--line); border-radius: 16px;
+            padding: 20px; overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 12.5px; line-height: 1.75; color: #cbd5e1; white-space: pre; margin: 0;
+        }
+        .copybar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+        .copybar small { color: var(--dim); font-size: 11.5px; font-weight: 700; }
+        button.copy { background: var(--panel-2); border: 1px solid var(--line); color: var(--ink);
+                      font-family: inherit; font-size: 11.5px; font-weight: 800; padding: 8px 14px;
+                      border-radius: 9px; cursor: pointer; }
+        button.copy:hover { background: #1b2536; }
+
+        .capture { background: linear-gradient(180deg, rgba(99,102,241,.1), rgba(3,7,18,0));
+                   border: 1px solid rgba(99,102,241,.25); border-radius: 22px; padding: 30px; }
+        form.signup { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 0; }
+        form.signup input {
+            flex: 1 1 210px; background: #060a14; border: 1px solid var(--line); color: var(--ink);
+            font-family: inherit; font-size: 14px; padding: 13px 15px; border-radius: 11px;
+        }
+        form.signup input::placeholder { color: #475569; }
+        form.signup input:focus { outline: 0; border-color: var(--indigo); }
+        form.signup button { flex: 0 0 auto; }
+        .formnote { font-size: 11.5px; color: var(--dim); margin: 12px 0 0; }
+        .formmsg { font-size: 13.5px; font-weight: 700; margin: 14px 0 0; display: none; }
+        .formmsg.ok { display: block; color: var(--green); }
+        .formmsg.bad { display: block; color: var(--rose); }
+
+        .upsell { display: grid; gap: 24px; grid-template-columns: 1.4fr 1fr; align-items: center;
+                  background: linear-gradient(180deg, #0d1424, #060a14); border: 1px solid var(--line);
+                  border-radius: 22px; padding: 30px; }
+        .pricebox { text-align: center; background: #060a14; border: 1px solid var(--line); border-radius: 18px; padding: 22px; }
+        .pricebox .amt { display: block; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+                         font-size: 34px; font-weight: 800; color: #fff; letter-spacing: -.02em; }
+        .pricebox .amt small { font-size: 14px; color: var(--mute); }
+        .pricebox .sub { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: var(--dim); }
+
+        ul.ticks { list-style: none; padding: 0; margin: 16px 0 0; }
+        ul.ticks li { font-size: 13.5px; color: #cbd5e1; padding-left: 26px; position: relative; margin-bottom: 9px; }
+        ul.ticks li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 800; }
+
+        footer { padding: 44px 0 56px; text-align: center; }
+        footer .brand { display: inline-block; margin-bottom: 10px; font-size: 14px; }
+        footer p { font-size: 11.5px; color: #475569; margin: 6px 0; }
+        footer a { color: var(--mute); }
+
+        @media (max-width: 760px) {
+            .tablewrap { border: 0; background: none; overflow-x: visible; }
+            table { min-width: 0; }
+            thead { display: none; }
+            table, tbody, tr, td { display: block; width: 100%; }
+            tbody tr {
+                background: rgba(17, 24, 39, .45); border: 1px solid var(--line);
+                border-radius: 16px; padding: 16px; margin-bottom: 12px;
+            }
+            tbody td { border: 0; padding: 0; }
+            td.co { font-size: 16px; margin-bottom: 8px; white-space: normal; }
+            td[data-label="System"] { margin-bottom: 10px; }
+            td[data-label="What it means"]::before {
+                content: attr(data-label); display: block; font-size: 10px; font-weight: 800;
+                text-transform: uppercase; letter-spacing: .12em; color: var(--dim); margin-bottom: 5px;
+            }
+            .upsell { grid-template-columns: 1fr; }
+            header.hero { padding: 48px 0 40px; }
+            section { padding: 44px 0; }
+            .navlinks a:not(.btn) { display: none; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="wrap">
+            <a class="brand" href="/">The Tech Hut<span>.</span></a>
+            <div class="navlinks">
+                <a href="#map">The map</a>
+                <a href="#rules">The rules</a>
+                <a href="/jobs/">Jobs board</a>
+                <a class="btn" href="#list">Get the checklist</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="wrap">
+            <span class="pill">⚡ Free · No payment · Updated October 2026</span>
+            <h1>A robot reads your CV first. <em>Here is which one.</em></h1>
+            <p class="lede">
+                Safaricom runs Oracle. Britam runs Taleo. M-KOPA and Andela run Ashby. Tala runs Lever.
+                Each of those systems chews through your CV differently — and the formatting that sails
+                through one gets you silently filtered by another. We checked the live job feed of every
+                major Kenyan tech employer we track and wrote down what we found.
+            </p>
+            <div class="cta-row">
+                <a class="btn light" href="#map">See the map →</a>
+                <a class="btn ghost" href="#list">Email me the checklist</a>
+            </div>
+            <p class="cta-note" style="margin-top:18px">Built from the same feeds that power our live <a href="/jobs/" style="color:var(--mute)">jobs board</a></p>
+        </div>
+    </header>
+
+    <section id="map">
+        <div class="wrap">
+            <span class="eyebrow">Part one · the map</span>
+            <h2>Who runs what</h2>
+            <p class="tight" style="max-width:68ch">
+                Every row below was confirmed against the employer's own live careers feed in October 2026.
+                Employers do change systems, so treat this as a snapshot — but the pattern holds:
+                the funded startups sit on modern, parser-friendly systems, and the big corporates sit on
+                Oracle products that make you re-type your whole life into a form.
+            </p>
+
+            <div class="tablewrap" style="margin-top:24px">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Employer</th>
+                            <th>System behind the apply button</th>
+                            <th>What that means for you</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="co" data-label="Employer">Safaricom</td>
+                            <td data-label="System"><span class="ats hard">Oracle Recruiting Cloud</span></td>
+                            <td data-label="What it means">Your uploaded CV is parsed, then you re-enter everything by hand anyway. The form fields are what get searched — not your PDF. Budget 40 minutes for a first application.</td>
+                        </tr>
+                        <tr>
+                            <td class="co" data-label="Employer">Britam</td>
+                            <td data-label="System"><span class="ats hard">Oracle Taleo</span></td>
+                            <td data-label="What it means">Oldest system on this list. Hates tables, columns, headers and footers. Build a profile once and reuse it — Taleo keeps it between applications.</td>
+                        </tr>
+                        <tr>
+                            <td class="co" data-label="Employer">M-KOPA</td>
+                            <td data-label="System"><span class="ats easy">Ashby</span></td>
+                            <td data-label="What it means">Clean parse, short form, structured screening questions. Your answers to those questions matter more than your CV design.</td>
+                        </tr>
+                        <tr>
+                            <td class="co" data-label="Employer">Andela</td>
+                            <td data-label="System"><span class="ats easy">Ashby</span></td>
+                            <td data-label="What it means">Same as above. Skills are matched as discrete tags, so name your stack explicitly — "React", not "modern frontend frameworks".</td>
+                        </tr>
+                        <tr>
+                            <td class="co" data-label="Employer">One Acre Fund</td>
+                            <td data-label="System"><span class="ats">Greenhouse</span></td>
+                            <td data-label="What it means">Parses a plain PDF almost perfectly. Keyword search runs on the parsed text, so the words in your CV are the words recruiters find you by.</td>
+                        </tr>
+                        <tr>
+                            <td class="co" data-label="Employer">Jumia</td>
+                            <td data-label="System"><span class="ats">Greenhouse</span></td>
+                            <td data-label="What it means">Same engine. Expect a cover-letter field — it is usually optional, and usually read when a shortlist is close.</td>
+                        </tr>
+                        <tr>
+                            <td class="co" data-label="Employer">Zipline</td>
+                            <td data-label="System"><span class="ats">Greenhouse</span></td>
+                            <td data-label="What it means">Posts Kenya roles alongside global ones on one board. Filter by location before you apply or you will waste a week.</td>
+                        </tr>
+                        <tr>
+                            <td class="co" data-label="Employer">GiveDirectly</td>
+                            <td data-label="System"><span class="ats">Greenhouse</span></td>
+                            <td data-label="What it means">Heavy on structured application questions. Written answers carry real weight here.</td>
+                        </tr>
+                        <tr>
+                            <td class="co" data-label="Employer">Tala</td>
+                            <td data-label="System"><span class="ats">Lever</span></td>
+                            <td data-label="What it means">Lever auto-fills the form from your CV or LinkedIn. <b>Check what it filled in</b> — a bad parse is the single most common silent rejection.</td>
+                        </tr>
+                        <tr>
+                            <td class="co" data-label="Employer">Apollo Agriculture</td>
+                            <td data-label="System"><span class="ats">Lever</span></td>
+                            <td data-label="What it means">Same auto-fill behaviour. Lever also dedupes applicants, so a second application to the same role does nothing.</td>
+                        </tr>
+                        <tr>
+                            <td class="co" data-label="Employer">Sun King</td>
+                            <td data-label="System"><span class="ats easy">Pinpoint</span></td>
+                            <td data-label="What it means">Short, forgiving form. Volume is high across Africa — being specific about your county and language skills genuinely helps.</td>
+                        </tr>
+                        <tr>
+                            <td class="co" data-label="Employer">Watu Credit</td>
+                            <td data-label="System"><span class="ats">JazzHR</span></td>
+                            <td data-label="What it means">Plain form, light parsing. Almost everything a screener sees is your CV itself, so the first third of page one does the work.</td>
+                        </tr>
+                        <tr>
+                            <td class="co" data-label="Employer">ACRE Africa</td>
+                            <td data-label="System"><span class="ats easy">Careers page + email</span></td>
+                            <td data-label="What it means">No ATS at all — a human opens your mail. Your subject line and your first two sentences are the entire filter.</td>
+                        </tr>
+                        <tr>
+                            <td class="co" data-label="Employer">Canonical</td>
+                            <td data-label="System"><span class="ats">Greenhouse</span></td>
+                            <td data-label="What it means">Fully remote, hires "home based — EMEA", which includes Kenya. Written application essays are a formal, scored part of the process.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout warn">
+                ⚠️ <b>The pattern worth memorising:</b> if the apply link takes you to a URL containing
+                <b>oraclecloud.com</b> or <b>taleo.net</b>, you are in a form-first system — the CV is secondary
+                and the fields are everything. If it takes you to <b>greenhouse.io</b>, <b>lever.co</b>,
+                <b>ashbyhq.com</b> or <b>pinpointhq.com</b>, your CV file is parsed and searched directly,
+                so formatting is everything.
+            </div>
+        </div>
+    </section>
+
+    <section id="rules">
+        <div class="wrap">
+            <span class="eyebrow">Part two · the rules</span>
+            <h2>Six formatting rules that satisfy all seven systems</h2>
+            <p class="tight" style="max-width:66ch">
+                You cannot keep a different CV per employer. You do not need to. These six rules are the
+                intersection — the format that parses cleanly in Oracle, Taleo, Greenhouse, Lever, Ashby,
+                Pinpoint and JazzHR at the same time.
+            </p>
+
+            <div class="cards">
+                <div class="card">
+                    <span class="n">RULE 01</span>
+                    <h3>One column. Always.</h3>
+                    <p>Two-column CVs — the ones with a coloured sidebar — are read left-to-right across the page by most parsers. Your job titles end up merged with your skills list. This single choice breaks more Kenyan applications than anything else.</p>
+                </div>
+                <div class="card">
+                    <span class="n">RULE 02</span>
+                    <h3>No tables, text boxes or icons.</h3>
+                    <p>Taleo drops table contents entirely. Icons and logos become nothing. If a phone icon replaces the word "Phone", some parsers lose your number. Write the words.</p>
+                </div>
+                <div class="card">
+                    <span class="n">RULE 03</span>
+                    <h3>Use the boring headings.</h3>
+                    <p>"Work Experience", "Education", "Skills", "Certifications". Not "Where I've Made Impact". Parsers match section headings against a fixed dictionary; a creative heading means that section is never categorised.</p>
+                </div>
+                <div class="card">
+                    <span class="n">RULE 04</span>
+                    <h3>Dates as MM/YYYY, right of the role.</h3>
+                    <p>03/2024 – Present. Not "Mar '24 to date", not seasons, not just years. Date parsing is how systems calculate your years of experience, and that number is often a hard filter.</p>
+                </div>
+                <div class="card">
+                    <span class="n">RULE 05</span>
+                    <h3>Mirror the posting's exact nouns.</h3>
+                    <p>If the ad says "Node.js", write Node.js — not Node, not NodeJS. Keyword matching is literal. Put the stack in a Skills line <em>and</em> inside the bullet where you used it.</p>
+                </div>
+                <div class="card">
+                    <span class="n">RULE 06</span>
+                    <h3>Submit a PDF — unless asked for Word.</h3>
+                    <p>Modern systems parse PDF cleanly. Taleo and some Oracle configurations still prefer .docx. Keep both exports of the same file, named <b>Firstname-Lastname-Role.pdf</b>, never "CV final v3".</p>
+                </div>
+            </div>
+
+            <div class="callout tip">
+                ✅ <b>The 60-second test:</b> open your CV, select all, copy, and paste into a blank plain-text
+                note. What you see is almost exactly what the parser sees. If the order is scrambled, your
+                dates vanish or your name is missing — that is your rejection, before any human was involved.
+            </div>
+        </div>
+    </section>
+
+    <section id="skeleton">
+        <div class="wrap">
+            <span class="eyebrow">Part three · the skeleton</span>
+            <h2>Copy this structure</h2>
+            <p class="tight" style="max-width:64ch">
+                Paste it into a blank document, replace the content, keep the order and the headings.
+                It is deliberately plain — that is the point.
+            </p>
+
+            <div style="margin-top:22px">
+                <div class="copybar">
+                    <small>PLAIN-TEXT CV SKELETON · PARSES IN ALL SEVEN SYSTEMS</small>
+                    <button class="copy" id="copyBtn" type="button">Copy skeleton</button>
+                </div>
+<pre class="skeleton" id="skel">FIRSTNAME LASTNAME
+Backend Engineer
+Nairobi, Kenya | +254 7XX XXX XXX | you@email.com
+linkedin.com/in/yourname | github.com/yourname
+
+SUMMARY
+Backend engineer with 4 years building payment and lending
+services in Kenya. Node.js, PostgreSQL, AWS. Shipped an
+M-Pesa Daraja integration handling 12,000 transactions a day.
+
+SKILLS
+Languages: JavaScript (Node.js), Python, SQL
+Frameworks: Express, NestJS, Django
+Data: PostgreSQL, Redis, MongoDB
+Cloud and tooling: AWS (EC2, RDS, Lambda), Docker, GitHub Actions
+Integrations: M-Pesa Daraja API, Stripe, Africa's Talking
+
+WORK EXPERIENCE
+
+Backend Engineer                              03/2024 - Present
+Company Name, Nairobi, Kenya
+- Cut checkout failures 31% by rebuilding the M-Pesa callback
+  handler with idempotency keys and a retry queue.
+- Moved 18 services onto GitHub Actions, taking deploys from
+  45 minutes to 6.
+- Owned the PostgreSQL schema for a loan book of 240,000 users.
+
+Software Developer                            01/2022 - 02/2024
+Company Name, Nairobi, Kenya
+- Built the customer API used by 3 mobile clients, 1.2M monthly
+  requests, 99.9% uptime.
+- Reduced median query time from 820ms to 140ms by adding
+  composite indexes and removing N+1 reads.
+
+EDUCATION
+
+BSc Computer Science                          09/2017 - 11/2021
+University Name, Nairobi, Kenya
+
+CERTIFICATIONS
+AWS Certified Solutions Architect - Associate, 2025
+</pre>
+            </div>
+
+            <div class="callout tip">
+                ✅ <b>Every bullet is X-Y-Z:</b> did X, measured by Y, by doing Z. "Cut checkout failures 31%
+                (Y) by rebuilding the M-Pesa callback handler (Z)". A bullet with no number in it is a
+                sentence a screener skips.
+            </div>
+        </div>
+    </section>
+
+    <section id="list">
+        <div class="wrap">
+            <div class="capture">
+                <span class="eyebrow">Part four · stay ahead of it</span>
+                <h2 style="margin-bottom:10px">Get the keyword checklist and the Monday openings digest</h2>
+                <p style="max-width:60ch;margin:0">
+                    One email, every Monday: the new Kenyan tech openings that landed on our feeds that week,
+                    which system each one runs, and the keyword checklist for the role families they fall into
+                    — engineering, data, product, ops. No spam, no resale of your address, unsubscribe in one click.
+                </p>
+
+                <!--
+                  FORMSPREE ENDPOINT
+                  Posting to the existing form (xrbgbddv) with a _subject tag so these land labelled
+                  in the same inbox as the other site forms. To split them out, create a new form at
+                  formspree.io, then change the one FORM_ID value in the script at the bottom of this file.
+                -->
+                <form class="signup" id="signupForm" novalidate>
+                    <input type="text" name="name" placeholder="First name" autocomplete="given-name" required>
+                    <input type="email" name="email" placeholder="you@email.com" autocomplete="email" required>
+                    <input type="text" name="role" placeholder="Role you're after (e.g. backend)" autocomplete="off">
+                    <button class="btn" type="submit" id="signupBtn">Send it to me</button>
+                </form>
+                <p class="formmsg" id="formMsg"></p>
+                <p class="formnote">
+                    We also post every new opening to the free WhatsApp channel —
+                    <a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" target="_blank" rel="noopener">The Tech Hut Community</a>,
+                    8,900 members and counting.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="full">
+        <div class="wrap">
+            <span class="eyebrow">When you want the whole thing</span>
+            <h2>The full blueprint</h2>
+            <p class="tight" style="max-width:64ch">
+                Everything above is the map and the rules. The blueprint is the finished article: the complete
+                guide plus the ready-to-edit CV templates, written for engineers, data people and product folks
+                applying through exactly these systems.
+            </p>
+
+            <div class="upsell" style="margin-top:26px">
+                <div>
+                    <h3 style="font-size:19px">How to Craft a Winning CV — the Tech Hut Blueprint</h3>
+                    <ul class="ticks">
+                        <li>Ready-to-edit CV blueprints, already in the format above</li>
+                        <li>The full X-Y-Z bullet library with worked Kenyan examples</li>
+                        <li>Keyword sets per role family, built from live postings</li>
+                        <li>The screening-question answers that Ashby and Greenhouse actually score</li>
+                        <li>One payment, yours permanently, instant delivery</li>
+                    </ul>
+                </div>
+                <div class="pricebox">
+                    <span class="sub">one-time</span>
+                    <span class="amt"><small>KSh</small> 250</span>
+                    <a class="btn light" href="/cv.html" style="margin-top:14px;display:block">Get the blueprint</a>
+                    <p style="font-size:10.5px;color:var(--dim);margin:12px 0 0">Secure checkout · M-Pesa and card</p>
+                </div>
+            </div>
+
+            <div class="cta-row" style="margin-top:30px">
+                <a class="btn ghost" href="/jobs/">Browse the live jobs board →</a>
+                <a class="btn ghost" href="/blog/daily/">Read The Daily Savannah →</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="wrap">
+            <a class="brand" href="/">The Tech Hut<span>.</span></a>
+            <p>Kenyan tech opportunities, every day. <a href="/jobs/">Jobs</a> · <a href="/blog/daily/">Daily Savannah</a> · <a href="/communities/">Communities</a> · <a href="/recruiters/">For employers</a></p>
+            <p>&copy; 2026 The Tech Hut Community · <a href="mailto:info@thetechhut.co">info@thetechhut.co</a></p>
+        </div>
+    </footer>
+
+    <script>
+        /* ---- copy the skeleton ---- */
+        document.getElementById('copyBtn').addEventListener('click', function () {
+            var btn = this;
+            var text = document.getElementById('skel').innerText;
+            function done() { btn.textContent = 'Copied ✓'; setTimeout(function () { btn.textContent = 'Copy skeleton'; }, 2200); }
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(done, fallback);
+            } else { fallback(); }
+            function fallback() {
+                var ta = document.createElement('textarea');
+                ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+                document.body.appendChild(ta); ta.select();
+                try { document.execCommand('copy'); done(); } catch (e) { btn.textContent = 'Select and copy manually'; }
+                document.body.removeChild(ta);
+            }
+        });
+
+        /* ---- email capture ---- */
+        var FORM_ID = 'xrbgbddv';          /* <- swap for a dedicated Formspree form id when you create one */
+
+        var form = document.getElementById('signupForm');
+        var msg = document.getElementById('formMsg');
+        var btn = document.getElementById('signupBtn');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var fd = new FormData(form);
+            var email = (fd.get('email') || '').toString().trim();
+            if (!email || email.indexOf('@') < 1 || email.indexOf('.') < 0) {
+                msg.className = 'formmsg bad';
+                msg.textContent = 'That email does not look right — check it and try again.';
+                return;
+            }
+            fd.append('_subject', 'CV Pack signup — ' + email);
+            fd.append('source', 'cv-pack');
+            btn.disabled = true;
+            btn.textContent = 'Sending…';
+            msg.className = 'formmsg';
+            msg.textContent = '';
+
+            fetch('https://formspree.io/f/' + FORM_ID, {
+                method: 'POST',
+                body: fd,
+                headers: { 'Accept': 'application/json' }
+            }).then(function (r) {
+                if (!r.ok) throw new Error('bad status');
+                form.reset();
+                msg.className = 'formmsg ok';
+                msg.textContent = "You're on the list. The first digest lands Monday — check your spam folder once and mark it as not spam.";
+                btn.textContent = 'Done ✓';
+            }).catch(function () {
+                msg.className = 'formmsg bad';
+                msg.innerHTML = 'That did not go through. Email <a href="mailto:info@thetechhut.co?subject=CV%20Pack" style="color:var(--rose)">info@thetechhut.co</a> and we will add you by hand.';
+                btn.disabled = false;
+                btn.textContent = 'Send it to me';
+            });
+        });
+    </script>
+</body>
+
+</html>
