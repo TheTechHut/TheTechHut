@@ -1,0 +1,22 @@
+name = "thetechhut-pay"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+# Nothing secret belongs in this file — it is committed. The three secrets are
+# set with `wrangler secret put <NAME>` and live only in Cloudflare:
+#
+#   wrangler secret put PAYSTACK_SECRET_KEY   # sk_test_… first, sk_live_… later
+#   wrangler secret put REMOTE_LIST_TOKEN     # from scripts/remote_token.txt
+#   wrangler secret put RESEND_API_KEY        # optional, for the receipt email
+#
+# Deploying without a custom domain gives you
+# https://thetechhut-pay.<your-subdomain>.workers.dev — that URL is what goes
+# into API_BASE in assets/js/pay.js. To use api.thetechhut.co instead, add the
+# route below and point the DNS at Cloudflare.
+#
+# routes = [
+#   { pattern = "api.thetechhut.co/*", custom_domain = true }
+# ]
+
+[observability]
+enabled = true

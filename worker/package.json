@@ -1,0 +1,16 @@
+{
+  "name": "thetechhut-pay",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Paystack backend for thetechhut.co \u2014 the only place the secret key is used",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "node test/worker.test.mjs",
+    "tail": "wrangler tail"
+  },
+  "devDependencies": {
+    "wrangler": "^3.90.0"
+  },
+  "type": "module"
+}

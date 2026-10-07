@@ -3,3 +3,5 @@ node_modules/
 __pycache__/
 _to_delete/
 Claude outputs/
+worker/node_modules/
+worker/.wrangler/
