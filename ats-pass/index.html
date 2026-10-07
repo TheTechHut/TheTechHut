@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATS Pass — we rewrite your CV so the robot passes it | The Tech Hut</title>
+    <link rel="canonical" href="https://thetechhut.co/ats-pass/">
+
+    <meta name="description" content="Send your CV and the role you want on WhatsApp. In 24 hours you get it back formatted to pass the exact hiring system that employer runs, with the keyword set for that role. KSh 1,000.">
+    <meta name="keywords" content="CV writing Kenya, ATS CV rewrite Nairobi, professional CV service Kenya, CV review Kenya, resume writing Nairobi, The Tech Hut">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="ATS Pass — your CV, rewritten to pass the machine">
+    <meta property="og:description" content="24 hours. One role. Formatted for the exact system that employer runs. KSh 1,000.">
+    <meta property="og:url" content="https://thetechhut.co/ats-pass/">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="https://images.unsplash.com/photo-1698767008609-f5fa6137b9e6?q=80&amp;w=32&amp;h=32&amp;auto=format&amp;fit=crop">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="https://images.unsplash.com/photo-1698767008609-f5fa6137b9e6?q=80&amp;w=180&amp;h=180&amp;auto=format&amp;fit=crop">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #030712;
+            --panel: #0b1220;
+            --panel-2: #111827;
+            --line: #1f2937;
+            --ink: #f1f5f9;
+            --mute: #94a3b8;
+            --dim: #64748b;
+            --indigo: #6366f1;
+            --indigo-soft: rgba(99, 102, 241, .12);
+            --green: #34d399;
+            --rose: #fb7185;
+            --gold: #fbbf24;
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+
+        a { color: inherit; }
+
+        .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+        nav {
+            position: sticky; top: 0; z-index: 50;
+            background: rgba(3, 7, 18, .82);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 255, 255, .06);
+        }
+
+        nav .wrap { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; }
+        .brand { font-weight: 800; font-size: 15px; letter-spacing: -.02em; text-decoration: none; }
+        .brand span { color: var(--indigo); }
+        .navlinks { display: flex; align-items: center; gap: 18px; font-size: 12px; font-weight: 700; }
+        .navlinks a { color: var(--mute); text-decoration: none; }
+        .navlinks a:hover { color: #fff; }
+        .navlinks a.btn { color: #fff; }
+
+        .btn {
+            display: inline-block; background: var(--indigo); color: #fff;
+            font-weight: 700; font-size: 13px; padding: 11px 20px; border-radius: 999px;
+            text-decoration: none; border: 0; cursor: pointer;
+            box-shadow: 0 10px 30px -12px rgba(99, 102, 241, .8);
+            transition: transform .15s ease, background .15s ease;
+        }
+        .btn:hover { background: #4f46e5; transform: translateY(-1px); }
+        .btn.ghost { background: transparent; border: 1px solid var(--line); box-shadow: none; color: var(--ink); }
+        .btn.ghost:hover { background: var(--panel-2); }
+        .btn.light { background: #fff; color: #030712; box-shadow: 0 10px 30px -14px rgba(255,255,255,.4); }
+        .btn.light:hover { background: #e2e8f0; }
+
+        header.hero { padding: 72px 0 56px; border-bottom: 1px solid #0f172a; }
+
+        .pill {
+            display: inline-flex; align-items: center; gap: 7px;
+            font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em;
+            background: rgba(52, 211, 153, .1); color: var(--green);
+            border: 1px solid rgba(52, 211, 153, .22);
+            padding: 6px 12px; border-radius: 999px;
+        }
+
+        h1 {
+            font-size: clamp(30px, 6vw, 52px); line-height: 1.05; letter-spacing: -.03em;
+            font-weight: 800; margin: 22px 0 18px; max-width: 18ch;
+        }
+        h1 em { font-style: normal; background: linear-gradient(90deg, #818cf8, #c084fc, #f472b6);
+                -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+        .lede { font-size: clamp(15px, 2.2vw, 19px); color: var(--mute); max-width: 62ch; margin: 0 0 28px; }
+
+        .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+        .cta-note { font-size: 11px; font-weight: 700; color: var(--dim); text-transform: uppercase; letter-spacing: .1em; }
+
+        section { padding: 60px 0; border-bottom: 1px solid #0f172a; }
+        .eyebrow { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .16em; color: var(--indigo); }
+        h2 { font-size: clamp(23px, 4vw, 34px); letter-spacing: -.025em; font-weight: 800; margin: 10px 0 14px; }
+        h3 { font-size: 16px; font-weight: 800; letter-spacing: -.01em; margin: 0 0 8px; }
+        p { color: var(--mute); font-size: 14.5px; }
+        p.tight { margin-top: 0; }
+
+        .tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 18px; background: rgba(17, 24, 39, .4); }
+        table { width: 100%; border-collapse: collapse; min-width: 640px; }
+        thead tr { background: rgba(3, 7, 18, .6); border-bottom: 1px solid var(--line); }
+        th { text-align: left; padding: 14px; font-size: 10.5px; font-weight: 800; text-transform: uppercase;
+             letter-spacing: .12em; color: var(--dim); white-space: nowrap; }
+        td { padding: 14px; font-size: 13.5px; border-bottom: 1px solid #0d1526; vertical-align: top; color: #cbd5e1; }
+        tbody tr:last-child td { border-bottom: 0; }
+        td.co { font-weight: 800; color: #fff; white-space: nowrap; }
+        .ats { display: inline-block; font-size: 11px; font-weight: 800; padding: 4px 9px; border-radius: 7px;
+               background: var(--indigo-soft); color: #a5b4fc; white-space: nowrap; }
+        .ats.hard { background: rgba(251, 113, 133, .12); color: var(--rose); }
+        .ats.easy { background: rgba(52, 211, 153, .1); color: var(--green); }
+
+        .cards { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); margin-top: 26px; }
+        .card { background: linear-gradient(180deg, rgba(17,24,39,.6), rgba(3,7,18,.6));
+                border: 1px solid #16202f; border-radius: 18px; padding: 22px; }
+        .card .n { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; font-weight: 800;
+                   color: var(--indigo); display: block; margin-bottom: 10px; }
+        .card p { font-size: 13px; margin: 0; }
+
+        .callout { border-radius: 16px; padding: 16px 18px; font-size: 13px; margin: 22px 0 0; }
+        .callout.warn { background: rgba(251, 113, 133, .06); border: 1px solid rgba(251, 113, 133, .2); color: #fda4af; }
+        .callout.tip { background: rgba(52, 211, 153, .06); border: 1px solid rgba(52, 211, 153, .18); color: #6ee7b7; }
+        .callout b { color: #fff; }
+
+        pre.skeleton {
+            background: #060a14; border: 1px solid var(--line); border-radius: 16px;
+            padding: 20px; overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 12.5px; line-height: 1.75; color: #cbd5e1; white-space: pre; margin: 0;
+        }
+        .copybar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+        .copybar small { color: var(--dim); font-size: 11.5px; font-weight: 700; }
+        button.copy { background: var(--panel-2); border: 1px solid var(--line); color: var(--ink);
+                      font-family: inherit; font-size: 11.5px; font-weight: 800; padding: 8px 14px;
+                      border-radius: 9px; cursor: pointer; }
+        button.copy:hover { background: #1b2536; }
+
+        .capture { background: linear-gradient(180deg, rgba(99,102,241,.1), rgba(3,7,18,0));
+                   border: 1px solid rgba(99,102,241,.25); border-radius: 22px; padding: 30px; }
+        form.signup { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 0; }
+        form.signup input {
+            flex: 1 1 210px; background: #060a14; border: 1px solid var(--line); color: var(--ink);
+            font-family: inherit; font-size: 14px; padding: 13px 15px; border-radius: 11px;
+        }
+        form.signup input::placeholder { color: #475569; }
+        form.signup input:focus { outline: 0; border-color: var(--indigo); }
+        form.signup button { flex: 0 0 auto; }
+        .formnote { font-size: 11.5px; color: var(--dim); margin: 12px 0 0; }
+        .formmsg { font-size: 13.5px; font-weight: 700; margin: 14px 0 0; display: none; }
+        .formmsg.ok { display: block; color: var(--green); }
+        .formmsg.bad { display: block; color: var(--rose); }
+
+        .upsell { display: grid; gap: 24px; grid-template-columns: 1.4fr 1fr; align-items: center;
+                  background: linear-gradient(180deg, #0d1424, #060a14); border: 1px solid var(--line);
+                  border-radius: 22px; padding: 30px; }
+        .pricebox { text-align: center; background: #060a14; border: 1px solid var(--line); border-radius: 18px; padding: 22px; }
+        .pricebox .amt { display: block; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+                         font-size: 34px; font-weight: 800; color: #fff; letter-spacing: -.02em; }
+        .pricebox .amt small { font-size: 14px; color: var(--mute); }
+        .pricebox .sub { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: var(--dim); }
+
+        ul.ticks { list-style: none; padding: 0; margin: 16px 0 0; }
+        ul.ticks li { font-size: 13.5px; color: #cbd5e1; padding-left: 26px; position: relative; margin-bottom: 9px; }
+        ul.ticks li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 800; }
+
+        footer { padding: 44px 0 56px; text-align: center; }
+        footer .brand { display: inline-block; margin-bottom: 10px; font-size: 14px; }
+        footer p { font-size: 11.5px; color: #475569; margin: 6px 0; }
+        footer a { color: var(--mute); }
+
+        @media (max-width: 760px) {
+            .tablewrap { border: 0; background: none; overflow-x: visible; }
+            table { min-width: 0; }
+            thead { display: none; }
+            table, tbody, tr, td { display: block; width: 100%; }
+            tbody tr {
+                background: rgba(17, 24, 39, .45); border: 1px solid var(--line);
+                border-radius: 16px; padding: 16px; margin-bottom: 12px;
+            }
+            tbody td { border: 0; padding: 0; }
+            td.co { font-size: 16px; margin-bottom: 8px; white-space: normal; }
+            td[data-label="System"] { margin-bottom: 10px; }
+            td[data-label="What it means"]::before {
+                content: attr(data-label); display: block; font-size: 10px; font-weight: 800;
+                text-transform: uppercase; letter-spacing: .12em; color: var(--dim); margin-bottom: 5px;
+            }
+            .upsell { grid-template-columns: 1fr; }
+            header.hero { padding: 48px 0 40px; }
+            section { padding: 44px 0; }
+            .navlinks a:not(.btn) { display: none; }
+        }
+    </style>
+    <style>
+        .steps { counter-reset: s; margin-top: 28px; }
+        .step { display: grid; grid-template-columns: 46px 1fr; gap: 18px; align-items: start;
+                padding: 20px 0; border-bottom: 1px solid #0f172a; }
+        .step:last-child { border-bottom: 0; }
+        .step .num { counter-increment: s; width: 38px; height: 38px; border-radius: 50%;
+                     display: grid; place-items: center; font-weight: 800; font-size: 14px;
+                     background: var(--indigo-soft); color: #a5b4fc; border: 1px solid rgba(99,102,241,.3); }
+        .step .num::before { content: counter(s); }
+        .step h3 { margin-bottom: 4px; }
+        .step p { margin: 0; font-size: 13.5px; }
+
+        .buybox { background: linear-gradient(180deg, #0d1424, #060a14); border: 1px solid var(--line);
+                  border-radius: 22px; padding: 32px; text-align: center; max-width: 520px; margin: 28px auto 0; }
+        .was { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 17px;
+               color: var(--dim); text-decoration: line-through; }
+        .now { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 42px;
+               font-weight: 800; color: #fff; letter-spacing: -.03em; display: block; margin: 4px 0; }
+        .now small { font-size: 16px; color: var(--mute); }
+        .launch { display: inline-block; font-size: 10.5px; font-weight: 800; text-transform: uppercase;
+                  letter-spacing: .12em; color: var(--gold); background: rgba(251,191,36,.1);
+                  border: 1px solid rgba(251,191,36,.25); padding: 5px 11px; border-radius: 999px; }
+        .buybox ul.ticks { text-align: left; max-width: 390px; margin: 20px auto 0; }
+        .slots { display: inline-flex; gap: 5px; margin-top: 16px; }
+        .slot { width: 14px; height: 14px; border-radius: 4px; background: var(--green); opacity: .85; }
+        .slot.gone { background: #1f2937; }
+        .faq h3 { font-size: 14.5px; margin-bottom: 4px; }
+        .faq p { margin: 0 0 18px; font-size: 13.5px; }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="wrap">
+            <a class="brand" href="/">The Tech Hut<span>.</span></a>
+            <div class="navlinks">
+                <a href="#how">How it works</a>
+                <a href="#buy">Price</a>
+                <a href="/cv-pack/">Free CV pack</a>
+                <a class="btn" href="#buy">Book a slot</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="wrap">
+            <span class="pill">⚡ 24-hour turnaround · 10 slots a week</span>
+            <h1>Your CV, rewritten <em>for the machine that reads it.</em></h1>
+            <p class="lede">
+                Send us your CV and the role you are going for. We check which hiring system that
+                employer actually runs, rebuild your CV in the format that system parses cleanly,
+                and send it back with the keyword set for that specific role. One working day.
+            </p>
+            <div class="cta-row">
+                <a class="btn light" href="#buy">Book a slot — KSh 1,000</a>
+                <a class="btn ghost" href="/cv-pack/">Or do it yourself, free</a>
+            </div>
+            <p class="cta-note" style="margin-top:18px">We will tell you honestly if your CV does not need this</p>
+        </div>
+    </header>
+
+    <section id="how">
+        <div class="wrap">
+            <span class="eyebrow">How it works</span>
+            <h2>Four steps, one day</h2>
+
+            <div class="steps">
+                <div class="step">
+                    <span class="num"></span>
+                    <div>
+                        <h3>You pay and message us on WhatsApp</h3>
+                        <p>Send your CV in whatever state it is in — Word, PDF, a Canva export, a photo of
+                           a printout. Plus the link to the role you want, or the job title and company
+                           if you have not found the posting yet.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <span class="num"></span>
+                    <div>
+                        <h3>We identify the system behind the apply button</h3>
+                        <p>Oracle, Taleo, Greenhouse, Lever, Ashby, Pinpoint, JazzHR — each one mangles a
+                           CV differently. We already track which employer runs which; that research is
+                           the reason this service exists and it is why a generic CV writer cannot do it.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <span class="num"></span>
+                    <div>
+                        <h3>We rebuild it and run the parse check</h3>
+                        <p>One column, parser-safe headings, dates in the format the system expects, and
+                           your bullets rewritten as X-Y-Z with the numbers you actually have. Then we
+                           strip it to plain text to see exactly what the parser will see, and fix what breaks.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <span class="num"></span>
+                    <div>
+                        <h3>You get three things back</h3>
+                        <p>The rewritten CV as both .docx and .pdf, the keyword set for that role with a
+                           note on where each term should appear, and the plain-text parse so you can see
+                           what changed and why. Within 24 hours on a working day.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout tip">
+                ✅ <b>One round of changes is included.</b> Read it, tell us what you would say differently,
+                and we fix it. It is your career history — we are formatting and sharpening it, not
+                taking it over.
+            </div>
+        </div>
+    </section>
+
+    <section id="limits">
+        <div class="wrap">
+            <span class="eyebrow">Before you pay us</span>
+            <h2>What we will not do</h2>
+            <div class="cards" style="margin-top:24px">
+                <div class="card">
+                    <span class="n">NO</span>
+                    <h3>Invent experience</h3>
+                    <p>We will not add a job you did not have, a degree you did not finish or a number you cannot defend in an interview. A CV that gets you into a room you cannot hold is worse than no CV.</p>
+                </div>
+                <div class="card">
+                    <span class="n">NO</span>
+                    <h3>Promise an interview</h3>
+                    <p>Formatting gets you read by a human. What happens next is your experience against everyone else's. Anyone promising you interviews for a thousand bob is selling you something else.</p>
+                </div>
+                <div class="card">
+                    <span class="n">NO</span>
+                    <h3>Take your money if you don't need it</h3>
+                    <p>Send the CV first if you like. If it already parses and reads well, we will say so, refund you and point you at the <a href="/cv-pack/" style="color:var(--indigo)">free pack</a> instead.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="buy">
+        <div class="wrap">
+            <span class="eyebrow">Book it</span>
+            <h2 style="text-align:center">ATS Pass</h2>
+
+            <div class="buybox">
+                <span class="launch">Launch price · while slots last</span>
+                <div style="margin-top:14px">
+                    <span class="was">KSh 2,000</span>
+                    <span class="now"><small>KSh</small> 1,000</span>
+                    <span style="font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--dim)">ONE CV · ONE ROLE · 24 HOURS</span>
+                </div>
+
+                <div class="slots" title="Slots this week">
+                    <span class="slot"></span><span class="slot"></span><span class="slot"></span>
+                    <span class="slot"></span><span class="slot"></span><span class="slot"></span>
+                    <span class="slot"></span><span class="slot"></span><span class="slot"></span>
+                    <span class="slot"></span>
+                </div>
+                <p style="font-size:11px;color:var(--dim);margin:8px 0 0">Ten slots a week, because one person does this by hand</p>
+
+                <ul class="ticks">
+                    <li>Rewritten CV as .docx and .pdf</li>
+                    <li>Keyword set for the exact role you are applying to</li>
+                    <li>The plain-text parse, so you can see what the system sees</li>
+                    <li>One round of changes included</li>
+                    <li>Refunded in full if we think you do not need it</li>
+                </ul>
+
+                <a class="btn light" id="payBtn" href="#" style="display:block;margin-top:24px">Book a slot — KSh 1,000</a>
+                <p style="font-size:10.5px;color:var(--dim);margin:12px 0 0">M-Pesa or card · then send the CV on WhatsApp</p>
+            </div>
+
+            <p style="text-align:center;margin-top:22px;font-size:13px">
+                Hiring for a team instead?
+                <a href="/advertise/" style="color:var(--indigo);font-weight:700">See the employer rates →</a>
+            </p>
+        </div>
+    </section>
+
+    <section id="faq">
+        <div class="wrap">
+            <span class="eyebrow">Fair questions</span>
+            <h2>Before you ask</h2>
+            <div class="faq" style="max-width:68ch">
+                <h3>How is this different from the free CV pack?</h3>
+                <p>The pack teaches you the rules and gives you a skeleton. This is us applying them to
+                   your CV, for a named employer, with the keyword research done. If you have the time
+                   and patience, do it yourself — the pack is genuinely complete.</p>
+
+                <h3>Will you do more than one role?</h3>
+                <p>Each booking covers one CV targeted at one role, because the keyword work is
+                   role-specific. A second role on the same CV is KSh 500 if booked at the same time.</p>
+
+                <h3>What if I have no work experience yet?</h3>
+                <p>Then say so when you book. Projects, coursework and internships can be framed with
+                   real numbers, and we will tell you which of yours carry weight — but be warned that
+                   a thin CV stays thin, and formatting cannot fix that.</p>
+
+                <h3>Do you keep my CV?</h3>
+                <p>We keep it while we work on it and delete it after your revision round, unless you
+                   ask us to hold it for a future booking. We never pass it to an employer without you
+                   telling us to.</p>
+
+                <h3>Is 24 hours realistic?</h3>
+                <p>On a working day, yes — that is why there are only ten slots a week. If you book
+                   on a Friday night, you get it Monday, and we will say so when you book.</p>
+            </div>
+
+            <div class="cta-row" style="margin-top:26px">
+                <a class="btn ghost" href="/cv-pack/">Read the free pack first →</a>
+                <a class="btn ghost" href="/remote/">Find roles worth the effort →</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="wrap">
+            <a class="brand" href="/">The Tech Hut<span>.</span></a>
+            <p>Kenyan tech opportunities, every day. <a href="/jobs/">Jobs</a> · <a href="/shop/">Shop</a> · <a href="/cv-pack/">CV pack</a> · <a href="/remote/">Remote list</a> · <a href="/advertise/">For employers</a></p>
+            <p>&copy; 2026 The Tech Hut Community · <a href="mailto:info@thetechhut.co">info@thetechhut.co</a> · +254 115 017 058</p>
+        </div>
+    </footer>
+
+    <script>
+        /* ------------------------------------------------------------------
+           PAYMENT LINK -- create a KSh 1,000 link in IntaSend or Paystack and
+           paste it here. Empty means the button goes to WhatsApp instead, which
+           is a perfectly good way to run the first ten.
+           ------------------------------------------------------------------ */
+        var PAY_LINK = '';
+        var WA = 'https://wa.me/254115017058?text=' + encodeURIComponent(
+            'I want to book an ATS Pass (KSh 1,000). Here is my CV and the role I am applying for:');
+
+        var pay = document.getElementById('payBtn');
+        pay.setAttribute('href', PAY_LINK || WA);
+        if (!PAY_LINK) { pay.setAttribute('target', '_blank'); pay.setAttribute('rel', 'noopener'); }
+    </script>
+</body>
+
+</html>
