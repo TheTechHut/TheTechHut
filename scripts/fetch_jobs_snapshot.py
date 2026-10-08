@@ -5,8 +5,14 @@ Daily hiring snapshot.
 Fetches every employer feed the jobs board reads, writes a dated snapshot, and
 maintains three rolling files the site and the products read:
 
-  data/snapshots/YYYY-MM-DD.json  one day's raw rows, kept forever (not served
-                                  -- firebase.json ignores it)
+  data/snapshots/YYYY-MM-DD.json  one day's raw rows, kept for SNAPSHOT_DAYS
+                                  and then deleted (not served -- firebase.json
+                                  ignores it). A day of rows is about half a
+                                  megabyte, so keeping them all would put
+                                  ~190MB a year into git history, permanently,
+                                  for a static site. The aggregates in
+                                  hiring-index.json are the part worth keeping,
+                                  and they are tiny.
   data/remote-summary.json        PUBLIC. Company names, role counts and the
                                   location wording, so the sales page can show
                                   live proof the list is real and current.
@@ -41,6 +47,10 @@ import urllib.request
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, 'data')
 SNAPS = os.path.join(DATA, 'snapshots')
+
+# Long enough to recompute a bad run, spot-check a week, or diff a month.
+# Beyond that the rolling index already has what a report needs.
+SNAPSHOT_DAYS = 45
 UA = 'TheTechHutBot/1.0 (+https://thetechhut.co/jobs/)'
 TIMEOUT = 30
 
@@ -277,6 +287,21 @@ def main():
 
     with open(idx_path, 'w') as fh:
         json.dump(idx, fh, separators=(',', ':'), sort_keys=True)
+
+    # ---- prune old raw snapshots -----------------------------------
+    keep_from = (datetime.date.today() - datetime.timedelta(days=SNAPSHOT_DAYS)).isoformat()
+    pruned = 0
+    for name in sorted(os.listdir(SNAPS)):
+        if not name.endswith('.json'):
+            continue
+        if name[:-5] < keep_from:
+            try:
+                os.remove(os.path.join(SNAPS, name))
+                pruned += 1
+            except OSError:
+                pass
+    if pruned:
+        print('pruned %d snapshot(s) older than %s' % (pruned, keep_from))
 
     print('\nsnapshot %s: %d roles scanned, %d work-from-Kenya across %d companies, '
           '%d Kenya-based'
