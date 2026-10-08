@@ -6,6 +6,20 @@
 #
 # Runs on a schedule rather than as a Claude task because this needs to happen
 # every single day without anyone watching, and GitHub's cron does that.
+#
+# IMPORTANT — this only works if chore/redesign is the repository's DEFAULT
+# branch. GitHub runs `schedule` only from the default branch, and only shows
+# the "Run workflow" button for workflow files that exist there:
+#
+#   "Scheduled workflows will only run on the default branch."
+#   "This event will only trigger a workflow run if the workflow file exists
+#    on the default branch."
+#   https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows
+#
+# Do NOT fix that by copying this file to main. main is 234 commits behind and
+# carries its own firebase-hosting-merge.yml that deploys on push to main — so
+# a commit there would publish the June 2024 site over the live one. Change the
+# default branch instead (Settings -> Branches).
 name: Daily hiring snapshot
 
 'on':
