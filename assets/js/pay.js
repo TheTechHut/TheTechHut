@@ -158,6 +158,16 @@
         });
     }
 
+    /* Same rules as the Worker, which has the final say. Returns +E.164 or ''. */
+    function cleanWhatsApp(raw) {
+        var n = String(raw || '').replace(/[\s().-]/g, '');
+        if (/^0[17]\d{8}$/.test(n)) n = '+254' + n.slice(1);
+        else if (/^[17]\d{8}$/.test(n)) n = '+254' + n;
+        else if (/^254[17]\d{8}$/.test(n)) n = '+' + n;
+        else if (/^00\d{8,15}$/.test(n)) n = '+' + n.slice(2);
+        return /^\+[1-9]\d{7,14}$/.test(n) ? n : '';
+    }
+
     function buy(key) {
         var p = LABELS[key] || { name: key, kes: 0 };
         if (!configured()) { window.open(waLink(key), '_blank', 'noopener'); return; }
@@ -165,12 +175,14 @@
         var veil = modal([
             '<h3>' + p.name + '</h3>',
             '<p>KSh <span class="amt">' + p.kes.toLocaleString('en-KE') + '</span> — one payment, by M-Pesa or card.',
-            ' We only need an email to send your receipt and access to.</p>',
+            ' Your email is for the receipt; your WhatsApp number is how we deliver and set you up. We do not share either.</p>',
             '<p class="err" id="tthErr"></p>',
             '<label for="tthName">Your name</label>',
             '<input id="tthName" type="text" autocomplete="given-name" placeholder="First name">',
             '<label for="tthEmail">Email</label>',
             '<input id="tthEmail" type="email" autocomplete="email" placeholder="you@email.com">',
+            '<label for="tthWa">WhatsApp number</label>',
+            '<input id="tthWa" type="tel" inputmode="tel" autocomplete="tel" placeholder="0712 345 678">',
             '<div class="row"><button class="go" id="tthGo">Pay KSh ' + p.kes.toLocaleString('en-KE') + '</button>',
             '<button class="x" id="tthX">Cancel</button></div>'
         ].join(''));
@@ -179,6 +191,7 @@
         var go = veil.querySelector('#tthGo');
         var email = veil.querySelector('#tthEmail');
         var name = veil.querySelector('#tthName');
+        var wa = veil.querySelector('#tthWa');
         veil.querySelector('#tthX').addEventListener('click', function () { close(veil); });
         setTimeout(function () { name.focus(); }, 30);
 
@@ -192,11 +205,13 @@
         go.addEventListener('click', function () {
             var e = (email.value || '').trim();
             if (e.indexOf('@') < 1 || e.indexOf('.') < 2) { fail('That email does not look right.'); return; }
+            var w = cleanWhatsApp(wa.value);
+            if (!w) { fail('Enter the WhatsApp number we can reach you on, e.g. 0712 345 678 (or +256… from abroad).'); return; }
             err.style.display = 'none';
             go.disabled = true;
             go.textContent = 'Opening…';
 
-            api('/initialize', { product: key, email: e, name: (name.value || '').trim() })
+            api('/initialize', { product: key, email: e, whatsapp: w, name: (name.value || '').trim() })
                 .then(function (init) {
                     if (!init.access_code) throw new Error(init.error || 'could not start the payment');
                     return openPopup(init.access_code).then(function () {
@@ -230,7 +245,7 @@
                 });
         });
 
-        email.addEventListener('keydown', function (ev) { if (ev.key === 'Enter') go.click(); });
+        wa.addEventListener('keydown', function (ev) { if (ev.key === 'Enter') go.click(); });
     }
 
     /* ---------------------------------------------------------------- wiring */

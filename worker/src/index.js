@@ -17,7 +17,7 @@
  * unlocked from the console without paying at all.
  *
  * Endpoints
- *   POST /initialize  { product, email, name? }  -> { access_code, reference }
+ *   POST /initialize  { product, email, whatsapp, name? }  -> { access_code, reference }
  *   POST /verify      { reference }              -> { paid, product, delivery }
  *   POST /webhook     Paystack signed event      -> 200
  *   GET  /health
@@ -75,6 +75,22 @@ function json(body, status, origin) {
     status: status || 200,
     headers: { 'Content-Type': 'application/json', ...cors(origin) },
   });
+}
+
+/**
+ * Normalise a WhatsApp number to +E.164, or return null.
+ * Kenyan local forms (0712 345 678, 712345678, 254712345678) are expanded;
+ * anything else must already be international (+256..., +234...) so people
+ * elsewhere in Africa can still buy.
+ */
+function normalizeWhatsApp(raw) {
+  if (typeof raw !== 'string') return null;
+  let n = raw.replace(/[\s().-]/g, '');
+  if (/^0[17]\d{8}$/.test(n)) n = '+254' + n.slice(1);          // 0712345678
+  else if (/^[17]\d{8}$/.test(n)) n = '+254' + n;                // 712345678
+  else if (/^254[17]\d{8}$/.test(n)) n = '+' + n;                // 254712345678
+  else if (/^00\d{8,15}$/.test(n)) n = '+' + n.slice(2);          // 00256...
+  return /^\+[1-9]\d{7,14}$/.test(n) ? n : null;
 }
 
 function validEmail(e) {
@@ -172,6 +188,8 @@ async function initialize(req, env, origin) {
   const p = PRODUCTS[b.product];
   if (!p) return json({ error: 'unknown product' }, 400, origin);
   if (!validEmail(b.email)) return json({ error: 'a valid email is required' }, 400, origin);
+  const whatsapp = normalizeWhatsApp(b.whatsapp);
+  if (!whatsapp) return json({ error: 'a valid WhatsApp number is required' }, 400, origin);
 
   const res = await paystack('/transaction/initialize', env.PAYSTACK_SECRET_KEY, {
     method: 'POST',
@@ -184,6 +202,12 @@ async function initialize(req, env, origin) {
         product: b.product,
         product_name: p.name,
         customer_name: (b.name || '').toString().slice(0, 80),
+        whatsapp,
+        // custom_fields are what the Paystack dashboard shows on each transaction
+        custom_fields: [
+          { display_name: 'WhatsApp', variable_name: 'whatsapp', value: whatsapp },
+          { display_name: 'Name', variable_name: 'customer_name', value: (b.name || '').toString().slice(0, 80) },
+        ],
         cancel_action: SITE,
       },
     }),

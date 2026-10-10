@@ -55,7 +55,7 @@ await t('initialize sends the catalogue price, ignoring any amount the client se
     return new Response(JSON.stringify({ status: true, data: { access_code: 'ac_1', reference: 'ref_1' } }), { status: 200 });
   });
   const r = await worker.fetch(post('/initialize', {
-    product: 'bundle', email: 'a@b.com', amount: 1, kes: 1, price: 1,
+    product: 'bundle', email: 'a@b.com', whatsapp: '0712 345 678', amount: 1, kes: 1, price: 1,
   }), env);
   restore();
   assert.equal(r.status, 200);
@@ -71,6 +71,32 @@ await t('initialize rejects an unknown product', async () => {
 await t('initialize rejects a malformed email', async () => {
   const r = await worker.fetch(post('/initialize', { product: 'bundle', email: 'nope' }), env);
   assert.equal(r.status, 400);
+});
+
+console.log('\nthe WhatsApp number is required, normalised, and travels with the payment');
+await t('initialize refuses a missing or junk WhatsApp number', async () => {
+  for (const w of [undefined, '', 'abc', '12345', '+254 71', '0612345678', '<script>']) {
+    const r = await worker.fetch(post('/initialize', { product: 'bundle', email: 'a@b.com', whatsapp: w }), env);
+    assert.equal(r.status, 400, 'should reject ' + JSON.stringify(w));
+  }
+});
+
+await t('Kenyan local formats are normalised to +254 and stored on the transaction', async () => {
+  const cases = { '0712345678': '+254712345678', '0112 345 678': '+254112345678', '712345678': '+254712345678',
+                  '254712345678': '+254712345678', '+254 712-345-678': '+254712345678', '+256 772 123456': '+256772123456' };
+  for (const [input, want] of Object.entries(cases)) {
+    let sent = null;
+    stubPaystack(async (url, init) => {
+      sent = JSON.parse(init.body);
+      return new Response(JSON.stringify({ status: true, data: { access_code: 'ac_1', reference: 'ref_1' } }), { status: 200 });
+    });
+    const r = await worker.fetch(post('/initialize', { product: 'early-monthly', email: 'a@b.com', whatsapp: input }), env);
+    restore();
+    assert.equal(r.status, 200, input);
+    assert.equal(sent.metadata.whatsapp, want, input);
+    const f = sent.metadata.custom_fields.find((x) => x.variable_name === 'whatsapp');
+    assert.equal(f.value, want, 'dashboard custom field for ' + input);
+  }
 });
 
 console.log('\nverify refuses anything that is not a real, full payment');
@@ -160,7 +186,7 @@ await t('an unknown origin is answered as the canonical site, not echoed back', 
 });
 
 await t('a missing secret key fails closed', async () => {
-  const r = await worker.fetch(post('/initialize', { product: 'bundle', email: 'a@b.com' }), {});
+  const r = await worker.fetch(post('/initialize', { product: 'bundle', email: 'a@b.com', whatsapp: '0712345678' }), {});
   assert.equal(r.status, 500);
 });
 
