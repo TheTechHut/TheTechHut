@@ -17,9 +17,13 @@ Free, no card. <https://dash.cloudflare.com/sign-up>
 
 ### 2. Deploy
 
+**Run this in Terminal on your Mac**, not through Claude. Deploying needs a
+Cloudflare login, and `wrangler login` opens a browser and waits for a callback
+on your own machine — it cannot complete anywhere else.
+
 ```sh
-cd worker
-npm install
+cd ~/Desktop/Robbie/Projects/TheTechHut/worker
+npm install             # must run on the Mac: wrangler ships per-platform binaries
 npx wrangler login      # opens the browser once
 npx wrangler deploy
 ```
@@ -40,9 +44,12 @@ Cloudflare.
 
 ```sh
 npx wrangler secret put PAYSTACK_SECRET_KEY   # sk_test_… for now
-npx wrangler secret put REMOTE_LIST_TOKEN     # cat ../scripts/remote_token.txt
+npx wrangler secret put REMOTE_LIST_TOKEN     # 16f1bf974ed1cd96
 npx wrangler secret put RESEND_API_KEY        # optional — skip it for now
 ```
+
+Each one prompts, you paste, it goes straight to Cloudflare. The value is never
+written to a file and never appears in this repo.
 
 Paystack keys: Dashboard → Settings → API Keys & Webhooks.
 
