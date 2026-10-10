@@ -25,8 +25,8 @@
 (function () {
     'use strict';
 
-    var PUBLIC_KEY = '';
-    var API_BASE = '';
+    var PUBLIC_KEY = 'pk_live_0ea0b49d018982026271a8d153bc6b5d3955b895';
+    var API_BASE = 'https://thetechhut-pay.thetechhut.workers.dev';
 
     var WHATSAPP = '254115017058';
     var INLINE_JS = 'https://js.paystack.co/v2/inline.js';
