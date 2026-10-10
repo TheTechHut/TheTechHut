@@ -363,15 +363,36 @@
             margin-bottom: 1.5rem;
         }
 
-        .price-tag {
+        /* .price-box p is (0,1,1) and .price-tag was (0,1,0), so the generic
+           paragraph rule won and the headline price rendered at 17.6px grey
+           instead of 48px dark blue. Scoping it to .price-box lets the price
+           be the biggest thing in the box, which is the entire point of it. */
+        .price-box .price-tag {
             font-size: 3rem;
             font-weight: 900;
             color: var(--dark-blue);
             margin: 0;
             line-height: 1;
         }
-        
-        .price-tag small {
+
+        .price-box .was {
+            font-family: ui-monospace, Menlo, monospace;
+            font-size: 1.1rem;
+            color: #718096;
+            text-decoration: line-through;
+            margin: 0;
+        }
+
+        .price-box .launch {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: #046b52;
+            margin: 0.25rem 0 1rem;
+        }
+
+        .price-box .price-tag small {
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--gold-yellow);
@@ -490,7 +511,7 @@
             <!-- UPDATED SUB-HEADLINE: National focus -->
             <h2>Stop wasting hours searching. Instantly connect with 50+ vetted, active professional tech groups Across the Africa and get daily tech opportunities.</h2>
             <!-- CTA BUTTON -->
-            <a href="https://payment.intasend.com/pay/6fcb6394-28d1-47f6-bac8-7474cef0cfb1/" class="cta-button">Access 50+ Tech Groups Instantly</a>
+            <a href="#" data-pay="communities" data-pay-label="the African Tech Community Database (KSh 250)" class="cta-button">Access 50+ Tech Groups Instantly</a>
             
             <!-- SOCIAL PROOF -->
             <p class="social-proof">
@@ -619,7 +640,7 @@
                 
                
                 <!-- FINAL CTA -->
-                <a href="https://payment.intasend.com/pay/6fcb6394-28d1-47f6-bac8-7474cef0cfb1/" class="cta-button" style="margin-top: 1.5rem; margin-left: 2rem;">Access 50+ Tech Groups Now</a>
+                <a href="#" data-pay="communities" data-pay-label="the African Tech Community Database (KSh 250)" class="cta-button" style="margin-top: 1.5rem; margin-left: 2rem;">Access 50+ Tech Groups Now</a>
             
             </div>
             
@@ -662,9 +683,11 @@
 
             <div class="price-box">
                 <p>One-Time Purchase, Lifetime Access (Priced in Kenyan Shillings):</p>
-                <p class="price-tag" id="priceTag"><small>Ksh.</small>25</p>
+                <p class="was">Ksh. 500</p>
+                <p class="price-tag" id="priceTag"><small>Ksh.</small>250</p>
+                <p class="launch">Launch price</p>
                 <!-- FINAL CTA -->
-                <a href="https://payment.intasend.com/pay/6fcb6394-28d1-47f6-bac8-7474cef0cfb1/" class="cta-button" style="margin-top: 1.5rem;">Access 50+ Tech Groups Now</a>
+                <a href="#" data-pay="communities" data-pay-label="the African Tech Community Database (KSh 250)" class="cta-button" style="margin-top: 1.5rem;">Access 50+ Tech Groups Now</a>
             </div>
 
         </div>
@@ -684,39 +707,32 @@
         </div>
     </footer>
 
+<script src="/assets/js/pay.js" defer></script>
 <script>
     /* ==================================================================
-       PRICE AND PAYMENT LINK -- the only numbers on this page that matter.
+       PRICE
 
-       These two MUST change together. Changing the displayed price without
-       creating a matching payment link means people see one number and get
-       charged another, which is the one mistake worth never making.
+       KSh 250, and the number lives in ONE place: PRODUCTS in
+       worker/src/index.js. The Worker is what Paystack is told to charge,
+       so a price typed into this page could never be the real one anyway
+       — it is display, and this script only keeps it honest.
 
-       To reprice:
-         1. Create a new payment link for the new amount in IntaSend.
-         2. Paste it into PAY_LINK below.
-         3. Set PRICE to the same number.
-       Both the headline price and every buy button follow from here.
+       The old KSh 25 IntaSend link is retired. It earned roughly KSh 950
+       across 38 customers in its lifetime; the same database at 250 would
+       have sold to much the same people. Nobody refuses a curated list
+       because it costs 250 bob.
 
-       Worth knowing: at KSh 25 this product has earned roughly KSh 950 in
-       its lifetime across 38 customers. The same database at KSh 250 would
-       almost certainly have sold to the same people -- the objection to a
-       curated list is never that it costs 250 bob.
+       To change the price: edit PRODUCTS in the Worker, redeploy, and
+       update PRICE below so the page agrees. If the two ever disagree,
+       the Worker wins and this page is the thing that is lying.
        ================================================================== */
-    var PRICE = 25;
-    var PAY_LINK = 'https://payment.intasend.com/pay/6fcb6394-28d1-47f6-bac8-7474cef0cfb1/';
+    var PRICE = 250;
 
     (function () {
         var tag = document.getElementById('priceTag');
         if (tag) { tag.innerHTML = '<small>Ksh.</small>' + PRICE; }
-        Array.prototype.forEach.call(
-            document.querySelectorAll('a[href*="payment.intasend.com"]'),
-            function (a) { a.setAttribute('href', PAY_LINK); }
-        );
-        Array.prototype.forEach.call(
-            document.querySelectorAll('[data-price]'),
-            function (el) { el.textContent = PRICE; }
-        );
+        Array.prototype.forEach.call(document.querySelectorAll('[data-price]'),
+            function (el) { el.textContent = PRICE; });
     })();
 </script>
 </body>

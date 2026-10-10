@@ -54,6 +54,7 @@ const PRODUCTS = {
   'early-quarter': { name: 'Early Access — three months', kes: 600,  delivers: 'whatsapp'    },
   'early-annual':  { name: 'Early Access — one year',     kes: 2000, delivers: 'whatsapp'    },
   'cv-blueprint':  { name: 'The CV Blueprint',            kes: 250,  delivers: 'whatsapp'    },
+  'communities':   { name: 'African Tech Community Database', kes: 250, delivers: 'whatsapp' },
 };
 
 /* ------------------------------------------------------------------ utils */

@@ -40,7 +40,8 @@
         'early-monthly': { name: 'Early Access — one month',    kes: 250 },
         'early-quarter': { name: 'Early Access — three months', kes: 600 },
         'early-annual':  { name: 'Early Access — one year',     kes: 2000 },
-        'cv-blueprint':  { name: 'The CV Blueprint',            kes: 250 }
+        'cv-blueprint':  { name: 'The CV Blueprint',            kes: 250 },
+        'communities':   { name: 'African Tech Community Database', kes: 250 }
     };
 
     var configured = function () { return !!(PUBLIC_KEY && API_BASE); };
