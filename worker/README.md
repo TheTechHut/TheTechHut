@@ -45,6 +45,7 @@ Cloudflare.
 ```sh
 npx wrangler secret put PAYSTACK_SECRET_KEY   # sk_test_… for now
 npx wrangler secret put REMOTE_LIST_TOKEN     # the value from step 3a below
+npx wrangler secret put EARLY_ACCESS_INVITE   # the Early Access WhatsApp group invite link
 npx wrangler secret put RESEND_API_KEY        # optional — skip it for now
 ```
 

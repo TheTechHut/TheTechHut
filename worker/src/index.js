@@ -26,6 +26,9 @@
  *   PAYSTACK_SECRET_KEY   sk_test_… while testing, sk_live_… when you go live
  *   REMOTE_LIST_TOKEN     the token from scripts/remote_token.txt
  *   RESEND_API_KEY        optional; without it the page still reveals the link
+ *   EARLY_ACCESS_INVITE   the WhatsApp group invite link (https://chat.whatsapp.com/...).
+ *                         A secret, NOT a file: this repo is published, and the link
+ *                         is only meant to be shown to someone who has paid.
  */
 
 const PAYSTACK = 'https://api.paystack.co';
@@ -49,10 +52,10 @@ const CURRENCY = 'KES';
 const PRODUCTS = {
   'remote-list':   { name: 'The Remote-From-Kenya List',  kes: 500,  delivers: 'remote-list' },
   'ats-pass':      { name: 'ATS Pass',                    kes: 1000, delivers: 'whatsapp'    },
-  'bundle':        { name: 'The Job Hunt Bundle',         kes: 1500, delivers: 'remote-list' },
-  'early-monthly': { name: 'Early Access — one month',    kes: 250,  delivers: 'whatsapp'    },
-  'early-quarter': { name: 'Early Access — three months', kes: 600,  delivers: 'whatsapp'    },
-  'early-annual':  { name: 'Early Access — one year',     kes: 2000, delivers: 'whatsapp'    },
+  'bundle':        { name: 'The Job Hunt Bundle',         kes: 1500, delivers: 'remote-list', includesEarlyAccess: true },
+  'early-monthly': { name: 'Early Access — one month',    kes: 250,  delivers: 'early-group'    },
+  'early-quarter': { name: 'Early Access — three months', kes: 600,  delivers: 'early-group'    },
+  'early-annual':  { name: 'Early Access — one year',     kes: 2000, delivers: 'early-group'    },
   'cv-blueprint':  { name: 'The CV Blueprint',            kes: 250,  delivers: 'whatsapp'    },
   'communities':   { name: 'African Tech Community Database', kes: 250, delivers: 'whatsapp' },
 };
@@ -128,16 +131,34 @@ function safeEqual(a, b) {
   return diff === 0;
 }
 
+/** The invite link, but only if it really is a WhatsApp group invite. */
+function earlyInvite(env) {
+  const u = (env.EARLY_ACCESS_INVITE || '').toString().trim();
+  return /^https:\/\/chat\.whatsapp\.com\/[A-Za-z0-9]{10,40}(\?[\w=&.%-]*)?$/.test(u) ? u : null;
+}
+
+const earlyGroupLink = (url, included) => ({
+  kind: 'link',
+  label: included ? 'Early Access group (three months included)' : 'Your Early Access group',
+  url,
+  cta: 'Request to join the group',
+  note: 'Tap to request to join, from the WhatsApp number you gave us. We approve you against your payment, usually the same day.',
+});
+
 function deliveryFor(product, env) {
   const p = PRODUCTS[product];
   if (!p) return null;
+  const invite = earlyInvite(env);
+  if (p.delivers === 'early-group' && invite) return earlyGroupLink(invite, false);
   if (p.delivers === 'remote-list' && env.REMOTE_LIST_TOKEN) {
-    return {
+    const d = {
       kind: 'link',
       label: 'Your Remote-From-Kenya List',
       url: SITE + '/remote/list/#' + env.REMOTE_LIST_TOKEN,
       note: 'Bookmark this. It is rebuilt every morning, so it stays current.',
     };
+    if (p.includesEarlyAccess && invite) d.also = [earlyGroupLink(invite, true)];
+    return d;
   }
   return {
     kind: 'whatsapp',
@@ -159,6 +180,8 @@ async function sendReceipt(env, to, product, delivery, reference) {
       'Thanks for buying ' + p.name + '.',
       '',
       delivery.kind === 'link' ? delivery.label + ': ' + delivery.url : delivery.note,
+      ...(delivery.kind === 'link' && delivery.cta ? ['', delivery.note] : []),
+      ...((delivery.also || []).flatMap((a) => ['', a.label + ': ' + a.url, a.note])),
       '',
       'Payment reference: ' + reference,
       'Questions: info@thetechhut.co or +254 115 017 058',

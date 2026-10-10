@@ -150,6 +150,45 @@ await t('a junk reference never reaches Paystack', async () => {
   assert.equal(called, false);
 });
 
+console.log('\nthe Early Access invite is shown only after a verified payment, and only if it is real');
+const INVITE = 'https://chat.whatsapp.com/FAKEINVITE12345';
+const paid = (product, e) => worker.fetch(post('/verify', { reference: 'ref_early_1' }), e || { ...env, EARLY_ACCESS_INVITE: INVITE });
+await t('an Early Access payment returns the group invite', async () => {
+  for (const [product, amount] of [['early-monthly', 25000], ['early-quarter', 60000], ['early-annual', 200000]]) {
+    stubPaystack(async () => new Response(JSON.stringify(verifyPayload({ amount, metadata: { product } })), { status: 200 }));
+    const b = await (await paid(product)).json(); restore();
+    assert.equal(b.paid, true, product);
+    assert.equal(b.delivery.kind, 'link', product);
+    assert.equal(b.delivery.url, INVITE, product);
+  }
+});
+await t('the bundle returns the list AND the group invite', async () => {
+  stubPaystack(async () => new Response(JSON.stringify(verifyPayload({ amount: 150000, metadata: { product: 'bundle' } })), { status: 200 }));
+  const b = await (await paid('bundle')).json(); restore();
+  assert.match(b.delivery.url, /\/remote\/list\/#/);
+  assert.equal(b.delivery.also[0].url, INVITE);
+});
+await t('without the invite secret, Early Access falls back to the WhatsApp message', async () => {
+  stubPaystack(async () => new Response(JSON.stringify(verifyPayload({ amount: 25000, metadata: { product: 'early-monthly' } })), { status: 200 }));
+  const b = await (await paid('early-monthly', env)).json(); restore();
+  assert.equal(b.delivery.kind, 'whatsapp');
+});
+await t('a malformed invite secret is ignored rather than shown to buyers', async () => {
+  for (const bad of ['javascript:alert(1)', 'https://evil.example/x', 'http://chat.whatsapp.com/ABCDEFGHIJ12', '']) {
+    stubPaystack(async () => new Response(JSON.stringify(verifyPayload({ amount: 25000, metadata: { product: 'early-monthly' } })), { status: 200 }));
+    const b = await (await paid('early-monthly', { ...env, EARLY_ACCESS_INVITE: bad })).json(); restore();
+    assert.equal(b.delivery.kind, 'whatsapp', 'should ignore ' + bad);
+  }
+});
+await t('the invite is never revealed for a payment that was not completed or was underpaid', async () => {
+  stubPaystack(async () => new Response(JSON.stringify(verifyPayload({ status: 'abandoned', amount: 25000, metadata: { product: 'early-monthly' } })), { status: 200 }));
+  let b = await (await paid('early-monthly')).json(); restore();
+  assert.equal(b.paid, false); assert.ok(!JSON.stringify(b).includes('chat.whatsapp.com'));
+  stubPaystack(async () => new Response(JSON.stringify(verifyPayload({ amount: 100, metadata: { product: 'early-monthly' } })), { status: 200 }));
+  b = await (await paid('early-monthly')).json(); restore();
+  assert.equal(b.paid, false); assert.ok(!JSON.stringify(b).includes('chat.whatsapp.com'));
+});
+
 console.log('\nwebhook trusts the signature and nothing else');
 await t('a correctly signed charge.success is accepted', async () => {
   const body = JSON.stringify({ event: 'charge.success', data: verifyPayload().data });

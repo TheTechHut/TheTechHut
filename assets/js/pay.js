@@ -168,6 +168,16 @@
         return /^\+[1-9]\d{7,14}$/.test(n) ? n : '';
     }
 
+    /* One delivery block. Link text is the button label when the Worker sends one
+       (the group invite), otherwise the URL itself (the list link). */
+    function deliveryHtml(d) {
+        if (d.kind === 'link') {
+            return '<div class="ok"><strong>' + d.label + '</strong><br><a href="' + d.url +
+                '" target="_blank" rel="noopener">' + (d.cta || d.url) + '</a></div><p>' + (d.note || '') + '</p>';
+        }
+        return '<div class="ok"><strong>' + d.label + '</strong></div><p>' + (d.note || '') + '</p>';
+    }
+
     function buy(key) {
         var p = LABELS[key] || { name: key, kes: 0 };
         if (!configured()) { window.open(waLink(key), '_blank', 'noopener'); return; }
@@ -232,9 +242,8 @@
                         '<p>' + p.name + ', KSh ' + Number(res.amount).toLocaleString('en-KE') + '.',
                         res.emailed ? ' A copy is on its way to your email.' : '',
                         '</p>',
-                        d.kind === 'link'
-                            ? '<div class="ok"><strong>' + d.label + '</strong><br><a href="' + d.url + '">' + d.url + '</a></div><p>' + (d.note || '') + '</p>'
-                            : '<div class="ok"><strong>' + d.label + '</strong></div><p>' + (d.note || '') + '</p>',
+                        deliveryHtml(d),
+                        (d.also || []).map(deliveryHtml).join(''),
                         '<p style="font-size:12px;color:#5b6b7b">Reference ' + res.reference + '</p>',
                         '<div class="row"><button class="go" id="tthDone">Done</button></div>'
                     ].join(''));
