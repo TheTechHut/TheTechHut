@@ -303,7 +303,6 @@ STATIC_PAGES = [
     ('/events/',                     '0.70', 'weekly'),
     ('/communities/',                '0.60', 'monthly'),
     ('/recruiters/',                 '0.60', 'monthly'),
-    ('/content/',                    '0.50', 'monthly'),
     ('/afro-ip/',                    '0.50', 'monthly'),
     ('/entrepreneurial_challenge/',  '0.50', 'monthly'),
     ('/data_privacy_policy/',        '0.30', 'yearly'),
