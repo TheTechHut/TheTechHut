@@ -238,16 +238,21 @@ def main():
     with open(os.path.join(DATA, 'remote-summary.json'), 'w') as fh:
         json.dump(summary, fh, indent=1)
 
-    # paid: the same companies with every role and its apply link
-    token = 'preview'
-    tok_file = os.path.join(ROOT, 'scripts', 'remote_token.txt')
-    if os.path.exists(tok_file):
-        token = open(tok_file).read().strip() or 'preview'
-    full = dict(meta)
-    full['companies'] = companies
-    os.makedirs(os.path.join(DATA, 'l'), exist_ok=True)
-    with open(os.path.join(DATA, 'l', token + '.json'), 'w') as fh:
-        json.dump(full, fh, indent=1)
+    # paid: the same companies with every role and its apply link.
+    # The token only ever comes from the environment. A file in this repo gets
+    # published by GitHub Pages, which is exactly how the first one leaked.
+    token = (os.environ.get('REMOTE_LIST_TOKEN') or '').strip()
+    if not re.fullmatch(r'[A-Za-z0-9_-]{16,64}', token):
+        print('\n!! REMOTE_LIST_TOKEN missing or malformed -- the paid list was '
+              'NOT written.\n   Set it under Settings -> Secrets and variables '
+              '-> Actions.\n   The public summary is still current.')
+    else:
+        full = dict(meta)
+        full['companies'] = companies
+        os.makedirs(os.path.join(DATA, 'l'), exist_ok=True)
+        with open(os.path.join(DATA, 'l', token + '.json'), 'w') as fh:
+            json.dump(full, fh, indent=1)
+        print('paid list written for the configured token')
 
     # ---- data/hiring-index.json: the rolling report data ----------------
     idx_path = os.path.join(DATA, 'hiring-index.json')

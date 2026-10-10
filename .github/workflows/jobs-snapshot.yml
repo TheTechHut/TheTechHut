@@ -46,6 +46,10 @@ jobs:
           ref: chore/redesign
 
       - name: Fetch the feeds and write the snapshot
+        env:
+          # Names the paid file's path. Never stored in the repo: GitHub Pages
+          # serves this repo verbatim, so a token in a file is a public token.
+          REMOTE_LIST_TOKEN: ${{ secrets.REMOTE_LIST_TOKEN }}
         run: python3 scripts/fetch_jobs_snapshot.py
 
       - name: Commit if anything changed

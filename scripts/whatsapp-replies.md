@@ -54,7 +54,7 @@ Once you see the payment:
 ```
 Got it, thank you! Here is your list:
 
-https://thetechhut.co/remote/list/#16f1bf974ed1cd96
+https://thetechhut.co/remote/list/#<YOUR TOKEN>
 
 Bookmark that — it updates itself every morning, so check back rather
 than applying from a copy.
@@ -163,6 +163,11 @@ after a hundred sales is how people keep selling the wrong thing.
 **Every buyer gets the same URL.** If one person forwards it to a WhatsApp
 group, everyone in that group has your KSh 500 product for free. The page asks
 them not to, which is a request rather than a lock.
+
+The first token leaked a different way, worth remembering: it lived in
+`scripts/remote_token.txt`, and GitHub Pages publishes this repo, so it was
+readable at `https://thetechhut.co/scripts/remote_token.txt`. It now lives only
+in GitHub Actions secrets and Cloudflare. Never put the replacement in a file.
 
 Two ways out, when it starts to matter:
 

@@ -1,0 +1,22 @@
+# GitHub Pages serves this repository, and Jekyll publishes everything that is
+# not excluded here. firebase.json's ignore list does NOT apply — the live site
+# is Pages, not Firebase — which is how scripts/remote_token.txt ended up
+# readable at https://thetechhut.co/scripts/remote_token.txt.
+#
+# Anything added below is not published. Check a new path with
+#   curl -I https://thetechhut.co/<path>
+# and expect a 404 before assuming it is private. And never rely on this alone
+# for a secret: the repo's history is a separate exposure. Secrets belong in
+# GitHub Actions secrets and Cloudflare secrets, not in files.
+exclude:
+  - scripts/              # build tooling, outreach drafts, fulfilment scripts
+  - worker/               # the Paystack Worker's source, config and tests
+  - data/snapshots/       # ~535KB of raw rows per day, kept 45 days
+  - firebase.json
+  - .firebaserc
+  - README.md
+  - CLAUDE.md
+
+# data/remote-summary.json, data/hiring-index.json and data/l/ stay published:
+# the first two are public proof on /remote/, and data/l/<token>.json is the
+# product itself, which has to be fetchable by the people who bought it.

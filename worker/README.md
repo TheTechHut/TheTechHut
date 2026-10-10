@@ -44,7 +44,7 @@ Cloudflare.
 
 ```sh
 npx wrangler secret put PAYSTACK_SECRET_KEY   # sk_test_… for now
-npx wrangler secret put REMOTE_LIST_TOKEN     # 16f1bf974ed1cd96
+npx wrangler secret put REMOTE_LIST_TOKEN     # the value from step 3a below
 npx wrangler secret put RESEND_API_KEY        # optional — skip it for now
 ```
 
@@ -52,6 +52,25 @@ Each one prompts, you paste, it goes straight to Cloudflare. The value is never
 written to a file and never appears in this repo.
 
 Paystack keys: Dashboard → Settings → API Keys & Webhooks.
+
+#### 3a. Generate the list token yourself
+
+```sh
+openssl rand -hex 16
+```
+
+Paste that same value into **two** places and nowhere else:
+
+- `wrangler secret put REMOTE_LIST_TOKEN` (above), so the Worker can build the
+  buyer's link
+- GitHub → Settings → Secrets and variables → Actions → **REMOTE_LIST_TOKEN**,
+  so the daily job knows what to name the file
+
+Do not put it in a file in this repo. GitHub Pages publishes this repository,
+so a token in a file is a public token — that is exactly how the first one
+leaked, at `https://thetechhut.co/scripts/remote_token.txt`. Do not paste it
+into a chat either, including to me: I do not need it, and a transcript is one
+more copy of it.
 
 Without `RESEND_API_KEY` nothing breaks — the buyer still sees their access
 link on screen the moment payment clears, they just do not also get an email.
