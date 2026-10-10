@@ -1,0 +1,699 @@
+{
+ "updated": "2026-10-10",
+ "company_count": 12,
+ "role_count": 303,
+ "local_role_count": 31,
+ "roles_scanned": 2435,
+ "companies": [
+  {
+   "company": "Canonical",
+   "platform": "greenhouse",
+   "eligible": 234,
+   "locations": [
+    "Home based - EMEA",
+    "Home based - EMEA; Office Based - London, UK",
+    "Home Based - Americas; Home based - EMEA; Home based - Worldwide",
+    "Home based - Worldwide",
+    "Home Based - APAC; Home based - EMEA",
+    "Home Based - Americas; Home based - EMEA"
+   ],
+   "roles": [
+    {
+     "title": "Accountant",
+     "location": "Home based - EMEA",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/5569916"
+    },
+    {
+     "title": "Accounts Payable Clerk",
+     "location": "Home based - EMEA; Office Based - London, UK",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/7971310"
+    },
+    {
+     "title": "Accounts Receivable Clerk",
+     "location": "Home based - EMEA",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/5243483"
+    },
+    {
+     "title": "Alliances & Channels Leader",
+     "location": "Home Based - Americas; Home based - EMEA; Home based - Worldwide",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/8002334"
+    },
+    {
+     "title": "Alliances Field Engineer",
+     "location": "Home based - Worldwide",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/3433732"
+    },
+    {
+     "title": "Associate Linux Support Engineer",
+     "location": "Home based - Worldwide",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/6448444"
+    },
+    {
+     "title": "Business Development Representative",
+     "location": "Home based - Worldwide",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/6713184"
+    },
+    {
+     "title": "Business Services Team Manager",
+     "location": "Home based - Worldwide",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/5798264"
+    },
+    {
+     "title": "C, Golang Software Engineer working on dqlite, a Raft extension for SQLite",
+     "location": "Home based - EMEA",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/4124053"
+    },
+    {
+     "title": "Channel Partner Sales Executive",
+     "location": "Home based - Worldwide",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/7982278"
+    },
+    {
+     "title": "Channel Partner Sales Executive, UKI",
+     "location": "Home based - EMEA",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/8001736"
+    },
+    {
+     "title": "Cloud Engineering Manager",
+     "location": "Home based - Worldwide",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/4676649"
+    },
+    {
+     "title": "Cloud Field Engineer",
+     "location": "Home based - Worldwide",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/6132532"
+    },
+    {
+     "title": "Cloud Field Engineering Manager",
+     "location": "Home based - Worldwide",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/7410479"
+    },
+    {
+     "title": "Cloud Professional Services Manager",
+     "location": "Home based - Worldwide",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/6283017"
+    },
+    {
+     "title": "Cloud Solutions Architect - Alliances",
+     "location": "Home based - Worldwide",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/5915936"
+    },
+    {
+     "title": "Cloud Support Engineer",
+     "location": "Home based - Worldwide",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/2456563"
+    },
+    {
+     "title": "Community Engineer (multiple roles and seniority levels)",
+     "location": "Home based - Worldwide",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/3275433"
+    },
+    {
+     "title": "Containerization & Virtualisation Engineer",
+     "location": "Home based - Worldwide",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/5172247"
+    },
+    {
+     "title": "Content marketing lead",
+     "location": "Home based - EMEA",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/6943565"
+    },
+    {
+     "title": "Content Marketing Manager",
+     "location": "Home based - EMEA",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/8046372"
+    },
+    {
+     "title": "Cost Accounting Manager",
+     "location": "Home based - EMEA; Office Based - London, UK",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/7980589"
+    },
+    {
+     "title": "C++/Rust Graphics and Windowing System Software Engineer - Mir",
+     "location": "Home Based - APAC; Home based - EMEA",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/4439935"
+    },
+    {
+     "title": "Design Manager (Visual)",
+     "location": "Home based - EMEA",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/7566317"
+    },
+    {
+     "title": "Developer Relations Engineer",
+     "location": "Home Based - APAC; Home based - EMEA",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/5143011"
+    },
+    {
+     "title": "Devices & IOT Field Engineering Manager (Americas)",
+     "location": "Home based - Worldwide",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/3756791"
+    },
+    {
+     "title": "Director, Talent Analytics",
+     "location": "Home based - EMEA",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/6460571"
+    },
+    {
+     "title": "Distributed Systems Engineer",
+     "location": "Home based - Worldwide",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/4581200"
+    },
+    {
+     "title": "Distributed Systems Testing Software Engineer, Python / Go",
+     "location": "Home Based - Americas; Home based - EMEA",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/2969042"
+    },
+    {
+     "title": "Embedded & Desktop Linux Systems Engineer - Optimisation",
+     "location": "Home based - Worldwide",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/3821346"
+    },
+    {
+     "title": "Embedded Devices Software Solution Sales Account Manager",
+     "location": "Home based - Worldwide",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/7911753"
+    },
+    {
+     "title": "Embedded Devices Software Solution Sales - All Roles",
+     "location": "Home based - Worldwide",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/5823852"
+    },
+    {
+     "title": "Embedded Linux Field Engineer for Devices/IoT",
+     "location": "Home based - Worldwide",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/3362765"
+    },
+    {
+     "title": "Embedded Linux Senior Software Engineer - Optimisation",
+     "location": "Home based - Worldwide",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/6189337"
+    },
+    {
+     "title": "Engineering Director - Business Data",
+     "location": "Home based - EMEA",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/7646448"
+    },
+    {
+     "title": "Engineering Director - Commercial Systems",
+     "location": "Home based - EMEA",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/7646454"
+    },
+    {
+     "title": "Engineering Manager",
+     "location": "Home based - Worldwide",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/5188002"
+    },
+    {
+     "title": "Engineering Manager - AppArmor",
+     "location": "Home based - Worldwide",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/6215502"
+    },
+    {
+     "title": "Engineering Manager - App Stores",
+     "location": "Home based - Worldwide",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/5127399"
+    },
+    {
+     "title": "Engineering Manager- Ceph & Distributed Storage",
+     "location": "Home Based - Americas; Home based - EMEA",
+     "url": "https://job-boards.greenhouse.io/canonical/jobs/4175808"
+    }
+   ],
+   "total": 311
+  },
+  {
+   "company": "Supabase",
+   "platform": "ashby",
+   "eligible": 30,
+   "locations": [
+    "Remote, Global",
+    "Remote, EMEA"
+   ],
+   "roles": [
+    {
+     "title": "AI Platform Engineer",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/3b5d54ca-741b-45ac-bd3f-31605a0d3541"
+    },
+    {
+     "title": "Support Engineer (EMEA)",
+     "location": "Remote, EMEA",
+     "url": "https://jobs.ashbyhq.com/supabase/c01f7436-1fdd-4a3e-8b96-8cadc33b006e"
+    },
+    {
+     "title": "Multigres Engineer",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/2e718684-4f75-4a99-8d6b-3b6bd44e4228"
+    },
+    {
+     "title": "Support Engineer (EMEA - Weekends)",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/590a0742-97f1-47f4-81a2-567efc939ae2"
+    },
+    {
+     "title": " Account Executive (EMEA)",
+     "location": "Remote, EMEA",
+     "url": "https://jobs.ashbyhq.com/supabase/a069c886-1107-408e-88b4-e1aa8d33d4bc"
+    },
+    {
+     "title": "Multigres Deployment Engineer",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/f035bda1-b5d3-4c5b-8736-b9c335fe1c3b"
+    },
+    {
+     "title": "Database Support Engineer (EMEA)",
+     "location": "Remote, EMEA",
+     "url": "https://jobs.ashbyhq.com/supabase/3889002e-536e-4046-a330-70e942b0cc96"
+    },
+    {
+     "title": "Platform Engineer, Managed Postgres",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/9073c0cd-2545-473a-b2ac-63e4615c69b5"
+    },
+    {
+     "title": "Postgres Deployment Engineer",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/48950725-e0d9-4025-92d9-f75e1b60ce45"
+    },
+    {
+     "title": "Software Engineer - Auth",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/e569b7f7-fa8f-4139-86f6-4f52b456882d"
+    },
+    {
+     "title": "Software Engineer - Functions (Compute)",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/3ab0b926-c9b5-4197-aff2-88d5bf009e13"
+    },
+    {
+     "title": "Product Lead - Infrastructure",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/47bcfdb8-b954-423e-8a9e-85256434575c"
+    },
+    {
+     "title": "Engineering Manager",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/99a80436-89ec-412b-b782-1dd462bd16dc"
+    },
+    {
+     "title": "Member of Technical Staff/ Partners",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/cb04ae3a-3a47-4e21-928f-c2456b7b214e"
+    },
+    {
+     "title": "Supalite Engineer",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/b75ba81e-54cc-4393-a575-bc41776b0113"
+    },
+    {
+     "title": "Release Engineer",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/f6035bf8-4f44-4425-9944-d5509a3c8652"
+    },
+    {
+     "title": "Performance Engineer - Performance Analysis & Tuning",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/98ef6a11-9898-4960-9931-1264285849f3"
+    },
+    {
+     "title": "Performance Engineer - Benchmarking",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/11beb619-0c25-4b11-9818-3f18e278c65b"
+    },
+    {
+     "title": "Cloud Platform Engineer",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/5d09daeb-2d7e-42de-9151-81a1341195c4"
+    },
+    {
+     "title": "Senior Data Analyst - Marketing",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/59083a14-b2b6-4dd8-8037-739aa1ad1e22"
+    },
+    {
+     "title": "Technical Account Management (TAM) Leader",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/f52fd120-5fbe-4e0d-949d-01e217ec77d6"
+    },
+    {
+     "title": "Product Manager - Realtime",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/bd5ce178-84c9-469e-89f4-493c21b50622"
+    },
+    {
+     "title": "Platform Engineer - Compute Capacity",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/4eb14408-51e6-4c58-812a-3782d5c0b045"
+    },
+    {
+     "title": "Software Engineer - Branching",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/06752423-eebb-472c-95b5-c7ff2559fd60"
+    },
+    {
+     "title": "Platform Security Engineer (AMER/APAC)",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/8fa1c7a0-a85c-4562-a1f5-4dd22cadae27"
+    },
+    {
+     "title": "Engineering Manager, Billing",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/b4a2f5e5-5c51-4c1a-abde-a89de27451c7"
+    },
+    {
+     "title": "Platform Engineer, Edge & Networking",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/6c9de03c-e289-4612-9045-492985d0274b"
+    },
+    {
+     "title": "FinOps Engineer ",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/fab1525f-3d89-4d1c-9094-84d21647415e"
+    },
+    {
+     "title": "Head of AI Native Operations",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/9c04bc60-78a1-4529-950d-4704ab475764"
+    },
+    {
+     "title": "Product Manager - Auth",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/9a4c9984-07c7-4b47-982f-371de3f6ff50"
+    }
+   ],
+   "total": 54
+  },
+  {
+   "company": "Oyster",
+   "platform": "ashby",
+   "eligible": 13,
+   "locations": [
+    "EMEA"
+   ],
+   "roles": [
+    {
+     "title": "Accounts Payable Analyst",
+     "location": "EMEA",
+     "url": "https://jobs.ashbyhq.com/oyster/83b10c34-8c44-4c58-89d4-5e99be716c76"
+    },
+    {
+     "title": "Senior Director, Data Platform and AI",
+     "location": "EMEA",
+     "url": "https://jobs.ashbyhq.com/oyster/a9b4d7d3-cbea-4cd1-9a75-4f30fd395e0b"
+    },
+    {
+     "title": "Legal Counsel (Employment Products)",
+     "location": "EMEA",
+     "url": "https://jobs.ashbyhq.com/oyster/f96014b7-68e5-45fe-9c53-1dea5775fc66"
+    },
+    {
+     "title": "Lead Product Manager",
+     "location": "EMEA",
+     "url": "https://jobs.ashbyhq.com/oyster/20b0c812-255e-433b-99bb-2d1f399f0c7a"
+    },
+    {
+     "title": "Legal Counsel (Employment Products)",
+     "location": "EMEA",
+     "url": "https://jobs.ashbyhq.com/oyster/92ee57c2-7ee4-48d9-b089-0feda448dc01"
+    },
+    {
+     "title": "Senior Payroll Specialist (Netherlands)",
+     "location": "EMEA",
+     "url": "https://jobs.ashbyhq.com/oyster/c54574a5-31fb-4f72-9cb2-9431f3c61935"
+    },
+    {
+     "title": "Business Development Representative (EMEA)",
+     "location": "EMEA",
+     "url": "https://jobs.ashbyhq.com/oyster/2843c3ed-da41-422a-8c19-edcbbf95f8b0"
+    },
+    {
+     "title": "Senior Data Engineer",
+     "location": "EMEA",
+     "url": "https://jobs.ashbyhq.com/oyster/7c2d418d-d817-4e9f-b73c-41fa5f6549af"
+    },
+    {
+     "title": "Content Marketing Lead",
+     "location": "EMEA",
+     "url": "https://jobs.ashbyhq.com/oyster/fe7c660d-9a43-434b-b4ca-adb48bd1d4df"
+    },
+    {
+     "title": "Senior Director, Product (Employer of Record)",
+     "location": "EMEA",
+     "url": "https://jobs.ashbyhq.com/oyster/7835b377-7646-43a1-b917-b63f1e579869"
+    },
+    {
+     "title": "Business Manager, GTM",
+     "location": "EMEA",
+     "url": "https://jobs.ashbyhq.com/oyster/d9d3e2c5-73a5-47cd-8490-844645858891"
+    },
+    {
+     "title": "Senior AI Solutions Engineer - GTM",
+     "location": "EMEA",
+     "url": "https://jobs.ashbyhq.com/oyster/440f7cfe-3649-411c-8009-3ad09213435d"
+    },
+    {
+     "title": "Senior Accountant (EMEA)",
+     "location": "EMEA",
+     "url": "https://jobs.ashbyhq.com/oyster/094ead64-8a8b-45a1-b37d-0c09953a4f98"
+    }
+   ],
+   "total": 23
+  },
+  {
+   "company": "ConsenSys",
+   "platform": "greenhouse",
+   "eligible": 8,
+   "locations": [
+    "UNITED STATES - Remote, EMEA - Remote",
+    "UNITED STATES - Remote, EMEA - Remote, CANADA - Remote, LATAM - Remote",
+    "UNITED STATES - Remote, EMEA - Remote, LATAM - Remote",
+    "UNITED STATES - Remote, LATAM - Remote, EMEA - Remote",
+    "United States - Remote, EMEA - Remote",
+    "EMEA - Remote, UNITED STATES - Remote"
+   ],
+   "roles": [
+    {
+     "title": "Director of Technical Accounting",
+     "location": "UNITED STATES - Remote, EMEA - Remote",
+     "url": "https://job-boards.greenhouse.io/consensys/jobs/8208515"
+    },
+    {
+     "title": "Lead Product Designer",
+     "location": "UNITED STATES - Remote, EMEA - Remote, CANADA - Remote, LATAM - Remote",
+     "url": "https://job-boards.greenhouse.io/consensys/jobs/8202750"
+    },
+    {
+     "title": "Product Marketing Lead - Trade",
+     "location": "UNITED STATES - Remote, EMEA - Remote, LATAM - Remote",
+     "url": "https://job-boards.greenhouse.io/consensys/jobs/8048308"
+    },
+    {
+     "title": "Risk & Controls Manager",
+     "location": "UNITED STATES - Remote, LATAM - Remote, EMEA - Remote",
+     "url": "https://job-boards.greenhouse.io/consensys/jobs/8207369"
+    },
+    {
+     "title": " Senior Design Engineer",
+     "location": "United States - Remote, EMEA - Remote",
+     "url": "https://job-boards.greenhouse.io/consensys/jobs/7256954"
+    },
+    {
+     "title": "Senior Product Manager \u2013 Universal KYC (MetaMask Passport)",
+     "location": "EMEA - Remote, UNITED STATES - Remote",
+     "url": "https://job-boards.greenhouse.io/consensys/jobs/7903661"
+    },
+    {
+     "title": "Senior Software Engineer - Predict ",
+     "location": "UNITED STATES - Remote, CANADA - Remote, LATAM - Remote, EMEA - Remote",
+     "url": "https://job-boards.greenhouse.io/consensys/jobs/8259010"
+    },
+    {
+     "title": "Staff Software Engineer: Perpetuals",
+     "location": "EMEA - Remote",
+     "url": "https://job-boards.greenhouse.io/consensys/jobs/8138475"
+    }
+   ],
+   "total": 10
+  },
+  {
+   "company": "Railway",
+   "platform": "ashby",
+   "eligible": 6,
+   "locations": [
+    "Global"
+   ],
+   "roles": [
+    {
+     "title": "Senior Full-Stack Engineer - Product",
+     "location": "Global",
+     "url": "https://jobs.ashbyhq.com/railway/6ddcfe47-6cce-469b-ba6d-4f0e83440c9d"
+    },
+    {
+     "title": "Infrastructure Engineer",
+     "location": "Global",
+     "url": "https://jobs.ashbyhq.com/railway/b8072f95-043f-404d-a313-f0bdf8dd3c81"
+    },
+    {
+     "title": "Senior Platform Engineer: Storage",
+     "location": "Global",
+     "url": "https://jobs.ashbyhq.com/railway/25d8444a-47dc-4084-ae56-29a0f0b19b74"
+    },
+    {
+     "title": "Senior Infra Engineer: Observability",
+     "location": "Global",
+     "url": "https://jobs.ashbyhq.com/railway/4856389c-44d8-4635-ba51-5fc1b8a49ca8"
+    },
+    {
+     "title": "Senior Infra Engineer: Baremetal Orchestration",
+     "location": "Global",
+     "url": "https://jobs.ashbyhq.com/railway/d93c8794-6058-4295-83a0-092b05664f34"
+    },
+    {
+     "title": "Senior Product Engineer, Scalability",
+     "location": "Global",
+     "url": "https://jobs.ashbyhq.com/railway/5f51771e-339f-49f9-8da2-e3c7179c7bad"
+    }
+   ],
+   "total": 8
+  },
+  {
+   "company": "Zipline",
+   "platform": "greenhouse",
+   "eligible": 4,
+   "locations": [
+    "Remote in Africa",
+    "Remote from Anywhere",
+    "Remote in USA; Remote, EMEA"
+   ],
+   "roles": [
+    {
+     "title": "Executive Assistant to the CEO, Africa",
+     "location": "Remote in Africa",
+     "url": "https://www.zipline.com/open-roles/7979053003?gh_jid=7979053003"
+    },
+    {
+     "title": "Principal Counsel, Africa Legal",
+     "location": "Remote from Anywhere",
+     "url": "https://www.zipline.com/open-roles/7821937003?gh_jid=7821937003"
+    },
+    {
+     "title": "Staff Software Engineer, Healthcare \u2014 Customer Experience",
+     "location": "Remote in USA; Remote, EMEA",
+     "url": "https://www.zipline.com/open-roles/7983305003?gh_jid=7983305003"
+    },
+    {
+     "title": "Staff Software Engineer, Healthcare \u2014 Systems & Integrations",
+     "location": "Remote in USA; Remote, EMEA",
+     "url": "https://www.zipline.com/open-roles/7983316003?gh_jid=7983316003"
+    }
+   ],
+   "total": 355
+  },
+  {
+   "company": "PostHog",
+   "platform": "ashby",
+   "eligible": 2,
+   "locations": [
+    "Remote (EMEA)"
+   ],
+   "roles": [
+    {
+     "title": "Technical Customer Success Manager - EMEA",
+     "location": "Remote (EMEA)",
+     "url": "https://jobs.ashbyhq.com/posthog/0be1b52c-2401-4ae2-b7fc-5d018c1ff96f"
+    },
+    {
+     "title": "Security Engineer ",
+     "location": "Remote (EMEA)",
+     "url": "https://jobs.ashbyhq.com/posthog/36d5ce14-851c-450f-879a-45cbb896225e"
+    }
+   ],
+   "total": 10
+  },
+  {
+   "company": "Sun King",
+   "platform": "pinpoint",
+   "eligible": 2,
+   "locations": [
+    "Global"
+   ],
+   "roles": [
+    {
+     "title": "Global Marketing Manager - PAYG Phones",
+     "location": "Global",
+     "url": "https://sunking.pinpointhq.com/en/postings/21382d3e-69bd-4256-ae28-26853f824db4"
+    },
+    {
+     "title": "Customer Lifecycle Marketing  Manager",
+     "location": "Global",
+     "url": "https://sunking.pinpointhq.com/en/postings/871d5dcf-0be2-4a6d-9ca7-bd2d267c0ffd"
+    }
+   ],
+   "total": 197
+  },
+  {
+   "company": "GitLab",
+   "platform": "greenhouse",
+   "eligible": 1,
+   "locations": [
+    "Remote, EMEA; Remote, France; Remote, Germany; Remote, Ireland; Remote, Netherlands; Remote, United Kingdom"
+   ],
+   "roles": [
+    {
+     "title": "Business Development Representative ",
+     "location": "Remote, EMEA; Remote, France; Remote, Germany; Remote, Ireland; Remote, Netherlands; Remote, United Kingdom",
+     "url": "https://job-boards.greenhouse.io/gitlab/jobs/8532274002"
+    }
+   ],
+   "total": 221
+  },
+  {
+   "company": "Cockroach Labs",
+   "platform": "greenhouse",
+   "eligible": 1,
+   "locations": [
+    "Global"
+   ],
+   "roles": [
+    {
+     "title": "Join our Talent Community!",
+     "location": "Global",
+     "url": "https://www.cockroachlabs.com/careers/job/?gh_jid=2578081"
+    }
+   ],
+   "total": 18
+  },
+  {
+   "company": "Turing",
+   "platform": "greenhouse",
+   "eligible": 1,
+   "locations": [
+    "Global - Remote"
+   ],
+   "roles": [
+    {
+     "title": "Investigations Analyst",
+     "location": "Global - Remote",
+     "url": "https://job-boards.greenhouse.io/turing/jobs/6198600004"
+    }
+   ],
+   "total": 29
+  },
+  {
+   "company": "Apollo Agriculture",
+   "platform": "lever",
+   "eligible": 1,
+   "locations": [
+    "Anywhere (Remote)"
+   ],
+   "roles": [
+    {
+     "title": "Manager \u2013 Credit Strategy & Operations",
+     "location": "Anywhere (Remote)",
+     "url": "https://jobs.lever.co/apolloagriculture/859ecb4c-1a82-45a4-8447-53c7076a2d91"
+    }
+   ],
+   "total": 3
+  }
+ ]
+}
