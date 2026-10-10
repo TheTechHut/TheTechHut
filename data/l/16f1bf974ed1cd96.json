@@ -1,9 +1,9 @@
 {
- "updated": "2026-10-09",
+ "updated": "2026-10-10",
  "company_count": 12,
- "role_count": 302,
- "local_role_count": 32,
- "roles_scanned": 2438,
+ "role_count": 303,
+ "local_role_count": 31,
+ "roles_scanned": 2435,
  "companies": [
   {
    "company": "Canonical",
@@ -224,7 +224,7 @@
   {
    "company": "Supabase",
    "platform": "ashby",
-   "eligible": 29,
+   "eligible": 30,
    "locations": [
     "Remote, Global",
     "Remote, EMEA"
@@ -264,6 +264,11 @@
      "title": "Database Support Engineer (EMEA)",
      "location": "Remote, EMEA",
      "url": "https://jobs.ashbyhq.com/supabase/3889002e-536e-4046-a330-70e942b0cc96"
+    },
+    {
+     "title": "Platform Engineer, Managed Postgres",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/9073c0cd-2545-473a-b2ac-63e4615c69b5"
     },
     {
      "title": "Postgres Deployment Engineer",
@@ -376,7 +381,7 @@
      "url": "https://jobs.ashbyhq.com/supabase/9a4c9984-07c7-4b47-982f-371de3f6ff50"
     }
    ],
-   "total": 53
+   "total": 54
   },
   {
    "company": "Oyster",
@@ -582,7 +587,7 @@
      "url": "https://www.zipline.com/open-roles/7983316003?gh_jid=7983316003"
     }
    ],
-   "total": 356
+   "total": 355
   },
   {
    "company": "PostHog",
@@ -624,7 +629,7 @@
      "url": "https://sunking.pinpointhq.com/en/postings/871d5dcf-0be2-4a6d-9ca7-bd2d267c0ffd"
     }
    ],
-   "total": 195
+   "total": 197
   },
   {
    "company": "GitLab",
@@ -640,7 +645,7 @@
      "url": "https://job-boards.greenhouse.io/gitlab/jobs/8532274002"
     }
    ],
-   "total": 219
+   "total": 221
   },
   {
    "company": "Cockroach Labs",
