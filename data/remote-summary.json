@@ -1,9 +1,9 @@
 {
- "updated": "2026-10-10",
+ "updated": "2026-10-11",
  "company_count": 12,
  "role_count": 303,
  "local_role_count": 31,
- "roles_scanned": 2435,
+ "roles_scanned": 2436,
  "companies": [
   {
    "company": "Canonical",
@@ -65,7 +65,7 @@
    "company": "Zipline",
    "platform": "greenhouse",
    "eligible": 4,
-   "total": 355,
+   "total": 356,
    "locations": [
     "Remote in Africa",
     "Remote from Anywhere",
@@ -85,7 +85,7 @@
    "company": "Sun King",
    "platform": "pinpoint",
    "eligible": 2,
-   "total": 197,
+   "total": 196,
    "locations": [
     "Global"
    ]
