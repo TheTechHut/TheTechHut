@@ -1,9 +1,9 @@
 {
- "updated": "2026-10-11",
+ "updated": "2026-10-12",
  "company_count": 12,
  "role_count": 303,
  "local_role_count": 31,
- "roles_scanned": 2436,
+ "roles_scanned": 2433,
  "companies": [
   {
    "company": "Canonical",
@@ -629,7 +629,7 @@
      "url": "https://sunking.pinpointhq.com/en/postings/871d5dcf-0be2-4a6d-9ca7-bd2d267c0ffd"
     }
    ],
-   "total": 196
+   "total": 193
   },
   {
    "company": "GitLab",

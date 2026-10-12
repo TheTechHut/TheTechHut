@@ -1,9 +1,9 @@
 {
- "updated": "2026-10-11",
+ "updated": "2026-10-12",
  "company_count": 12,
  "role_count": 303,
  "local_role_count": 31,
- "roles_scanned": 2436,
+ "roles_scanned": 2433,
  "companies": [
   {
    "company": "Canonical",
@@ -85,7 +85,7 @@
    "company": "Sun King",
    "platform": "pinpoint",
    "eligible": 2,
-   "total": 196,
+   "total": 193,
    "locations": [
     "Global"
    ]
