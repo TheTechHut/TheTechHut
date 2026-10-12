@@ -200,7 +200,8 @@ def card(d):
 index = head('The Daily Savannah | The Tech Hut Blog',
              "The Tech Hut's automated daily digest of Kenya's tech ecosystem — startups, "
              "fintech, policy, and infrastructure. A fresh edition every evening at 9:00 PM EAT.",
-             f'{SITE}/blog/daily/', latest['img'], 'Nairobi city skyline', 'website')
+             f'{SITE}/blog/daily/', f'{SITE}/assets/img/social/daily.jpg',
+             'The Daily Savannah: African tech in one read', 'website')
 index += f'''
 {STYLE}
 
