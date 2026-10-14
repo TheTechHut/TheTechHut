@@ -1,9 +1,9 @@
 {
- "updated": "2026-10-13",
+ "updated": "2026-10-14",
  "company_count": 12,
  "role_count": 303,
- "local_role_count": 31,
- "roles_scanned": 2452,
+ "local_role_count": 35,
+ "roles_scanned": 2421,
  "companies": [
   {
    "company": "Canonical",
@@ -224,7 +224,7 @@
   {
    "company": "Supabase",
    "platform": "ashby",
-   "eligible": 30,
+   "eligible": 31,
    "locations": [
     "Remote, Global",
     "Remote, EMEA"
@@ -379,6 +379,11 @@
      "title": "Product Manager - Auth",
      "location": "Remote, Global",
      "url": "https://jobs.ashbyhq.com/supabase/9a4c9984-07c7-4b47-982f-371de3f6ff50"
+    },
+    {
+     "title": "Platform Engineer - Compute",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/6b314e83-6617-49fc-8c73-021ebae9a757"
     }
    ],
    "total": 52
@@ -386,16 +391,11 @@
   {
    "company": "Oyster",
    "platform": "ashby",
-   "eligible": 14,
+   "eligible": 13,
    "locations": [
     "EMEA"
    ],
    "roles": [
-    {
-     "title": "Accounts Payable Analyst",
-     "location": "EMEA",
-     "url": "https://jobs.ashbyhq.com/oyster/83b10c34-8c44-4c58-89d4-5e99be716c76"
-    },
     {
      "title": "Senior Director, Data Platform and AI",
      "location": "EMEA",
@@ -513,7 +513,7 @@
      "url": "https://job-boards.greenhouse.io/consensys/jobs/8138475"
     }
    ],
-   "total": 9
+   "total": 8
   },
   {
    "company": "Railway",
@@ -587,7 +587,7 @@
      "url": "https://www.zipline.com/open-roles/7983316003?gh_jid=7983316003"
     }
    ],
-   "total": 354
+   "total": 352
   },
   {
    "company": "PostHog",
@@ -629,7 +629,7 @@
      "url": "https://sunking.pinpointhq.com/en/postings/871d5dcf-0be2-4a6d-9ca7-bd2d267c0ffd"
     }
    ],
-   "total": 192
+   "total": 191
   },
   {
    "company": "GitLab",
@@ -645,7 +645,7 @@
      "url": "https://job-boards.greenhouse.io/gitlab/jobs/8532274002"
     }
    ],
-   "total": 221
+   "total": 215
   },
   {
    "company": "Cockroach Labs",
@@ -661,7 +661,7 @@
      "url": "https://www.cockroachlabs.com/careers/job/?gh_jid=2578081"
     }
    ],
-   "total": 19
+   "total": 18
   },
   {
    "company": "Turing",
@@ -677,7 +677,7 @@
      "url": "https://job-boards.greenhouse.io/turing/jobs/6198600004"
     }
    ],
-   "total": 29
+   "total": 28
   },
   {
    "company": "Apollo Agriculture",
