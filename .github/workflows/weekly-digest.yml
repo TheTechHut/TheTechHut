@@ -1,0 +1,72 @@
+# Monday openings digest -> Brevo campaign to the CV Pack list.
+#
+# Runs after the daily hiring snapshot (03:20 UTC) so the week's data is in.
+# scripts/send_digest.py works out which Kenya-based roles are new since about
+# a week ago, builds the email, and creates + sends a Brevo campaign. It sends
+# nothing when there is nothing new, and never sends the same ISO week twice.
+#
+# Secrets (Settings -> Secrets and variables -> Actions):
+#   BREVO_API_KEY       v3 API key (the same one the Worker uses)
+#   BREVO_LIST_ID       numeric list id (the same one the Worker uses)
+#   BREVO_SENDER_EMAIL  a sender verified in Brevo
+#   BREVO_SENDER_NAME   optional
+#
+# Try it safely first: Actions -> Weekly openings digest -> Run workflow, and
+# fill in "test_email" to get ONE copy sent to that address and nobody else, or
+# tick "dry_run" to just see what would be sent in the log.
+#
+# Like the snapshot workflow, this only runs on the repository's DEFAULT branch
+# (chore/redesign here). See the note at the top of jobs-snapshot.yml.
+name: Weekly openings digest
+
+'on':
+  schedule:
+    # 04:30 UTC = 07:30 EAT on Mondays. Not on the hour, so it is not queued
+    # behind everyone else's :00 jobs.
+    - cron: '30 4 * * 1'
+  workflow_dispatch:
+    inputs:
+      test_email:
+        description: 'Send ONE test copy to this address instead of the list'
+        required: false
+        default: ''
+      dry_run:
+        description: 'Build the digest and print a summary, send nothing'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: weekly-digest
+  cancel-in-progress: false
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chore/redesign
+
+      - name: Unit tests
+        run: python3 -m unittest scripts/tests/test_send_digest.py
+
+      - name: Send the digest
+        env:
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          BREVO_LIST_ID: ${{ secrets.BREVO_LIST_ID }}
+          BREVO_SENDER_EMAIL: ${{ secrets.BREVO_SENDER_EMAIL }}
+          BREVO_SENDER_NAME: ${{ secrets.BREVO_SENDER_NAME }}
+          TEST_EMAIL: ${{ github.event.inputs.test_email }}
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
+        run: |
+          if [ "$DRY_RUN" = "true" ]; then
+            python3 scripts/send_digest.py --dry-run --out "$RUNNER_TEMP/digest.html"
+            cat "$RUNNER_TEMP/digest.html" | head -c 4000
+          elif [ -n "$TEST_EMAIL" ]; then
+            python3 scripts/send_digest.py --test "$TEST_EMAIL"
+          else
+            python3 scripts/send_digest.py
+          fi

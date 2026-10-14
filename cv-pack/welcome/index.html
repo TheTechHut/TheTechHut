@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm your email | The Tech Hut</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://thetechhut.co/cv-pack/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap">
+    <style>
+        :root { --ink:#073B4C; --body:#4a5568; --green:#06D6A0; --green-text:#046b52; --bg:#f0f4f8;
+                --line:rgba(7,59,76,.12); --alert:#9b2020; }
+        * { box-sizing: border-box; }
+        body { margin:0; font-family:"Inter",system-ui,sans-serif; background:var(--bg); color:var(--body); line-height:1.6; }
+        nav { background:var(--green); padding:14px 20px; }
+        nav a { font-family:"Poppins",sans-serif; font-weight:700; color:var(--ink); text-decoration:none; font-size:18px; }
+        main { max-width:640px; margin:0 auto; padding:40px 20px 64px; }
+        h1 { font-family:"Poppins",sans-serif; color:var(--ink); font-size:28px; line-height:1.2; margin:0 0 12px; }
+        h2 { font-family:"Poppins",sans-serif; color:var(--ink); font-size:18px; margin:32px 0 10px; }
+        .box { background:#fff; border:1px solid var(--line); border-radius:16px; padding:24px; }
+        .btn { font:700 15px "Poppins",sans-serif; background:var(--ink); color:#fff; border:0; border-radius:999px; padding:13px 26px; cursor:pointer; }
+        .btn[disabled] { opacity:.6; cursor:default; }
+        .bad { color:var(--alert); font-weight:600; }
+        .ok { color:var(--green-text); font-weight:600; }
+        .rule { margin:0 0 12px; font-size:15px; }
+        .rule b { color:var(--ink); }
+        a { color:var(--green-text); font-weight:600; }
+        [hidden] { display:none !important; }
+    </style>
+</head>
+<body>
+<nav><a href="/">The Tech Hut<span style="color:#fff">.</span></a></nav>
+<main>
+    <!-- state: has a token, not confirmed yet. The click is what confirms: mail scanners open links but do not press buttons. -->
+    <section id="ready" hidden>
+        <h1>One click to confirm</h1>
+        <p>Press the button and we will add you to the list and send the CV keyword checklist to your inbox.</p>
+        <p><button class="btn" id="go" type="button">Confirm my email</button></p>
+        <p id="err" class="bad" role="alert"></p>
+    </section>
+
+    <section id="done" hidden>
+        <h1>You are confirmed</h1>
+        <p class="ok">The checklist is on its way to your inbox, and the first openings digest arrives Monday morning, Nairobi time.</p>
+        <div class="box" style="margin-top:20px">
+            <h2 style="margin-top:0">While you wait: the six rules</h2>
+            <p class="rule"><b>1. One column. Always.</b> Two-column CVs are read straight across the page by most parsers.</p>
+            <p class="rule"><b>2. No tables, text boxes or icons.</b> Write the word Phone, not a phone icon.</p>
+            <p class="rule"><b>3. Use the boring headings.</b> Work Experience, Education, Skills, Certifications.</p>
+            <p class="rule"><b>4. Dates as MM/YYYY, right of the role.</b> Date parsing is how years of experience are worked out.</p>
+            <p class="rule"><b>5. Mirror the posting's exact nouns.</b> If the ad says Node.js, write Node.js.</p>
+            <p class="rule"><b>6. Submit a PDF, unless asked for Word.</b> Name it Firstname-Lastname-Role.pdf.</p>
+        </div>
+        <p style="margin-top:24px">The full guide, with the seven systems and a copy-paste skeleton, is at <a href="/cv-pack/">thetechhut.co/cv-pack</a>.</p>
+    </section>
+
+    <section id="problem" hidden>
+        <h1 id="ptitle">That link did not work</h1>
+        <p id="pbody"></p>
+        <p><a href="/cv-pack/#list">Sign up again</a> and we will send a fresh link.</p>
+    </section>
+</main>
+<script>
+(function () {
+    var API_BASE = 'https://thetechhut-pay.thetechhut.workers.dev';
+    var token = null;
+    var go = document.getElementById('go'), err = document.getElementById('err');
+
+    function show(id) {
+        ['ready', 'done', 'problem'].forEach(function (s) { document.getElementById(s).hidden = (s !== id); });
+    }
+    function problem(title, body) {
+        document.getElementById('ptitle').textContent = title;
+        document.getElementById('pbody').textContent = body;
+        show('problem');
+    }
+    // Re-reads the link on load and whenever the #fragment changes, so pasting
+    // the link into a tab that is already open still works.
+    function init() {
+        var m = /[#&]t=([A-Za-z0-9._-]+)/.exec(location.hash || '');
+        token = m && m[1];
+        if (!token) {
+            problem('Open the link from your email', 'This page confirms your signup, and it needs the link we emailed you. If you have not signed up yet, you can do it below.');
+            return;
+        }
+        go.disabled = false; go.textContent = 'Confirm my email'; err.textContent = '';
+        show('ready');
+    }
+
+    go.addEventListener('click', function () {
+        if (!token) return;
+        go.disabled = true; go.textContent = 'Confirming…'; err.textContent = '';
+        fetch(API_BASE + '/confirm', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ t: token })
+        }).then(function (r) {
+            return r.json().catch(function () { return {}; }).then(function (b) { return { ok: r.ok, body: b }; });
+        }).then(function (res) {
+            if (res.ok) {
+                token = null;
+                history.replaceState(null, '', location.pathname);   // do not leave the token in the address bar
+                show('done');
+            } else if (res.body && res.body.error === 'expired') {
+                problem('That link has expired', 'Confirmation links last 48 hours.');
+            } else if (res.body && res.body.error === 'invalid') {
+                problem('That link is not valid', 'It may have been cut off when it was copied. Use the button in the email, or sign up again.');
+            } else {
+                throw new Error('server');
+            }
+        }).catch(function () {
+            go.disabled = false; go.textContent = 'Confirm my email';
+            err.textContent = 'That did not go through. Press the button again, or email info@thetechhut.co and we will add you by hand.';
+        });
+    });
+
+    window.addEventListener('hashchange', init);
+    init();
+})();
+</script>
+</body>
+</html>

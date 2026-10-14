@@ -9,6 +9,9 @@ compatibility_date = "2026-10-01"
 #   wrangler secret put REMOTE_LIST_TOKEN     # from scripts/remote_token.txt
 #   wrangler secret put RESEND_API_KEY        # optional, for the receipt email
 #
+# The CV Pack email signup (see README, "The CV Pack email list") adds four more:
+#   BREVO_API_KEY, BREVO_LIST_ID, BREVO_SENDER_EMAIL, SUBSCRIBE_SECRET
+#
 # Deploying without a custom domain gives you
 # https://thetechhut-pay.<your-subdomain>.workers.dev — that URL is what goes
 # into API_BASE in assets/js/pay.js. To use api.thetechhut.co instead, add the

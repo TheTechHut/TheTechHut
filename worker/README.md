@@ -150,3 +150,83 @@ npx wrangler deploy      # ship a change
 there, redeploy, and change the page copy to match. `LABELS` in
 `assets/js/pay.js` is display only — if the two disagree, the Worker wins and
 the page is the thing that is lying to the customer.
+
+---
+
+## The CV Pack email list (Brevo)
+
+`/cv-pack/` collects an email and sends the person a keyword checklist, then a
+digest of new Kenya-based openings every Monday. The Worker handles signup and
+the GitHub Action sends the digest. Brevo holds the list and does the
+unsubscribing.
+
+```
+form on /cv-pack/ ──POST /subscribe──▶ Worker ──▶ Brevo: confirmation email
+                                                   (nothing is on the list yet)
+link in that email ─▶ /cv-pack/welcome/#t=… ──POST /confirm──▶ Worker
+                         ──▶ Brevo: add to list  +  welcome email with the checklist
+
+Mondays 04:30 UTC: .github/workflows/weekly-digest.yml
+   scripts/send_digest.py ──▶ Brevo campaign to the list (has Brevo's unsubscribe link)
+```
+
+### Setup, about twenty minutes
+
+1. **Brevo account.** <https://www.brevo.com> (the free plan works to start; see
+   limits below).
+2. **Sender.** *Senders, Domains & Dedicated IPs*: add `thetechhut.co` as a domain and
+   add the DNS records Brevo shows (DKIM and DMARC) wherever the domain's DNS lives,
+   then add and verify the sender address (for example `hello@thetechhut.co`).
+   Skip the DNS step and the confirmation emails will mostly land in spam.
+3. **List.** *Contacts → Lists → Create a list* named `CV Pack`. Note its numeric ID.
+4. **Attributes (optional).** *Contacts → Settings → Contact attributes*: add two text
+   attributes, `ROLE` and `SOURCE`. Without them people are still added, just without
+   their target role.
+5. **API key.** *SMTP & API → API keys → Generate*. Do not paste it into a chat or a file.
+6. **Worker secrets**, from `worker/` in your own Terminal:
+
+   ```sh
+   npx wrangler secret put BREVO_API_KEY
+   npx wrangler secret put BREVO_LIST_ID          # the number from step 3
+   npx wrangler secret put BREVO_SENDER_EMAIL     # the verified sender from step 2
+   npx wrangler secret put SUBSCRIBE_SECRET       # paste the output of: openssl rand -hex 32
+   npx wrangler secret put BREVO_SENDER_NAME      # optional, default "The Tech Hut"
+   npx wrangler deploy
+   ```
+
+7. **GitHub secrets** (repo → Settings → Secrets and variables → Actions):
+   `BREVO_API_KEY`, `BREVO_LIST_ID`, `BREVO_SENDER_EMAIL`, and optionally `BREVO_SENDER_NAME`.
+   The Action runs only if `chore/redesign` is the default branch, same as the
+   daily snapshot.
+
+### Check it works
+
+```sh
+curl https://thetechhut-pay.<your-subdomain>.workers.dev/health   # "newsletter": true
+```
+
+Then sign up on the live page with your own address, click the link in the
+email, press the button, and confirm the checklist arrives and you appear in the
+Brevo list. To test the digest, run the **Weekly openings digest** workflow by
+hand with your address in `test_email`: one copy goes to you and nobody else.
+
+### Things worth knowing
+
+- **Only Kenya-based roles** go in the digest. The remote-from-Kenya list is the
+  paid product and is never included.
+- **The week can be thin.** The feeds currently carry roughly 30 Kenya-based roles
+  in total, so a typical week has a handful of new ones. When there are none, the
+  Action sends nothing rather than an empty email, and it will not send the same
+  ISO week twice. It also refuses to send if the latest snapshot had a feed failure,
+  because a failed feed makes old roles look new.
+- **Brevo's free plan has a daily sending cap** (300 emails a day when this was
+  written; check current limits). Every confirmation, every welcome and every
+  digest recipient counts. A list much larger than that needs a paid plan, or the
+  digest will not reach everyone.
+- **Spam protection is light**: an address check, a hidden honeypot field and a
+  confirmation step. Someone could still make the form send confirmation emails to
+  addresses they do not own, and each one counts against the cap. If that happens,
+  add a Cloudflare rate-limiting rule on `/subscribe`.
+- The keyword checklist lives in one place, `worker/src/checklist.js`, which the
+  welcome email and the digest both read. Edit it there.
+- Tests: `npm test` (Worker) and `python3 -m unittest scripts/tests/test_send_digest.py`.

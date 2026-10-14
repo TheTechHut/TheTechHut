@@ -509,15 +509,15 @@ AWS Certified Solutions Architect - Associate, 2025
                 </p>
 
                 <!--
-                  FORMSPREE ENDPOINT
-                  Posting to the existing form (xrbgbddv) with a _subject tag so these land labelled
-                  in the same inbox as the other site forms. To split them out, create a new form at
-                  formspree.io, then change the one FORM_ID value in the script at the bottom of this file.
+                  Posts to the Worker (POST /subscribe), which emails a confirmation link; nothing is added to the
+                  Brevo list until the person clicks it. See worker/src/newsletter.js. The "website" field is a
+                  honeypot: humans never see it, bots fill it.
                 -->
                 <form class="signup" id="signupForm" novalidate>
                     <input type="text" name="name" placeholder="First name" autocomplete="given-name" required>
                     <input type="email" name="email" placeholder="you@email.com" autocomplete="email" required>
                     <input type="text" name="role" placeholder="Role you're after (e.g. backend)" autocomplete="off">
+                    <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
                     <button class="btn" type="submit" id="signupBtn">Send it to me</button>
                 </form>
                 <p class="formmsg" id="formMsg"></p>
@@ -525,6 +525,10 @@ AWS Certified Solutions Architect - Associate, 2025
                     We also post every new opening to the free WhatsApp channel —
                     <a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" target="_blank" rel="noopener">The Tech Hut Community</a>,
                     8,900 members and counting.
+                </p>
+                <p class="formnote">
+                    We email you a link to confirm your address first; nothing is sent until you click it.
+                    Emails are sent through Brevo. <a href="/data_privacy_policy/">How we handle your data</a>.
                 </p>
             </div>
         </div>
@@ -593,8 +597,8 @@ AWS Certified Solutions Architect - Associate, 2025
             }
         });
 
-        /* ---- email capture ---- */
-        var FORM_ID = 'xrbgbddv';          /* <- swap for a dedicated Formspree form id when you create one */
+        /* ---- email capture: confirm-by-email signup through the Worker ---- */
+        var API_BASE = 'https://thetechhut-pay.thetechhut.workers.dev';
 
         var form = document.getElementById('signupForm');
         var msg = document.getElementById('formMsg');
@@ -609,23 +613,26 @@ AWS Certified Solutions Architect - Associate, 2025
                 msg.textContent = 'That email does not look right — check it and try again.';
                 return;
             }
-            fd.append('_subject', 'CV Pack signup — ' + email);
-            fd.append('source', 'cv-pack');
             btn.disabled = true;
             btn.textContent = 'Sending…';
             msg.className = 'formmsg';
             msg.textContent = '';
 
-            fetch('https://formspree.io/f/' + FORM_ID, {
+            fetch(API_BASE + '/subscribe', {
                 method: 'POST',
-                body: fd,
-                headers: { 'Accept': 'application/json' }
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email: email,
+                    name: (fd.get('name') || '').toString(),
+                    role: (fd.get('role') || '').toString(),
+                    website: (fd.get('website') || '').toString()
+                })
             }).then(function (r) {
                 if (!r.ok) throw new Error('bad status');
                 form.reset();
                 msg.className = 'formmsg ok';
-                msg.textContent = "You're on the list. The first digest lands Monday — check your spam folder once and mark it as not spam.";
-                btn.textContent = 'Done ✓';
+                msg.textContent = 'Almost there — we sent a link to ' + email + '. Click it to confirm, and the checklist arrives straight away. Check spam once if it is not in your inbox.';
+                btn.textContent = 'Check your inbox ✓';
             }).catch(function () {
                 msg.className = 'formmsg bad';
                 msg.innerHTML = 'That did not go through. Email <a href="mailto:info@thetechhut.co?subject=CV%20Pack" style="color:#9b2020;font-weight:700">info@thetechhut.co</a> and we will add you by hand.';

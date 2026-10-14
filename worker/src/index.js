@@ -20,6 +20,8 @@
  *   POST /initialize  { product, email, whatsapp, name? }  -> { access_code, reference }
  *   POST /verify      { reference }              -> { paid, product, delivery }
  *   POST /webhook     Paystack signed event      -> 200
+ *   POST /subscribe   { email, name?, role? }    -> sends a confirmation email   (newsletter.js)
+ *   POST /confirm     { t }                      -> adds to the Brevo list       (newsletter.js)
  *   GET  /health
  *
  * Secrets (wrangler secret put <NAME> — never commit these)
@@ -29,7 +31,11 @@
  *   EARLY_ACCESS_INVITE   the WhatsApp group invite link (https://chat.whatsapp.com/...).
  *                         A secret, NOT a file: this repo is published, and the link
  *                         is only meant to be shown to someone who has paid.
+ *   BREVO_API_KEY, BREVO_LIST_ID, BREVO_SENDER_EMAIL, SUBSCRIBE_SECRET
+ *                         the CV Pack signup; see newsletter.js
  */
+
+import { handleNewsletter, newsletterConfigured } from './newsletter.js';
 
 const PAYSTACK = 'https://api.paystack.co';
 const SITE = 'https://thetechhut.co';
@@ -316,7 +322,17 @@ export default {
     const origin = req.headers.get('Origin') || '';
 
     if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors(origin) });
-    if (url.pathname === '/health') return json({ ok: true, products: Object.keys(PRODUCTS) }, 200, origin);
+    if (url.pathname === '/health') return json({ ok: true, products: Object.keys(PRODUCTS), newsletter: newsletterConfigured(env) }, 200, origin);
+
+    // The CV Pack signup does not touch Paystack, so it must not depend on the
+    // Paystack key being set.
+    if (req.method === 'POST' && (url.pathname === '/subscribe' || url.pathname === '/confirm')) {
+      try {
+        return await handleNewsletter(req, env, url, origin, { json, validEmail, safeEqual });
+      } catch (e) {
+        return json({ error: 'server error' }, 500, origin);
+      }
+    }
     if (!env.PAYSTACK_SECRET_KEY) return json({ error: 'server not configured' }, 500, origin);
 
     try {
