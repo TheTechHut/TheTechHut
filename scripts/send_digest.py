@@ -120,6 +120,10 @@ def find_new_roles(snaps_dir, today=None):
     seen = {r.get('url') for r in before.get('roles', [])}
     out, urls = [], set()
     for r in now.get('roles', []):
+        # Himalayas rows link to Himalayas, not the employer, and the digest promises
+        # employer links; they are also not feeds whose failure should matter here.
+        if r.get('platform') == 'himalayas':
+            continue
         if r.get('reach') != 'local' or not r.get('url') or r['url'] in seen or r['url'] in urls:
             continue
         posted = parse_posted(r.get('posted'))

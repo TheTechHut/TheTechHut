@@ -337,6 +337,7 @@
         <div class="wrap">
             <a class="brand" href="/">The Tech Hut<span>.</span></a>
             <p>Your access link is personal. Sharing it is how it stops being updated.</p>
+            <p id="credit" hidden>Some roles are listed via <a href="https://himalayas.app" target="_blank" rel="noopener">Himalayas</a>, the remote jobs site, through its public API. Listings on Himalayas remain theirs and their employers’.</p>
             <p>&copy; 2026 The Tech Hut Community · <a href="mailto:info@thetechhut.co">info@thetechhut.co</a></p>
         </div>
     </footer>
@@ -368,10 +369,13 @@
             document.getElementById('mRoles').textContent = n(d.role_count);
             document.getElementById('mScanned').textContent = n(d.roles_scanned);
             document.getElementById('mDate').textContent = d.updated || '—';
+            var viaHm = (d.sources || []).indexOf('Himalayas') > -1;
             document.getElementById('blurb').textContent =
                 'Every role below sits at a company that will put someone in Kenya on its payroll or ' +
-                'on a contract. Each one links straight to the employer’s own application form — ' +
-                'we never stand between you and the apply button.';
+                'on a contract. Roles from employers’ own career pages link straight to the employer’s ' +
+                'application form — we never stand between you and the apply button.' +
+                (viaHm ? ' Roles marked “via Himalayas” link to the listing on Himalayas, which takes you on to the employer.' : '');
+            document.getElementById('credit').hidden = !viaHm;
             draw('');
             document.getElementById('q').addEventListener('input', function () {
                 draw(this.value.toLowerCase().trim());
@@ -415,10 +419,15 @@
                     var w = document.createElement('span');
                     w.className = 'w'; w.textContent = r.location;
                     row.appendChild(t); row.appendChild(w);
+                    if (r.via) {
+                        var v = document.createElement('span');
+                        v.className = 'w'; v.textContent = 'via ' + r.via;
+                        row.appendChild(v);
+                    }
                     if (r.url) {
                         var a = document.createElement('a');
                         a.href = r.url; a.target = '_blank'; a.rel = 'noopener';
-                        a.textContent = 'Apply →';
+                        a.textContent = r.via ? 'View on ' + r.via + ' →' : 'Apply →';
                         row.appendChild(a);
                     }
                     wrap.appendChild(row);
