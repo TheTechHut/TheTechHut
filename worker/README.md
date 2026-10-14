@@ -230,3 +230,53 @@ hand with your address in `test_email`: one copy goes to you and nobody else.
 - The keyword checklist lives in one place, `worker/src/checklist.js`, which the
   welcome email and the digest both read. Edit it there.
 - Tests: `npm test` (Worker) and `python3 -m unittest scripts/tests/test_send_digest.py`.
+
+## The Daily Savannah weekly roundup (second list)
+
+One Worker, one Brevo account and one API key serve both mailings, but each
+product has **its own Brevo list** so people only get what they asked for. The
+Worker picks the list from the `product` in the signup request (`cv-pack` is the
+default, so older pages keep working; `daily` is the Daily Savannah).
+
+```
+signup boxes on /blog/ , /blog/daily/ and the end of every edition
+   ──POST /subscribe {product:"daily"}──▶ Worker ──▶ Brevo: confirmation email
+link in that email ─▶ /blog/daily/welcome/#t=… ──POST /confirm──▶ Worker
+   ──▶ Brevo: add to the DAILY list  +  short welcome email
+
+Sundays 04:30 UTC (07:30 Nairobi): .github/workflows/weekly-roundup.yml
+   scripts/send_roundup.py ──▶ Brevo campaign to the DAILY list
+```
+
+### Setup
+
+1. **Second list.** *Contacts → Lists → Create a list* named `Daily Savannah`. Note its ID.
+   The account, the API key, the verified sender and `SUBSCRIBE_SECRET` are all reused.
+2. **Worker secret**, then redeploy (the new code adds the product routing):
+
+   ```sh
+   npx wrangler secret put BREVO_LIST_ID_DAILY    # the number from step 1
+   npx wrangler deploy
+   ```
+
+3. **GitHub secret**: `BREVO_LIST_ID_DAILY` (the existing `BREVO_API_KEY`,
+   `BREVO_SENDER_EMAIL` and `BREVO_SENDER_NAME` are reused). Do **not** change
+   `BREVO_LIST_ID`: that is still the CV Pack list.
+4. **Check**: `/health` should show both `"newsletter": true` and `"newsletterDaily": true`.
+   Sign up on a live Daily Savannah page with your own address, confirm, then run
+   **Weekly Daily Savannah roundup** by hand with your address in `test_email`.
+
+### Things worth knowing
+
+- **The roundup covers the seven days that ended yesterday** (on Sunday 18 Oct:
+  Sun 11 to Sat 17 Oct). Weeks tile with no gap or overlap, and the Sunday edition
+  that goes out with the email is covered the next week.
+- **It only includes editions committed to the branch**, so push the week's
+  editions before Sunday 07:30 Nairobi time. A week with fewer than three editions
+  is skipped unless you tick `force`, and a week is never sent twice (the
+  campaign name carries the ISO week).
+- **Adding another product** is one entry in `PRODUCTS` and `MAILS` in
+  `worker/src/newsletter.js` (its list secret, confirm page and wording), a confirm
+  page, a privacy-policy paragraph, and a test.
+- Tests: `npm test` (Worker) and
+  `python3 -m unittest scripts/tests/test_send_roundup.py scripts/tests/test_send_digest.py`.

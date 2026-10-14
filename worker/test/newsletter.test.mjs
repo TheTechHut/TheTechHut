@@ -242,5 +242,107 @@ await t('/health reports whether the signup is configured, without leaking value
   assert.ok(!JSON.stringify(b1).includes('xkeysib'));
 });
 
+console.log('\nseveral products, one Worker');
+const envBoth = { ...env, BREVO_LIST_ID_DAILY: '9' };
+
+await t('daily: the confirmation link points at the Daily Savannah page and names the product', async () => {
+  const calls = stubBrevo();
+  const r = await worker.fetch(post('/subscribe', { email: 'a@b.co', name: 'Ana', product: 'daily', role: 'ignored' }), envBoth);
+  restore();
+  assert.strictEqual(r.status, 200);
+  const mail = calls[0].body;
+  assert.ok(mail.htmlContent.includes('https://thetechhut.co/blog/daily/welcome/#t='));
+  assert.ok(mail.subject.includes('Daily Savannah'));
+  assert.deepStrictEqual(mail.tags, ['daily-confirm']);
+  assert.ok(!mail.htmlContent.includes('CV checklist'));
+});
+
+await t('daily: confirming adds the contact to the DAILY list only, with its own welcome', async () => {
+  let calls = stubBrevo();
+  await worker.fetch(post('/subscribe', { email: 'a@b.co', name: 'Ana', product: 'daily' }), envBoth);
+  const token = tokenFrom(calls);
+  restore();
+  calls = stubBrevo();
+  const r = await worker.fetch(post('/confirm', { t: token }), envBoth);
+  restore();
+  assert.strictEqual(r.status, 200);
+  const add = calls.find((c) => c.path === '/contacts');
+  assert.deepStrictEqual(add.body.listIds, [9]);
+  assert.strictEqual(add.body.attributes.SOURCE, 'daily');
+  assert.strictEqual(add.body.attributes.ROLE, undefined);
+  const welcome = calls.find((c) => c.path === '/smtp/email').body;
+  assert.ok(welcome.subject.includes('Daily Savannah'));
+  assert.ok(!welcome.htmlContent.includes('Six rules'));
+  assert.deepStrictEqual(welcome.tags, ['daily-welcome']);
+});
+
+await t('cv-pack still goes to its own list when both are configured', async () => {
+  let calls = stubBrevo();
+  await worker.fetch(post('/subscribe', { email: 'a@b.co' }), envBoth);   // no product: the old form
+  const token = tokenFrom(calls);
+  restore();
+  calls = stubBrevo();
+  await worker.fetch(post('/confirm', { t: token }), envBoth);
+  restore();
+  assert.deepStrictEqual(calls.find((c) => c.path === '/contacts').body.listIds, [7]);
+});
+
+await t('a link issued before there were products (no s) is treated as cv-pack', async () => {
+  const token = await signToken({ e: 'old@b.co', n: '', r: '', x: Date.now() + 1e6 }, envBoth.SUBSCRIBE_SECRET);
+  const calls = stubBrevo();
+  const r = await worker.fetch(post('/confirm', { t: token }), envBoth);
+  restore();
+  assert.strictEqual(r.status, 200);
+  assert.deepStrictEqual(calls.find((c) => c.path === '/contacts').body.listIds, [7]);
+});
+
+await t('daily is 503 until its own list id is set, while cv-pack keeps working', async () => {
+  let calls = stubBrevo();
+  const r1 = await worker.fetch(post('/subscribe', { email: 'a@b.co', product: 'daily' }), env);   // env has no BREVO_LIST_ID_DAILY
+  const r2 = await worker.fetch(post('/subscribe', { email: 'a@b.co', product: 'cv-pack' }), env);
+  restore();
+  assert.strictEqual(r1.status, 503);
+  assert.strictEqual(r2.status, 200);
+  assert.strictEqual(calls.length, 1);
+});
+
+await t('a daily token cannot be confirmed into the daily list if that list is not configured', async () => {
+  const token = await signToken({ e: 'a@b.co', n: '', r: '', s: 'daily', x: Date.now() + 1e6 }, env.SUBSCRIBE_SECRET);
+  const calls = stubBrevo();
+  const r = await worker.fetch(post('/confirm', { t: token }), env);
+  restore();
+  assert.strictEqual(r.status, 503);
+  assert.strictEqual(calls.length, 0);
+});
+
+await t('an unknown product is refused, including inherited object keys', async () => {
+  const calls = stubBrevo();
+  const results = [];
+  for (const product of ['nope', '__proto__', 'constructor', 'toString', 42, {}]) {
+    results.push((await worker.fetch(post('/subscribe', { email: 'a@b.co', product }), envBoth)).status);
+  }
+  restore();
+  assert.deepStrictEqual(results, [400, 400, 400, 400, 400, 400]);
+  assert.strictEqual(calls.length, 0);
+});
+
+await t('a token whose s is an inherited key falls back to cv-pack rather than crashing', async () => {
+  const token = await signToken({ e: 'a@b.co', n: '', r: '', s: 'constructor', x: Date.now() + 1e6 }, envBoth.SUBSCRIBE_SECRET);
+  const calls = stubBrevo();
+  const r = await worker.fetch(post('/confirm', { t: token }), envBoth);
+  restore();
+  assert.strictEqual(r.status, 200);
+  assert.deepStrictEqual(calls.find((c) => c.path === '/contacts').body.listIds, [7]);
+});
+
+await t('/health reports each list separately', async () => {
+  const b1 = await (await worker.fetch(new Request('https://api.test/health'), envBoth)).json();
+  const b2 = await (await worker.fetch(new Request('https://api.test/health'), env)).json();
+  assert.strictEqual(b1.newsletter, true);
+  assert.strictEqual(b1.newsletterDaily, true);
+  assert.strictEqual(b2.newsletter, true);
+  assert.strictEqual(b2.newsletterDaily, false);
+});
+
 console.log('\n' + pass + ' passed, ' + fail + ' failed\n');
 process.exit(fail ? 1 : 0);

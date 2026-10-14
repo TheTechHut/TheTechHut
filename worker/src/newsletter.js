@@ -1,8 +1,12 @@
 /**
- * The CV Pack signup: double opt-in, then Brevo.
+ * Email signups for our products: double opt-in, then Brevo.
  *
- *   POST /subscribe { email, name?, role?, website? }
+ * One Worker, one Brevo account, one list per product (PRODUCTS below), so
+ * people only ever receive the email they asked for.
+ *
+ *   POST /subscribe { email, name?, role?, product?, website? }
  *        -> emails a confirmation link. Nothing is added to the list yet.
+ *           `product` defaults to "cv-pack" so older pages keep working.
  *   POST /confirm   { t }
  *        -> the link's token. Adds the contact to the Brevo list, sends the
  *           welcome email with the keyword checklist.
@@ -20,7 +24,8 @@
  *
  * Secrets / vars (wrangler secret put <NAME>):
  *   BREVO_API_KEY        Brevo -> SMTP & API -> API keys (a v3 key)
- *   BREVO_LIST_ID        the numeric id of the list contacts are added to
+ *   BREVO_LIST_ID        numeric id of the CV Pack list
+ *   BREVO_LIST_ID_DAILY  numeric id of the Daily Savannah list
  *   BREVO_SENDER_EMAIL   a sender verified in Brevo (ideally on an authenticated
  *                        domain, or confirmation emails land in spam)
  *   BREVO_SENDER_NAME    optional, defaults to "The Tech Hut"
@@ -32,10 +37,22 @@ const SITE = 'https://thetechhut.co';
 const BREVO = 'https://api.brevo.com/v3';
 const TOKEN_TTL_MS = 48 * 60 * 60 * 1000;
 
-const REQUIRED = ['BREVO_API_KEY', 'BREVO_LIST_ID', 'BREVO_SENDER_EMAIL', 'SUBSCRIBE_SECRET'];
+const SHARED = ['BREVO_API_KEY', 'BREVO_SENDER_EMAIL', 'SUBSCRIBE_SECRET'];
 
-export function newsletterConfigured(env) {
-  return REQUIRED.every((k) => env[k] && String(env[k]).trim());
+// Each product has its own list, its own confirmation page and its own wording.
+// The `confirmEmail` / `welcomeEmail` builders are defined further down.
+const PRODUCTS = {
+  'cv-pack': { listEnv: 'BREVO_LIST_ID', page: '/cv-pack/welcome/', tag: 'cv-pack', role: true },
+  daily: { listEnv: 'BREVO_LIST_ID_DAILY', page: '/blog/daily/welcome/', tag: 'daily', role: false },
+};
+const DEFAULT_PRODUCT = 'cv-pack';
+
+const present = (env, k) => !!(env[k] && String(env[k]).trim());
+
+/** True when the shared secrets and that product's list id are all set. */
+export function newsletterConfigured(env, product = DEFAULT_PRODUCT) {
+  const p = PRODUCTS[product];
+  return !!p && [...SHARED, p.listEnv].every((k) => present(env, k));
 }
 
 /* ------------------------------------------------------------------ utils */
@@ -159,6 +176,40 @@ export function welcomeEmail(name) {
   return { subject: 'Your CV keyword checklist', html, text };
 }
 
+export function dailyConfirmEmail(link, name) {
+  const hi = name ? 'Hi ' + esc(name) + ',' : 'Hi,';
+  const html = WRAP_OPEN
+    + '<p>' + hi + '</p>'
+    + '<p>Someone (hopefully you) asked for the weekly Daily Savannah roundup from The Tech Hut: one email each Sunday morning with the week\'s Kenyan tech headlines. Confirm your email to start getting it.</p>'
+    + '<p style="margin:24px 0"><a href="' + esc(link) + '" style="background:#073B4C;color:#fff;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:700">Confirm my email</a></p>'
+    + '<p style="font-size:13px;color:#4a5568">The link works for 48 hours. If it was not you, ignore this email and nothing will happen: you will not be added to anything.</p>'
+    + WRAP_CLOSE;
+  const text = hi + '\n\nSomeone (hopefully you) asked for the weekly Daily Savannah roundup from The Tech Hut: one email each Sunday morning with the week\'s Kenyan tech headlines. Confirm your email to start getting it:\n\n'
+    + link + '\n\nThe link works for 48 hours. If it was not you, ignore this email and nothing will happen: you will not be added to anything.\n';
+  return { subject: 'Confirm your email for the Daily Savannah weekly roundup', html, text };
+}
+
+export function dailyWelcomeEmail(name) {
+  const hi = name ? 'Hi ' + esc(name) + ',' : 'Hi,';
+  const hiText = name ? 'Hi ' + name + ',' : 'Hi,';
+  const html = WRAP_OPEN
+    + '<p>' + hi + '</p>'
+    + '<p>You are confirmed. Every Sunday morning, Nairobi time, you will get one email with the week\'s Daily Savannah editions: the lead story from each day and the headlines under it, with a link to read the full edition.</p>'
+    + '<p>A new edition is published every evening at 9:00 PM EAT if you want it sooner: <a href="' + SITE + '/blog/daily/">thetechhut.co/blog/daily</a>.</p>'
+    + '<p style="font-size:13px;color:#4a5568">Every roundup has an unsubscribe link at the bottom, and one click removes you.</p>'
+    + WRAP_CLOSE;
+  const text = hiText + '\n\nYou are confirmed. Every Sunday morning, Nairobi time, you will get one email with the week\'s Daily Savannah editions: the lead story from each day and the headlines under it, with a link to read the full edition.\n\n'
+    + 'A new edition is published every evening at 9:00 PM EAT if you want it sooner: ' + SITE + '/blog/daily/\n\n'
+    + 'Every roundup has an unsubscribe link at the bottom, and one click removes you.\n';
+  return { subject: 'You are on the Daily Savannah weekly roundup', html, text };
+}
+
+// Wording per product. Kept next to the registry so a new product is one entry.
+const MAILS = {
+  'cv-pack': { confirm: confirmEmail, welcome: welcomeEmail },
+  daily: { confirm: dailyConfirmEmail, welcome: dailyWelcomeEmail },
+};
+
 async function sendMail(env, to, name, mail, tag) {
   return brevo('/smtp/email', env, {
     method: 'POST',
@@ -187,29 +238,38 @@ async function subscribe(req, env, origin, deps, now) {
   const email = typeof body.email === 'string' ? body.email.trim().toLowerCase() : '';
   if (!validEmail(email)) return json({ error: 'a valid email is required' }, 400, origin);
 
-  if (!newsletterConfigured(env)) return json({ error: 'signup is not switched on yet' }, 503, origin);
+  // Pages written before there were several products send no `product`.
+  const product = body.product === undefined || body.product === '' ? DEFAULT_PRODUCT : body.product;
+  if (typeof product !== 'string' || !Object.prototype.hasOwnProperty.call(PRODUCTS, product)) {
+    return json({ error: 'unknown product' }, 400, origin);
+  }
+  const cfg = PRODUCTS[product];
+  if (!newsletterConfigured(env, product)) return json({ error: 'signup is not switched on yet' }, 503, origin);
 
   const name = clean(body.name, 60);
-  const role = clean(body.role, 80);
-  const token = await signToken({ e: email, n: name, r: role, s: 'cv-pack', x: now + TOKEN_TTL_MS }, env.SUBSCRIBE_SECRET);
-  const link = SITE + '/cv-pack/welcome/#t=' + token;
+  const role = cfg.role ? clean(body.role, 80) : '';
+  const token = await signToken({ e: email, n: name, r: role, s: product, x: now + TOKEN_TTL_MS }, env.SUBSCRIBE_SECRET);
+  const link = SITE + cfg.page + '#t=' + token;
 
-  const sent = await sendMail(env, email, name, confirmEmail(link, name), 'cv-pack-confirm');
+  const sent = await sendMail(env, email, name, MAILS[product].confirm(link, name), cfg.tag + '-confirm');
   if (!sent.ok) return json({ error: 'could not send the confirmation email' }, 502, origin);
   return json({ ok: true }, 200, origin);
 }
 
 async function confirm(req, env, origin, deps, now) {
   const { json, safeEqual } = deps;
-  if (!newsletterConfigured(env)) return json({ error: 'signup is not switched on yet' }, 503, origin);
   let body;
   try { body = await req.json(); } catch (e) { return json({ error: 'bad request' }, 400, origin); }
 
   const v = await verifyToken(body && body.t, env.SUBSCRIBE_SECRET, now, safeEqual);
   if (!v.ok) return json({ error: v.reason }, 400, origin);
-  const { e: email, n: name, r: role, s: source } = v.payload;
+  const { e: email, n: name, r: role } = v.payload;
+  // Links sent before there were several products carry s:'cv-pack' (or nothing).
+  const product = Object.prototype.hasOwnProperty.call(PRODUCTS, v.payload.s) ? v.payload.s : DEFAULT_PRODUCT;
+  const cfg = PRODUCTS[product];
+  if (!newsletterConfigured(env, product)) return json({ error: 'signup is not switched on yet' }, 503, origin);
 
-  const listId = Number(env.BREVO_LIST_ID);
+  const listId = Number(env[cfg.listEnv]);
   if (!Number.isInteger(listId) || listId < 1) return json({ error: 'signup is not switched on yet' }, 503, origin);
 
   // Confirming is explicit consent, so emailBlacklisted:false also re-enables
@@ -220,14 +280,14 @@ async function confirm(req, env, origin, deps, now) {
   });
   const attrs = {};
   if (name) attrs.FIRSTNAME = name;
-  let r = await make({ ...attrs, ...(role ? { ROLE: role } : {}), SOURCE: source || 'cv-pack' });
+  let r = await make({ ...attrs, ...(role ? { ROLE: role } : {}), SOURCE: product });
   // ROLE and SOURCE are custom attributes that must exist in Brevo. If they do
   // not, Brevo answers 400; the person is still worth adding without them.
   if (r.status === 400) r = await make(attrs);
   if (!r.ok) return json({ error: 'could not save your signup' }, 502, origin);
 
   // Best effort: being on the list matters more than the welcome email.
-  try { await sendMail(env, email, name, welcomeEmail(name), 'cv-pack-welcome'); } catch (e) { /* ignore */ }
+  try { await sendMail(env, email, name, MAILS[product].welcome(name), cfg.tag + '-welcome'); } catch (e) { /* ignore */ }
   return json({ ok: true }, 200, origin);
 }
 

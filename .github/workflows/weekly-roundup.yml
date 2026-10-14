@@ -1,0 +1,82 @@
+# Sunday Daily Savannah roundup -> Brevo campaign to the Daily Savannah list.
+#
+# scripts/send_roundup.py reads the edition files in blog/daily/_src/editions/,
+# takes the seven days that ended yesterday, builds one email and creates + sends
+# a Brevo campaign to the DAILY list (a different list from the CV Pack digest).
+# It never sends the same ISO week twice and skips a week with fewer than three
+# editions, so a gap in publishing does not email a thin roundup.
+#
+# It can only include editions that are committed to the branch below, so push
+# the week's editions before Sunday 07:30 Nairobi time.
+#
+# Secrets (Settings -> Secrets and variables -> Actions):
+#   BREVO_API_KEY        v3 API key (the same one the Worker and the digest use)
+#   BREVO_LIST_ID_DAILY  numeric id of the Daily Savannah list
+#   BREVO_SENDER_EMAIL   a sender verified in Brevo
+#   BREVO_SENDER_NAME    optional
+#
+# Try it safely first: Actions -> Weekly Daily Savannah roundup -> Run workflow,
+# and fill in "test_email" to get ONE copy sent to that address and nobody else,
+# or tick "dry_run" to just see the subject and counts in the log.
+#
+# Like the other scheduled workflows, this only runs on the repository's DEFAULT
+# branch (chore/redesign here). See the note at the top of jobs-snapshot.yml.
+name: Weekly Daily Savannah roundup
+
+'on':
+  schedule:
+    # 04:30 UTC = 07:30 EAT on Sundays. Not on the hour, so it is not queued
+    # behind everyone else's :00 jobs.
+    - cron: '30 4 * * 0'
+  workflow_dispatch:
+    inputs:
+      test_email:
+        description: 'Send ONE test copy to this address instead of the list'
+        required: false
+        default: ''
+      dry_run:
+        description: 'Build the roundup and print a summary, send nothing'
+        type: boolean
+        default: false
+      force:
+        description: 'Send even if the week has fewer than 3 editions or was already sent'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: weekly-roundup
+  cancel-in-progress: false
+
+jobs:
+  roundup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chore/redesign
+
+      - name: Unit tests
+        run: python3 -m unittest scripts/tests/test_send_roundup.py
+
+      - name: Send the roundup
+        env:
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          BREVO_LIST_ID_DAILY: ${{ secrets.BREVO_LIST_ID_DAILY }}
+          BREVO_SENDER_EMAIL: ${{ secrets.BREVO_SENDER_EMAIL }}
+          BREVO_SENDER_NAME: ${{ secrets.BREVO_SENDER_NAME }}
+          TEST_EMAIL: ${{ github.event.inputs.test_email }}
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
+          FORCE: ${{ github.event.inputs.force }}
+        run: |
+          ARGS=""
+          if [ "$FORCE" = "true" ]; then ARGS="--force"; fi
+          if [ "$DRY_RUN" = "true" ]; then
+            python3 scripts/send_roundup.py --dry-run --out "$RUNNER_TEMP/roundup.html" $ARGS
+          elif [ -n "$TEST_EMAIL" ]; then
+            python3 scripts/send_roundup.py --test "$TEST_EMAIL" $ARGS
+          else
+            python3 scripts/send_roundup.py $ARGS
+          fi

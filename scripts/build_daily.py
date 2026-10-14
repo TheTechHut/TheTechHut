@@ -39,6 +39,8 @@ STYLE  = section(layout, '<style>',  r'<style>.*?</style>')
 HEADER = section(layout, 'header',   r'<header class="site">.*?</header>')
 FOOTER = section(layout, 'footer',   r'<footer class="site">.*?</footer>')
 SCRIPT = section(layout, 'script',   r'<script>.*?</script>')
+SIGNUP = section(layout, 'signup',   r'<aside class="subscribe".*?</aside>')
+SIGNUP_JS = section(layout, 'signup script', r'<script id="signup-js">.*?</script>')
 
 MONTHS = {m: i for i, m in enumerate(
     ['January','February','March','April','May','June','July','August','September',
@@ -169,12 +171,15 @@ for i, d in enumerate(eds):
     {d['body']}
   </section>
 
+  {SIGNUP}
+
   {nav}
   <a class="backlink" href="/blog/daily/">&larr; All editions</a>
 </div>
 
 {FOOTER}
 
+{SIGNUP_JS}
 {SCRIPT}
 </body>
 </html>
@@ -216,6 +221,8 @@ index += f'''
     </div>
   </div>
 
+  {SIGNUP}
+
   <h2 class="section-title" style="margin-top:2.25rem">Latest edition</h2>
   <a class="ed-latest" href="/blog/daily/{latest['slug']}/">
     <div class="txt">
@@ -234,6 +241,8 @@ index += f'''
 </div>
 
 {FOOTER}
+
+{SIGNUP_JS}
 </body>
 </html>
 '''
