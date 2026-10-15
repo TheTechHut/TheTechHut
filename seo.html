@@ -11,6 +11,7 @@
     <meta name="keywords"
         content="Technical SEO, Programmatic SEO, Generative Engine Optimization, GEO, Google Search Console Blueprint">
     <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#073B4C">
 
     <meta property="og:title" content="SEO Automation Kit & Masterclass | The Tech Hut">
     <meta property="og:description"
@@ -28,566 +29,142 @@
         href="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=32&h=32&auto=format&fit=crop">
     <link rel="apple-touch-icon" sizes="180x180"
         href="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=180&h=180&auto=format&fit=crop">
-
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/thh.css">
     <style>
-        :root {
-            --brand-primary: #006ae6;
-            --brand-primary-dark: #0053b3;
-            --brand-primary-light: #e6f0fc;
-            --text-dark: #0f172a;
-            --text-muted: #475569;
-            --bg-light: #f8fafc;
-            --bg-white: #ffffff;
-            --border-color: #e2e8f0;
-            --radius-md: 12px;
-            --radius-lg: 20px;
-            --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        /* SEO kit sales page. Type, colour, masthead and footer come from the shared stylesheet. */
+        header.hero h1 { max-width: 19ch; }
+        header.hero .cta-note { margin-top: 26px; text-transform: none; letter-spacing: 0; font-size: 13px; }
+        .intro { max-width: 64ch; color: var(--muted); margin: 0 0 4px; }
+        .cards { margin-top: 22px; }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        .modules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 36px; margin-top: 24px; }
+        .module { border-top: 2px solid var(--ink); padding-top: 12px; }
+        .mnum { display: block; font-family: var(--mono); font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .06em; color: var(--green); margin-bottom: 8px; }
+        .module h3 { font-size: 22px; margin-bottom: 6px; }
+        .module p { font-size: 16px; color: var(--muted); margin: 0; }
+        .module ul.ticks { margin-top: 12px; }
+        .module ul.ticks li { font-size: 15.5px; margin-bottom: 6px; }
 
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-white);
-            color: var(--text-dark);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
+        .bundle .right .sub { display: block; font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--dim); }
+        .price-note { font-size: 15px; color: var(--muted); margin: 6px 0 18px; }
+        .btn.pay { display: block; width: 100%; text-align: center; padding: 14px 20px; font-size: 16px; }
+        .bundle ul.ticks li { font-size: 16.5px; }
 
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+        .faq-list { max-width: 760px; border-top: 1px solid var(--rule); }
+        .faq-list details { border-bottom: 1px solid var(--rule); }
+        .faq-list summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+            padding: 16px 0; font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+        .faq-list summary::-webkit-details-marker { display: none; }
+        .faq-list summary::after { content: "+"; font-family: var(--mono); font-size: 18px; font-weight: 500; color: var(--green); }
+        .faq-list details[open] summary::after { content: "\2212"; }
+        .faq-list details p { font-size: 16px; margin: -4px 0 18px; max-width: 66ch; }
 
-        /* PREMIUM FLOATING NAVIGATION */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        nav .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 24px;
-        }
-
-        .logo {
-            font-size: 1.25rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            color: var(--text-dark);
-            text-decoration: none;
-        }
-
-        .logo span {
-            color: var(--brand-primary);
-        }
-
-        /* STRATEGIC BUTTON SYSTEMS */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            border-radius: var(--radius-md);
-            transition: var(--transition-smooth);
-            text-decoration: none;
-            cursor: pointer;
-            padding: 12px 24px;
-            font-size: 0.95rem;
-        }
-
-        .btn-primary {
-            background: var(--brand-primary);
-            color: var(--bg-white);
-            border: none;
-        }
-
-        .btn-primary:hover {
-            background: var(--brand-primary-dark);
-            transform: translateY(-1px);
-        }
-
-        .btn-secondary {
-            background: var(--bg-light);
-            color: var(--text-dark);
-            border: 1px solid var(--border-color);
-        }
-
-        .btn-secondary:hover {
-            background: var(--border-color);
-        }
-
-        /* HERO TRANSFORMATION ENGINE */
-        header.hero {
-            padding: 140px 0 80px 0;
-            background: radial-gradient(120% 120% at 50% 100%, #ffffff 60%, #e6f0fc 100%);
-            text-align: center;
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            background: var(--brand-primary-light);
-            color: var(--brand-primary);
-            font-size: 0.8rem;
-            font-weight: 700;
-            padding: 6px 16px;
-            border-radius: 30px;
-            margin-bottom: 24px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border: 1px solid rgba(0, 106, 230, 0.1);
-        }
-
-        h1.hero-title {
-            font-size: 2.6rem;
-            font-weight: 800;
-            line-height: 1.15;
-            letter-spacing: -1.5px;
-            max-width: 900px;
-            margin: 0 auto 24px auto;
-            color: var(--text-dark);
-        }
-
-        h1.hero-title span {
-            color: var(--brand-primary);
-        }
-
-        .hero-subtitle {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            max-width: 680px;
-            margin: 0 auto 32px auto;
-            font-weight: 500;
-        }
-
-        .hero-actions {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            flex-wrap: wrap;
-            margin-bottom: 40px;
-        }
-
-        .social-proof-strip {
-            border-top: 1px solid var(--border-color);
-            padding-top: 32px;
-            margin-top: 48px;
-        }
-
-        .social-proof-strip p {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-muted);
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-
-        .brand-logos {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 48px;
-            flex-wrap: wrap;
-            opacity: 0.65;
-        }
-
-        .brand-logos span {
-            font-weight: 700;
-            font-size: 1.1rem;
-            letter-spacing: -0.5px;
-            color: var(--text-dark);
-        }
-
-        /* INTERSECTION SECTION HEADERS */
-        .section-header {
-            text-align: center;
-            margin-bottom: 56px;
-        }
-
-        .section-header h2 {
-            font-size: 2rem;
-            font-weight: 800;
-            letter-spacing: -0.8px;
-            margin-bottom: 12px;
-        }
-
-        .section-header p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* CORE VALUE PROP BRIDGES */
-        .agitation-section {
-            padding: 80px 0;
-            background: var(--bg-light);
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 24px;
-        }
-
-        .value-card {
-            background: var(--bg-white);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 32px;
-            transition: var(--transition-smooth);
-        }
-
-        .value-card h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            letter-spacing: -0.3px;
-        }
-
-        .value-card p {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-        }
-
-        /* SYLLABUS / CURRICULUM ARCHITECTURE */
-        .curriculum-section {
-            padding: 80px 0;
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 24px;
-        }
-
-        .module-box {
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            padding: 36px;
-            background: var(--bg-white);
-            position: relative;
-            transition: var(--transition-smooth);
-        }
-
-        .module-box:hover {
-            border-color: var(--brand-primary);
-            box-shadow: var(--shadow-md);
-        }
-
-        .module-num {
-            position: absolute;
-            top: 36px;
-            right: 36px;
-            font-weight: 800;
-            color: var(--brand-primary-light);
-            font-size: 2rem;
-            line-height: 1;
-        }
-
-        .module-box h3 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 14px;
-            max-width: 80%;
-            letter-spacing: -0.4px;
-        }
-
-        .module-box ul {
-            list-style: none;
-            margin-top: 16px;
-        }
-
-        .module-box li {
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 10px;
-            font-size: 0.95rem;
-            color: var(--text-dark);
-        }
-
-        .module-box li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--brand-primary);
-            font-weight: 700;
-        }
-
-        /* VALUE FOR MONEY PRICING ARCHITECTURE */
-        .pricing-section {
-            padding: 80px 0;
-            background: #0f172a;
-            color: var(--bg-white);
-        }
-
-        .pricing-section .section-header h2 {
-            color: var(--bg-white);
-        }
-
-        .pricing-card {
-            background: #1e293b;
-            border: 1px solid #334155;
-            border-radius: var(--radius-lg);
-            max-width: 540px;
-            margin: 0 auto;
-            padding: 48px 36px;
-            text-align: center;
-        }
-
-        .price-display {
-            margin: 24px 0;
-        }
-
-        .price-display .currency {
-            font-size: 1.5rem;
-            font-weight: 600;
-            vertical-align: super;
-            color: #94a3b8;
-        }
-
-        .price-display .amount {
-            font-size: 3.5rem;
-            font-weight: 800;
-            letter-spacing: -2px;
-        }
-
-        .price-features {
-            text-align: left;
-            margin: 32px 0;
-            border-top: 1px solid #334155;
-            padding-top: 24px;
-        }
-
-        .price-features li {
-            list-style: none;
-            margin-bottom: 12px;
-            font-size: 0.98rem;
-            color: #cbd5e1;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .price-features li::before {
-            content: "✓";
-            color: #10b981;
-            font-weight: 800;
-        }
-
-        /* FAQ ACCORDION PATTERNS */
-        .faq-section {
-            padding: 80px 0;
-            background: var(--bg-light);
-        }
-
-        .faq-wrapper {
-            max-width: 760px;
-            margin: 0 auto;
-        }
-
-        details {
-            background: var(--bg-white);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 18px 24px;
-            margin-bottom: 16px;
-            transition: var(--transition-smooth);
-        }
-
-        details[open] {
-            border-color: var(--brand-primary);
-        }
-
-        summary {
-            font-weight: 700;
-            font-size: 1.05rem;
-            cursor: pointer;
-            list-style: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        summary::after {
-            content: "+";
-            font-size: 1.3rem;
-            color: var(--brand-primary);
-            font-weight: 600;
-        }
-
-        details[open] summary::after {
-            content: "−";
-        }
-
-        details p {
-            margin-top: 14px;
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        /* BRAND FOOTER */
-        footer {
-            background: var(--bg-white);
-            border-top: 1px solid var(--border-color);
-            padding: 48px 0;
-            text-align: center;
-            font-size: 0.88rem;
-            color: var(--text-muted);
-        }
-
-        /* RESPONSIVE RENDERING INJECTIONS */
-        @media (min-width: 768px) {
-            h1.hero-title {
-                font-size: 3.6rem;
-            }
-
-            .grid-3 {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .grid-2 {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .pricing-card {
-                padding: 56px;
-            }
+        @media (max-width: 760px) {
+            .modules { grid-template-columns: 1fr; }
+            .faq-list summary { font-size: 18px; }
         }
     </style>
 </head>
 
 <body>
 
-    <nav>
-        <div class="container">
-            <a href="#" class="logo">The Tech Hut<span>.</span></a>
-            <a href="#purchase" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.88rem;">Buy
-                Masterclass</a>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="masthead">
+        <div class="masthead-top"><div class="wrap"><span>Kenya's tech careers, reported daily</span><span class="hide-sm"><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a> &middot; <a href="mailto:info@thetechhut.co">info@thetechhut.co</a></span></div></div>
+        <div class="wrap masthead-main">
+            <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+            <nav class="sitenav" aria-label="Site"><a href="/blog/daily/">Daily</a><a href="/jobs/">Jobs</a><a href="/remote/">Remote</a><a href="/cv-pack/">CV Pack</a><a href="/shop/">Shop</a><a href="/events/">Events</a><a href="/apprenticeship/">Apprenticeship</a><a href="/blog/">Blog</a></nav>
         </div>
-    </nav>
+    </header>
+    <nav class="pagenav" aria-label="On this page"><div class="wrap"><span class="pagenav-label">On this page</span><a href="#why">Why it works</a><a href="#curriculum">Curriculum</a><a href="#purchase">Price</a><a href="#faq">Questions</a><a class="btn" href="#purchase">Buy the masterclass</a></div></nav>
 
-    <header class="hero">
-        <div class="container">
-            <span class="badge">Next-Gen Search Blueprint</span>
-            <h1 class="hero-title">Stop Chasing Fluffy Text. Build <span>SEO Systems That Scale</span>.</h1>
-            <p class="hero-subtitle">An engineering-grade system breakdown covering technical crawl pipelines, dynamic
-                schema deployment, and AI-native optimization (GEO).</p>
+    <header class="hero" id="main">
+        <div class="wrap">
+            <span class="eyebrow">SEO Automation Kit &amp; Masterclass</span>
+            <h1>Stop writing filler. Build SEO <em>systems</em> that scale.</h1>
+            <p class="lede">A technical course in how search engines crawl, render and cite your site: crawl pipelines, schema you can deploy, and optimising for AI search (GEO).</p>
 
-            <div class="hero-actions">
-                <a href="#purchase" class="btn btn-primary">Get Instant Access</a>
-                <a href="seo-guide.html" class="btn btn-secondary">Read Free Module</a>
+            <div class="cta-row">
+                <a href="#purchase" class="btn">Get the kit · KES 4,500</a>
+                <a href="seo-guide.html" class="btn ghost">Read the free module</a>
             </div>
 
-            <div class="social-proof-strip">
-                <p>Engineered for technical operators at scale</p>
-                <div class="brand-logos">
-                    <span>Nobuk Africa</span>
-                    <span>Interview Dojo</span>
-                    <span>ACRE Africa</span>
-                    <span>Tirop's Angels</span>
-                </div>
-            </div>
+            <p class="cta-note">Built for technical operators at Nobuk Africa · Interview Dojo · ACRE Africa · Tirop's Angels</p>
         </div>
     </header>
 
-    <section class="agitation-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Why Most SEO Manuals Fail</h2>
-                <p>Standard marketing advice tells you to "write high-quality content" and pray. This playbook breaks
-                    down the exact code pathways search spiders demand.</p>
-            </div>
+    <section id="why">
+        <div class="wrap">
+            <div class="section-head"><h2>Why most SEO manuals fail</h2></div>
+            <p class="intro">Standard marketing advice tells you to "write high-quality content" and pray. This playbook covers what search crawlers actually need from your code.</p>
 
-            <div class="grid-3">
-                <div class="value-card">
-                    <h3>Crawl Optimization</h3>
-                    <p>Learn how to manage your origin server load configurations so Googlebot renders and catalogs deep
-                        routes during the very first wave.</p>
+            <div class="cards">
+                <div class="card">
+                    <span class="n">01</span>
+                    <h3>Crawl optimisation</h3>
+                    <p>Set up your server so Googlebot can render and index your deeper pages on its first pass.</p>
                 </div>
-                <div class="value-card">
-                    <h3>GSC Data Mining</h3>
-                    <p>Stop guessing tracking strategies. Extract and isolate actionable intent modifiers hidden deep
-                        inside your performance log tables.</p>
+                <div class="card">
+                    <span class="n">02</span>
+                    <h3>GSC data mining</h3>
+                    <p>Stop guessing. Pull the search-intent modifiers hidden in your Google Search Console performance tables.</p>
                 </div>
-                <div class="value-card">
-                    <h3>Generative AI Engine</h3>
-                    <p>Position your documentation cleanly for Large Language Model citation scrapers inside ChatGPT,
-                        Perplexity, and Gemini paths.</p>
+                <div class="card">
+                    <span class="n">03</span>
+                    <h3>Generative AI search</h3>
+                    <p>Structure your documentation so it gets cited by the AI tools people search with: ChatGPT, Perplexity and Gemini.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="curriculum-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>The Masterclass Curriculum</h2>
-                <p>Five execution modules filled with real-world technical schematics, validation assets, and code
-                    components.</p>
-            </div>
+    <section id="curriculum">
+        <div class="wrap">
+            <div class="section-head"><h2>The masterclass curriculum</h2></div>
+            <p class="intro">Five modules of real-world technical diagrams, validation assets and code components.</p>
 
-            <div class="grid-2">
-                <div class="module-box">
-                    <span class="module-num">01</span>
-                    <h3>Search Architecture & Indexing Tracks</h3>
-                    <p>Master how search robots evaluate application frameworks natively.</p>
-                    <ul>
+            <div class="modules">
+                <div class="module">
+                    <span class="mnum">Module 01</span>
+                    <h3>Search architecture &amp; indexing</h3>
+                    <p>How search robots evaluate application frameworks.</p>
+                    <ul class="ticks">
                         <li>The Two-Wave Render Timeline Execution Limit</li>
                         <li>Configuring production edge-rendering routes</li>
                         <li>Resolving layout shifts and TTFB response friction</li>
                     </ul>
                 </div>
 
-                <div class="module-box">
-                    <span class="module-num">02</span>
-                    <h3>Google Search Console Deep Mining</h3>
-                    <p>Turn raw interface metric reports into data-driven development tasks.</p>
-                    <ul>
+                <div class="module">
+                    <span class="mnum">Module 02</span>
+                    <h3>Google Search Console deep mining</h3>
+                    <p>Turn raw Search Console reports into development tasks.</p>
+                    <ul class="ticks">
                         <li>Fixing 'Crawled - currently not indexed' block limits</li>
                         <li>Converting impression bursts into active traffic funnels</li>
                         <li>Automating sitemap verification pipelines securely</li>
                     </ul>
                 </div>
 
-                <div class="module-box">
-                    <span class="module-num">03</span>
-                    <h3>AI Search & Generative Engine Optimization</h3>
-                    <p>Prepare your product visibility tracking paths for modern AI tools.</p>
-                    <ul>
+                <div class="module">
+                    <span class="mnum">Module 03</span>
+                    <h3>AI search &amp; Generative Engine Optimization</h3>
+                    <p>Make your product visible to modern AI tools.</p>
+                    <ul class="ticks">
                         <li>How vector models extract citation targets</li>
                         <li>Structuring explicit entity definition statements</li>
                         <li>Building table frameworks optimized for LLM scrapers</li>
                     </ul>
                 </div>
 
-                <div class="module-box">
-                    <span class="module-num">04</span>
-                    <h3>Topical Hub Engineering</h3>
-                    <p>Eliminate keyword cannibalization loops via structural directory paths.</p>
-                    <ul>
+                <div class="module">
+                    <span class="mnum">Module 04</span>
+                    <h3>Topical hub engineering</h3>
+                    <p>Stop your own pages competing for the same keyword, using a clear directory structure.</p>
+                    <ul class="ticks">
                         <li>Structuring robust parent-pillar directory paths</li>
                         <li>Contextual internal anchor linking frameworks</li>
                         <li>Automating cross-route discovery distributions</li>
@@ -597,44 +174,38 @@
         </div>
     </section>
 
-    <section id="purchase" class="pricing-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Invest in a Predictable Growth Engine</h2>
-                <p>Gain lifelong access to the comprehensive automation kit and all upcoming updates.</p>
-            </div>
+    <section id="purchase">
+        <div class="wrap">
+            <div class="section-head"><h2>One price, lifetime updates</h2></div>
+            <p class="intro">Lifetime access to the full automation kit, and every update to it.</p>
 
-            <div class="pricing-card">
-                <span class="badge" style="background: rgba(255,255,255,0.1); color: #fff;">Complete Access Pass</span>
-                <div class="price-display">
-                    <span class="currency">KES</span>
-                    <span class="amount">4,500</span>
+            <div class="bundle">
+                <div>
+                    <span class="eyebrow">What you get</span>
+                    <ul class="ticks">
+                        <li>Complete SEO Execution Masterclass Playbook</li>
+                        <li>Production-ready JSON-LD structured data templates</li>
+                        <li>GSC Diagnostic Checklist &amp; Error Resolution Maps</li>
+                        <li>Generative Engine Optimization (GEO) Framework</li>
+                        <li>Access to The Tech Hut private builder group</li>
+                    </ul>
                 </div>
-                <p style="color: #94a3b8; margin-bottom: 24px;">One-time purchase. Lifetime documentation updates
-                    included.</p>
+                <div class="right">
+                    <span class="sub">Complete access pass</span>
+                    <span class="now"><small>KES</small> 4,500</span>
+                    <p class="price-note">One-time purchase. Lifetime documentation updates included.</p>
 
-                <a href="https://paystack.shop/pay/559v-00uot" id="payButton" class="btn btn-primary"
-                    style="width: 100%; padding: 16px; font-size: 1.05rem;">Get Instant Access Now</a>
-
-                <ul class="price-features">
-                    <li>Complete SEO Execution Masterclass Playbook</li>
-                    <li>Production-ready JSON-LD structured data templates</li>
-                    <li>GSC Diagnostic Checklist & Error Resolution Maps</li>
-                    <li>Generative Engine Optimization (GEO) Framework</li>
-                    <li>Access to The Tech Hut private builder group</li>
-                </ul>
+                    <a href="https://paystack.shop/pay/559v-00uot" id="payButton" class="btn pay">Get instant access</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="faq-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Frequently Answered Queries</h2>
-                <p>Everything you need to know about the technical search masterclass package.</p>
-            </div>
+    <section id="faq">
+        <div class="wrap">
+            <div class="section-head"><h2>Questions</h2></div>
 
-            <div class="faq-wrapper">
+            <div class="faq-list">
                 <details>
                     <summary>Who is this playbook specifically built for?</summary>
                     <p>This is built for developers, technical marketers, and product founders who want to skip the
@@ -649,19 +220,69 @@
                 </details>
                 <details>
                     <summary>Can I apply these frameworks to client-side frameworks?</summary>
-                    <p>Absolutely. We focus extensively on configuring Server-Side Rendering (SSR) and edge caching
-                        parameters to make sure modern frontend architectures register instantly during the first
+                    <p>Yes. We focus on configuring Server-Side Rendering (SSR) and edge caching
+                        parameters so that modern front-end architectures are picked up during the first
                         indexing wave.</p>
                 </details>
             </div>
         </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <p>© 2026 The Tech Hut Community. All rights reserved.</p>
-            <p style="font-size: 0.75rem; margin-top: 8px; color: #94a3b8;">High-efficiency engineering for clean,
-                predictable search traffic acquisition pathways.</p>
+    <div class="pagefoot"><div class="wrap">
+        <p>SEO Automation Kit &amp; Masterclass from The Tech Hut: technical SEO for clean, predictable search traffic.</p>
+    </div></div>
+
+    <footer class="sitefoot">
+        <div class="wrap">
+            <div class="sitefoot-grid">
+                <div>
+                    <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+                    <p>Helping Kenyans into tech work: jobs you can take from Nairobi, a daily read on the industry, and projects with mentors.</p>
+                </div>
+                <div>
+                    <h4>Read</h4>
+                    <ul>
+                        <li><a href="/blog/daily/">Daily Savannah</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Find work</h4>
+                    <ul>
+                        <li><a href="/jobs/">Jobs board</a></li>
+                        <li><a href="/remote/">Remote-from-Kenya list</a></li>
+                        <li><a href="/cv-pack/">CV Pack</a></li>
+                        <li><a href="/early-access/">Early Access</a></li>
+                        <li><a href="/shop/">Everything we make</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="/apprenticeship/">Apprenticeship</a></li>
+                        <li><a href="/events/">Events</a></li>
+                        <li><a href="/communities/">Tech communities</a></li>
+                        <li><a href="/tools/">Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Employers</h4>
+                    <ul>
+                        <li><a href="/advertise/">Advertise</a></li>
+                        <li><a href="/jobs-for-your-community/">A jobs board for your community</a></li>
+                        <li><a href="/recruiters/">Recruiters</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sitefoot-base">
+                <span>&copy; 2026 The Tech Hut Community</span>
+                <a href="mailto:info@thetechhut.co">info@thetechhut.co</a>
+                <span>+254 115 017 058</span>
+                <a href="/data_privacy_policy/">Privacy</a>
+                <a href="https://linkedin.com/company/digital-transformation-partner/" rel="noopener">LinkedIn</a>
+                <a href="https://x.com/Ekiprop_kimutai" rel="noopener">X</a>
+            </div>
         </div>
     </footer>
 

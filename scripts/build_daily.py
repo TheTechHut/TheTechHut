@@ -24,9 +24,7 @@ DAILY = os.path.join(ROOT, 'blog', 'daily')
 SRC = os.path.join(DAILY, '_src')
 EDS = os.path.join(SRC, 'editions')
 SITE = 'https://thetechhut.co'
-FONTS = ('  <link rel="preconnect" href="https://fonts.googleapis.com">\n'
-         '  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?'
-         'family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap">')
+FONTS = '  <link rel="preconnect" href="https://fonts.googleapis.com">\n  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">\n  <link rel="stylesheet" href="/assets/css/thh.css">'
 
 def section(layout, name, pattern):
     m = re.search(pattern, layout, re.S)
@@ -36,8 +34,8 @@ def section(layout, name, pattern):
 
 layout = open(os.path.join(SRC, 'layout.html')).read()
 STYLE  = section(layout, '<style>',  r'<style>.*?</style>')
-HEADER = section(layout, 'header',   r'<header class="site">.*?</header>')
-FOOTER = section(layout, 'footer',   r'<footer class="site">.*?</footer>')
+HEADER = section(layout, 'header',   r'<a class="skip".*?</header>')
+FOOTER = section(layout, 'footer',   r'<div class="pagefoot">.*?</footer>')
 SCRIPT = section(layout, 'script',   r'<script>.*?</script>')
 SIGNUP = section(layout, 'signup',   r'<aside class="subscribe".*?</aside>')
 SIGNUP_JS = section(layout, 'signup script', r'<script id="signup-js">.*?</script>')
@@ -85,7 +83,7 @@ def head(title, desc, url, img, alt, og_type='article'):
   <meta name="keywords" content="Kenya tech news, Kenyan startups, M-Pesa, fintech Kenya, Nairobi tech, Silicon Savannah, Safaricom, Kenya AI policy, daily tech digest">
   <meta name="author" content="The Tech Hut">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#06D6A0">
+  <meta name="theme-color" content="#073B4C">
   <link rel="canonical" href="{url}">
   <!-- Open Graph -->
   <meta property="og:type" content="{og_type}">
@@ -155,8 +153,7 @@ for i, d in enumerate(eds):
 
 {HEADER}
 
-<div class="shell">
-  <a class="backlink" href="/blog/daily/">&larr; All editions</a>
+<main id="main" class="shell">
   <div class="pagehead">
     <h1>The Daily <em>Savannah</em></h1>
     <div class="sub">
@@ -175,7 +172,7 @@ for i, d in enumerate(eds):
 
   {nav}
   <a class="backlink" href="/blog/daily/">&larr; All editions</a>
-</div>
+</main>
 
 {FOOTER}
 
@@ -192,14 +189,12 @@ latest = eds[0]
 def card(d):
     teasers = ''.join(f'<li>{t}</li>' for t in d['heads'])
     return f'''      <a class="ed-card" href="/blog/daily/{d['slug']}/">
-        <div class="pic"><img src="{d['img']}" alt="{html.escape(d['alt'], quote=True)}" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>{d['datetext']}</b>{html.escape(d['no'])} &middot; {d['count']} stories</div>
         <div class="txt">
-          <span class="no">{html.escape(d['no'])} &middot; {d['count']} stories</span>
-          <h3>{d['datetext']}</h3>
-          <p>{d['lede']}</p>
+          <h3>{d['lead_title']}</h3>
           <ul>{teasers}</ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="{d['img']}" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>'''
 
 index = head('The Daily Savannah | The Tech Hut Blog',
@@ -212,24 +207,24 @@ index += f'''
 
 {HEADER}
 
-<div class="shell">
+<main id="main" class="shell">
   <div class="pagehead">
     <h1>The Daily <em>Savannah</em></h1>
     <div class="sub">
       <span>Kenya's tech ecosystem, every day — startups, fintech, policy &amp; infrastructure.</span>
-      <span class="auto">NEW EDITION EVERY 9:00 PM EAT</span>
+      <span class="auto">New edition every evening, 9:00 PM EAT</span>
     </div>
   </div>
 
   {SIGNUP}
 
-  <h2 class="section-title" style="margin-top:2.25rem">Latest edition</h2>
+  <h2 class="section-title" style="margin-top:34px">Latest edition</h2>
   <a class="ed-latest" href="/blog/daily/{latest['slug']}/">
     <div class="txt">
       <span class="kicker">{html.escape(latest['no'])} &middot; {latest['datetext']}</span>
       <h3>{latest['lead_title']}</h3>
       <p>{latest['lede']}</p>
-      <span class="more" style="font-size:0.8rem;font-weight:700;color:var(--green-dark)">Read the full edition &rarr;</span>
+      <span class="more">Read the full edition &rarr;</span>
     </div>
     <div class="pic"><img src="{latest['img']}" alt="{html.escape(latest['alt'], quote=True)}" fetchpriority="high" decoding="async" onerror="this.remove()"></div>
   </a>
@@ -238,7 +233,7 @@ index += f'''
   <div class="ed-grid">
 {chr(10).join(card(d) for d in eds)}
   </div>
-</div>
+</main>
 
 {FOOTER}
 
@@ -286,6 +281,28 @@ if os.path.exists(blog_index):
         print(f'Injected {len(rows)} edition(s) into blog/index.html')
     else:
         print('NOTE: DAILY:START/END markers missing in blog/index.html - skipped')
+
+
+# ---- latest edition on the home page (/) ------------------------------------
+home_index = os.path.join(ROOT, 'index.html')
+if os.path.exists(home_index):
+    h = open(home_index, encoding='utf-8').read()
+    m = re.search(r'(<!-- HOME-DAILY:START[^>]*-->)(.*?)(<!-- HOME-DAILY:END -->)', h, re.S)
+    if m:
+        top = eds[0]
+        earlier = ''.join(
+            f'<li><time datetime="{e["slug"]}">{e["datetext"]}</time>'
+            f'<a href="/blog/daily/{e["slug"]}/">{e["lead_title"]}</a></li>'
+            for e in eds[1:4])
+        block = (f'\n                <span class="label">The Daily Savannah &middot; {html.escape(top["no"])}</span>'
+                 f'\n                <h2><a href="/blog/daily/{top["slug"]}/">{top["lead_title"]}</a></h2>'
+                 f'\n                <p class="dek">{top["lede"]}</p>'
+                 f'\n                <ul class="earlier">{earlier}</ul>\n                ')
+        h = h[:m.start(2)] + block + h[m.end(2):]
+        open(home_index, 'w', encoding='utf-8').write(h)
+        print('Updated the latest edition on the home page')
+    else:
+        print('NOTE: HOME-DAILY markers missing in index.html - skipped')
 
 
 # ---- regenerate sitemap.xml so every edition is discoverable -------------

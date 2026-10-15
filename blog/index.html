@@ -8,7 +8,7 @@
     <meta name="keywords" content="The Tech Hut, tech blog Kenya, Nairobi tech, programming tutorials, Kenya tech news, tech apprenticeship Kenya">
     <meta name="author" content="The Tech Hut">
     <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#06D6A0">
+    <meta name="theme-color" content="#073B4C">
     <link rel="canonical" href="https://thetechhut.co/blog/">
     <!-- Open Graph -->
     <meta property="og:type" content="website">
@@ -26,164 +26,124 @@
     <meta name="twitter:title" content="The Tech Hut Blog">
     <meta name="twitter:description" content="Tech insights from Nairobi — tutorials, guides, and Kenya's daily tech digest.">
     <meta name="twitter:image" content="https://images.unsplash.com/photo-1741991110666-88115e724741?q=80&w=1200&h=630&auto=format&fit=crop">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/thh.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            color: #073B4C;
-            background-color: #f0f4f8;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Poppins', sans-serif;
-        }
-        .text-gradient-primary {
-            background-image: linear-gradient(to right, #06D6A0, #FFD700);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            color: transparent;
-        }
-        /* Updated button styles with a blue gradient and shadow */
-        .btn-primary {
-            background-image: linear-gradient(to right, #2E86AB, #073B4C);
-            color: white;
-            font-weight: 700;
-            padding: 0.75rem 2rem;
-            border-radius: 9999px;
-            box-shadow: 0 5px 15px rgba(46, 134, 171, 0.4);
-            transition: all 0.3s ease;
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(46, 134, 171, 0.5);
-        }
-        .card {
-            background-color: #ffffff;
-            border-radius: 1.5rem;
-            padding: 2rem;
-            box-shadow: 0 8px 20px rgba(7, 59, 76, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(7, 59, 76, 0.15);
-        }
+        /* Blog index. Type, colour, masthead and footer come from the shared stylesheet. */
+        .blog-head { padding: 44px 0 30px; }
+        .blog-head h1 { max-width: none; }
+        .blog-head .lede { margin-bottom: 0; }
+        main section { padding: 40px 0; border-bottom: 0; }
+        main section + section { padding-top: 8px; }
+        main section:last-of-type { border-bottom: 0; }
 
-        /* Custom scrollbar for a cleaner look */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-    
-        /* Anonymous reactions */
-        .reactions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-        .reactions button {
-            display: inline-flex; align-items: center; gap: 0.4rem;
-            font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600;
-            color: #073B4C; background: #f0f4f8;
-            border: 1px solid rgba(7, 59, 76, 0.14); border-radius: 9999px;
-            padding: 0.35rem 0.9rem; cursor: pointer;
-            transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
-        }
-        .reactions button:hover { border-color: #06D6A0; transform: translateY(-1px); }
-        .reactions button.on { background: rgba(6, 214, 160, 0.16); border-color: #06D6A0; }
-        .reactions button span { color: #718096; font-variant-numeric: tabular-nums; }
+        /* featured post: lead story, text beside the picture */
+        #featured-post-container a.feat { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px;
+            text-decoration: none; color: var(--text); }
+        a.feat .kicker { margin-bottom: 8px; }
+        a.feat h3 { font-size: clamp(28px, 3.6vw, 42px); line-height: 1.08; letter-spacing: -.02em; margin: 0 0 14px; }
+        a.feat:hover h3 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .12em; }
+        a.feat .dek { font-size: 17.5px; line-height: 1.6; color: var(--text); margin: 0 0 14px; max-width: 52ch; }
+        a.feat .pic img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
 
-        /* Weekly Daily Savannah roundup signup */
-        .subscribe-box { background:#fff; border:1px solid rgba(7,59,76,0.12); border-left:4px solid #06D6A0; border-radius:1rem; padding:1.4rem 1.5rem; box-shadow:0 8px 20px rgba(7,59,76,0.08); }
-        .subscribe-box h2 { font-size:1.35rem; font-weight:700; color:#073B4C; margin:0 0 .25rem; }
-        .subscribe-box p { font-size:.92rem; color:#4a5568; margin:0; }
-        .sub-form { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1rem; }
-        .sub-form input[type="text"], .sub-form input[type="email"] { flex:1 1 11rem; font:inherit; color:#073B4C; background:#fff; padding:.65rem .9rem; border:1px solid rgba(7,59,76,0.25); border-radius:.6rem; }
-        .sub-form input:focus-visible { outline:2px solid #06D6A0; outline-offset:2px; }
-        .sub-form input.hp { position:absolute; left:-9999px; width:1px; height:1px; opacity:0; }
-        .sub-form button { font:700 .92rem 'Poppins',sans-serif; color:#fff; background:#073B4C; border:0; border-radius:999px; padding:.7rem 1.4rem; cursor:pointer; }
-        .sub-form button:focus-visible { outline:2px solid #06D6A0; outline-offset:3px; }
-        .sub-form button[disabled] { opacity:.6; cursor:default; }
-        .sub-msg { min-height:1.3em; margin-top:.7rem; font-weight:600; font-size:.9rem; }
-        .sub-msg.ok { color:#046b52; } .sub-msg.bad { color:#9b2020; }
-        .sub-note { font-size:.78rem; color:#718096; margin-top:.5rem; }
-        .sub-note a { color:#05b384; }
+        /* byline-style meta line under each post */
+        .meta { font-family: var(--mono); font-size: 12px; line-height: 1.6; text-transform: uppercase; letter-spacing: .05em; color: var(--dim); }
+        .meta .sep { margin: 0 6px; color: #9FBAC4; }
+        .meta.single-meta { margin: 0 0 20px; }
+
+        /* all posts: columns divided by rules, like a page of type */
+        .post-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; }
+        a.post { display: block; padding: 0 22px 30px; border-left: 1px solid var(--rule); text-decoration: none; color: var(--text); }
+        a.post:nth-child(3n+1) { padding-left: 0; border-left: 0; }
+        a.post:nth-child(3n) { padding-right: 0; }
+        a.post .pic { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-top: 2px solid var(--ink); padding-top: 12px; }
+        a.post .txt { padding-top: 12px; }
+        a.post h4 { font-family: var(--serif); font-size: 22px; line-height: 1.2; font-weight: 600; color: var(--ink); margin: 0 0 8px; }
+        a.post:hover h4 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .12em; }
+        a.post .ex { font-size: 15.5px; line-height: 1.55; color: var(--muted); margin: 0 0 10px; }
+
+        /* weekly roundup signup (same block as the Daily Savannah) */
+        .subscribe { background: var(--paper-2); border-top: 3px solid var(--ink); padding: 22px 24px; }
+        .subscribe h2 { font-size: 26px; margin: 0 0 6px; }
+        .subscribe p { font-size: 16px; color: var(--text); margin: 0; max-width: 64ch; }
+        .sub-form { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+        .sub-form input[type="text"], .sub-form input[type="email"] { flex: 1 1 12rem; width: auto; }
+        .sub-form input.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+        .sub-form button { font: 700 15px/1.2 var(--sans); color: #fff; background: var(--ink); border: 1px solid var(--ink);
+            border-radius: 3px; padding: 12px 20px; cursor: pointer; }
+        .sub-form button:hover { background: var(--ink-2); }
+        .sub-form button[disabled] { opacity: .6; cursor: default; }
+        .sub-msg { min-height: 1.3em; margin: 10px 0 0; font-weight: 600; font-size: 15px; }
+        .sub-msg.ok { color: var(--green); }
+        .sub-msg.bad { color: var(--red); }
+        .subscribe .sub-note { font-size: 14px; color: var(--dim); margin-top: 6px; }
+
+        /* single post view (/blog/?title=...) */
+        article.single { max-width: 720px; margin: 0 auto; padding: 36px 0 48px; }
+        article.single h1 { font-size: clamp(32px, 5vw, 50px); max-width: none; margin: 4px 0 14px; }
+        article.single .hero-img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; margin: 0 0 26px; background: var(--paper-3); }
+        article.single p { font-size: 18.5px; line-height: 1.7; color: var(--text); }
+        .post-reactions { margin: 0 0 22px; }
+        .backlink { display: inline-block; margin: 0 0 22px; font-weight: 700; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--mint); }
+        .backlink:hover { border-bottom-color: var(--ink); color: var(--ink); }
+        article.single p + .backlink { margin: 14px 0 0; }
+
+        /* anonymous reactions (built by the reactions script) */
+        .reactions { display: flex; flex-wrap: wrap; gap: 6px; }
+        .reactions button { font: 600 13px/1 var(--sans); color: var(--ink); background: transparent; border: 1px solid var(--rule);
+            border-radius: 2px; padding: 5px 8px; cursor: pointer; }
+        .reactions button:hover { border-color: var(--ink); }
+        .reactions button.on { border-color: var(--green); background: var(--paper-2); }
+        .reactions button span { color: var(--dim); font-family: var(--mono); font-size: 12px; margin-left: 2px; }
+
+        @media (max-width: 900px) {
+            .post-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            a.post:nth-child(3n+1) { padding-left: 22px; border-left: 1px solid var(--rule); }
+            a.post:nth-child(3n) { padding-right: 22px; }
+            a.post:nth-child(2n+1) { padding-left: 0; border-left: 0; }
+            a.post:nth-child(2n) { padding-right: 0; }
+        }
+        @media (max-width: 680px) {
+            .blog-head { padding: 30px 0 24px; }
+            main section { padding: 30px 0; }
+            #featured-post-container a.feat { grid-template-columns: 1fr; gap: 16px; }
+            a.feat .pic { order: -1; }
+            .post-grid { grid-template-columns: 1fr; }
+            a.post, a.post:nth-child(3n+1), a.post:nth-child(2n+1), a.post:nth-child(3n), a.post:nth-child(2n) { padding: 0 0 26px; border-left: 0; }
+            .subscribe { padding: 20px 18px; }
+        }
     </style>
-</head>
-<body class="antialiased">
-    <!-- Header with green background and no shadow -->
-    <header class="bg-[#06D6A0] sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <img src="https://lh3.googleusercontent.com/pw/AP1GczMRXm5fWGnx_VEenzpGb-cQkP17XBBnA69u_ADqp8efQCJ4CFYSbovdnj9fM33rNnzbZA0f1aN1nRAbbS7_R-NYYgTTRWPyovQfaGKK2hoH9LgFM8rtTzxO6IpqlgBSYlA6rVN_IdTIJIUnku6VO5HS=w500-h500-s-no-gm?authuser=0" alt="The Tech Hut Logo" class="h-10 w-auto rounded-md" onerror="this.src='https://placehold.co/150x50/cbd5e0/4299e1?text=The+Tech+Hut'">
-                <!-- Added "Blog" text next to the logo -->
-                <span class="font-bold text-xl text-white ml-2">Blog</span>
-            </div>
-            <nav class="hidden md:flex space-x-6">
-                <!-- Links changed to white with golden-yellow hover -->
-                <a href="#featured" class="text-white hover:text-[#FFD700] transition duration-300">Featured</a>
-                <a href="#blogs" class="text-white hover:text-[#FFD700] transition duration-300">Blogs</a>
-                <a href="/jobs/" class="text-white hover:text-[#FFD700] transition duration-300">Jobs</a>
-                <a href="#" class="text-white hover:text-[#FFD700] transition duration-300">About</a>
-                <a href="#" class="text-white hover:text-[#FFD700] transition duration-300">Contact</a>
-            </nav>
-            <div class="md:hidden">
-                <!-- Mobile menu button changed to white with golden-yellow hover -->
-                <button id="menu-button" class="text-white hover:text-[#FFD700] focus:outline-none">
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <!-- Mobile menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg py-2">
-            <a href="#featured" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 transition duration-300">Featured</a>
-            <a href="#blogs" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 transition duration-300">Blogs</a>
-            <a href="#" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 transition duration-300">About</a>
-            <a href="#" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 transition duration-300">Contact</a>
+</head><body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="masthead">
+        <div class="masthead-top"><div class="wrap"><span>Kenya's tech careers, reported daily</span><span class="hide-sm"><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a> &middot; <a href="mailto:info@thetechhut.co">info@thetechhut.co</a></span></div></div>
+        <div class="wrap masthead-main">
+            <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+            <nav class="sitenav" aria-label="Site"><a href="/blog/daily/">Daily</a><a href="/jobs/">Jobs</a><a href="/remote/">Remote</a><a href="/cv-pack/">CV Pack</a><a href="/shop/">Shop</a><a href="/events/">Events</a><a href="/apprenticeship/">Apprenticeship</a><a href="/blog/" aria-current="page">Blog</a></nav>
         </div>
     </header>
 
-    <!-- Hero Section: Updated with a background image and an overlay -->
-    <section class="relative w-full min-h-screen flex items-center justify-center text-center p-8 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
-        <!-- Overlay to make the text stand out and maintain the color theme -->
-        <div class="absolute inset-0 bg-[#06D6A0] opacity-80"></div>
-        <div class="relative z-10 max-w-4xl mx-auto">
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-white mb-4">
-                Tech Insights, Simplified.
-            </h1>
-            <p class="text-lg sm:text-xl text-white max-w-2xl mx-auto mb-8">
-                Your go-to source for the latest in technology, software development, and digital innovation.
-            </p>
-            <a href="#blogs" class="btn-primary inline-block">
-                Explore Blogs
-            </a>
-        </div>
-    </section>
+    <main id="main" class="wrap">
+        <header class="pagehead blog-head">
+            <span class="eyebrow">From The Tech Hut, Nairobi</span>
+            <h1>The Tech Hut <em>Blog</em></h1>
+            <p class="lede">Tutorials, guides and The Daily Savannah, our daily digest of Kenya's tech ecosystem: startups, fintech, policy and infrastructure.</p>
+        </header>
 
-    <!-- Main content container to hold other sections -->
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <!-- Featured Section -->
-        <section id="featured" class="mb-16">
-            <h2 class="text-3xl font-bold text-gray-900 mb-6">Featured Story</h2>
+        <section id="featured">
+            <div class="section-head"><h2>Featured</h2></div>
             <!-- The featured post will be dynamically injected here -->
-            <div id="featured-post-container" class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row">
+            <div id="featured-post-container">
                 <!-- Content will be added by JavaScript -->
             </div>
         </section>
 
         <!-- Weekly roundup signup: POST /subscribe (product "daily") on the Worker -->
-        <section class="mb-16">
-<aside class="subscribe-box" id="subscribe" aria-labelledby="sub-h">
+        <section>
+<aside class="subscribe" id="subscribe" aria-labelledby="sub-h">
   <h2 id="sub-h">Get the week in one email</h2>
   <p>Every Sunday morning, Nairobi time: the lead story and headlines from each day's edition, with a link to read the full thing. Free, and one click to unsubscribe.</p>
   <!-- Posts to the Worker (POST /subscribe, product "daily"). The Worker emails a confirmation link and only adds
@@ -201,21 +161,63 @@
 
         <!-- All Blogs Section -->
         <section id="blogs">
-            <h2 class="text-3xl font-bold text-gray-900 mb-6">All Blogs</h2>
-            <div id="blog-posts-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="section-head"><h2>All posts</h2><a href="/blog/daily/">Every Daily Savannah edition</a></div>
+            <div id="blog-posts-container" class="post-grid">
                 <!-- Blog posts will be dynamically injected here by JavaScript -->
             </div>
         </section>
     </main>
 
-    <!-- Footer with updated design -->
-    <footer class="bg-[#073B4C] text-gray-200 py-10">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p>&copy; 2024 The Tech Hut. All rights reserved.</p>
-            <div class="mt-4 flex justify-center space-x-4 text-sm font-semibold">
-                <a href="#" class="hover:text-[#FFD700] transition duration-300">Twitter</a>
-                <a href="#" class="hover:text-[#FFD700] transition duration-300">LinkedIn</a>
-                <a href="#" class="hover:text-[#FFD700] transition duration-300">GitHub</a>
+    <footer class="sitefoot">
+        <div class="wrap">
+            <div class="sitefoot-grid">
+                <div>
+                    <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+                    <p>Helping Kenyans into tech work: jobs you can take from Nairobi, a daily read on the industry, and projects with mentors.</p>
+                </div>
+                <div>
+                    <h4>Read</h4>
+                    <ul>
+                        <li><a href="/blog/daily/">Daily Savannah</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Find work</h4>
+                    <ul>
+                        <li><a href="/jobs/">Jobs board</a></li>
+                        <li><a href="/remote/">Remote-from-Kenya list</a></li>
+                        <li><a href="/cv-pack/">CV Pack</a></li>
+                        <li><a href="/early-access/">Early Access</a></li>
+                        <li><a href="/shop/">Everything we make</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="/apprenticeship/">Apprenticeship</a></li>
+                        <li><a href="/events/">Events</a></li>
+                        <li><a href="/communities/">Tech communities</a></li>
+                        <li><a href="/tools/">Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Employers</h4>
+                    <ul>
+                        <li><a href="/advertise/">Advertise</a></li>
+                        <li><a href="/jobs-for-your-community/">A jobs board for your community</a></li>
+                        <li><a href="/recruiters/">Recruiters</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sitefoot-base">
+                <span>&copy; 2026 The Tech Hut Community</span>
+                <a href="mailto:info@thetechhut.co">info@thetechhut.co</a>
+                <span>+254 115 017 058</span>
+                <a href="/data_privacy_policy/">Privacy</a>
+                <a href="https://linkedin.com/company/digital-transformation-partner/" rel="noopener">LinkedIn</a>
+                <a href="https://x.com/Ekiprop_kimutai" rel="noopener">X</a>
             </div>
         </div>
     </footer>
@@ -225,7 +227,7 @@
             const menuButton = document.getElementById('menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
 
-            menuButton.addEventListener('click', () => {
+            if (menuButton && mobileMenu) menuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
             });
 
@@ -234,7 +236,7 @@
                 {
                     id: 0,
                     title: "The Daily Savannah \u2014 Kenya Tech, Every Day",
-                    excerpt: "Our automated daily digest of Kenya's tech ecosystem: startups, fintech, policy, and infrastructure. A fresh edition every evening at 6 PM.",
+                    excerpt: "Our automated daily digest of Kenya's tech ecosystem: startups, fintech, policy, and infrastructure. A fresh edition every evening at 9 PM.",
                     author: "The Tech Hut",
                     date: "Updated daily",
                     image: "https://images.unsplash.com/photo-1741991110666-88115e724741?q=80&w=800&auto=format&fit=crop",
@@ -381,21 +383,21 @@
                 const href = post.url || `/blog?title=${titleEncoded}&author=${authorEncoded}`;
 
                 featuredContainer.innerHTML = `
-                    <a href="${href}" class="flex flex-col md:flex-row w-full transition-transform transform hover:scale-105 duration-300">
-                        <div class="md:w-1/2 p-6 md:p-10 flex flex-col justify-center">
-                            <span class="text-sm font-semibold text-[#06D6A0] uppercase mb-2">Featured</span>
-                            <h3 class="text-2xl font-bold text-gray-900 mb-3">${post.title}</h3>
-                            <p class="text-gray-600 mb-4">${post.excerpt}</p>
-                            <div class="flex items-center text-gray-500 text-sm">
+                    <a href="${href}" class="feat">
+                        <div class="txt">
+                            <span class="kicker">Featured</span>
+                            <h3>${post.title}</h3>
+                            <p class="dek">${post.excerpt}</p>
+                            <div class="meta">
                                 <span>By ${post.author}</span>
-                                <span class="mx-2">•</span>
+                                <span class="sep">•</span>
                                 <span>${post.date}</span>
-                                <span class="mx-2">•</span>
+                                <span class="sep">•</span>
                                 <span data-live-likes="${window.TTHReactions.slug(post.title)}">0 Likes</span>
                             </div>
                         </div>
-                        <div class="md:w-1/2">
-                            <img src="${post.image}" alt="Featured blog post image" class="w-full h-full object-cover">
+                        <div class="pic">
+                            <img src="${post.image}" alt="Featured blog post image" class="pic-img">
                         </div>
                     </a>
                 `;
@@ -410,17 +412,17 @@
                 
                 const article = document.createElement('a');
                 article.href = href; // Making the entire card a link
-                article.className = 'card overflow-hidden block transition-transform transform hover:scale-105 duration-300';
+                article.className = 'post';
                 article.innerHTML = `
-                    <img src="${post.image}" alt="Image for ${post.title}" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h4 class="text-xl font-bold text-gray-900 mb-2">${post.title}</h4>
-                        <p class="text-gray-600 text-sm mb-4">${post.excerpt}</p>
-                        <div class="flex items-center text-gray-500 text-xs">
+                    <img src="${post.image}" alt="Image for ${post.title}" class="pic">
+                    <div class="txt">
+                        <h4>${post.title}</h4>
+                        <p class="ex">${post.excerpt}</p>
+                        <div class="meta">
                             <span>By ${post.author}</span>
-                            <span class="mx-2">•</span>
+                            <span class="sep">•</span>
                             <span>${post.date}</span>
-                            <span class="mx-2">•</span>
+                            <span class="sep">•</span>
                             <span data-live-likes="${window.TTHReactions.slug(post.title)}">0 Likes</span>
                         </div>
                     </div>
@@ -448,23 +450,23 @@
                 if (hero) hero.style.display = 'none';
                 const main = document.querySelector('main');
                 const paragraphs = (post.content && post.content.length ? post.content : [post.excerpt])
-                    .map(p => `<p class="text-gray-600 leading-relaxed mb-5">${p}</p>`).join('');
+                    .map(p => `<p>${p}</p>`).join('');
                 main.innerHTML = `
-                    <article class="max-w-3xl mx-auto">
-                        <a href="/blog/" class="inline-block mb-6 text-sm font-semibold text-[#06D6A0] hover:text-[#073B4C] transition duration-300">&larr; Back to all blogs</a>
-                        <span class="block text-sm font-semibold text-[#06D6A0] uppercase mb-2">The Tech Hut Blog</span>
-                        <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">${post.title}</h1>
-                        <div class="flex items-center text-gray-500 text-sm mb-8">
+                    <article class="single">
+                        <a href="/blog/" class="backlink">&larr; Back to all blogs</a>
+                        <span class="eyebrow">The Tech Hut Blog</span>
+                        <h1>${post.title}</h1>
+                        <div class="meta single-meta">
                             <span>By ${post.author}</span>
-                            <span class="mx-2">&bull;</span>
+                            <span class="sep">&bull;</span>
                             <span>${post.date}</span>
-                            <span class="mx-2">&bull;</span>
+                            <span class="sep">&bull;</span>
                             <span data-live-likes="${window.TTHReactions.slug(post.title)}">0 Likes</span>
                         </div>
-                        <div id="post-reactions" class="mb-8"></div>
-                        <img src="${post.image}" alt="Image for ${post.title}" class="w-full h-64 sm:h-96 object-cover rounded-xl shadow-lg mb-8">
+                        <div id="post-reactions" class="post-reactions"></div>
+                        <img src="${post.image}" alt="Image for ${post.title}" class="hero-img">
                         ${paragraphs}
-                        <a href="/blog/" class="inline-block mt-4 text-sm font-semibold text-[#06D6A0] hover:text-[#073B4C] transition duration-300">&larr; Back to all blogs</a>
+                        <a href="/blog/" class="backlink">&larr; Back to all blogs</a>
                     </article>
                 `;
                 window.scrollTo(0, 0);

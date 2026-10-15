@@ -5,171 +5,278 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Afro-IP, Law & Tech Conference Infographic</title>
     <link rel="canonical" href="https://thetechhut.co/afro-ip/">
-    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8;
-        }
         .chart-container {
             position: relative;
             width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
             height: 300px;
             max-height: 400px;
         }
         @media (min-width: 768px) {
-            .chart-container {
-                height: 350px;
-            }
+            .chart-container { height: 350px; }
         }
-        .flow-arrow {
-            content: '→';
-            font-size: 2rem;
-            color: #118AB2;
-            line-height: 1;
+        .chart-container.tall { height: 360px; }
+        .chart-note { font-size: 15px; color: var(--muted); margin: 14px 0 0; max-width: 66ch; }
+
+        /* chart on the left, the words beside it */
+        .duo { display: grid; gap: 28px 48px; grid-template-columns: 1.1fr 1fr; align-items: start; margin-top: 24px; }
+        .duo > div { border-top: 2px solid var(--ink); padding-top: 14px; min-width: 0; }
+        .duo.even { grid-template-columns: 1fr 1fr; }
+        .duo h3 { font-size: 21px; }
+        .defs { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--rule); }
+        .defs li { padding: 12px 0; border-bottom: 1px solid var(--rule); font-size: 16px; color: var(--text); }
+
+        /* the cycle: three stages read left to right */
+        .cycle { list-style: none; padding: 0; margin: 24px 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+            border-top: 2px solid var(--ink); border-bottom: 1px solid var(--rule); counter-reset: c; }
+        .cycle li { counter-increment: c; padding: 16px 20px 16px 0; font-family: var(--serif); font-size: 22px; font-weight: 600; color: var(--ink); line-height: 1.2; }
+        .cycle li + li { border-left: 1px solid var(--rule); padding-left: 20px; }
+        .cycle li::before { content: counter(c, decimal-leading-zero); display: block; font-family: var(--mono); font-size: 12px; font-weight: 500;
+            color: var(--green); letter-spacing: .06em; margin-bottom: 8px; }
+        .cycle li:not(:last-child)::after { content: "\2192"; font-family: var(--mono); font-size: 18px; color: var(--green); margin-left: 8px; }
+        .cycle li.back::after { content: "\21BA  back to policy"; font-family: var(--mono); font-size: 12px; font-weight: 500; text-transform: uppercase;
+            letter-spacing: .06em; color: var(--dim); display: block; margin: 8px 0 0; }
+
+        .cards.comps { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+        @media (max-width: 1000px) { .cards.comps { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+        @media (max-width: 860px) {
+            .duo, .duo.even { grid-template-columns: 1fr; }
         }
-        .flow-arrow-down {
-            content: '↓';
-            font-size: 2rem;
-            color: #118AB2;
-            line-height: 1;
+        @media (max-width: 620px) {
+            .cycle { grid-template-columns: 1fr; }
+            .cycle li + li { border-left: 0; padding-left: 0; border-top: 1px solid var(--rule); }
+            .cycle li:not(:last-child)::after { content: "\2193"; }
+            .cards.comps { grid-template-columns: 1fr; }
         }
     </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/thh.css">
 </head>
-<body class="bg-[#073B4C] text-gray-800">
+<body>
 
-    <div class="container mx-auto p-4 md:p-8">
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="masthead">
+        <div class="masthead-top"><div class="wrap"><span>Kenya's tech careers, reported daily</span><span class="hide-sm"><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a> &middot; <a href="mailto:info@thetechhut.co">info@thetechhut.co</a></span></div></div>
+        <div class="wrap masthead-main">
+            <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+            <nav class="sitenav" aria-label="Site"><a href="/blog/daily/">Daily</a><a href="/jobs/">Jobs</a><a href="/remote/">Remote</a><a href="/cv-pack/">CV Pack</a><a href="/shop/">Shop</a><a href="/events/">Events</a><a href="/apprenticeship/">Apprenticeship</a><a href="/blog/">Blog</a></nav>
+        </div>
+    </header>
+    <nav class="pagenav" aria-label="On this page"><div class="wrap"><span class="pagenav-label">On this page</span><a href="#challenges">Challenges</a><a href="#audiences">Audiences</a><a href="#competitions">Competitions</a><a href="#outcomes">Outcomes</a></div></nav>
 
-        <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-6xl font-black text-white uppercase tracking-wider">Charting <span class="text-[#06D6A0]">Africa's AI Future</span></h1>
-            <p class="text-xl md:text-2xl text-gray-300 mt-4">The Afro-IP, Law & Tech Conference & Competitions</p>
-        </header>
+    <header class="hero" id="main">
+        <div class="wrap">
+            <span class="eyebrow">The Afro-IP, Law &amp; Tech Conference &amp; Competitions</span>
+            <h1>Charting <em>Africa's AI future</em></h1>
+            <p class="lede">
+                This initiative bridges the gap between high-level strategy, like the AU's Continental AI
+                Strategy, and tangible, community-driven innovation. It's a multidisciplinary forum
+                designed to ensure Africa's development of AI is inclusive, ethical, and self-determined.
+            </p>
+            <p class="byline">An initiative by YLIT &amp; the Centre for Afro-IP Law and Policy Research</p>
+        </div>
+    </header>
 
-        <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-            <section class="lg:col-span-3 bg-white/10 rounded-xl shadow-2xl p-6 md:p-8 backdrop-blur-sm border border-white/20">
-                <h2 class="text-3xl font-bold text-white mb-4 text-center">A Unified Vision: From Policy to Code</h2>
-                <p class="text-gray-300 mb-6 text-center max-w-3xl mx-auto">
-                    This initiative bridges the gap between high-level strategy, like the AU's Continental AI Strategy, and tangible, community-driven innovation. It's a multidisciplinary forum designed to ensure Africa's development of AI is inclusive, ethical, and self-determined.
-                </p>
-                <div class="chart-container h-64 md:h-80 mx-auto">
-                    <canvas id="themesChart"></canvas>
-                </div>
-                 <p class="text-center text-gray-400 mt-4 text-sm">This chart illustrates the three core thematic pillars of the event. "Leveraging AI" is the overarching goal, which is achieved by translating "Policy to Code" through the practical application of "Code, Voice, & Map" in the competitions. This shows a clear strategy for turning vision into reality.</p>
-            </section>
-
-            <section class="md:col-span-2 lg:col-span-1 bg-white rounded-xl shadow-lg p-6">
-                <h2 class="text-2xl font-bold text-[#073B4C] mb-4">Africa's AI Landscape: Key Challenges</h2>
-                <div class="chart-container h-80">
-                    <canvas id="challengesChart"></canvas>
-                </div>
-                <div class="mt-4 text-sm text-gray-600 space-y-2">
-                    <p><strong>Regulatory Gaps:</strong> A lack of harmonized legal frameworks creates uncertainty, hindering investment and innovation.</p>
-                    <p><strong>Ethical Dilemmas:</strong> Without context-sensitive governance, AI risks amplifying biases and infringing on data rights.</p>
-                    <p><strong>Infrastructure Shortfalls:</strong> Limited digital access and research capacity form a barrier to large-scale AI adoption.</p>
-                    <p><strong>Under-representation:</strong> African voices are often absent in global AI forums, leading to misaligned solutions.</p>
-                </div>
-            </section>
-
-            <section class="md:col-span-2 bg-white rounded-xl shadow-lg p-6 flex flex-col items-center justify-center">
-                <h2 class="text-2xl font-bold text-[#073B4C] mb-6 text-center">The Virtuous Cycle: From Policy to Impact</h2>
-                 <p class="text-center text-gray-600 mb-6 max-w-xl">The conference creates a self-reinforcing cycle where policy informs innovation and practical application refines governance. This integrated approach is key to sustainable development in Africa's AI ecosystem.</p>
-                <div class="w-full flex flex-col md:flex-row items-center justify-around space-y-4 md:space-y-0 md:space-x-4">
-                    <div class="text-center">
-                        <div class="bg-[#118AB2] text-white p-4 rounded-lg shadow-md">Policy Frameworks</div>
-                        <div class="flow-arrow-down md:hidden my-2">↓</div>
-                    </div>
-                    <div class="hidden md:block flow-arrow">→</div>
-                    <div class="text-center">
-                        <div class="bg-[#06D6A0] text-white p-4 rounded-lg shadow-md">Community Innovation</div>
-                         <div class="flow-arrow-down md:hidden my-2">↓</div>
-                    </div>
-                    <div class="hidden md:block flow-arrow">→</div>
-                    <div class="text-center">
-                        <div class="bg-[#FFD166] text-[#073B4C] p-4 rounded-lg shadow-md">Actionable Insights</div>
+    <section id="vision">
+        <div class="wrap">
+            <span class="eyebrow">The themes</span>
+            <h2>A unified vision: from policy to code</h2>
+            <div class="duo">
+                <div>
+                    <div class="chart-container">
+                        <canvas id="themesChart"></canvas>
                     </div>
                 </div>
-            </section>
-
-            <section class="bg-white rounded-xl shadow-lg p-6">
-                <h2 class="text-2xl font-bold text-[#073B4C] mb-4 text-center">Conference Audience</h2>
-                <div class="chart-container h-64">
-                    <canvas id="conferenceAudienceChart"></canvas>
+                <div>
+                    <h3>Three pillars</h3>
+                    <p class="chart-note" style="margin-top:0">This chart illustrates the three core thematic pillars of the event. &ldquo;Leveraging AI&rdquo; is the overarching goal, which is achieved by translating &ldquo;Policy to Code&rdquo; through the practical application of &ldquo;Code, Voice, &amp; Map&rdquo; in the competitions. This shows a clear strategy for turning vision into reality.</p>
                 </div>
-                <p class="text-center text-gray-600 mt-4 text-sm">Engages a broad, multidisciplinary group to foster rich dialogue and cross-sectoral partnerships.</p>
-            </section>
+            </div>
+        </div>
+    </section>
 
-            <section class="bg-white rounded-xl shadow-lg p-6">
-                <h2 class="text-2xl font-bold text-[#073B4C] mb-4 text-center">Competition Participants</h2>
-                <div class="chart-container h-64">
-                    <canvas id="competitionAudienceChart"></canvas>
-                </div>
-                 <p class="text-center text-gray-600 mt-4 text-sm">Targets emerging talent to directly engage the future architects of Africa's digital landscape.</p>
-            </section>
-
-            <section class="lg:col-span-3 bg-white/10 rounded-xl shadow-2xl p-6 md:p-8 backdrop-blur-sm border border-white/20">
-                <h2 class="text-3xl font-bold text-white mb-6 text-center">Fostering Innovation: The Competitions</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 text-center">
-                    <div class="bg-white/90 p-4 rounded-lg shadow-md">
-                        <div class="text-4xl mb-2">⚖️</div>
-                        <h3 class="font-bold text-[#118AB2]">Moot Court</h3>
-                        <p class="text-sm text-gray-600">Advocacy & jurisprudence on IP, data rights & AI ethics.</p>
-                    </div>
-                    <div class="bg-white/90 p-4 rounded-lg shadow-md">
-                        <div class="text-4xl mb-2">🔬</div>
-                        <h3 class="font-bold text-[#118AB2]">Research</h3>
-                        <p class="text-sm text-gray-600">Policy foresight & critical analysis for AI regulation.</p>
-                    </div>
-                    <div class="bg-white/90 p-4 rounded-lg shadow-md">
-                        <div class="text-4xl mb-2">💬</div>
-                        <h3 class="font-bold text-[#118AB2]">Debate</h3>
-                        <p class="text-sm text-gray-600">Strategic argumentation on sovereignty & bias.</p>
-                    </div>
-                    <div class="bg-white/90 p-4 rounded-lg shadow-md">
-                        <div class="text-4xl mb-2">💻</div>
-                        <h3 class="font-bold text-[#118AB2]">Hackathon</h3>
-                        <p class="text-sm text-gray-600">Civic tech innovation for Afrocentric legal needs.</p>
-                    </div>
-                    <div class="bg-white/90 p-4 rounded-lg shadow-md">
-                        <div class="text-4xl mb-2">🗺️</div>
-                        <h3 class="font-bold text-[#118AB2]">Mapperthon</h3>
-                        <p class="text-sm text-gray-600">Data mapping for justice accessibility & infrastructure.</p>
+    <section id="challenges">
+        <div class="wrap">
+            <span class="eyebrow">The landscape</span>
+            <h2>Africa's AI landscape: key challenges</h2>
+            <div class="duo">
+                <div>
+                    <div class="chart-container tall">
+                        <canvas id="challengesChart"></canvas>
                     </div>
                 </div>
-            </section>
-            
-            <section class="lg:col-span-3 bg-white rounded-xl shadow-lg p-6">
-                <h2 class="text-2xl font-bold text-[#073B4C] mb-4 text-center">Driving Progress: Measurable Outcomes</h2>
-                <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">The conference is designed for tangible impact, moving beyond discussion to generate measurable results in capacity building, policy development, and innovation.</p>
-                <div class="chart-container h-80 mx-auto">
+                <div>
+                    <h3>Four gaps</h3>
+                    <ul class="defs">
+                        <li><strong>Regulatory gaps:</strong> A lack of harmonised legal frameworks creates uncertainty, hindering investment and innovation.</li>
+                        <li><strong>Ethical dilemmas:</strong> Without context-sensitive governance, AI risks amplifying biases and infringing on data rights.</li>
+                        <li><strong>Infrastructure shortfalls:</strong> Limited digital access and research capacity form a barrier to large-scale AI adoption.</li>
+                        <li><strong>Under-representation:</strong> African voices are often absent in global AI forums, leading to misaligned solutions.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cycle">
+        <div class="wrap">
+            <span class="eyebrow">The approach</span>
+            <h2>The virtuous cycle: from policy to impact</h2>
+            <p class="tight" style="max-width:62ch">The conference creates a self-reinforcing cycle where policy informs innovation and practical application refines governance. This integrated approach is key to sustainable development in Africa's AI ecosystem.</p>
+            <ol class="cycle">
+                <li>Policy frameworks</li>
+                <li>Community innovation</li>
+                <li class="back">Actionable insights</li>
+            </ol>
+        </div>
+    </section>
+
+    <section id="audiences">
+        <div class="wrap">
+            <span class="eyebrow">Who takes part</span>
+            <h2>Two audiences</h2>
+            <div class="duo even">
+                <div>
+                    <h3>Conference audience</h3>
+                    <div class="chart-container">
+                        <canvas id="conferenceAudienceChart"></canvas>
+                    </div>
+                    <p class="chart-note">Engages a broad, multidisciplinary group to foster rich dialogue and cross-sectoral partnerships.</p>
+                </div>
+                <div>
+                    <h3>Competition participants</h3>
+                    <div class="chart-container">
+                        <canvas id="competitionAudienceChart"></canvas>
+                    </div>
+                    <p class="chart-note">Targets emerging talent to directly engage the future architects of Africa's digital landscape.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="competitions">
+        <div class="wrap">
+            <span class="eyebrow">Code, voice and map</span>
+            <h2>The competitions</h2>
+            <div class="cards comps">
+                <div class="card">
+                    <span class="n">01</span>
+                    <h3>Moot Court</h3>
+                    <p>Advocacy &amp; jurisprudence on IP, data rights &amp; AI ethics.</p>
+                </div>
+                <div class="card">
+                    <span class="n">02</span>
+                    <h3>Research</h3>
+                    <p>Policy foresight &amp; critical analysis for AI regulation.</p>
+                </div>
+                <div class="card">
+                    <span class="n">03</span>
+                    <h3>Debate</h3>
+                    <p>Strategic argumentation on sovereignty &amp; bias.</p>
+                </div>
+                <div class="card">
+                    <span class="n">04</span>
+                    <h3>Hackathon</h3>
+                    <p>Civic tech innovation for Afrocentric legal needs.</p>
+                </div>
+                <div class="card">
+                    <span class="n">05</span>
+                    <h3>Mapperthon</h3>
+                    <p>Data mapping for justice accessibility &amp; infrastructure.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="outcomes">
+        <div class="wrap">
+            <span class="eyebrow">Targets</span>
+            <h2>Measurable outcomes</h2>
+            <p class="tight" style="max-width:62ch">The conference is designed for tangible impact, moving beyond discussion to generate measurable results in capacity building, policy development, and innovation.</p>
+            <div style="border-top:2px solid var(--ink);padding-top:14px;margin-top:24px">
+                <div class="chart-container tall">
                     <canvas id="outcomesChart"></canvas>
                 </div>
-            </section>
+            </div>
+        </div>
+    </section>
 
-        </main>
+    <div class="pagefoot"><div class="wrap">
+        <p>An initiative by Young Lawyers in Tech Society (YLIT) &amp; The Centre for Afro-IP Law and Policy Research.</p>
+    </div></div>
 
-        <footer class="text-center mt-12 py-6 border-t border-white/20">
-            <p class="text-gray-400">An initiative by Young Lawyers in Tech Society (YLIT) & The Centre for Afro-IP Law and Policy Research.</p>
-        </footer>
-
-    </div>
+    <footer class="sitefoot">
+        <div class="wrap">
+            <div class="sitefoot-grid">
+                <div>
+                    <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+                    <p>Helping Kenyans into tech work: jobs you can take from Nairobi, a daily read on the industry, and projects with mentors.</p>
+                </div>
+                <div>
+                    <h4>Read</h4>
+                    <ul>
+                        <li><a href="/blog/daily/">Daily Savannah</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Find work</h4>
+                    <ul>
+                        <li><a href="/jobs/">Jobs board</a></li>
+                        <li><a href="/remote/">Remote-from-Kenya list</a></li>
+                        <li><a href="/cv-pack/">CV Pack</a></li>
+                        <li><a href="/early-access/">Early Access</a></li>
+                        <li><a href="/shop/">Everything we make</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="/apprenticeship/">Apprenticeship</a></li>
+                        <li><a href="/events/">Events</a></li>
+                        <li><a href="/communities/">Tech communities</a></li>
+                        <li><a href="/tools/">Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Employers</h4>
+                    <ul>
+                        <li><a href="/advertise/">Advertise</a></li>
+                        <li><a href="/jobs-for-your-community/">A jobs board for your community</a></li>
+                        <li><a href="/recruiters/">Recruiters</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sitefoot-base">
+                <span>&copy; 2026 The Tech Hut Community</span>
+                <a href="mailto:info@thetechhut.co">info@thetechhut.co</a>
+                <span>+254 115 017 058</span>
+                <a href="/data_privacy_policy/">Privacy</a>
+                <a href="https://linkedin.com/company/digital-transformation-partner/" rel="noopener">LinkedIn</a>
+                <a href="https://x.com/Ekiprop_kimutai" rel="noopener">X</a>
+            </div>
+        </div>
+    </footer>
 
     <script>
+        /* brand palette only: ink, green, mint, gold and a neutral blue-grey */
         const energeticPalette = {
-            red: '#FF6B6B',
-            yellow: '#FFD166',
+            red: '#9FBAC4',
+            yellow: '#FFD700',
             green: '#06D6A0',
-            blue: '#118AB2',
+            blue: '#046B52',
             darkBlue: '#073B4C',
             white: '#FFFFFF'
         };
+
+        Chart.defaults.font.family = '"Source Sans 3", system-ui, sans-serif';
+        Chart.defaults.font.size = 13;
+        Chart.defaults.color = energeticPalette.darkBlue;
 
         function wrapLabel(label, maxWidth) {
             const words = label.split(' ');
@@ -186,7 +293,7 @@
             lines.push(currentLine);
             return lines;
         }
-        
+
         const tooltipTitleCallback = (tooltipItems) => {
             const item = tooltipItems[0];
             let label = item.chart.data.labels[item.dataIndex];
@@ -195,7 +302,7 @@
             }
             return label;
         };
-        
+
         const defaultChartOptions = {
             responsive: true,
             maintainAspectRatio: false,
@@ -217,7 +324,7 @@
                     grid: { color: 'rgba(7, 59, 76, 0.1)' }
                 },
                 x: {
-                    ticks: { color: energeticPalette.darkBlue },
+                    ticks: { color: energeticPalette.darkBlue, autoSkip: false },
                     grid: { display: false }
                 }
             }
@@ -227,13 +334,12 @@
         new Chart(themesCtx, {
             type: 'bar',
             data: {
-                labels: ['Leveraging AI: An African Perspective', 'From Policy to Code', 'Code, Voice, & Map'],
+                labels: ['Leveraging AI: An African Perspective', 'From Policy to Code', 'Code, Voice, & Map'].map(label => wrapLabel(label, 18)),
                 datasets: [{
                     label: 'Thematic Focus',
                     data: [100, 85, 70],
-                    backgroundColor: [energeticPalette.blue, energeticPalette.green, energeticPalette.yellow],
-                    borderColor: energeticPalette.darkBlue,
-                    borderWidth: 2
+                    backgroundColor: [energeticPalette.darkBlue, energeticPalette.blue, energeticPalette.green],
+                    borderWidth: 0
                 }]
             },
             options: {
@@ -245,8 +351,8 @@
                     tooltip: { callbacks: { title: tooltipTitleCallback } }
                 },
                 scales: {
-                    y: { ticks: { color: energeticPalette.white, font: { size: 14 } }, grid: { display: false } },
-                    x: { ticks: { color: energeticPalette.white }, grid: { color: 'rgba(255, 255, 255, 0.2)' } }
+                    y: { ticks: { color: energeticPalette.darkBlue, font: { size: 14 } }, grid: { display: false } },
+                    x: { ticks: { color: energeticPalette.darkBlue }, grid: { color: 'rgba(7, 59, 76, 0.1)' } }
                 }
             }
         });
@@ -255,16 +361,16 @@
         new Chart(challengesCtx, {
             type: 'radar',
             data: {
-                labels: ['Regulatory Gaps', 'Ethical Dilemmas', 'Infrastructure Shortfalls', 'Under-representation'],
+                labels: ['Regulatory Gaps', 'Ethical Dilemmas', 'Infrastructure Shortfalls', 'Under-representation'].map(label => wrapLabel(label, 12)),
                 datasets: [{
                     label: 'Challenge Severity',
                     data: [8, 9, 7, 8.5],
-                    backgroundColor: 'rgba(255, 107, 107, 0.4)',
-                    borderColor: energeticPalette.red,
-                    pointBackgroundColor: energeticPalette.red,
+                    backgroundColor: 'rgba(6, 214, 160, 0.25)',
+                    borderColor: energeticPalette.darkBlue,
+                    pointBackgroundColor: energeticPalette.darkBlue,
                     pointBorderColor: energeticPalette.white,
                     pointHoverBackgroundColor: energeticPalette.white,
-                    pointHoverBorderColor: energeticPalette.red
+                    pointHoverBorderColor: energeticPalette.darkBlue
                 }]
             },
             options: {
@@ -295,7 +401,7 @@
                 labels: ['Legal Scholars', 'Tech Entrepreneurs', 'Policymakers', 'GIS Experts & CSOs'],
                 datasets: [{
                     data: [30, 25, 25, 20],
-                    backgroundColor: [energeticPalette.blue, energeticPalette.green, energeticPalette.yellow, energeticPalette.red],
+                    backgroundColor: [energeticPalette.darkBlue, energeticPalette.green, energeticPalette.yellow, energeticPalette.red],
                     hoverOffset: 4
                 }]
             },
@@ -316,7 +422,7 @@
                 labels: ['University Students', 'Young Professionals', 'CSOs & Advocates', 'Creative Industry'],
                 datasets: [{
                     data: [40, 30, 15, 15],
-                    backgroundColor: [energeticPalette.green, energeticPalette.blue, energeticPalette.red, energeticPalette.yellow],
+                    backgroundColor: [energeticPalette.green, energeticPalette.darkBlue, energeticPalette.red, energeticPalette.yellow],
                     hoverOffset: 4
                 }]
             },
@@ -329,7 +435,7 @@
                 }
             }
         });
-        
+
         const outcomesCtx = document.getElementById('outcomesChart').getContext('2d');
         const outcomeLabels = ['Policy Briefs Published', 'Prototype Projects Initiated', 'Multi-Sector Partnerships', 'Mentorship Pairings', 'Skills Gained (Participants)'];
         new Chart(outcomesCtx, {
@@ -339,8 +445,8 @@
                 datasets: [{
                     label: 'Targeted Outcomes (Units/Count)',
                     data: [20, 5, 15, 50, 200],
-                    backgroundColor: [energeticPalette.green, energeticPalette.yellow, energeticPalette.blue, energeticPalette.red, energeticPalette.darkBlue],
-                    borderRadius: 5,
+                    backgroundColor: energeticPalette.darkBlue,
+                    borderRadius: 0,
                 }]
             },
             options: defaultChartOptions

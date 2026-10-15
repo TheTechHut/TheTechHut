@@ -27,226 +27,159 @@
     <meta name="twitter:image" content="https://thetechhut.co/assets/img/social/cv-blueprint.jpg">
     <meta name="keywords"
         content="how to craft a winning cv, tech resume guide, software engineer CV guide, ATS friendly developer resume, engineering resume metrics, Kenya tech jobs, The Tech Hut">
-
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/thh.css">
+    <style>
+        .reality { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+        .reality h2 { max-width: 20ch; }
+        .calc { background: var(--paper-2); border-top: 3px solid var(--ink); padding: 22px 24px 24px; }
+        .calc h3 { margin-bottom: 4px; }
+        .calc > p { font-size: 15.5px; color: var(--muted); }
+        .calc label { display: block; font-family: var(--mono); font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .06em; color: var(--dim); margin: 18px 0 10px; }
+        .calc input[type="range"] { width: 100%; accent-color: var(--ink); margin: 0; }
+        .scale { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-family: var(--mono); font-size: 12.5px; color: var(--dim); margin-top: 8px; }
+        .scale #salaryDisplay { font-size: 16px; font-weight: 600; color: var(--ink); }
+        .calc .figures { margin-top: 20px; grid-template-columns: 1fr 1fr; }
+        .calc .figures > div + div { border-left: 1px solid var(--rule); padding-left: 16px; }
+        .calc .figures b { font-size: 24px; }
+        .calc .figures b.ok { color: var(--green); }
+        .calc .figures span { margin: 0 0 6px; font-family: var(--mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--dim); }
+        #purchase .now { margin: 8px 0 2px; }
+        #payButton { display: block; width: 100%; margin-top: 18px; font-size: 16px; padding: 14px 20px; }
+        #purchase .paynote { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--dim); margin: 10px 0 0; }
+        #purchase .delivery { border-top: 1px solid var(--rule); margin: 18px 0 0; padding-top: 14px; font-size: 15.5px; }
+        @media (max-width: 860px) { .reality { grid-template-columns: 1fr; gap: 32px; } }
+        @media (max-width: 420px) { .calc { padding: 18px 16px 20px; } .scale { font-size: 11.5px; } }
+    
+    </style>
 </head>
 
-<body
-    class="bg-[#030712] text-slate-100 antialiased font-sans selection:bg-indigo-500 selection:text-white overflow-x-hidden">
-
-    <nav class="fixed top-0 left-0 w-full z-50 bg-[#030712]/70 backdrop-blur-xl border-b border-white/5">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-md font-bold tracking-tight text-white hover:opacity-80 transition cursor-pointer">
-                The Tech Hut<span class="text-indigo-500">.</span>
-            </div>
-            <div class="flex items-center gap-6">
-                <a href="#features"
-                    class="text-xs font-semibold text-slate-400 hover:text-white transition hidden sm:inline-block">The
-                    Strategy</a>
-                <a href="#purchase"
-                    class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-4 py-2.5 rounded-full transition-all duration-300 shadow-lg shadow-indigo-600/20 hover:scale-[1.02]">
-                    Download Blueprint
-                </a>
-            </div>
+<body>
+        <a class="skip" href="#main">Skip to content</a>
+    <header class="masthead">
+        <div class="masthead-top"><div class="wrap"><span>Kenya's tech careers, reported daily</span><span class="hide-sm"><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a> &middot; <a href="mailto:info@thetechhut.co">info@thetechhut.co</a></span></div></div>
+        <div class="wrap masthead-main">
+            <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+            <nav class="sitenav" aria-label="Site"><a href="/blog/daily/">Daily</a><a href="/jobs/">Jobs</a><a href="/remote/">Remote</a><a href="/cv-pack/">CV Pack</a><a href="/shop/">Shop</a><a href="/events/">Events</a><a href="/apprenticeship/">Apprenticeship</a><a href="/blog/">Blog</a></nav>
         </div>
-    </nav>
+    </header>
+    <nav class="pagenav" aria-label="On this page"><div class="wrap"><span class="pagenav-label">On this page</span><a href="#loss-aversion">The problem</a><a href="#features">What's inside</a><a href="#compare">Compared</a><a class="btn" href="#purchase">Get it &middot; KSh 250</a></div></nav>
 
-    <header
-        class="min-h-screen flex flex-col justify-center items-center pt-24 pb-12 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-slate-900/40 via-[#030712] to-[#030712] relative px-6">
-        <div
-            class="absolute inset-0 bg-[linear-gradient(to_right,#111827_1px,transparent_1px),linear-gradient(to_bottom,#111827_1px,transparent_1px)] bg-[size:5rem_5rem] opacity-30">
-        </div>
-
-        <div class="max-w-4xl mx-auto text-center space-y-8 relative z-10">
-            <div
-                class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-extrabold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase tracking-widest animate-fade-in mx-auto">
-                ⚡ Over 1,420+ Tech Careers Optimized in Kenya
-            </div>
-
-            <h1
-                class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.05] max-w-3xl mx-auto">
-                Your tech stack is elite. <br>
-                <span
-                    class="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Your
-                    CV shouldn't hold you back.</span>
-            </h1>
-
-            <p class="text-md sm:text-xl text-slate-400 max-w-xl mx-auto font-medium leading-relaxed">
-                Stop falling into automated recruiter black holes. Get the definitive markdown blueprints engineered to
-                bypass ATS filters and secure high-leverage interviews.
+    <header class="hero" id="main">
+        <div class="wrap">
+            <span class="pill">Over 1,420 tech careers optimised in Kenya</span>
+            <h1>Your tech stack is elite. Your CV shouldn&rsquo;t <em>hold you back.</em></h1>
+            <p class="lede">
+                Most tech CVs are read by an applicant tracking system before a person ever sees
+                them. This guide and its plain markdown templates show you how to lay yours out so
+                it gets past the ATS filter and into an interview.
             </p>
-
-            <div class="flex flex-col items-center gap-4 pt-4">
-                <a href="#purchase"
-                    class="w-full sm:w-auto px-8 py-4 bg-white text-slate-950 font-bold rounded-full text-sm shadow-2xl transition duration-300 hover:bg-slate-100 hover:scale-[1.01] text-center">
-                    Get Instant Access — KSH 250
-                </a>
-                <p class="text-[11px] text-slate-500 font-semibold uppercase tracking-wider flex items-center gap-2">
-                    <span>Instant Delivery</span> • <span>One-Time Payment</span> • <span>Paystack Verified</span>
-                </p>
+            <div class="cta-row">
+                <a class="btn light" href="#purchase">Get instant access &mdash; KSH 250</a>
+                <a class="btn ghost" href="#loss-aversion">Read the strategy</a>
             </div>
-        </div>
-
-        <div class="mt-16 animate-bounce hidden md:block">
-            <a href="#loss-aversion"
-                class="text-slate-600 text-xs tracking-widest uppercase font-bold hover:text-slate-400 transition">Read
-                The Strategy ↓</a>
+            <p class="cta-note">Instant delivery &middot; One-time payment &middot; Paystack verified</p>
         </div>
     </header>
 
-    <section id="loss-aversion" class="py-24 border-t border-slate-900 bg-black/40">
-        <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div class="lg:col-span-6 space-y-6">
-                <span class="text-xs font-bold text-rose-400 uppercase tracking-widest block">The Reality Check</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
-                    Every automated rejection is a missed KSH 150,000+ salary step.
-                </h2>
-                <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
-                    When you apply for remote or local tech roles, your CV is processed by an **Applicant Tracking
-                    System (ATS)** before a human engineer ever looks at it. If your alignment layout, project stack
-                    parsing, or metric metrics are off, you get filtered out instantly.
+    <section id="loss-aversion">
+        <div class="wrap reality">
+            <div>
+                <span class="eyebrow">The reality check</span>
+                <h2>Every automated rejection is a missed KSH 150,000+ salary step.</h2>
+                <p>
+                    When you apply for remote or local tech roles, your CV is processed by an
+                    <b>Applicant Tracking System (ATS)</b> before a human engineer ever looks at it.
+                    If your layout, the way your project stack parses, or your metrics are off, you
+                    get filtered out instantly.
                 </p>
-                <div class="p-4 bg-rose-500/5 border border-rose-500/20 rounded-2xl">
-                    <p class="text-xs text-rose-300 leading-relaxed font-medium">
-                        ⚠️ **The Truth:** You don't need a longer career history. You need a layout engineered to pass
-                        the algorithmic screening gatekeepers.
-                    </p>
+                <div class="callout warn">
+                    <b>The truth:</b> you don&rsquo;t need a longer career history. You need a layout
+                    that gets through the automated screening.
                 </div>
             </div>
 
-            <div class="lg:col-span-6">
-                <div
-                    class="bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-800 rounded-3xl p-6 shadow-2xl space-y-6">
-                    <div class="space-y-1">
-                        <h3 class="text-base font-bold text-white">Interactive Cost Calculator</h3>
-                        <p class="text-xs text-slate-400">Calculate the real financial impact of sticking with a
-                            low-converting CV.</p>
-                    </div>
-
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Target
-                                Monthly Tech Salary (KSH)</label>
-                            <input type="range" id="salaryRange" min="80000" max="450000" step="10000" value="180000"
-                                oninput="calculateLoss()"
-                                class="w-full accent-indigo-500 bg-slate-800 h-2 rounded-lg cursor-pointer">
-                            <div class="flex justify-between text-xs font-mono font-bold text-indigo-400 mt-2">
-                                <span>KSH 80,000</span>
-                                <span id="salaryDisplay"
-                                    class="bg-indigo-500/10 px-2 py-0.5 rounded text-sm text-white">KSH 180,000</span>
-                                <span>KSH 450,000+</span>
-                            </div>
-                        </div>
-
-                        <div class="border-t border-slate-800/80 pt-4 grid grid-cols-2 gap-4 text-center">
-                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-900">
-                                <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Weekly
-                                    Missed Value</span>
-                                <span id="weeklyLoss" class="text-lg font-mono font-extrabold text-rose-400">KSH
-                                    41,538</span>
-                            </div>
-                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-900">
-                                <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Your
-                                    Investment Today</span>
-                                <span class="text-lg font-mono font-extrabold text-emerald-400">KSH 250</span>
-                            </div>
-                        </div>
-                    </div>
+            <div class="calc">
+                <h3>What a filtered CV costs you</h3>
+                <p>Move the slider to your target salary to see what each week with a low-converting CV is worth.</p>
+                <label for="salaryRange">Target monthly tech salary (KSH)</label>
+                <input type="range" id="salaryRange" min="80000" max="450000" step="10000" value="180000"
+                    oninput="calculateLoss()">
+                <div class="scale">
+                    <span>KSH 80,000</span>
+                    <span id="salaryDisplay">KSH 180,000</span>
+                    <span>KSH 450,000+</span>
+                </div>
+                <div class="figures">
+                    <div><span>Weekly missed value</span><b id="weeklyLoss">KSH 41,538</b></div>
+                    <div><span>Your investment today</span><b class="ok">KSH 250</b></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="features" class="py-24 bg-[#030712]">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center max-w-2xl mx-auto space-y-3 mb-16">
-                <span class="text-xs font-bold uppercase tracking-widest text-indigo-400">Engineered Structure</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">What makes this blueprint
-                    definitive?</h2>
-                <p class="text-sm text-slate-400">No generic fluff. Just proven, battle-tested frameworks tailored
-                    specifically for engineers, frontend developers, and data professionals.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div
-                    class="p-8 rounded-3xl bg-gradient-to-b from-slate-900/60 to-slate-950/60 border border-slate-900 space-y-4 hover:border-slate-800 transition duration-300">
-                    <span class="text-2xl block">🤖</span>
-                    <h3 class="text-md font-bold text-white tracking-tight">ATS Core Syntax Alignment</h3>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        Complete breakdown of algorithmic keyword formatting. Learn how to present complex
-                        cross-platform tech like **Flutter, React, and Android SDKs** so search parameters flag your
-                        profile instantly.
-                    </p>
+    <section id="features">
+        <div class="wrap">
+            <span class="eyebrow">What is inside</span>
+            <h2>What the blueprint covers</h2>
+            <p class="tight" style="max-width:62ch">
+                Frameworks written specifically for engineers, frontend developers and data
+                professionals, not general advice for every job-seeker.
+            </p>
+            <div class="cards">
+                <div class="card">
+                    <span class="n">01 &middot; Keywords</span>
+                    <h3>ATS keyword alignment</h3>
+                    <p>A complete breakdown of how applicant tracking systems read keywords, and how to
+                       present cross-platform tech like <b>Flutter, React, and Android SDKs</b> so a
+                       recruiter&rsquo;s search turns up your profile.</p>
                 </div>
-                <div
-                    class="p-8 rounded-3xl bg-gradient-to-b from-slate-900/60 to-slate-950/60 border border-slate-900 space-y-4 hover:border-slate-800 transition duration-300">
-                    <span class="text-2xl block">📈</span>
-                    <h3 class="text-md font-bold text-white tracking-tight">The X-Y-Z Quantified Formula</h3>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        Stop listing passive job responsibilities. Master Google's structured layout format to frame
-                        metrics flawlessly (e.g., *"Reduced bundle initialization delays by 22% using Tailwind CSS"*).
-                    </p>
+                <div class="card">
+                    <span class="n">02 &middot; Bullet points</span>
+                    <h3>The X-Y-Z quantified formula</h3>
+                    <p>Stop listing passive job responsibilities. Use Google&rsquo;s X-Y-Z format to put a
+                       number on each point, e.g. <i>&ldquo;Reduced bundle initialization delays by 22% using
+                       Tailwind CSS&rdquo;</i>.</p>
                 </div>
-                <div
-                    class="p-8 rounded-3xl bg-gradient-to-b from-slate-900/60 to-slate-950/60 border border-slate-900 space-y-4 hover:border-slate-800 transition duration-300">
-                    <span class="text-2xl block">📄</span>
-                    <h3 class="text-md font-bold text-white tracking-tight">Clean Markdown Code Blueprints</h3>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        Skip bloated, over-styled graphical layout elements that break scanning software. Receive
-                        minimal, semantic blueprints built for maximum scannability and structural elegance.
-                    </p>
+                <div class="card">
+                    <span class="n">03 &middot; Templates</span>
+                    <h3>Clean markdown blueprints</h3>
+                    <p>No over-styled graphical layouts that break scanning software. You get minimal,
+                       semantic templates that parse cleanly and are quick for a person to scan.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-16 bg-black/20 border-t border-b border-slate-900">
-        <div class="max-w-4xl mx-auto px-6">
-            <h3 class="text-center text-xs font-bold text-slate-500 uppercase tracking-widest mb-10">How this approach
-                compares</h3>
-            <div class="overflow-x-auto rounded-2xl border border-slate-800 bg-slate-900/20 backdrop-blur-md">
-                <table class="w-full text-left border-collapse">
+    <section id="compare">
+        <div class="wrap">
+            <div class="section-head"><h2>How this approach compares</h2></div>
+            <div class="tablewrap" style="border-top:0">
+                <table class="compare">
                     <thead>
-                        <tr class="border-b border-slate-800 bg-slate-950/50">
-                            <th class="p-4 text-xs font-bold text-slate-400 uppercase tracking-wider">The Evaluation
-                                Track</th>
-                            <th class="p-4 text-xs font-bold text-rose-400 uppercase tracking-wider">Boring Traditional
-                                CVs</th>
-                            <th class="p-4 text-xs font-bold text-emerald-400 uppercase tracking-wider">The Tech Hut
-                                Blueprint</th>
+                        <tr>
+                            <th>What is judged</th>
+                            <th>A typical CV</th>
+                            <th>The Tech Hut Blueprint</th>
                         </tr>
                     </thead>
-                    <tbody class="text-xs text-slate-300 divide-y divide-slate-900 font-medium">
+                    <tbody>
                         <tr>
-                            <td class="p-4 font-bold text-white">Algorithmic Scoring</td>
-                            <td class="p-4 text-slate-500">Breaks on deep graphics/tables</td>
-                            <td class="p-4 text-emerald-400 font-bold">100% Text-Parsed Semantic Layout</td>
+                            <td class="co">Algorithmic scoring</td>
+                            <td class="no" data-label="A typical CV">Breaks on graphics and tables</td>
+                            <td class="yes" data-label="The Tech Hut Blueprint">100% text-parsed semantic layout</td>
                         </tr>
                         <tr>
-                            <td class="p-4 font-bold text-white">Point Formulation</td>
-                            <td class="p-4 text-slate-500">"Responsible for coding features"</td>
-                            <td class="p-4 text-emerald-400 font-bold">Quantified X-Y-Z System Impact Metrics</td>
+                            <td class="co">Bullet points</td>
+                            <td class="no" data-label="A typical CV">&ldquo;Responsible for coding features&rdquo;</td>
+                            <td class="yes" data-label="The Tech Hut Blueprint">Quantified X-Y-Z impact metrics</td>
                         </tr>
                         <tr>
-                            <td class="p-4 font-bold text-white">Review Engagement</td>
-                            <td class="p-4 text-slate-500">Recruiter drops out in 6 seconds</td>
-                            <td class="p-4 text-emerald-400 font-bold">High-Density Stack Summaries First</td>
+                            <td class="co">Recruiter attention</td>
+                            <td class="no" data-label="A typical CV">Recruiter drops out in 6 seconds</td>
+                            <td class="yes" data-label="The Tech Hut Blueprint">Dense stack summary first</td>
                         </tr>
                     </tbody>
                 </table>
@@ -254,58 +187,85 @@
         </div>
     </section>
 
-    <section id="purchase" class="py-32 bg-[#030712] relative">
-        <div class="max-w-xl mx-auto px-6 relative z-10">
-
-            <div
-                class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-slate-800 rounded-3xl p-8 md:p-10 text-center space-y-8 shadow-2xl relative overflow-hidden">
-                <div
-                    class="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent">
+    <section id="purchase">
+        <div class="wrap">
+            <span class="eyebrow">Get the guide</span>
+            <h2>How to Craft a Winning CV</h2>
+            <p class="tight" style="max-width:56ch">The guide and the markdown templates, for less than a
+               single cup of coffee at Java House.</p>
+            <div class="bundle">
+                <div>
+                    <h3 style="font-size:20px">What you get</h3>
+                    <ul class="ticks">
+                        <li>The guide: how to craft a winning tech CV</li>
+                        <li>Clean markdown CV blueprints, ready to edit</li>
+                        <li>The core optimisation guidelines</li>
+                    </ul>
+                    <p class="delivery"><b>Immediate delivery:</b> after checking out successfully you are
+                       redirected straight to your full markdown blueprints and the core optimisation guidelines.</p>
                 </div>
-
-                <div class="space-y-2">
-                    <span class="text-xs font-bold uppercase tracking-widest text-indigo-400">Unlock Immediate
-                        Access</span>
-                    <h2 class="text-3xl font-black text-white tracking-tight">Investment Value</h2>
-                    <p class="text-xs text-slate-400 leading-relaxed max-w-sm mx-auto">
-                        Less than the cost of a single cup of coffee at Java House, but engineered to secure your next
-                        major engineering breakthrough.
-                    </p>
-                </div>
-
-                <div
-                    class="p-4 bg-slate-950 rounded-2xl border border-slate-900 flex justify-between items-center max-w-xs mx-auto">
-                    <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Secure Pricing Locked</span>
-                    <span class="text-2xl font-black text-white font-mono">KSH 250</span>
-                </div>
-
-                <div class="space-y-4">
-                    <button id="payButton"
-                        class="w-full py-4 bg-white text-slate-950 hover:bg-slate-100 font-bold rounded-xl transition duration-300 shadow-xl text-sm font-bold tracking-wide active:scale-[0.99]">
-                        Unlock Guide & Templates
-                    </button>
-                    <p
-                        class="text-[10px] text-slate-500 font-semibold flex items-center justify-center gap-1.5 uppercase tracking-wider">
-                        🛡️ Secure transaction managed via Paystack
-                    </p>
-                </div>
-
-                <div class="border-t border-slate-900 pt-6 text-left">
-                    <p class="text-[11px] text-slate-400 leading-relaxed">
-                        📥 **Immediate Delivery:** After checking out successfully, you will instantly receive automated
-                        redirects to secure your full markdown blueprints and core optimization guidelines.
-                    </p>
+                <div class="right">
+                    <span class="pill">One-time payment</span>
+                    <span class="now"><small>KSH</small> 250</span>
+                    <button id="payButton" class="btn light">Get the guide and templates</button>
+                    <p class="paynote">Secure transaction managed via Paystack</p>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <footer class="py-12 bg-black border-t border-slate-900 text-center space-y-4 relative z-10">
-        <div class="text-sm font-bold text-white tracking-tight">The Tech Hut<span class="text-indigo-500">.</span>
+    <footer class="sitefoot">
+        <div class="wrap">
+            <div class="sitefoot-grid">
+                <div>
+                    <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+                    <p>Helping Kenyans into tech work: jobs you can take from Nairobi, a daily read on the industry, and projects with mentors.</p>
+                </div>
+                <div>
+                    <h4>Read</h4>
+                    <ul>
+                        <li><a href="/blog/daily/">Daily Savannah</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Find work</h4>
+                    <ul>
+                        <li><a href="/jobs/">Jobs board</a></li>
+                        <li><a href="/remote/">Remote-from-Kenya list</a></li>
+                        <li><a href="/cv-pack/">CV Pack</a></li>
+                        <li><a href="/early-access/">Early Access</a></li>
+                        <li><a href="/shop/">Everything we make</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="/apprenticeship/">Apprenticeship</a></li>
+                        <li><a href="/events/">Events</a></li>
+                        <li><a href="/communities/">Tech communities</a></li>
+                        <li><a href="/tools/">Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Employers</h4>
+                    <ul>
+                        <li><a href="/advertise/">Advertise</a></li>
+                        <li><a href="/jobs-for-your-community/">A jobs board for your community</a></li>
+                        <li><a href="/recruiters/">Recruiters</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sitefoot-base">
+                <span>&copy; 2026 The Tech Hut Community</span>
+                <a href="mailto:info@thetechhut.co">info@thetechhut.co</a>
+                <span>+254 115 017 058</span>
+                <a href="/data_privacy_policy/">Privacy</a>
+                <a href="https://linkedin.com/company/digital-transformation-partner/" rel="noopener">LinkedIn</a>
+                <a href="https://x.com/Ekiprop_kimutai" rel="noopener">X</a>
+            </div>
         </div>
-        <p class="text-[11px] text-slate-600 font-medium">© 2026 The Tech Hut Community. Engineered for developers
-            across East Africa Time frameworks.</p>
     </footer>
 
     <script>

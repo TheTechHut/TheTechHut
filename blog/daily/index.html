@@ -8,7 +8,7 @@
   <meta name="keywords" content="Kenya tech news, Kenyan startups, M-Pesa, fintech Kenya, Nairobi tech, Silicon Savannah, Safaricom, Kenya AI policy, daily tech digest">
   <meta name="author" content="The Tech Hut">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#06D6A0">
+  <meta name="theme-color" content="#073B4C">
   <link rel="canonical" href="https://thetechhut.co/blog/daily/">
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -27,377 +27,150 @@
   <meta name="twitter:description" content="The Tech Hut&#x27;s automated daily digest of Kenya&#x27;s tech ecosystem — startups, fintech, policy, and infrastructure. A fresh edition every evening at 9:00 PM EAT.">
   <meta name="twitter:image" content="https://thetechhut.co/assets/img/social/daily.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/thh.css">
 </head>
 <body>
 <style>
-  :root {
-    --bg: #f0f4f8;
-    --card: #ffffff;
-    --ink: #073B4C;
-    --body: #4a5568;
-    --muted: #718096;
-    --green: #06D6A0;
-    --green-dark: #05b384;
-    --gold: #FFD700;
-    --footer: #073B4C;
-    --shadow: 0 8px 20px rgba(7, 59, 76, 0.08);
-    --shadow-hover: 0 12px 25px rgba(7, 59, 76, 0.15);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--body);
-    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-    font-size: 1rem;
-    line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-  }
-  h1, h2, h3, h4 { font-family: "Poppins", "Inter", sans-serif; color: var(--ink); }
-  a:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; border-radius: 4px; }
-  .shell { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
+  /* The Daily Savannah. Site-wide type, colour, masthead and footer come from /assets/css/thh.css;
+     this block only lays out the paper itself. */
+  .shell { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
 
-  /* ---- Header (matches blog index) ---- */
-  header.site {
-    background: var(--green);
-    position: sticky;
-    top: 0;
-    z-index: 50;
-  }
-  header.site .inner {
-    max-width: 72rem;
-    margin: 0 auto;
-    padding: 1rem 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-  }
-  header.site .brand {
-    display: flex;
-    align-items: baseline;
-    gap: 0.55rem;
-    text-decoration: none;
-  }
-  header.site .brand b {
-    font-family: "Poppins", sans-serif;
-    font-weight: 700;
-    font-size: 1.15rem;
-    color: #ffffff;
-  }
-  header.site .brand span {
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    font-size: 0.8rem;
-    color: var(--ink);
-    background: rgba(255, 255, 255, 0.35);
-    border-radius: 9999px;
-    padding: 0.15rem 0.75rem;
-  }
-  header.site nav { display: flex; gap: 1.5rem; }
-  header.site nav a {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: color 0.3s ease;
-  }
-  header.site nav a:hover { color: var(--gold); }
-  @media (max-width: 640px) { header.site nav { display: none; } }
-
-  /* ---- Page title ---- */
-  .pagehead { padding: 2.75rem 0 0.5rem; }
-  .pagehead h1 { font-weight: 800; font-size: clamp(1.9rem, 5vw, 2.8rem); line-height: 1.15; margin-bottom: 0.4rem; }
-  .pagehead h1 em { font-style: normal; color: var(--green-dark); }
-  .pagehead .sub {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem 1.25rem;
-    align-items: center;
-    font-size: 0.9rem;
-    color: var(--muted);
-  }
-  .pagehead .auto {
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: var(--green-dark);
-    background: rgba(6, 214, 160, 0.12);
-    border: 1px solid rgba(6, 214, 160, 0.4);
-    border-radius: 9999px;
-    padding: 0.2rem 0.85rem;
-    letter-spacing: 0.04em;
-  }
+  /* ---- Nameplate ---- */
+  .pagehead { padding: 30px 0 0; border-bottom: 0; text-align: center; }
+  .pagehead h1 { font-size: clamp(40px, 7vw, 76px); font-weight: 700; letter-spacing: -.025em; margin: 0 auto; max-width: none; line-height: 1; }
+  .pagehead h1 em { font-style: italic; font-weight: 500; color: var(--green); }
+  .pagehead .sub { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 20px; margin-top: 16px;
+    padding: 8px 0; border-top: 1px solid var(--ink); border-bottom: 3px double var(--ink);
+    font-family: var(--mono); font-size: 12.5px; color: var(--ink); text-transform: uppercase; letter-spacing: .05em; text-align: left; }
+  .pagehead .auto { color: var(--green); }
 
   /* ---- Edition ---- */
-  section.edition { padding-top: 2.25rem; }
-  .edition-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6rem; margin-bottom: 0.35rem; }
-  .edition-head h2 { font-weight: 700; font-size: 1.6rem; }
-  .edition-head .no {
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--green-dark);
-  }
-  .edition-lede { color: var(--muted); font-size: 0.95rem; margin-bottom: 1.5rem; max-width: 46rem; }
+  section.edition { padding: 26px 0 0; border: 0; }
+  .edition-lede { font-family: var(--serif); font-style: italic; font-size: clamp(19px, 2.2vw, 23px); line-height: 1.45;
+    color: var(--ink); max-width: 62ch; margin: 0 0 26px; }
 
-  /* ---- Lead story: split card like the blog's Featured ---- */
-  article.lead {
-    background: var(--card);
-    border-radius: 1rem;
-    box-shadow: var(--shadow);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 2rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  article.lead:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
-  @media (min-width: 768px) { article.lead { flex-direction: row; } }
-  article.lead .txt { padding: 2rem 2.25rem; display: flex; flex-direction: column; justify-content: center; }
-  @media (min-width: 768px) { article.lead .txt { width: 55%; } article.lead .pic { width: 45%; } }
-  .kicker {
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--green-dark);
-    margin-bottom: 0.5rem;
-  }
-  article.lead h3 { font-weight: 700; font-size: clamp(1.3rem, 3vw, 1.8rem); line-height: 1.25; margin-bottom: 0.7rem; }
-  article.lead p.dek { font-size: 0.96rem; margin-bottom: 0.9rem; }
-  article.lead .pic { background: rgba(6, 214, 160, 0.12); min-height: 12rem; position: relative; }
-  article.lead .pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  /* lead story */
+  article.lead { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 32px;
+    border-top: 2px solid var(--ink); padding: 16px 0 30px; border-bottom: 1px solid var(--rule); margin-bottom: 26px; }
+  article.lead .kicker { margin-bottom: 8px; }
+  article.lead h3 { font-size: clamp(28px, 3.6vw, 42px); line-height: 1.08; letter-spacing: -.02em; margin: 0 0 14px; }
+  article.lead p.dek { font-size: 17.5px; line-height: 1.65; color: var(--text); margin: 0 0 14px; }
+  article.lead .pic { order: 2; }
+  article.lead .pic img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
 
-  /* ---- Story cards: grid like All Blogs ---- */
-  .story-list { display: grid; grid-template-columns: 1fr; gap: 1.75rem; }
-  @media (min-width: 640px) { .story-list { grid-template-columns: 1fr 1fr; } }
-  @media (min-width: 1024px) { .story-list { grid-template-columns: 1fr 1fr 1fr; } }
-  article.story {
-    background: var(--card);
-    border-radius: 1rem;
-    box-shadow: var(--shadow);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  article.story:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
-  .thumb {
-    position: relative;
-    height: 10.5rem;
-    background: linear-gradient(135deg, rgba(6, 214, 160, 0.2), rgba(7, 59, 76, 0.15));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: "Poppins", sans-serif;
-    font-weight: 700;
-    font-size: 0.9rem;
-    letter-spacing: 0.14em;
-    color: var(--green-dark);
-  }
-  .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  article.story .txt { padding: 1.4rem 1.5rem 1.3rem; display: flex; flex-direction: column; flex: 1; }
-  article.story h3 { font-weight: 700; font-size: 1.05rem; line-height: 1.35; margin-bottom: 0.5rem; }
-  article.story p { font-size: 0.87rem; margin-bottom: 0.8rem; }
-  .story-src { margin-top: auto; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
-  .story-src a { color: var(--green-dark); text-decoration: none; }
-  .story-src a:hover { color: var(--ink); text-decoration: underline; }
+  /* other stories: columns divided by rules, like a page of type */
+  .story-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; }
+  article.story { padding: 0 22px 26px; border-left: 1px solid var(--rule); }
+  article.story:nth-child(3n+1) { padding-left: 0; border-left: 0; }
+  article.story .thumb { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--green); padding-top: 10px; border-top: 2px solid var(--ink); margin-bottom: 8px; }
+  article.story .thumb img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; margin-top: 10px; }
+  article.story h3 { font-size: 23px; line-height: 1.18; margin: 0 0 10px; }
+  article.story p { font-size: 16px; line-height: 1.62; margin: 0 0 12px; }
+  .story-src { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--dim); margin: 0; }
+  .story-src a { color: var(--green); }
 
-  /* ---- Numbers strip ---- */
-  .numbers {
-    background: var(--card);
-    border-radius: 1rem;
-    box-shadow: var(--shadow);
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
-    gap: 1rem;
-    margin-top: 1.75rem;
-    padding: 1.4rem 1.6rem;
-  }
-  .num b {
-    display: block;
-    font-family: "Poppins", sans-serif;
-    font-weight: 700;
-    font-size: 1.55rem;
-    color: var(--green-dark);
-    font-variant-numeric: tabular-nums;
-  }
-  .num span { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+  /* the day in numbers */
+  .numbers { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); margin-top: 8px;
+    border-top: 2px solid var(--ink); border-bottom: 1px solid var(--rule); }
+  .numbers::before { content: "The day in numbers"; grid-column: 1 / -1; font-family: var(--mono); font-size: 12px;
+    text-transform: uppercase; letter-spacing: .08em; color: var(--dim); padding: 10px 0 0; }
+  .num { padding: 10px 18px 16px 0; }
+  .num b { display: block; font-family: var(--mono); font-size: 27px; font-weight: 600; color: var(--ink); letter-spacing: -.02em; line-height: 1.15; }
+  .num span { display: block; font-size: 14.5px; color: var(--muted); margin-top: 4px; }
 
-  /* ---- Archive ---- */
-  section.archive { margin-top: 3.25rem; }
-  section.archive > h2 { font-weight: 700; font-size: 1.6rem; margin-bottom: 1rem; }
-  .archive-box { background: var(--card); border-radius: 1rem; box-shadow: var(--shadow); padding: 0.9rem 1.6rem; }
-  .archive-box details { border-top: 1px solid rgba(7, 59, 76, 0.1); }
-  .archive-box details:first-of-type { border-top: none; }
-  .archive-box summary {
-    cursor: pointer;
-    padding: 0.85rem 0;
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: var(--ink);
-    transition: color 0.3s ease;
-  }
-  .archive-box summary:hover { color: var(--green-dark); }
-  .archive-box .archive-empty { color: var(--muted); font-style: italic; padding: 0.85rem 0; }
-  .archive-box .story-list { padding-bottom: 1.25rem; }
-  .archive-box article.lead { margin-top: 0.5rem; margin-bottom: 1.5rem; }
+  /* reactions: quiet, after each story */
+  .reactions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .reactions button { font: 600 13px/1 var(--sans); color: var(--ink); background: transparent; border: 1px solid var(--rule);
+    border-radius: 2px; padding: 5px 8px; cursor: pointer; }
+  .reactions button:hover { border-color: var(--ink); }
+  .reactions button.on { border-color: var(--green); background: var(--paper-2); }
+  .reactions button span { color: var(--dim); font-family: var(--mono); font-size: 12px; margin-left: 2px; }
 
-  /* ---- Footer (matches blog index) ---- */
-  footer.site {
-    margin-top: 3.5rem;
-    background: var(--footer);
-    color: #e2e8f0;
-    padding: 2.5rem 0;
-    text-align: center;
-  }
-  footer.site .links { margin-top: 1rem; display: flex; justify-content: center; gap: 1.25rem; font-size: 0.85rem; font-weight: 600; }
-  footer.site a { color: #e2e8f0; text-decoration: none; transition: color 0.3s ease; }
-  footer.site a:hover { color: var(--gold); }
-  footer.site .note { margin-top: 1.1rem; font-size: 0.76rem; color: #a0aec0; max-width: 44rem; margin-left: auto; margin-right: auto; padding: 0 1.5rem; }
-  /* ---- Reactions ---- */
-  .reactions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.9rem; }
-  .reactions button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-family: "Inter", sans-serif;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--ink);
-    background: var(--bg);
-    border: 1px solid rgba(7, 59, 76, 0.14);
-    border-radius: 9999px;
-    padding: 0.3rem 0.8rem;
-    cursor: pointer;
-    transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
-  }
-  .reactions button:hover { border-color: var(--green); transform: translateY(-1px); }
-  .reactions button.on { background: rgba(6, 214, 160, 0.16); border-color: var(--green); }
-  .reactions button span { color: var(--muted); font-variant-numeric: tabular-nums; }
-  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  /* ---- Index: latest edition and the archive ---- */
+  .section-title { font-size: 26px; margin: 0 0 16px; padding-top: 10px; border-top: 2px solid var(--ink); }
+  a.ed-latest { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 32px; text-decoration: none;
+    color: var(--text); padding-bottom: 30px; margin-bottom: 34px; border-bottom: 1px solid var(--rule); }
+  a.ed-latest .kicker { margin-bottom: 8px; }
+  a.ed-latest h3 { font-size: clamp(28px, 3.6vw, 42px); line-height: 1.08; letter-spacing: -.02em; margin: 0 0 12px; }
+  a.ed-latest:hover h3 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .12em; }
+  a.ed-latest p { font-size: 17.5px; color: var(--text); margin: 0 0 12px; }
+  a.ed-latest .more { font-weight: 700; color: var(--ink); border-bottom: 1px solid var(--mint); }
+  a.ed-latest .pic img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
 
-  /* ---- Edition index cards ---- */
-  .ed-grid { display: grid; grid-template-columns: 1fr; gap: 1.75rem; }
-  @media (min-width: 640px) { .ed-grid { grid-template-columns: 1fr 1fr; } }
-  @media (min-width: 1024px) { .ed-grid { grid-template-columns: 1fr 1fr 1fr; } }
-  a.ed-card {
-    background: var(--card); border-radius: 1rem; box-shadow: var(--shadow);
-    overflow: hidden; display: flex; flex-direction: column; text-decoration: none;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  a.ed-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
-  a.ed-card .pic { position: relative; height: 11rem; background: rgba(6,214,160,0.12); }
-  a.ed-card .pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  a.ed-card .txt { padding: 1.4rem 1.5rem 1.3rem; display: flex; flex-direction: column; flex: 1; }
-  a.ed-card .no {
-    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--green-dark); margin-bottom: 0.4rem;
-  }
-  a.ed-card h3 { font-weight: 700; font-size: 1.12rem; line-height: 1.3; margin-bottom: 0.5rem; }
-  a.ed-card p { font-size: 0.86rem; color: var(--body); margin-bottom: 0.8rem; }
-  a.ed-card, a.ed-latest { color: var(--body); }
-  a.ed-card ul { list-style: none; margin: 0 0 0.9rem; padding: 0; }
-  a.ed-card li {
-    font-size: 0.8rem; color: var(--muted); padding-left: 0.9rem; position: relative;
-    margin-bottom: 0.25rem; line-height: 1.45;
-  }
-  a.ed-card li::before { content: "\2022"; position: absolute; left: 0; color: var(--green); }
-  a.ed-card .more {
-    margin-top: auto; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em;
-    color: var(--green-dark);
-  }
-  a.ed-card:hover .more { color: var(--ink); }
-
-  /* Latest edition banner */
-  a.ed-latest {
-    display: flex; flex-direction: column; background: var(--card); border-radius: 1rem;
-    box-shadow: var(--shadow); overflow: hidden; text-decoration: none; margin-bottom: 3rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  a.ed-latest:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
-  @media (min-width: 768px) { a.ed-latest { flex-direction: row; }
-    a.ed-latest .txt { width: 55%; } a.ed-latest .pic { width: 45%; } }
-  a.ed-latest .txt { padding: 2rem 2.25rem; display: flex; flex-direction: column; justify-content: center; }
-  a.ed-latest .pic { position: relative; min-height: 13rem; background: rgba(6,214,160,0.12); }
-  a.ed-latest .pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  a.ed-latest h3 { font-weight: 700; font-size: clamp(1.3rem, 3vw, 1.75rem); line-height: 1.22; margin-bottom: 0.6rem; }
-  a.ed-latest p { font-size: 0.95rem; margin-bottom: 0.9rem; color: var(--body); }
-
-  .section-title {
-    font-weight: 700; font-size: 1.35rem; margin-bottom: 1.1rem;
-    padding-bottom: 0.6rem; border-bottom: 2px solid rgba(6,214,160,0.35);
-  }
+  .ed-grid { border-top: 0; }
+  a.ed-card { display: grid; grid-template-columns: 150px minmax(0, 1fr) 168px; gap: 24px; padding: 20px 0;
+    border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--text); }
+  a.ed-card .no { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--dim); line-height: 1.5; }
+  a.ed-card .no b { display: block; color: var(--ink); font-weight: 600; font-size: 13px; }
+  a.ed-card h3 { font-size: 23px; line-height: 1.2; margin: 0 0 8px; }
+  a.ed-card:hover h3 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .12em; }
+  a.ed-card p { font-size: 16px; color: var(--muted); margin: 0 0 8px; }
+  a.ed-card ul { list-style: none; margin: 0; padding: 0; }
+  a.ed-card li { font-size: 15px; color: var(--text); padding: 4px 0 4px 14px; position: relative; line-height: 1.4; }
+  a.ed-card li::before { content: ""; position: absolute; left: 0; top: .78em; width: 6px; height: 6px; background: var(--mint); }
+  a.ed-card .pic img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
 
   /* ---- Edition page nav ---- */
-  .backlink {
-    display: inline-block; margin: 1.75rem 0 0; font-size: 0.82rem; font-weight: 700;
-    letter-spacing: 0.04em; color: var(--green-dark); text-decoration: none;
-  }
-  .backlink:hover { color: var(--ink); }
-  .ed-nav {
-    display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between;
-    margin-top: 2.5rem; padding-top: 1.4rem; border-top: 2px solid rgba(6,214,160,0.35);
-  }
-  .ed-nav a {
-    font-size: 0.86rem; font-weight: 600; color: var(--green-dark); text-decoration: none;
-    max-width: 22rem;
-  }
-  .ed-nav a:hover { color: var(--ink); }
-  .ed-nav a small { display: block; font-size: 0.68rem; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--muted); margin-bottom: 0.2rem; }
+  .backlink { display: inline-block; margin: 22px 0 0; font-weight: 700; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--mint); }
+  .backlink:hover { border-bottom-color: var(--ink); color: var(--ink); }
+  .ed-nav { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; margin-top: 34px; padding-top: 14px; border-top: 2px solid var(--ink); }
+  .ed-nav a { font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--ink); text-decoration: none; max-width: 24rem; }
+  .ed-nav a:hover { text-decoration: underline; }
+  .ed-nav a small { display: block; font-family: var(--mono); font-size: 11.5px; font-weight: 400; text-transform: uppercase; letter-spacing: .06em; color: var(--dim); margin-bottom: 4px; }
   .ed-nav .next { text-align: right; margin-left: auto; }
 
-  /* ---- Weekly roundup signup (markup + script: see the SIGNUP blocks below) ---- */
-  .subscribe {
-    margin-top: 2.5rem; background: var(--card); border: 1px solid rgba(7,59,76,0.12);
-    border-left: 4px solid var(--green); border-radius: 1rem; padding: 1.4rem 1.5rem;
-    box-shadow: var(--shadow);
-  }
-  .subscribe h2 { font-weight: 700; font-size: 1.15rem; line-height: 1.3; margin-bottom: 0.25rem; }
-  .subscribe p { font-size: 0.92rem; }
-  .sub-form { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem; }
-  .sub-form input[type="text"], .sub-form input[type="email"] {
-    flex: 1 1 11rem; font: inherit; color: var(--ink); background: #fff;
-    padding: 0.65rem 0.9rem; border: 1px solid rgba(7,59,76,0.25); border-radius: 0.6rem;
-  }
-  .sub-form input:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+  /* ---- Weekly roundup signup ---- */
+  .subscribe { margin: 34px 0 0; background: var(--paper-2); border-top: 3px solid var(--ink); padding: 22px 24px; }
+  .subscribe h2 { font-size: 26px; margin: 0 0 6px; }
+  .subscribe p { font-size: 16px; color: var(--text); margin: 0; max-width: 64ch; }
+  .sub-form { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+  .sub-form input[type="text"], .sub-form input[type="email"] { flex: 1 1 12rem; width: auto; }
   .sub-form input.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
-  .sub-form button {
-    font: 700 0.92rem "Poppins", "Inter", sans-serif; color: #fff; background: var(--ink);
-    border: 0; border-radius: 999px; padding: 0.7rem 1.4rem; cursor: pointer;
+  .sub-form button { font: 700 15px/1.2 var(--sans); color: #fff; background: var(--ink); border: 1px solid var(--ink);
+    border-radius: 3px; padding: 12px 20px; cursor: pointer; }
+  .sub-form button:hover { background: var(--ink-2); }
+  .sub-form button[disabled] { opacity: .6; cursor: default; }
+  .sub-msg { min-height: 1.3em; margin: 10px 0 0; font-weight: 600; font-size: 15px; }
+  .sub-msg.ok { color: var(--green); }
+  .sub-msg.bad { color: var(--red); }
+  .subscribe .sub-note { font-size: 14px; color: var(--dim); margin-top: 6px; }
+
+  @media (max-width: 900px) {
+    .story-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    article.story:nth-child(3n+1) { padding-left: 22px; border-left: 1px solid var(--rule); }
+    article.story:nth-child(2n+1) { padding-left: 0; border-left: 0; }
+    a.ed-card { grid-template-columns: 120px minmax(0, 1fr); }
+    a.ed-card .pic { display: none; }
   }
-  .sub-form button:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
-  .sub-form button[disabled] { opacity: 0.6; cursor: default; }
-  .sub-msg { min-height: 1.3em; margin-top: 0.7rem; font-weight: 600; font-size: 0.9rem; }
-  .sub-msg.ok { color: #046b52; }
-  .sub-msg.bad { color: #9b2020; }
-  .sub-note { font-size: 0.78rem; color: var(--muted); margin-top: 0.5rem; }
-  .sub-note a { color: var(--green-dark); }
+  @media (max-width: 680px) {
+    article.lead, a.ed-latest { grid-template-columns: 1fr; gap: 16px; }
+    article.lead .pic, a.ed-latest .pic { order: -1; }
+    .story-list { grid-template-columns: 1fr; }
+    article.story, article.story:nth-child(3n+1), article.story:nth-child(2n+1) { padding: 0 0 24px; border-left: 0; }
+    a.ed-card { grid-template-columns: 1fr; gap: 6px; }
+    .pagehead .sub { justify-content: flex-start; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 
-<header class="site">
-  <div class="inner">
-    <a class="brand" href="https://thetechhut.co/blog/"><b>The Tech Hut</b><span>Daily</span></a>
-    <nav>
-      <a href="https://thetechhut.co/">Home</a>
-      <a href="https://thetechhut.co/blog/">Blog</a>
-      <a href="https://thetechhut.co/jobs/">Jobs</a>
-      <a href="https://thetechhut.co/communities/">Community</a>
-      <a href="https://thetechhut.co/events/">Events</a>
-    </nav>
-  </div>
-</header>
+<a class="skip" href="#main">Skip to content</a>
+    <header class="masthead">
+        <div class="masthead-top"><div class="wrap"><span>Kenya's tech careers, reported daily</span><span class="hide-sm"><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a> &middot; <a href="mailto:info@thetechhut.co">info@thetechhut.co</a></span></div></div>
+        <div class="wrap masthead-main">
+            <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+            <nav class="sitenav" aria-label="Site"><a href="/blog/daily/" aria-current="page">Daily</a><a href="/jobs/">Jobs</a><a href="/remote/">Remote</a><a href="/cv-pack/">CV Pack</a><a href="/shop/">Shop</a><a href="/events/">Events</a><a href="/apprenticeship/">Apprenticeship</a><a href="/blog/">Blog</a></nav>
+        </div>
+    </header>
 
-<div class="shell">
+<main id="main" class="shell">
   <div class="pagehead">
     <h1>The Daily <em>Savannah</em></h1>
     <div class="sub">
       <span>Kenya's tech ecosystem, every day — startups, fintech, policy &amp; infrastructure.</span>
-      <span class="auto">NEW EDITION EVERY 9:00 PM EAT</span>
+      <span class="auto">New edition every evening, 9:00 PM EAT</span>
     </div>
   </div>
 
@@ -416,13 +189,13 @@
   <p class="sub-note">We email you a link to confirm your address first, and nothing is sent until you click it. Emails go out through Brevo. <a href="/data_privacy_policy/">How we handle your data</a>.</p>
 </aside>
 
-  <h2 class="section-title" style="margin-top:2.25rem">Latest edition</h2>
+  <h2 class="section-title" style="margin-top:34px">Latest edition</h2>
   <a class="ed-latest" href="/blog/daily/2026-10-15/">
     <div class="txt">
       <span class="kicker">Edition Nº 43 &middot; Thursday, 15 October 2026</span>
       <h3>Murang'a says the national government switched off its hospital records system; the Health Ministry says it never controlled it</h3>
       <p>Murang'a says the national government switched off its county hospital system and the Ministry of Health says it never ran it, Kenyan-founded Satlyt raises US$8 million to run AI on satellites, Google's newest Gemini model lands in Kenya from KES 3,700 a month, Bolt launches a KSh 280 membership, and Kuunda's US$5 million turns out to be a share sale.</p>
-      <span class="more" style="font-size:0.8rem;font-weight:700;color:var(--green-dark)">Read the full edition &rarr;</span>
+      <span class="more">Read the full edition &rarr;</span>
     </div>
     <div class="pic"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="A Black doctor in a white coat with a stethoscope around the neck holds a smartphone in both hands — Murang&#x27;a&#x27;s county hospitals say their records system was switched off" fetchpriority="high" decoding="async" onerror="this.remove()"></div>
   </a>
@@ -430,450 +203,408 @@
   <h2 class="section-title">All editions</h2>
   <div class="ed-grid">
       <a class="ed-card" href="/blog/daily/2026-10-15/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="A Black doctor in a white coat with a stethoscope around the neck holds a smartphone in both hands — Murang&#x27;a&#x27;s county hospitals say their records system was switched off" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Thursday, 15 October 2026</b>Edition Nº 43 &middot; 5 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 43 &middot; 5 stories</span>
-          <h3>Thursday, 15 October 2026</h3>
-          <p>Murang'a says the national government switched off its county hospital system and the Ministry of Health says it never ran it, Kenyan-founded Satlyt raises US$8 million to run AI on satellites, Google's newest Gemini model lands in Kenya from KES 3,700 a month, Bolt launches a KSh 280 membership, and Kuunda's US$5 million turns out to be a share sale.</p>
+          <h3>Murang'a says the national government switched off its hospital records system; the Health Ministry says it never controlled it</h3>
           <ul><li>Kenyan-founded Satlyt raises US$8 million to run AI on satellites, but the NASA headline is mostly not cash</li><li>Gemini 4 Argon is live, and the cheapest way to use it in Kenya is KES 3,700 a month</li><li>Bolt Plus costs KSh 280 a month, and a rider has to spend KSh 5,600 to earn that back</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-10-14/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1614064548237-096f735f344f?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="A padlock on a laptop keyboard ringed by red, green and blue light trails — Kenya recorded 11.12 billion cyber threat events in the last financial year" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Wednesday, 14 October 2026</b>Edition Nº 42 &middot; 5 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 42 &middot; 5 stories</span>
-          <h3>Wednesday, 14 October 2026</h3>
-          <p>Kenya's count of cyber threat events jumps 29% to 11.12 billion as Safaricom hosts its security summit, KEPSA asks MPs to reject a Bill that would meter home internet, and the CMA floats independent risk ratings for money market funds.</p>
+          <h3>Kenya recorded 11.12 billion cyber threat events in a year, up 29%, and small businesses are the soft target</h3>
           <ul><li>KEPSA tells Parliament to reject the Bill that would put a meter on home internet</li><li>The CMA wants independent risk ratings on money market funds and the firms that run them</li><li>TECNO and Infinix's parent Transsion raises about US$390 million in Hong Kong, mostly for AI and marketing</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1614064548237-096f735f344f?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-10-13/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1781504798134-31600e8579ba?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="Nairobi&#x27;s skyline by day — the CA&#x27;s draft satellite licensing framework is open for comment until 6 November" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Tuesday, 13 October 2026</b>Edition Nº 41 &middot; 4 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 41 &middot; 4 stories</span>
-          <h3>Tuesday, 13 October 2026</h3>
-          <p>The Communications Authority opens its draft rulebook for satellite operators to comment until 6 November, Kenya gets an IMF review date but still no new programme, and WhatsApp's username privacy feature runs into a businesses-need-your-number problem.</p>
+          <h3>The CA wants your comments on how satellite operators get licensed in Kenya</h3>
           <ul><li>Treasury says an IMF review mission is due in December — a new programme is still unresolved</li><li>Some WhatsApp users are deleting their usernames and going back to phone numbers</li><li>Getty Images plans a prepackaged Chapter 11 as AI disrupts stock photography</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1781504798134-31600e8579ba?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-10-12/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1741991109902-98bf764fb35d?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="Nairobi&#x27;s skyline at night — Microsoft&#x27;s Africa Development Centre in Westlands is reportedly closing" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Monday, 12 October 2026</b>Edition Nº 40 &middot; 5 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 40 &middot; 5 stories</span>
-          <h3>Monday, 12 October 2026</h3>
-          <p>Staff at Microsoft's Nairobi engineering centre have reportedly been told it is closing — the company's own statement avoids the word — while the Dangote GDR offer shuts tomorrow at a KES 535 minimum and KRA beats its customs target.</p>
+          <h3>Microsoft's Africa Development Centre in Nairobi is reportedly closing</h3>
           <ul><li>Dangote refinery GDRs: the minimum drops from KES 107,000 to KES 535 — offer closes tomorrow</li><li>KRA beats its September customs target by KES 965 million</li><li>PwC struggles to sell Koko's carbon credits, and creditors face steep losses</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1741991109902-98bf764fb35d?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-10-09/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1573164574572-cb89e39749b4?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="A boardroom meeting round a long table — Kenya’s tech exits and what they say about the clarity of the rules" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Friday, 9 October 2026</b>Edition Nº 39 &middot; 3 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 39 &middot; 3 stories</span>
-          <h3>Friday, 9 October 2026</h3>
-          <p>Kenya's tech exits are a lesson in how much rides on clear rules, Google's tap-to-pay in Kenya is still a deleted LinkedIn post, and a student team wants to fix matatu fare reconciliation.</p>
+          <h3>Why tech companies keep struggling to operate in Kenya</h3>
           <ul><li>Google Wallet tap-to-pay is not available in Kenya, despite a DTB pilot post</li><li>GirlCode hackathon winner Naulisako wants to fix fare tracking for matatu owners</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1573164574572-cb89e39749b4?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-10-08/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1655720357872-ce227e4164ba?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="Three women working together over a laptop — Cloud9 has raised US$500,000 from Alliance to expand cross-border payments" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Thursday, 8 October 2026</b>Edition Nº 38 &middot; 3 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 38 &middot; 3 stories</span>
-          <h3>Thursday, 8 October 2026</h3>
-          <p>A Kenyan stablecoin-rails fintech lands US$500,000 from a New York accelerator, a payments API wins its Mozambique licence, and Spotify's audiobook rollout names Kenya but not a price.</p>
+          <h3>Cloud9 raises US$500,000 from Alliance to expand cross-border payments</h3>
           <ul><li>PawaPay gets a Bank of Mozambique licence to onboard merchants directly</li><li>Spotify says audiobooks reach Kenya by year-end — price and hours still unknown</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1655720357872-ce227e4164ba?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-10-07/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1651341050677-24dba59ce0fd?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="Market charts on a screen — Ziidi Shari’ah puts a Shari’ah-compliant money market fund inside M-PESA from KES 100" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Wednesday, 7 October 2026</b>Edition Nº 37 &middot; 4 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 37 &middot; 4 stories</span>
-          <h3>Wednesday, 7 October 2026</h3>
-          <p>Safaricom puts a Shari'ah-compliant money market fund inside M-PESA from KES 100, while regulators and MPs try to answer what happens to a phone number — and the money tied to it — when its owner cannot be reached.</p>
+          <h3>Safaricom launches Ziidi Shari'ah, an Islamic money market fund on M-PESA</h3>
           <ul><li>The CA tells MPs how a recycled number is meant to be handled</li><li>Dan Kwach returns to Cassava for its AI data centre push</li><li>Equity's Finserve is piloting EMMA, a new mobile money wallet — without a price list</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1651341050677-24dba59ce0fd?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-10-06/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="A customer paying by phone at a shop counter — Jumbe is a second M-PESA SMS that proves the payment without showing the payer’s balance" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Tuesday, 6 October 2026</b>Edition Nº 36 &middot; 2 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 36 &middot; 2 stories</span>
-          <h3>Tuesday, 6 October 2026</h3>
-          <p>Safaricom's second M-PESA SMS proves you paid without showing your balance — and it is the business, not you, that decides whether you get it.</p>
+          <h3>M-PESA's "Jumbe" is a second SMS that proves you paid, minus your balance</h3>
           <ul><li>Safaricom takes its Home Internet clinic to an Embakasi estate</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-10-05/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1788784519586-0a14c5b55f0a?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="A statue of Lady Justice above a courthouse — a statutory manager could run a payment firm for up to two years" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Monday, 5 October 2026</b>Edition Nº 35 &middot; 4 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 35 &middot; 4 stories</span>
-          <h3>Monday, 5 October 2026</h3>
-          <p>The payments Bill would let the Central Bank walk into a payment company unannounced, fire the people it holds responsible and install its own manager for up to two years — and comment closes on Friday.</p>
+          <h3>The CBK wants the power to take over a payment firm</h3>
           <ul><li>Quickmart goes to the NSE at KES 7.50 and a KES 30 billion valuation</li><li>MPs ask what happens when your phone number is given to someone else</li><li>Abdi Mohamed takes over at I&amp;M with the digital numbers already working</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1788784519586-0a14c5b55f0a?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-10-02/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1657069345471-c54f2432b79c?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="A car driving through a flooded street — the alert carve-out covers El Niño and disaster warnings" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Friday, 2 October 2026</b>Edition Nº 34 &middot; 3 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 34 &middot; 3 stories</span>
-          <h3>Friday, 2 October 2026</h3>
-          <p>From yesterday, no Kenyan phone can opt out of a government emergency alert — the Communications Authority has ordered every operator to push El Niño warnings past Do Not Disturb.</p>
+          <h3>Emergency SMS will now override Do Not Disturb</h3>
           <ul><li>Safaricom's AI Pay reads the receipt so you don't type the PayBill</li><li>Airtel Money puts KSh37 million into two Marigat schools</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1657069345471-c54f2432b79c?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-10-01/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1781807124729-a6a68d42a6d7?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="The London skyline — Airtel Money&#x27;s $7bn listing is closed to retail investors in Kenya" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Thursday, 1 October 2026</b>Edition Nº 33 &middot; 3 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 33 &middot; 3 stories</span>
-          <h3>Thursday, 1 October 2026</h3>
-          <p>Airtel Money is worth $7 billion on the London market this morning, built substantially on African customers who are not allowed to buy the shares — while in Nairobi, M-PESA starts arriving at shop tills as a tap.</p>
+          <h3>Airtel Money prices in London at $7bn — and shuts African retail investors out</h3>
           <ul><li>M-PESA arrives at the till as a tap</li><li>Bolt Send passes a million deliveries, and Kenya is its fastest-growing market</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1781807124729-a6a68d42a6d7?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-09-30/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1534691601885-2b18af007add?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Closed roller shutters on a row of shopfronts — Copia&#x27;s rural retail network is being wound up" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Wednesday, 30 September 2026</b>Edition Nº 32 &middot; 6 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 32 &middot; 6 stories</span>
-          <h3>Wednesday, 30 September 2026</h3>
-          <p>Copia is going to be broken up and sold — two and a half years after administration, $123 million of venture money and 50,000 agents were not enough to make rural e-commerce pay.</p>
+          <h3>The High Court orders Copia into liquidation</h3>
           <ul><li>CBK licenses 29 more digital lenders, taking the total to 281</li><li>The float in your wallet could start earning — for someone</li><li>Kenyans will be able to buy Dangote — as a depositary receipt on the NSE</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1534691601885-2b18af007add?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-09-29/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1644036705181-4280bfe30d2a?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="An aircraft wing over a city — Kenya Airways is using AI to set fares across holiday, business and diaspora demand" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Tuesday, 29 September 2026</b>Edition Nº 31 &middot; 4 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 31 &middot; 4 stories</span>
-          <h3>Tuesday, 29 September 2026</h3>
-          <p>Kenya Airways hands fare-setting to an AI engine, a Moringa survey finds three-quarters of Kenyan employers still at the beginning of building tech capability, and Kaspersky turns up fake iPhone 18 stores taking bitcoin.</p>
+          <h3>Kenya Airways puts an AI engine behind its fares</h3>
           <ul><li>Moringa's survey: 73% of Kenyan employers are still at square one on tech capability</li><li>The iPhone 18 is not on sale yet, but the fake stores are open</li><li>Vodacom puts sign-language interpretation inside the M-PESA app</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1644036705181-4280bfe30d2a?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-09-28/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1571867424488-4565932edb41?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="Two hands holding phones side by side — interoperability and 270,000 agents are moving Airtel Money to 11% of Kenya&#x27;s market" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Monday, 28 September 2026</b>Edition Nº 30 &middot; 6 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 30 &middot; 6 stories</span>
-          <h3>Monday, 28 September 2026</h3>
-          <p>Airtel Money quietly becomes a real second force in Kenyan mobile money, an investigation counts a dozen barely-documented government deals with Big Tech, and a dialysis clinic built into a shipping container puts two Kenyans in the Africa Prize final.</p>
+          <h3>How Airtel Money went from rounding error to 11%</h3>
           <ul><li>Twelve deals, little paper: an audit of Kenya's Big Tech engagements</li><li>A dialysis clinic in a shipping container reaches the Africa Prize final</li><li>I&amp;M opens 25,000 accounts a month without a paper form</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1571867424488-4565932edb41?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-09-25/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1556742521-9713bf272865?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="Paying by phone at a terminal — Absa Next bundles loans, savings and investments into one app open to non-customers" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Friday, 25 September 2026</b>Edition Nº 29 &middot; 4 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 29 &middot; 4 stories</span>
-          <h3>Friday, 25 September 2026</h3>
-          <p>Absa ships the full version of its all-in-one app, the man who runs M-PESA's technology tells a Nairobi conference exactly where AI is not allowed near money, and Tecno wins two gold awards in Berlin for devices you cannot buy.</p>
+          <h3>Absa Next opens to people who do not bank with Absa</h3>
           <ul><li>"AI assists. Deterministic rules decide." M-PESA draws the line</li><li>Tecno takes two IFA golds — for a 4.9mm modular phone and a mini gaming PC</li><li>WSO2Con Africa closes on governance, not models</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1556742521-9713bf272865?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-09-24/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1582192730841-2a682d7375f9?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="A panel on stage before a full auditorium — Latitude59 expects 2,000 attendees and 600 investors in Nairobi" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Thursday, 24 September 2026</b>Edition Nº 28 &middot; 4 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 28 &middot; 4 stories</span>
-          <h3>Thursday, 24 September 2026</h3>
-          <p>An Estonian startup festival returns to Nairobi for a fourth year, Yellow Card recruits a Monzo finance chief as stablecoin rails go global, and Kenya tries again to turn university research into companies.</p>
+          <h3>Latitude59 brings its pitch contest back to Nairobi</h3>
           <ul><li>Yellow Card hires Monzo's former group financial controller as CFO</li><li>Kenya maps a route from university lab to company</li><li>The enterprise AI problem is not the pilot, it is everything after it</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1582192730841-2a682d7375f9?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-09-23/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1765502318157-61d9bb6579e0?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Rows of filing cabinets — behind 22,000 digital services, the processing is still done by hand" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Wednesday, 23 September 2026</b>Edition Nº 27 &middot; 5 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 27 &middot; 5 stories</span>
-          <h3>Wednesday, 23 September 2026</h3>
-          <p>Kenya has digitised 22,000 government services and still asks you to carry a birth certificate to the passport office — the ICT Secretary said so out loud at WSO2Con Africa in Nairobi.</p>
+          <h3>22,000 digital services, and a backend that is "still pretty manual"</h3>
           <ul><li>KPC's Inuka fellowship placed 30% of its first cohort</li><li>Equity moves payment approval to your face or thumb</li><li>Posta's parcels jumped 549% in a quarter — and still fell for the year</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1765502318157-61d9bb6579e0?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-09-22/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1599050751795-6cdaafbc2319?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="A phone held over a card reader — the draft bill would let licensed third parties read the data behind payments like this" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Tuesday, 22 September 2026</b>Edition Nº 26 &middot; 6 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 26 &middot; 6 stories</span>
-          <h3>Tuesday, 22 September 2026</h3>
-          <p>A draft law would force M-PESA and the banks to hand customer data to anyone the customer authorises, the CBK's own survey finds the banks have quietly become fintechs, and KCB's stake in Pesapal turns out to be 22.23% — disclosed not in Nairobi but by a Tanzanian regulator.</p>
+          <h3>The Payment Bill would prise open M-PESA's data</h3>
           <ul><li>The CBK's own survey says the banks are already fintechs</li><li>KCB's Pesapal stake is 22.23%, and Tanzania told us</li><li>EPRA lifts the ceiling that punished busy charging stations</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1599050751795-6cdaafbc2319?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-09-21/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1651608670845-e124df680a27?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Someone leading a room of people working on laptops — This Is Digital has run AI training for 800 professionals" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Monday, 21 September 2026</b>Edition Nº 25 &middot; 5 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 25 &middot; 5 stories</span>
-          <h3>Monday, 21 September 2026</h3>
-          <p>A Nairobi AI-literacy business that started as a question put to a chatbot has now trained 800 people in 11 countries, Spiro doubles its climate facility to $36 million, and two Kenyan musicians are in court over songs used in phone ads.</p>
+          <h3>This Is Digital turned one chatbot question into a business training 800 professionals</h3>
           <ul><li>Spiro takes another $18m, doubling its AfricaGoGreen facility to $36m</li><li>Two Kenyan musicians, two phone campaigns, two questions nobody settled in writing</li><li>Google runs "Tutunge na Gemini" for Nairobi creators and students</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1651608670845-e124df680a27?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-09-19/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1673798880756-889117cacb7e?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Mobile masts against a cloudy sky — Kenya now counts 88 million SIM subscriptions" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Saturday, 19 September 2026</b>Edition Nº 24 &middot; 5 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 24 &middot; 5 stories</span>
-          <h3>Saturday, 19 September 2026</h3>
-          <p>The Communications Authority's quarterly numbers landed this week, and read together they describe a country with 88 million SIMs, 52 million smartphones and 34,007 fewer mobile money agents than it had three months ago.</p>
+          <h3>88 million SIMs, and the feature phone is finally losing</h3>
           <ul><li>Mobile money grew. The agents didn't.</li><li>Safaricom gained where the market grew, held where it didn't</li><li>Fixed internet up 32% — and Starlink had to stop selling</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1673798880756-889117cacb7e?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-09-18/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1683322499436-f4383dd59f5a?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Blue network cables plugged into server ports — Airtel&#x27;s wholesale fibre unit closes without ever earning revenue" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Friday, 18 September 2026</b>Edition Nº 23 &middot; 7 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 23 &middot; 7 stories</span>
-          <h3>Friday, 18 September 2026</h3>
-          <p>Airtel quietly folds its Kenyan wholesale fibre bet, KRA says sorry with a penalty waiver before the VAT deadline, and Apple TV finally arrives in Kenya — bundled into iCloud+.</p>
+          <h3>Airtel shuts its Kenyan wholesale fibre unit after two years of zero revenue</h3>
           <ul><li>HustleSasa draws a German investor as it grows beyond ticketing</li><li>KRA waives penalties and interest over iTax downtime</li><li>PAPSS volumes jump 1,000% as the pan-African rail turns to adoption</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1683322499436-f4383dd59f5a?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-09-17/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1689150571822-1b573b695391?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="A room watching a projected deck — Claude can now draft, edit and present slides without leaving the chat" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Thursday, 17 September 2026</b>Edition Nº 22 &middot; 4 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 22 &middot; 4 stories</span>
-          <h3>Thursday, 17 September 2026</h3>
-          <p>Anthropic puts documents and decks inside Claude and points them at Google Workspace, while Kenya's banks spend the day on the unglamorous work: fuel-station dealers, farm loans and getting small exporters onto somebody else's shelf.</p>
+          <h3>Claude gets Docs and Slides, and aims them at Google Workspace</h3>
           <ul><li>Equity wants to stop lending against raw hides</li><li>Absa will finance the rent on Shell forecourts</li><li>Visa signs five years with Ethiopia's Dashen Bank</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1689150571822-1b573b695391?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-09-16/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1594915440248-1e419eba6611?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Fibre patch cables running into a network switch — Kenya needs about 70,000km more before 2027" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Wednesday, 16 September 2026</b>Edition Nº 21 &middot; 6 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 21 &middot; 6 stories</span>
-          <h3>Wednesday, 16 September 2026</h3>
-          <p>Kenya goes shopping for 70,000km of fibre in under two years, Vodacom heads for the Court of Appeal, and TikTok starts asking Kenyan creators for their tax details.</p>
+          <h3>Kenya tenders for the fibre it needs to hit 100,000km before the 2027 vote</h3>
           <ul><li>Vodacom will appeal; Safaricom is "reviewing the judgment"</li><li>TikTok starts collecting tax details from Kenyan creators</li><li>Kenya takes a Konza cloud expansion and a spaceport to Seoul</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1594915440248-1e419eba6611?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-09-15/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1780396070926-5abdd2a7928a?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="An empty panelled courtroom — three judges voided Kenya&#x27;s largest privatisation" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Tuesday, 15 September 2026</b>Edition Nº 20 &middot; 6 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 20 &middot; 6 stories</span>
-          <h3>Tuesday, 15 September 2026</h3>
-          <p>The High Court has voided the KES 204.3 billion sale of Kenya's Safaricom stake to Vodacom and ordered the shares back to the state — the largest privatisation in the country's history, unwound.</p>
+          <h3>High Court nullifies the Safaricom stake sale to Vodacom</h3>
           <ul><li>Stanbic Bank Kenya confirms Michael Mutiga as CEO</li><li>The next Hustler Fund wants your bank, Sacco and mobile-lender record</li><li>Spiro and Yadea team up as Kenya's e-boda market gets crowded</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1780396070926-5abdd2a7928a?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-09-14/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1767347948854-6cf1686d47d8?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Vendors selling produce at an open-air market — Twiga Foods built its business on supplying stalls like these" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Monday, 14 September 2026</b>Edition Nº 19 &middot; 7 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 19 &middot; 7 stories</span>
-          <h3>Monday, 14 September 2026</h3>
-          <p>Twiga Foods, once the loudest proof that Kenyan agritech could raise Goldman Sachs money, is now in the hands of an administrator — on a Monday when Parliament is also poking holes in how the Safaricom windfall gets spent.</p>
+          <h3>Twiga Foods ends up in administration</h3>
           <ul><li>MPs find gaps in the rules for the KES 340 billion Safaricom-sale fund</li><li>Watu Credit raises $7m in debt to keep financing bikes and phones</li><li>CBK drafts a "too big to fail" regime for Kenyan banks</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1767347948854-6cf1686d47d8?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-09-13/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1771433053081-458d46481c09?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Traffic backed up on an overpass — Kenya&#x27;s private-capital investors have few routes off the road" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Sunday, 13 September 2026</b>Edition Nº 18 &middot; 3 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 18 &middot; 3 stories</span>
-          <h3>Sunday, 13 September 2026</h3>
-          <p>A quiet Sunday, and the thread running through it is the same one: Kenya has KSh3.8 trillion sitting in pension funds and collective schemes, and not enough ways for it to get into — or out of — private companies.</p>
+          <h3>The NSE is building an exit ramp for investors who cannot get out</h3>
           <ul><li>Sidian's CEO wants an MSME bond, not just more bank lending</li><li>Kenya's REIT rules were written for buildings, not for data centres</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1771433053081-458d46481c09?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-09-12/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1694022724038-acb03623601d?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="A close look at a phone&#x27;s glass display — the folding panel alone accounts for an eighth of the iPhone Duo&#x27;s price" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Saturday, 12 September 2026</b>Edition Nº 17 &middot; 6 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 17 &middot; 6 stories</span>
-          <h3>Saturday, 12 September 2026</h3>
-          <p>A quiet Saturday, and the most interesting number is a supply-chain one: the folding screen inside Apple's new iPhone Duo costs more than an entire mid-range phone, and Samsung is the only company that can make it.</p>
+          <h3>One screen, $250: the part that explains the iPhone Duo's price</h3>
           <ul><li>A Nigerian cloud provider opens its first Nairobi zone</li><li>Digital Parks Africa adds a Tier IV carrier-neutral build in Lagos</li><li>Siemens puts its industrial software into six African markets through Redington</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1694022724038-acb03623601d?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-09-11/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1783965951359-3ea1e0aa7772?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="Hands holding a phone open to a social feed in the dark — the fake posts never left a network of fake accounts" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Friday, 11 September 2026</b>Edition Nº 16 &middot; 6 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 16 &middot; 6 stories</span>
-          <h3>Friday, 11 September 2026</h3>
-          <p>Anthropic names Kenya in a global AI misuse report — a bot farm using Claude to manufacture praise for a cabinet secretary ahead of 2027 — while the man now running the National Infrastructure Fund sets his sights on the KSh3 trillion sitting in pension savings.</p>
+          <h3>Anthropic caught a Kenyan bot farm using Claude to manufacture grassroots praise</h3>
           <ul><li>Mworia wants Kenya's pension savings financing its roads and grids</li><li>700 Garissa youth start a 25-week course in cloud, AI and data</li><li>The dividend revival is quietly reshaping who owns the NSE</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1783965951359-3ea1e0aa7772?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-09-10/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1615891081220-9116de3e1afd?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="A woman working at a laptop — 87% of Kenyans surveyed use an AI tool at least weekly" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Thursday, 10 September 2026</b>Edition Nº 15 &middot; 6 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 15 &middot; 6 stories</span>
-          <h3>Thursday, 10 September 2026</h3>
-          <p>A global survey puts Kenya near the top of the world for weekly AI use, Mombasa's $1.5 billion AI data centre starts shopping for its own gas turbines, and Kenyan savers quietly move KSh948.7 billion out of the money-market default.</p>
+          <h3>87% of Kenyans use AI every week — against a 64% global average</h3>
           <ul><li>Mombasa's $1.5bn AI data centre plans to build its own power station</li><li>Kenyan funds near KSh1 trillion as the money-market habit breaks</li><li>Uber says Kenya stays, a week after leaving Nigeria and Uganda</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1615891081220-9116de3e1afd?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-09-09/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1587476351660-e9fa4bb8b26c?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="A helmeted rider on a motorcycle — ARC Ride is funding 5,000 more electric bikes and the swap stations behind them" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Wednesday, 9 September 2026</b>Edition Nº 14 &middot; 6 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 14 &middot; 6 stories</span>
-          <h3>Wednesday, 9 September 2026</h3>
-          <p>A Nairobi battery-swap operator pulls in $33.3 million to go continental, a 500km protected cable is planned along the Kenyan coast, and the system meant to place 1.2 million learners in senior school is buckling on deadline day.</p>
+          <h3>ARC Ride raises $33.3m to take Nairobi's battery swapping continental</h3>
           <ul><li>LuLu plans a 500km protected cable from Mombasa to Lamu</li><li>KEMIS meets its first real deadline — and 1.2 million learners are in the queue</li><li>Apple's foldable is real, and it is called iPhone Duo</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1587476351660-e9fa4bb8b26c?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-09-08/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Abstract AI-generated artwork — Kenya&#x27;s Copyright Tribunal says machine output alone earns no copyright" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Tuesday, 8 September 2026</b>Edition Nº 13 &middot; 6 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 13 &middot; 6 stories</span>
-          <h3>Tuesday, 8 September 2026</h3>
-          <p>A tribunal draws Kenya's first line on AI and copyright, the regulator moves to give data centres their own licence the day after Nairobi opens a new one, and half-year deal tables put Kenyan banking M&amp;A on top of Africa.</p>
+          <h3>No human effort, no copyright: Kenya's tribunal rules on AI-generated work</h3>
           <ul><li>CA proposes a standalone licence for data centres</li><li>Digital Realty switches on NBO2 in Nairobi</li><li>Two bank deals put Kenya top of Africa's M&amp;A table</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-09-07/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1673902274292-36d5732dd3a4?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="The Mombasa skyline — the coastal city climbed 22 places while Nairobi fell nine" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Monday, 7 September 2026</b>Edition Nº 12 &middot; 6 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 12 &middot; 6 stories</span>
-          <h3>Monday, 7 September 2026</h3>
-          <p>Nairobi slides nine places in the global startup rankings while Mombasa climbs twenty-two, Bolt marks a decade in Kenya, and Centum's James Mworia takes charge of the fund meant to pull private money into national infrastructure.</p>
+          <h3>Nairobi drops nine places — and Mombasa is the only Kenyan city climbing</h3>
           <ul><li>Ten years in, Bolt puts its Kenya bill at KES 19 billion</li><li>Safaricom Ethiopia's real test is not subscribers — it is March 2027</li><li>James Mworia leaves Centum to run Kenya's National Infrastructure Fund</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1673902274292-36d5732dd3a4?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-09-06/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1599905858319-ade1a3d6f228?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Two satellite dishes on a wall — DStv is cutting six Kenyan bouquets down to three" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Sunday, 6 September 2026</b>Edition Nº 11 &middot; 4 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 11 &middot; 4 stories</span>
-          <h3>Sunday, 6 September 2026</h3>
-          <p>MultiChoice tears up its Kenyan price list, Google Translate learns to keep talking in the background — in Swahili — and mobile money's leaders admit sign-ups are no longer the score that matters.</p>
+          <h3>DStv collapses six bouquets into three — and cuts Premium by KES 4,400</h3>
           <ul><li>Google Translate goes background-mode — with Swahili on the list</li><li>From Eastlands to Copenhagen: the Kenyan wiring Nordic money to African startups</li><li>Mobile money's next fight is engagement, not sign-ups</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1599905858319-ade1a3d6f228?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-09-05/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1687422808248-f807f4ea2a2e?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="A trader in an apron checking his phone — Sun King is selling handsets at KES 55 a day" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Saturday, 5 September 2026</b>Edition Nº 10 &middot; 6 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 10 &middot; 6 stories</span>
-          <h3>Saturday, 5 September 2026</h3>
-          <p>Sun King points its paygo solar playbook at the smartphone market, Safaricom Ethiopia crosses 15 million subscribers, and Equity anchors a $200 million climate fund for the region's farmers.</p>
+          <h3>Sun King crashes the financed-phone race with a KES 55-a-day handset</h3>
           <ul><li>Safaricom Ethiopia crosses 15 million subscribers four years in</li><li>Hisa opens US IPOs to Kenyan retail investors</li><li>Equity and IFAD launch a $200m climate fund for East African farmers</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1687422808248-f807f4ea2a2e?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-09-04/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="A red padlock resting on a keyboard — a scan of Kenyan systems turned up 4.8 million leaked credentials" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Friday, 4 September 2026</b>Edition Nº 9 &middot; 7 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 9 &middot; 7 stories</span>
-          <h3>Friday, 4 September 2026</h3>
-          <p>A state cyber-audit finds 4.8 million Kenyan credentials leaked online, State House unwinds the cargo tax that enraged small traders, and a Nairobi stablecoin pioneer plugs into six markets.</p>
+          <h3>Kenya arms its cybercrime prosecutors as a scan finds 4.8 million leaked credentials</h3>
           <ul><li>Kotani Pay takes stablecoin payouts continental with DCSPay</li><li>Ruto rolls back the cargo taxes squeezing small online importers</li><li>Standard Bank wants Stanbic to be Kenya's biggest bank by 2030</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-09-03/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Ride-hailing driver navigating city traffic" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Thursday, 3 September 2026</b>Edition Nº 8 &middot; 6 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 8 &middot; 6 stories</span>
-          <h3>Thursday, 3 September 2026</h3>
-          <p>A High Court judge suspends the state's grip on ride-hailing, detectives arrest fintech founders and a SIM-swap ring, and Uber trims a tenth of its global workforce — a day when Kenya's tech story ran through the courts.</p>
+          <h3>High Court suspends the 18% ride-hailing commission cap</h3>
           <ul><li>FlexPay founders arrested over a missing KES 31.2 million</li><li>Four Chinese nationals held as DCI cracks a SIM-swap ring</li><li>Women in STEM Africa Summit opens at KICC with an investor pitch arena</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-09-02/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Developer working on invoicing software code" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Wednesday, 2 September 2026</b>Edition Nº 7 &middot; 6 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 7 &middot; 6 stories</span>
-          <h3>Wednesday, 2 September 2026</h3>
-          <p>A Nairobi-built tax platform opens in Dubai, Konza's successor authority asks young designers to draw its new face, and Uber walks away from Nigeria after twelve years — a day about Kenyan software going out and global platforms pulling back.</p>
+          <h3>After $20 billion in invoices, Kenya's DigiTax opens in the UAE</h3>
           <ul><li>Technopolis Authority puts KES 1 million behind a new logo</li><li>NBK half-year profit jumps 61% to KSh 1.72 billion</li><li>Uber leaves Nigeria after twelve years — Kenya unaffected</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-09-01/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1680879275304-bbe20f7e28fb?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="A Kenyan content creator filming on a phone" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Tuesday, 1 September 2026</b>Edition Nº 6 &middot; 6 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 6 &middot; 6 stories</span>
-          <h3>Tuesday, 1 September 2026</h3>
-          <p>Creators push back on the withholding tax landing in their October payouts, the regulator moves to recycle dormant phone numbers that now double as bank accounts, and two very large cheques are written for the continent's fibre.</p>
+          <h3>Kenya's creators ask Treasury to pause the 5% withholding tax</h3>
           <ul><li>CA moves to recycle numbers dormant for three months</li><li>BAKE proposes an Office of the Creator Ombudsman</li><li>Intel puts free AI courses inside Kenya's public libraries</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1680879275304-bbe20f7e28fb?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-08-31/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Rows of network equipment and fibre cabling in a data centre" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Monday, 31 August 2026</b>Edition Nº 5 &middot; 6 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 5 &middot; 6 stories</span>
-          <h3>Monday, 31 August 2026</h3>
-          <p>Airtel goes after the infrastructure licences that underpin Safaricom's dominance, Kenya's seat at the Digital Cooperation Organization is confirmed in Riyadh, and KRA wires its invoice system straight into the government's payment pipeline.</p>
+          <h3>Airtel bids for Tier 1 infrastructure and gateway licences to take on Safaricom</h3>
           <ul><li>Kenya's Digital Cooperation Organization membership gets the green light</li><li>KRA plugs eTIMS into IFMIS to vet every government supplier invoice</li><li>WHO switches on an AI-assisted health data hub for all 47 African member states</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-08-30/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1745848413060-0827ec268cda?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="A video camera filming a creator in a studio" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Sunday, 30 August 2026</b>Edition Nº 4 &middot; 6 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 4 &middot; 6 stories</span>
-          <h3>Sunday, 30 August 2026</h3>
-          <p>The taxman reaches into Kenyan creators' AdSense payouts, NCBA and BasiGo put together the financing to electrify the matatu fleet, and a battle-tested Nairobi lender quietly crosses a billion dollars in loans to market traders.</p>
+          <h3>Google will withhold 5% of Kenyan creators' YouTube earnings for KRA</h3>
           <ul><li>NCBA and BasiGo strike deal to finance 1,000 electric matatus</li><li>SUN Mobility launches an open battery-swap network from Nairobi</li><li>HFCB posts record half-year profit as its capital raise pays off</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1745848413060-0827ec268cda?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-08-29/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1739271933163-8dcc7c8e8a3e?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="A woman replying to messages on her phone" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Saturday, 29 August 2026</b>Edition Nº 3 &middot; 7 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 3 &middot; 7 stories</span>
-          <h3>Saturday, 29 August 2026</h3>
-          <p>Meta puts a price on the business chat window Kenyan banks and retailers have leaned on for free, Nairobi applies to join the bloc writing the world's digital trade rules, and the half-year books show how much of Kenyan banking has already moved onto the phone.</p>
+          <h3>Meta starts charging Kenyan businesses for every WhatsApp reply</h3>
           <ul><li>Kenya applies to join the Digital Cooperation Organisation</li><li>I&amp;M's half-year profit climbs 22% as 92% of customers go digital</li><li>Britam profit jumps 52% as it digitises marine cargo cover</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1739271933163-8dcc7c8e8a3e?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-08-28/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1741991110666-88115e724741?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Nairobi city skyline by day" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Friday, 28 August 2026</b>Edition Nº 2 &middot; 7 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 2 &middot; 7 stories</span>
-          <h3>Friday, 28 August 2026</h3>
-          <p>A regulator draws new lines around the delivery apps, the grid runs perilously thin, and Kenya edges toward the world's main cybercrime treaty — a heavy day for the rules and the wires underneath the ecosystem.</p>
+          <h3>CA brings Uber, Bolt and Glovo parcel deliveries under licence</h3>
           <ul><li>Kenya's power reserve margin collapses to 3.34%, reviving rationing fears</li><li>Kenya moves closer to joining the Budapest Convention on cybercrime</li><li>Nairobi's Flowt raises pre-seed to turn messy books into loan-ready data</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1741991110666-88115e724741?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
       <a class="ed-card" href="/blog/daily/2026-08-27/">
-        <div class="pic"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Stock market chart trending downward" decoding="async" onerror="this.remove()"></div>
+        <div class="no"><b>Thursday, 27 August 2026</b>Edition Nº 1 · Launch &middot; 6 stories</div>
         <div class="txt">
-          <span class="no">Edition Nº 1 · Launch &middot; 6 stories</span>
-          <h3>Thursday, 27 August 2026</h3>
-          <p>Welcome to the first edition: the stories shaping Kenyan tech this season, from a shake-up in Africa's funding league table to M-Pesa's biggest platform overhaul yet. A fresh digest lands here every evening at 9.</p>
+          <h3>Kenya slips to third in Africa's startup funding table</h3>
           <ul><li>Safaricom cuts M-Pesa fees for businesses in sweeping tariff revision</li><li>Kenya's national AI policy heads toward Cabinet after public consultation</li><li>Ziidi Trader puts the NSE inside 35 million M-Pesa wallets</li></ul>
-          <span class="more">Read edition &rarr;</span>
         </div>
+        <div class="pic"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </a>
   </div>
-</div>
+</main>
 
-<footer class="site">
-  <div class="shell">
-    <p>&copy; 2026 The Tech Hut. All rights reserved.</p>
-    <div class="links">
-      <a href="https://thetechhut.co/">Home</a>
-      <a href="https://thetechhut.co/blog/">Blog</a>
-      <a href="https://thetechhut.co/communities/">Community</a>
-      <a href="https://thetechhut.co/events/">Events</a>
-    </div>
-    <p class="note">The Daily Savannah is The Tech Hut's automated daily digest of Kenya's tech ecosystem, researched and written by Claude every evening at 9:00 PM Nairobi time. Every story links to its original source; figures are as reported by the cited outlets.</p>
-  </div>
-</footer>
+<div class="pagefoot"><div class="wrap">
+  <p>The Daily Savannah is The Tech Hut's automated daily digest of Kenya's tech ecosystem, researched and written by Claude every evening at 9:00 PM Nairobi time. Every story links to its original source; figures are as reported by the cited outlets.</p>
+</div></div>
+<footer class="sitefoot">
+        <div class="wrap">
+            <div class="sitefoot-grid">
+                <div>
+                    <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+                    <p>Helping Kenyans into tech work: jobs you can take from Nairobi, a daily read on the industry, and projects with mentors.</p>
+                </div>
+                <div>
+                    <h4>Read</h4>
+                    <ul>
+                        <li><a href="/blog/daily/">Daily Savannah</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Find work</h4>
+                    <ul>
+                        <li><a href="/jobs/">Jobs board</a></li>
+                        <li><a href="/remote/">Remote-from-Kenya list</a></li>
+                        <li><a href="/cv-pack/">CV Pack</a></li>
+                        <li><a href="/early-access/">Early Access</a></li>
+                        <li><a href="/shop/">Everything we make</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="/apprenticeship/">Apprenticeship</a></li>
+                        <li><a href="/events/">Events</a></li>
+                        <li><a href="/communities/">Tech communities</a></li>
+                        <li><a href="/tools/">Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Employers</h4>
+                    <ul>
+                        <li><a href="/advertise/">Advertise</a></li>
+                        <li><a href="/jobs-for-your-community/">A jobs board for your community</a></li>
+                        <li><a href="/recruiters/">Recruiters</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sitefoot-base">
+                <span>&copy; 2026 The Tech Hut Community</span>
+                <a href="mailto:info@thetechhut.co">info@thetechhut.co</a>
+                <span>+254 115 017 058</span>
+                <a href="/data_privacy_policy/">Privacy</a>
+                <a href="https://linkedin.com/company/digital-transformation-partner/" rel="noopener">LinkedIn</a>
+                <a href="https://x.com/Ekiprop_kimutai" rel="noopener">X</a>
+            </div>
+        </div>
+    </footer>
 
 <script id="signup-js">
 (function () {
@@ -906,7 +637,7 @@
             form.reset();
             msg.className = 'sub-msg ok';
             msg.textContent = 'Almost there. We sent a link to ' + email + '. Click it to confirm. Check spam once if it is not in your inbox.';
-            btn.textContent = 'Check your inbox ✓';
+            btn.textContent = 'Check your inbox';
         }).catch(function () {
             msg.className = 'sub-msg bad';
             msg.textContent = 'That did not go through. Try again in a minute, or email info@thetechhut.co and we will add you by hand.';

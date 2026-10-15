@@ -6,124 +6,217 @@
     <title>The AI Job Apocalypse: Are You Prepared?</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8;
-            color: #333333;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/thh.css">
+<style>
+  /* Long-form article. Type, colour, masthead and footer come from the shared stylesheet;
+     this block only sets the reading column. */
+  .article { --col: 720px; padding-bottom: 56px; }
+  .article .wrap { max-width: calc(var(--col) + 2 * var(--gutter)); }
+  .article-head { padding-top: 48px; padding-bottom: 26px; }
+  .article-head .eyebrow { padding-top: 10px; border-top: 2px solid var(--ink); }
+  .article-head h1 { font-size: clamp(36px, 5.4vw, 56px); line-height: 1.06; letter-spacing: -.022em; max-width: none; margin: 6px 0 18px; }
+  .article-head .standfirst { font-family: var(--serif); font-size: clamp(20px, 2.4vw, 24px); line-height: 1.42; color: var(--ink);
+    max-width: none; margin: 0 0 20px; }
+  .article-head .byline { margin: 0; padding: 10px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .article-fig { margin: 0 auto 30px; }
+  .article-fig img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+  .article-fig figcaption { font-size: 14px; color: var(--dim); margin-top: 8px; }
+  .article-body { max-width: none; }
+  .article-body > p:first-child::first-letter { font-family: var(--serif); font-weight: 600; color: var(--ink);
+    float: left; font-size: 4.1em; line-height: .82; margin: .08em .1em 0 0; }
+  .article-body h2 { padding-top: 12px; border-top: 2px solid var(--ink); }
+  .article-body ul li::marker { color: var(--green); }
+  .article-body .callout { font-size: 16px; line-height: 1.6; margin: 1.8em 0 0; }
+  .article-body ul.srcs { font-size: 16px; line-height: 1.5; list-style: none; padding: 0; border-top: 1px solid var(--rule); }
+  .article-body ul.srcs li { padding: 10px 0; margin: 0; border-bottom: 1px solid var(--rule); }
+  .article-body ul.srcs a { color: var(--ink); text-decoration-color: var(--mint); text-decoration-thickness: 2px; }
+  .article-body ul.srcs a:hover { color: var(--green); }
+  .backlink { display: inline-block; margin: 34px 0 0; font-weight: 700; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--mint); }
+  .backlink:hover { border-bottom-color: var(--ink); color: var(--ink); }
+  @media (max-width: 760px) {
+    .article-head { padding-top: 30px; }
+    .article-body { font-size: 17.5px; }
+  }
+  /* this article: epigraphs, numbered points, the event box */
+  .epigraphs { margin: 0 0 1.6em; padding: 4px 0 4px 18px; border-left: 3px solid var(--mint); }
+  .prose .epigraphs blockquote { margin: 0 0 14px; padding: 0; border: 0; font-size: 21px; line-height: 1.4; }
+  .prose .epigraphs blockquote:last-child { margin-bottom: 0; }
+  .epigraphs blockquote p { margin: 0 0 4px; color: var(--ink); }
+  .epigraphs footer { font-family: var(--sans); font-style: normal; font-size: 14.5px; color: var(--dim); }
+  .article-body > p.opener::first-letter { font-family: var(--serif); font-weight: 600; color: var(--ink);
+    float: left; font-size: 4.1em; line-height: .82; margin: .08em .1em 0 0; }
+  .prose ol.points { list-style: none; counter-reset: pt; padding: 0; margin: 1.4em 0; border-top: 2px solid var(--ink); }
+  .prose ol.points li { counter-increment: pt; display: grid; grid-template-columns: 48px 1fr; column-gap: 12px;
+    padding: 16px 0; margin: 0; border-bottom: 1px solid var(--rule); }
+  .prose ol.points li::before { content: counter(pt, decimal-leading-zero); grid-row: span 2; font-family: var(--serif);
+    font-size: 34px; font-weight: 500; line-height: 1; color: var(--green); }
+  .prose ol.points h3 { margin: 0 0 6px; font-size: 22px; }
+  .prose ol.points p { margin: 0; }
+  .prose p.closer { font-family: var(--serif); font-size: 24px; font-weight: 600; color: var(--ink); margin-top: 1.2em; }
+  .event { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 28px; align-items: start;
+    margin-top: 44px; padding: 20px 0 26px; border-top: 4px solid var(--mint); border-bottom: 1px solid var(--rule); }
+  .event h2 { font-size: clamp(24px, 3vw, 30px); margin: 0 0 10px; }
+  .event p { font-size: 16.5px; margin: 0 0 14px; }
+  .event .ledger { margin: 0 0 20px; }
+  .event .ledger span { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--dim); padding-top: 2px; }
+  .event .ledger li b { font-family: var(--sans); font-weight: 600; white-space: normal; text-align: right; }
+  .event-pic img { display: block; width: 100%; height: auto; border: 1px solid var(--rule); }
+  @media (max-width: 640px) {
+    .event { grid-template-columns: 1fr; }
+    .event-pic { max-width: 260px; }
+  }
+</style>
 </head>
-<body class="antialiased">
+<body>
+<a class="skip" href="#main">Skip to content</a>
+    <header class="masthead">
+        <div class="masthead-top"><div class="wrap"><span>Kenya's tech careers, reported daily</span><span class="hide-sm"><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a> &middot; <a href="mailto:info@thetechhut.co">info@thetechhut.co</a></span></div></div>
+        <div class="wrap masthead-main">
+            <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+            <nav class="sitenav" aria-label="Site"><a href="/blog/daily/">Daily</a><a href="/jobs/">Jobs</a><a href="/remote/">Remote</a><a href="/cv-pack/">CV Pack</a><a href="/shop/">Shop</a><a href="/events/">Events</a><a href="/apprenticeship/">Apprenticeship</a><a href="/blog/" aria-current="page">Blog</a></nav>
+        </div>
+    </header>
 
-    <div class="max-w-4xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
-        <!-- Blog Post Container -->
-        <article class="bg-white rounded-xl shadow-lg overflow-hidden">
-            <header class="p-8 sm:p-10">
-                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-center text-gray-900 leading-tight">
-                    The AI Job Apocalypse Is Coming. Are You Prepared?
-                </h1>
-                <p class="mt-4 text-center text-lg text-gray-500 italic">
-                    (Adapted from a piece by MJ DeMarco)
-                </p>
-            </header>
+<main id="main">
+  <article class="article">
+    <header class="article-head wrap">
+      <span class="eyebrow">AI and work</span>
+      <h1>The AI Job Apocalypse Is Coming. Are You Prepared?</h1>
+      <p class="byline">Adapted from a piece by MJ DeMarco</p>
+    </header>
 
-            <main class="px-6 pb-8 sm:px-10 sm:pb-12 text-gray-700 leading-relaxed">
-                <!-- Introductory Quotes Section -->
-                <div class="mt-8 border-l-4 border-emerald-500 pl-4 space-y-4 text-gray-600 italic">
-                    <blockquote class="text-base sm:text-lg">
-                        <p>"The horse is here to stay, but the automobile is only a novelty—a fad."</p>
-                        <footer class="mt-2 text-sm font-semibold text-right text-gray-400">
-                            — President of the Michigan Savings Bank, 1903, advising against investing in Ford.
-                        </footer>
-                    </blockquote>
-                    <blockquote class="text-base sm:text-lg">
-                        <p>"There is no reason anyone would want a computer in their home."</p>
-                        <footer class="mt-2 text-sm font-semibold text-right text-gray-400">
-                            — Ken Olsen, Founder of Digital Equipment Corp., 1977.
-                        </footer>
-                    </blockquote>
-                </div>
+    <div class="wrap">
+      <div class="prose article-body">
+        <!-- Introductory Quotes Section -->
+        <div class="epigraphs">
+          <blockquote>
+            <p>"The horse is here to stay, but the automobile is only a novelty—a fad."</p>
+            <footer>— President of the Michigan Savings Bank, 1903, advising against investing in Ford.</footer>
+          </blockquote>
+          <blockquote>
+            <p>"There is no reason anyone would want a computer in their home."</p>
+            <footer>— Ken Olsen, Founder of Digital Equipment Corp., 1977.</footer>
+          </blockquote>
+        </div>
 
-                <p class="mt-8">The graveyard of technological history is littered with dumb opinions, so-called experts who couldn't see the freight train of progress barreling down the tracks. Every great leap is met by a chorus of comfortable, smug insiders who declare it impossible, impractical, or just a passing fad, right before it renders them obsolete.</p>
-                <p class="mt-4">And today, that same tired song is being sung about AI.</p>
-                <p class="mt-4">The skeptics call it over-hyped. Wall Street is warning of a bubble. Policy makers are downplaying the impact as AI revolutionizes one industry at a time, from legal to engineering.</p>
-                <p class="mt-4">They are catastrophically wrong. And I only need to look at the last 72 hours of my own life to prove it.</p>
-                <p class="mt-4">Last week, I upgraded the forum to new hardware and a new server. Migrations are never fun and are usually wrought with issues, and this one was no exception. One issue? The forum's enhanced search function choked and died. Without this function, finding content becomes virtually impossible.</p>
-                <p class="mt-4">No problem. I did what any business owner would do: I found a specialist. I contacted a server engineer, explained the problem, and he confirmed he could fix it. I told him he was hired.</p>
-                <p class="mt-4">But there was a catch. The engineer couldn't get to it until later in the week.</p>
-                <p class="mt-4">In the old world, this would be the end of the story. I'd wait, he'd work, I'd pay.</p>
-                <p class="mt-4">But we no longer live in that world anymore.</p>
-                <p class="mt-4">While waiting, I opened up ChatGPT, described the server environment in excruciating detail, and pasted the exact error logs into the prompt. The AI directed me to the command prompt, which to me is like navigating a 12-cylinder engine in a Lamborghini: overwhelming, confusing, and a completely foreign language. Two hours later, after a back-and-forth dialogue where I, a non-expert, was guided by the AI, the problem was solved. The search was fixed.</p>
-                <p class="mt-4">My next email was to the human engineer. **"Thanks, but I no longer need your services."** He just lost a job. I just saved $180, his hourly rate.</p>
-                <p class="mt-4">This is how the AI job apocalypse starts. No robot is kicking down your door. It's a client sending a cancellation email because a $20-per-month subscription is now doing your job faster and cheaper.</p>
-                <p class="mt-4">And this fear is starting to ripple through the entire workforce. CNBC recently cited a new trend emerging in the workforce: the concept of **"job hugging."** Employees are clinging to their jobs, heads down, praying the AI reaper doesn't notice them. Employees are not job-shopping; they're just hoping to survive the week without their role being "optimized" by an algorithm. This shift is happening because the value of specialized knowledge is collapsing.</p>
+        <p class="opener">The graveyard of technological history is littered with dumb opinions, so-called experts who couldn't see the freight train of progress barreling down the tracks. Every great leap is met by a chorus of comfortable, smug insiders who declare it impossible, impractical, or just a passing fad, right before it renders them obsolete.</p>
+        <p>And today, that same tired song is being sung about AI.</p>
+        <p>The skeptics call it over-hyped. Wall Street is warning of a bubble. Policy makers are downplaying the impact as AI revolutionizes one industry at a time, from legal to engineering.</p>
+        <p>They are catastrophically wrong. And I only need to look at the last 72 hours of my own life to prove it.</p>
+        <p>Last week, I upgraded the forum to new hardware and a new server. Migrations are never fun and are usually wrought with issues, and this one was no exception. One issue? The forum's enhanced search function choked and died. Without this function, finding content becomes virtually impossible.</p>
+        <p>No problem. I did what any business owner would do: I found a specialist. I contacted a server engineer, explained the problem, and he confirmed he could fix it. I told him he was hired.</p>
+        <p>But there was a catch. The engineer couldn't get to it until later in the week.</p>
+        <p>In the old world, this would be the end of the story. I'd wait, he'd work, I'd pay.</p>
+        <p>But we no longer live in that world anymore.</p>
+        <p>While waiting, I opened up ChatGPT, described the server environment in excruciating detail, and pasted the exact error logs into the prompt. The AI directed me to the command prompt, which to me is like navigating a 12-cylinder engine in a Lamborghini: overwhelming, confusing, and a completely foreign language. Two hours later, after a back-and-forth dialogue where I, a non-expert, was guided by the AI, the problem was solved. The search was fixed.</p>
+        <p>My next email was to the human engineer. <strong>"Thanks, but I no longer need your services."</strong> He just lost a job. I just saved $180, his hourly rate.</p>
+        <p>This is how the AI job apocalypse starts. No robot is kicking down your door. It's a client sending a cancellation email because a $20-per-month subscription is now doing your job faster and cheaper.</p>
+        <p>And this fear is starting to ripple through the entire workforce. CNBC recently cited a new trend emerging in the workforce: the concept of <strong>"job hugging."</strong> Employees are clinging to their jobs, heads down, praying the AI reaper doesn't notice them. Employees are not job-shopping; they're just hoping to survive the week without their role being "optimized" by an algorithm. This shift is happening because the value of specialized knowledge is collapsing.</p>
 
-                <!-- Entrepreneurship Section -->
-                <div class="mt-12 pt-8 border-t border-gray-200">
-                    <h2 class="text-2xl sm:text-3xl font-bold text-center text-gray-900 leading-tight">
-                        Entrepreneurship: Both Your Defense and Your Offense
-                    </h2>
-                    <p class="mt-4">The old playbook of trading time for money is a career-ender, whether as a business owner or an employee. The "job hugger," the freelancer, the consultant, anyone selling a task, is standing on the train tracks.</p>
-                    <p class="mt-4">The ultimate defense against this revolution isn't upskilling. It's to stop being a skill-for-hire altogether and instead, master the tool itself. The ultimate defense to the forthcoming job apocalypse is Fastlane entrepreneurship.</p>
-                    <p class="mt-4">AI is a tool. An employee is a tool. A consultant is a tool. An entrepreneur is the architect who wields these tools.</p>
-                    <p class="mt-4">AI is just the newest, most powerful tool in the box. While it will replace millions of human tools, it will create thousands of entrepreneurial mastercrafters who can now build empires single-handedly. Here's how to frame it, Fastlane-style...</p>
+        <!-- Entrepreneurship Section -->
+        <h2>Entrepreneurship: Both Your Defense and Your Offense</h2>
+        <p>The old playbook of trading time for money is a career-ender, whether as a business owner or an employee. The "job hugger," the freelancer, the consultant, anyone selling a task, is standing on the train tracks.</p>
+        <p>The ultimate defense against this revolution isn't upskilling. It's to stop being a skill-for-hire altogether and instead, master the tool itself. The ultimate defense to the forthcoming job apocalypse is Fastlane entrepreneurship.</p>
+        <p>AI is a tool. An employee is a tool. A consultant is a tool. An entrepreneur is the architect who wields these tools.</p>
+        <p>AI is just the newest, most powerful tool in the box. While it will replace millions of human tools, it will create thousands of entrepreneurial mastercrafters who can now build empires single-handedly. Here's how to frame it, Fastlane-style...</p>
 
-                    <!-- Key Points Section -->
-                    <ul class="mt-6 space-y-8">
-                        <li>
-                            <h3 class="font-bold text-lg sm:text-xl text-emerald-600">
-                                1. Become the AI-Powered Architect.
-                            </h3>
-                            <p class="mt-2 text-base">Your job is no longer to *do the work*, but to design the *system that does the work*. An entrepreneur with AI is a one-person army, capable of achieving what used to require a team of 20 and a seven-figure budget. Stop being the bricklayer; be the architect directing a fleet of robotic bricklayers.</p>
-                        </li>
-                        <li>
-                            <h3 class="font-bold text-lg sm:text-xl text-emerald-600">
-                                2. Attack the Human Gaps.
-                            </h3>
-                            <p class="mt-2 text-base">AI is great at logic and data, but it's a dumbass at empathy, trust, and community. This is your moat. Build a brand that hasn't lost its humanity. Create a community your customers crave. Offer a human-centric experience so exceptional that no AI algorithm can replicate it.</p>
-                        </li>
-                        <li>
-                            <h3 class="font-bold text-lg sm:text-xl text-emerald-600">
-                                3. Master Tangible, IRL Problems.
-                            </h3>
-                            <p class="mt-2 text-base">AI can solve web-based problems like "Fix my server." Yet, it's not so good at real-time, tangible execution that must occur in real life (IRL). While it can design a package for vegan Pop-Tarts, it can't manufacture the product. It can't produce the box. The new winners will be those who leverage the technology but bring its power into IRL.</p>
-                        </li>
-                    </ul>
-                    <p class="mt-8">The revolution is coming. And you have a choice. You can be the person whose job is swallowed by the coming AI Apocalypse, or you can be the person holding the automation remote. You can be the cog made obsolete by the machine, or you can be the entrepreneur who uses those cogs to build a machine.</p>
-                    <p class="mt-4 font-bold text-center">The choice is yours, but the clock is ticking.</p>
-                </div>
+        <!-- Key Points Section -->
+        <ol class="points">
+          <li>
+            <h3>Become the AI-Powered Architect.</h3>
+            <p>Your job is no longer to <em>do the work</em>, but to design the <em>system that does the work</em>. An entrepreneur with AI is a one-person army, capable of achieving what used to require a team of 20 and a seven-figure budget. Stop being the bricklayer; be the architect directing a fleet of robotic bricklayers.</p>
+          </li>
+          <li>
+            <h3>Attack the Human Gaps.</h3>
+            <p>AI is great at logic and data, but it's a dumbass at empathy, trust, and community. This is your moat. Build a brand that hasn't lost its humanity. Create a community your customers crave. Offer a human-centric experience so exceptional that no AI algorithm can replicate it.</p>
+          </li>
+          <li>
+            <h3>Master Tangible, IRL Problems.</h3>
+            <p>AI can solve web-based problems like "Fix my server." Yet, it's not so good at real-time, tangible execution that must occur in real life (IRL). While it can design a package for vegan Pop-Tarts, it can't manufacture the product. It can't produce the box. The new winners will be those who leverage the technology but bring its power into IRL.</p>
+          </li>
+        </ol>
+        <p>The revolution is coming. And you have a choice. You can be the person whose job is swallowed by the coming AI Apocalypse, or you can be the person holding the automation remote. You can be the cog made obsolete by the machine, or you can be the entrepreneur who uses those cogs to build a machine.</p>
+        <p class="closer">The choice is yours, but the clock is ticking.</p>
+      </div>
 
-                <!-- Call to Action Section -->
-                <div class="mt-12 text-center p-6 bg-blue-50 border border-blue-100 rounded-lg shadow-inner">
-                    <img src="../../assets/img/Night of Building with AI.png">
-                    <h2 class="text-xl sm:text-2xl font-bold text-blue-800">Ready to Be the Architect? Join Our Exclusive Session!</h2>
-                    <p class="mt-3 text-base text-gray-700">Don't just stand by while the world changes. Get on the right side of this revolution and learn how to **build your own AI from scratch** with the one and only **Abdulhamid Sonaike!**</p>
-                    <p class="mt-3 text-base text-gray-700">This is your chance to become a mastercrafter and wield the most powerful tool in the box.</p>
-                    <ul class="mt-4 text-left inline-block space-y-1">
-                        <li class="font-semibold text-gray-800">
-                            <span class="text-blue-500">What:</span> Building an LLM from Scratch
-                        </li>
-                        <li class="font-semibold text-gray-800">
-                            <span class="text-blue-500">Who:</span> Abdulhamid Sonaike
-                        </li>
-                        <li class="font-semibold text-gray-800">
-                            <span class="text-blue-500">When:</span> This Friday Night!
-                        </li>
-                    </ul>
-                    <div class="mt-6">
-                        
-                        <a href="https://luma.com/456b3sen" target="_blank" class="inline-block px-8 py-4 text-white font-bold bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full shadow-lg hover:shadow-xl transform transition-transform duration-200 hover:scale-105">
-                            Join the Revolution & Register! 🚀
-                        </a>
-                    </div>
-                </div>
+      <!-- Call to Action Section -->
+      <aside class="event" aria-labelledby="event-h">
+        <div class="event-txt">
+          <span class="eyebrow">Event</span>
+          <h2 id="event-h">Build an LLM from scratch with Abdulhamid Sonaike</h2>
+          <p>Learn how to <strong>build your own AI from scratch</strong> with Abdulhamid Sonaike, and see the most powerful tool in the box from the inside.</p>
+          <ul class="ledger">
+            <li><span>What</span><b>Building an LLM from Scratch</b></li>
+            <li><span>Who</span><b>Abdulhamid Sonaike</b></li>
+            <li><span>When</span><b>This Friday night</b></li>
+          </ul>
+          <div class="cta-row">
+            <a href="https://luma.com/456b3sen" target="_blank" rel="noopener" class="btn">Register on Luma</a>
+          </div>
+        </div>
+        <div class="event-pic">
+          <img src="../../assets/img/Night of Building with AI.png" alt="Night of Building with AI: event poster" width="1587" height="2245" loading="lazy">
+        </div>
+      </aside>
 
-            </main>
-        </article>
+      <a class="backlink" href="/blog/">&larr; Back to the blog</a>
     </div>
+  </article>
+</main>
 
+<footer class="sitefoot">
+        <div class="wrap">
+            <div class="sitefoot-grid">
+                <div>
+                    <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+                    <p>Helping Kenyans into tech work: jobs you can take from Nairobi, a daily read on the industry, and projects with mentors.</p>
+                </div>
+                <div>
+                    <h4>Read</h4>
+                    <ul>
+                        <li><a href="/blog/daily/">Daily Savannah</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Find work</h4>
+                    <ul>
+                        <li><a href="/jobs/">Jobs board</a></li>
+                        <li><a href="/remote/">Remote-from-Kenya list</a></li>
+                        <li><a href="/cv-pack/">CV Pack</a></li>
+                        <li><a href="/early-access/">Early Access</a></li>
+                        <li><a href="/shop/">Everything we make</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="/apprenticeship/">Apprenticeship</a></li>
+                        <li><a href="/events/">Events</a></li>
+                        <li><a href="/communities/">Tech communities</a></li>
+                        <li><a href="/tools/">Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Employers</h4>
+                    <ul>
+                        <li><a href="/advertise/">Advertise</a></li>
+                        <li><a href="/jobs-for-your-community/">A jobs board for your community</a></li>
+                        <li><a href="/recruiters/">Recruiters</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sitefoot-base">
+                <span>&copy; 2026 The Tech Hut Community</span>
+                <a href="mailto:info@thetechhut.co">info@thetechhut.co</a>
+                <span>+254 115 017 058</span>
+                <a href="/data_privacy_policy/">Privacy</a>
+                <a href="https://linkedin.com/company/digital-transformation-partner/" rel="noopener">LinkedIn</a>
+                <a href="https://x.com/Ekiprop_kimutai" rel="noopener">X</a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

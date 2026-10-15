@@ -6,51 +6,105 @@
   <title>Page not found | The Tech Hut</title>
   <meta name="description" content="That page doesn't exist on The Tech Hut. Find our apprenticeship, blog, daily Kenyan tech digest and remote job board instead.">
   <meta name="robots" content="noindex, follow">
-  <meta name="theme-color" content="#06D6A0">
+  <meta name="theme-color" content="#073B4C">
   <link rel="icon" type="image/png" href="/assets/img/the_tech_hut_logo.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root { --green:#06D6A0; --green-dark:#05b384; --mint:#91FBBF; --ink:#073B4C; }
-    * { box-sizing:border-box; margin:0; padding:0; }
-    body {
-      min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
-      padding:40px 20px; text-align:center; color:#fff;
-      font-family:"Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      background:#093E76 linear-gradient(221deg, #093E76 22%, #333 80%) fixed;
-    }
-    img.logo { width:72px; height:72px; border-radius:50%; margin-bottom:28px; }
-    .code { font-size:clamp(64px,16vw,120px); font-weight:800; line-height:1; letter-spacing:-.02em;
-      background:linear-gradient(-45deg, var(--mint), var(--green));
-      background-clip:text; -webkit-background-clip:text; -webkit-text-fill-color:transparent; color:transparent; }
-    h1 { font-size:clamp(20px,4vw,28px); font-weight:700; margin:8px 0 12px; }
-    p { max-width:30rem; font-weight:300; line-height:1.7; color:rgba(250,255,251,.72); margin-bottom:32px; }
-    .links { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
-    .links a {
-      font-size:14px; font-weight:600; text-decoration:none; color:#fff;
-      border:1px solid rgba(46,204,113,.5); border-radius:9999px; padding:11px 22px;
-      transition:background .25s ease, border-color .25s ease, transform .25s ease;
-    }
-    .links a:hover { background:rgba(6,214,160,.16); border-color:var(--green); transform:translateY(-2px); }
-    .links a.primary { background:var(--green); border-color:var(--green); color:#053; }
-    .links a.primary:hover { background:var(--mint); }
-    a:focus-visible { outline:2px solid var(--mint); outline-offset:3px; }
-    @media (prefers-reduced-motion: reduce) { .links a { transition:none; } }
-  </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/thh.css">
+    <style>
+        .nf { padding: 56px 20px 72px; min-height: 60vh; }
+        .nf h1 { max-width: 18ch; margin-top: 8px; }
+        .nf .lede { margin-bottom: 30px; }
+        .nf .index-list { max-width: 900px; border-top: 2px solid var(--ink); display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 36px; }
+        .nf .index-list > li { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 12px 0; }
+        .nf .index-list a { font-family: var(--serif); font-size: 20px; font-weight: 600; line-height: 1.25; }
+        .nf .index-list span { font-family: var(--mono); font-size: 12px; color: var(--dim); white-space: nowrap; }
+        @media (max-width: 860px) { .nf .index-list { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 640px) {
+          .nf { padding: 36px 20px 48px; }
+          .nf .index-list { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
-  <img class="logo" src="/assets/img/the_tech_hut_logo.png" alt="The Tech Hut logo" width="72" height="72">
-  <div class="code">404</div>
-  <h1>We couldn't find that page</h1>
-  <p>The link may be out of date, or the page may have moved. Here's where most people are headed:</p>
-  <div class="links">
-    <a class="primary" href="/">Home</a>
-    <a href="/apprenticeship/">Apprenticeship</a>
-    <a href="/blog/">Blog</a>
-    <a href="/blog/daily/">Daily Savannah</a>
-    <a href="/jobs/">Tech Jobs</a>
-    <a href="/events/">Events</a>
-  </div>
+<a class="skip" href="#main">Skip to content</a>
+    <header class="masthead">
+        <div class="masthead-top"><div class="wrap"><span>Kenya's tech careers, reported daily</span><span class="hide-sm"><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a> &middot; <a href="mailto:info@thetechhut.co">info@thetechhut.co</a></span></div></div>
+        <div class="wrap masthead-main">
+            <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+            <nav class="sitenav" aria-label="Site"><a href="/blog/daily/">Daily</a><a href="/jobs/">Jobs</a><a href="/remote/">Remote</a><a href="/cv-pack/">CV Pack</a><a href="/shop/">Shop</a><a href="/events/">Events</a><a href="/apprenticeship/">Apprenticeship</a><a href="/blog/">Blog</a></nav>
+        </div>
+    </header>
+<main id="main" class="wrap nf">
+        <span class="eyebrow">Error 404 &middot; page not found</span>
+        <h1>We couldn&rsquo;t find that page</h1>
+        <p class="lede">The link may be out of date, or the page may have moved. Here&rsquo;s where most people are headed:</p>
+        <ul class="index-list">
+            <li><a href="/">Home</a><span>/</span></li>
+            <li><a href="/jobs/">Tech jobs</a><span>/jobs/</span></li>
+            <li><a href="/remote/">Remote-from-Kenya list</a><span>/remote/</span></li>
+            <li><a href="/blog/daily/">Daily Savannah</a><span>/blog/daily/</span></li>
+            <li><a href="/cv-pack/">CV Pack</a><span>/cv-pack/</span></li>
+            <li><a href="/apprenticeship/">Apprenticeship</a><span>/apprenticeship/</span></li>
+            <li><a href="/events/">Events</a><span>/events/</span></li>
+            <li><a href="/blog/">Blog</a><span>/blog/</span></li>
+            <li><a href="/shop/">Shop</a><span>/shop/</span></li>
+        </ul>
+    </main>
+
+<footer class="sitefoot">
+        <div class="wrap">
+            <div class="sitefoot-grid">
+                <div>
+                    <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+                    <p>Helping Kenyans into tech work: jobs you can take from Nairobi, a daily read on the industry, and projects with mentors.</p>
+                </div>
+                <div>
+                    <h4>Read</h4>
+                    <ul>
+                        <li><a href="/blog/daily/">Daily Savannah</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Find work</h4>
+                    <ul>
+                        <li><a href="/jobs/">Jobs board</a></li>
+                        <li><a href="/remote/">Remote-from-Kenya list</a></li>
+                        <li><a href="/cv-pack/">CV Pack</a></li>
+                        <li><a href="/early-access/">Early Access</a></li>
+                        <li><a href="/shop/">Everything we make</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="/apprenticeship/">Apprenticeship</a></li>
+                        <li><a href="/events/">Events</a></li>
+                        <li><a href="/communities/">Tech communities</a></li>
+                        <li><a href="/tools/">Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Employers</h4>
+                    <ul>
+                        <li><a href="/advertise/">Advertise</a></li>
+                        <li><a href="/jobs-for-your-community/">A jobs board for your community</a></li>
+                        <li><a href="/recruiters/">Recruiters</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sitefoot-base">
+                <span>&copy; 2026 The Tech Hut Community</span>
+                <a href="mailto:info@thetechhut.co">info@thetechhut.co</a>
+                <span>+254 115 017 058</span>
+                <a href="/data_privacy_policy/">Privacy</a>
+                <a href="https://linkedin.com/company/digital-transformation-partner/" rel="noopener">LinkedIn</a>
+                <a href="https://x.com/Ekiprop_kimutai" rel="noopener">X</a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

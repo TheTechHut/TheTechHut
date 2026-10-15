@@ -11,7 +11,7 @@
     <meta name="keywords" content="tech jobs Kenya, remote jobs from Kenya, tech apprenticeship Kenya, learn to code Nairobi, Kenya tech news, CV tips Kenya, tech talent Kenya">
     <meta name="author" content="The Tech Hut">
     <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#06D6A0">
+    <meta name="theme-color" content="#073B4C">
     <link rel="canonical" href="https://thetechhut.co/">
     <link rel="alternate" hreflang="en" href="https://thetechhut.co/">
     <link rel="alternate" hreflang="x-default" href="https://thetechhut.co/">
@@ -45,11 +45,6 @@
     <meta name="twitter:description" content="Kenya's tech career hub: mentor-led apprenticeships, live tech and work-from-Kenya jobs, free CV tools and The Daily Savannah news digest.">
     <meta name="twitter:image" content="https://thetechhut.co/assets/img/social-card.jpg">
     <meta name="twitter:image:alt" content="The Tech Hut">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/css/style.css">
 
     <!-- Structured data -->
     <script type="application/ld+json">
@@ -112,402 +107,239 @@
       ]
     }
     </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/thh.css">
 
-    <style>
-        body { color: white; }
-        /* replaces the few Tailwind utilities the header used, so the CDN script is no longer needed */
-        .brand-row { display: flex; align-items: center; margin-bottom: 1rem; }
-        /* the stylesheet gives .branding a percentage height that collapses the icon row
-           on small screens - pin explicit sizes so the icons survive at every width */
-        footer .container .branding { height: auto !important; flex-wrap: wrap; }
-        .socials { display: flex; gap: 18px; margin-top: 18px; flex: 0 0 auto; align-items: center; }
-        .socials a {
-            display: inline-flex; align-items: center; justify-content: center;
-            width: 44px; height: 44px; flex: 0 0 44px; border-radius: 50%; color: #fff;
-            border: 1px solid rgba(46,204,113,.45); background: rgba(255,255,255,.05);
-            transition: background .25s ease, border-color .25s ease, transform .25s ease;
-        }
-        .socials a:hover { background: rgba(6,214,160,.18); border-color: #06D6A0; transform: translateY(-2px); }
-        .socials a:focus-visible { outline: 2px solid #91FBBF; outline-offset: 3px; }
-        .socials svg { width: 22px; height: 22px; flex: 0 0 22px; }
-        .brand-logo { height: 3rem; width: 3rem; border-radius: 9999px; margin-right: .75rem; }
-        .brand-name { font-size: 1.5rem; line-height: 2rem; font-weight: 700; }
-        .nav-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; }
-        @media (min-width: 768px) {
-            .brand-row { margin-bottom: 0; }
-            .nav-row { justify-content: flex-end; }
-        }
-        .nav-link {
-            color: white; font-weight: 600; padding: 0.5rem 1rem;
-            transition: all 0.3s ease; position: relative;
-        }
-        .nav-link::after {
-            content: ''; position: absolute; left: 50%; bottom: 0;
-            width: 0; height: 2px; background-color: #06D6A0;
-            transition: width 0.3s ease, left 0.3s ease;
-        }
-        .nav-link:hover::after { width: 100%; left: 0; }
-        @media (prefers-reduced-motion: reduce) { .nav-link, .nav-link::after { transition: none; } }
-        /* Mobile: the stylesheet pins header height, so six nav links wrap out of it and
-           spill over the page. Let the bar grow and scroll the links horizontally instead. */
-        @media (max-width: 768px) {
-            header {
-                height: auto !important;
-                align-items: center;
-                padding: 10px 12px !important;
-                gap: 10px;
-            }
-            .brand-row { margin-bottom: 0; flex: 0 0 auto; }
-            .brand-logo { height: 2.25rem; width: 2.25rem; margin-right: .5rem; }
-            .brand-name { font-size: 1.05rem; }
-            .nav-row {
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                justify-content: flex-start;
-                gap: .25rem;
-                scrollbar-width: none;
-                -webkit-overflow-scrolling: touch;
-            }
-            .nav-row::-webkit-scrollbar { display: none; }
-            .nav-link { padding: .5rem .5rem; white-space: nowrap; font-size: .9rem; }
-        }
+<style>
+  /* front page only */
+  .front { padding: 44px 0 48px; border-bottom: 1px solid var(--rule); }
+  .front-grid { display: grid; gap: 40px 56px; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); align-items: start; }
+  .front h1 { font-size: clamp(38px, 5.4vw, 64px); max-width: 15ch; }
+  .front .lede { margin-bottom: 28px; }
+  .today { border-top: 2px solid var(--ink); padding-top: 12px; }
+  .today .label { margin-bottom: 6px; }
+  .today h2 { font-size: 26px; line-height: 1.18; margin: 0 0 10px; }
+  .today h2 a { color: var(--ink); text-decoration: none; }
+  .today h2 a:hover { text-decoration: underline; }
+  .today .dek { font-size: 16px; color: var(--muted); margin: 0 0 14px; }
+  .today .earlier { list-style: none; padding: 0; margin: 0 0 14px; border-top: 1px solid var(--rule); }
+  .today .earlier li { border-bottom: 1px solid var(--rule); padding: 9px 0; font-size: 15.5px; line-height: 1.4; }
+  .today .earlier time { display: block; font-family: var(--mono); font-size: 11.5px; color: var(--dim); text-transform: uppercase; letter-spacing: .05em; }
+  .today .earlier a { color: var(--ink); text-decoration: none; }
+  .today .earlier a:hover { text-decoration: underline; }
 
-    </style>
+  .desk { display: grid; gap: 32px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .desk-col { border-top: 2px solid var(--ink); padding-top: 12px; }
+  .desk-col h3 { font-size: 24px; margin: 0 0 4px; }
+  .desk-col > p { font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--muted); margin: 0 0 12px; line-height: 1.35; }
+  .desk-col ul { list-style: none; margin: 0; padding: 0; }
+  .desk-col li { border-top: 1px solid var(--rule); padding: 11px 0; }
+  .desk-col li a { font-weight: 700; color: var(--ink); text-decoration: none; }
+  .desk-col li a:hover { text-decoration: underline; }
+  .desk-col li .price { font-family: var(--mono); font-size: 12px; color: var(--green); margin-left: 6px; white-space: nowrap; }
+  .desk-col li span.d { display: block; font-size: 15px; color: var(--muted); line-height: 1.45; margin-top: 2px; }
+
+  .feature { display: grid; gap: 40px; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); align-items: center; }
+  .feature figure { margin: 0; }
+  .feature img { display: block; width: 100%; height: auto; }
+  .feature figcaption { font-family: var(--mono); font-size: 12px; color: var(--dim); margin-top: 8px; }
+  .video { position: relative; aspect-ratio: 16 / 9; background: var(--ink); max-width: 860px; }
+  .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .partners { display: grid; gap: 24px 48px; grid-template-columns: minmax(0, 1.4fr) auto; align-items: end;
+              border-top: 4px solid var(--mint); padding-top: 18px; }
+  .partners h2 { margin-bottom: 8px; }
+  .partners p { margin: 0; color: var(--muted); max-width: 58ch; }
+
+  @media (max-width: 960px) {
+    .desk { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 760px) {
+    .front { padding: 28px 0 36px; }
+    .front-grid, .feature, .partners { grid-template-columns: 1fr; }
+    .desk { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
 
-
 <body>
-    <header>
-         <div class="brand-row">
-            <img src="/assets/img/the_tech_hut_logo.png" alt="The Tech Hut Logo" class="brand-logo" width="48" height="48">
-            <p class="brand-name text-gradient-primary">The Tech Hut</p>
-            </div>
-        <nav class="nav-row">
-           
-            <!-- Replaced "Student Projects" with "Community" and linked to WhatsApp channel -->
-            <a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" target="_blank" rel="noopener noreferrer" class="nav-link">Community</a>
-            <!-- Updated "Events" link -->
-            <a href="https://thetechhut.co/events" class="nav-link">Events</a>
-            <a href="https://thetechhut.co/apprenticeship" class="nav-link">Apprenticeship</a>
-            <a href="https://thetechhut.co/blog/" class="nav-link">Blog</a>
-            <a href="https://thetechhut.co/blog/daily/" class="nav-link">Daily</a>
-            <a href="https://thetechhut.co/jobs/" class="nav-link">Jobs</a>
-            <a href="https://thetechhut.co/cv-pack/" class="nav-link">CV Pack</a>
-            <a href="https://thetechhut.co/shop/" class="nav-link">Shop</a>
-        </nav>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="masthead">
+        <div class="masthead-top"><div class="wrap"><span>Kenya's tech careers, reported daily</span><span class="hide-sm"><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a> &middot; <a href="mailto:info@thetechhut.co">info@thetechhut.co</a></span></div></div>
+        <div class="wrap masthead-main">
+            <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+            <nav class="sitenav" aria-label="Site"><a href="/blog/daily/">Daily</a><a href="/jobs/">Jobs</a><a href="/remote/">Remote</a><a href="/cv-pack/">CV Pack</a><a href="/shop/">Shop</a><a href="/events/">Events</a><a href="/apprenticeship/">Apprenticeship</a><a href="/blog/">Blog</a></nav>
+        </div>
     </header>
 
-    <main class="showcase">
-        <div class="img">
-            <picture>
-                <source srcset="./assets/img/chic.webp" type="image/webp">
-                <img src="./assets/img/chic.png" alt="A Tech Hut learner working on a laptop" width="1000" height="1000" fetchpriority="high" decoding="async">
-            </picture>
-        </div>
-        <div class="text">
-            <p class="eyebrow">Kenya&rsquo;s tech career hub</p>
-            <h1 class="txt-gradient">
-                Learn tech. Find work. Stay ahead &ndash; from Kenya.
-            </h1>
-
-            <p>
-                The Tech Hut helps Kenyans build careers in tech. Learn on live projects with mentors, find jobs you can
-                actually take from Nairobi, get your CV past recruiter software, and keep up with Kenya&rsquo;s tech
-                scene in one daily read.
-            </p>
-
-            <div class="cta-row">
-                <a href="https://thetechhut.co/jobs/" class="btn-gradient">Find a job</a>
-                <a href="https://thetechhut.co/apprenticeship" class="btn-outline">Join the apprenticeship</a>
+    <main id="main">
+    <div class="front">
+        <div class="wrap front-grid">
+            <div>
+                <span class="eyebrow">Kenya&rsquo;s tech career hub</span>
+                <h1>Tech work you can take from Kenya, and the skills to <em>get it</em>.</h1>
+                <p class="lede">The Tech Hut helps Kenyans build careers in tech. Learn on live projects with mentors, find jobs you can
+                    actually take from Nairobi, get your CV past recruiter software, and keep up with Kenya&rsquo;s tech
+                    scene in one daily read.</p>
+                <div class="cta-row">
+                    <a href="/jobs/" class="btn">Find a job</a>
+                    <a href="/apprenticeship/" class="btn ghost">Join the apprenticeship</a>
+                </div>
             </div>
-        </div>
-    </main>
-
-    <!-- What we do: the whole site on one screen, grouped by what the visitor is trying to do.
-         Built from <div>s (not <section>s) and scoped to #what-we-do so the global
-         "body section" / section:nth-of-type(2) rules in style.css cannot touch it. -->
-    <style>
-      .showcase .text .eyebrow, #what-we-do .eyebrow, #apprenticeship .eyebrow, #testimonials .eyebrow {
-        font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
-        color: #91FBBF; margin: 0 0 12px; width: auto; line-height: 1.4;
-      }
-      .cta-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 8px; }
-      .showcase .text .cta-row a { padding: 18px 36px; text-decoration: none; }
-      .btn-outline {
-        display: inline-flex; align-items: center; justify-content: center; text-align: center;
-        border: 2px solid #2ECC71; border-radius: 50px; color: #fff; font-size: 15px; letter-spacing: 1px;
-        background: transparent; transition: background .3s ease, border-color .3s ease;
-      }
-      .btn-outline:hover { background: rgba(46, 204, 113, .16); border-color: #91FBBF; }
-      .btn-outline:focus-visible, .btn-gradient:focus-visible { outline: 2px solid #91FBBF; outline-offset: 3px; }
-      /* the stylesheet's showcase text width (70%) is for paragraphs; keep the eyebrow and row natural */
-      #what-we-do { box-sizing: border-box; width: 100%; padding: 30px 20px 50px; display: flex; flex-direction: column; align-items: center; }
-      #what-we-do h2 { width: 100%; text-align: center; font-size: 2.2em; margin: 0 0 10px; }
-      #what-we-do .wwd-lede { max-width: 640px; text-align: center; margin: 0 auto; font-size: 15px; line-height: 1.7; color: rgba(250, 255, 251, .85); }
-      #what-we-do .wwd-grid {
-        display: grid; grid-template-columns: 1fr; gap: 22px; width: 100%; max-width: 1180px; margin: 34px auto 0;
-      }
-      @media (min-width: 700px) { #what-we-do .wwd-grid { grid-template-columns: repeat(2, 1fr); } }
-      @media (min-width: 1100px) { #what-we-do .wwd-grid { grid-template-columns: repeat(4, 1fr); } }
-      #what-we-do .wwd-col {
-        display: flex; flex-direction: column; text-align: left;
-        border: 1px solid rgba(4, 97, 44, .8); border-radius: 16px; padding: 26px 22px 18px;
-        background: rgba(255, 255, 255, .04); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
-      }
-      #what-we-do .wwd-col h3 {
-        font-size: 22px; font-weight: 700; margin: 0 0 6px; line-height: 1.25;
-        background: linear-gradient(-45deg, #91FBBF, #2ECC71);
-        background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
-      }
-      #what-we-do .wwd-col .wwd-sub { font-size: 14px; line-height: 1.55; margin: 0 0 14px; color: rgba(250, 255, 251, .75); }
-      #what-we-do .wwd-item {
-        display: block; text-decoration: none; padding: 12px 0; border-top: 1px solid rgba(145, 251, 191, .16);
-        color: inherit;
-      }
-      #what-we-do .wwd-item .n { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 15px; font-weight: 700; color: #fff; }
-      #what-we-do .wwd-item .d { display: block; margin-top: 3px; font-size: 13px; font-weight: 300; line-height: 1.55; color: rgba(250, 255, 251, .72); }
-      #what-we-do .wwd-item:hover .n, #what-we-do .wwd-item:focus-visible .n { color: #91FBBF; }
-      #what-we-do .wwd-item:focus-visible { outline: 2px solid #91FBBF; outline-offset: 2px; }
-      #what-we-do .tag {
-        font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
-        color: #91FBBF; border: 1px solid rgba(145, 251, 191, .55); border-radius: 999px; padding: 1px 8px; white-space: nowrap;
-      }
-
-      /* the footer link groups sit in one inline-flex row; let them wrap on narrow widths */
-      body footer .container .links { flex-wrap: wrap; gap: 14px 32px; }
-      body footer .container .links > div { gap: 10px 24px; }
-
-      /* apprenticeship block: now one offer among several, so it gets an eyebrow and a normal heading size */
-      #apprenticeship h2 { font-size: 2.2em; }
-
-      /* testimonials: centred heading and a proper 16:9 video (it used to sit inside a <p>, capped at 70% width) */
-      #testimonials { box-sizing: border-box; width: 100%; padding: 40px 20px 30px; display: flex !important; justify-content: center; }
-      #testimonials .text { width: 100%; max-width: 860px; align-items: center !important; text-align: center; }
-      #testimonials .text h2 { font-size: 2.2em; text-align: center; margin: 0 0 20px; }
-      #testimonials .eyebrow { margin: 0 0 10px; }
-      #testimonials .video-wrap { width: 100%; aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; border: 1px solid rgba(4, 97, 44, .8); background: rgba(0, 0, 0, .35); }
-      #testimonials .video-wrap iframe { width: 100%; height: 100%; display: block; border: 0; }
-      @media (max-width: 700px) { #testimonials .text h2 { font-size: 1.8em; } }
-
-      /* employers / partners band */
-      #partners { box-sizing: border-box; width: 100%; padding: 10px 20px 60px; display: flex; justify-content: center; }
-      #partners .band {
-        width: 100%; max-width: 1100px; box-sizing: border-box; padding: 34px 30px; border-radius: 16px;
-        border: 1px solid rgba(4, 97, 44, .8); background: rgba(255, 255, 255, .05);
-        display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 22px;
-      }
-      #partners h2 { font-size: 1.7em; margin: 0 0 8px; width: auto; }
-      #partners p { margin: 0; max-width: 560px; font-size: 15px; line-height: 1.65; color: rgba(250, 255, 251, .85); width: auto; }
-      #partners .cta-row { margin: 0; }
-      #partners .cta-row a { padding: 16px 30px; text-decoration: none; }
-      @media (max-width: 700px) {
-        .cta-row a { flex: 1 1 100%; }
-        #what-we-do h2 { font-size: 1.8em; }
-        #apprenticeship h2 { font-size: 1.8em; }
-      }
-      @media (prefers-reduced-motion: reduce) { .btn-outline { transition: none; } }
-    </style>
-
-    <div id="what-we-do" role="region" aria-labelledby="wwd-title">
-        <h2 id="wwd-title" class="txt-gradient">What we do</h2>
-        <p class="wwd-lede">Four things, one goal: getting more Kenyans into good tech careers. Start with whichever fits where you are.</p>
-        <div class="wwd-grid">
-
-            <div class="wwd-col">
-                <h3>Learn</h3>
-                <p class="wwd-sub">Build skills on real work, with people who do it for a living.</p>
-                <a class="wwd-item" href="https://thetechhut.co/apprenticeship">
-                    <span class="n">Apprenticeship</span>
-                    <span class="d">Live projects with industry mentors, and certifications that show what you can do.</span>
-                </a>
-                <a class="wwd-item" href="https://thetechhut.co/events">
-                    <span class="n">Events</span>
-                    <span class="d">Meetups and build nights with other people learning tech in Kenya.</span>
-                </a>
-                <a class="wwd-item" href="https://thetechhut.co/blog/">
-                    <span class="n">The Blog <span class="tag">Free</span></span>
-                    <span class="d">Tutorials and career guides, written for people learning by doing.</span>
-                </a>
-            </div>
-
-            <div class="wwd-col">
-                <h3>Find work</h3>
-                <p class="wwd-sub">Jobs you can actually take from Kenya, and a CV that gets read.</p>
-                <a class="wwd-item" href="https://thetechhut.co/jobs/">
-                    <span class="n">Tech Jobs <span class="tag">Free</span></span>
-                    <span class="d">Live listings from employers that hire in tech. Filter by role, type and date.</span>
-                </a>
-                <a class="wwd-item" href="https://thetechhut.co/remote/">
-                    <span class="n">Work From Kenya List <span class="tag">KSh 500</span></span>
-                    <span class="d">Most &ldquo;remote&rdquo; jobs won&rsquo;t hire you here. These will.</span>
-                </a>
-                <a class="wwd-item" href="https://thetechhut.co/cv-pack/">
-                    <span class="n">CV Pack <span class="tag">Free</span></span>
-                    <span class="d">The applicant tracking systems Kenyan employers use, and the rules to get past them.</span>
-                </a>
-                <a class="wwd-item" href="https://thetechhut.co/early-access/">
-                    <span class="n">Early Access <span class="tag">From KSh 250</span></span>
-                    <span class="d">See new roles before they reach the public board.</span>
-                </a>
-                <a class="wwd-item" href="https://thetechhut.co/shop/">
-                    <span class="n">More guides and tools</span>
-                    <span class="d">Everything else we make, in one shop.</span>
-                </a>
-            </div>
-
-            <div class="wwd-col">
-                <h3>Stay informed</h3>
-                <p class="wwd-sub">Know what is happening in Kenya&rsquo;s tech scene without hunting for it.</p>
-                <a class="wwd-item" href="https://thetechhut.co/blog/daily/">
-                    <span class="n">The Daily Savannah <span class="tag">Free</span></span>
-                    <span class="d">Startups, funding, fintech, policy and infrastructure in one digest at 9pm. Every story sourced.</span>
-                </a>
-                <a class="wwd-item" href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" target="_blank" rel="noopener noreferrer">
-                    <span class="n">WhatsApp channel <span class="tag">Free</span></span>
-                    <span class="d">Jobs, news and events sent straight to your phone.</span>
-                </a>
-                <a class="wwd-item" href="https://thetechhut.co/tools/">
-                    <span class="n">Tools we recommend</span>
-                    <span class="d">Remote work, learning and developer tools, with an honest note on where each falls short.</span>
-                </a>
-            </div>
-
-            <div class="wwd-col">
-                <h3>Hire and partner</h3>
-                <p class="wwd-sub">Reach Kenya&rsquo;s tech talent, or run a jobs board of your own.</p>
-                <a class="wwd-item" href="https://thetechhut.co/advertise/">
-                    <span class="n">Advertise with us</span>
-                    <span class="d">Put your roles, product or event in front of our job seekers and daily readers.</span>
-                </a>
-                <a class="wwd-item" href="https://thetechhut.co/jobs-for-your-community/">
-                    <span class="n">A jobs board for your community</span>
-                    <span class="d">A branded board for your school, meetup or network, set up for you.</span>
-                </a>
-                <a class="wwd-item" href="mailto:info@thetechhut.co">
-                    <span class="n">Talk to us</span>
-                    <span class="d">info@thetechhut.co</span>
-                </a>
-            </div>
-
+            <aside class="today" aria-label="Latest from the Daily Savannah">
+                <!-- HOME-DAILY:START generated by scripts/build_daily.py, do not edit by hand -->
+                <span class="label">The Daily Savannah &middot; Edition Nº 43</span>
+                <h2><a href="/blog/daily/2026-10-15/">Murang'a says the national government switched off its hospital records system; the Health Ministry says it never controlled it</a></h2>
+                <p class="dek">Murang'a says the national government switched off its county hospital system and the Ministry of Health says it never ran it, Kenyan-founded Satlyt raises US$8 million to run AI on satellites, Google's newest Gemini model lands in Kenya from KES 3,700 a month, Bolt launches a KSh 280 membership, and Kuunda's US$5 million turns out to be a share sale.</p>
+                <ul class="earlier"><li><time datetime="2026-10-14">Wednesday, 14 October 2026</time><a href="/blog/daily/2026-10-14/">Kenya recorded 11.12 billion cyber threat events in a year, up 29%, and small businesses are the soft target</a></li><li><time datetime="2026-10-13">Tuesday, 13 October 2026</time><a href="/blog/daily/2026-10-13/">The CA wants your comments on how satellite operators get licensed in Kenya</a></li><li><time datetime="2026-10-12">Monday, 12 October 2026</time><a href="/blog/daily/2026-10-12/">Microsoft's Africa Development Centre in Nairobi is reportedly closing</a></li></ul>
+                <!-- HOME-DAILY:END -->
+                <a class="link-arrow" href="/blog/daily/">All editions of the Daily Savannah &rarr;</a>
+            </aside>
         </div>
     </div>
 
-    <section class="flex-container" id="apprenticeship">
-
-        <div class="text">
-            <p class="eyebrow">The Apprenticeship</p>
-            <h2 class="txt-gradient">
-                Learn on live projects, guided by industry mentors
-            </h2>
-
-            <p>
-                Our apprenticeship puts you on real projects with experienced professionals. You earn as you build
-                experience, and finish with certifications that show employers what you can do.
-            </p>
-            <p>
-                <a href="https://thetechhut.co/apprenticeship" class="btn-gradient">Join the apprenticeship</a>
-            </p>
-        </div>
-
-
-        <div class="img">
-            <picture>
-                <source srcset="./assets/img/pexels-cottonbro-6803525.webp" type="image/webp">
-                <img id="hero_image" src="./assets/img/pexels-cottonbro-6803525.jpg" alt="Mentor guiding a developer through a live project" width="1400" height="933" fetchpriority="high" decoding="async">
-            </picture>
-        </div>
-    </section>
-
-    <section class="flex-container" id="testimonials">
-        <div class="text">
-            <p class="eyebrow">From the apprenticeship</p>
-            <h2 class="txt-gradient">Hear from our apprentices</h2>
-            <div class="video-wrap">
-                <iframe src="https://www.youtube.com/embed/hyDpjKFzs-I?si=0_jM7lkyOm0NDKsj"
-                    title="The Tech Hut apprentice testimonial video" frameborder="0" loading="lazy"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-                </iframe>
+    <section id="what-we-do" aria-labelledby="wwd-title">
+        <div class="wrap">
+            <div class="section-head"><h2 id="wwd-title">What we do</h2><a href="/shop/">Everything we make &rarr;</a></div>
+            <div class="desk">
+                <div class="desk-col">
+                    <h3>Learn</h3>
+                    <p>Build skills on real work, with people who do it for a living.</p>
+                    <ul>
+                        <li><a href="/apprenticeship/">Apprenticeship</a><span class="d">Live projects with industry mentors, and certifications that show what you can do.</span></li>
+                        <li><a href="/events/">Events</a><span class="d">Meetups and build nights with other people learning tech in Kenya.</span></li>
+                        <li><a href="/blog/">The Blog</a><span class="price">Free</span><span class="d">Tutorials and career guides, written for people learning by doing.</span></li>
+                    </ul>
+                </div>
+                <div class="desk-col">
+                    <h3>Find work</h3>
+                    <p>Jobs you can actually take from Kenya, and a CV that gets read.</p>
+                    <ul>
+                        <li><a href="/jobs/">Tech jobs</a><span class="price">Free</span><span class="d">Live listings from employers that hire in tech. Filter by role, type and date.</span></li>
+                        <li><a href="/remote/">Remote-from-Kenya list</a><span class="price">KSh 500</span><span class="d">Most &ldquo;remote&rdquo; jobs won&rsquo;t hire you here. These will.</span></li>
+                        <li><a href="/cv-pack/">CV Pack</a><span class="price">Free</span><span class="d">The applicant tracking systems Kenyan employers use, and the rules to get past them.</span></li>
+                        <li><a href="/early-access/">Early Access</a><span class="price">From KSh 250</span><span class="d">See new roles before they reach the public board.</span></li>
+                    </ul>
+                </div>
+                <div class="desk-col">
+                    <h3>Stay informed</h3>
+                    <p>Know what is happening in Kenyan tech without hunting for it.</p>
+                    <ul>
+                        <li><a href="/blog/daily/">The Daily Savannah</a><span class="price">Free</span><span class="d">Startups, funding, fintech, policy and infrastructure in one digest at 9pm. Every story sourced.</span></li>
+                        <li><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" target="_blank" rel="noopener noreferrer">WhatsApp channel</a><span class="price">Free</span><span class="d">Jobs, news and events sent straight to your phone.</span></li>
+                        <li><a href="/tools/">Tools we recommend</a><span class="d">Remote work, learning and developer tools, with an honest note on where each falls short.</span></li>
+                    </ul>
+                </div>
+                <div class="desk-col">
+                    <h3>Hire and partner</h3>
+                    <p>Reach Kenyan tech talent, or run a jobs board of your own.</p>
+                    <ul>
+                        <li><a href="/advertise/">Advertise with us</a><span class="d">Put your roles, product or event in front of our job seekers and daily readers.</span></li>
+                        <li><a href="/jobs-for-your-community/">A jobs board for your community</a><span class="d">A branded board for your school, meetup or network, set up for you.</span></li>
+                        <li><a href="mailto:info@thetechhut.co">Talk to us</a><span class="d">info@thetechhut.co</span></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
 
-    <div id="partners">
-        <div class="band">
+    <section id="apprenticeship">
+        <div class="wrap feature">
             <div>
-                <h2 class="txt-gradient">Hiring, or want to reach Kenyan tech talent?</h2>
+                <span class="eyebrow">The apprenticeship</span>
+                <h2>Learn on live projects, guided by industry mentors</h2>
+                <p>Our apprenticeship puts you on real projects with experienced professionals. You earn as you build
+                    experience, and finish with certifications that show employers what you can do.</p>
+                <p><a href="/apprenticeship/" class="btn">Join the apprenticeship</a></p>
+            </div>
+            <figure>
+                <picture>
+                    <source srcset="/assets/img/pexels-cottonbro-6803525.webp" type="image/webp">
+                    <img id="hero_image" src="/assets/img/pexels-cottonbro-6803525.jpg" alt="A mentor guiding a developer through a live project" width="1400" height="933" loading="lazy" decoding="async">
+                </picture>
+                <figcaption>Apprentices work on live projects with a mentor.</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section id="testimonials">
+        <div class="wrap">
+            <div class="section-head"><h2>Hear from our apprentices</h2></div>
+            <div class="video">
+                <iframe src="https://www.youtube.com/embed/hyDpjKFzs-I?si=0_jM7lkyOm0NDKsj"
+                    title="The Tech Hut apprentice testimonial video" loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section id="partners">
+        <div class="wrap partners">
+            <div>
+                <h2>Hiring, or want to reach Kenyan tech talent?</h2>
                 <p>Advertise your roles, product or event to the people reading our jobs board and daily digest, or launch a branded jobs board for your own community.</p>
             </div>
             <div class="cta-row">
-                <a href="https://thetechhut.co/advertise/" class="btn-gradient">Advertise with us</a>
-                <a href="https://thetechhut.co/jobs-for-your-community/" class="btn-outline">Get a jobs board</a>
+                <a href="/advertise/" class="btn">Advertise with us</a>
+                <a href="/jobs-for-your-community/" class="btn ghost">Get a jobs board</a>
             </div>
         </div>
-    </div>
+    </section>
+    </main>
 
-    <footer>
-        <div class='container'>
-            <div class='branding'>
-                <div class="logo">
-                    <img src="assets/img/christmas_logo.png" alt="The Tech Hut logo" width="120" height="120" loading="lazy" decoding="async" />
-                    <ol>
-                        <li>
-                            <p>Learn from mentors.</p>
-                        </li>
-                        <li>
-                            <p>Find work from Kenya.</p>
-                        </li>
-                        <li>
-                            <p>Follow Kenya tech daily.</p>
-                        </li>
-                    </ol>
+    <footer class="sitefoot">
+        <div class="wrap">
+            <div class="sitefoot-grid">
+                <div>
+                    <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+                    <p>Helping Kenyans into tech work: jobs you can take from Nairobi, a daily read on the industry, and projects with mentors.</p>
                 </div>
-
-
-                <div class='socials'>
-                    <a href="https://linkedin.com/company/digital-transformation-partner/" target="_blank" rel="noopener" aria-label="The Tech Hut on LinkedIn" title="LinkedIn">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true" focusable="false"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
-                    </a>
-                    <a href="https://x.com/Ekiprop_kimutai" target="_blank" rel="noopener" aria-label="The Tech Hut on X" title="X">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.46l8.6-9.83L0 1.15h7.59l5.24 6.93 6.07-6.93zm-1.29 19.5h2.04L6.49 3.24H4.3l13.31 17.41z"/></svg>
-                    </a>
-                    <a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" target="_blank" rel="noopener" aria-label="The Tech Hut WhatsApp channel" title="WhatsApp">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true" focusable="false"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.25-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35zM12.04 21.5h-.01a9.4 9.4 0 0 1-4.79-1.31l-.34-.2-3.56.93.95-3.47-.22-.36a9.38 9.38 0 0 1-1.44-5.01c0-5.19 4.23-9.41 9.42-9.41 2.51 0 4.88.98 6.65 2.76a9.35 9.35 0 0 1 2.76 6.66c0 5.19-4.23 9.41-9.42 9.41zM20.52 3.49A11.8 11.8 0 0 0 12.04 0C5.46 0 .1 5.35.1 11.93c0 2.1.55 4.16 1.6 5.97L0 24l6.24-1.64a11.9 11.9 0 0 0 5.8 1.48h.01c6.58 0 11.94-5.35 11.94-11.93a11.86 11.86 0 0 0-3.47-8.42z"/></svg>
-                    </a>
+                <div>
+                    <h4>Read</h4>
+                    <ul>
+                        <li><a href="/blog/daily/">Daily Savannah</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a></li>
+                    </ul>
                 </div>
-            </div>
-
-            <div class='links'>
-                <div class='grid-5'>
-                    <a href="https://thetechhut.co/blog/">Blog</a>
-                    <a href="https://thetechhut.co/blog/daily/">Daily Savannah</a>
-                    <a href="https://thetechhut.co/jobs/">Tech Jobs</a>
-                    <a href="https://thetechhut.co/apprenticeship">Apprenticeship</a>
-                    <a href="https://thetechhut.co/advertise/">Advertise with us</a>
+                <div>
+                    <h4>Find work</h4>
+                    <ul>
+                        <li><a href="/jobs/">Jobs board</a></li>
+                        <li><a href="/remote/">Remote-from-Kenya list</a></li>
+                        <li><a href="/cv-pack/">CV Pack</a></li>
+                        <li><a href="/early-access/">Early Access</a></li>
+                        <li><a href="/shop/">Everything we make</a></li>
+                    </ul>
                 </div>
-
-                <div class='grid-4'>
-                    <a href="https://thetechhut.co/events">Events</a>
-                    <a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H">Community</a>
-                    <a href="https://thetechhut.co/cv-pack/">Free CV Pack</a>
-                    <a href="https://thetechhut.co/early-access/">Early Access</a>
+                <div>
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="/apprenticeship/">Apprenticeship</a></li>
+                        <li><a href="/events/">Events</a></li>
+                        <li><a href="/communities/">Tech communities</a></li>
+                        <li><a href="/tools/">Tools</a></li>
+                    </ul>
                 </div>
-
-                <div class='grid-4'>
-                    <a href="https://thetechhut.co/shop/">Everything we make</a>
-                    <a href="https://thetechhut.co/remote/">Remote-From-Kenya List</a>
-                    <a href="https://thetechhut.co/tools/">Tools</a>
-                    <a href="https://thetechhut.co/jobs-for-your-community/">Board for your community</a>
-                </div>
-
-                <div class='grid-3'>
-                    <a href="">Terms and conditions</a>
-                    <a href="https://linkedin.com/company/digital-transformation-partner/">Contact Us</a>
-                    <a href="https://thetechhut.co/data_privacy_policy/">Privacy Policy</a>
+                <div>
+                    <h4>Employers</h4>
+                    <ul>
+                        <li><a href="/advertise/">Advertise</a></li>
+                        <li><a href="/jobs-for-your-community/">A jobs board for your community</a></li>
+                        <li><a href="/recruiters/">Recruiters</a></li>
+                    </ul>
                 </div>
             </div>
-
-
+            <div class="sitefoot-base">
+                <span>&copy; 2026 The Tech Hut Community</span>
+                <a href="mailto:info@thetechhut.co">info@thetechhut.co</a>
+                <span>+254 115 017 058</span>
+                <a href="/data_privacy_policy/">Privacy</a>
+                <a href="https://linkedin.com/company/digital-transformation-partner/" rel="noopener">LinkedIn</a>
+                <a href="https://x.com/Ekiprop_kimutai" rel="noopener">X</a>
+            </div>
         </div>
     </footer>
     <!-- Clarity analytics (deferred so it never blocks first paint) -->

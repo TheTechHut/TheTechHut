@@ -101,79 +101,94 @@
     <meta property="og:locale:alternate" content="en_NZ">
     <meta property="og:locale:alternate" content="en_IN">
     <meta property="og:locale:alternate" content="en_PK">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/thh.css">
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="./style.css">
+    <style>
+        .event { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px; align-items: start; border-top: 2px solid var(--ink); padding-top: 24px; }
+        .event .poster img { display: block; width: 100%; height: auto; }
+        .event h2 { margin: 0 0 6px; }
+        .event h3 { font-size: 19px; margin: 22px 0 6px; }
+        .agenda { list-style: none; padding: 0; margin: 10px 0 0; border-top: 1px solid var(--rule); counter-reset: a; }
+        .agenda li { counter-increment: a; display: grid; grid-template-columns: 34px 1fr; gap: 10px; padding: 11px 0; border-bottom: 1px solid var(--rule); font-size: 16px; }
+        .agenda li::before { content: counter(a, decimal-leading-zero); font-family: var(--mono); font-size: 12.5px; color: var(--green); padding-top: 3px; }
+        .event .ledger { max-width: 440px; margin-top: 24px; }
+        .event .ledger li span { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--dim); padding-top: 3px; }
+        .event .ledger li b { font-size: 14.5px; text-align: right; }
+        .event .act { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 22px; }
+        .event .act p { margin: 0; color: var(--muted); font-size: 15.5px; }
+        .lineup { display: grid; gap: 24px; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); margin-top: 22px; }
+        .lineup figure { margin: 0; border-top: 2px solid var(--ink); padding-top: 10px; }
+        .lineup img { display: block; width: 100%; height: auto; }
+        .lineup figcaption { font-size: 15px; color: var(--ink); font-weight: 600; margin-top: 8px; }
+        .lineup figcaption span { display: block; font-weight: 400; color: var(--dim); font-size: 14px; }
+        .circle-parent { display: none; }
+        @media (max-width: 860px) {
+            .event { grid-template-columns: 1fr; gap: 24px; }
+            .event .poster { max-width: 420px; }
+        }
+        @media (max-width: 480px) {
+            .lineup { grid-template-columns: 1fr 1fr; gap: 18px 14px; }
+        }
+    
+    </style>
 </head>
 
 <body>
+        <a class="skip" href="#main">Skip to content</a>
+    <header class="masthead">
+        <div class="masthead-top"><div class="wrap"><span>Kenya's tech careers, reported daily</span><span class="hide-sm"><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a> &middot; <a href="mailto:info@thetechhut.co">info@thetechhut.co</a></span></div></div>
+        <div class="wrap masthead-main">
+            <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+            <nav class="sitenav" aria-label="Site"><a href="/blog/daily/">Daily</a><a href="/jobs/">Jobs</a><a href="/remote/">Remote</a><a href="/cv-pack/">CV Pack</a><a href="/shop/">Shop</a><a href="/events/" aria-current="page">Events</a><a href="/apprenticeship/">Apprenticeship</a><a href="/blog/">Blog</a></nav>
+        </div>
+    </header>
 
-    <div class="circle-parent"></div>
+    <div class="circle-parent" aria-hidden="true"></div>
 
-    <div class="row">
-        <div class="event_container">
+    <header class="pagehead" id="main">
+        <div class="wrap">
+            <span class="eyebrow">The Tech Hut community</span>
             <h1>Events</h1>
-            <!-- <p>Join us for our upcoming events to learn, share and grow with the community.</p> -->
-            <div class="event_card">
-                <img class="event_image" src="./assets/img/entrepreneurial_masterclass_poster_1.png" alt="No Image">
+            <p class="lede">Where The Tech Hut community comes together to learn, share and grow.</p>
+        </div>
+    </header>
+
+    <section id="masterclass">
+        <div class="wrap">
+            <div class="event">
+                <div class="poster">
+                    <img class="event_image" src="./assets/img/entrepreneurial_masterclass_poster_1.png" alt="Poster for The Entrepreneurial Masterclass, 16 November, online" width="1920" height="2688">
+                </div>
                 <div class="event_info">
-                    <h2><span class="event_title"><b>THE ENTREPRENEURIAL MASTERCLASS</b></span></h2>
-                    <b>
-                        <p>✨ The Agenda ✨</p>
-                    </b>
-                    <p>🚀 Building your journey in entrepreneurship with Robi and experts like: </p>
-                    <ol class="event_description">
-                        <li>
-                            🌟 <b>The Art of Pitching</b> with Caleb Jephune - Founder of <a href="">Bricklabs
-                                ai</a>
-                        </li>
-                        <li>🌟 <b>The art of selling</b> with Robi - Founder of <a href="">The Tech
-                                Hut</a>
-                        </li>
-
-
-                        <li>🌟 <b>Indie Hacking - starting from scratch</b> with Peter Okwara - Founder of
-                            <a href="">Career Go</a>
-                        </li>
-                        <li>🌟 <b>Developing an MVP</b> with Gabriel Okemwa - Co Founder & CTO of <a href="">The
-                                Tech
-                                Hut</a> and a couple of other startups
-                        </li>
-                        <li>🌟 <b>The art of content</b> with Ivy Joy - Content Cartel of <a href="">The Tech
-                                Hut</a>
-                        </li>
-                        <li>🌟 <b>The art of building</b> with Valarie Chebet - Lead of Cohort One at<a href="">The
-                                Tech
-                                Hut</a>
-                        </li>
+                    <span class="eyebrow">Masterclass &middot; Online</span>
+                    <h2><span class="event_title">The Entrepreneurial Masterclass</span></h2>
+                    <h3>The agenda</h3>
+                    <p>Building your journey in entrepreneurship with Robi and experts like:</p>
+                    <ol class="agenda event_description">
+                        <li><div><b>The Art of Pitching</b> with Caleb Jephune - Founder of <a href="">Bricklabs ai</a></div></li>
+                        <li><div><b>The art of selling</b> with Robi - Founder of <a href="">The Tech Hut</a></div></li>
+                        <li><div><b>Indie Hacking - starting from scratch</b> with Peter Okwara - Founder of <a href="">Career Go</a></div></li>
+                        <li><div><b>Developing an MVP</b> with Gabriel Okemwa - Co Founder &amp; CTO of <a href="">The Tech Hut</a> and a couple of other startups</div></li>
+                        <li><div><b>The art of content</b> with Ivy Joy - Content Cartel of <a href="">The Tech Hut</a></div></li>
+                        <li><div><b>The art of building</b> with Valarie Chebet - Lead of Cohort One at <a href="">The Tech Hut</a></div></li>
                     </ol>
 
-                    <p class="event_date"><img class="icon" src="./assets/img/calendar_icon.svg"> <span>16th
-                            November,
-                            2024
-                        </span>
-                    </p>
+                    <ul class="ledger">
+                        <li class="event_date"><span>Date</span> <b>16th November, 2024</b></li>
+                        <li class="event_date"><span>Time</span> <b>7:00pm - 9:30pm (EAT)</b></li>
+                        <li class="event_date"><span>Where</span> <b>Online</b></li>
+                        <li class="event_date"><span>Price</span> <b>Ksh. 98</b></li>
+                    </ul>
 
-                    <p class="event_date"><img class="icon" src="./assets/img/clock_icon.svg"> <span>7:00pm -
-                            9:30pm(EAT)</span>
-                    </p>
-
-                    <p class="event_date"><img class="icon" src="./assets/img/location_on.svg"><span>Online</span>
-                    </p>
-
-                    <p class="event_date"><img class="icon" src="./assets/img/dollar_sign.svg">
-                        <span>Ksh. 98</span>
-                        <!-- <span style="text-decoration-line: line-through; color: #2ecc71;">Ksh. 150 </span> -->
-                    </p>
-                    <a href="../entrepreneurial_challenge/index.html" target="_self">
-                        <button type="submit">Sold Out</button>
-                    </a>
-                    <p style="color: #d6a811; align-self: flex-end;">Moderated by: Ivy Joy</p>
+                    <div class="act">
+                        <a class="btn ghost" href="../entrepreneurial_challenge/index.html" target="_self">Sold Out</a>
+                        <p>Moderated by: Ivy Joy</p>
+                    </div>
                 </div>
-
-                <!-- <button>Register</button> -->
             </div>
-        </div>
 
         <!-- <div class="pay_container">
             <h1>Pay</h1>
@@ -196,27 +211,81 @@
                 </strong>
             </span>
         </div> -->
-    </div>
-    <div class="speakers">
-        <h1>Speaker Line-up</h1>
-        <div class="grid">
-            <img src="./assets/img/Caleb_Speaker_One.png">
-            <img src="./assets/img/Robi_Speaker_Two.png">
-            <img src="./assets/img/Peter_Speaker_Three.png">
-            <img src="./assets/img/Okemwa_Speaker_Four.png">
-            <img src="./assets/img/Valarie_Speaker_Five.png">
         </div>
-        <h1 style="color: #d6a811;">Our Moderator</h1>
-        <div class="grid">
-            <img src="./assets/img/Ivy_The_Moderator.png">
+    </section>
+
+    <section class="speakers" id="speakers">
+        <div class="wrap">
+            <div class="section-head"><h2>Speaker line-up</h2></div>
+            <div class="lineup grid">
+                <figure><img src="./assets/img/Caleb_Speaker_One.png" alt="Caleb Jephune, The Art of Pitching" width="1920" height="2688" loading="lazy"><figcaption>Caleb Jephune<span>The Art of Pitching</span></figcaption></figure>
+                <figure><img src="./assets/img/Robi_Speaker_Two.png" alt="Robi, The art of selling" width="1920" height="2688" loading="lazy"><figcaption>Robi<span>The art of selling</span></figcaption></figure>
+                <figure><img src="./assets/img/Peter_Speaker_Three.png" alt="Peter Okwara, Indie Hacking" width="1920" height="2688" loading="lazy"><figcaption>Peter Okwara<span>Indie Hacking</span></figcaption></figure>
+                <figure><img src="./assets/img/Okemwa_Speaker_Four.png" alt="Gabriel Okemwa, Developing an MVP" width="1920" height="2688" loading="lazy"><figcaption>Gabriel Okemwa<span>Developing an MVP</span></figcaption></figure>
+                <figure><img src="./assets/img/Valarie_Speaker_Five.png" alt="Valarie Chebet, The art of building" width="1920" height="2688" loading="lazy"><figcaption>Valarie Chebet<span>The art of building</span></figcaption></figure>
+            </div>
+
+            <div class="section-head" style="margin-top:44px"><h2>Our moderator</h2></div>
+            <div class="lineup grid">
+                <figure><img src="./assets/img/Ivy_The_Moderator.png" alt="Ivy Joy, moderator" width="1920" height="2688" loading="lazy"><figcaption>Ivy Joy<span>Moderator</span></figcaption></figure>
+            </div>
         </div>
-    </div>
+    </section>
 
-
-    <div class="footer">
-        <p>&copy; 2024 The Tech Hut</p>
-    </div>
+    <footer class="sitefoot">
+        <div class="wrap">
+            <div class="sitefoot-grid">
+                <div>
+                    <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+                    <p>Helping Kenyans into tech work: jobs you can take from Nairobi, a daily read on the industry, and projects with mentors.</p>
+                </div>
+                <div>
+                    <h4>Read</h4>
+                    <ul>
+                        <li><a href="/blog/daily/">Daily Savannah</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Find work</h4>
+                    <ul>
+                        <li><a href="/jobs/">Jobs board</a></li>
+                        <li><a href="/remote/">Remote-from-Kenya list</a></li>
+                        <li><a href="/cv-pack/">CV Pack</a></li>
+                        <li><a href="/early-access/">Early Access</a></li>
+                        <li><a href="/shop/">Everything we make</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="/apprenticeship/">Apprenticeship</a></li>
+                        <li><a href="/events/">Events</a></li>
+                        <li><a href="/communities/">Tech communities</a></li>
+                        <li><a href="/tools/">Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Employers</h4>
+                    <ul>
+                        <li><a href="/advertise/">Advertise</a></li>
+                        <li><a href="/jobs-for-your-community/">A jobs board for your community</a></li>
+                        <li><a href="/recruiters/">Recruiters</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sitefoot-base">
+                <span>&copy; 2026 The Tech Hut Community</span>
+                <a href="mailto:info@thetechhut.co">info@thetechhut.co</a>
+                <span>+254 115 017 058</span>
+                <a href="/data_privacy_policy/">Privacy</a>
+                <a href="https://linkedin.com/company/digital-transformation-partner/" rel="noopener">LinkedIn</a>
+                <a href="https://x.com/Ekiprop_kimutai" rel="noopener">X</a>
+            </div>
+        </div>
+    </footer>
+    <script src="./script.js"></script>
 </body>
-<script src="./script.js"></script>
 
 </html>

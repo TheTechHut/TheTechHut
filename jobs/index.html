@@ -8,7 +8,7 @@
   <meta name="keywords" content="remote tech jobs, Kenya developer jobs, Nairobi tech jobs, remote developer jobs Africa, worldwide remote jobs, The Tech Hut">
   <meta name="author" content="The Tech Hut">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#06D6A0">
+  <meta name="theme-color" content="#073B4C">
   <link rel="canonical" href="https://thetechhut.co/jobs/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="The Tech Hut">
@@ -24,204 +24,170 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Tech Jobs — Remote roles open worldwide">
   <meta name="twitter:description" content="Remote tech roles a Nairobi-based developer can actually apply to. Updated live.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap">
-<style>
-  :root {
-    --bg: #f0f4f8; --card: #ffffff; --ink: #073B4C; --body: #4a5568; --muted: #718096;
-    --green: #06D6A0; --green-dark: #05b384; --gold: #FFD700; --footer: #073B4C;
-    --line: rgba(7,59,76,0.10);
-    --shadow: 0 8px 20px rgba(7,59,76,0.08); --shadow-hover: 0 12px 25px rgba(7,59,76,0.15);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--bg); color: var(--body); font-size: 1rem; line-height: 1.6;
-    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
-  h1,h2,h3,h4 { font-family: "Poppins","Inter",sans-serif; color: var(--ink); }
-  a { color: inherit; }
-  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
-    outline: 2px solid var(--green); outline-offset: 2px; border-radius: 4px; }
-  .shell { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/thh.css">
+  <style>
+    [hidden] { display: none !important; }
 
-  header.site { background: var(--green); position: sticky; top: 0; z-index: 50; }
-  header.site .inner { max-width: 72rem; margin: 0 auto; padding: 1rem 1.5rem;
-    display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
-  header.site .brand { display: flex; align-items: baseline; gap: 0.55rem; text-decoration: none; }
-  header.site .brand b { font-family: "Poppins",sans-serif; font-weight: 700; font-size: 1.15rem; color: #fff; }
-  header.site .brand span { font-family: "Poppins",sans-serif; font-weight: 600; font-size: 0.8rem;
-    color: var(--ink); background: rgba(255,255,255,0.35); border-radius: 9999px; padding: 0.15rem 0.75rem; }
-  header.site nav { display: flex; gap: 1.5rem; }
-  header.site nav a { color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color .3s; }
-  header.site nav a:hover { color: var(--gold); }
-  @media (max-width: 640px) { header.site nav { display: none; } }
+    /* title block and search */
+    .pagehead.jobshead { padding: 40px 0 26px; border-bottom: 0; }
+    .jobshead h1 { margin-bottom: 12px; }
+    .jobshead .lede { margin-bottom: 14px; }
+    .count { display: block; min-height: 1.4em; font-family: var(--mono); font-size: 13px; color: var(--green); margin: 0 0 22px; }
+    .searchbar { display: flex; gap: 8px; max-width: 720px; margin: 0; }
+    .searchbar input { flex: 1 1 auto; min-width: 0; width: auto; }
+    .searchbar button { flex: 0 0 auto; }
+    .chips { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 18px; margin-top: 12px; font-size: 15px; color: var(--dim); }
+    .chips > span { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; margin-right: -4px; }
+    .chips button { font: inherit; font-size: 15px; font-weight: 600; color: var(--ink); background: none; border: 0; padding: 2px 0;
+      cursor: pointer; text-decoration: underline; text-decoration-color: var(--mint); text-decoration-thickness: 2px; text-underline-offset: .25em; }
+    .chips button:hover { text-decoration-color: var(--ink); }
 
-  /* hero */
-  .hero { text-align: center; padding: 3rem 0 2.25rem; }
-  .hero h1 { font-weight: 800; font-size: clamp(2rem,5.5vw,3rem); line-height: 1.1; margin-bottom: 0.6rem; }
-  .hero h1 em { font-style: normal; color: var(--green-dark); }
-  .hero p.sub { max-width: 34rem; margin: 0 auto 0.5rem; color: var(--muted); }
-  .hero .count { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--green-dark); margin-bottom: 1.5rem; display: block; }
-  .searchbar { display: flex; gap: 0.5rem; max-width: 40rem; margin: 0 auto 1rem; }
-  .searchbar input { flex: 1; min-width: 0; font: inherit; font-size: 0.95rem; color: var(--ink);
-    background: var(--card); border: 1px solid var(--line); border-radius: 9999px;
-    padding: 0.85rem 1.25rem; box-shadow: var(--shadow); }
-  .searchbar input::placeholder { color: var(--muted); }
-  .searchbar button { font-family: "Poppins",sans-serif; font-weight: 700; font-size: 0.9rem; color: #fff;
-    background: var(--green); border: none; border-radius: 9999px; padding: 0.85rem 1.9rem; cursor: pointer;
-    box-shadow: 0 5px 15px rgba(6,214,160,0.35); transition: transform .2s, box-shadow .2s; }
-  .searchbar button:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(6,214,160,0.45); }
-  .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; align-items: center;
-    font-size: 0.82rem; color: var(--muted); }
-  .chips button { font: inherit; font-weight: 600; color: var(--ink); background: var(--card);
-    border: 1px solid var(--line); border-radius: 9999px; padding: 0.3rem 0.9rem; cursor: pointer; transition: all .2s; }
-  .chips button:hover { border-color: var(--green); color: var(--green-dark); }
+    /* layout: filters left, list right; on phones filters, then list, then the side notes */
+    .cols { display: grid; gap: 0 48px; grid-template-columns: 236px minmax(0, 1fr); grid-template-rows: auto 1fr;
+      grid-template-areas: "filters list" "notes list"; align-items: start; padding-bottom: 56px; }
+    aside.filters { grid-area: filters; }
+    .sidenotes { grid-area: notes; }
+    .results { grid-area: list; min-width: 0; }
 
-  /* layout */
-  .cols { display: grid; grid-template-columns: 1fr; gap: 2rem; padding-bottom: 3rem; }
-  @media (min-width: 900px) { .cols { grid-template-columns: 15rem minmax(0,1fr); align-items: start; } }
+    /* filters: a plain sidebar with ruled groups */
+    aside.filters h2, .listhead h2 { font-size: 22px; margin: 0; }
+    aside.filters > h2 { border-top: 2px solid var(--ink); padding: 10px 0 12px; }
+    .fgroup { border-top: 1px solid var(--rule); padding: 12px 0 14px; }
+    .fgroup > label { display: block; font-family: var(--mono); font-size: 11.5px; font-weight: 500; text-transform: uppercase;
+      letter-spacing: .08em; color: var(--dim); margin: 0 0 8px; }
+    .fgroup select { font-size: 15px; padding: 8px 10px; cursor: pointer; }
+    .pills { display: flex; flex-direction: column; }
+    .pills button { position: relative; font: inherit; font-size: 15.5px; text-align: left; color: var(--text); background: none;
+      border: 0; padding: 4px 0 4px 20px; cursor: pointer; }
+    .pills button::before { content: ""; position: absolute; left: 1px; top: .78em; width: 9px; height: 9px; border: 1px solid #9FBAC4; }
+    .pills button:hover { color: var(--ink); text-decoration: underline; text-underline-offset: .2em; }
+    .pills button[aria-pressed="true"] { color: var(--ink); font-weight: 700; }
+    .pills button[aria-pressed="true"]::before { background: var(--mint); border-color: var(--mint); }
+    .clearbtn { font: inherit; font-size: 15px; font-weight: 700; color: var(--ink); background: none; border: 0; padding: 2px 0;
+      border-bottom: 1px solid var(--mint); cursor: pointer; margin: 2px 0 0; }
+    .clearbtn:hover { border-bottom-color: var(--ink); }
+    aside.filters .clearwrap { border-top: 1px solid var(--rule); padding-top: 12px; }
 
-  aside.filters { background: var(--card); border-radius: 1rem; box-shadow: var(--shadow); padding: 1.4rem 1.5rem; }
-  @media (min-width: 900px) { aside.filters { position: sticky; top: 5.5rem; } }
-  aside.filters h2 { font-size: 1rem; font-weight: 700; margin-bottom: 1.1rem; }
-  .direct { margin-top: 1.4rem; padding-top: 1.3rem; border-top: 1px solid rgba(7,59,76,0.1); }
-  .direct h2 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
-  .direct > p { font-size: 0.8rem; color: var(--muted); line-height: 1.5; margin-bottom: 0.9rem; }
-  .direct ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-  .direct a { display: block; padding: 0.6rem 0.75rem; border-radius: 0.55rem;
-    background: rgba(6,214,160,0.08); color: var(--ink); text-decoration: none;
-    font-weight: 600; font-size: 0.88rem; transition: background 0.15s; }
-  .direct a:hover { background: rgba(6,214,160,0.18); }
-  .direct a span { display: block; font-weight: 400; font-size: 0.74rem; color: var(--muted); margin-top: 0.15rem; }
-  .promo { margin-top: 1.4rem; padding: 1rem 1rem 1.1rem; border-radius: 0.9rem;
-    background: linear-gradient(180deg, rgba(6,214,160,0.10), rgba(6,214,160,0.03));
-    border: 1px solid rgba(6,214,160,0.25); }
-  .promo h2 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.35rem; }
-  .promo p { font-size: 0.8rem; color: var(--muted); line-height: 1.5; margin-bottom: 0.75rem; }
-  .promo a.go { display: block; text-align: center; text-decoration: none; font-weight: 700;
-    font-size: 0.85rem; padding: 0.6rem 0.8rem; border-radius: 9999px;
-    background: var(--green); color: #fff; box-shadow: 0 4px 12px rgba(6,214,160,0.3); }
-  .promo a.go:hover { filter: brightness(0.95); }
-  .promo a.alt { display: block; text-align: center; text-decoration: none; font-weight: 600;
-    font-size: 0.8rem; margin-top: 0.5rem; color: var(--green-dark); }
-  .promo a.alt:hover { text-decoration: underline; }
-  .fgroup { margin-bottom: 1.3rem; }
-  .fgroup > label { display: block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
-    text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
-  .fgroup select { width: 100%; font: inherit; font-size: 0.88rem; color: var(--ink); background: var(--bg);
-    border: 1px solid var(--line); border-radius: 0.6rem; padding: 0.55rem 0.7rem; cursor: pointer; }
-  .pills { display: flex; flex-direction: column; gap: 0.4rem; }
-  .pills button { font: inherit; font-size: 0.85rem; font-weight: 600; text-align: left; color: var(--ink);
-    background: var(--bg); border: 1px solid transparent; border-radius: 0.6rem; padding: 0.5rem 0.8rem;
-    cursor: pointer; transition: all .2s; }
-  .pills button:hover { border-color: var(--green); }
-  .pills button[aria-pressed="true"] { background: var(--green); color: #fff; box-shadow: 0 4px 12px rgba(6,214,160,0.35); }
-  .clearbtn { width: 100%; font-family: "Poppins",sans-serif; font-weight: 700; font-size: 0.85rem;
-    color: var(--green-dark); background: transparent; border: 1px solid var(--green); border-radius: 9999px;
-    padding: 0.6rem; cursor: pointer; transition: all .2s; }
-  .clearbtn:hover { background: var(--green); color: #fff; }
+    /* employers hiring directly, and the two notes */
+    .direct { border-top: 2px solid var(--ink); padding-top: 10px; margin-top: 34px; }
+    .direct h2, .promo h2 { font-size: 19px; line-height: 1.25; margin: 0 0 6px; }
+    .direct > p { font-size: 14.5px; color: var(--muted); line-height: 1.5; margin: 0 0 10px; }
+    .direct ul { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--rule); }
+    .direct li { border-bottom: 1px solid var(--rule); }
+    .direct a { display: block; padding: 9px 0; color: var(--ink); text-decoration: none; font-family: var(--serif); font-weight: 600; font-size: 17px; line-height: 1.3; }
+    .direct a:hover { text-decoration: underline; }
+    .direct a span { display: block; font-family: var(--sans); font-weight: 400; font-size: 14px; color: var(--dim); margin-top: 2px; }
+    .promo { border-top: 4px solid var(--mint); padding-top: 12px; margin-top: 34px; }
+    .promo p { font-size: 15px; color: var(--text); line-height: 1.5; margin: 0 0 14px; }
+    .promo a.go { display: block; text-align: center; font-weight: 700; font-size: 15px; line-height: 1.25; padding: 11px 14px;
+      background: var(--ink); color: #fff; border-radius: 3px; text-decoration: none; }
+    .promo a.go:hover { background: var(--ink-2); }
+    .promo a.alt { display: inline-block; margin-top: 12px; font-size: 15px; font-weight: 700; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--mint); }
+    .promo a.alt:hover { border-bottom-color: var(--ink); }
 
-  .listhead { background: var(--card); border-radius: 1rem; box-shadow: var(--shadow);
-    padding: 1.1rem 1.5rem; margin-bottom: 1.25rem; display: flex; flex-wrap: wrap; gap: 0.75rem;
-    align-items: baseline; justify-content: space-between; }
-  .listhead h2 { font-size: 1.15rem; font-weight: 700; }
-  .listhead h2 span { color: var(--muted); font-weight: 500; font-size: 0.95rem; }
-  .listhead .sortwrap { font-size: 0.8rem; color: var(--muted); }
-  .listhead select { font: inherit; font-size: 0.82rem; color: var(--ink); background: var(--bg);
-    border: 1px solid var(--line); border-radius: 0.5rem; padding: 0.35rem 0.5rem; cursor: pointer; }
+    /* list head */
+    .listhead { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 16px;
+      border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink); padding: 10px 0 12px; }
+    .listhead h2 span { font-family: var(--mono); font-size: 15px; font-weight: 500; color: var(--green); letter-spacing: 0; margin-left: 4px; }
+    .sortwrap { display: inline-flex; align-items: baseline; gap: 8px; font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--dim); }
+    .sortwrap label { font: inherit; color: inherit; }
+    .sortwrap select { width: auto; font-family: var(--sans); font-size: 15px; text-transform: none; letter-spacing: 0; padding: 6px 8px; cursor: pointer; }
 
-  .job { background: var(--card); border-radius: 1rem; box-shadow: var(--shadow); padding: 1.3rem 1.5rem;
-    margin-bottom: 1rem; display: grid; grid-template-columns: 3.25rem minmax(0,1fr); gap: 1.1rem;
-    transition: transform .25s, box-shadow .25s; }
-  .job:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
-  @media (min-width: 700px) { .job { grid-template-columns: 3.25rem minmax(0,1fr) auto; align-items: start; } }
-  .logo { width: 3.25rem; height: 3.25rem; border-radius: 0.7rem; overflow: hidden; background: rgba(6,214,160,0.14);
-    display: flex; align-items: center; justify-content: center; font-family: "Poppins",sans-serif;
-    font-weight: 700; font-size: 1.25rem; color: var(--green-dark); }
-  .logo img { width: 100%; height: 100%; object-fit: contain; background: #fff; }
-  .job h3 { font-size: 1.05rem; font-weight: 700; line-height: 1.3; margin-bottom: 0.2rem; }
-  .job h3 a { text-decoration: none; }
-  .job h3 a:hover { color: var(--green-dark); }
-  .job .co { font-size: 0.9rem; font-weight: 600; color: var(--body); margin-bottom: 0.45rem; }
-  .job .meta { display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; font-size: 0.8rem; color: var(--muted);
-    margin-bottom: 0.6rem; }
-  .job .excerpt { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.6rem;
-    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-  .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
-  .tags span { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
-    color: var(--green-dark); background: rgba(6,214,160,0.13); border-radius: 9999px; padding: 0.2rem 0.65rem; }
-  .tags span.src { color: var(--muted); background: var(--bg); }
-  .apply { align-self: center; }
-  .apply a { display: inline-block; font-family: "Poppins",sans-serif; font-weight: 700; font-size: 0.85rem;
-    color: #fff; background: var(--green); border-radius: 9999px; padding: 0.6rem 1.4rem; text-decoration: none;
-    white-space: nowrap; box-shadow: 0 4px 12px rgba(6,214,160,0.35); transition: transform .2s, box-shadow .2s; }
-  .apply a:hover { transform: translateY(-1px); box-shadow: 0 7px 18px rgba(6,214,160,0.45); }
-  .posted { font-size: 0.72rem; color: var(--muted); text-align: right; margin-bottom: 0.5rem; }
-  @media (max-width: 699px) { .posted { text-align: left; } .apply { align-self: start; } }
+    /* one role per row, separated by hairlines (the markup is built by the script below) */
+    .job { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 28px; align-items: start;
+      padding: 18px 0 17px; border-bottom: 1px solid var(--rule); }
+    .job .logo { display: none; }
+    .job h3 { font-size: 21px; line-height: 1.25; margin: 0 0 5px; }
+    .job h3 a { color: var(--ink); text-decoration: none; }
+    .job h3 a:hover { text-decoration: underline; text-decoration-thickness: 1px; }
+    .job .co { display: inline-block; max-width: 100%; font-weight: 700; font-size: 15.5px; color: var(--ink); }
+    .job .meta { display: inline; font-family: var(--mono); font-size: 13px; color: var(--dim); }
+    .job .meta span { white-space: nowrap; }
+    .job .meta span::before { content: "·"; margin: 0 8px; color: #9FBAC4; }
+    .job .excerpt { font-size: 15.5px; color: var(--muted); line-height: 1.5; margin: 7px 0 0; max-width: 70ch;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .tags { display: flex; flex-wrap: wrap; align-items: baseline; margin-top: 7px; font-family: var(--mono); font-size: 11.5px;
+      text-transform: uppercase; letter-spacing: .06em; color: var(--green); }
+    .tags span + span::before { content: "/"; margin: 0 8px; color: #9FBAC4; }
+    .tags span.src { color: var(--dim); text-transform: none; letter-spacing: 0; font-size: 12px; }
+    .apply { padding-top: 4px; }
+    .apply a { display: inline-block; font-weight: 700; font-size: 15px; color: var(--ink); text-decoration: none; white-space: nowrap;
+      border: 1px solid var(--ink); border-radius: 3px; padding: 7px 14px; }
+    .apply a:hover { background: var(--ink); color: #fff; }
 
-  .state { background: var(--card); border-radius: 1rem; box-shadow: var(--shadow); padding: 2.5rem 1.5rem;
-    text-align: center; color: var(--muted); }
-  .state h3 { margin-bottom: 0.5rem; }
-  .skeleton { background: var(--card); border-radius: 1rem; box-shadow: var(--shadow); padding: 1.3rem 1.5rem;
-    margin-bottom: 1rem; display: grid; grid-template-columns: 3.25rem minmax(0,1fr); gap: 1.1rem; }
-  .sk { background: linear-gradient(90deg, #e9eef4 25%, #f4f7fa 50%, #e9eef4 75%);
-    background-size: 200% 100%; animation: sh 1.3s infinite; border-radius: 0.5rem; }
-  @keyframes sh { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-  .more { display: block; margin: 1.5rem auto 0; font-family: "Poppins",sans-serif; font-weight: 700;
-    font-size: 0.88rem; color: var(--green-dark); background: var(--card); border: 1px solid var(--green);
-    border-radius: 9999px; padding: 0.7rem 2rem; cursor: pointer; transition: all .2s; }
-  .more:hover { background: var(--green); color: #fff; }
+    /* empty, error and loading states */
+    .state { border-left: 3px solid var(--gold-2); background: var(--paper-2); padding: 16px 20px; margin-top: 20px; color: var(--text); }
+    .state h3 { font-size: 20px; margin: 0 0 6px; }
+    .state p { margin: 0; font-size: 16px; }
+    .skeleton { padding: 20px 0 19px; border-bottom: 1px solid var(--rule); }
+    .skeleton > .sk:first-child { display: none; }
+    .sk { background: var(--paper-3); border-radius: 0; animation: thhpulse 1.4s ease-in-out infinite; }
+    .skeleton .sk:nth-child(1) { height: 1.3rem !important; }
+    @keyframes thhpulse { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
+    .more { display: block; width: 100%; margin: 24px 0 0; font: inherit; font-weight: 700; font-size: 15px; color: var(--ink);
+      background: transparent; border: 1px solid var(--ink); border-radius: 3px; padding: 12px; cursor: pointer; }
+    .more:hover { background: var(--ink); color: #fff; }
 
-  .credits { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem 3rem; font-size: 0.78rem; color: var(--muted);
-    text-align: center; line-height: 1.8; }
-  .credits a { color: var(--green-dark); font-weight: 600; }
+    .pagefoot .credits { font-size: 14.5px; }
+    .pagefoot .credits a { color: var(--green); }
 
-  footer.site { background: var(--footer); color: #e2e8f0; padding: 2.5rem 0; text-align: center; }
-  footer.site .links { margin-top: 1rem; display: flex; justify-content: center; gap: 1.25rem;
-    font-size: 0.85rem; font-weight: 600; }
-  footer.site a { color: #e2e8f0; text-decoration: none; transition: color .3s; }
-  footer.site a:hover { color: var(--gold); }
-  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
-</style>
+    @media (max-width: 899px) {
+      .cols { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-template-areas: "filters" "list" "notes"; }
+      aside.filters { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; margin-bottom: 30px; }
+      aside.filters > h2, aside.filters .clearwrap, .fgroup.wide { grid-column: 1 / -1; }
+      .fgroup.wide .pills { flex-direction: row; flex-wrap: wrap; gap: 0 22px; }
+      .sidenotes { margin-top: 20px; }
+    }
+    @media (max-width: 600px) {
+      .pagehead.jobshead { padding: 28px 0 22px; }
+      .searchbar .btn { padding: 11px 16px; }
+      .job { grid-template-columns: minmax(0, 1fr); }
+      .job h3 { font-size: 19.5px; }
+      .apply { padding-top: 2px; }
+      .apply a { border: 0; border-bottom: 1px solid var(--mint); border-radius: 0; padding: 0 0 1px; font-size: 15px; }
+      .apply a::after { content: " \2192"; }
+      .apply a:hover { background: none; color: var(--ink); border-bottom-color: var(--ink); }
+    }
+    @media (prefers-reduced-motion: reduce) { .sk { animation: none; } }
+  </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
+    <header class="masthead">
+        <div class="masthead-top"><div class="wrap"><span>Kenya's tech careers, reported daily</span><span class="hide-sm"><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a> &middot; <a href="mailto:info@thetechhut.co">info@thetechhut.co</a></span></div></div>
+        <div class="wrap masthead-main">
+            <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+            <nav class="sitenav" aria-label="Site"><a href="/blog/daily/">Daily</a><a href="/jobs/" aria-current="page">Jobs</a><a href="/remote/">Remote</a><a href="/cv-pack/">CV Pack</a><a href="/shop/">Shop</a><a href="/events/">Events</a><a href="/apprenticeship/">Apprenticeship</a><a href="/blog/">Blog</a></nav>
+        </div>
+    </header>
 
-<header class="site">
-  <div class="inner">
-    <a class="brand" href="https://thetechhut.co/"><b>The Tech Hut</b><span>Jobs</span></a>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/blog/">Blog</a>
-      <a href="/blog/daily/">Daily</a>
-      <a href="/cv-pack/">CV Pack</a>
-      <a href="/shop/">Shop</a>
-      <a href="/apprenticeship/">Apprenticeship</a>
-      <a href="/communities/">Community</a>
-    </nav>
-  </div>
-</header>
-
-<div class="shell">
-  <div class="hero">
-    <h1>Tech <em>Jobs</em></h1>
-    <p class="sub">Remote roles open worldwide — the ones you can actually take from Nairobi. Refreshed every time you load the page.</p>
-    <span class="count" id="count">Loading roles…</span>
-    <form class="searchbar" id="searchform" role="search">
-      <input id="q" type="search" placeholder="Search roles, companies, or skills…" aria-label="Search jobs">
-      <button type="submit">Search</button>
-    </form>
-    <div class="chips">
-      <span>Popular:</span>
-      <button type="button" data-chip="developer">Developer</button>
-      <button type="button" data-chip="design">Design</button>
-      <button type="button" data-chip="data">Data</button>
-      <button type="button" data-chip="devops">DevOps</button>
-      <button type="button" data-chip="junior">Entry level</button>
+<main id="main">
+  <header class="pagehead jobshead">
+    <div class="wrap">
+      <span class="eyebrow">Jobs board &middot; read live from the employers</span>
+      <h1>Tech <em>jobs</em></h1>
+      <p class="lede">Remote roles open worldwide &mdash; the ones you can actually take from Nairobi. Refreshed every time you load the page.</p>
+      <span class="count" id="count">Loading roles…</span>
+      <form class="searchbar" id="searchform" role="search">
+        <input id="q" type="search" placeholder="Search roles, companies, or skills…" aria-label="Search jobs">
+        <button class="btn" type="submit">Search</button>
+      </form>
+      <div class="chips">
+        <span>Popular:</span>
+        <button type="button" data-chip="developer">Developer</button>
+        <button type="button" data-chip="design">Design</button>
+        <button type="button" data-chip="data">Data</button>
+        <button type="button" data-chip="devops">DevOps</button>
+        <button type="button" data-chip="junior">Entry level</button>
+      </div>
     </div>
-  </div>
+  </header>
 
-  <div class="cols">
-    <aside class="filters">
+  <div class="wrap cols">
+    <aside class="filters" aria-label="Filters">
       <h2>Filters</h2>
       <div class="fgroup">
         <label for="ftype">Job type</label>
@@ -231,7 +197,7 @@
         <label for="fcat">Category</label>
         <select id="fcat"><option value="">All categories</option></select>
       </div>
-      <div class="fgroup">
+      <div class="fgroup wide">
         <label>Region</label>
         <div class="pills" id="fregion">
           <button type="button" data-region="" aria-pressed="true">Everywhere</button>
@@ -240,7 +206,7 @@
           <button type="button" data-region="Remote" aria-pressed="false">Remote</button>
         </div>
       </div>
-      <div class="fgroup">
+      <div class="fgroup wide">
         <label>Date posted</label>
         <div class="pills" id="fdate">
           <button type="button" data-days="0" aria-pressed="true">Any time</button>
@@ -250,8 +216,10 @@
           <button type="button" data-days="30" aria-pressed="false">Past month</button>
         </div>
       </div>
-      <button class="clearbtn" id="clear" type="button">Clear filters</button>
+      <div class="clearwrap"><button class="clearbtn" id="clear" type="button">Clear filters</button></div>
+    </aside>
 
+    <div class="sidenotes">
       <div class="direct">
         <h2>Employers hiring directly</h2>
         <p>These employers run recruitment systems we can&rsquo;t read automatically. Their openings
@@ -281,12 +249,12 @@
            that will genuinely employ you from Nairobi.</p>
         <a class="go" href="/remote/">See the Remote-From-Kenya list</a>
       </div>
-    </aside>
+    </div>
 
-    <main>
+    <div class="results">
       <div class="listhead">
         <h2>Available jobs <span id="shown"></span></h2>
-        <span class="sortwrap">Sort
+        <span class="sortwrap"><label for="sort">Sort</label>
           <select id="sort">
             <option value="date">Newest first</option>
             <option value="title">Title A–Z</option>
@@ -296,10 +264,11 @@
       </div>
       <div id="list"></div>
       <button class="more" id="more" type="button" hidden>Show more roles</button>
-    </main>
+    </div>
   </div>
-</div>
+</main>
 
+<div class="pagefoot"><div class="wrap">
 <p class="credits">
   Listings are pulled live from
   <a href="https://jobicy.com/" target="_blank" rel="noopener">Jobicy</a>,
@@ -309,15 +278,61 @@
   Every apply button opens the original posting on the source site — The Tech Hut does not host applications
   and is not the employer. Always verify a role before sharing personal details; never pay to apply.
 </p>
+</div></div>
 
-<footer class="site">
-  <div class="shell">
-    <p>&copy; 2026 The Tech Hut. All rights reserved.</p>
-    <div class="links">
-      <a href="/">Home</a><a href="/blog/">Blog</a><a href="/blog/daily/">Daily</a><a href="/cv-pack/">CV Pack</a><a href="/shop/">Shop</a><a href="/remote/">Remote list</a><a href="/advertise/">For employers</a><a href="/communities/">Community</a>
-    </div>
-  </div>
-</footer>
+<footer class="sitefoot">
+        <div class="wrap">
+            <div class="sitefoot-grid">
+                <div>
+                    <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+                    <p>Helping Kenyans into tech work: jobs you can take from Nairobi, a daily read on the industry, and projects with mentors.</p>
+                </div>
+                <div>
+                    <h4>Read</h4>
+                    <ul>
+                        <li><a href="/blog/daily/">Daily Savannah</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Find work</h4>
+                    <ul>
+                        <li><a href="/jobs/">Jobs board</a></li>
+                        <li><a href="/remote/">Remote-from-Kenya list</a></li>
+                        <li><a href="/cv-pack/">CV Pack</a></li>
+                        <li><a href="/early-access/">Early Access</a></li>
+                        <li><a href="/shop/">Everything we make</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="/apprenticeship/">Apprenticeship</a></li>
+                        <li><a href="/events/">Events</a></li>
+                        <li><a href="/communities/">Tech communities</a></li>
+                        <li><a href="/tools/">Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Employers</h4>
+                    <ul>
+                        <li><a href="/advertise/">Advertise</a></li>
+                        <li><a href="/jobs-for-your-community/">A jobs board for your community</a></li>
+                        <li><a href="/recruiters/">Recruiters</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sitefoot-base">
+                <span>&copy; 2026 The Tech Hut Community</span>
+                <a href="mailto:info@thetechhut.co">info@thetechhut.co</a>
+                <span>+254 115 017 058</span>
+                <a href="/data_privacy_policy/">Privacy</a>
+                <a href="https://linkedin.com/company/digital-transformation-partner/" rel="noopener">LinkedIn</a>
+                <a href="https://x.com/Ekiprop_kimutai" rel="noopener">X</a>
+            </div>
+        </div>
+    </footer>
 
 <script>
 (function () {
@@ -627,8 +642,8 @@
       '<div>' +
         '<h3><a href="' + esc(j.url) + '" target="_blank" rel="noopener">' + esc(j.title) + '</a></h3>' +
         '<div class="co">' + esc(j.company || 'Company not listed') + '</div>' +
-        '<div class="meta"><span>📍 ' + esc(j.location) + '</span>' +
-          (j.date ? '<span>🕒 ' + esc(ago(j.date)) + '</span>' : '') + '</div>' +
+        '<div class="meta"><span>' + esc(j.location) + '</span>' +
+          (j.date ? '<span>' + esc(ago(j.date)) + '</span>' : '') + '</div>' +
         (j.excerpt ? '<p class="excerpt">' + esc(j.excerpt) + '</p>' : '') +
         '<div class="tags">' +
           chips.map(function (c) { return '<span>' + esc(c) + '</span>'; }).join('') +

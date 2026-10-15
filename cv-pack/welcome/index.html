@@ -7,31 +7,39 @@
     <meta name="robots" content="noindex, nofollow">
     <link rel="canonical" href="https://thetechhut.co/cv-pack/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/thh.css">
     <style>
-        :root { --ink:#073B4C; --body:#4a5568; --green:#06D6A0; --green-text:#046b52; --bg:#f0f4f8;
-                --line:rgba(7,59,76,.12); --alert:#9b2020; }
-        * { box-sizing: border-box; }
-        body { margin:0; font-family:"Inter",system-ui,sans-serif; background:var(--bg); color:var(--body); line-height:1.6; }
-        nav { background:var(--green); padding:14px 20px; }
-        nav a { font-family:"Poppins",sans-serif; font-weight:700; color:var(--ink); text-decoration:none; font-size:18px; }
-        main { max-width:640px; margin:0 auto; padding:40px 20px 64px; }
-        h1 { font-family:"Poppins",sans-serif; color:var(--ink); font-size:28px; line-height:1.2; margin:0 0 12px; }
-        h2 { font-family:"Poppins",sans-serif; color:var(--ink); font-size:18px; margin:32px 0 10px; }
-        .box { background:#fff; border:1px solid var(--line); border-radius:16px; padding:24px; }
-        .btn { font:700 15px "Poppins",sans-serif; background:var(--ink); color:#fff; border:0; border-radius:999px; padding:13px 26px; cursor:pointer; }
-        .btn[disabled] { opacity:.6; cursor:default; }
-        .bad { color:var(--alert); font-weight:600; }
-        .ok { color:var(--green-text); font-weight:600; }
-        .rule { margin:0 0 12px; font-size:15px; }
-        .rule b { color:var(--ink); }
-        a { color:var(--green-text); font-weight:600; }
-        [hidden] { display:none !important; }
+        [hidden] { display: none !important; }
+        .confirm { padding-top: 56px; padding-bottom: 72px; min-height: 52vh; }
+        .confirm > * { max-width: 680px; }
+        .confirm section { padding: 0; border: 0; }
+        .confirm h1 { font-size: clamp(32px, 4.6vw, 46px); margin: 6px 0 14px; }
+        .confirm p { font-size: 18px; max-width: 60ch; }
+        .confirm .btn { font-size: 16px; padding: 13px 22px; }
+        .bad { color: var(--red); font-weight: 600; }
+        .bad:empty { display: none; }
+        .ok { color: var(--green); font-weight: 600; }
+        .box { border-top: 2px solid var(--ink); margin-top: 28px; padding-top: 10px; }
+        .box h2 { font-size: 24px; margin: 0 0 10px; }
+        .confirm .rule { max-width: none; font-size: 16.5px; margin: 0; padding: 11px 0; border-bottom: 1px solid var(--rule); }
+        .rule:last-child { border-bottom: 0; }
+        .rule b { font-family: var(--serif); font-size: 18px; font-weight: 600; }
+        .after { margin-top: 26px; }
     </style>
 </head>
 <body>
-<nav><a href="/">The Tech Hut<span style="color:#fff">.</span></a></nav>
-<main>
+<a class="skip" href="#main">Skip to content</a>
+    <header class="masthead">
+        <div class="masthead-top"><div class="wrap"><span>Kenya's tech careers, reported daily</span><span class="hide-sm"><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a> &middot; <a href="mailto:info@thetechhut.co">info@thetechhut.co</a></span></div></div>
+        <div class="wrap masthead-main">
+            <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+            <nav class="sitenav" aria-label="Site"><a href="/blog/daily/">Daily</a><a href="/jobs/">Jobs</a><a href="/remote/">Remote</a><a href="/cv-pack/" aria-current="page">CV Pack</a><a href="/shop/">Shop</a><a href="/events/">Events</a><a href="/apprenticeship/">Apprenticeship</a><a href="/blog/">Blog</a></nav>
+        </div>
+    </header>
+<main id="main" class="wrap confirm">
+    <span class="eyebrow">CV Pack &middot; confirm your email</span>
     <!-- state: has a token, not confirmed yet. The click is what confirms: mail scanners open links but do not press buttons. -->
     <section id="ready" hidden>
         <h1>One click to confirm</h1>
@@ -43,8 +51,8 @@
     <section id="done" hidden>
         <h1>You are confirmed</h1>
         <p class="ok">The checklist is on its way to your inbox, and the first openings digest arrives Monday morning, Nairobi time.</p>
-        <div class="box" style="margin-top:20px">
-            <h2 style="margin-top:0">While you wait: the six rules</h2>
+        <div class="box">
+            <h2>While you wait: the six rules</h2>
             <p class="rule"><b>1. One column. Always.</b> Two-column CVs are read straight across the page by most parsers.</p>
             <p class="rule"><b>2. No tables, text boxes or icons.</b> Write the word Phone, not a phone icon.</p>
             <p class="rule"><b>3. Use the boring headings.</b> Work Experience, Education, Skills, Certifications.</p>
@@ -52,7 +60,7 @@
             <p class="rule"><b>5. Mirror the posting's exact nouns.</b> If the ad says Node.js, write Node.js.</p>
             <p class="rule"><b>6. Submit a PDF, unless asked for Word.</b> Name it Firstname-Lastname-Role.pdf.</p>
         </div>
-        <p style="margin-top:24px">The full guide, with the seven systems and a copy-paste skeleton, is at <a href="/cv-pack/">thetechhut.co/cv-pack</a>.</p>
+        <p class="after">The full guide, with the seven systems and a copy-paste skeleton, is at <a href="/cv-pack/">thetechhut.co/cv-pack</a>.</p>
     </section>
 
     <section id="problem" hidden>
@@ -61,6 +69,60 @@
         <p><a href="/cv-pack/#list">Sign up again</a> and we will send a fresh link.</p>
     </section>
 </main>
+
+<footer class="sitefoot">
+        <div class="wrap">
+            <div class="sitefoot-grid">
+                <div>
+                    <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+                    <p>Helping Kenyans into tech work: jobs you can take from Nairobi, a daily read on the industry, and projects with mentors.</p>
+                </div>
+                <div>
+                    <h4>Read</h4>
+                    <ul>
+                        <li><a href="/blog/daily/">Daily Savannah</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Find work</h4>
+                    <ul>
+                        <li><a href="/jobs/">Jobs board</a></li>
+                        <li><a href="/remote/">Remote-from-Kenya list</a></li>
+                        <li><a href="/cv-pack/">CV Pack</a></li>
+                        <li><a href="/early-access/">Early Access</a></li>
+                        <li><a href="/shop/">Everything we make</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="/apprenticeship/">Apprenticeship</a></li>
+                        <li><a href="/events/">Events</a></li>
+                        <li><a href="/communities/">Tech communities</a></li>
+                        <li><a href="/tools/">Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Employers</h4>
+                    <ul>
+                        <li><a href="/advertise/">Advertise</a></li>
+                        <li><a href="/jobs-for-your-community/">A jobs board for your community</a></li>
+                        <li><a href="/recruiters/">Recruiters</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sitefoot-base">
+                <span>&copy; 2026 The Tech Hut Community</span>
+                <a href="mailto:info@thetechhut.co">info@thetechhut.co</a>
+                <span>+254 115 017 058</span>
+                <a href="/data_privacy_policy/">Privacy</a>
+                <a href="https://linkedin.com/company/digital-transformation-partner/" rel="noopener">LinkedIn</a>
+                <a href="https://x.com/Ekiprop_kimutai" rel="noopener">X</a>
+            </div>
+        </div>
+    </footer>
 <script>
 (function () {
     var API_BASE = 'https://thetechhut-pay.thetechhut.workers.dev';
