@@ -1,15 +1,15 @@
 {
- "updated": "2026-10-14",
+ "updated": "2026-10-15",
  "company_count": 12,
  "role_count": 303,
- "local_role_count": 35,
- "roles_scanned": 2421,
+ "local_role_count": 38,
+ "roles_scanned": 2425,
  "companies": [
   {
    "company": "Canonical",
    "platform": "greenhouse",
-   "eligible": 234,
-   "total": 311,
+   "eligible": 233,
+   "total": 310,
    "locations": [
     "Home based - EMEA",
     "Home based - EMEA; Office Based - London, UK",
@@ -22,8 +22,8 @@
   {
    "company": "Supabase",
    "platform": "ashby",
-   "eligible": 31,
-   "total": 52,
+   "eligible": 32,
+   "total": 53,
    "locations": [
     "Remote, Global",
     "Remote, EMEA"
@@ -32,8 +32,8 @@
   {
    "company": "Oyster",
    "platform": "ashby",
-   "eligible": 13,
-   "total": 23,
+   "eligible": 14,
+   "total": 24,
    "locations": [
     "EMEA"
    ]
@@ -65,7 +65,7 @@
    "company": "Zipline",
    "platform": "greenhouse",
    "eligible": 4,
-   "total": 352,
+   "total": 349,
    "locations": [
     "Remote in Africa",
     "Remote from Anywhere",
@@ -76,25 +76,16 @@
    "company": "PostHog",
    "platform": "ashby",
    "eligible": 2,
-   "total": 10,
+   "total": 11,
    "locations": [
     "Remote (EMEA)"
-   ]
-  },
-  {
-   "company": "Sun King",
-   "platform": "pinpoint",
-   "eligible": 2,
-   "total": 191,
-   "locations": [
-    "Global"
    ]
   },
   {
    "company": "GitLab",
    "platform": "greenhouse",
    "eligible": 1,
-   "total": 215,
+   "total": 217,
    "locations": [
     "Remote, EMEA; Remote, France; Remote, Germany; Remote, Ireland; Remote, Netherlands; Remote, United Kingdom"
    ]
@@ -124,6 +115,15 @@
    "total": 3,
    "locations": [
     "Anywhere (Remote)"
+   ]
+  },
+  {
+   "company": "Sun King",
+   "platform": "pinpoint",
+   "eligible": 1,
+   "total": 194,
+   "locations": [
+    "Global"
    ]
   }
  ]
