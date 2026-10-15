@@ -1,14 +1,14 @@
 {
- "updated": "2026-10-14",
+ "updated": "2026-10-15",
  "company_count": 12,
  "role_count": 303,
- "local_role_count": 35,
- "roles_scanned": 2421,
+ "local_role_count": 38,
+ "roles_scanned": 2425,
  "companies": [
   {
    "company": "Canonical",
    "platform": "greenhouse",
-   "eligible": 234,
+   "eligible": 233,
    "locations": [
     "Home based - EMEA",
     "Home based - EMEA; Office Based - London, UK",
@@ -219,12 +219,12 @@
      "url": "https://job-boards.greenhouse.io/canonical/jobs/4175808"
     }
    ],
-   "total": 311
+   "total": 310
   },
   {
    "company": "Supabase",
    "platform": "ashby",
-   "eligible": 31,
+   "eligible": 32,
    "locations": [
     "Remote, Global",
     "Remote, EMEA"
@@ -381,17 +381,22 @@
      "url": "https://jobs.ashbyhq.com/supabase/9a4c9984-07c7-4b47-982f-371de3f6ff50"
     },
     {
+     "title": "FinOps Data Engineer ",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/73ddf93b-fe0c-455d-ba27-cdde0d3fb94f"
+    },
+    {
      "title": "Platform Engineer - Compute",
      "location": "Remote, Global",
      "url": "https://jobs.ashbyhq.com/supabase/6b314e83-6617-49fc-8c73-021ebae9a757"
     }
    ],
-   "total": 52
+   "total": 53
   },
   {
    "company": "Oyster",
    "platform": "ashby",
-   "eligible": 13,
+   "eligible": 14,
    "locations": [
     "EMEA"
    ],
@@ -460,9 +465,14 @@
      "title": "Senior Accountant (EMEA)",
      "location": "EMEA",
      "url": "https://jobs.ashbyhq.com/oyster/094ead64-8a8b-45a1-b37d-0c09953a4f98"
+    },
+    {
+     "title": "Senior AI Solutions Engineer ",
+     "location": "EMEA",
+     "url": "https://jobs.ashbyhq.com/oyster/34e9f726-4461-4ef7-9724-a0aba8c72a76"
     }
    ],
-   "total": 23
+   "total": 24
   },
   {
    "company": "ConsenSys",
@@ -587,7 +597,7 @@
      "url": "https://www.zipline.com/open-roles/7983316003?gh_jid=7983316003"
     }
    ],
-   "total": 352
+   "total": 349
   },
   {
    "company": "PostHog",
@@ -608,28 +618,7 @@
      "url": "https://jobs.ashbyhq.com/posthog/36d5ce14-851c-450f-879a-45cbb896225e"
     }
    ],
-   "total": 10
-  },
-  {
-   "company": "Sun King",
-   "platform": "pinpoint",
-   "eligible": 2,
-   "locations": [
-    "Global"
-   ],
-   "roles": [
-    {
-     "title": "Global Marketing Manager - PAYG Phones",
-     "location": "Global",
-     "url": "https://sunking.pinpointhq.com/en/postings/21382d3e-69bd-4256-ae28-26853f824db4"
-    },
-    {
-     "title": "Customer Lifecycle Marketing  Manager",
-     "location": "Global",
-     "url": "https://sunking.pinpointhq.com/en/postings/871d5dcf-0be2-4a6d-9ca7-bd2d267c0ffd"
-    }
-   ],
-   "total": 191
+   "total": 11
   },
   {
    "company": "GitLab",
@@ -645,7 +634,7 @@
      "url": "https://job-boards.greenhouse.io/gitlab/jobs/8532274002"
     }
    ],
-   "total": 215
+   "total": 217
   },
   {
    "company": "Cockroach Labs",
@@ -694,6 +683,22 @@
     }
    ],
    "total": 3
+  },
+  {
+   "company": "Sun King",
+   "platform": "pinpoint",
+   "eligible": 1,
+   "locations": [
+    "Global"
+   ],
+   "roles": [
+    {
+     "title": "Global Marketing Manager - PAYG Phones",
+     "location": "Global",
+     "url": "https://sunking.pinpointhq.com/en/postings/21382d3e-69bd-4256-ae28-26853f824db4"
+    }
+   ],
+   "total": 194
   }
  ]
 }
