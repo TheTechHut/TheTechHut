@@ -124,6 +124,11 @@ def find_new_roles(snaps_dir, today=None):
         # employer links; they are also not feeds whose failure should matter here.
         if r.get('platform') == 'himalayas':
             continue
+        # Careers-page rows are skipped for now: a site that failed on the baseline
+        # day would make every one of its roles look new. Revisit once a few
+        # sources have a clean run history.
+        if r.get('platform') == 'careers-page':
+            continue
         if r.get('reach') != 'local' or not r.get('url') or r['url'] in seen or r['url'] in urls:
             continue
         posted = parse_posted(r.get('posted'))

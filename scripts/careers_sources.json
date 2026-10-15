@@ -1,0 +1,4 @@
+{
+  "_comment": "Employers whose own websites are read for JobPosting data. An entry needs allowed_by, reviewed_on (the day you read their terms and robots.txt) and a review_note. See scripts/careers_pages.py. Check a site first with: python3 scripts/careers_pages.py --check https://example.com/careers",
+  "sources": []
+}

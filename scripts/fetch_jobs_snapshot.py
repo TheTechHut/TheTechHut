@@ -28,14 +28,20 @@ maintains three rolling files the site and the products read:
 Runs in GitHub Actions. No dependencies beyond the standard library, because a
 cron job that needs pip is a cron job that breaks.
 
-Three kinds of source
----------------------
+Four kinds of source
+--------------------
 FEEDS      Employers' own career-page APIs (Greenhouse, Lever, Ashby, Pinpoint).
            A feed that fails is a "failure": the Monday digest refuses to guess
            what is new when one is down, so only feeds known to work belong here.
 PROBATION  Same kind of feed, but not yet proven. Tried every run; a failure is
            only a note in the snapshot and never blocks anything. Move a feed up
            to FEEDS once the run log shows it answering.
+Careers    Employers' own websites, read from the JobPosting markup they publish
+pages      for Google. Only employers listed in scripts/careers_sources.json, each
+           reviewed by a person for terms and robots.txt, and crawled slowly,
+           obeying robots.txt (see scripts/careers_pages.py). A problem is a
+           note, never a failure. Not part of the Monday digest yet: a site that
+           is down on the baseline day would make all its roles look new.
 Himalayas  An aggregator with a free public JSON API that asks for credit and a
            link back (see fetch_himalayas). Tech roles open to Kenya only, capped,
            always linked to the Himalayas listing, never part of the Monday digest
@@ -61,6 +67,9 @@ import sys
 import time
 import urllib.error
 import urllib.request
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import careers_pages
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, 'data')
@@ -308,6 +317,23 @@ def fetch_himalayas(fetch=None, sleep=time.sleep, now=None):
     return rows[:HIMALAYAS_KEEP], notes
 
 
+def fetch_careers_sources(registry=None, fetch=None, sleep=time.sleep, today=None):
+    """-> (rows, notes) from the vetted employer websites in the registry. Never raises."""
+    sources, notes = careers_pages.load_sources(registry or careers_pages.REGISTRY, today)
+    rows = []
+    for src in sources:
+        try:
+            got, n = careers_pages.crawl_source(src, fetch=fetch, sleep=sleep, today=today)
+        except Exception as e:                # crawl_source already guards itself; this is the second net
+            got, n = [], ['%s: unexpected error, skipped: %s' % (src.get('name'), e)]
+        for r in got:
+            r['reach'] = classify(r['location'])
+        notes.extend(n)
+        rows.extend(got)
+        print('  %-20s %-11s %4d roles' % (src['name'], 'careers-page', len(got)))
+    return rows, notes
+
+
 def main():
     today = datetime.date.today().isoformat()
     os.makedirs(SNAPS, exist_ok=True)
@@ -331,7 +357,13 @@ def main():
                 })
             print('  %-20s %-11s %4d roles%s' % (name, platform, len(rows), '' if proven else '   (probation: it answers, consider moving to FEEDS)'))
 
-    # Himalayas last, and dropping any role an employer feed already carries, so
+    # Vetted employer websites next. A role an ATS feed already carries wins.
+    cp_rows, cp_notes = fetch_careers_sources()
+    notes.extend(cp_notes)
+    have = {(r['company'].lower(), r['title'].lower()) for r in snapshot}
+    snapshot.extend(r for r in cp_rows if (r['company'].lower(), r['title'].lower()) not in have)
+
+    # Himalayas last, and dropping any role an employer already carries, so
     # a company's own listing always wins over the aggregator's copy of it.
     hm_rows, hm_notes = fetch_himalayas()
     notes.extend(hm_notes)
