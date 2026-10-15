@@ -30,130 +30,51 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/thh.css">
+  <link rel="stylesheet" href="/assets/css/blog.css">
 </head>
 <body>
 <style>
-  /* The Daily Savannah. Site-wide type, colour, masthead and footer come from /assets/css/thh.css;
-     this block only lays out the paper itself. */
-  .shell { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+  /* The Daily Savannah. Type, colour, masthead and footer: /assets/css/thh.css.
+     News-site layout (category bar, top band, feed, sidebar, split hero): /assets/css/blog.css.
+     This block only covers what is particular to an edition. */
 
-  /* ---- Nameplate ---- */
-  .pagehead { padding: 30px 0 0; border-bottom: 0; text-align: center; }
-  .pagehead h1 { font-size: clamp(40px, 7vw, 76px); font-weight: 700; letter-spacing: -.025em; margin: 0 auto; max-width: none; line-height: 1; }
-  .pagehead h1 em { font-style: italic; font-weight: 500; color: var(--green); }
-  .pagehead .sub { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 20px; margin-top: 16px;
-    padding: 8px 0; border-top: 1px solid var(--ink); border-bottom: 3px double var(--ink);
-    font-family: var(--mono); font-size: 12.5px; color: var(--ink); text-transform: uppercase; letter-spacing: .05em; text-align: left; }
-  .pagehead .auto { color: var(--green); }
+  /* the lead story's headline and picture are in the hero, so the body starts with its text */
+  .edition article.lead { border-top: 0; padding: 0 0 26px; margin: 0 0 8px; border-bottom: 1px solid var(--rule); }
+  .edition article.lead h3, .edition article.lead .pic { display: none; }
+  .edition article.lead .kicker { margin-bottom: 10px; }
+  .edition article.lead p.dek { font-size: 18.5px; line-height: 1.7; color: var(--text); margin: 0 0 14px; }
+  .edition article.lead p.dek::first-letter { font-family: var(--serif); font-weight: 600; float: left; font-size: 64px; line-height: .9; padding: 6px 8px 0 0; color: var(--ink); }
 
-  /* ---- Edition ---- */
-  section.edition { padding: 26px 0 0; border: 0; }
-  .edition-lede { font-family: var(--serif); font-style: italic; font-size: clamp(19px, 2.2vw, 23px); line-height: 1.45;
-    color: var(--ink); max-width: 62ch; margin: 0 0 26px; }
-
-  /* lead story */
-  article.lead { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 32px;
-    border-top: 2px solid var(--ink); padding: 16px 0 30px; border-bottom: 1px solid var(--rule); margin-bottom: 26px; }
-  article.lead .kicker { margin-bottom: 8px; }
-  article.lead h3 { font-size: clamp(28px, 3.6vw, 42px); line-height: 1.08; letter-spacing: -.02em; margin: 0 0 14px; }
-  article.lead p.dek { font-size: 17.5px; line-height: 1.65; color: var(--text); margin: 0 0 14px; }
-  article.lead .pic { order: 2; }
-  article.lead .pic img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
-
-  /* other stories: columns divided by rules, like a page of type */
-  .story-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; }
-  article.story { padding: 0 22px 26px; border-left: 1px solid var(--rule); }
-  article.story:nth-child(3n+1) { padding-left: 0; border-left: 0; }
-  article.story .thumb { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .08em;
-    color: var(--green); padding-top: 10px; border-top: 2px solid var(--ink); margin-bottom: 8px; }
-  article.story .thumb img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; margin-top: 10px; }
-  article.story h3 { font-size: 23px; line-height: 1.18; margin: 0 0 10px; }
-  article.story p { font-size: 16px; line-height: 1.62; margin: 0 0 12px; }
+  /* the other stories, one after another down the column */
+  .story-list { display: block; }
+  article.story { border-top: 2px solid var(--ink); padding: 14px 0 26px; }
+  article.story .thumb { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--green); margin-bottom: 8px; }
+  article.story .thumb img { float: right; width: 190px; aspect-ratio: 3 / 2; object-fit: cover; margin: 4px 0 12px 22px; }
+  article.story h3 { font-size: 26px; line-height: 1.15; margin: 0 0 10px; }
+  article.story p { font-size: 17.5px; line-height: 1.68; color: var(--text); margin: 0 0 12px; }
+  article.story::after { content: ""; display: block; clear: both; }
   .story-src { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--dim); margin: 0; }
   .story-src a { color: var(--green); }
 
   /* the day in numbers */
-  .numbers { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); margin-top: 8px;
-    border-top: 2px solid var(--ink); border-bottom: 1px solid var(--rule); }
-  .numbers::before { content: "The day in numbers"; grid-column: 1 / -1; font-family: var(--mono); font-size: 12px;
-    text-transform: uppercase; letter-spacing: .08em; color: var(--dim); padding: 10px 0 0; }
+  .numbers { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); margin: 8px 0 0; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--rule); }
+  .numbers::before { content: "The day in numbers"; grid-column: 1 / -1; font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--dim); padding: 10px 0 0; }
   .num { padding: 10px 18px 16px 0; }
-  .num b { display: block; font-family: var(--mono); font-size: 27px; font-weight: 600; color: var(--ink); letter-spacing: -.02em; line-height: 1.15; }
+  .num b { display: block; font-family: var(--mono); font-size: 26px; font-weight: 600; color: var(--ink); letter-spacing: -.02em; line-height: 1.15; }
   .num span { display: block; font-size: 14.5px; color: var(--muted); margin-top: 4px; }
 
-  /* reactions: quiet, after each story */
-  .reactions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-  .reactions button { font: 600 13px/1 var(--sans); color: var(--ink); background: transparent; border: 1px solid var(--rule);
-    border-radius: 2px; padding: 5px 8px; cursor: pointer; }
-  .reactions button:hover { border-color: var(--ink); }
-  .reactions button.on { border-color: var(--green); background: var(--paper-2); }
-  .reactions button span { color: var(--dim); font-family: var(--mono); font-size: 12px; margin-left: 2px; }
+  .edition .subscribe { margin-top: 30px; }
 
-  /* ---- Index: latest edition and the archive ---- */
-  .section-title { font-size: 26px; margin: 0 0 16px; padding-top: 10px; border-top: 2px solid var(--ink); }
-  a.ed-latest { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 32px; text-decoration: none;
-    color: var(--text); padding-bottom: 30px; margin-bottom: 34px; border-bottom: 1px solid var(--rule); }
-  a.ed-latest .kicker { margin-bottom: 8px; }
-  a.ed-latest h3 { font-size: clamp(28px, 3.6vw, 42px); line-height: 1.08; letter-spacing: -.02em; margin: 0 0 12px; }
-  a.ed-latest:hover h3 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .12em; }
-  a.ed-latest p { font-size: 17.5px; color: var(--text); margin: 0 0 12px; }
-  a.ed-latest .more { font-weight: 700; color: var(--ink); border-bottom: 1px solid var(--mint); }
-  a.ed-latest .pic img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
-
-  .ed-grid { border-top: 0; }
-  a.ed-card { display: grid; grid-template-columns: 150px minmax(0, 1fr) 168px; gap: 24px; padding: 20px 0;
-    border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--text); }
-  a.ed-card .no { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--dim); line-height: 1.5; }
-  a.ed-card .no b { display: block; color: var(--ink); font-weight: 600; font-size: 13px; }
-  a.ed-card h3 { font-size: 23px; line-height: 1.2; margin: 0 0 8px; }
-  a.ed-card:hover h3 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .12em; }
-  a.ed-card p { font-size: 16px; color: var(--muted); margin: 0 0 8px; }
-  a.ed-card ul { list-style: none; margin: 0; padding: 0; }
-  a.ed-card li { font-size: 15px; color: var(--text); padding: 4px 0 4px 14px; position: relative; line-height: 1.4; }
-  a.ed-card li::before { content: ""; position: absolute; left: 0; top: .78em; width: 6px; height: 6px; background: var(--mint); }
-  a.ed-card .pic img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
-
-  /* ---- Edition page nav ---- */
-  .backlink { display: inline-block; margin: 22px 0 0; font-weight: 700; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--mint); }
-  .backlink:hover { border-bottom-color: var(--ink); color: var(--ink); }
-  .ed-nav { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; margin-top: 34px; padding-top: 14px; border-top: 2px solid var(--ink); }
-  .ed-nav a { font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--ink); text-decoration: none; max-width: 24rem; }
+  /* previous / next edition */
+  .ed-nav { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; margin-top: 30px; padding-top: 14px; border-top: 2px solid var(--ink); }
+  .ed-nav a { font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--ink); text-decoration: none; max-width: 22rem; }
   .ed-nav a:hover { text-decoration: underline; }
   .ed-nav a small { display: block; font-family: var(--mono); font-size: 11.5px; font-weight: 400; text-transform: uppercase; letter-spacing: .06em; color: var(--dim); margin-bottom: 4px; }
   .ed-nav .next { text-align: right; margin-left: auto; }
 
-  /* ---- Weekly roundup signup ---- */
-  .subscribe { margin: 34px 0 0; background: var(--paper-2); border-top: 3px solid var(--ink); padding: 22px 24px; }
-  .subscribe h2 { font-size: 26px; margin: 0 0 6px; }
-  .subscribe p { font-size: 16px; color: var(--text); margin: 0; max-width: 64ch; }
-  .sub-form { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
-  .sub-form input[type="text"], .sub-form input[type="email"] { flex: 1 1 12rem; width: auto; }
-  .sub-form input.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
-  .sub-form button { font: 700 15px/1.2 var(--sans); color: #fff; background: var(--ink); border: 1px solid var(--ink);
-    border-radius: 3px; padding: 12px 20px; cursor: pointer; }
-  .sub-form button:hover { background: var(--ink-2); }
-  .sub-form button[disabled] { opacity: .6; cursor: default; }
-  .sub-msg { min-height: 1.3em; margin: 10px 0 0; font-weight: 600; font-size: 15px; }
-  .sub-msg.ok { color: var(--green); }
-  .sub-msg.bad { color: var(--red); }
-  .subscribe .sub-note { font-size: 14px; color: var(--dim); margin-top: 6px; }
-
-  @media (max-width: 900px) {
-    .story-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    article.story:nth-child(3n+1) { padding-left: 22px; border-left: 1px solid var(--rule); }
-    article.story:nth-child(2n+1) { padding-left: 0; border-left: 0; }
-    a.ed-card { grid-template-columns: 120px minmax(0, 1fr); }
-    a.ed-card .pic { display: none; }
+  @media (max-width: 600px) {
+    article.story .thumb img { float: none; width: 100%; margin: 8px 0 12px; }
   }
-  @media (max-width: 680px) {
-    article.lead, a.ed-latest { grid-template-columns: 1fr; gap: 16px; }
-    article.lead .pic, a.ed-latest .pic { order: -1; }
-    .story-list { grid-template-columns: 1fr; }
-    article.story, article.story:nth-child(3n+1), article.story:nth-child(2n+1) { padding: 0 0 24px; border-left: 0; }
-    a.ed-card { grid-template-columns: 1fr; gap: 6px; }
-    .pagehead .sub { justify-content: flex-start; }
-  }
-  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 
 <a class="skip" href="#main">Skip to content</a>
@@ -164,17 +85,416 @@
             <nav class="sitenav" aria-label="Site"><a href="/blog/daily/" aria-current="page">Daily</a><a href="/jobs/">Jobs</a><a href="/remote/">Remote</a><a href="/cv-pack/">CV Pack</a><a href="/shop/">Shop</a><a href="/events/">Events</a><a href="/apprenticeship/">Apprenticeship</a><a href="/blog/">Blog</a></nav>
         </div>
     </header>
+<nav class="blogbar" aria-label="Blog sections"><div class="wrap"><a class="name" href="/blog/">The Tech Hut <em>Blog</em></a><a class="cat" href="/blog/#latest">Latest</a><a class="cat on" href="/blog/daily/" aria-current="page">Daily Savannah</a><span class="sep" aria-hidden="true"></span><a class="cat" href="/blog/#c=ai">AI</a><a class="cat" href="/blog/#c=fintech">Fintech</a><a class="cat" href="/blog/#c=careers">Careers</a><a class="cat" href="/blog/#c=security">Security</a><a class="cat" href="/blog/#c=developers">Developers</a><a class="sub" href="#subscribe">Weekly email</a></div></nav>
 
-<main id="main" class="shell">
-  <div class="pagehead">
-    <h1>The Daily <em>Savannah</em></h1>
-    <div class="sub">
-      <span>Kenya's tech ecosystem, every day — startups, fintech, policy &amp; infrastructure.</span>
-      <span class="auto">New edition every evening, 9:00 PM EAT</span>
+<main id="main">
+  <div class="topband">
+    <div class="wrap">
+      <div class="plate">The Daily <em>Savannah</em><small>Kenya's tech ecosystem, every evening at 9:00 PM EAT</small></div>
+      <div class="top-grid">
+        <a class="over big" href="/blog/daily/2026-10-15/"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" decoding="async" onerror="this.remove()"><span class="cap"><span class="cat">Edition Nº 43 &middot; Health tech</span><h3>Murang'a says the national government switched off its hospital records system; the Health Ministry says it never controlled it</h3><span class="by">Thursday, 15 October 2026</span></span></a>
+        <div class="top-stack"><a class="over" href="/blog/daily/2026-10-14/"><img src="https://images.unsplash.com/photo-1614064548237-096f735f344f?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" decoding="async" onerror="this.remove()"><span class="cap"><span class="cat">Edition Nº 42 &middot; Security</span><h3>Kenya recorded 11.12 billion cyber threat events in a year, up 29%, and small businesses are the soft target</h3><span class="by">Wednesday, 14 October 2026</span></span></a><a class="over" href="/blog/daily/2026-10-13/"><img src="https://images.unsplash.com/photo-1781504798134-31600e8579ba?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" decoding="async" onerror="this.remove()"><span class="cap"><span class="cat">Edition Nº 41 &middot; Policy</span><h3>The CA wants your comments on how satellite operators get licensed in Kenya</h3><span class="by">Tuesday, 13 October 2026</span></span></a></div>
+        <div class="top-heads"><h2>Also in Edition Nº 43</h2><ul><li><a href="/blog/daily/2026-10-15/">Kenyan-founded Satlyt raises US$8 million to run AI on satellites, but the NASA headline is mostly not cash</a></li><li><a href="/blog/daily/2026-10-15/">Gemini 4 Argon is live, and the cheapest way to use it in Kenya is KES 3,700 a month</a></li><li><a href="/blog/daily/2026-10-15/">Bolt Plus costs KSh 280 a month, and a rider has to spend KSh 5,600 to earn that back</a></li><li><a href="/blog/daily/2026-10-15/">Kuunda's US$5 million is a share sale, not new money for the company</a></li></ul></div>
+      </div>
     </div>
   </div>
 
-  <aside class="subscribe" id="subscribe" aria-labelledby="sub-h">
+  <div class="wrap feedwrap">
+    <section id="latest" aria-labelledby="all-h">
+      <div class="feedhead"><h2 id="all-h">All editions</h2><span class="filter">43 editions</span></div>
+      <ul class="river">
+      <li>
+        <a href="/blog/daily/2026-10-15/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 43 &middot; 5 stories</span>
+          <h3><a href="/blog/daily/2026-10-15/">Murang'a says the national government switched off its hospital records system; the Health Ministry says it never controlled it</a></h3>
+          <ul class="heads"><li>Kenyan-founded Satlyt raises US$8 million to run AI on satellites, but the NASA headline is mostly not cash</li><li>Gemini 4 Argon is live, and the cheapest way to use it in Kenya is KES 3,700 a month</li><li>Bolt Plus costs KSh 280 a month, and a rider has to spend KSh 5,600 to earn that back</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Thursday, 15 October 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-10-14/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1614064548237-096f735f344f?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 42 &middot; 5 stories</span>
+          <h3><a href="/blog/daily/2026-10-14/">Kenya recorded 11.12 billion cyber threat events in a year, up 29%, and small businesses are the soft target</a></h3>
+          <ul class="heads"><li>KEPSA tells Parliament to reject the Bill that would put a meter on home internet</li><li>The CMA wants independent risk ratings on money market funds and the firms that run them</li><li>TECNO and Infinix's parent Transsion raises about US$390 million in Hong Kong, mostly for AI and marketing</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Wednesday, 14 October 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-10-13/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1781504798134-31600e8579ba?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 41 &middot; 4 stories</span>
+          <h3><a href="/blog/daily/2026-10-13/">The CA wants your comments on how satellite operators get licensed in Kenya</a></h3>
+          <ul class="heads"><li>Treasury says an IMF review mission is due in December — a new programme is still unresolved</li><li>Some WhatsApp users are deleting their usernames and going back to phone numbers</li><li>Getty Images plans a prepackaged Chapter 11 as AI disrupts stock photography</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Tuesday, 13 October 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-10-12/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1741991109902-98bf764fb35d?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 40 &middot; 5 stories</span>
+          <h3><a href="/blog/daily/2026-10-12/">Microsoft's Africa Development Centre in Nairobi is reportedly closing</a></h3>
+          <ul class="heads"><li>Dangote refinery GDRs: the minimum drops from KES 107,000 to KES 535 — offer closes tomorrow</li><li>KRA beats its September customs target by KES 965 million</li><li>PwC struggles to sell Koko's carbon credits, and creditors face steep losses</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Monday, 12 October 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-10-09/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1573164574572-cb89e39749b4?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 39 &middot; 3 stories</span>
+          <h3><a href="/blog/daily/2026-10-09/">Why tech companies keep struggling to operate in Kenya</a></h3>
+          <ul class="heads"><li>Google Wallet tap-to-pay is not available in Kenya, despite a DTB pilot post</li><li>GirlCode hackathon winner Naulisako wants to fix fare tracking for matatu owners</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Friday, 9 October 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-10-08/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1655720357872-ce227e4164ba?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 38 &middot; 3 stories</span>
+          <h3><a href="/blog/daily/2026-10-08/">Cloud9 raises US$500,000 from Alliance to expand cross-border payments</a></h3>
+          <ul class="heads"><li>PawaPay gets a Bank of Mozambique licence to onboard merchants directly</li><li>Spotify says audiobooks reach Kenya by year-end — price and hours still unknown</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Thursday, 8 October 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-10-07/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1651341050677-24dba59ce0fd?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 37 &middot; 4 stories</span>
+          <h3><a href="/blog/daily/2026-10-07/">Safaricom launches Ziidi Shari'ah, an Islamic money market fund on M-PESA</a></h3>
+          <ul class="heads"><li>The CA tells MPs how a recycled number is meant to be handled</li><li>Dan Kwach returns to Cassava for its AI data centre push</li><li>Equity's Finserve is piloting EMMA, a new mobile money wallet — without a price list</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Wednesday, 7 October 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-10-06/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 36 &middot; 2 stories</span>
+          <h3><a href="/blog/daily/2026-10-06/">M-PESA's "Jumbe" is a second SMS that proves you paid, minus your balance</a></h3>
+          <ul class="heads"><li>Safaricom takes its Home Internet clinic to an Embakasi estate</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Tuesday, 6 October 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-10-05/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1788784519586-0a14c5b55f0a?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 35 &middot; 4 stories</span>
+          <h3><a href="/blog/daily/2026-10-05/">The CBK wants the power to take over a payment firm</a></h3>
+          <ul class="heads"><li>Quickmart goes to the NSE at KES 7.50 and a KES 30 billion valuation</li><li>MPs ask what happens when your phone number is given to someone else</li><li>Abdi Mohamed takes over at I&amp;M with the digital numbers already working</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Monday, 5 October 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-10-02/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1657069345471-c54f2432b79c?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 34 &middot; 3 stories</span>
+          <h3><a href="/blog/daily/2026-10-02/">Emergency SMS will now override Do Not Disturb</a></h3>
+          <ul class="heads"><li>Safaricom's AI Pay reads the receipt so you don't type the PayBill</li><li>Airtel Money puts KSh37 million into two Marigat schools</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Friday, 2 October 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-10-01/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1781807124729-a6a68d42a6d7?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 33 &middot; 3 stories</span>
+          <h3><a href="/blog/daily/2026-10-01/">Airtel Money prices in London at $7bn — and shuts African retail investors out</a></h3>
+          <ul class="heads"><li>M-PESA arrives at the till as a tap</li><li>Bolt Send passes a million deliveries, and Kenya is its fastest-growing market</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Thursday, 1 October 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-09-30/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1534691601885-2b18af007add?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 32 &middot; 6 stories</span>
+          <h3><a href="/blog/daily/2026-09-30/">The High Court orders Copia into liquidation</a></h3>
+          <ul class="heads"><li>CBK licenses 29 more digital lenders, taking the total to 281</li><li>The float in your wallet could start earning — for someone</li><li>Kenyans will be able to buy Dangote — as a depositary receipt on the NSE</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Wednesday, 30 September 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-09-29/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1644036705181-4280bfe30d2a?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 31 &middot; 4 stories</span>
+          <h3><a href="/blog/daily/2026-09-29/">Kenya Airways puts an AI engine behind its fares</a></h3>
+          <ul class="heads"><li>Moringa's survey: 73% of Kenyan employers are still at square one on tech capability</li><li>The iPhone 18 is not on sale yet, but the fake stores are open</li><li>Vodacom puts sign-language interpretation inside the M-PESA app</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Tuesday, 29 September 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-09-28/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1571867424488-4565932edb41?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 30 &middot; 6 stories</span>
+          <h3><a href="/blog/daily/2026-09-28/">How Airtel Money went from rounding error to 11%</a></h3>
+          <ul class="heads"><li>Twelve deals, little paper: an audit of Kenya's Big Tech engagements</li><li>A dialysis clinic in a shipping container reaches the Africa Prize final</li><li>I&amp;M opens 25,000 accounts a month without a paper form</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Monday, 28 September 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-09-25/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1556742521-9713bf272865?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 29 &middot; 4 stories</span>
+          <h3><a href="/blog/daily/2026-09-25/">Absa Next opens to people who do not bank with Absa</a></h3>
+          <ul class="heads"><li>"AI assists. Deterministic rules decide." M-PESA draws the line</li><li>Tecno takes two IFA golds — for a 4.9mm modular phone and a mini gaming PC</li><li>WSO2Con Africa closes on governance, not models</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Friday, 25 September 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-09-24/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1582192730841-2a682d7375f9?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 28 &middot; 4 stories</span>
+          <h3><a href="/blog/daily/2026-09-24/">Latitude59 brings its pitch contest back to Nairobi</a></h3>
+          <ul class="heads"><li>Yellow Card hires Monzo's former group financial controller as CFO</li><li>Kenya maps a route from university lab to company</li><li>The enterprise AI problem is not the pilot, it is everything after it</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Thursday, 24 September 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-09-23/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1765502318157-61d9bb6579e0?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 27 &middot; 5 stories</span>
+          <h3><a href="/blog/daily/2026-09-23/">22,000 digital services, and a backend that is "still pretty manual"</a></h3>
+          <ul class="heads"><li>KPC's Inuka fellowship placed 30% of its first cohort</li><li>Equity moves payment approval to your face or thumb</li><li>Posta's parcels jumped 549% in a quarter — and still fell for the year</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Wednesday, 23 September 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-09-22/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1599050751795-6cdaafbc2319?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 26 &middot; 6 stories</span>
+          <h3><a href="/blog/daily/2026-09-22/">The Payment Bill would prise open M-PESA's data</a></h3>
+          <ul class="heads"><li>The CBK's own survey says the banks are already fintechs</li><li>KCB's Pesapal stake is 22.23%, and Tanzania told us</li><li>EPRA lifts the ceiling that punished busy charging stations</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Tuesday, 22 September 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-09-21/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1651608670845-e124df680a27?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 25 &middot; 5 stories</span>
+          <h3><a href="/blog/daily/2026-09-21/">This Is Digital turned one chatbot question into a business training 800 professionals</a></h3>
+          <ul class="heads"><li>Spiro takes another $18m, doubling its AfricaGoGreen facility to $36m</li><li>Two Kenyan musicians, two phone campaigns, two questions nobody settled in writing</li><li>Google runs "Tutunge na Gemini" for Nairobi creators and students</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Monday, 21 September 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-09-19/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1673798880756-889117cacb7e?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 24 &middot; 5 stories</span>
+          <h3><a href="/blog/daily/2026-09-19/">88 million SIMs, and the feature phone is finally losing</a></h3>
+          <ul class="heads"><li>Mobile money grew. The agents didn't.</li><li>Safaricom gained where the market grew, held where it didn't</li><li>Fixed internet up 32% — and Starlink had to stop selling</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Saturday, 19 September 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-09-18/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1683322499436-f4383dd59f5a?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 23 &middot; 7 stories</span>
+          <h3><a href="/blog/daily/2026-09-18/">Airtel shuts its Kenyan wholesale fibre unit after two years of zero revenue</a></h3>
+          <ul class="heads"><li>HustleSasa draws a German investor as it grows beyond ticketing</li><li>KRA waives penalties and interest over iTax downtime</li><li>PAPSS volumes jump 1,000% as the pan-African rail turns to adoption</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Friday, 18 September 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-09-17/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1689150571822-1b573b695391?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 22 &middot; 4 stories</span>
+          <h3><a href="/blog/daily/2026-09-17/">Claude gets Docs and Slides, and aims them at Google Workspace</a></h3>
+          <ul class="heads"><li>Equity wants to stop lending against raw hides</li><li>Absa will finance the rent on Shell forecourts</li><li>Visa signs five years with Ethiopia's Dashen Bank</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Thursday, 17 September 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-09-16/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1594915440248-1e419eba6611?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 21 &middot; 6 stories</span>
+          <h3><a href="/blog/daily/2026-09-16/">Kenya tenders for the fibre it needs to hit 100,000km before the 2027 vote</a></h3>
+          <ul class="heads"><li>Vodacom will appeal; Safaricom is "reviewing the judgment"</li><li>TikTok starts collecting tax details from Kenyan creators</li><li>Kenya takes a Konza cloud expansion and a spaceport to Seoul</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Wednesday, 16 September 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-09-15/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1780396070926-5abdd2a7928a?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 20 &middot; 6 stories</span>
+          <h3><a href="/blog/daily/2026-09-15/">High Court nullifies the Safaricom stake sale to Vodacom</a></h3>
+          <ul class="heads"><li>Stanbic Bank Kenya confirms Michael Mutiga as CEO</li><li>The next Hustler Fund wants your bank, Sacco and mobile-lender record</li><li>Spiro and Yadea team up as Kenya's e-boda market gets crowded</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Tuesday, 15 September 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-09-14/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1767347948854-6cf1686d47d8?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 19 &middot; 7 stories</span>
+          <h3><a href="/blog/daily/2026-09-14/">Twiga Foods ends up in administration</a></h3>
+          <ul class="heads"><li>MPs find gaps in the rules for the KES 340 billion Safaricom-sale fund</li><li>Watu Credit raises $7m in debt to keep financing bikes and phones</li><li>CBK drafts a "too big to fail" regime for Kenyan banks</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Monday, 14 September 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-09-13/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1771433053081-458d46481c09?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 18 &middot; 3 stories</span>
+          <h3><a href="/blog/daily/2026-09-13/">The NSE is building an exit ramp for investors who cannot get out</a></h3>
+          <ul class="heads"><li>Sidian's CEO wants an MSME bond, not just more bank lending</li><li>Kenya's REIT rules were written for buildings, not for data centres</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Sunday, 13 September 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-09-12/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1694022724038-acb03623601d?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 17 &middot; 6 stories</span>
+          <h3><a href="/blog/daily/2026-09-12/">One screen, $250: the part that explains the iPhone Duo's price</a></h3>
+          <ul class="heads"><li>A Nigerian cloud provider opens its first Nairobi zone</li><li>Digital Parks Africa adds a Tier IV carrier-neutral build in Lagos</li><li>Siemens puts its industrial software into six African markets through Redington</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Saturday, 12 September 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-09-11/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1783965951359-3ea1e0aa7772?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 16 &middot; 6 stories</span>
+          <h3><a href="/blog/daily/2026-09-11/">Anthropic caught a Kenyan bot farm using Claude to manufacture grassroots praise</a></h3>
+          <ul class="heads"><li>Mworia wants Kenya's pension savings financing its roads and grids</li><li>700 Garissa youth start a 25-week course in cloud, AI and data</li><li>The dividend revival is quietly reshaping who owns the NSE</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Friday, 11 September 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-09-10/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1615891081220-9116de3e1afd?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 15 &middot; 6 stories</span>
+          <h3><a href="/blog/daily/2026-09-10/">87% of Kenyans use AI every week — against a 64% global average</a></h3>
+          <ul class="heads"><li>Mombasa's $1.5bn AI data centre plans to build its own power station</li><li>Kenyan funds near KSh1 trillion as the money-market habit breaks</li><li>Uber says Kenya stays, a week after leaving Nigeria and Uganda</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Thursday, 10 September 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-09-09/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1587476351660-e9fa4bb8b26c?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 14 &middot; 6 stories</span>
+          <h3><a href="/blog/daily/2026-09-09/">ARC Ride raises $33.3m to take Nairobi's battery swapping continental</a></h3>
+          <ul class="heads"><li>LuLu plans a 500km protected cable from Mombasa to Lamu</li><li>KEMIS meets its first real deadline — and 1.2 million learners are in the queue</li><li>Apple's foldable is real, and it is called iPhone Duo</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Wednesday, 9 September 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-09-08/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 13 &middot; 6 stories</span>
+          <h3><a href="/blog/daily/2026-09-08/">No human effort, no copyright: Kenya's tribunal rules on AI-generated work</a></h3>
+          <ul class="heads"><li>CA proposes a standalone licence for data centres</li><li>Digital Realty switches on NBO2 in Nairobi</li><li>Two bank deals put Kenya top of Africa's M&amp;A table</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Tuesday, 8 September 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-09-07/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1673902274292-36d5732dd3a4?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 12 &middot; 6 stories</span>
+          <h3><a href="/blog/daily/2026-09-07/">Nairobi drops nine places — and Mombasa is the only Kenyan city climbing</a></h3>
+          <ul class="heads"><li>Ten years in, Bolt puts its Kenya bill at KES 19 billion</li><li>Safaricom Ethiopia's real test is not subscribers — it is March 2027</li><li>James Mworia leaves Centum to run Kenya's National Infrastructure Fund</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Monday, 7 September 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-09-06/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1599905858319-ade1a3d6f228?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 11 &middot; 4 stories</span>
+          <h3><a href="/blog/daily/2026-09-06/">DStv collapses six bouquets into three — and cuts Premium by KES 4,400</a></h3>
+          <ul class="heads"><li>Google Translate goes background-mode — with Swahili on the list</li><li>From Eastlands to Copenhagen: the Kenyan wiring Nordic money to African startups</li><li>Mobile money's next fight is engagement, not sign-ups</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Sunday, 6 September 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-09-05/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1687422808248-f807f4ea2a2e?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 10 &middot; 6 stories</span>
+          <h3><a href="/blog/daily/2026-09-05/">Sun King crashes the financed-phone race with a KES 55-a-day handset</a></h3>
+          <ul class="heads"><li>Safaricom Ethiopia crosses 15 million subscribers four years in</li><li>Hisa opens US IPOs to Kenyan retail investors</li><li>Equity and IFAD launch a $200m climate fund for East African farmers</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Saturday, 5 September 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-09-04/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 9 &middot; 7 stories</span>
+          <h3><a href="/blog/daily/2026-09-04/">Kenya arms its cybercrime prosecutors as a scan finds 4.8 million leaked credentials</a></h3>
+          <ul class="heads"><li>Kotani Pay takes stablecoin payouts continental with DCSPay</li><li>Ruto rolls back the cargo taxes squeezing small online importers</li><li>Standard Bank wants Stanbic to be Kenya's biggest bank by 2030</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Friday, 4 September 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-09-03/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 8 &middot; 6 stories</span>
+          <h3><a href="/blog/daily/2026-09-03/">High Court suspends the 18% ride-hailing commission cap</a></h3>
+          <ul class="heads"><li>FlexPay founders arrested over a missing KES 31.2 million</li><li>Four Chinese nationals held as DCI cracks a SIM-swap ring</li><li>Women in STEM Africa Summit opens at KICC with an investor pitch arena</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Thursday, 3 September 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-09-02/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 7 &middot; 6 stories</span>
+          <h3><a href="/blog/daily/2026-09-02/">After $20 billion in invoices, Kenya's DigiTax opens in the UAE</a></h3>
+          <ul class="heads"><li>Technopolis Authority puts KES 1 million behind a new logo</li><li>NBK half-year profit jumps 61% to KSh 1.72 billion</li><li>Uber leaves Nigeria after twelve years — Kenya unaffected</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Wednesday, 2 September 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-09-01/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1680879275304-bbe20f7e28fb?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 6 &middot; 6 stories</span>
+          <h3><a href="/blog/daily/2026-09-01/">Kenya's creators ask Treasury to pause the 5% withholding tax</a></h3>
+          <ul class="heads"><li>CA moves to recycle numbers dormant for three months</li><li>BAKE proposes an Office of the Creator Ombudsman</li><li>Intel puts free AI courses inside Kenya's public libraries</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Tuesday, 1 September 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-08-31/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 5 &middot; 6 stories</span>
+          <h3><a href="/blog/daily/2026-08-31/">Airtel bids for Tier 1 infrastructure and gateway licences to take on Safaricom</a></h3>
+          <ul class="heads"><li>Kenya's Digital Cooperation Organization membership gets the green light</li><li>KRA plugs eTIMS into IFMIS to vet every government supplier invoice</li><li>WHO switches on an AI-assisted health data hub for all 47 African member states</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Monday, 31 August 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-08-30/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1745848413060-0827ec268cda?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 4 &middot; 6 stories</span>
+          <h3><a href="/blog/daily/2026-08-30/">Google will withhold 5% of Kenyan creators' YouTube earnings for KRA</a></h3>
+          <ul class="heads"><li>NCBA and BasiGo strike deal to finance 1,000 electric matatus</li><li>SUN Mobility launches an open battery-swap network from Nairobi</li><li>HFCB posts record half-year profit as its capital raise pays off</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Sunday, 30 August 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-08-29/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1739271933163-8dcc7c8e8a3e?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 3 &middot; 7 stories</span>
+          <h3><a href="/blog/daily/2026-08-29/">Meta starts charging Kenyan businesses for every WhatsApp reply</a></h3>
+          <ul class="heads"><li>Kenya applies to join the Digital Cooperation Organisation</li><li>I&amp;M's half-year profit climbs 22% as 92% of customers go digital</li><li>Britam profit jumps 52% as it digitises marine cargo cover</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Saturday, 29 August 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-08-28/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1741991110666-88115e724741?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 2 &middot; 7 stories</span>
+          <h3><a href="/blog/daily/2026-08-28/">CA brings Uber, Bolt and Glovo parcel deliveries under licence</a></h3>
+          <ul class="heads"><li>Kenya's power reserve margin collapses to 3.34%, reviving rationing fears</li><li>Kenya moves closer to joining the Budapest Convention on cybercrime</li><li>Nairobi's Flowt raises pre-seed to turn messy books into loan-ready data</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Friday, 28 August 2026</div>
+        </div>
+      </li>
+      <li>
+        <a href="/blog/daily/2026-08-27/" tabindex="-1" aria-hidden="true"><img class="thumb" src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+        <div>
+          <span class="cat">Edition Nº 1 · Launch &middot; 6 stories</span>
+          <h3><a href="/blog/daily/2026-08-27/">Kenya slips to third in Africa's startup funding table</a></h3>
+          <ul class="heads"><li>Safaricom cuts M-Pesa fees for businesses in sweeping tariff revision</li><li>Kenya's national AI policy heads toward Cabinet after public consultation</li><li>Ziidi Trader puts the NSE inside 35 million M-Pesa wallets</li></ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; Thursday, 27 August 2026</div>
+        </div>
+      </li>
+      </ul>
+    </section>
+
+    <div class="side">
+      <aside class="subscribe" id="subscribe" aria-labelledby="sub-h">
   <h2 id="sub-h">Get the week in one email</h2>
   <p>Every Sunday morning, Nairobi time: the lead story and headlines from each day's edition, with a link to read the full thing. Free, and one click to unsubscribe.</p>
   <!-- Posts to the Worker (POST /subscribe, product "daily"). The Worker emails a confirmation link and only adds
@@ -188,364 +508,16 @@
   <p class="sub-msg" id="subMsg" role="status" aria-live="polite"></p>
   <p class="sub-note">We email you a link to confirm your address first, and nothing is sent until you click it. Emails go out through Brevo. <a href="/data_privacy_policy/">How we handle your data</a>.</p>
 </aside>
-
-  <h2 class="section-title" style="margin-top:34px">Latest edition</h2>
-  <a class="ed-latest" href="/blog/daily/2026-10-15/">
-    <div class="txt">
-      <span class="kicker">Edition Nº 43 &middot; Thursday, 15 October 2026</span>
-      <h3>Murang'a says the national government switched off its hospital records system; the Health Ministry says it never controlled it</h3>
-      <p>Murang'a says the national government switched off its county hospital system and the Ministry of Health says it never ran it, Kenyan-founded Satlyt raises US$8 million to run AI on satellites, Google's newest Gemini model lands in Kenya from KES 3,700 a month, Bolt launches a KSh 280 membership, and Kuunda's US$5 million turns out to be a share sale.</p>
-      <span class="more">Read the full edition &rarr;</span>
+      <div class="picks">
+        <h2>From the blog</h2>
+        <ul>
+          <li><a href="/blog/dangote-ipo-fintech/">Fintechs Powering the Dangote IPO</a></li>
+          <li><a href="/blog/jobs/">Landing tech jobs in Kenya: the real talk</a></li>
+          <li><a href="/blog/ai_job_apocalypse/">The AI job apocalypse is coming. Are you prepared?</a></li>
+          <li><a href="/blog/">Everything on the blog</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="pic"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="A Black doctor in a white coat with a stethoscope around the neck holds a smartphone in both hands — Murang&#x27;a&#x27;s county hospitals say their records system was switched off" fetchpriority="high" decoding="async" onerror="this.remove()"></div>
-  </a>
-
-  <h2 class="section-title">All editions</h2>
-  <div class="ed-grid">
-      <a class="ed-card" href="/blog/daily/2026-10-15/">
-        <div class="no"><b>Thursday, 15 October 2026</b>Edition Nº 43 &middot; 5 stories</div>
-        <div class="txt">
-          <h3>Murang'a says the national government switched off its hospital records system; the Health Ministry says it never controlled it</h3>
-          <ul><li>Kenyan-founded Satlyt raises US$8 million to run AI on satellites, but the NASA headline is mostly not cash</li><li>Gemini 4 Argon is live, and the cheapest way to use it in Kenya is KES 3,700 a month</li><li>Bolt Plus costs KSh 280 a month, and a rider has to spend KSh 5,600 to earn that back</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-10-14/">
-        <div class="no"><b>Wednesday, 14 October 2026</b>Edition Nº 42 &middot; 5 stories</div>
-        <div class="txt">
-          <h3>Kenya recorded 11.12 billion cyber threat events in a year, up 29%, and small businesses are the soft target</h3>
-          <ul><li>KEPSA tells Parliament to reject the Bill that would put a meter on home internet</li><li>The CMA wants independent risk ratings on money market funds and the firms that run them</li><li>TECNO and Infinix's parent Transsion raises about US$390 million in Hong Kong, mostly for AI and marketing</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1614064548237-096f735f344f?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-10-13/">
-        <div class="no"><b>Tuesday, 13 October 2026</b>Edition Nº 41 &middot; 4 stories</div>
-        <div class="txt">
-          <h3>The CA wants your comments on how satellite operators get licensed in Kenya</h3>
-          <ul><li>Treasury says an IMF review mission is due in December — a new programme is still unresolved</li><li>Some WhatsApp users are deleting their usernames and going back to phone numbers</li><li>Getty Images plans a prepackaged Chapter 11 as AI disrupts stock photography</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1781504798134-31600e8579ba?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-10-12/">
-        <div class="no"><b>Monday, 12 October 2026</b>Edition Nº 40 &middot; 5 stories</div>
-        <div class="txt">
-          <h3>Microsoft's Africa Development Centre in Nairobi is reportedly closing</h3>
-          <ul><li>Dangote refinery GDRs: the minimum drops from KES 107,000 to KES 535 — offer closes tomorrow</li><li>KRA beats its September customs target by KES 965 million</li><li>PwC struggles to sell Koko's carbon credits, and creditors face steep losses</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1741991109902-98bf764fb35d?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-10-09/">
-        <div class="no"><b>Friday, 9 October 2026</b>Edition Nº 39 &middot; 3 stories</div>
-        <div class="txt">
-          <h3>Why tech companies keep struggling to operate in Kenya</h3>
-          <ul><li>Google Wallet tap-to-pay is not available in Kenya, despite a DTB pilot post</li><li>GirlCode hackathon winner Naulisako wants to fix fare tracking for matatu owners</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1573164574572-cb89e39749b4?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-10-08/">
-        <div class="no"><b>Thursday, 8 October 2026</b>Edition Nº 38 &middot; 3 stories</div>
-        <div class="txt">
-          <h3>Cloud9 raises US$500,000 from Alliance to expand cross-border payments</h3>
-          <ul><li>PawaPay gets a Bank of Mozambique licence to onboard merchants directly</li><li>Spotify says audiobooks reach Kenya by year-end — price and hours still unknown</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1655720357872-ce227e4164ba?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-10-07/">
-        <div class="no"><b>Wednesday, 7 October 2026</b>Edition Nº 37 &middot; 4 stories</div>
-        <div class="txt">
-          <h3>Safaricom launches Ziidi Shari'ah, an Islamic money market fund on M-PESA</h3>
-          <ul><li>The CA tells MPs how a recycled number is meant to be handled</li><li>Dan Kwach returns to Cassava for its AI data centre push</li><li>Equity's Finserve is piloting EMMA, a new mobile money wallet — without a price list</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1651341050677-24dba59ce0fd?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-10-06/">
-        <div class="no"><b>Tuesday, 6 October 2026</b>Edition Nº 36 &middot; 2 stories</div>
-        <div class="txt">
-          <h3>M-PESA's "Jumbe" is a second SMS that proves you paid, minus your balance</h3>
-          <ul><li>Safaricom takes its Home Internet clinic to an Embakasi estate</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-10-05/">
-        <div class="no"><b>Monday, 5 October 2026</b>Edition Nº 35 &middot; 4 stories</div>
-        <div class="txt">
-          <h3>The CBK wants the power to take over a payment firm</h3>
-          <ul><li>Quickmart goes to the NSE at KES 7.50 and a KES 30 billion valuation</li><li>MPs ask what happens when your phone number is given to someone else</li><li>Abdi Mohamed takes over at I&amp;M with the digital numbers already working</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1788784519586-0a14c5b55f0a?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-10-02/">
-        <div class="no"><b>Friday, 2 October 2026</b>Edition Nº 34 &middot; 3 stories</div>
-        <div class="txt">
-          <h3>Emergency SMS will now override Do Not Disturb</h3>
-          <ul><li>Safaricom's AI Pay reads the receipt so you don't type the PayBill</li><li>Airtel Money puts KSh37 million into two Marigat schools</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1657069345471-c54f2432b79c?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-10-01/">
-        <div class="no"><b>Thursday, 1 October 2026</b>Edition Nº 33 &middot; 3 stories</div>
-        <div class="txt">
-          <h3>Airtel Money prices in London at $7bn — and shuts African retail investors out</h3>
-          <ul><li>M-PESA arrives at the till as a tap</li><li>Bolt Send passes a million deliveries, and Kenya is its fastest-growing market</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1781807124729-a6a68d42a6d7?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-09-30/">
-        <div class="no"><b>Wednesday, 30 September 2026</b>Edition Nº 32 &middot; 6 stories</div>
-        <div class="txt">
-          <h3>The High Court orders Copia into liquidation</h3>
-          <ul><li>CBK licenses 29 more digital lenders, taking the total to 281</li><li>The float in your wallet could start earning — for someone</li><li>Kenyans will be able to buy Dangote — as a depositary receipt on the NSE</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1534691601885-2b18af007add?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-09-29/">
-        <div class="no"><b>Tuesday, 29 September 2026</b>Edition Nº 31 &middot; 4 stories</div>
-        <div class="txt">
-          <h3>Kenya Airways puts an AI engine behind its fares</h3>
-          <ul><li>Moringa's survey: 73% of Kenyan employers are still at square one on tech capability</li><li>The iPhone 18 is not on sale yet, but the fake stores are open</li><li>Vodacom puts sign-language interpretation inside the M-PESA app</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1644036705181-4280bfe30d2a?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-09-28/">
-        <div class="no"><b>Monday, 28 September 2026</b>Edition Nº 30 &middot; 6 stories</div>
-        <div class="txt">
-          <h3>How Airtel Money went from rounding error to 11%</h3>
-          <ul><li>Twelve deals, little paper: an audit of Kenya's Big Tech engagements</li><li>A dialysis clinic in a shipping container reaches the Africa Prize final</li><li>I&amp;M opens 25,000 accounts a month without a paper form</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1571867424488-4565932edb41?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-09-25/">
-        <div class="no"><b>Friday, 25 September 2026</b>Edition Nº 29 &middot; 4 stories</div>
-        <div class="txt">
-          <h3>Absa Next opens to people who do not bank with Absa</h3>
-          <ul><li>"AI assists. Deterministic rules decide." M-PESA draws the line</li><li>Tecno takes two IFA golds — for a 4.9mm modular phone and a mini gaming PC</li><li>WSO2Con Africa closes on governance, not models</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1556742521-9713bf272865?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-09-24/">
-        <div class="no"><b>Thursday, 24 September 2026</b>Edition Nº 28 &middot; 4 stories</div>
-        <div class="txt">
-          <h3>Latitude59 brings its pitch contest back to Nairobi</h3>
-          <ul><li>Yellow Card hires Monzo's former group financial controller as CFO</li><li>Kenya maps a route from university lab to company</li><li>The enterprise AI problem is not the pilot, it is everything after it</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1582192730841-2a682d7375f9?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-09-23/">
-        <div class="no"><b>Wednesday, 23 September 2026</b>Edition Nº 27 &middot; 5 stories</div>
-        <div class="txt">
-          <h3>22,000 digital services, and a backend that is "still pretty manual"</h3>
-          <ul><li>KPC's Inuka fellowship placed 30% of its first cohort</li><li>Equity moves payment approval to your face or thumb</li><li>Posta's parcels jumped 549% in a quarter — and still fell for the year</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1765502318157-61d9bb6579e0?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-09-22/">
-        <div class="no"><b>Tuesday, 22 September 2026</b>Edition Nº 26 &middot; 6 stories</div>
-        <div class="txt">
-          <h3>The Payment Bill would prise open M-PESA's data</h3>
-          <ul><li>The CBK's own survey says the banks are already fintechs</li><li>KCB's Pesapal stake is 22.23%, and Tanzania told us</li><li>EPRA lifts the ceiling that punished busy charging stations</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1599050751795-6cdaafbc2319?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-09-21/">
-        <div class="no"><b>Monday, 21 September 2026</b>Edition Nº 25 &middot; 5 stories</div>
-        <div class="txt">
-          <h3>This Is Digital turned one chatbot question into a business training 800 professionals</h3>
-          <ul><li>Spiro takes another $18m, doubling its AfricaGoGreen facility to $36m</li><li>Two Kenyan musicians, two phone campaigns, two questions nobody settled in writing</li><li>Google runs "Tutunge na Gemini" for Nairobi creators and students</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1651608670845-e124df680a27?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-09-19/">
-        <div class="no"><b>Saturday, 19 September 2026</b>Edition Nº 24 &middot; 5 stories</div>
-        <div class="txt">
-          <h3>88 million SIMs, and the feature phone is finally losing</h3>
-          <ul><li>Mobile money grew. The agents didn't.</li><li>Safaricom gained where the market grew, held where it didn't</li><li>Fixed internet up 32% — and Starlink had to stop selling</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1673798880756-889117cacb7e?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-09-18/">
-        <div class="no"><b>Friday, 18 September 2026</b>Edition Nº 23 &middot; 7 stories</div>
-        <div class="txt">
-          <h3>Airtel shuts its Kenyan wholesale fibre unit after two years of zero revenue</h3>
-          <ul><li>HustleSasa draws a German investor as it grows beyond ticketing</li><li>KRA waives penalties and interest over iTax downtime</li><li>PAPSS volumes jump 1,000% as the pan-African rail turns to adoption</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1683322499436-f4383dd59f5a?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-09-17/">
-        <div class="no"><b>Thursday, 17 September 2026</b>Edition Nº 22 &middot; 4 stories</div>
-        <div class="txt">
-          <h3>Claude gets Docs and Slides, and aims them at Google Workspace</h3>
-          <ul><li>Equity wants to stop lending against raw hides</li><li>Absa will finance the rent on Shell forecourts</li><li>Visa signs five years with Ethiopia's Dashen Bank</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1689150571822-1b573b695391?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-09-16/">
-        <div class="no"><b>Wednesday, 16 September 2026</b>Edition Nº 21 &middot; 6 stories</div>
-        <div class="txt">
-          <h3>Kenya tenders for the fibre it needs to hit 100,000km before the 2027 vote</h3>
-          <ul><li>Vodacom will appeal; Safaricom is "reviewing the judgment"</li><li>TikTok starts collecting tax details from Kenyan creators</li><li>Kenya takes a Konza cloud expansion and a spaceport to Seoul</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1594915440248-1e419eba6611?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-09-15/">
-        <div class="no"><b>Tuesday, 15 September 2026</b>Edition Nº 20 &middot; 6 stories</div>
-        <div class="txt">
-          <h3>High Court nullifies the Safaricom stake sale to Vodacom</h3>
-          <ul><li>Stanbic Bank Kenya confirms Michael Mutiga as CEO</li><li>The next Hustler Fund wants your bank, Sacco and mobile-lender record</li><li>Spiro and Yadea team up as Kenya's e-boda market gets crowded</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1780396070926-5abdd2a7928a?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-09-14/">
-        <div class="no"><b>Monday, 14 September 2026</b>Edition Nº 19 &middot; 7 stories</div>
-        <div class="txt">
-          <h3>Twiga Foods ends up in administration</h3>
-          <ul><li>MPs find gaps in the rules for the KES 340 billion Safaricom-sale fund</li><li>Watu Credit raises $7m in debt to keep financing bikes and phones</li><li>CBK drafts a "too big to fail" regime for Kenyan banks</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1767347948854-6cf1686d47d8?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-09-13/">
-        <div class="no"><b>Sunday, 13 September 2026</b>Edition Nº 18 &middot; 3 stories</div>
-        <div class="txt">
-          <h3>The NSE is building an exit ramp for investors who cannot get out</h3>
-          <ul><li>Sidian's CEO wants an MSME bond, not just more bank lending</li><li>Kenya's REIT rules were written for buildings, not for data centres</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1771433053081-458d46481c09?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-09-12/">
-        <div class="no"><b>Saturday, 12 September 2026</b>Edition Nº 17 &middot; 6 stories</div>
-        <div class="txt">
-          <h3>One screen, $250: the part that explains the iPhone Duo's price</h3>
-          <ul><li>A Nigerian cloud provider opens its first Nairobi zone</li><li>Digital Parks Africa adds a Tier IV carrier-neutral build in Lagos</li><li>Siemens puts its industrial software into six African markets through Redington</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1694022724038-acb03623601d?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-09-11/">
-        <div class="no"><b>Friday, 11 September 2026</b>Edition Nº 16 &middot; 6 stories</div>
-        <div class="txt">
-          <h3>Anthropic caught a Kenyan bot farm using Claude to manufacture grassroots praise</h3>
-          <ul><li>Mworia wants Kenya's pension savings financing its roads and grids</li><li>700 Garissa youth start a 25-week course in cloud, AI and data</li><li>The dividend revival is quietly reshaping who owns the NSE</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1783965951359-3ea1e0aa7772?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-09-10/">
-        <div class="no"><b>Thursday, 10 September 2026</b>Edition Nº 15 &middot; 6 stories</div>
-        <div class="txt">
-          <h3>87% of Kenyans use AI every week — against a 64% global average</h3>
-          <ul><li>Mombasa's $1.5bn AI data centre plans to build its own power station</li><li>Kenyan funds near KSh1 trillion as the money-market habit breaks</li><li>Uber says Kenya stays, a week after leaving Nigeria and Uganda</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1615891081220-9116de3e1afd?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-09-09/">
-        <div class="no"><b>Wednesday, 9 September 2026</b>Edition Nº 14 &middot; 6 stories</div>
-        <div class="txt">
-          <h3>ARC Ride raises $33.3m to take Nairobi's battery swapping continental</h3>
-          <ul><li>LuLu plans a 500km protected cable from Mombasa to Lamu</li><li>KEMIS meets its first real deadline — and 1.2 million learners are in the queue</li><li>Apple's foldable is real, and it is called iPhone Duo</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1587476351660-e9fa4bb8b26c?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-09-08/">
-        <div class="no"><b>Tuesday, 8 September 2026</b>Edition Nº 13 &middot; 6 stories</div>
-        <div class="txt">
-          <h3>No human effort, no copyright: Kenya's tribunal rules on AI-generated work</h3>
-          <ul><li>CA proposes a standalone licence for data centres</li><li>Digital Realty switches on NBO2 in Nairobi</li><li>Two bank deals put Kenya top of Africa's M&amp;A table</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-09-07/">
-        <div class="no"><b>Monday, 7 September 2026</b>Edition Nº 12 &middot; 6 stories</div>
-        <div class="txt">
-          <h3>Nairobi drops nine places — and Mombasa is the only Kenyan city climbing</h3>
-          <ul><li>Ten years in, Bolt puts its Kenya bill at KES 19 billion</li><li>Safaricom Ethiopia's real test is not subscribers — it is March 2027</li><li>James Mworia leaves Centum to run Kenya's National Infrastructure Fund</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1673902274292-36d5732dd3a4?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-09-06/">
-        <div class="no"><b>Sunday, 6 September 2026</b>Edition Nº 11 &middot; 4 stories</div>
-        <div class="txt">
-          <h3>DStv collapses six bouquets into three — and cuts Premium by KES 4,400</h3>
-          <ul><li>Google Translate goes background-mode — with Swahili on the list</li><li>From Eastlands to Copenhagen: the Kenyan wiring Nordic money to African startups</li><li>Mobile money's next fight is engagement, not sign-ups</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1599905858319-ade1a3d6f228?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-09-05/">
-        <div class="no"><b>Saturday, 5 September 2026</b>Edition Nº 10 &middot; 6 stories</div>
-        <div class="txt">
-          <h3>Sun King crashes the financed-phone race with a KES 55-a-day handset</h3>
-          <ul><li>Safaricom Ethiopia crosses 15 million subscribers four years in</li><li>Hisa opens US IPOs to Kenyan retail investors</li><li>Equity and IFAD launch a $200m climate fund for East African farmers</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1687422808248-f807f4ea2a2e?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-09-04/">
-        <div class="no"><b>Friday, 4 September 2026</b>Edition Nº 9 &middot; 7 stories</div>
-        <div class="txt">
-          <h3>Kenya arms its cybercrime prosecutors as a scan finds 4.8 million leaked credentials</h3>
-          <ul><li>Kotani Pay takes stablecoin payouts continental with DCSPay</li><li>Ruto rolls back the cargo taxes squeezing small online importers</li><li>Standard Bank wants Stanbic to be Kenya's biggest bank by 2030</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-09-03/">
-        <div class="no"><b>Thursday, 3 September 2026</b>Edition Nº 8 &middot; 6 stories</div>
-        <div class="txt">
-          <h3>High Court suspends the 18% ride-hailing commission cap</h3>
-          <ul><li>FlexPay founders arrested over a missing KES 31.2 million</li><li>Four Chinese nationals held as DCI cracks a SIM-swap ring</li><li>Women in STEM Africa Summit opens at KICC with an investor pitch arena</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-09-02/">
-        <div class="no"><b>Wednesday, 2 September 2026</b>Edition Nº 7 &middot; 6 stories</div>
-        <div class="txt">
-          <h3>After $20 billion in invoices, Kenya's DigiTax opens in the UAE</h3>
-          <ul><li>Technopolis Authority puts KES 1 million behind a new logo</li><li>NBK half-year profit jumps 61% to KSh 1.72 billion</li><li>Uber leaves Nigeria after twelve years — Kenya unaffected</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-09-01/">
-        <div class="no"><b>Tuesday, 1 September 2026</b>Edition Nº 6 &middot; 6 stories</div>
-        <div class="txt">
-          <h3>Kenya's creators ask Treasury to pause the 5% withholding tax</h3>
-          <ul><li>CA moves to recycle numbers dormant for three months</li><li>BAKE proposes an Office of the Creator Ombudsman</li><li>Intel puts free AI courses inside Kenya's public libraries</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1680879275304-bbe20f7e28fb?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-08-31/">
-        <div class="no"><b>Monday, 31 August 2026</b>Edition Nº 5 &middot; 6 stories</div>
-        <div class="txt">
-          <h3>Airtel bids for Tier 1 infrastructure and gateway licences to take on Safaricom</h3>
-          <ul><li>Kenya's Digital Cooperation Organization membership gets the green light</li><li>KRA plugs eTIMS into IFMIS to vet every government supplier invoice</li><li>WHO switches on an AI-assisted health data hub for all 47 African member states</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-08-30/">
-        <div class="no"><b>Sunday, 30 August 2026</b>Edition Nº 4 &middot; 6 stories</div>
-        <div class="txt">
-          <h3>Google will withhold 5% of Kenyan creators' YouTube earnings for KRA</h3>
-          <ul><li>NCBA and BasiGo strike deal to finance 1,000 electric matatus</li><li>SUN Mobility launches an open battery-swap network from Nairobi</li><li>HFCB posts record half-year profit as its capital raise pays off</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1745848413060-0827ec268cda?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-08-29/">
-        <div class="no"><b>Saturday, 29 August 2026</b>Edition Nº 3 &middot; 7 stories</div>
-        <div class="txt">
-          <h3>Meta starts charging Kenyan businesses for every WhatsApp reply</h3>
-          <ul><li>Kenya applies to join the Digital Cooperation Organisation</li><li>I&amp;M's half-year profit climbs 22% as 92% of customers go digital</li><li>Britam profit jumps 52% as it digitises marine cargo cover</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1739271933163-8dcc7c8e8a3e?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-08-28/">
-        <div class="no"><b>Friday, 28 August 2026</b>Edition Nº 2 &middot; 7 stories</div>
-        <div class="txt">
-          <h3>CA brings Uber, Bolt and Glovo parcel deliveries under licence</h3>
-          <ul><li>Kenya's power reserve margin collapses to 3.34%, reviving rationing fears</li><li>Kenya moves closer to joining the Budapest Convention on cybercrime</li><li>Nairobi's Flowt raises pre-seed to turn messy books into loan-ready data</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1741991110666-88115e724741?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
-      <a class="ed-card" href="/blog/daily/2026-08-27/">
-        <div class="no"><b>Thursday, 27 August 2026</b>Edition Nº 1 · Launch &middot; 6 stories</div>
-        <div class="txt">
-          <h3>Kenya slips to third in Africa's startup funding table</h3>
-          <ul><li>Safaricom cuts M-Pesa fees for businesses in sweeping tariff revision</li><li>Kenya's national AI policy heads toward Cabinet after public consultation</li><li>Ziidi Trader puts the NSE inside 35 million M-Pesa wallets</li></ul>
-        </div>
-        <div class="pic"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>
   </div>
 </main>
 

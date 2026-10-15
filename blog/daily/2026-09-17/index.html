@@ -30,130 +30,51 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/thh.css">
+  <link rel="stylesheet" href="/assets/css/blog.css">
 </head>
 <body>
 <style>
-  /* The Daily Savannah. Site-wide type, colour, masthead and footer come from /assets/css/thh.css;
-     this block only lays out the paper itself. */
-  .shell { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+  /* The Daily Savannah. Type, colour, masthead and footer: /assets/css/thh.css.
+     News-site layout (category bar, top band, feed, sidebar, split hero): /assets/css/blog.css.
+     This block only covers what is particular to an edition. */
 
-  /* ---- Nameplate ---- */
-  .pagehead { padding: 30px 0 0; border-bottom: 0; text-align: center; }
-  .pagehead h1 { font-size: clamp(40px, 7vw, 76px); font-weight: 700; letter-spacing: -.025em; margin: 0 auto; max-width: none; line-height: 1; }
-  .pagehead h1 em { font-style: italic; font-weight: 500; color: var(--green); }
-  .pagehead .sub { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 20px; margin-top: 16px;
-    padding: 8px 0; border-top: 1px solid var(--ink); border-bottom: 3px double var(--ink);
-    font-family: var(--mono); font-size: 12.5px; color: var(--ink); text-transform: uppercase; letter-spacing: .05em; text-align: left; }
-  .pagehead .auto { color: var(--green); }
+  /* the lead story's headline and picture are in the hero, so the body starts with its text */
+  .edition article.lead { border-top: 0; padding: 0 0 26px; margin: 0 0 8px; border-bottom: 1px solid var(--rule); }
+  .edition article.lead h3, .edition article.lead .pic { display: none; }
+  .edition article.lead .kicker { margin-bottom: 10px; }
+  .edition article.lead p.dek { font-size: 18.5px; line-height: 1.7; color: var(--text); margin: 0 0 14px; }
+  .edition article.lead p.dek::first-letter { font-family: var(--serif); font-weight: 600; float: left; font-size: 64px; line-height: .9; padding: 6px 8px 0 0; color: var(--ink); }
 
-  /* ---- Edition ---- */
-  section.edition { padding: 26px 0 0; border: 0; }
-  .edition-lede { font-family: var(--serif); font-style: italic; font-size: clamp(19px, 2.2vw, 23px); line-height: 1.45;
-    color: var(--ink); max-width: 62ch; margin: 0 0 26px; }
-
-  /* lead story */
-  article.lead { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 32px;
-    border-top: 2px solid var(--ink); padding: 16px 0 30px; border-bottom: 1px solid var(--rule); margin-bottom: 26px; }
-  article.lead .kicker { margin-bottom: 8px; }
-  article.lead h3 { font-size: clamp(28px, 3.6vw, 42px); line-height: 1.08; letter-spacing: -.02em; margin: 0 0 14px; }
-  article.lead p.dek { font-size: 17.5px; line-height: 1.65; color: var(--text); margin: 0 0 14px; }
-  article.lead .pic { order: 2; }
-  article.lead .pic img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
-
-  /* other stories: columns divided by rules, like a page of type */
-  .story-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; }
-  article.story { padding: 0 22px 26px; border-left: 1px solid var(--rule); }
-  article.story:nth-child(3n+1) { padding-left: 0; border-left: 0; }
-  article.story .thumb { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .08em;
-    color: var(--green); padding-top: 10px; border-top: 2px solid var(--ink); margin-bottom: 8px; }
-  article.story .thumb img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; margin-top: 10px; }
-  article.story h3 { font-size: 23px; line-height: 1.18; margin: 0 0 10px; }
-  article.story p { font-size: 16px; line-height: 1.62; margin: 0 0 12px; }
+  /* the other stories, one after another down the column */
+  .story-list { display: block; }
+  article.story { border-top: 2px solid var(--ink); padding: 14px 0 26px; }
+  article.story .thumb { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--green); margin-bottom: 8px; }
+  article.story .thumb img { float: right; width: 190px; aspect-ratio: 3 / 2; object-fit: cover; margin: 4px 0 12px 22px; }
+  article.story h3 { font-size: 26px; line-height: 1.15; margin: 0 0 10px; }
+  article.story p { font-size: 17.5px; line-height: 1.68; color: var(--text); margin: 0 0 12px; }
+  article.story::after { content: ""; display: block; clear: both; }
   .story-src { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--dim); margin: 0; }
   .story-src a { color: var(--green); }
 
   /* the day in numbers */
-  .numbers { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); margin-top: 8px;
-    border-top: 2px solid var(--ink); border-bottom: 1px solid var(--rule); }
-  .numbers::before { content: "The day in numbers"; grid-column: 1 / -1; font-family: var(--mono); font-size: 12px;
-    text-transform: uppercase; letter-spacing: .08em; color: var(--dim); padding: 10px 0 0; }
+  .numbers { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); margin: 8px 0 0; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--rule); }
+  .numbers::before { content: "The day in numbers"; grid-column: 1 / -1; font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--dim); padding: 10px 0 0; }
   .num { padding: 10px 18px 16px 0; }
-  .num b { display: block; font-family: var(--mono); font-size: 27px; font-weight: 600; color: var(--ink); letter-spacing: -.02em; line-height: 1.15; }
+  .num b { display: block; font-family: var(--mono); font-size: 26px; font-weight: 600; color: var(--ink); letter-spacing: -.02em; line-height: 1.15; }
   .num span { display: block; font-size: 14.5px; color: var(--muted); margin-top: 4px; }
 
-  /* reactions: quiet, after each story */
-  .reactions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-  .reactions button { font: 600 13px/1 var(--sans); color: var(--ink); background: transparent; border: 1px solid var(--rule);
-    border-radius: 2px; padding: 5px 8px; cursor: pointer; }
-  .reactions button:hover { border-color: var(--ink); }
-  .reactions button.on { border-color: var(--green); background: var(--paper-2); }
-  .reactions button span { color: var(--dim); font-family: var(--mono); font-size: 12px; margin-left: 2px; }
+  .edition .subscribe { margin-top: 30px; }
 
-  /* ---- Index: latest edition and the archive ---- */
-  .section-title { font-size: 26px; margin: 0 0 16px; padding-top: 10px; border-top: 2px solid var(--ink); }
-  a.ed-latest { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 32px; text-decoration: none;
-    color: var(--text); padding-bottom: 30px; margin-bottom: 34px; border-bottom: 1px solid var(--rule); }
-  a.ed-latest .kicker { margin-bottom: 8px; }
-  a.ed-latest h3 { font-size: clamp(28px, 3.6vw, 42px); line-height: 1.08; letter-spacing: -.02em; margin: 0 0 12px; }
-  a.ed-latest:hover h3 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .12em; }
-  a.ed-latest p { font-size: 17.5px; color: var(--text); margin: 0 0 12px; }
-  a.ed-latest .more { font-weight: 700; color: var(--ink); border-bottom: 1px solid var(--mint); }
-  a.ed-latest .pic img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
-
-  .ed-grid { border-top: 0; }
-  a.ed-card { display: grid; grid-template-columns: 150px minmax(0, 1fr) 168px; gap: 24px; padding: 20px 0;
-    border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--text); }
-  a.ed-card .no { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--dim); line-height: 1.5; }
-  a.ed-card .no b { display: block; color: var(--ink); font-weight: 600; font-size: 13px; }
-  a.ed-card h3 { font-size: 23px; line-height: 1.2; margin: 0 0 8px; }
-  a.ed-card:hover h3 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .12em; }
-  a.ed-card p { font-size: 16px; color: var(--muted); margin: 0 0 8px; }
-  a.ed-card ul { list-style: none; margin: 0; padding: 0; }
-  a.ed-card li { font-size: 15px; color: var(--text); padding: 4px 0 4px 14px; position: relative; line-height: 1.4; }
-  a.ed-card li::before { content: ""; position: absolute; left: 0; top: .78em; width: 6px; height: 6px; background: var(--mint); }
-  a.ed-card .pic img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
-
-  /* ---- Edition page nav ---- */
-  .backlink { display: inline-block; margin: 22px 0 0; font-weight: 700; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--mint); }
-  .backlink:hover { border-bottom-color: var(--ink); color: var(--ink); }
-  .ed-nav { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; margin-top: 34px; padding-top: 14px; border-top: 2px solid var(--ink); }
-  .ed-nav a { font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--ink); text-decoration: none; max-width: 24rem; }
+  /* previous / next edition */
+  .ed-nav { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; margin-top: 30px; padding-top: 14px; border-top: 2px solid var(--ink); }
+  .ed-nav a { font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--ink); text-decoration: none; max-width: 22rem; }
   .ed-nav a:hover { text-decoration: underline; }
   .ed-nav a small { display: block; font-family: var(--mono); font-size: 11.5px; font-weight: 400; text-transform: uppercase; letter-spacing: .06em; color: var(--dim); margin-bottom: 4px; }
   .ed-nav .next { text-align: right; margin-left: auto; }
 
-  /* ---- Weekly roundup signup ---- */
-  .subscribe { margin: 34px 0 0; background: var(--paper-2); border-top: 3px solid var(--ink); padding: 22px 24px; }
-  .subscribe h2 { font-size: 26px; margin: 0 0 6px; }
-  .subscribe p { font-size: 16px; color: var(--text); margin: 0; max-width: 64ch; }
-  .sub-form { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
-  .sub-form input[type="text"], .sub-form input[type="email"] { flex: 1 1 12rem; width: auto; }
-  .sub-form input.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
-  .sub-form button { font: 700 15px/1.2 var(--sans); color: #fff; background: var(--ink); border: 1px solid var(--ink);
-    border-radius: 3px; padding: 12px 20px; cursor: pointer; }
-  .sub-form button:hover { background: var(--ink-2); }
-  .sub-form button[disabled] { opacity: .6; cursor: default; }
-  .sub-msg { min-height: 1.3em; margin: 10px 0 0; font-weight: 600; font-size: 15px; }
-  .sub-msg.ok { color: var(--green); }
-  .sub-msg.bad { color: var(--red); }
-  .subscribe .sub-note { font-size: 14px; color: var(--dim); margin-top: 6px; }
-
-  @media (max-width: 900px) {
-    .story-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    article.story:nth-child(3n+1) { padding-left: 22px; border-left: 1px solid var(--rule); }
-    article.story:nth-child(2n+1) { padding-left: 0; border-left: 0; }
-    a.ed-card { grid-template-columns: 120px minmax(0, 1fr); }
-    a.ed-card .pic { display: none; }
+  @media (max-width: 600px) {
+    article.story .thumb img { float: none; width: 100%; margin: 8px 0 12px; }
   }
-  @media (max-width: 680px) {
-    article.lead, a.ed-latest { grid-template-columns: 1fr; gap: 16px; }
-    article.lead .pic, a.ed-latest .pic { order: -1; }
-    .story-list { grid-template-columns: 1fr; }
-    article.story, article.story:nth-child(3n+1), article.story:nth-child(2n+1) { padding: 0 0 24px; border-left: 0; }
-    a.ed-card { grid-template-columns: 1fr; gap: 6px; }
-    .pagehead .sub { justify-content: flex-start; }
-  }
-  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 
 <a class="skip" href="#main">Skip to content</a>
@@ -164,20 +85,23 @@
             <nav class="sitenav" aria-label="Site"><a href="/blog/daily/" aria-current="page">Daily</a><a href="/jobs/">Jobs</a><a href="/remote/">Remote</a><a href="/cv-pack/">CV Pack</a><a href="/shop/">Shop</a><a href="/events/">Events</a><a href="/apprenticeship/">Apprenticeship</a><a href="/blog/">Blog</a></nav>
         </div>
     </header>
+<nav class="blogbar" aria-label="Blog sections"><div class="wrap"><a class="name" href="/blog/">The Tech Hut <em>Blog</em></a><a class="cat" href="/blog/#latest">Latest</a><a class="cat on" href="/blog/daily/" aria-current="page">Daily Savannah</a><span class="sep" aria-hidden="true"></span><a class="cat" href="/blog/#c=ai">AI</a><a class="cat" href="/blog/#c=fintech">Fintech</a><a class="cat" href="/blog/#c=careers">Careers</a><a class="cat" href="/blog/#c=security">Security</a><a class="cat" href="/blog/#c=developers">Developers</a><a class="sub" href="#subscribe">Weekly email</a></div></nav>
 
-<main id="main" class="shell">
-  <div class="pagehead">
-    <h1>The Daily <em>Savannah</em></h1>
-    <div class="sub">
-      <span>Thursday, 17 September 2026</span>
-      <span class="auto">Edition Nº 22</span>
+<main id="main">
+  <header class="art-hero">
+    <figure class="pic"><img src="https://images.unsplash.com/photo-1689150571822-1b573b695391?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="A room watching a projected deck — Claude can now draft, edit and present slides without leaving the chat" fetchpriority="high" decoding="async" onerror="this.remove()"></figure>
+    <div class="panel">
+      <a class="cat" href="/blog/daily/">The Daily Savannah &middot; Edition Nº 22</a>
+      <h1>Claude gets Docs and Slides, and aims them at Google Workspace</h1>
+      <p class="by"><b>The Daily Savannah</b> &middot; <time datetime="2026-09-17">Thursday, 17 September 2026</time> &middot; 4 stories</p>
     </div>
-  </div>
+  </header>
 
-  <section class="edition">
-    <p class="edition-lede">Anthropic puts documents and decks inside Claude and points them at Google Workspace, while Kenya's banks spend the day on the unglamorous work: fuel-station dealers, farm loans and getting small exporters onto somebody else's shelf.</p>
+  <div class="wrap art-body">
+    <section class="edition">
+      <p class="lede">Anthropic puts documents and decks inside Claude and points them at Google Workspace, while Kenya's banks spend the day on the unglamorous work: fuel-station dealers, farm loans and getting small exporters onto somebody else's shelf.</p>
 
-    <article class="lead">
+      <article class="lead">
       <div class="txt">
         <span class="kicker">Featured · AI</span>
         <h3>Claude gets Docs and Slides, and aims them at Google Workspace</h3>
@@ -222,9 +146,8 @@
       <div class="num"><b>350</b><span>Shell stations Vivo runs in Kenya</span></div>
       <div class="num"><b>5 years</b><span>the Visa–Dashen agreement in Ethiopia</span></div>
     </div>
-  </section>
 
-  <aside class="subscribe" id="subscribe" aria-labelledby="sub-h">
+      <aside class="subscribe" id="subscribe" aria-labelledby="sub-h">
   <h2 id="sub-h">Get the week in one email</h2>
   <p>Every Sunday morning, Nairobi time: the lead story and headlines from each day's edition, with a link to read the full thing. Free, and one click to unsubscribe.</p>
   <!-- Posts to the Worker (POST /subscribe, product "daily"). The Worker emails a confirmation link and only adds
@@ -239,8 +162,19 @@
   <p class="sub-note">We email you a link to confirm your address first, and nothing is sent until you click it. Emails go out through Brevo. <a href="/data_privacy_policy/">How we handle your data</a>.</p>
 </aside>
 
-  <div class="ed-nav"><a class="prev" href="/blog/daily/2026-09-16/"><small>Previous edition</small>&larr; Wednesday, 16 September 2026</a><a class="next" href="/blog/daily/2026-09-18/"><small>Next edition</small>Friday, 18 September 2026 &rarr;</a></div>
-  <a class="backlink" href="/blog/daily/">&larr; All editions</a>
+      <div class="ed-nav"><a class="prev" href="/blog/daily/2026-09-16/"><small>Previous edition</small>&larr; Wednesday, 16 September 2026</a><a class="next" href="/blog/daily/2026-09-18/"><small>Next edition</small>Friday, 18 September 2026 &rarr;</a></div>
+    </section>
+
+    <aside class="side">
+      <div class="picks"><h2>Earlier editions</h2><ul><li><a href="/blog/daily/2026-09-16/">Kenya tenders for the fibre it needs to hit 100,000km before the 2027 vote</a><time>Wednesday, 16 September 2026</time></li><li><a href="/blog/daily/2026-09-15/">High Court nullifies the Safaricom stake sale to Vodacom</a><time>Tuesday, 15 September 2026</time></li><li><a href="/blog/daily/2026-09-14/">Twiga Foods ends up in administration</a><time>Monday, 14 September 2026</time></li><li><a href="/blog/daily/2026-09-13/">The NSE is building an exit ramp for investors who cannot get out</a><time>Sunday, 13 September 2026</time></li><li><a href="/blog/daily/2026-09-12/">One screen, $250: the part that explains the iPhone Duo's price</a><time>Saturday, 12 September 2026</time></li></ul></div>
+      <div class="promo">
+        <span class="label">About the Daily</span>
+        <h3>Kenyan tech, every evening</h3>
+        <p>A digest of Kenya's tech ecosystem at 9:00 PM Nairobi time. Every story links to its source.</p>
+        <a class="link-arrow" href="/blog/daily/">All editions &rarr;</a>
+      </div>
+    </aside>
+  </div>
 </main>
 
 <div class="pagefoot"><div class="wrap">

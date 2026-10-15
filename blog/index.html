@@ -30,91 +30,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/thh.css">
-    <style>
-        /* Blog index. Type, colour, masthead and footer come from the shared stylesheet. */
-        .blog-head { padding: 44px 0 30px; }
-        .blog-head h1 { max-width: none; }
-        .blog-head .lede { margin-bottom: 0; }
-        main section { padding: 40px 0; border-bottom: 0; }
-        main section + section { padding-top: 8px; }
-        main section:last-of-type { border-bottom: 0; }
-
-        /* featured post: lead story, text beside the picture */
-        #featured-post-container a.feat { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px;
-            text-decoration: none; color: var(--text); }
-        a.feat .kicker { margin-bottom: 8px; }
-        a.feat h3 { font-size: clamp(28px, 3.6vw, 42px); line-height: 1.08; letter-spacing: -.02em; margin: 0 0 14px; }
-        a.feat:hover h3 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .12em; }
-        a.feat .dek { font-size: 17.5px; line-height: 1.6; color: var(--text); margin: 0 0 14px; max-width: 52ch; }
-        a.feat .pic img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
-
-        /* byline-style meta line under each post */
-        .meta { font-family: var(--mono); font-size: 12px; line-height: 1.6; text-transform: uppercase; letter-spacing: .05em; color: var(--dim); }
-        .meta .sep { margin: 0 6px; color: #9FBAC4; }
-        .meta.single-meta { margin: 0 0 20px; }
-
-        /* all posts: columns divided by rules, like a page of type */
-        .post-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; }
-        a.post { display: block; padding: 0 22px 30px; border-left: 1px solid var(--rule); text-decoration: none; color: var(--text); }
-        a.post:nth-child(3n+1) { padding-left: 0; border-left: 0; }
-        a.post:nth-child(3n) { padding-right: 0; }
-        a.post .pic { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-top: 2px solid var(--ink); padding-top: 12px; }
-        a.post .txt { padding-top: 12px; }
-        a.post h4 { font-family: var(--serif); font-size: 22px; line-height: 1.2; font-weight: 600; color: var(--ink); margin: 0 0 8px; }
-        a.post:hover h4 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .12em; }
-        a.post .ex { font-size: 15.5px; line-height: 1.55; color: var(--muted); margin: 0 0 10px; }
-
-        /* weekly roundup signup (same block as the Daily Savannah) */
-        .subscribe { background: var(--paper-2); border-top: 3px solid var(--ink); padding: 22px 24px; }
-        .subscribe h2 { font-size: 26px; margin: 0 0 6px; }
-        .subscribe p { font-size: 16px; color: var(--text); margin: 0; max-width: 64ch; }
-        .sub-form { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
-        .sub-form input[type="text"], .sub-form input[type="email"] { flex: 1 1 12rem; width: auto; }
-        .sub-form input.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
-        .sub-form button { font: 700 15px/1.2 var(--sans); color: #fff; background: var(--ink); border: 1px solid var(--ink);
-            border-radius: 3px; padding: 12px 20px; cursor: pointer; }
-        .sub-form button:hover { background: var(--ink-2); }
-        .sub-form button[disabled] { opacity: .6; cursor: default; }
-        .sub-msg { min-height: 1.3em; margin: 10px 0 0; font-weight: 600; font-size: 15px; }
-        .sub-msg.ok { color: var(--green); }
-        .sub-msg.bad { color: var(--red); }
-        .subscribe .sub-note { font-size: 14px; color: var(--dim); margin-top: 6px; }
-
-        /* single post view (/blog/?title=...) */
-        article.single { max-width: 720px; margin: 0 auto; padding: 36px 0 48px; }
-        article.single h1 { font-size: clamp(32px, 5vw, 50px); max-width: none; margin: 4px 0 14px; }
-        article.single .hero-img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; margin: 0 0 26px; background: var(--paper-3); }
-        article.single p { font-size: 18.5px; line-height: 1.7; color: var(--text); }
-        .post-reactions { margin: 0 0 22px; }
-        .backlink { display: inline-block; margin: 0 0 22px; font-weight: 700; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--mint); }
-        .backlink:hover { border-bottom-color: var(--ink); color: var(--ink); }
-        article.single p + .backlink { margin: 14px 0 0; }
-
-        /* anonymous reactions (built by the reactions script) */
-        .reactions { display: flex; flex-wrap: wrap; gap: 6px; }
-        .reactions button { font: 600 13px/1 var(--sans); color: var(--ink); background: transparent; border: 1px solid var(--rule);
-            border-radius: 2px; padding: 5px 8px; cursor: pointer; }
-        .reactions button:hover { border-color: var(--ink); }
-        .reactions button.on { border-color: var(--green); background: var(--paper-2); }
-        .reactions button span { color: var(--dim); font-family: var(--mono); font-size: 12px; margin-left: 2px; }
-
-        @media (max-width: 900px) {
-            .post-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-            a.post:nth-child(3n+1) { padding-left: 22px; border-left: 1px solid var(--rule); }
-            a.post:nth-child(3n) { padding-right: 22px; }
-            a.post:nth-child(2n+1) { padding-left: 0; border-left: 0; }
-            a.post:nth-child(2n) { padding-right: 0; }
-        }
-        @media (max-width: 680px) {
-            .blog-head { padding: 30px 0 24px; }
-            main section { padding: 30px 0; }
-            #featured-post-container a.feat { grid-template-columns: 1fr; gap: 16px; }
-            a.feat .pic { order: -1; }
-            .post-grid { grid-template-columns: 1fr; }
-            a.post, a.post:nth-child(3n+1), a.post:nth-child(2n+1), a.post:nth-child(3n), a.post:nth-child(2n) { padding: 0 0 26px; border-left: 0; }
-            .subscribe { padding: 20px 18px; }
-        }
-    </style>
+    <link rel="stylesheet" href="/assets/css/blog.css">
 </head><body>
     <a class="skip" href="#main">Skip to content</a>
     <header class="masthead">
@@ -124,26 +40,25 @@
             <nav class="sitenav" aria-label="Site"><a href="/blog/daily/">Daily</a><a href="/jobs/">Jobs</a><a href="/remote/">Remote</a><a href="/cv-pack/">CV Pack</a><a href="/shop/">Shop</a><a href="/events/">Events</a><a href="/apprenticeship/">Apprenticeship</a><a href="/blog/" aria-current="page">Blog</a></nav>
         </div>
     </header>
+    <nav class="blogbar home" aria-label="Blog sections"><div class="wrap"><a class="name" href="/blog/">The Tech Hut <em>Blog</em></a><a class="cat on" href="/blog/#latest" aria-current="page">Latest</a><a class="cat" href="/blog/daily/">Daily Savannah</a><span class="sep" aria-hidden="true"></span><a class="cat" href="/blog/#c=ai">AI</a><a class="cat" href="/blog/#c=fintech">Fintech</a><a class="cat" href="/blog/#c=careers">Careers</a><a class="cat" href="/blog/#c=security">Security</a><a class="cat" href="/blog/#c=developers">Developers</a><a class="sub" href="#subscribe">Weekly email</a></div></nav>
 
-    <main id="main" class="wrap">
-        <header class="pagehead blog-head">
-            <span class="eyebrow">From The Tech Hut, Nairobi</span>
-            <h1>The Tech Hut <em>Blog</em></h1>
-            <p class="lede">Tutorials, guides and The Daily Savannah, our daily digest of Kenya's tech ecosystem: startups, fintech, policy and infrastructure.</p>
-        </header>
-
-        <!-- Featured Section -->
-        <section id="featured">
-            <div class="section-head"><h2>Featured</h2></div>
-            <!-- The featured post will be dynamically injected here -->
-            <div id="featured-post-container">
-                <!-- Content will be added by JavaScript -->
+    <main id="main">
+        <div class="topband" id="topband">
+            <div class="wrap">
+                <div class="plate">The Tech Hut <em>Blog</em><small>Tutorials, guides and the Daily Savannah, from Nairobi</small></div>
+                <div class="top-grid" id="featured-post-container"></div>
             </div>
-        </section>
+        </div>
 
-        <!-- Weekly roundup signup: POST /subscribe (product "daily") on the Worker -->
-        <section>
-<aside class="subscribe" id="subscribe" aria-labelledby="sub-h">
+        <div class="wrap feedwrap">
+            <section id="latest" aria-labelledby="latest-h">
+                <div class="feedhead"><h2 id="latest-h">Latest</h2><span class="filter" id="filter-note" hidden></span></div>
+                <ul class="river" id="blog-posts-container"></ul>
+            </section>
+
+            <div class="side">
+                <!-- Weekly roundup signup: POST /subscribe (product "daily") on the Worker -->
+                <aside class="subscribe" id="subscribe" aria-labelledby="sub-h">
   <h2 id="sub-h">Get the week in one email</h2>
   <p>Every Sunday morning, Nairobi time: the lead story and headlines from each day's edition, with a link to read the full thing. Free, and one click to unsubscribe.</p>
   <!-- Posts to the Worker (POST /subscribe, product "daily"). The Worker emails a confirmation link and only adds
@@ -157,15 +72,12 @@
   <p class="sub-msg" id="subMsg" role="status" aria-live="polite"></p>
   <p class="sub-note">We email you a link to confirm your address first, and nothing is sent until you click it. Emails go out through Brevo. <a href="/data_privacy_policy/">How we handle your data</a>.</p>
 </aside>
-        </section>
-
-        <!-- All Blogs Section -->
-        <section id="blogs">
-            <div class="section-head"><h2>All posts</h2><a href="/blog/daily/">Every Daily Savannah edition</a></div>
-            <div id="blog-posts-container" class="post-grid">
-                <!-- Blog posts will be dynamically injected here by JavaScript -->
+                <div class="picks" id="picks">
+                    <h2>Worth reading</h2>
+                    <ul></ul>
+                </div>
             </div>
-        </section>
+        </div>
     </main>
 
     <footer class="sitefoot">
@@ -235,6 +147,7 @@
             const blogPosts = [
                 {
                     id: 0,
+                    category: "Daily Savannah",
                     title: "The Daily Savannah \u2014 Kenya Tech, Every Day",
                     excerpt: "Our automated daily digest of Kenya's tech ecosystem: startups, fintech, policy, and infrastructure. A fresh edition every evening at 9 PM.",
                     author: "The Tech Hut",
@@ -246,6 +159,7 @@
                 // DAILY:START — generated by scripts/build_daily.py, do not edit by hand
                 {
                     id: "daily-2026-10-15",
+                    category: "Daily Savannah",
                     title: "Murang'a says the national government switched off its hospital records system; the Health Ministry says it never controlled it",
                     excerpt: "Murang'a says the national government switched off its county hospital system and the Ministry of Health says it never ran it, Kenyan-founded Satlyt raises US$8 million to run AI on satellites, Google's newest Gemini model lands in Kenya from KES 3,700 a month, Bolt launches a KSh 280 membership, and Kuunda's US$5 million turns out to be a share sale.",
                     author: "The Daily Savannah",
@@ -256,6 +170,7 @@
                 },
                 {
                     id: "daily-2026-10-14",
+                    category: "Daily Savannah",
                     title: "Kenya recorded 11.12 billion cyber threat events in a year, up 29%, and small businesses are the soft target",
                     excerpt: "Kenya's count of cyber threat events jumps 29% to 11.12 billion as Safaricom hosts its security summit, KEPSA asks MPs to reject a Bill that would meter home internet, and the CMA floats independent risk ratings for money market funds.",
                     author: "The Daily Savannah",
@@ -266,6 +181,7 @@
                 },
                 {
                     id: "daily-2026-10-13",
+                    category: "Daily Savannah",
                     title: "The CA wants your comments on how satellite operators get licensed in Kenya",
                     excerpt: "The Communications Authority opens its draft rulebook for satellite operators to comment until 6 November, Kenya gets an IMF review date but still no new programme, and WhatsApp's username privacy feature runs into a businesses-need-your-number problem.",
                     author: "The Daily Savannah",
@@ -276,6 +192,7 @@
                 },
                 {
                     id: "daily-2026-10-12",
+                    category: "Daily Savannah",
                     title: "Microsoft's Africa Development Centre in Nairobi is reportedly closing",
                     excerpt: "Staff at Microsoft's Nairobi engineering centre have reportedly been told it is closing \u2014 the company's own statement avoids the word \u2014 while the Dangote GDR offer shuts tomorrow at a KES 535 minimum and KRA beats its customs target.",
                     author: "The Daily Savannah",
@@ -286,6 +203,7 @@
                 },
                 {
                     id: "daily-2026-10-09",
+                    category: "Daily Savannah",
                     title: "Why tech companies keep struggling to operate in Kenya",
                     excerpt: "Kenya's tech exits are a lesson in how much rides on clear rules, Google's tap-to-pay in Kenya is still a deleted LinkedIn post, and a student team wants to fix matatu fare reconciliation.",
                     author: "The Daily Savannah",
@@ -297,6 +215,7 @@
                 // DAILY:END
                 {
                     id: 7,
+                    category: "Fintech",
                     title: "Fintechs Powering the Dangote IPO",
                     excerpt: "Africa's biggest-ever share sale opens through 55 app-based channels and a \u20a65,250 minimum. Ahead of the Africa Fintech Summit panel, what it means for Kenya's capital markets.",
                     author: "The Tech Hut",
@@ -307,6 +226,7 @@
                 },
                 {
                     id: 1,
+                    category: "Developers",
                     title: "Demystifying Blockchain Technology",
                     content: ["A blockchain is, at its core, a shared ledger that no single party controls. Every transaction is grouped into a block, cryptographically linked to the one before it, and copied across thousands of computers - which is why tampering with one record means rewriting them all.", "In this guide we unpack how consensus mechanisms like proof-of-work and proof-of-stake actually work, what smart contracts make possible, and where blockchain genuinely adds value beyond cryptocurrency - from supply chains to land registries here in Kenya."],
                     excerpt: "An easy-to-understand guide to the world of decentralized ledgers and cryptocurrencies.",
@@ -317,6 +237,7 @@
                 },
                 {
                     id: 2,
+                    category: "Developers",
                     title: "Full Stack Development in 2024",
                     content: ["The modern full-stack developer's toolkit keeps consolidating: TypeScript across the stack, React or Vue on the front end, Node or serverless functions behind an API, and a managed database underneath.", "We walk through the skills that matter most this year - component-driven UI, API design, CI/CD basics, and enough cloud literacy to ship confidently - plus a practical learning path for each."],
                     excerpt: "What technologies and skills are essential for a modern full-stack developer?",
@@ -327,6 +248,7 @@
                 },
                 {
                     id: 3,
+                    category: "AI",
                     title: "The Future of Quantum Computing",
                     content: ["Quantum computers trade bits for qubits, which can exist in superpositions of 0 and 1. That single difference lets them explore many possibilities at once, promising breakthroughs in cryptography, materials science, and drug discovery.", "We look at where the technology stands today, what 'quantum advantage' really means, and why post-quantum cryptography is something every engineer should have on their radar now."],
                     excerpt: "Exploring how quantum mechanics could revolutionize computation and what it means for the future.",
@@ -337,6 +259,7 @@
                 },
                 {
                     id: 4,
+                    category: "Security",
                     title: "Cybersecurity Basics for Small Businesses",
                     content: ["Most breaches don't start with sophisticated exploits - they start with a reused password, a missed update, or a convincing phishing email. Small businesses are targeted precisely because attackers assume defenses are thin.", "This checklist covers the essentials: multi-factor authentication everywhere, automatic updates, least-privilege access, offline backups, and training your team to spot social engineering before it lands."],
                     excerpt: "Essential tips and best practices to protect your business from common cyber threats.",
@@ -347,6 +270,7 @@
                 },
                 {
                     id: 5,
+                    category: "AI",
                     title: "Intro to Machine Learning with Python",
                     content: ["Machine learning sounds intimidating until you train your first model. With Python, scikit-learn, and a clean dataset, you can go from raw CSV to working predictions in an afternoon.", "This tutorial walks through the full loop - loading data with pandas, splitting train and test sets, fitting a classifier, and honestly evaluating how well it performs - with all the code included."],
                     excerpt: "A beginner's tutorial on building your first machine learning model using Python.",
@@ -357,6 +281,7 @@
                 },
                 {
                     id: 6,
+                    category: "Developers",
                     title: "The Impact of 5G on IoT",
                     content: ["5G isn't just faster phones - its low latency and massive device density are what the Internet of Things has been waiting for. Think thousands of sensors per square kilometre reporting in near real time.", "We explore what that unlocks for smart agriculture, logistics, and city infrastructure in East Africa, and the practical hurdles - coverage, power, and cost - that still stand in the way."],
                     excerpt: "How the next generation of wireless technology is supercharging the Internet of Things.",
@@ -365,69 +290,112 @@
                     image: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?q=80&w=800&auto=format&fit=crop",
                     likes: 38
                 },
+                {
+                    id: 8,
+                    category: "Careers",
+                    title: "Landing tech jobs in Kenya: the real talk",
+                    excerpt: "The good, the bad and the realities of the Kenyan tech job market, and a seven-step blueprint for getting hired.",
+                    author: "The Tech Hut",
+                    date: "",
+                    image: "https://images.unsplash.com/photo-1573164574572-cb89e39749b4?q=80&w=800&auto=format&fit=crop",
+                    likes: 0,
+                    url: "/blog/jobs/"
+                },
+                {
+                    id: 9,
+                    category: "AI",
+                    title: "The AI job apocalypse is coming. Are you prepared?",
+                    excerpt: "Adapted from a piece by MJ DeMarco: what AI is likely to do to jobs, and how to position yourself.",
+                    author: "MJ DeMarco, adapted by The Tech Hut",
+                    date: "",
+                    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800&auto=format&fit=crop",
+                    likes: 0,
+                    url: "/blog/ai_job_apocalypse/"
+                },
             ];
 
             const container = document.getElementById('blog-posts-container');
             const featuredContainer = document.getElementById('featured-post-container');
+            const picksList = document.querySelector('#picks ul');
+            const filterNote = document.getElementById('filter-note');
 
-            // Find the blog post with the most likes to make it the featured post
-            const featuredPost = blogPosts.reduce((prev, current) => {
-                return (prev.likes > current.likes) ? prev : current;
-            });
-
-            // Function to render the featured post dynamically
-            function renderFeaturedPost(post) {
-                // Encode title and author for a clean URL
-                const titleEncoded = encodeURIComponent(post.title);
-                const authorEncoded = encodeURIComponent(post.author);
-                const href = post.url || `/blog?title=${titleEncoded}&author=${authorEncoded}`;
-
-                featuredContainer.innerHTML = `
-                    <a href="${href}" class="feat">
-                        <div class="txt">
-                            <span class="kicker">Featured</span>
-                            <h3>${post.title}</h3>
-                            <p class="dek">${post.excerpt}</p>
-                            <div class="meta">
-                                <span>By ${post.author}</span>
-                                <span class="sep">•</span>
-                                <span>${post.date}</span>
-                                <span class="sep">•</span>
-                                <span data-live-likes="${window.TTHReactions.slug(post.title)}">0 Likes</span>
-                            </div>
-                        </div>
-                        <div class="pic">
-                            <img src="${post.image}" alt="Featured blog post image" class="pic-img">
-                        </div>
-                    </a>
-                `;
+            const slugify = s => (s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+            const when = p => { const t = Date.parse(p.date); return isNaN(t) ? null : t; };
+            const hrefOf = p => p.url || `/blog?title=${encodeURIComponent(p.title)}&author=${encodeURIComponent(p.author)}`;
+            const catOf = p => p.category || 'Blog';
+            function ago(p) {
+                const t = when(p);
+                if (t === null) return p.date || '';
+                const days = Math.floor((Date.now() - t) / 864e5);
+                if (days <= 0) return 'Today';
+                if (days === 1) return 'Yesterday';
+                if (days < 7) return `${days} days ago`;
+                return p.date;
             }
+            const likes = p => `<span class="lk" data-live-likes="${window.TTHReactions ? window.TTHReactions.slug(p.title) : ''}"></span>`;
 
-            // Function to create a blog post card
-            function createBlogPostCard(post) {
-                // Encode title and author for a clean URL
-                const titleEncoded = encodeURIComponent(post.title);
-                const authorEncoded = encodeURIComponent(post.author);
-                const href = post.url || `/blog?title=${titleEncoded}&author=${authorEncoded}`;
-                
-                const article = document.createElement('a');
-                article.href = href; // Making the entire card a link
-                article.className = 'post';
-                article.innerHTML = `
-                    <img src="${post.image}" alt="Image for ${post.title}" class="pic">
-                    <div class="txt">
-                        <h4>${post.title}</h4>
-                        <p class="ex">${post.excerpt}</p>
-                        <div class="meta">
-                            <span>By ${post.author}</span>
-                            <span class="sep">•</span>
-                            <span>${post.date}</span>
-                            <span class="sep">•</span>
-                            <span data-live-likes="${window.TTHReactions.slug(post.title)}">0 Likes</span>
-                        </div>
-                    </div>
-                `;
-                return article;
+            // newest first; undated pieces after the dated ones; the Daily hub link is not a story
+            const stories = blogPosts
+                .filter(p => p.url !== '/blog/daily/')
+                .sort((a, b) => (when(b) ?? -Infinity) - (when(a) ?? -Infinity));
+
+            function overCard(p, big) {
+                return `<a class="over${big ? ' big' : ''}" href="${hrefOf(p)}">
+                        <img src="${p.image}" alt="" ${big ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" onerror="this.remove()">
+                        <span class="cap"><span class="cat">${catOf(p)}</span><h3>${p.title}</h3><span class="by">${p.author} &middot; ${ago(p)}</span></span>
+                    </a>`;
+            }
+            function renderTop() {
+                const [lead, s1, s2, ...rest] = stories;
+                const heads = rest.slice(0, 6).map(p =>
+                    `<li><a href="${hrefOf(p)}">${p.title}</a><time>${ago(p)}</time></li>`).join('');
+                featuredContainer.innerHTML = `
+                    ${overCard(lead, true)}
+                    <div class="top-stack">${s1 ? overCard(s1) : ''}${s2 ? overCard(s2) : ''}</div>
+                    <div class="top-heads"><h2>Top headlines</h2><ul>${heads}</ul></div>`;
+            }
+            function row(p) {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <a href="${hrefOf(p)}" tabindex="-1" aria-hidden="true"><img class="thumb" src="${p.image}" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'thumb blank'}))"></a>
+                    <div>
+                        <span class="cat">${catOf(p)}</span>
+                        <h3><a href="${hrefOf(p)}">${p.title}</a></h3>
+                        <p class="ex">${p.excerpt}</p>
+                        <div class="by"><b>${p.author}</b>${ago(p) ? ' &middot; ' + ago(p) : ''} ${likes(p)}</div>
+                    </div>`;
+                return li;
+            }
+            function renderFeed() {
+                const m = location.hash.match(/^#c=([a-z0-9-]+)/);
+                const want = m ? m[1] : null;
+                const list = want ? stories.filter(p => slugify(catOf(p)) === want) : stories;
+                container.innerHTML = '';
+                list.forEach(p => container.appendChild(row(p)));
+                if (!list.length) container.innerHTML = '<li class="river-empty">Nothing in this section yet.</li>';
+                document.querySelectorAll('.blogbar a.cat').forEach(a => {
+                    const h = a.getAttribute('href');
+                    a.classList.toggle('on', want ? h.endsWith('#c=' + want) : h === '/blog/#latest');
+                });
+                if (want) {
+                    const label = list.length ? catOf(list[0]) : want;
+                    filterNote.innerHTML = `Showing ${label} <button type="button" id="clear-filter">Show everything</button>`;
+                    filterNote.hidden = false;
+                    document.getElementById('clear-filter').onclick = () => { history.pushState('', '', '/blog/#latest'); renderFeed(); };
+                    document.getElementById('latest').scrollIntoView({ block: 'start' });
+                } else {
+                    filterNote.hidden = true;
+                }
+                watchLikes();
+            }
+            function renderPicks() {
+                stories.filter(p => catOf(p) !== 'Daily Savannah')
+                    .sort((a, b) => (b.likes || 0) - (a.likes || 0)).slice(0, 5)
+                    .forEach(p => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `<a href="${hrefOf(p)}">${p.title}</a>${p.date ? `<time>${ago(p)}</time>` : ''}`;
+                        picksList.appendChild(li);
+                    });
             }
 
             // Render a single post view for dynamic URLs like /blog/?title=...&author=...
@@ -446,33 +414,44 @@
                 setMeta('meta[name="twitter:title"]', post.title);
                 setMeta('meta[name="twitter:description"]', post.excerpt);
                 setMeta('meta[name="twitter:image"]', post.image);
-                const hero = document.querySelector('section.min-h-screen');
-                if (hero) hero.style.display = 'none';
                 const main = document.querySelector('main');
                 const paragraphs = (post.content && post.content.length ? post.content : [post.excerpt])
                     .map(p => `<p>${p}</p>`).join('');
+                const more = stories.filter(p => p !== post).slice(0, 5)
+                    .map(p => `<li><a href="${hrefOf(p)}">${p.title}</a>${p.date ? `<time>${ago(p)}</time>` : ''}</li>`).join('');
                 main.innerHTML = `
-                    <article class="single">
-                        <a href="/blog/" class="backlink">&larr; Back to all blogs</a>
-                        <span class="eyebrow">The Tech Hut Blog</span>
-                        <h1>${post.title}</h1>
-                        <div class="meta single-meta">
-                            <span>By ${post.author}</span>
-                            <span class="sep">&bull;</span>
-                            <span>${post.date}</span>
-                            <span class="sep">&bull;</span>
-                            <span data-live-likes="${window.TTHReactions.slug(post.title)}">0 Likes</span>
+                    <header class="art-hero">
+                        <figure class="pic"><img src="${post.image}" alt="" onerror="this.remove()"></figure>
+                        <div class="panel">
+                            <a class="cat" href="/blog/#c=${slugify(catOf(post))}">${catOf(post)}</a>
+                            <h1>${post.title}</h1>
+                            <p class="by"><b>${post.author}</b> &middot; <time>${post.date}</time> ${likes(post)}</p>
                         </div>
-                        <div id="post-reactions" class="post-reactions"></div>
-                        <img src="${post.image}" alt="Image for ${post.title}" class="hero-img">
-                        ${paragraphs}
-                        <a href="/blog/" class="backlink">&larr; Back to all blogs</a>
-                    </article>
+                    </header>
+                    <div class="wrap art-body">
+                        <article class="prose">
+                            ${paragraphs}
+                            <div id="post-reactions" class="post-reactions"></div>
+                            <p><a href="/blog/" class="link-arrow">&larr; All blog posts</a></p>
+                        </article>
+                        <aside class="side"><div class="picks"><h2>More from the blog</h2><ul>${more}</ul></div></aside>
+                    </div>
                 `;
                 window.scrollTo(0, 0);
                 if (window.TTHReactions) {
                     window.TTHReactions.attach(document.getElementById('post-reactions'), window.TTHReactions.slug(post.title));
                 }
+            }
+
+            // Live like counts: shown only once a post has some
+            function watchLikes() {
+                if (!(window.TTHReactions && window.TTHReactions.watchTotal)) return;
+                document.querySelectorAll('[data-live-likes]:not([data-watched])').forEach(el => {
+                    el.setAttribute('data-watched', '1');
+                    window.TTHReactions.watchTotal(el.getAttribute('data-live-likes'), n => {
+                        el.textContent = n ? `· ${n} ${n === 1 ? 'like' : 'likes'}` : '';
+                    });
+                });
             }
 
             // Route: single post view when ?title= is present, otherwise the normal listing
@@ -486,20 +465,12 @@
                 window.location.replace(requestedPost.url);
             } else if (requestedPost) {
                 renderSinglePost(requestedPost);
+                watchLikes();
             } else {
-                renderFeaturedPost(featuredPost);
-                blogPosts.forEach(post => {
-                    container.appendChild(createBlogPostCard(post));
-                });
-            }
-
-            // Live like counts: each card shows the real total of reactions on that post
-            if (window.TTHReactions && window.TTHReactions.watchTotal) {
-                document.querySelectorAll('[data-live-likes]').forEach(el => {
-                    window.TTHReactions.watchTotal(el.getAttribute('data-live-likes'), n => {
-                        el.textContent = `${n} ${n === 1 ? 'Like' : 'Likes'}`;
-                    });
-                });
+                renderTop();
+                renderPicks();
+                renderFeed();
+                window.addEventListener('hashchange', renderFeed);
             }
         });
     </script>

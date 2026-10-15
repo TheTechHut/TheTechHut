@@ -24,7 +24,7 @@ DAILY = os.path.join(ROOT, 'blog', 'daily')
 SRC = os.path.join(DAILY, '_src')
 EDS = os.path.join(SRC, 'editions')
 SITE = 'https://thetechhut.co'
-FONTS = '  <link rel="preconnect" href="https://fonts.googleapis.com">\n  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">\n  <link rel="stylesheet" href="/assets/css/thh.css">'
+FONTS = '  <link rel="preconnect" href="https://fonts.googleapis.com">\n  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">\n  <link rel="stylesheet" href="/assets/css/thh.css">\n  <link rel="stylesheet" href="/assets/css/blog.css">'
 
 def section(layout, name, pattern):
     m = re.search(pattern, layout, re.S)
@@ -34,7 +34,7 @@ def section(layout, name, pattern):
 
 layout = open(os.path.join(SRC, 'layout.html')).read()
 STYLE  = section(layout, '<style>',  r'<style>.*?</style>')
-HEADER = section(layout, 'header',   r'<a class="skip".*?</header>')
+HEADER = section(layout, 'header',   r'<a class="skip".*?(?=\n<!-- /HEADER -->)')
 FOOTER = section(layout, 'footer',   r'<div class="pagefoot">.*?</footer>')
 SCRIPT = section(layout, 'script',   r'<script>.*?</script>')
 SIGNUP = section(layout, 'signup',   r'<aside class="subscribe".*?</aside>')
@@ -64,7 +64,10 @@ def load(slug):
     m = re.search(r'<div class="pic"><img src="([^"]+)"[^>]*?alt="([^"]*)"', d['body'])
     d['img'], d['alt'] = (m.group(1), m.group(2)) if m else ('', 'The Daily Savannah')
     d['count'] = d['body'].count('<article class="story">') + (1 if d['body'] else 0)
-    d['heads'] = re.findall(r'<article class="story">.*?<h3>(.*?)</h3>', d['body'], re.S)[:3]
+    d['allheads'] = re.findall(r'<article class="story">.*?<h3>(.*?)</h3>', d['body'], re.S)
+    d['heads'] = d['allheads'][:3]
+    m = re.search(r'<article class="lead">.*?<span class="kicker">(.*?)</span>', d['body'], re.S)
+    d['kicker'] = re.sub(r'^\s*Featured\s*·\s*', '', strip_tags(m.group(1))) if m else ''
     if '<!--' in d['body'] or '<section' in d['body']:
         sys.exit('build_daily.py: malformed fragment %s.html' % d['slug'])
     return d
@@ -148,30 +151,45 @@ for i, d in enumerate(eds):
     seo_title = f'{lead_t} — The Daily Savannah, {d["datetext"]}'
     seo_desc = f'{lead_t}. Plus: {plus}.' if plus else d['lede']
     page = head(seo_title, seo_desc, url, d['img'], d['alt'])
+    earlier = ''.join(
+        f'<li><a href="/blog/daily/{e["slug"]}/">{e["lead_title"]}</a><time>{e["datetext"]}</time></li>'
+        for e in eds[i+1:i+6])
     page += f'''
 {STYLE}
 
 {HEADER}
 
-<main id="main" class="shell">
-  <div class="pagehead">
-    <h1>The Daily <em>Savannah</em></h1>
-    <div class="sub">
-      <span>{d['datetext']}</span>
-      <span class="auto">{html.escape(d['no'])}</span>
+<main id="main">
+  <header class="art-hero">
+    <figure class="pic"><img src="{d['img']}" alt="{html.escape(d['alt'], quote=True)}" fetchpriority="high" decoding="async" onerror="this.remove()"></figure>
+    <div class="panel">
+      <a class="cat" href="/blog/daily/">The Daily Savannah &middot; {html.escape(d['no'])}</a>
+      <h1>{d['lead_title']}</h1>
+      <p class="by"><b>The Daily Savannah</b> &middot; <time datetime="{d['slug']}">{d['datetext']}</time> &middot; {d['count']} stories</p>
     </div>
+  </header>
+
+  <div class="wrap art-body">
+    <section class="edition">
+      <p class="lede">{d['lede']}</p>
+
+      {d['body']}
+
+      {SIGNUP}
+
+      {nav}
+    </section>
+
+    <aside class="side">
+      <div class="picks"><h2>Earlier editions</h2><ul>{earlier}</ul></div>
+      <div class="promo">
+        <span class="label">About the Daily</span>
+        <h3>Kenyan tech, every evening</h3>
+        <p>A digest of Kenya's tech ecosystem at 9:00 PM Nairobi time. Every story links to its source.</p>
+        <a class="link-arrow" href="/blog/daily/">All editions &rarr;</a>
+      </div>
+    </aside>
   </div>
-
-  <section class="edition">
-    <p class="edition-lede">{d['lede']}</p>
-
-    {d['body']}
-  </section>
-
-  {SIGNUP}
-
-  {nav}
-  <a class="backlink" href="/blog/daily/">&larr; All editions</a>
 </main>
 
 {FOOTER}
@@ -188,50 +206,65 @@ for i, d in enumerate(eds):
 latest = eds[0]
 def card(d):
     teasers = ''.join(f'<li>{t}</li>' for t in d['heads'])
-    return f'''      <a class="ed-card" href="/blog/daily/{d['slug']}/">
-        <div class="no"><b>{d['datetext']}</b>{html.escape(d['no'])} &middot; {d['count']} stories</div>
-        <div class="txt">
-          <h3>{d['lead_title']}</h3>
-          <ul>{teasers}</ul>
+    return f'''      <li>
+        <a href="/blog/daily/{d['slug']}/" tabindex="-1" aria-hidden="true"><img class="thumb" src="{d['img']}" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{{className:'thumb blank'}}))"></a>
+        <div>
+          <span class="cat">{html.escape(d['no'])} &middot; {d['count']} stories</span>
+          <h3><a href="/blog/daily/{d['slug']}/">{d['lead_title']}</a></h3>
+          <ul class="heads">{teasers}</ul>
+          <div class="by"><b>The Daily Savannah</b> &middot; {d['datetext']}</div>
         </div>
-        <div class="pic"><img src="{d['img']}" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
-      </a>'''
+      </li>'''
+
+def over(d, big=False):
+    return (f'<a class="over{" big" if big else ""}" href="/blog/daily/{d["slug"]}/">'
+            f'<img src="{d["img"]}" alt="" decoding="async" onerror="this.remove()">'
+            f'<span class="cap"><span class="cat">{html.escape(d["no"])} &middot; {html.escape(d["kicker"] or "Lead story")}</span>'
+            f'<h3>{d["lead_title"]}</h3><span class="by">{d["datetext"]}</span></span></a>')
 
 index = head('The Daily Savannah | The Tech Hut Blog',
              "The Tech Hut's automated daily digest of Kenya's tech ecosystem — startups, "
              "fintech, policy, and infrastructure. A fresh edition every evening at 9:00 PM EAT.",
              f'{SITE}/blog/daily/', f'{SITE}/assets/img/social/daily.jpg',
              'The Daily Savannah: African tech in one read', 'website')
+tonight = ''.join(f'<li><a href="/blog/daily/{latest["slug"]}/">{h}</a></li>' for h in latest['allheads'])
 index += f'''
 {STYLE}
 
 {HEADER}
 
-<main id="main" class="shell">
-  <div class="pagehead">
-    <h1>The Daily <em>Savannah</em></h1>
-    <div class="sub">
-      <span>Kenya's tech ecosystem, every day — startups, fintech, policy &amp; infrastructure.</span>
-      <span class="auto">New edition every evening, 9:00 PM EAT</span>
+<main id="main">
+  <div class="topband">
+    <div class="wrap">
+      <div class="plate">The Daily <em>Savannah</em><small>Kenya's tech ecosystem, every evening at 9:00 PM EAT</small></div>
+      <div class="top-grid">
+        {over(latest, True)}
+        <div class="top-stack">{''.join(over(e) for e in eds[1:3])}</div>
+        <div class="top-heads"><h2>Also in {html.escape(latest['no'])}</h2><ul>{tonight}</ul></div>
+      </div>
     </div>
   </div>
 
-  {SIGNUP}
-
-  <h2 class="section-title" style="margin-top:34px">Latest edition</h2>
-  <a class="ed-latest" href="/blog/daily/{latest['slug']}/">
-    <div class="txt">
-      <span class="kicker">{html.escape(latest['no'])} &middot; {latest['datetext']}</span>
-      <h3>{latest['lead_title']}</h3>
-      <p>{latest['lede']}</p>
-      <span class="more">Read the full edition &rarr;</span>
-    </div>
-    <div class="pic"><img src="{latest['img']}" alt="{html.escape(latest['alt'], quote=True)}" fetchpriority="high" decoding="async" onerror="this.remove()"></div>
-  </a>
-
-  <h2 class="section-title">All editions</h2>
-  <div class="ed-grid">
+  <div class="wrap feedwrap">
+    <section id="latest" aria-labelledby="all-h">
+      <div class="feedhead"><h2 id="all-h">All editions</h2><span class="filter">{len(eds)} editions</span></div>
+      <ul class="river">
 {chr(10).join(card(d) for d in eds)}
+      </ul>
+    </section>
+
+    <div class="side">
+      {SIGNUP}
+      <div class="picks">
+        <h2>From the blog</h2>
+        <ul>
+          <li><a href="/blog/dangote-ipo-fintech/">Fintechs Powering the Dangote IPO</a></li>
+          <li><a href="/blog/jobs/">Landing tech jobs in Kenya: the real talk</a></li>
+          <li><a href="/blog/ai_job_apocalypse/">The AI job apocalypse is coming. Are you prepared?</a></li>
+          <li><a href="/blog/">Everything on the blog</a></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </main>
 
@@ -262,6 +295,7 @@ if os.path.exists(blog_index):
             rows.append(
                 '                {\n'
                 f'                    id: "daily-{d["slug"]}",\n'
+                '                    category: "Daily Savannah",\n'
                 f'                    title: {_json.dumps(title)},\n'
                 f'                    excerpt: {_json.dumps(excerpt)},\n'
                 f'                    author: {_json.dumps("The Daily Savannah")},\n'
