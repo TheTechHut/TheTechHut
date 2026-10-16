@@ -126,6 +126,15 @@ PROBATION = [
 # Jooble, Neuvoo, Google Jobs or LinkedIn. Its site terms forbid scraping the
 # website; the API is the sanctioned way in. Rows therefore always carry the
 # Himalayas URL and a `via` credit.
+#
+# Since October 2026 Himalayas offers free API keys (himalayas.app/signup/developer).
+# A key is optional: without one the script uses the shared public allowance.
+# With HIMALAYAS_API_KEY set (a GitHub secret) it is sent as
+# "Authorization: Bearer <key>", which gives this site its own limits. The key is
+# never printed. A rejected key (HTTP 401) is reported in the notes and the run
+# carries on without it. Their API terms also say every Apply action must use the
+# API's applicationLink, so that is the link we keep when it points at Himalayas.
+HIMALAYAS_KEY_ENV = 'HIMALAYAS_API_KEY'
 HIMALAYAS_API = 'https://himalayas.app/jobs/api/search?country=KE&limit=20&page=%d'
 HIMALAYAS_PAGE_SIZE = 20
 HIMALAYAS_MAX_PAGES = 40        # about the newest 800 roles; polite beats complete
@@ -173,8 +182,10 @@ SKILLS = [
 ]
 
 
-def get(url):
-    req = urllib.request.Request(url, headers={'User-Agent': UA, 'Accept': 'application/json'})
+def get(url, headers=None):
+    h = {'User-Agent': UA, 'Accept': 'application/json'}
+    h.update(headers or {})
+    req = urllib.request.Request(url, headers=h)
     with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
         return json.loads(r.read().decode('utf-8', 'replace'))
 
@@ -262,7 +273,9 @@ def himalayas_rows(payload, now=None):
     for j in (payload.get('jobs') if isinstance(payload, dict) else None) or []:
         title = str(j.get('title') or '').strip()
         company = str(j.get('companyName') or '').strip()
-        url = str(j.get('guid') or j.get('applicationLink') or '').strip()
+        apply = str(j.get('applicationLink') or '').strip()
+        listing = str(j.get('guid') or '').strip()
+        url = apply if apply.startswith('https://himalayas.app/') else listing
         # Only ever link to Himalayas itself: that is the credit they ask for, and
         # it means a malformed or hostile feed row cannot send a buyer elsewhere.
         if not (title and company and url.startswith('https://himalayas.app/')):
@@ -290,14 +303,33 @@ def himalayas_rows(payload, now=None):
     return out
 
 
-def fetch_himalayas(fetch=None, sleep=time.sleep, now=None):
-    """-> (rows, notes). Never raises; a problem ends paging and is reported as a note."""
+def himalayas_key(env=None):
+    """-> (key or '', note or ''). Only a plain token is accepted, so nothing odd ends up in a header."""
+    raw = ((env if env is not None else os.environ).get(HIMALAYAS_KEY_ENV) or '').strip()
+    if not raw:
+        return '', ''
+    if not re.fullmatch(r'[A-Za-z0-9._~+/=-]{8,256}', raw):
+        return '', 'Himalayas: %s is set but does not look like a key; using public access' % HIMALAYAS_KEY_ENV
+    return raw, ''
+
+
+def fetch_himalayas(fetch=None, sleep=time.sleep, now=None, env=None):
+    """-> (rows, notes). Never raises; a problem ends paging and is reported as a note.
+    fetch(url, headers) returns parsed JSON; headers carry the API key when there is one."""
     fetch = fetch or get
-    rows, notes, seen = [], [], set()
-    for page in range(1, HIMALAYAS_MAX_PAGES + 1):
+    key, note = himalayas_key(env)
+    rows, notes, seen = [], ([note] if note else []), set()
+    page = 1
+    while page <= HIMALAYAS_MAX_PAGES:
+        headers = {'Authorization': 'Bearer ' + key} if key else {}
         try:
-            payload = fetch(HIMALAYAS_API % page)
+            payload = fetch(HIMALAYAS_API % page, headers)
         except urllib.error.HTTPError as e:
+            if e.code == 401 and key:
+                # Their docs: a bad key never falls back by itself. We do, once, so the list still updates.
+                notes.append('Himalayas rejected the API key (HTTP 401); check the %s secret. Carried on without it.' % HIMALAYAS_KEY_ENV)
+                key = ''
+                continue
             notes.append('Himalayas page %d: HTTP %s%s' % (page, e.code, ' (rate limited, stopped)' if e.code == 429 else ''))
             break
         except (urllib.error.URLError, ValueError, TimeoutError, OSError) as e:
@@ -312,6 +344,7 @@ def fetch_himalayas(fetch=None, sleep=time.sleep, now=None):
                 rows.append(r)
         if len(jobs) < HIMALAYAS_PAGE_SIZE:
             break
+        page += 1
         sleep(HIMALAYAS_PAUSE)
     rows.sort(key=lambda r: r['posted'], reverse=True)
     return rows[:HIMALAYAS_KEEP], notes

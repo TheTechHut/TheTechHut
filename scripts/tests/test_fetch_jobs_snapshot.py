@@ -97,17 +97,19 @@ class HimalayasFetch(unittest.TestCase):
     def page(self, n, count=20):
         return {'jobs': [job(slug='p%d-%d' % (n, i), title='Engineer %d-%d' % (n, i), days=1 + (n * 20 + i) % 20) for i in range(count)]}
 
-    def run_fetch(self, pages):
+    def run_fetch(self, pages, env=None):
         calls = []
+        self.headers = []
 
-        def fetch(url):
+        def fetch(url, headers=None):
             calls.append(url)
+            self.headers.append(dict(headers or {}))
             item = pages[len(calls) - 1] if len(calls) <= len(pages) else {'jobs': []}
             if isinstance(item, Exception):
                 raise item
             return item
         slept = []
-        out = fj.fetch_himalayas(fetch=fetch, sleep=slept.append, now=NOW)
+        out = fj.fetch_himalayas(fetch=fetch, sleep=slept.append, now=NOW, env=env or {})
         return out, calls, slept
 
     def test_pages_until_a_short_page_and_pauses_between_requests(self):
@@ -141,6 +143,44 @@ class HimalayasFetch(unittest.TestCase):
         self.assertEqual(len(r), fj.HIMALAYAS_KEEP)
         self.assertEqual(r, sorted(r, key=lambda x: x['posted'], reverse=True))
         self.assertEqual(len({x['url'] for x in r}), len(r))
+
+    def test_no_key_means_no_authorization_header(self):
+        self.run_fetch([self.page(1, 5)])
+        self.assertEqual(self.headers, [{}])
+
+    def test_a_key_is_sent_as_a_bearer_token_on_every_page(self):
+        (r, notes), calls, _ = self.run_fetch([self.page(1), self.page(2, 3)], env={'HIMALAYAS_API_KEY': 'hk_live_abc123XYZ'})
+        self.assertEqual(self.headers, [{'Authorization': 'Bearer hk_live_abc123XYZ'}] * 2)
+        self.assertEqual(notes, [])
+
+    def test_a_rejected_key_is_reported_and_the_run_carries_on_without_it(self):
+        err = urllib.error.HTTPError('u', 401, 'Unauthorized', {}, None)
+        (r, notes), calls, _ = self.run_fetch([err, self.page(1, 5)], env={'HIMALAYAS_API_KEY': 'hk_revoked_000000'})
+        self.assertEqual(len(r), 5)
+        self.assertEqual(self.headers[0], {'Authorization': 'Bearer hk_revoked_000000'})
+        self.assertEqual(self.headers[1], {})
+        self.assertIn('page=1', calls[1])                       # the same page, retried
+        self.assertTrue(any('401' in n for n in notes))
+        self.assertFalse(any('hk_revoked' in n for n in notes)) # the key is never written out
+
+    def test_a_malformed_key_is_never_put_in_a_header(self):
+        (r, notes), _, _ = self.run_fetch([self.page(1, 2)], env={'HIMALAYAS_API_KEY': 'abc\r\nX-Evil: 1'})
+        self.assertEqual(self.headers, [{}])
+        self.assertTrue(any('does not look like a key' in n for n in notes))
+
+    def test_401_without_a_key_is_just_a_note(self):
+        err = urllib.error.HTTPError('u', 401, 'Unauthorized', {}, None)
+        (r, notes), calls, _ = self.run_fetch([err])
+        self.assertEqual(len(calls), 1)
+        self.assertTrue(any('401' in n for n in notes))
+
+    def test_the_apply_link_wins_when_it_points_at_himalayas(self):
+        j = job(slug='a1')
+        j['applicationLink'] = 'https://himalayas.app/companies/acme/jobs/a1/apply'
+        self.assertEqual(rows(j)[0]['url'], 'https://himalayas.app/companies/acme/jobs/a1/apply')
+        k = job(slug='a2')
+        k['applicationLink'] = 'https://boards.greenhouse.io/acme/jobs/1'   # never send a buyer off Himalayas
+        self.assertEqual(rows(k)[0]['url'], 'https://himalayas.app/companies/acme/jobs/a2')
 
 
 class WholeRun(unittest.TestCase):
