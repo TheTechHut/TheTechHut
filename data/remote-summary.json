@@ -1,9 +1,12 @@
 {
- "updated": "2026-10-15",
- "company_count": 12,
- "role_count": 303,
- "local_role_count": 38,
- "roles_scanned": 2425,
+ "updated": "2026-10-16",
+ "company_count": 63,
+ "role_count": 383,
+ "local_role_count": 50,
+ "roles_scanned": 2518,
+ "sources": [
+  "Himalayas"
+ ],
  "companies": [
   {
    "company": "Canonical",
@@ -22,8 +25,8 @@
   {
    "company": "Supabase",
    "platform": "ashby",
-   "eligible": 32,
-   "total": 53,
+   "eligible": 33,
+   "total": 54,
    "locations": [
     "Remote, Global",
     "Remote, EMEA"
@@ -32,8 +35,8 @@
   {
    "company": "Oyster",
    "platform": "ashby",
-   "eligible": 14,
-   "total": 24,
+   "eligible": 13,
+   "total": 22,
    "locations": [
     "EMEA"
    ]
@@ -53,12 +56,30 @@
    ]
   },
   {
+   "company": "Tether Operations Limited",
+   "platform": "himalayas",
+   "eligible": 7,
+   "total": 7,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
    "company": "Railway",
    "platform": "ashby",
    "eligible": 6,
-   "total": 8,
+   "total": 7,
    "locations": [
     "Global"
+   ]
+  },
+  {
+   "company": "micro1",
+   "platform": "himalayas",
+   "eligible": 6,
+   "total": 6,
+   "locations": [
+    "Worldwide"
    ]
   },
   {
@@ -73,19 +94,118 @@
    ]
   },
   {
+   "company": "Zup",
+   "platform": "himalayas",
+   "eligible": 4,
+   "total": 4,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "G2i",
+   "platform": "himalayas",
+   "eligible": 4,
+   "total": 4,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Xperteez Technology",
+   "platform": "himalayas",
+   "eligible": 4,
+   "total": 4,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Deed",
+   "platform": "himalayas",
+   "eligible": 3,
+   "total": 3,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
    "company": "PostHog",
+   "platform": "ashby",
+   "eligible": 2,
+   "total": 10,
+   "locations": [
+    "Remote (EMEA)"
+   ]
+  },
+  {
+   "company": "Zapier",
    "platform": "ashby",
    "eligible": 2,
    "total": 11,
    "locations": [
-    "Remote (EMEA)"
+    "EMEA"
+   ]
+  },
+  {
+   "company": "Yellow Card",
+   "platform": "himalayas",
+   "eligible": 2,
+   "total": 2,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "knowmad mood",
+   "platform": "himalayas",
+   "eligible": 2,
+   "total": 2,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "AlmavivA de Belgique",
+   "platform": "himalayas",
+   "eligible": 2,
+   "total": 2,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Tiugo Technologies",
+   "platform": "himalayas",
+   "eligible": 2,
+   "total": 2,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Spotter Labs",
+   "platform": "himalayas",
+   "eligible": 2,
+   "total": 2,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "ClanX",
+   "platform": "himalayas",
+   "eligible": 2,
+   "total": 2,
+   "locations": [
+    "Worldwide"
    ]
   },
   {
    "company": "GitLab",
    "platform": "greenhouse",
    "eligible": 1,
-   "total": 217,
+   "total": 221,
    "locations": [
     "Remote, EMEA; Remote, France; Remote, Germany; Remote, Ireland; Remote, Netherlands; Remote, United Kingdom"
    ]
@@ -103,7 +223,7 @@
    "company": "Turing",
    "platform": "greenhouse",
    "eligible": 1,
-   "total": 28,
+   "total": 29,
    "locations": [
     "Global - Remote"
    ]
@@ -124,6 +244,348 @@
    "total": 194,
    "locations": [
     "Global"
+   ]
+  },
+  {
+   "company": "Builders FirstSource",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "OpsBrasil Servi\u00e7os Cloud LTDA",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Correlation One",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "cbs Corporate Business Solutions",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "DriveSavers Data Recovery",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "INDG",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Clera",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Defuse Labs",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Muse Group",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "vCluster Labs",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Bold",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Xsens",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "MGID",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Phizenix",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Addepto",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "NextAlpha (Nu Dawn)",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Holiday World",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Mimidentalclinic",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "TestYantra Software Solutions",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "EVB",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Hard Rock Digital",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Clario",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Thoropass",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "MAT Research",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "shopware AG",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Chasi",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "My Own Staff",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Victron Energy B.V.",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Draftboard",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Agencyhires",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Levelup Labs",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Scentbird",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Codest Ltd. Company No. 12590542, VAT number: GB363431020",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Cambium Learning Group",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "CrazyGames",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Distribusion Technologies GmbH",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Pontoonglobal",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Infomediji",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
    ]
   }
  ]
