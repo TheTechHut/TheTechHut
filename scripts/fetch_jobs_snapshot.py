@@ -134,6 +134,10 @@ PROBATION = [
 # never printed. A rejected key (HTTP 401) is reported in the notes and the run
 # carries on without it. Their API terms also say every Apply action must use the
 # API's applicationLink, so that is the link we keep when it points at Himalayas.
+#
+# Permission: in October 2026 Jack at Himalayas confirmed by email that listing
+# a capped set of their tech roles, credited and linked back, in the paid
+# Remote-from-Kenya list is fine under their API terms. Keep that email.
 HIMALAYAS_KEY_ENV = 'HIMALAYAS_API_KEY'
 HIMALAYAS_API = 'https://himalayas.app/jobs/api/search?country=KE&limit=20&page=%d'
 HIMALAYAS_PAGE_SIZE = 20
