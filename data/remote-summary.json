@@ -1,9 +1,9 @@
 {
- "updated": "2026-10-18",
- "company_count": 140,
- "role_count": 590,
- "local_role_count": 54,
- "roles_scanned": 2742,
+ "updated": "2026-10-19",
+ "company_count": 129,
+ "role_count": 592,
+ "local_role_count": 53,
+ "roles_scanned": 2750,
  "sources": [
   "Himalayas"
  ],
@@ -23,6 +23,15 @@
    ]
   },
   {
+   "company": "EWOR GmbH",
+   "platform": "himalayas",
+   "eligible": 42,
+   "total": 42,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
    "company": "Supabase",
    "platform": "ashby",
    "eligible": 34,
@@ -33,10 +42,10 @@
    ]
   },
   {
-   "company": "EWOR GmbH",
+   "company": "micro1",
    "platform": "himalayas",
-   "eligible": 30,
-   "total": 30,
+   "eligible": 20,
+   "total": 20,
    "locations": [
     "Worldwide"
    ]
@@ -44,17 +53,8 @@
   {
    "company": "Xperteez Technology",
    "platform": "himalayas",
-   "eligible": 21,
-   "total": 22,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "micro1",
-   "platform": "himalayas",
-   "eligible": 19,
-   "total": 19,
+   "eligible": 16,
+   "total": 17,
    "locations": [
     "Worldwide"
    ]
@@ -67,6 +67,15 @@
    "locations": [
     "EMEA",
     "Global"
+   ]
+  },
+  {
+   "company": "Ready",
+   "platform": "himalayas",
+   "eligible": 13,
+   "total": 13,
+   "locations": [
+    "Worldwide"
    ]
   },
   {
@@ -93,16 +102,7 @@
    ]
   },
   {
-   "company": "Deed",
-   "platform": "himalayas",
-   "eligible": 8,
-   "total": 8,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Ready",
+   "company": "Clera",
    "platform": "himalayas",
    "eligible": 7,
    "total": 7,
@@ -111,7 +111,7 @@
    ]
   },
   {
-   "company": "Clera",
+   "company": "Deed",
    "platform": "himalayas",
    "eligible": 7,
    "total": 7,
@@ -129,6 +129,15 @@
    ]
   },
   {
+   "company": "inovex GmbH",
+   "platform": "himalayas",
+   "eligible": 6,
+   "total": 6,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
    "company": "Utility",
    "platform": "himalayas",
    "eligible": 6,
@@ -138,7 +147,7 @@
    ]
   },
   {
-   "company": "Pontoonglobal",
+   "company": "Bridges for Enterprise",
    "platform": "himalayas",
    "eligible": 5,
    "total": 5,
@@ -203,25 +212,25 @@
    ]
   },
   {
-   "company": "Emetlab",
+   "company": "Levelup Labs",
    "platform": "himalayas",
-   "eligible": 4,
-   "total": 4,
+   "eligible": 3,
+   "total": 3,
    "locations": [
     "Worldwide"
    ]
   },
   {
-   "company": "OpenZeppelin",
+   "company": "Perena",
    "platform": "himalayas",
-   "eligible": 4,
-   "total": 4,
+   "eligible": 3,
+   "total": 3,
    "locations": [
     "Worldwide"
    ]
   },
   {
-   "company": "Bridges for Enterprise",
+   "company": "Growe Talents",
    "platform": "himalayas",
    "eligible": 3,
    "total": 3,
@@ -248,7 +257,7 @@
    ]
   },
   {
-   "company": "MENA Consultant",
+   "company": "Emetlab",
    "platform": "himalayas",
    "eligible": 3,
    "total": 3,
@@ -257,7 +266,7 @@
    ]
   },
   {
-   "company": "Radian Arc",
+   "company": "MENA Consultant",
    "platform": "himalayas",
    "eligible": 3,
    "total": 3,
@@ -284,6 +293,33 @@
    ]
   },
   {
+   "company": "Banco Plata, S.A., Instituci\u00f3n de Banca M\u00faltiple",
+   "platform": "himalayas",
+   "eligible": 2,
+   "total": 2,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Tiny",
+   "platform": "himalayas",
+   "eligible": 2,
+   "total": 2,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Enjoy Gaming LLC",
+   "platform": "himalayas",
+   "eligible": 2,
+   "total": 2,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
    "company": "GoFasti",
    "platform": "himalayas",
    "eligible": 2,
@@ -293,34 +329,7 @@
    ]
   },
   {
-   "company": "inovex GmbH",
-   "platform": "himalayas",
-   "eligible": 2,
-   "total": 2,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Perena",
-   "platform": "himalayas",
-   "eligible": 2,
-   "total": 2,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
    "company": "Pivotree",
-   "platform": "himalayas",
-   "eligible": 2,
-   "total": 2,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Solution Community",
    "platform": "himalayas",
    "eligible": 2,
    "total": 2,
@@ -410,25 +419,7 @@
    ]
   },
   {
-   "company": "Levelup Labs",
-   "platform": "himalayas",
-   "eligible": 2,
-   "total": 2,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Growe Talents",
-   "platform": "himalayas",
-   "eligible": 2,
-   "total": 2,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Talent Journey",
+   "company": "Pontoonglobal",
    "platform": "himalayas",
    "eligible": 2,
    "total": 2,
@@ -446,16 +437,7 @@
    ]
   },
   {
-   "company": "GitStart",
-   "platform": "himalayas",
-   "eligible": 2,
-   "total": 2,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Aftershoot",
+   "company": "Radian Arc",
    "platform": "himalayas",
    "eligible": 2,
    "total": 2,
@@ -485,13 +467,13 @@
    "company": "Sun King",
    "platform": "pinpoint",
    "eligible": 1,
-   "total": 194,
+   "total": 197,
    "locations": [
     "Global"
    ]
   },
   {
-   "company": "Logos",
+   "company": "Resilio Partners",
    "platform": "himalayas",
    "eligible": 1,
    "total": 1,
@@ -500,7 +482,43 @@
    ]
   },
   {
-   "company": "Tiny",
+   "company": "KOMBO medical solutions UG",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Sword Health",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Brainlyne",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "primion Technology GmbH",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Logos",
    "platform": "himalayas",
    "eligible": 1,
    "total": 1,
@@ -608,15 +626,6 @@
    ]
   },
   {
-   "company": "Enjoy Gaming LLC",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
    "company": "Payforge",
    "platform": "himalayas",
    "eligible": 1,
@@ -671,6 +680,15 @@
    ]
   },
   {
+   "company": "Solution Community",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
    "company": "Flowai",
    "platform": "himalayas",
    "eligible": 1,
@@ -701,7 +719,7 @@
    "company": "Mozilla",
    "platform": "himalayas",
    "eligible": 1,
-   "total": 99,
+   "total": 97,
    "locations": [
     "Worldwide"
    ]
@@ -1158,123 +1176,6 @@
   },
   {
    "company": "Gusti Leder GmbH",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "TCCA",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Jivpad",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Leadex Systems",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Wellcove CHCS Services",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Super Technologies",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "VuMedi",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Kargo",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "SE Ranking",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Cordia LLC",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Alphorm",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Stackmeister Jobs",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "refurbed",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Cority",
    "platform": "himalayas",
    "eligible": 1,
    "total": 1,
