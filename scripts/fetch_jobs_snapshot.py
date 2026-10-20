@@ -48,8 +48,9 @@ Himalayas  An aggregator with a free public JSON API that asks for credit and a
            (whose promise is "links go to the employer's own page"), and a
            problem there is a note, not a failure.
 
-Remote.co and CareerHound are deliberately not sources: their terms forbid
-scraping and building a competing list from their listings.
+Remote.co, CareerHound and FlexJobs are deliberately not sources: their terms
+forbid scraping and building a competing list from their listings. FlexJobs is
+linked from /jobs/ instead.
 Boards hosted on jobs.deel.com (Deel's ATS) are not read either, even where
 robots.txt allows it: Deel's Prohibited Uses (deel.com/legal) forbid robots,
 spiders and crawlers collecting data from any Deel website. Employers on Deel,
