@@ -36,6 +36,41 @@ def rows(*jobs):
     return fj.himalayas_rows({'jobs': list(jobs)}, NOW)
 
 
+
+class NewPlatformRowsTest(unittest.TestCase):
+    def test_smartrecruiters(self):
+        payload = {'content': [
+            {'id': '744', 'name': 'Data Engineer', 'releasedDate': '2026-10-20T10:19:51Z',
+             'company': {'identifier': 'StandardBankGroup'},
+             'location': {'fullLocation': 'Nairobi, Kenya', 'remote': False}},
+            {'id': '745', 'name': 'SRE', 'company': {'identifier': 'StandardBankGroup'},
+             'location': {'city': 'Lagos', 'country': 'ng', 'remote': True}},
+            {'id': '746', 'name': '', 'company': {'identifier': 'StandardBankGroup'}, 'location': {}},
+        ]}
+        rows = fj.rows_from('smartrecruiters', payload)
+        self.assertEqual(rows[0], ('Data Engineer', 'Nairobi, Kenya',
+                                   'https://jobs.smartrecruiters.com/StandardBankGroup/744', '2026-10-20T10:19:51Z'))
+        self.assertEqual(rows[1][1], 'Remote, Lagos, ng')
+        self.assertEqual(len(rows), 2)
+        self.assertEqual(fj.classify(rows[0][1]), 'local')
+
+    def test_workable(self):
+        payload = {'jobs': [
+            {'title': 'IT Officer', 'city': 'Kigali', 'country': 'Rwanda', 'telecommuting': False,
+             'url': 'https://apply.workable.com/j/ABC', 'published_on': '2026-09-28'},
+            {'title': 'Analyst', 'city': '', 'country': '', 'telecommuting': True,
+             'shortlink': 'https://apply.workable.com/j/DEF', 'created_at': '2026-09-01'},
+        ]}
+        rows = fj.rows_from('workable', payload)
+        self.assertEqual(rows[0], ('IT Officer', 'Kigali, Rwanda', 'https://apply.workable.com/j/ABC', '2026-09-28'))
+        self.assertEqual(rows[1], ('Analyst', 'Remote', 'https://apply.workable.com/j/DEF', '2026-09-01'))
+
+    def test_feed_urls(self):
+        self.assertEqual(fj.feed_url('smartrecruiters', 'StandardBankGroup'),
+                         'https://api.smartrecruiters.com/v1/companies/StandardBankGroup/postings?limit=100')
+        self.assertEqual(fj.feed_url('workable', 'afreximbank'),
+                         'https://apply.workable.com/api/v1/widget/accounts/afreximbank')
+
 class HimalayasRows(unittest.TestCase):
     def test_worldwide_tech_role_is_kept_and_credited(self):
         r = rows(job())

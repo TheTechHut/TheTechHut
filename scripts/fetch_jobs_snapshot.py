@@ -123,6 +123,8 @@ PROBATION = [
     ('Deel',                 'ashby',      'deel'),
     ('Zapier',               'ashby',      'zapier'),
     ('Wave',                 'lever',      'wave'),
+    ('Standard Bank Group',  'smartrecruiters', 'StandardBankGroup'),   # includes Stanbic
+    ('Afreximbank',          'workable',   'afreximbank'),
 ]
 
 # ---- Himalayas -----------------------------------------------------------
@@ -206,6 +208,8 @@ def feed_url(platform, slug):
         'lever':      'https://api.lever.co/v0/postings/%s?mode=json' % slug,
         'ashby':      'https://api.ashbyhq.com/posting-api/job-board/%s' % slug,
         'pinpoint':   'https://%s.pinpointhq.com/postings.json' % slug,
+        'smartrecruiters': 'https://api.smartrecruiters.com/v1/companies/%s/postings?limit=100' % slug,
+        'workable':   'https://apply.workable.com/api/v1/widget/accounts/%s' % slug,
     }[platform]
 
 
@@ -231,6 +235,23 @@ def rows_from(platform, payload):
             if isinstance(loc, dict):
                 loc = loc.get('name') or loc.get('city') or ''
             out.append((j.get('title', ''), loc, j.get('url', ''), j.get('created_at', '')))
+    elif platform == 'smartrecruiters':
+        for j in payload.get('content', []):
+            loc = j.get('location') or {}
+            place = loc.get('fullLocation') or ', '.join(x for x in (loc.get('city'), loc.get('country')) if x)
+            place = re.sub(r'(,\s*)+,', ',', place)
+            if loc.get('remote'):
+                place = 'Remote, ' + place if place else 'Remote'
+            company = (j.get('company') or {}).get('identifier', '')
+            url = 'https://jobs.smartrecruiters.com/%s/%s' % (company, j.get('id')) if company and j.get('id') else ''
+            out.append((j.get('name', ''), place, url, j.get('releasedDate', '')))
+    elif platform == 'workable':
+        for j in payload.get('jobs', []):
+            place = ', '.join(x for x in (j.get('city'), j.get('country')) if x)
+            if j.get('telecommuting'):
+                place = 'Remote, ' + place if place else 'Remote'
+            out.append((j.get('title', ''), place, j.get('url') or j.get('shortlink', ''),
+                        j.get('published_on') or j.get('created_at', '')))
     return [(t, (l or '').strip(), u, p) for t, l, u, p in out if t]
 
 

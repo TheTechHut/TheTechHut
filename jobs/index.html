@@ -80,6 +80,11 @@
     .direct a { display: block; padding: 9px 0; color: var(--ink); text-decoration: none; font-family: var(--serif); font-weight: 600; font-size: 17px; line-height: 1.3; }
     .direct a:hover { text-decoration: underline; }
     .direct a span { display: block; font-family: var(--sans); font-weight: 400; font-size: 14px; color: var(--dim); margin-top: 2px; }
+    .direct h3, .direct summary { font-family: var(--mono); font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; color: var(--green); margin: 18px 0 6px; }
+    .direct summary { cursor: pointer; padding: 4px 0; }
+    .direct summary:hover { color: var(--ink); }
+    .direct details[open] summary { margin-bottom: 6px; }
+    .direct p.also { font-size: 14px; color: var(--muted); line-height: 1.5; margin: 14px 0 0; }
     .promo { border-top: 4px solid var(--mint); padding-top: 12px; margin-top: 34px; }
     .promo p { font-size: 15px; color: var(--text); line-height: 1.5; margin: 0 0 14px; }
     .promo a.go { display: block; text-align: center; font-weight: 700; font-size: 15px; line-height: 1.25; padding: 11px 14px;
@@ -224,16 +229,64 @@
         <h2>Employers hiring directly</h2>
         <p>These employers run recruitment systems we can&rsquo;t read automatically. Their openings
            are not in the list above &mdash; check their own portals.</p>
+        <h3>Banks in Kenya</h3>
+        <ul>
+          <li><a href="https://eoin.fa.em3.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_3001/jobs" target="_blank" rel="noopener">
+            KCB Group <span>Oracle candidate portal</span></a></li>
+          <li><a href="https://equitybank.taleo.net/careersection/ext_new/jobsearch.ftl" target="_blank" rel="noopener">
+            Equity Bank <span>Taleo job search</span></a></li>
+          <li><a href="https://ncbagroup.com/careers/join-our-team/" target="_blank" rel="noopener">
+            NCBA <span>Open roles across its markets</span></a></li>
+          <li><a href="https://www.co-opbank.co.ke/career_tax/co-op-bank/" target="_blank" rel="noopener">
+            Co-operative Bank <span>Current vacancies</span></a></li>
+          <li><a href="https://absa.wd3.myworkdayjobs.com/ABSAcareersite" target="_blank" rel="noopener">
+            Absa Bank Kenya <span>Workday portal for every Absa market</span></a></li>
+          <li><a href="https://jobs.standardchartered.com/" target="_blank" rel="noopener">
+            Standard Chartered <span>Global job search; filter for Kenya</span></a></li>
+          <li><a href="https://imbank.myadrenalin.com/CANDMICROSITE/#/" target="_blank" rel="noopener">
+            I&amp;M Bank <span>Candidate portal</span></a></li>
+          <li><a href="https://dtbk.dtbafrica.com/careers" target="_blank" rel="noopener">
+            Diamond Trust Bank <span>Kenya careers page</span></a></li>
+          <li><a href="https://familybank.co.ke/?page_id=2696" target="_blank" rel="noopener">
+            Family Bank <span>Careers page</span></a></li>
+        </ul>
+        <h3>Other employers in Kenya</h3>
         <ul>
           <li><a href="https://egjd.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX/jobs" target="_blank" rel="noopener">
             Safaricom <span>Oracle candidate portal</span></a></li>
-          <li><a href="https://watu.com/corporate/careers/#work-at-watu" target="_blank" rel="noopener">
-            Watu <span>Group careers &mdash; Kenya and 8 other markets</span></a></li>
           <li><a href="https://britam.taleo.net/careersection/ke/jobsearch.ftl?lang=en" target="_blank" rel="noopener">
             Britam <span>Kenya job search</span></a></li>
+          <li><a href="https://watu.com/corporate/careers/#work-at-watu" target="_blank" rel="noopener">
+            Watu <span>Group careers &mdash; Kenya and 8 other markets</span></a></li>
+          <li><a href="https://careers.zetech.ac.ke/index.php?mod=vacancies" target="_blank" rel="noopener">
+            Zetech University <span>Academic and staff vacancies</span></a></li>
           <li><a href="https://jobs.deel.com/4a9f4504-6058-403a-9cb7-5dc27b7fe85b-1789634936748" target="_blank" rel="noopener">
             Accelera Digital Group <span>Engineering, data and AI roles; Nairobi among the hybrid locations</span></a></li>
         </ul>
+        <details>
+          <summary>Banks across Africa</summary>
+          <ul>
+            <li><a href="https://firstrand.wd3.myworkdayjobs.com/en-US/FRB/jobs" target="_blank" rel="noopener">
+            FirstRand / FNB <span>South Africa and its other markets</span></a></li>
+            <li><a href="https://jobs.nedbank.co.za/search/" target="_blank" rel="noopener">
+            Nedbank <span>Now NCBA&rsquo;s parent; mostly South Africa</span></a></li>
+            <li><a href="https://careers.capitecbank.co.za/search/" target="_blank" rel="noopener">
+            Capitec <span>South Africa</span></a></li>
+            <li><a href="https://fa-emqf-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1004" target="_blank" rel="noopener">
+            Ecobank <span>Oracle portal, 30+ African markets</span></a></li>
+            <li><a href="https://careers.accessbankplc.com/jobs" target="_blank" rel="noopener">
+            Access Bank <span>Nigeria and its African subsidiaries</span></a></li>
+            <li><a href="https://gtcoplc.zohorecruit.com/jobs/Careers" target="_blank" rel="noopener">
+            GTCO <span>Guaranty Trust Holding Company</span></a></li>
+            <li><a href="https://www.firstbanknigeria.com/home/careers/jobs/" target="_blank" rel="noopener">
+            First Bank of Nigeria <span>Careers page</span></a></li>
+            <li><a href="https://careers.crdbbank.co.tz/jobs" target="_blank" rel="noopener">
+            CRDB Bank <span>Tanzania</span></a></li>
+            <li><a href="https://recrutement.attijariwafa.com/" target="_blank" rel="noopener">
+            Attijariwafa Bank <span>Morocco and its African network</span></a></li>
+          </ul>
+        </details>
+        <p class="also">Standard Bank Group (Stanbic) and Afreximbank publish open job feeds, so their roles are in the list above.</p>
       </div>
 
       <div class="promo">
@@ -276,7 +329,7 @@
   <a href="https://jobicy.com/" target="_blank" rel="noopener">Jobicy</a>,
   <a href="https://remoteok.com/" target="_blank" rel="noopener">Remote OK</a>, and the public job-board
   APIs of employers hiring into Kenya &mdash; Sun King, M-KOPA, One Acre Fund,
-  Andela, GiveDirectly, ACRE Africa, Jumia, Moniepoint, Tala, Apollo Agriculture, Zipline and Canonical.
+  Andela, GiveDirectly, ACRE Africa, Jumia, Moniepoint, Standard Bank Group, Afreximbank, Tala, Apollo Agriculture, Zipline and Canonical.
   Every apply button opens the original posting on the source site — The Tech Hut does not host applications
   and is not the employer. Always verify a role before sharing personal details; never pay to apply.
 </p>
@@ -373,8 +426,8 @@
   // classified on the job TITLE only, in three tiers: strong tech wins outright,
   // an explicit non-tech word rules a role out, otherwise a looser tech match decides.
   var STRONG = /(developer|engineer|engineering|software|programmer|devops|\bsre\b|full.?stack|front.?end|back.?end|data scien|data analyst|data engineer|machine learning|\bml\b|\bai\b|cyber ?security|infosec|\bqa\b|\bux\b|\bui\b|product design|product manager|web design|technical writer|solutions architect|cloud|database|sysadmin|system administrator|network admin|it support|help ?desk|scrum|technical support)/i;
-  var NONTECH = /(maintenance|janitor|cleaner|housekeep|store manager|retail|cashier|barista|waiter|waitress|chef|cook|nurse|caregiver|therapist|driver|delivery|warehouse|forklift|teacher|tutor|babysit|nanny|landscap|plumb|electrician|carpent|welder|mechanic|security guard|receptionist|dog |groom)/i;
-  var TECH = /(develop|engineer|software|front.?end|back.?end|full.?stack|data|devops|cloud|security|mobile|ios|android|python|javascript|typescript|react|node|java|golang|rust|ruby|php|design|\bui\b|\bux\b|product|\bqa\b|machine.?learning|\bai\b|\bml\b|analyst|architect|sre|platform|\bapi\b|database|sql|\bit\b|cyber|scrum|webflow|wordpress)/i;
+  var NONTECH = /(maintenance|janitor|cleaner|housekeep|store manager|retail|cashier|barista|waiter|waitress|chef|cook|nurse|caregiver|therapist|driver|delivery|warehouse|forklift|teacher|tutor|babysit|nanny|landscap|plumb|electrician|carpent|welder|mechanic|security guard|receptionist|dog |groom|business development|relationship manager)/i;
+  var TECH = /(develop|engineer|software|front.?end|back.?end|full.?stack|data|devops|cloud|security|mobile|\bios\b|android|python|javascript|typescript|react|node|\bjava\b|golang|\brust\b|\bruby\b|php|design|\bui\b|\bux\b|product|\bqa\b|machine.?learning|\bai\b|\bml\b|analyst|architect|sre|platform|\bapi\b|database|sql|\bit\b|cyber|scrum|webflow|wordpress)/i;
   function isTechRole(title) {
     if (STRONG.test(title)) return true;
     if (NONTECH.test(title)) return false;
@@ -382,7 +435,7 @@
   }
   // Where is the role? Kenya first, then the rest of Africa, then anywhere-remote.
   var KE = /(kenya|nairobi|mombasa|kisumu|eldoret|nakuru|nyeri|kakamega|thika|machakos|kilifi|rukanga|sagana|naivasha|malindi)/i;
-  var AF = /(africa|nigeria|lagos|abuja|oyo|ilorin|ghana|accra|uganda|kampala|tanzania|dar es|rwanda|kigali|ethiopia|addis|egypt|cairo|johannesburg|cape town|senegal|dakar|ivory coast|abidjan|zambia|malawi|morocco|benin|togo|zimbabwe|botswana)/i;
+  var AF = /(africa|angola|luanda|namibia|windhoek|mozambique|maputo|mauritius|lesotho|eswatini|madagascar|south sudan|somalia|burundi|congo|kinshasa|cameroon|tunisia|algeria|nigeria|lagos|abuja|oyo|ilorin|ghana|accra|uganda|kampala|tanzania|dar es|rwanda|kigali|ethiopia|addis|egypt|cairo|johannesburg|cape town|senegal|dakar|ivory coast|abidjan|zambia|malawi|morocco|benin|togo|zimbabwe|botswana)/i;
   var RM = /(remote|anywhere|worldwide|distributed|global)/i;
   var REGION_RANK = { 'Kenya': 0, 'Rest of Africa': 1, 'Remote': 2, 'Elsewhere': 3 };
   function regionOf(loc) {
@@ -465,6 +518,10 @@
     // Moniepoint's board lives on Greenhouse's EU host (job-boards.eu.greenhouse.io),
     // but the public API at boards-api.greenhouse.io serves it like any other board.
     { name: 'Moniepoint',        ats: 'greenhouse', slug: 'moniepoint' },
+    // SmartRecruiters' Posting API and Workable's job widget API are public, documented
+    // and CORS-enabled, like the ATS feeds above. Standard Bank's list includes Stanbic.
+    { name: 'Standard Bank Group', ats: 'smartrecruiters', slug: 'StandardBankGroup' },
+    { name: 'Afreximbank',       ats: 'workable',   slug: 'afreximbank' },
     // WordPress careers pages: posts in a named category, read through the site's
     // own public REST API. `site` is the host, `cat` the category id
     // (find it at /wp-json/wp/v2/categories?search=careers).
@@ -541,6 +598,46 @@
       };
     });
   }
+  function fromSmartRecruiters(d, co) {
+    return (d && d.content || []).map(function (j) {
+      var loc = j.location || {};
+      var place = clean(loc.fullLocation || [loc.city, loc.country].filter(Boolean).join(', ')).replace(/(,\s*)+,/g, ',');
+      if (loc.remote) place = place ? 'Remote, ' + place : 'Remote';
+      var slug = (j.company && j.company.identifier) || co.slug;
+      return {
+        id: 'sr-' + co.slug + '-' + j.id,
+        title: clean(j.name),
+        company: co.name,
+        logo: '',
+        location: place || 'Not stated',
+        types: j.typeOfEmployment && j.typeOfEmployment.label ? [clean(j.typeOfEmployment.label)] : [],
+        cats: [catFromTitle(clean(j.name))], level: '',
+        excerpt: '',
+        url: safeUrl('https://jobs.smartrecruiters.com/' + encodeURIComponent(slug) + '/' + encodeURIComponent(j.id)),
+        date: j.releasedDate || '',
+        source: co.name
+      };
+    });
+  }
+  function fromWorkable(d, co) {
+    return (d && d.jobs || []).map(function (j) {
+      var place = [j.city, j.country].filter(Boolean).join(', ');
+      if (j.telecommuting) place = place ? 'Remote, ' + place : 'Remote';
+      return {
+        id: 'wk-' + co.slug + '-' + (j.shortcode || j.title),
+        title: clean(j.title),
+        company: co.name,
+        logo: '',
+        location: clean(place) || 'Not stated',
+        types: j.employment_type ? [clean(j.employment_type)] : [],
+        cats: [catFromTitle(clean(j.title))], level: '',
+        excerpt: '',
+        url: safeUrl(j.url || j.shortlink),
+        date: j.published_on || j.created_at || '',
+        source: co.name
+      };
+    });
+  }
   // WordPress posts never expire the way an ATS requisition does, so anything
   // older than MAX_POST_AGE days is treated as a closed role and dropped.
   var MAX_POST_AGE = 120;
@@ -572,6 +669,8 @@
     var url = co.ats === 'greenhouse' ? 'https://boards-api.greenhouse.io/v1/boards/' + co.slug + '/jobs'
             : co.ats === 'lever'      ? 'https://api.lever.co/v0/postings/' + co.slug + '?mode=json'
             : co.ats === 'pinpoint'   ? 'https://' + co.slug + '.pinpointhq.com/postings.json'
+            : co.ats === 'smartrecruiters' ? 'https://api.smartrecruiters.com/v1/companies/' + co.slug + '/postings?limit=100'
+            : co.ats === 'workable'   ? 'https://apply.workable.com/api/v1/widget/accounts/' + co.slug
             : co.ats === 'wordpress'  ? 'https://' + co.site + '/wp-json/wp/v2/posts?categories=' + co.cat +
                                         '&per_page=20&_fields=id,date,modified,link,title,excerpt'
             :                           'https://api.ashbyhq.com/posting-api/job-board/' + co.slug;
@@ -580,6 +679,8 @@
       var jobs = co.ats === 'greenhouse' ? fromGreenhouse(d, co)
                : co.ats === 'lever'      ? fromLever(d, co)
                : co.ats === 'pinpoint'   ? fromPinpoint(d, co)
+               : co.ats === 'smartrecruiters' ? fromSmartRecruiters(d, co)
+               : co.ats === 'workable'   ? fromWorkable(d, co)
                : co.ats === 'wordpress'  ? fromWordPress(d, co)
                :                           fromAshby(d, co);
       jobs = jobs.filter(function (j) { return j.title && j.url && isTechRole(j.title); });
