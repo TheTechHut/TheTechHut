@@ -50,6 +50,11 @@ Himalayas  An aggregator with a free public JSON API that asks for credit and a
 
 Remote.co and CareerHound are deliberately not sources: their terms forbid
 scraping and building a competing list from their listings.
+Boards hosted on jobs.deel.com (Deel's ATS) are not read either, even where
+robots.txt allows it: Deel's Prohibited Uses (deel.com/legal) forbid robots,
+spiders and crawlers collecting data from any Deel website. Employers on Deel,
+such as Accelera Digital Group, are linked from /jobs/ under "Employers hiring
+directly" instead.
 
 Why "eligible" is narrow
 ------------------------
@@ -99,6 +104,7 @@ FEEDS = [
     ('Cockroach Labs',     'greenhouse', 'cockroachlabs'),
     ('ConsenSys',          'greenhouse', 'consensys'),
     ('Turing',             'greenhouse', 'turing'),
+    ('Moniepoint',         'greenhouse', 'moniepoint'),   # EU-hosted board, same public API
     ('Tala',               'lever',      'tala'),
     ('Apollo Agriculture', 'lever',      'apolloagriculture'),
     ('Supabase',           'ashby',      'supabase'),
