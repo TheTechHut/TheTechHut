@@ -65,6 +65,24 @@ class NewPlatformRowsTest(unittest.TestCase):
         self.assertEqual(rows[0], ('IT Officer', 'Kigali, Rwanda', 'https://apply.workable.com/j/ABC', '2026-09-28'))
         self.assertEqual(rows[1], ('Analyst', 'Remote', 'https://apply.workable.com/j/DEF', '2026-09-01'))
 
+    def test_breezy(self):
+        payload = [
+            {'name': 'Actuarial Associate', 'url': 'https://turaco.breezy.hr/p/5a7-actuarial-associate',
+             'published_date': '2026-10-09T07:04:03.547Z',
+             'location': {'city': 'Nairobi', 'country': {'name': 'Kenya', 'id': 'KE'}, 'name': 'Nairobi, KE', 'is_remote': False}},
+            {'name': 'Transport Specialist', 'url': 'https://gozem.breezy.hr/p/1-transport',
+             'published_date': '2026-10-01T00:00:00Z',
+             'location': {'name': 'Cotonou, BJ', 'is_remote': True}},
+            {'name': '', 'url': 'https://x.breezy.hr/p/2', 'location': {}},
+        ]
+        rows = fj.rows_from('breezy', payload)
+        self.assertEqual(rows[0], ('Actuarial Associate', 'Nairobi, Kenya',
+                                   'https://turaco.breezy.hr/p/5a7-actuarial-associate', '2026-10-09T07:04:03.547Z'))
+        self.assertEqual(rows[1][1], 'Remote, Cotonou, BJ')
+        self.assertEqual(len(rows), 2)
+        self.assertEqual(fj.rows_from('breezy', {'not': 'a list'}), [])
+        self.assertEqual(fj.feed_url('breezy', 'turaco'), 'https://turaco.breezy.hr/json')
+
     def test_feed_urls(self):
         self.assertEqual(fj.feed_url('smartrecruiters', 'StandardBankGroup'),
                          'https://api.smartrecruiters.com/v1/companies/StandardBankGroup/postings?limit=100')

@@ -81,7 +81,11 @@
     .direct a:hover { text-decoration: underline; }
     .direct a span { display: block; font-family: var(--sans); font-weight: 400; font-size: 14px; color: var(--dim); margin-top: 2px; }
     .direct h3, .direct summary { font-family: var(--mono); font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; color: var(--green); margin: 18px 0 6px; }
-    .direct summary { cursor: pointer; padding: 4px 0; }
+    .direct details { border-top: 1px solid var(--rule); }
+    .direct details:last-of-type { border-bottom: 1px solid var(--rule); }
+    .direct summary { cursor: pointer; padding: 10px 0; margin: 0; }
+    .direct summary .n { color: var(--dim); margin-left: 4px; }
+    .direct details ul { margin-bottom: 8px; }
     .direct summary:hover { color: var(--ink); }
     .direct details[open] summary { margin-bottom: 6px; }
     .direct p.also { font-size: 14px; color: var(--muted); line-height: 1.5; margin: 14px 0 0; }
@@ -239,64 +243,168 @@
         <h2>Employers hiring directly</h2>
         <p>These employers run recruitment systems we can&rsquo;t read automatically. Their openings
            are not in the list above &mdash; check their own portals.</p>
-        <h3>Banks in Kenya</h3>
-        <ul>
-          <li><a href="https://eoin.fa.em3.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_3001/jobs" target="_blank" rel="noopener">
-            KCB Group <span>Oracle candidate portal</span></a></li>
-          <li><a href="https://equitybank.taleo.net/careersection/ext_new/jobsearch.ftl" target="_blank" rel="noopener">
-            Equity Bank <span>Taleo job search</span></a></li>
-          <li><a href="https://ncbagroup.com/careers/join-our-team/" target="_blank" rel="noopener">
-            NCBA <span>Open roles across its markets</span></a></li>
-          <li><a href="https://www.co-opbank.co.ke/career_tax/co-op-bank/" target="_blank" rel="noopener">
-            Co-operative Bank <span>Current vacancies</span></a></li>
-          <li><a href="https://absa.wd3.myworkdayjobs.com/ABSAcareersite" target="_blank" rel="noopener">
-            Absa Bank Kenya <span>Workday portal for every Absa market</span></a></li>
-          <li><a href="https://jobs.standardchartered.com/" target="_blank" rel="noopener">
-            Standard Chartered <span>Global job search; filter for Kenya</span></a></li>
-          <li><a href="https://imbank.myadrenalin.com/CANDMICROSITE/#/" target="_blank" rel="noopener">
-            I&amp;M Bank <span>Candidate portal</span></a></li>
-          <li><a href="https://dtbk.dtbafrica.com/careers" target="_blank" rel="noopener">
-            Diamond Trust Bank <span>Kenya careers page</span></a></li>
-          <li><a href="https://familybank.co.ke/?page_id=2696" target="_blank" rel="noopener">
-            Family Bank <span>Careers page</span></a></li>
-        </ul>
-        <h3>Other employers in Kenya</h3>
-        <ul>
-          <li><a href="https://egjd.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX/jobs" target="_blank" rel="noopener">
-            Safaricom <span>Oracle candidate portal</span></a></li>
-          <li><a href="https://britam.taleo.net/careersection/ke/jobsearch.ftl?lang=en" target="_blank" rel="noopener">
-            Britam <span>Kenya job search</span></a></li>
-          <li><a href="https://watu.com/corporate/careers/#work-at-watu" target="_blank" rel="noopener">
-            Watu <span>Group careers &mdash; Kenya and 8 other markets</span></a></li>
-          <li><a href="https://careers.zetech.ac.ke/index.php?mod=vacancies" target="_blank" rel="noopener">
-            Zetech University <span>Academic and staff vacancies</span></a></li>
-          <li><a href="https://jobs.deel.com/4a9f4504-6058-403a-9cb7-5dc27b7fe85b-1789634936748" target="_blank" rel="noopener">
-            Accelera Digital Group <span>Engineering, data and AI roles; Nairobi among the hybrid locations</span></a></li>
-        </ul>
-        <details>
-          <summary>Banks across Africa</summary>
+        <details open>
+          <summary>Banks in Kenya <span class="n">9</span></summary>
           <ul>
-            <li><a href="https://firstrand.wd3.myworkdayjobs.com/en-US/FRB/jobs" target="_blank" rel="noopener">
-            FirstRand / FNB <span>South Africa and its other markets</span></a></li>
-            <li><a href="https://jobs.nedbank.co.za/search/" target="_blank" rel="noopener">
-            Nedbank <span>Now NCBA&rsquo;s parent; mostly South Africa</span></a></li>
-            <li><a href="https://careers.capitecbank.co.za/search/" target="_blank" rel="noopener">
-            Capitec <span>South Africa</span></a></li>
-            <li><a href="https://fa-emqf-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1004" target="_blank" rel="noopener">
-            Ecobank <span>Oracle portal, 30+ African markets</span></a></li>
-            <li><a href="https://careers.accessbankplc.com/jobs" target="_blank" rel="noopener">
-            Access Bank <span>Nigeria and its African subsidiaries</span></a></li>
-            <li><a href="https://gtcoplc.zohorecruit.com/jobs/Careers" target="_blank" rel="noopener">
-            GTCO <span>Guaranty Trust Holding Company</span></a></li>
-            <li><a href="https://www.firstbanknigeria.com/home/careers/jobs/" target="_blank" rel="noopener">
-            First Bank of Nigeria <span>Careers page</span></a></li>
-            <li><a href="https://careers.crdbbank.co.tz/jobs" target="_blank" rel="noopener">
-            CRDB Bank <span>Tanzania</span></a></li>
-            <li><a href="https://recrutement.attijariwafa.com/" target="_blank" rel="noopener">
-            Attijariwafa Bank <span>Morocco and its African network</span></a></li>
+            <li><a href="https://eoin.fa.em3.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_3001/jobs" target="_blank" rel="noopener">
+              KCB Group <span>Oracle candidate portal</span></a></li>
+            <li><a href="https://equitybank.taleo.net/careersection/ext_new/jobsearch.ftl" target="_blank" rel="noopener">
+              Equity Bank <span>Taleo job search</span></a></li>
+            <li><a href="https://ncbagroup.com/careers/join-our-team/" target="_blank" rel="noopener">
+              NCBA <span>Open roles across its markets</span></a></li>
+            <li><a href="https://www.co-opbank.co.ke/career_tax/co-op-bank/" target="_blank" rel="noopener">
+              Co-operative Bank <span>Current vacancies</span></a></li>
+            <li><a href="https://absa.wd3.myworkdayjobs.com/ABSAcareersite" target="_blank" rel="noopener">
+              Absa Bank Kenya <span>Workday portal for every Absa market</span></a></li>
+            <li><a href="https://jobs.standardchartered.com/" target="_blank" rel="noopener">
+              Standard Chartered <span>Global job search; filter for Kenya</span></a></li>
+            <li><a href="https://imbank.myadrenalin.com/CANDMICROSITE/#/" target="_blank" rel="noopener">
+              I&amp;M Bank <span>Candidate portal</span></a></li>
+            <li><a href="https://dtbk.dtbafrica.com/careers" target="_blank" rel="noopener">
+              Diamond Trust Bank <span>Kenya careers page</span></a></li>
+            <li><a href="https://familybank.co.ke/?page_id=2696" target="_blank" rel="noopener">
+              Family Bank <span>Careers page</span></a></li>
           </ul>
         </details>
-        <p class="also">Standard Bank Group (Stanbic) and Afreximbank publish open job feeds, so their roles are in the list above.</p>
+        <details>
+          <summary>Insurers in Kenya <span class="n">12</span></summary>
+          <ul>
+            <li><a href="https://jubileeinsurance.com/ke/career-opportunities/" target="_blank" rel="noopener">
+              Jubilee Insurance <span>Kenya career opportunities</span></a></li>
+            <li><a href="https://careers.cicinsurancegroup.com/" target="_blank" rel="noopener">
+              CIC Insurance Group <span>Kenya, Uganda, Malawi and South Sudan</span></a></li>
+            <li><a href="https://oldmutual.wd3.myworkdayjobs.com/Old_Mutual_Careers" target="_blank" rel="noopener">
+              Old Mutual <span>Workday portal for the whole group; filter for Kenya</span></a></li>
+            <li><a href="https://britam.taleo.net/careersection/ke/jobsearch.ftl?lang=en" target="_blank" rel="noopener">
+              Britam <span>Kenya job search</span></a></li>
+            <li><a href="https://icealion.co.ke/open-roles" target="_blank" rel="noopener">
+              ICEA LION <span>Open roles</span></a></li>
+            <li><a href="https://www.apainsurance.org/careers" target="_blank" rel="noopener">
+              APA Insurance <span>Open careers</span></a></li>
+            <li><a href="https://www.madison.co.ke/careers/" target="_blank" rel="noopener">
+              Madison Group <span>Careers page</span></a></li>
+            <li><a href="https://www.liberty.co.ke/careers" target="_blank" rel="noopener">
+              Liberty Kenya <span>Includes the former Heritage</span></a></li>
+            <li><a href="https://www.gakenya.com/ga-insurance-limited/working-at-ga/careers/" target="_blank" rel="noopener">
+              GA Insurance <span>Careers page</span></a></li>
+            <li><a href="https://pula.bamboohr.com/careers" target="_blank" rel="noopener">
+              Pula <span>Agricultural insurance; BambooHR portal</span></a></li>
+            <li><a href="https://zep-re.com/about-us/careers-at-zep-re/" target="_blank" rel="noopener">
+              ZEP-RE <span>Regional reinsurer, Nairobi head office</span></a></li>
+            <li><a href="https://www.kenyare.co.ke/about-us/careers" target="_blank" rel="noopener">
+              Kenya Re <span>Adverts posted as PDFs</span></a></li>
+          </ul>
+        </details>
+        <details>
+          <summary>Tech companies in Kenya <span class="n">8</span></summary>
+          <ul>
+            <li><a href="https://africastalking.com/careers" target="_blank" rel="noopener">
+              Africa&rsquo;s Talking <span>Careers page</span></a></li>
+            <li><a href="https://craftsilicon.com/careers/" target="_blank" rel="noopener">
+              Craft Silicon <span>Careers page</span></a></li>
+            <li><a href="https://kopokopo.co.ke/careers/" target="_blank" rel="noopener">
+              Kopo Kopo <span>Careers page</span></a></li>
+            <li><a href="https://careers.paystack.com/jobs" target="_blank" rel="noopener">
+              Paystack <span>Some roles list Nairobi</span></a></li>
+            <li><a href="https://www.wave.com/en/careers/" target="_blank" rel="noopener">
+              Wave <span>Some roles open to Kenya</span></a></li>
+            <li><a href="https://careers.glovoapp.com/jobs-at-glovo/" target="_blank" rel="noopener">
+              Glovo <span>Filter for Kenya</span></a></li>
+            <li><a href="https://bolt.eu/en/careers/positions/" target="_blank" rel="noopener">
+              Bolt <span>Filter for Nairobi</span></a></li>
+            <li><a href="https://branch.co/careers/openings" target="_blank" rel="noopener">
+              Branch International <span>Careers page</span></a></li>
+          </ul>
+        </details>
+        <details>
+          <summary>Other employers in Kenya <span class="n">3</span></summary>
+          <ul>
+            <li><a href="https://egjd.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX/jobs" target="_blank" rel="noopener">
+              Safaricom <span>Oracle candidate portal</span></a></li>
+            <li><a href="https://careers.zetech.ac.ke/index.php?mod=vacancies" target="_blank" rel="noopener">
+              Zetech University <span>Academic and staff vacancies</span></a></li>
+            <li><a href="https://jobs.deel.com/4a9f4504-6058-403a-9cb7-5dc27b7fe85b-1789634936748" target="_blank" rel="noopener">
+              Accelera Digital Group <span>Engineering, data and AI roles; Nairobi among the hybrid locations</span></a></li>
+          </ul>
+        </details>
+        <details>
+          <summary>Banks across Africa <span class="n">9</span></summary>
+          <ul>
+            <li><a href="https://firstrand.wd3.myworkdayjobs.com/en-US/FRB/jobs" target="_blank" rel="noopener">
+              FirstRand / FNB <span>South Africa and its other markets</span></a></li>
+            <li><a href="https://jobs.nedbank.co.za/search/" target="_blank" rel="noopener">
+              Nedbank <span>Now NCBA&rsquo;s parent; mostly South Africa</span></a></li>
+            <li><a href="https://careers.capitecbank.co.za/search/" target="_blank" rel="noopener">
+              Capitec <span>South Africa</span></a></li>
+            <li><a href="https://fa-emqf-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1004" target="_blank" rel="noopener">
+              Ecobank <span>Oracle portal, 30+ African markets</span></a></li>
+            <li><a href="https://careers.accessbankplc.com/jobs" target="_blank" rel="noopener">
+              Access Bank <span>Nigeria and its African subsidiaries</span></a></li>
+            <li><a href="https://gtcoplc.zohorecruit.com/jobs/Careers" target="_blank" rel="noopener">
+              GTCO <span>Guaranty Trust Holding Company</span></a></li>
+            <li><a href="https://www.firstbanknigeria.com/home/careers/jobs/" target="_blank" rel="noopener">
+              First Bank of Nigeria <span>Careers page</span></a></li>
+            <li><a href="https://careers.crdbbank.co.tz/jobs" target="_blank" rel="noopener">
+              CRDB Bank <span>Tanzania</span></a></li>
+            <li><a href="https://recrutement.attijariwafa.com/" target="_blank" rel="noopener">
+              Attijariwafa Bank <span>Morocco and its African network</span></a></li>
+          </ul>
+        </details>
+        <details>
+          <summary>Insurers across Africa <span class="n">9</span></summary>
+          <ul>
+            <li><a href="https://careers.discovery.co.za/go/All-Jobs/4509301/" target="_blank" rel="noopener">
+              Discovery <span>South Africa</span></a></li>
+            <li><a href="https://www.momentum.co.za/momentum/about-us/careers" target="_blank" rel="noopener">
+              Momentum <span>South Africa</span></a></li>
+            <li><a href="https://www.hollard.co.za/our-world/careers/available-jobs" target="_blank" rel="noopener">
+              Hollard <span>South Africa</span></a></li>
+            <li><a href="https://www.santam.co.za/careers/jobs/" target="_blank" rel="noopener">
+              Santam <span>South Africa</span></a></li>
+            <li><a href="https://www.prudentialplc.com/en/careers/overview/" target="_blank" rel="noopener">
+              Prudential <span>Group careers, including its African markets</span></a></li>
+            <li><a href="https://corporate.axamansard.com/current-jobs/" target="_blank" rel="noopener">
+              AXA Mansard <span>Nigeria</span></a></li>
+            <li><a href="https://careers.leadway.com" target="_blank" rel="noopener">
+              Leadway Assurance <span>Nigeria</span></a></li>
+            <li><a href="https://africa-re.com/career" target="_blank" rel="noopener">
+              Africa Re <span>Pan-African reinsurer, offices include Nairobi</span></a></li>
+            <li><a href="https://www.curacel.co/more-vacancy" target="_blank" rel="noopener">
+              Curacel <span>Insurance technology, Nigeria</span></a></li>
+          </ul>
+        </details>
+        <details>
+          <summary>Tech companies across Africa <span class="n">13</span></summary>
+          <ul>
+            <li><a href="https://flutterwave.com/us/careers/vacancies" target="_blank" rel="noopener">
+              Flutterwave <span>Payments; mostly Nigeria</span></a></li>
+            <li><a href="https://careers.moove.io/jobs" target="_blank" rel="noopener">
+              Moove <span>Vehicle financing for ride-hailing drivers</span></a></li>
+            <li><a href="https://onafriq.com/careers" target="_blank" rel="noopener">
+              Onafriq <span>Payments network across Africa</span></a></li>
+            <li><a href="https://careers.opayweb.com" target="_blank" rel="noopener">
+              OPay <span>Nigeria</span></a></li>
+            <li><a href="https://www.yoco.com/za/careers/open-roles/" target="_blank" rel="noopener">
+              Yoco <span>South Africa</span></a></li>
+            <li><a href="https://peachpayments.bamboohr.com/careers" target="_blank" rel="noopener">
+              Peach Payments <span>South Africa and Mauritius</span></a></li>
+            <li><a href="https://clickatell.com/jobs/" target="_blank" rel="noopener">
+              Clickatell <span>South Africa and Nigeria</span></a></li>
+            <li><a href="https://aerobotics.bamboohr.com/careers" target="_blank" rel="noopener">
+              Aerobotics <span>South Africa</span></a></li>
+            <li><a href="https://www.instadeep.com/about-us/careers/" target="_blank" rel="noopener">
+              InstaDeep <span>AI; Tunis, Kigali and Cape Town among its offices</span></a></li>
+            <li><a href="https://www.fawry.com/jobs/" target="_blank" rel="noopener">
+              Fawry <span>Egypt</span></a></li>
+            <li><a href="https://paymob.com/en/careers.html" target="_blank" rel="noopener">
+              Paymob <span>Egypt</span></a></li>
+            <li><a href="https://www.breadfast.com/careers/" target="_blank" rel="noopener">
+              Breadfast <span>Egypt</span></a></li>
+            <li><a href="https://erp.mpharma.com/jobs" target="_blank" rel="noopener">
+              mPharma <span>Ghana</span></a></li>
+          </ul>
+        </details>
+        <p class="also">Standard Bank Group (with Stanbic and Liberty), Afreximbank, OUTsurance, Watu, Turaco and the other employers named at the foot of this page publish open job feeds, so their roles are in the list above.</p>
       </div>
 
       <div class="promo">
@@ -338,8 +446,7 @@
   Listings are pulled live from
   <a href="https://jobicy.com/" target="_blank" rel="noopener">Jobicy</a>,
   <a href="https://remoteok.com/" target="_blank" rel="noopener">Remote OK</a>, and the public job-board
-  APIs of employers hiring into Kenya &mdash; Sun King, M-KOPA, One Acre Fund,
-  Andela, GiveDirectly, ACRE Africa, Jumia, Moniepoint, Standard Bank Group, Afreximbank, Tala, Apollo Agriculture, Zipline and Canonical.
+  APIs of 40 employers hiring in Kenya and across Africa &mdash; M-KOPA, Andela, One Acre Fund, Jumia, Zipline, Tala, Apollo Agriculture, Sun King, GiveDirectly, Canonical, Moniepoint, Standard Bank Group, Afreximbank, Ajua, Watu, Turaco, Cellulant, Wasoko, Ilara Health, Gebeya, Irembo, Yassir, FairMoney, Taptap Send, LemFi, Optasia, Kuda, Helium Health, Gozem, Djamo, Takealot, Ozow, Luno, Entersekt, Mukuru, Lula, valU, Thndr, OUTsurance and ACRE Africa.
   Every apply button opens the original posting on the source site — The Tech Hut does not host applications
   and is not the employer. Always verify a role before sharing personal details; never pay to apply.
 </p>
@@ -445,9 +552,21 @@
   }
   // Where is the role? Kenya first, then the rest of Africa, then anywhere-remote.
   var KE = /(kenya|nairobi|mombasa|kisumu|eldoret|nakuru|nyeri|kakamega|thika|machakos|kilifi|rukanga|sagana|naivasha|malindi)/i;
-  var AF = /(africa|angola|luanda|namibia|windhoek|mozambique|maputo|mauritius|lesotho|eswatini|madagascar|south sudan|somalia|burundi|congo|kinshasa|cameroon|tunisia|algeria|nigeria|lagos|abuja|oyo|ilorin|ghana|accra|uganda|kampala|tanzania|dar es|rwanda|kigali|ethiopia|addis|egypt|cairo|johannesburg|cape town|senegal|dakar|ivory coast|abidjan|zambia|malawi|morocco|benin|togo|zimbabwe|botswana)/i;
+  var AF = /(africa|casablanca|rabat|marrakech|tunis|algiers|oran|lom[eé]|cotonou|douala|yaound|libreville|gabon|gaborone|harare|lusaka|lilongwe|bamako|ouagadougou|niamey|conakry|freetown|monrovia|banjul|giza|alexandria|kano|ibadan|port harcourt|durban|pretoria|stellenbosch|centurion|sandton|bloemfontein|ebene|port louis|angola|luanda|namibia|windhoek|mozambique|maputo|mauritius|lesotho|eswatini|madagascar|south sudan|somalia|burundi|congo|kinshasa|cameroon|tunisia|algeria|nigeria|lagos|abuja|oyo|ilorin|ghana|accra|uganda|kampala|tanzania|dar es|rwanda|kigali|ethiopia|addis|egypt|cairo|johannesburg|cape town|senegal|dakar|ivory coast|abidjan|zambia|malawi|morocco|benin|togo|zimbabwe|botswana)/i;
   var RM = /(remote|anywhere|worldwide|distributed|global)/i;
   var REGION_RANK = { 'Kenya': 0, 'Rest of Africa': 1, 'Remote': 2, 'Elsewhere': 3 };
+  // A role posted in several places: show the main one, but say so when Kenya is among the
+  // others, and sort it by every place it is open in (j.where).
+  function placeLabel(main, others) {
+    main = clean(main); others = (others || []).map(clean).filter(function (o) { return o && o !== main; });
+    if (!main && others.length) main = others.shift();
+    if (!others.length) return main;
+    if (!KE.test(main)) {
+      var ke = others.filter(function (o) { return KE.test(o); })[0];
+      if (ke) return main + ' · also ' + ke;
+    }
+    return main + ' + ' + others.length + ' more';
+  }
   function regionOf(loc) {
     var l = loc || '';
     if (KE.test(l)) return 'Kenya';
@@ -532,6 +651,34 @@
     // and CORS-enabled, like the ATS feeds above. Standard Bank's list includes Stanbic.
     { name: 'Standard Bank Group', ats: 'smartrecruiters', slug: 'StandardBankGroup' },
     { name: 'Afreximbank',       ats: 'workable',   slug: 'afreximbank' },
+    // Tech companies and insurers across Africa (checked 20 Oct 2026). Breezy publishes a
+    // public JSON list of each company's open positions at <company>.breezy.hr/json.
+    { name: 'Ajua',              ats: 'smartrecruiters', slug: 'Ajua' },
+    { name: 'Watu',              ats: 'smartrecruiters', slug: 'WatuCreditLtd' },
+    { name: 'Turaco',            ats: 'breezy',     slug: 'turaco' },
+    { name: 'Cellulant',         ats: 'breezy',     slug: 'cellulant-group' },
+    { name: 'Wasoko',            ats: 'breezy',     slug: 'wasoko' },
+    { name: 'Ilara Health',      ats: 'workable',   slug: 'ilara-health' },
+    { name: 'Gebeya',            ats: 'workable',   slug: 'gebeya-inc' },
+    { name: 'Irembo',            ats: 'greenhouse', slug: 'iremboltd' },
+    { name: 'Yassir',            ats: 'lever',      slug: 'Yassir' },
+    { name: 'FairMoney',         ats: 'workable',   slug: 'fairmoney' },
+    { name: 'Taptap Send',       ats: 'ashby',      slug: 'taptapsend' },
+    { name: 'LemFi',             ats: 'ashby',      slug: 'lemfi' },
+    { name: 'Optasia',           ats: 'workable',   slug: 'optasia' },
+    { name: 'Kuda',              ats: 'workable',   slug: 'kuda' },
+    { name: 'Helium Health',     ats: 'workable',   slug: 'helium-health' },
+    { name: 'Gozem',             ats: 'breezy',     slug: 'gozem' },
+    { name: 'Djamo',             ats: 'breezy',     slug: 'djamo' },
+    { name: 'Takealot',          ats: 'greenhouse', slug: 'takealotcom' },
+    { name: 'Ozow',              ats: 'greenhouse', slug: 'ozow' },
+    { name: 'Luno',              ats: 'greenhouse', slug: 'luno' },
+    { name: 'Entersekt',         ats: 'greenhouse', slug: 'entersekt' },
+    { name: 'Mukuru',            ats: 'breezy',     slug: 'mukuru' },
+    { name: 'Lula',              ats: 'breezy',     slug: 'lulalend' },
+    { name: 'valU',              ats: 'smartrecruiters', slug: 'ValU1' },
+    { name: 'Thndr',             ats: 'ashby',      slug: 'thndr' },
+    { name: 'OUTsurance',        ats: 'smartrecruiters', slug: 'OUTsurance' },
     // WordPress careers pages: posts in a named category, read through the site's
     // own public REST API. `site` is the host, `cat` the category id
     // (find it at /wp-json/wp/v2/categories?search=careers).
@@ -562,7 +709,8 @@
         title: clean(j.text),
         company: co.name,
         logo: '',
-        location: clean(c.location) || 'Not stated',
+        location: placeLabel(c.location, c.allLocations) || 'Not stated',
+        where: [c.location].concat(c.allLocations || []).join('; '),
         types: c.commitment ? [clean(c.commitment)] : [],
         cats: [catFromTitle(clean(j.text))], level: '',
         excerpt: clean(j.descriptionPlain, 190),
@@ -579,7 +727,10 @@
         title: clean(j.title),
         company: co.name,
         logo: '',
-        location: clean(j.location) || 'Not stated',
+        location: placeLabel(j.location, (j.secondaryLocations || []).map(function (x) { return x.location; })) +
+                  (j.isRemote && !/remote/i.test(j.location || '') ? ' (remote)' : '') || 'Not stated',
+        // not "Remote" itself: remote-from-North-America is not remote-from-Nairobi
+        where: [j.location].concat((j.secondaryLocations || []).map(function (x) { return x.location; })).join('; '),
         types: j.employmentType ? [clean(j.employmentType)] : [],
         cats: [catFromTitle(clean(j.title))], level: '',
         excerpt: '',
@@ -648,6 +799,26 @@
       };
     });
   }
+  function fromBreezy(arr, co) {
+    return (Array.isArray(arr) ? arr : []).map(function (j) {
+      var loc = j.location || {};
+      var place = [loc.city, loc.country && loc.country.name].filter(Boolean).join(', ') || loc.name || '';
+      if (loc.is_remote) place = place ? 'Remote, ' + place : 'Remote';
+      return {
+        id: 'bz-' + co.slug + '-' + (j.id || j.name),
+        title: clean(j.name),
+        company: co.name,
+        logo: '',
+        location: clean(place) || 'Not stated',
+        types: j.type && j.type.name ? [clean(j.type.name)] : [],
+        cats: [catFromTitle(clean(j.name))], level: '',
+        excerpt: '',
+        url: safeUrl(j.url),
+        date: j.published_date || '',
+        source: co.name
+      };
+    });
+  }
   // WordPress posts never expire the way an ATS requisition does, so anything
   // older than MAX_POST_AGE days is treated as a closed role and dropped.
   var MAX_POST_AGE = 120;
@@ -681,6 +852,7 @@
             : co.ats === 'pinpoint'   ? 'https://' + co.slug + '.pinpointhq.com/postings.json'
             : co.ats === 'smartrecruiters' ? 'https://api.smartrecruiters.com/v1/companies/' + co.slug + '/postings?limit=100'
             : co.ats === 'workable'   ? 'https://apply.workable.com/api/v1/widget/accounts/' + co.slug
+            : co.ats === 'breezy'     ? 'https://' + co.slug + '.breezy.hr/json'
             : co.ats === 'wordpress'  ? 'https://' + co.site + '/wp-json/wp/v2/posts?categories=' + co.cat +
                                         '&per_page=20&_fields=id,date,modified,link,title,excerpt'
             :                           'https://api.ashbyhq.com/posting-api/job-board/' + co.slug;
@@ -691,10 +863,11 @@
                : co.ats === 'pinpoint'   ? fromPinpoint(d, co)
                : co.ats === 'smartrecruiters' ? fromSmartRecruiters(d, co)
                : co.ats === 'workable'   ? fromWorkable(d, co)
+               : co.ats === 'breezy'     ? fromBreezy(d, co)
                : co.ats === 'wordpress'  ? fromWordPress(d, co)
                :                           fromAshby(d, co);
       jobs = jobs.filter(function (j) { return j.title && j.url && isTechRole(j.title); });
-      jobs.forEach(function (j) { j.region = regionOf(j.location); });
+      jobs.forEach(function (j) { j.region = regionOf(j.where || j.location); });
       jobs.sort(function (a, b) { return REGION_RANK[a.region] - REGION_RANK[b.region]; });
       return jobs.slice(0, PER_COMPANY);
     }).catch(function () { return []; });

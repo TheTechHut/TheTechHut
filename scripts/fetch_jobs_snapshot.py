@@ -125,6 +125,35 @@ PROBATION = [
     ('Wave',                 'lever',      'wave'),
     ('Standard Bank Group',  'smartrecruiters', 'StandardBankGroup'),   # includes Stanbic
     ('Afreximbank',          'workable',   'afreximbank'),
+    # Added 20 Oct 2026: tech companies and insurers across Africa. Each answered
+    # from a browser that day; empty boards (Cellulant, Wasoko, Ilara, Gebeya,
+    # Irembo) are kept because they hire in East Africa.
+    ('Ajua',                 'smartrecruiters', 'Ajua'),
+    ('Watu',                 'smartrecruiters', 'WatuCreditLtd'),
+    ('Turaco',               'breezy',     'turaco'),
+    ('Cellulant',            'breezy',     'cellulant-group'),
+    ('Wasoko',               'breezy',     'wasoko'),
+    ('Ilara Health',         'workable',   'ilara-health'),
+    ('Gebeya',               'workable',   'gebeya-inc'),
+    ('Irembo',               'greenhouse', 'iremboltd'),
+    ('Yassir',               'lever',      'Yassir'),
+    ('FairMoney',            'workable',   'fairmoney'),
+    ('Taptap Send',          'ashby',      'taptapsend'),
+    ('LemFi',                'ashby',      'lemfi'),
+    ('Optasia',              'workable',   'optasia'),
+    ('Kuda',                 'workable',   'kuda'),
+    ('Helium Health',        'workable',   'helium-health'),
+    ('Gozem',                'breezy',     'gozem'),
+    ('Djamo',                'breezy',     'djamo'),
+    ('Takealot',             'greenhouse', 'takealotcom'),
+    ('Ozow',                 'greenhouse', 'ozow'),
+    ('Luno',                 'greenhouse', 'luno'),
+    ('Entersekt',            'greenhouse', 'entersekt'),
+    ('Mukuru',               'breezy',     'mukuru'),
+    ('Lula',                 'breezy',     'lulalend'),
+    ('valU',                 'smartrecruiters', 'ValU1'),
+    ('Thndr',                'ashby',      'thndr'),
+    ('OUTsurance',           'smartrecruiters', 'OUTsurance'),
 ]
 
 # ---- Himalayas -----------------------------------------------------------
@@ -210,6 +239,7 @@ def feed_url(platform, slug):
         'pinpoint':   'https://%s.pinpointhq.com/postings.json' % slug,
         'smartrecruiters': 'https://api.smartrecruiters.com/v1/companies/%s/postings?limit=100' % slug,
         'workable':   'https://apply.workable.com/api/v1/widget/accounts/%s' % slug,
+        'breezy':     'https://%s.breezy.hr/json' % slug,
     }[platform]
 
 
@@ -223,7 +253,11 @@ def rows_from(platform, payload):
     elif platform == 'lever':
         for j in payload if isinstance(payload, list) else []:
             cat = j.get('categories') or {}
-            out.append((j.get('text', ''), cat.get('location', ''), j.get('hostedUrl', ''),
+            loc = cat.get('location', '') or ''
+            others = [x for x in (cat.get('allLocations') or []) if x and x != loc]
+            if others:                    # a role open in several places, Nairobi perhaps among them
+                loc = '; '.join([loc] + others) if loc else '; '.join(others)
+            out.append((j.get('text', ''), loc, j.get('hostedUrl', ''),
                         j.get('createdAt', '')))
     elif platform == 'ashby':
         for j in payload.get('jobs', []):
@@ -252,6 +286,14 @@ def rows_from(platform, payload):
                 place = 'Remote, ' + place if place else 'Remote'
             out.append((j.get('title', ''), place, j.get('url') or j.get('shortlink', ''),
                         j.get('published_on') or j.get('created_at', '')))
+    elif platform == 'breezy':
+        for j in payload if isinstance(payload, list) else []:
+            loc = j.get('location') or {}
+            country = (loc.get('country') or {}).get('name', '') if isinstance(loc.get('country'), dict) else ''
+            place = ', '.join(x for x in (loc.get('city'), country) if x) or loc.get('name', '')
+            if loc.get('is_remote'):
+                place = 'Remote, ' + place if place else 'Remote'
+            out.append((j.get('name', ''), place, j.get('url', ''), j.get('published_date', '')))
     return [(t, (l or '').strip(), u, p) for t, l, u, p in out if t]
 
 
