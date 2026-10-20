@@ -132,9 +132,19 @@
     .sk { background: var(--paper-3); border-radius: 0; animation: thhpulse 1.4s ease-in-out infinite; }
     .skeleton .sk:nth-child(1) { height: 1.3rem !important; }
     @keyframes thhpulse { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
-    .more { display: block; width: 100%; margin: 24px 0 0; font: inherit; font-weight: 700; font-size: 15px; color: var(--ink);
-      background: transparent; border: 1px solid var(--ink); border-radius: 3px; padding: 12px; cursor: pointer; }
-    .more:hover { background: var(--ink); color: #fff; }
+    /* numbered pages under the list */
+    .pager { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px;
+      border-top: 2px solid var(--ink); margin: 28px 0 0; padding-top: 14px; }
+    .pager .range { font-family: var(--mono); font-size: 13px; color: var(--dim); }
+    .pager ol { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; }
+    .pager button { font: inherit; font-family: var(--mono); font-size: 14px; min-width: 40px; height: 40px; padding: 0 10px;
+      color: var(--ink); background: transparent; border: 1px solid var(--rule); border-radius: 3px; cursor: pointer; }
+    .pager button:hover { border-color: var(--ink); }
+    .pager button[aria-current="page"] { background: var(--ink); border-color: var(--ink); color: #fff; cursor: default; }
+    .pager button:disabled { color: var(--dim); border-color: var(--rule); opacity: .55; cursor: default; }
+    .pager .gap { display: inline-flex; align-items: center; height: 40px; padding: 0 2px; color: var(--dim); font-family: var(--mono); }
+    @media (max-width: 560px) { .pager { justify-content: center; } .pager .range { width: 100%; text-align: center; }
+      .pager ol { justify-content: center; } .pager .lbl { display: none; } }
 
     .pagefoot .credits { font-size: 14.5px; }
     .pagefoot .credits a { color: var(--green); }
@@ -318,7 +328,7 @@
         </span>
       </div>
       <div id="list"></div>
-      <button class="more" id="more" type="button" hidden>Show more roles</button>
+      <nav class="pager" id="pager" aria-label="Pages of jobs" hidden></nav>
     </div>
   </div>
 </main>
@@ -391,7 +401,7 @@
 
 <script>
 (function () {
-  var PAGE = 20, shownCount = PAGE, all = [], view = [];
+  var PAGE = 20, page = 1, all = [], view = [];
   var state = { q: '', type: '', cat: '', region: '', days: 0, sort: 'date' };
   var $ = function (id) { return document.getElementById(id); };
 
@@ -733,8 +743,7 @@
     if (state.sort === 'title') view.sort(function (a, b) { return a.title.localeCompare(b.title); });
     else if (state.sort === 'company') view.sort(function (a, b) { return a.company.localeCompare(b.company); });
     else view.sort(function (a, b) { return (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0); });
-    shownCount = PAGE;
-    render();
+    setPage(1, false);
   }
 
   function card(j) {
@@ -766,11 +775,59 @@
     if (!view.length) {
       list.innerHTML = '<div class="state"><h3>No roles match those filters</h3>' +
         '<p>Try clearing a filter or searching a broader term.</p></div>';
-      $('more').hidden = true;
+      $('pager').hidden = true;
       return;
     }
-    list.innerHTML = view.slice(0, shownCount).map(card).join('');
-    $('more').hidden = shownCount >= view.length;
+    var pages = Math.ceil(view.length / PAGE);
+    if (page > pages) page = pages;
+    var from = (page - 1) * PAGE;
+    list.innerHTML = view.slice(from, from + PAGE).map(card).join('');
+    renderPager(pages, from);
+  }
+
+  // Page links: first, last, and two either side of the current page, with gaps between.
+  function pageNumbers(pages) {
+    var out = [], last = 0;
+    for (var n = 1; n <= pages; n++) {
+      if (n === 1 || n === pages || Math.abs(n - page) <= 2) {
+        if (last && n - last > 1) out.push(0);
+        out.push(n); last = n;
+      }
+    }
+    return out;
+  }
+  function renderPager(pages, from) {
+    var pager = $('pager');
+    if (pages <= 1) { pager.hidden = true; pager.innerHTML = ''; return; }
+    var btn = function (n, label, aria) {
+      return '<button type="button" data-page="' + n + '"' + (aria ? ' aria-label="' + aria + '"' : '') +
+        (n === page && !aria ? ' aria-current="page"' : '') +
+        ((n < 1 || n > pages) ? ' disabled' : '') + '>' + label + '</button>';
+    };
+    pager.innerHTML =
+      '<span class="range">' + (from + 1) + '&ndash;' + Math.min(from + PAGE, view.length) + ' of ' + view.length + '</span>' +
+      '<ol>' +
+        '<li>' + btn(page - 1, '&larr;<span class="lbl"> Prev</span>', 'Previous page') + '</li>' +
+        pageNumbers(pages).map(function (n) {
+          return '<li>' + (n ? btn(n, String(n)) : '<span class="gap" aria-hidden="true">&hellip;</span>') + '</li>';
+        }).join('') +
+        '<li>' + btn(page + 1, '<span class="lbl">Next </span>&rarr;', 'Next page') + '</li>' +
+      '</ol>';
+    pager.hidden = false;
+  }
+  // The page number lives in the address (#page=3) so a link or a refresh keeps your place.
+  function setPage(n, scroll) {
+    page = Math.max(1, n | 0);
+    render();
+    var want = page > 1 ? '#page=' + page : '', cur = location.hash;
+    if (cur !== want && (cur === '' || /^#page=\d+$/.test(cur))) {
+      try { history.replaceState(null, '', location.pathname + location.search + want); } catch (e) {}
+    }
+    if (scroll) document.querySelector('.listhead').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  function pageFromHash() {
+    var m = /^#page=(\d+)$/.exec(location.hash);
+    return m ? +m[1] : 1;
   }
 
   function fillSelects() {
@@ -822,7 +879,11 @@
     });
     apply();
   });
-  $('more').addEventListener('click', function () { shownCount += PAGE; render(); });
+  $('pager').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-page]');
+    if (!b || b.disabled || b.getAttribute('aria-current')) return;
+    setPage(+b.dataset.page, true);
+  });
 
   // --- boot ----------------------------------------------------------------
   $('list').innerHTML = new Array(5).join('x').split('x').map(function () {
@@ -832,20 +893,21 @@
       '<div class="sk" style="height:.8rem;width:85%"></div></div></div>';
   }).join('');
 
+  var startPage = pageFromHash();          // read before apply() resets it to 1
   load().then(function (jobs) {
     all = jobs;
     if (!all.length) throw new Error('empty');
     try { localStorage.setItem('tth-jobs', JSON.stringify({ t: Date.now(), jobs: all.slice(0, 60) })); } catch (e) {}
     $('count').textContent = all.length + ' open roles · updated ' + new Date().toLocaleDateString('en-KE',
       { day: 'numeric', month: 'short', year: 'numeric' });
-    fillSelects(); apply();
+    fillSelects(); apply(); setPage(startPage, false);
   }).catch(function () {
     var cached = null;
     try { cached = JSON.parse(localStorage.getItem('tth-jobs') || 'null'); } catch (e) {}
     if (cached && cached.jobs && cached.jobs.length) {
       all = cached.jobs;
       $('count').textContent = all.length + ' roles · showing your last saved copy';
-      fillSelects(); apply();
+      fillSelects(); apply(); setPage(startPage, false);
     } else {
       $('count').textContent = '';
       $('list').innerHTML = '<div class="state"><h3>Couldn\'t load roles just now</h3>' +
@@ -853,7 +915,7 @@
         '<a href="https://jobicy.com/" target="_blank" rel="noopener">Jobicy</a>, ' +
         '<a href="https://remoteok.com/" target="_blank" rel="noopener">Remote OK</a> or the employers\' ' +
         'own careers pages directly.</p></div>';
-      $('more').hidden = true;
+      $('pager').hidden = true;
     }
   });
 })();
