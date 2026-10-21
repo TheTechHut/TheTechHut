@@ -33,8 +33,9 @@ name: Daily hiring snapshot
 permissions:
   contents: write
 
+# One deploy at a time, shared with jobs-board.yml.
 concurrency:
-  group: jobs-snapshot
+  group: site-deploy
   cancel-in-progress: false
 
 jobs:
@@ -68,6 +69,18 @@ jobs:
             git push origin chore/redesign
             echo "changed=yes" >> "$GITHUB_OUTPUT"
           fi
+
+      # data/jobs-board.json is not in git, so a deploy without it would make
+      # the jobs board fall back to reading every feed live until the next
+      # three-hourly run. Build it first; if that fails, deploy anyway.
+      - uses: actions/setup-node@v4
+        if: steps.commit.outputs.changed == 'yes'
+        with:
+          node-version: '20'
+      - name: Build the jobs board data
+        if: steps.commit.outputs.changed == 'yes'
+        continue-on-error: true
+        run: node scripts/build_jobs_board.js
 
       # A push made with GITHUB_TOKEN does not trigger other workflows, so the
       # hosting deploy has to be called from here or the new data never goes live.

@@ -5,3 +5,6 @@ _to_delete/
 Claude outputs/
 worker/node_modules/
 worker/.wrangler/
+
+# built on GitHub Actions and deployed, never committed (scripts/build_jobs_board.js)
+data/jobs-board.json

@@ -1,0 +1,51 @@
+# Jobs board data, every three hours.
+#
+# Reads every feed the jobs board uses (assets/js/jobs-feeds.js, the page's own
+# code) and writes data/jobs-board.json, the one small file /jobs/ loads first,
+# then deploys the site with it. Without this, every visitor's browser makes
+# ~45 requests for several megabytes of JSON before showing a single role.
+#
+# The file is built here and deployed, never committed, so git history does
+# not grow by a copy every three hours. The page falls back to reading the
+# feeds live if the file is missing or more than 36 hours old.
+#
+# Like jobs-snapshot.yml, this only runs once chore/redesign is the default
+# branch (GitHub runs schedules only from the default branch). It deploys
+# whatever is on chore/redesign, exactly as the daily snapshot already does.
+name: Jobs board data
+
+'on':
+  schedule:
+    # every 3 hours at :41 (not on the hour, when scheduled runs queue up)
+    - cron: '41 */3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# One deploy at a time, shared with the daily snapshot.
+concurrency:
+  group: site-deploy
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chore/redesign
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Read the feeds and write data/jobs-board.json
+        run: node scripts/build_jobs_board.js
+
+      - name: Deploy
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_AI_STUDY_PAL }}'
+          channelId: live
