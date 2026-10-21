@@ -56,6 +56,10 @@
     /* filters: a plain sidebar with ruled groups */
     aside.filters h2, .listhead h2 { font-size: 22px; margin: 0; }
     aside.filters > h2 { border-top: 2px solid var(--ink); padding: 10px 0 12px; }
+    /* on wide screens the toggle is just the heading; on phones it opens and closes the filters */
+    .ftoggle { display: flex; align-items: baseline; gap: 8px; width: 100%; font: inherit; color: inherit; text-align: left;
+      background: none; border: 0; padding: 0; cursor: default; }
+    .fcount { font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--green); }
     .fgroup { border-top: 1px solid var(--rule); padding: 12px 0 14px; }
     .fgroup > label { display: block; font-family: var(--mono); font-size: 11.5px; font-weight: 500; text-transform: uppercase;
       letter-spacing: .08em; color: var(--dim); margin: 0 0 8px; }
@@ -161,8 +165,16 @@
 
     @media (max-width: 899px) {
       .cols { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-template-areas: "filters" "list" "notes"; }
-      aside.filters { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; margin-bottom: 30px; }
-      aside.filters > h2, aside.filters .clearwrap, .fgroup.wide { grid-column: 1 / -1; }
+      aside.filters { margin-bottom: 30px; }
+      aside.filters > h2 { padding: 0; }
+      .ftoggle { cursor: pointer; padding: 12px 0; min-height: 44px; }
+      .ftoggle::after { content: ""; margin-left: auto; align-self: center; width: 8px; height: 8px;
+        border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); transform: rotate(45deg) translateY(-3px); }
+      .ftoggle[aria-expanded="true"]::after { transform: rotate(-135deg) translate(-2px, -1px); }
+      .fbody { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; }
+      .fbody[hidden] { display: none !important; }
+      aside.filters .clearwrap, .fgroup.wide { grid-column: 1 / -1; }
+      aside.filters:has(.fbody[hidden]) { border-bottom: 1px solid var(--rule); }
       .fgroup.wide .pills { flex-direction: row; flex-wrap: wrap; gap: 0 22px; }
       .sidenotes { margin-top: 20px; }
     }
@@ -212,8 +224,9 @@
   </header>
 
   <div class="wrap cols">
-    <aside class="filters" aria-label="Filters">
-      <h2>Filters</h2>
+    <aside class="filters" id="filters" aria-label="Filters">
+      <h2><button type="button" class="ftoggle" id="ftoggle" aria-expanded="true" aria-controls="fbody">Filters<span class="fcount" id="fcount"></span></button></h2>
+      <div class="fbody" id="fbody">
       <div class="fgroup">
         <label for="ftype">Job type</label>
         <select id="ftype"><option value="">All types</option></select>
@@ -242,6 +255,7 @@
         </div>
       </div>
       <div class="clearwrap"><button class="clearbtn" id="clear" type="button">Clear filters</button></div>
+      </div>
     </aside>
 
     <div class="sidenotes">
@@ -909,7 +923,20 @@
   }
 
   // --- filtering & rendering ----------------------------------------------
+  // Filters fold away on phones (closed to start with) and are always open on wider screens.
+  var narrow = window.matchMedia('(max-width: 899px)');
+  function setFiltersOpen(open) {
+    $('ftoggle').setAttribute('aria-expanded', open ? 'true' : 'false');
+    $('fbody').hidden = !open;
+  }
+  function syncFilters() { setFiltersOpen(!narrow.matches); }
+  function updateFilterCount() {
+    var n = (state.type ? 1 : 0) + (state.cat ? 1 : 0) + (state.region ? 1 : 0) + (state.days ? 1 : 0);
+    $('fcount').textContent = n ? '(' + n + ' on)' : '';
+  }
+
   function apply() {
+    updateFilterCount();
     var q = state.q.toLowerCase();
     view = all.filter(function (j) {
       if (q) {
@@ -1065,6 +1092,14 @@
     });
     apply();
   });
+  $('ftoggle').addEventListener('click', function () {
+    if (!narrow.matches) return;
+    setFiltersOpen(this.getAttribute('aria-expanded') !== 'true');
+  });
+  syncFilters();
+  if (narrow.addEventListener) narrow.addEventListener('change', syncFilters);
+  else if (narrow.addListener) narrow.addListener(syncFilters);
+
   $('pager').addEventListener('click', function (e) {
     var b = e.target.closest('button[data-page]');
     if (!b || b.disabled || b.getAttribute('aria-current')) return;
