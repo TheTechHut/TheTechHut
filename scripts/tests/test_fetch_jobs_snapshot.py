@@ -477,6 +477,16 @@ class RemoteOKRows(unittest.TestCase):
         self.assertEqual(len(notes), 1)
 
 
+class LeverDates(unittest.TestCase):
+    def test_created_at_milliseconds_become_an_iso_date(self):
+        rows = fj.rows_from('lever', [{'text': 'SRE', 'categories': {'location': 'Nairobi'}, 'hostedUrl': 'https://jobs.lever.co/x/1',
+                                       'createdAt': 1792500000000}])
+        self.assertTrue(rows[0][3].startswith('2026-10-'))
+        self.assertIsInstance(rows[0][3], str)
+        rows = fj.rows_from('lever', [{'text': 'SRE', 'categories': {}, 'hostedUrl': 'https://jobs.lever.co/x/2'}])
+        self.assertEqual(rows[0][3], '')
+
+
 class AshbySecondaryLocations(unittest.TestCase):
     def test_secondary_locations_join_the_location(self):
         rows = fj.rows_from('ashby', {'jobs': [{'title': 'SRE', 'location': 'London', 'jobUrl': 'https://jobs.ashbyhq.com/x/1',

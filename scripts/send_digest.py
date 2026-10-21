@@ -91,10 +91,18 @@ def load_snapshots(snaps_dir):
 
 
 def parse_posted(s):
-    if not s:
+    """ISO date/time, or a unix epoch in seconds or milliseconds (Lever sends
+    milliseconds) -> date, or None."""
+    if s is None or s == '' or isinstance(s, bool):
         return None
+    if isinstance(s, (int, float)):
+        try:
+            secs = s / 1000.0 if s > 1e11 else s
+            return datetime.datetime.fromtimestamp(secs, datetime.timezone.utc).date()
+        except (OverflowError, OSError, ValueError):
+            return None
     try:
-        return datetime.datetime.fromisoformat(s.replace('Z', '+00:00')).date()
+        return datetime.datetime.fromisoformat(str(s).replace('Z', '+00:00')).date()
     except ValueError:
         return None
 

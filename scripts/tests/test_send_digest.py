@@ -82,5 +82,16 @@ class RealData(unittest.TestCase):
         self.assertGreaterEqual(out['count'], 0)
 
 
+class ParsePosted(unittest.TestCase):
+    """Older snapshots carry Lever's createdAt as an integer in milliseconds."""
+    def test_iso_and_epochs(self):
+        import send_digest as sd
+        self.assertEqual(str(sd.parse_posted('2026-10-12T00:00:00Z')), '2026-10-12')
+        self.assertEqual(str(sd.parse_posted(1792500000000)), str(sd.parse_posted(1792500000)))
+        self.assertTrue(str(sd.parse_posted(1792500000000)).startswith('2026-10-'))
+        for bad in (None, '', 'soon', True, 10 ** 30):
+            self.assertIsNone(sd.parse_posted(bad))
+
+
 if __name__ == '__main__':
     unittest.main()

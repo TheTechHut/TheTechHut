@@ -266,8 +266,10 @@ def rows_from(platform, payload):
             others = [x for x in (cat.get('allLocations') or []) if x and x != loc]
             if others:                    # a role open in several places, Nairobi perhaps among them
                 loc = '; '.join([loc] + others) if loc else '; '.join(others)
+            created = j.get('createdAt')              # milliseconds since 1970
+            when = _from_unix(created / 1000) if isinstance(created, (int, float)) and created > 0 else None
             out.append((j.get('text', ''), loc, j.get('hostedUrl', ''),
-                        j.get('createdAt', '')))
+                        when.isoformat() if when else ''))
     elif platform == 'ashby':
         for j in payload.get('jobs', []):
             loc = j.get('location', '') or ''
