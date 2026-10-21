@@ -356,6 +356,7 @@ STATIC_PAGES = [
     ('/remote/',                     '0.85', 'daily'),
     ('/ats-pass/',                   '0.75', 'monthly'),
     ('/tools/',                      '0.70', 'monthly'),
+    ('/games/',                      '0.60', 'monthly'),
     ('/jobs-for-your-community/',    '0.60', 'monthly'),
     # Paid product pages. Both are root-level .html files, which is why they
     # never appeared here before the check above was fixed.
