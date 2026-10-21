@@ -101,7 +101,7 @@
 
     <div class="pagefoot"><div class="wrap">
             <p>Your access link is personal. Sharing it is how it stops being updated.</p>
-            <p id="credit" hidden>Some roles are listed via <a href="https://himalayas.app" target="_blank" rel="noopener">Himalayas</a>, the remote jobs site, through its public API. Listings on Himalayas remain theirs and their employers’.</p>
+            <p id="credit" hidden></p>
         </div></div>
     <footer class="sitefoot">
         <div class="wrap">
@@ -184,13 +184,20 @@
             document.getElementById('mRoles').textContent = n(d.role_count);
             document.getElementById('mScanned').textContent = n(d.roles_scanned);
             document.getElementById('mDate').textContent = d.updated || '—';
-            var viaHm = (d.sources || []).indexOf('Himalayas') > -1;
+            // Remote-job sites whose public APIs we read; each asks for a credit and a link back.
+            var SITES = { 'Himalayas': 'https://himalayas.app', 'Jobicy': 'https://jobicy.com', 'Remote OK': 'https://remoteok.com' };
+            var via = (d.sources || []).filter(function (s) { return SITES[s]; });
+            var names = via.length > 1 ? via.slice(0, -1).join(', ') + ' and ' + via[via.length - 1] : via.join('');
             document.getElementById('blurb').textContent =
                 'Every role below sits at a company that will put someone in Kenya on its payroll or ' +
                 'on a contract. Roles from employers’ own career pages link straight to the employer’s ' +
                 'application form — we never stand between you and the apply button.' +
-                (viaHm ? ' Roles marked “via Himalayas” link to the listing on Himalayas, which takes you on to the employer.' : '');
-            document.getElementById('credit').hidden = !viaHm;
+                (via.length ? ' Roles marked “via ' + via[0] + '” (or another site) link to the listing on that site, which takes you on to the employer.' : '');
+            var credit = document.getElementById('credit');
+            credit.innerHTML = via.length ? 'Some roles are listed via ' + via.map(function (s, i) {
+                return (i && i === via.length - 1 ? 'and ' : '') + '<a href="' + SITES[s] + '" target="_blank" rel="noopener">' + s + '</a>';
+            }).join(via.length > 2 ? ', ' : ' ') + ', remote-job sites whose public APIs we read. Their listings remain theirs and their employers’.' : '';
+            credit.hidden = !via.length;
             draw('');
             document.getElementById('q').addEventListener('input', function () {
                 draw(this.value.toLowerCase().trim());

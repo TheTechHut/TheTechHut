@@ -122,7 +122,7 @@ def find_new_roles(snaps_dir, today=None):
     for r in now.get('roles', []):
         # Himalayas rows link to Himalayas, not the employer, and the digest promises
         # employer links; they are also not feeds whose failure should matter here.
-        if r.get('platform') == 'himalayas':
+        if r.get('platform') in ('himalayas', 'jobicy', 'remoteok'):
             continue
         # Careers-page rows are skipped for now: a site that failed on the baseline
         # day would make every one of its roles look new. Revisit once a few

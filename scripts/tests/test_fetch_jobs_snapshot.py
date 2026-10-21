@@ -242,6 +242,9 @@ class WholeRun(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.mkdtemp()
         self.saved = (fj.DATA, fj.SNAPS, fj.FEEDS, fj.PROBATION, fj.get, fj.fetch_himalayas)
+        self.saved_ag = (fj.fetch_jobicy, fj.fetch_remoteok)
+        fj.fetch_jobicy = lambda: ([], [])
+        fj.fetch_remoteok = lambda: ([], [])
         fj.DATA = self.tmp
         fj.SNAPS = os.path.join(self.tmp, 'snapshots')
         fj.FEEDS = [('Good Co', 'greenhouse', 'goodco')]
@@ -250,6 +253,7 @@ class WholeRun(unittest.TestCase):
 
     def tearDown(self):
         fj.DATA, fj.SNAPS, fj.FEEDS, fj.PROBATION, fj.get, fj.fetch_himalayas = self.saved
+        fj.fetch_jobicy, fj.fetch_remoteok = self.saved_ag
 
     def run_main(self, hm_rows, hm_notes=(), probation_ok=False):
         def get(url):
@@ -329,6 +333,32 @@ class WholeRun(unittest.TestCase):
         self.assertNotIn(('Good Co', 'himalayas'), titles)
         self.assertIn(('Newco', 'himalayas'), titles)
 
+    def test_jobicy_and_remote_ok_rows_are_credited_and_lose_to_employers(self):
+        jb = {'company': 'Jobco', 'platform': 'jobicy', 'title': 'Backend Engineer', 'location': 'Anywhere',
+              'url': 'https://jobicy.com/jobs/1-backend', 'posted': '2026-10-13T00:00:00+00:00', 'reach': 'global', 'via': 'Jobicy'}
+        dup = dict(jb, company='Good Co', title='Platform Engineer', url='https://jobicy.com/jobs/2-dup')
+        ro = {'company': 'Rokco', 'platform': 'remoteok', 'title': 'SRE', 'location': 'Worldwide',
+              'url': 'https://remoteok.com/remote-jobs/3', 'posted': '2026-10-13T00:00:00+00:00', 'reach': 'global', 'via': 'Remote OK'}
+        fj.fetch_jobicy = lambda: ([jb, dup], [])
+        fj.fetch_remoteok = lambda: ([ro], ['Remote OK: HTTP 429'])
+        code, snap, summary, _ = self.run_main([])
+        self.assertEqual(code, 0)
+        self.assertEqual(snap['failures'], [])
+        self.assertEqual(summary['sources'], ['Jobicy', 'Remote OK'])
+        got = {(r['company'], r['platform']) for r in snap['roles']}
+        self.assertIn(('Jobco', 'jobicy'), got)
+        self.assertIn(('Rokco', 'remoteok'), got)
+        self.assertNotIn(('Good Co', 'jobicy'), got)            # the employer's own listing wins
+        self.assertIn('Remote OK: HTTP 429', snap['notes'])
+
+    def test_a_crashing_aggregator_is_a_note(self):
+        def boom():
+            raise RuntimeError('bad payload')
+        fj.fetch_remoteok = boom
+        code, snap, _, _ = self.run_main([])
+        self.assertEqual(code, 0)
+        self.assertTrue(any('Remote OK: unexpected error' in n for n in snap['notes']))
+
     def test_no_himalayas_rows_means_no_source_credit(self):
         _, _, summary, _ = self.run_main([])
         self.assertNotIn('sources', summary)
@@ -347,11 +377,112 @@ class DigestIgnoresHimalayas(unittest.TestCase):
         hm = {'company': 'H', 'platform': 'himalayas', 'title': 'Backend Engineer', 'location': 'Kenya',
               'url': 'https://himalayas.app/companies/h/jobs/1', 'posted': '2026-10-12T00:00:00+00:00', 'reach': 'local', 'via': 'Himalayas'}
         snap('2026-10-06', [])
-        snap('2026-10-13', [ats, hm])
+        jb = dict(hm, company='J', platform='jobicy', url='https://jobicy.com/jobs/1', via='Jobicy')
+        ro = dict(hm, company='R', platform='remoteok', url='https://remoteok.com/remote-jobs/1', via='Remote OK')
+        snap('2026-10-13', [ats, hm, jb, ro])
         out = sd.build_digest(d)
         self.assertEqual(out['count'], 1)
-        self.assertNotIn('himalayas.app', out['html'])
+        for host in ('himalayas.app', 'jobicy.com', 'remoteok.com'):
+            self.assertNotIn(host, out['html'])
 
+
+
+NOW = datetime.datetime(2026, 10, 21, 12, 0, tzinfo=datetime.timezone.utc)
+
+
+class JobicyRows(unittest.TestCase):
+    def job(self, **kw):
+        j = {'id': 1, 'url': 'https://jobicy.com/jobs/1-dev', 'jobTitle': 'Senior Backend Developer', 'companyName': 'Acme',
+             'jobIndustry': ['Software Engineering'], 'jobGeo': 'Anywhere', 'pubDate': '2026-10-20T03:05:30+00:00'}
+        j.update(kw)
+        return j
+
+    def test_open_tech_role_is_kept_credited_and_linked_to_jobicy(self):
+        r = fj.jobicy_rows({'jobs': [self.job()]}, NOW)[0]
+        self.assertEqual((r['platform'], r['via'], r['reach'], r['location']), ('jobicy', 'Jobicy', 'global', 'Anywhere'))
+        self.assertEqual(r['url'], 'https://jobicy.com/jobs/1-dev')
+
+    def test_emea_counts_but_a_single_country_does_not(self):
+        self.assertEqual(len(fj.jobicy_rows({'jobs': [self.job(jobGeo='EMEA')]}, NOW)), 1)
+        self.assertEqual(fj.jobicy_rows({'jobs': [self.job(jobGeo='Germany')]}, NOW), [])
+        self.assertEqual(fj.jobicy_rows({'jobs': [self.job(jobGeo='USA')]}, NOW), [])
+
+    def test_non_tech_old_and_foreign_links_are_dropped(self):
+        jobs = [self.job(jobTitle='Account Executive', jobIndustry=['Sales']),
+                self.job(pubDate='2026-08-01T00:00:00+00:00'),
+                self.job(url='https://elsewhere.example/job')]
+        self.assertEqual(fj.jobicy_rows({'jobs': jobs}, NOW), [])
+
+    def test_industry_can_rescue_a_plain_title(self):
+        self.assertEqual(len(fj.jobicy_rows({'jobs': [self.job(jobTitle='Team Lead', jobIndustry=['DevOps & Infrastructure'])]}, NOW)), 1)
+
+    def test_malformed_payloads_do_not_crash(self):
+        for p in (None, [], {'jobs': None}, {'jobs': ['x', {}]}):
+            self.assertEqual(fj.jobicy_rows(p, NOW), [])
+
+    def test_fetch_follows_the_cursor_and_stops_at_the_page_cap(self):
+        calls = []
+        def fetch(url):
+            calls.append(url)
+            return {'jobs': [self.job(url='https://jobicy.com/jobs/%d' % len(calls))], 'hasMore': True, 'nextCursor': 'abc%d' % len(calls)}
+        rows, notes = fj.fetch_jobicy(fetch, sleep=lambda s: None, now=NOW)
+        self.assertEqual(len(calls), len(fj.JOBICY_GEOS) * fj.JOBICY_MAX_PAGES)
+        self.assertIn('&cursor=abc1', calls[1])
+        self.assertEqual(len(rows), len(calls))
+        self.assertEqual(notes, [])
+
+    def test_fetch_errors_are_notes(self):
+        def fetch(url):
+            raise urllib.error.HTTPError(url, 429, 'Too Many', {}, None)
+        rows, notes = fj.fetch_jobicy(fetch, sleep=lambda s: None, now=NOW)
+        self.assertEqual(rows, [])
+        self.assertTrue(all('HTTP 429' in n for n in notes))
+
+
+class RemoteOKRows(unittest.TestCase):
+    LEGAL = {'last_updated': 1, 'legal': 'Please link back to Remote OK'}
+
+    def job(self, **kw):
+        j = {'id': '9', 'position': 'Senior Python Engineer', 'company': 'Rok', 'location': 'Worldwide',
+             'url': 'https://remoteok.com/remote-jobs/9-python', 'date': '2026-10-19T10:00:00+00:00'}
+        j.update(kw)
+        return j
+
+    def test_legal_notice_is_skipped_and_worldwide_tech_role_kept(self):
+        rows = fj.remoteok_rows([self.LEGAL, self.job()], NOW)
+        self.assertEqual(len(rows), 1)
+        self.assertEqual((rows[0]['via'], rows[0]['platform'], rows[0]['reach']), ('Remote OK', 'remoteok', 'global'))
+
+    def test_vague_or_pinned_locations_are_dropped(self):
+        for loc in ('', 'Remote', 'United States', 'Remote - US', 'Boston'):
+            self.assertEqual(fj.remoteok_rows([self.LEGAL, self.job(location=loc)], NOW), [], loc)
+
+    def test_non_tech_and_foreign_links_are_dropped(self):
+        jobs = [self.job(position='Sales Manager'), self.job(url='https://elsewhere.example/9')]
+        self.assertEqual(fj.remoteok_rows([self.LEGAL] + jobs, NOW), [])
+
+    def test_epoch_dates_work_and_old_roles_go(self):
+        old = self.job(date='', epoch=int(datetime.datetime(2026, 8, 1, tzinfo=datetime.timezone.utc).timestamp()))
+        self.assertEqual(fj.remoteok_rows([old], NOW), [])
+
+    def test_malformed_payloads_do_not_crash(self):
+        for p in (None, {}, [None, 'x', {}]):
+            self.assertEqual(fj.remoteok_rows(p, NOW), [])
+
+    def test_fetch_error_is_a_note(self):
+        def fetch(url):
+            raise urllib.error.URLError('down')
+        rows, notes = fj.fetch_remoteok(fetch, now=NOW)
+        self.assertEqual(rows, [])
+        self.assertEqual(len(notes), 1)
+
+
+class AshbySecondaryLocations(unittest.TestCase):
+    def test_secondary_locations_join_the_location(self):
+        rows = fj.rows_from('ashby', {'jobs': [{'title': 'SRE', 'location': 'London', 'jobUrl': 'https://jobs.ashbyhq.com/x/1',
+                                                'secondaryLocations': [{'location': 'EMEA'}, {'location': 'London'}]}]})
+        self.assertEqual(rows[0][1], 'London; EMEA')
+        self.assertEqual(fj.classify(rows[0][1]), 'global')
 
 if __name__ == '__main__':
     unittest.main()

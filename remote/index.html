@@ -309,7 +309,12 @@
                 var stamp = document.getElementById('stamp');
                 stamp.textContent = 'Counted ' + d.updated + ' from ' + n(d.roles_scanned) +
                     ' live postings. Company names are free; the roles and apply links are the product.' +
-                    ((d.sources || []).indexOf('Himalayas') > -1 ? ' Includes tech roles listed via Himalayas (himalayas.app).' : '');
+                    (function (src) {
+                        var SITES = { 'Himalayas': 'himalayas.app', 'Jobicy': 'jobicy.com', 'Remote OK': 'remoteok.com' };
+                        var via = (src || []).filter(function (x) { return SITES[x]; }).map(function (x) { return x + ' (' + SITES[x] + ')'; });
+                        if (!via.length) return '';
+                        return ' Includes tech roles listed via ' + (via.length > 1 ? via.slice(0, -1).join(', ') + ' and ' + via[via.length - 1] : via[0]) + '.';
+                    })(d.sources);
                 document.getElementById('heroStamp').textContent = 'last counted ' + d.updated;
             })
             .catch(function () {

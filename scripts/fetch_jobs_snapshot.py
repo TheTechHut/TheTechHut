@@ -48,6 +48,14 @@ Himalayas  An aggregator with a free public JSON API that asks for credit and a
            (whose promise is "links go to the employer's own page"), and a
            problem there is a note, not a failure.
 
+Jobicy and Remote OK
+           The two remote-job boards /jobs/ itself reads. Both publish a free
+           JSON API that asks for a credit and a link back to their listing,
+           so, like Himalayas, their rows always link to the listing on Jobicy
+           or Remote OK, carry a `via` credit, only count when the place they
+           are open to is one a Kenyan can take (see classify), and are never
+           part of the Monday digest. A problem there is a note, not a failure.
+
 Remote.co, CareerHound and FlexJobs are deliberately not sources: their terms
 forbid scraping and building a competing list from their listings. FlexJobs is
 linked from /jobs/ instead.
@@ -262,7 +270,12 @@ def rows_from(platform, payload):
                         j.get('createdAt', '')))
     elif platform == 'ashby':
         for j in payload.get('jobs', []):
-            out.append((j.get('title', ''), j.get('location', ''),
+            loc = j.get('location', '') or ''
+            others = [x.get('location', '') for x in (j.get('secondaryLocations') or []) if isinstance(x, dict)]
+            others = [x for x in others if x and x != loc]
+            if others:                    # "London" plus "EMEA" is open to Nairobi
+                loc = '; '.join([loc] + others) if loc else '; '.join(others)
+            out.append((j.get('title', ''), loc,
                         j.get('jobUrl') or j.get('applyUrl', ''), j.get('publishedAt', '')))
     elif platform == 'pinpoint':
         for j in payload.get('data', []):
@@ -424,6 +437,139 @@ def fetch_himalayas(fetch=None, sleep=time.sleep, now=None, env=None):
     return rows[:HIMALAYAS_KEEP], notes
 
 
+# ---- Jobicy and Remote OK ---------------------------------------------------
+# The two aggregators the jobs board (/jobs/) reads in the browser.
+#
+# Jobicy (jobicy.com/jobs-rss-feed): free API, commercial use allowed with no
+# separate agreement; asks that Jobicy is credited with a direct link and that
+# every apply button goes to the Jobicy job URL in the feed; one automated
+# pass an hour at most (this runs once a day). We read its "anywhere" and
+# "EMEA" regions, a few pages each.
+#
+# Remote OK (remoteok.com/api): the first element of the response is its
+# legal notice: link back to the Remote OK URL (followed, no nofollow) and
+# mention Remote OK as the source; the logo is a trademark and is not used.
+JOBICY_API = 'https://jobicy.com/api/jobs?count=200&geo=%s'
+JOBICY_GEOS = ('anywhere', 'emea')
+JOBICY_MAX_PAGES = 3
+REMOTEOK_API = 'https://remoteok.com/api'
+AGGREGATOR_KEEP = 200
+AGGREGATOR_MAX_AGE_DAYS = 30
+AGGREGATOR_PAUSE = 1.0
+JOBICY_TECH_INDUSTRY = re.compile(r'(software|engineering|devops|data|qa|testing|cyber|security|product|design|technical support)', re.I)
+
+
+def _when(value):
+    """ISO date/time or a unix epoch -> aware datetime, or None."""
+    if value in (None, ''):
+        return None
+    if isinstance(value, (int, float)) or (isinstance(value, str) and value.isdigit()):
+        return _from_unix(value)
+    try:
+        t = datetime.datetime.fromisoformat(str(value).strip().replace('Z', '+00:00').replace(' ', 'T', 1))
+    except ValueError:
+        return None
+    return t if t.tzinfo else t.replace(tzinfo=datetime.timezone.utc)
+
+
+def _aggregator_row(company, title, loc, url, posted, platform, via, now):
+    """Common checks for an aggregator's role. -> row or None."""
+    if not (title and company and loc):
+        return None
+    reach = classify(loc)
+    if not reach:                  # "Remote", "USA", "Europe": not a place a Kenyan can take
+        return None
+    if posted and (now - posted).days > AGGREGATOR_MAX_AGE_DAYS:
+        return None
+    return {'company': company, 'platform': platform, 'title': title, 'location': loc,
+            'url': url, 'posted': posted.isoformat() if posted else '', 'reach': reach, 'via': via}
+
+
+def jobicy_rows(payload, now=None):
+    """Tech roles on Jobicy open to Kenya, each linked to its Jobicy page."""
+    now = now or datetime.datetime.now(datetime.timezone.utc)
+    out = []
+    for j in (payload.get('jobs') if isinstance(payload, dict) else None) or []:
+        if not isinstance(j, dict):
+            continue
+        title = str(j.get('jobTitle') or '').strip()
+        url = str(j.get('url') or '').strip()
+        if not url.startswith('https://jobicy.com/'):
+            continue                   # the credit they ask for, and no odd links
+        industry = ' '.join(str(x) for x in (j.get('jobIndustry') or []))
+        if not (HIMALAYAS_TECH_TITLE.search(title) or JOBICY_TECH_INDUSTRY.search(industry)):
+            continue
+        row = _aggregator_row(str(j.get('companyName') or '').strip(), title, str(j.get('jobGeo') or '').strip(),
+                              url, _when(j.get('pubDate')), 'jobicy', 'Jobicy', now)
+        if row:
+            out.append(row)
+    return out
+
+
+def remoteok_rows(payload, now=None):
+    """Tech roles on Remote OK open to Kenya, each linked to its Remote OK page."""
+    now = now or datetime.datetime.now(datetime.timezone.utc)
+    out = []
+    for j in payload if isinstance(payload, list) else []:
+        if not isinstance(j, dict) or 'legal' in j or not j.get('position'):
+            continue                   # the first element is their terms, not a job
+        title = str(j.get('position') or '').strip()
+        url = str(j.get('url') or '').strip()
+        if not url.startswith('https://remoteok.com/'):
+            continue
+        if not HIMALAYAS_TECH_TITLE.search(title):
+            continue
+        row = _aggregator_row(str(j.get('company') or '').strip(), title, str(j.get('location') or '').strip(),
+                              url, _when(j.get('date')) or _when(j.get('epoch')), 'remoteok', 'Remote OK', now)
+        if row:
+            out.append(row)
+    return out
+
+
+def fetch_jobicy(fetch=None, sleep=time.sleep, now=None):
+    """-> (rows, notes). Never raises."""
+    fetch = fetch or get
+    rows, notes, seen = [], [], set()
+    for geo in JOBICY_GEOS:
+        url = JOBICY_API % geo
+        for page in range(JOBICY_MAX_PAGES):
+            try:
+                payload = fetch(url)
+            except urllib.error.HTTPError as e:
+                notes.append('Jobicy %s: HTTP %s' % (geo, e.code))
+                break
+            except (urllib.error.URLError, ValueError, TimeoutError, OSError) as e:
+                notes.append('Jobicy %s: %s' % (geo, e))
+                break
+            for r in jobicy_rows(payload, now):
+                if r['url'] not in seen:
+                    seen.add(r['url'])
+                    rows.append(r)
+            cursor = payload.get('nextCursor') if isinstance(payload, dict) else None
+            if not (isinstance(payload, dict) and payload.get('hasMore') and isinstance(cursor, str)
+                    and re.fullmatch(r'[A-Za-z0-9._~=-]{1,512}', cursor)):
+                break
+            url = (JOBICY_API % geo) + '&cursor=' + cursor
+            sleep(AGGREGATOR_PAUSE)
+        sleep(AGGREGATOR_PAUSE)
+    rows.sort(key=lambda r: r['posted'], reverse=True)
+    return rows[:AGGREGATOR_KEEP], notes
+
+
+def fetch_remoteok(fetch=None, now=None):
+    """-> (rows, notes). Never raises. Remote OK serves its latest jobs in one response."""
+    fetch = fetch or get
+    try:
+        payload = fetch(REMOTEOK_API)
+    except urllib.error.HTTPError as e:
+        return [], ['Remote OK: HTTP %s' % e.code]
+    except (urllib.error.URLError, ValueError, TimeoutError, OSError) as e:
+        return [], ['Remote OK: %s' % e]
+    rows = remoteok_rows(payload, now)
+    rows.sort(key=lambda r: r['posted'], reverse=True)
+    return rows[:AGGREGATOR_KEEP], []
+
+
 def fetch_careers_sources(registry=None, fetch=None, sleep=time.sleep, today=None):
     """-> (rows, notes) from the vetted employer websites in the registry. Never raises."""
     sources, notes = careers_pages.load_sources(registry or careers_pages.REGISTRY, today)
@@ -479,6 +625,22 @@ def main():
     snapshot.extend(hm_rows)
     print('  %-20s %-11s %4d roles kept' % ('Himalayas', 'api', len(hm_rows)))
 
+    # Then the two aggregators the jobs board reads, on the same terms: an
+    # employer's own listing, or an aggregator already counted, wins.
+    sources = ['Himalayas'] if hm_rows else []
+    for label, fetcher in (('Jobicy', fetch_jobicy), ('Remote OK', fetch_remoteok)):
+        try:
+            ag_rows, ag_notes = fetcher()
+        except Exception as e:            # a third-party feed must never stop the snapshot
+            ag_rows, ag_notes = [], ['%s: unexpected error, skipped: %s' % (label, e)]
+        notes.extend(ag_notes)
+        have = {(r['company'].lower(), r['title'].lower()) for r in snapshot}
+        ag_rows = [r for r in ag_rows if (r['company'].lower(), r['title'].lower()) not in have]
+        snapshot.extend(ag_rows)
+        if ag_rows:
+            sources.append(label)
+        print('  %-20s %-11s %4d roles kept' % (label, 'api', len(ag_rows)))
+
     if not snapshot:
         print('every feed failed; refusing to write an empty snapshot')
         for f in failures:
@@ -521,8 +683,8 @@ def main():
             'role_count': sum(c['eligible'] for c in companies),
             'local_role_count': sum(1 for r in snapshot if r['reach'] == 'local'),
             'roles_scanned': len(snapshot)}
-    if hm_rows:
-        meta['sources'] = ['Himalayas']
+    if sources:
+        meta['sources'] = sources
 
     # public: enough to prove the list is real, nothing anyone can apply with
     summary = dict(meta)
