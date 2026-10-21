@@ -349,6 +349,7 @@ STATIC_PAGES = [
     ('/',                            '1.00', 'weekly'),
     ('/blog/',                       '0.90', 'daily'),
     ('/blog/daily/',                 '0.90', 'daily'),
+    ('/blog/reading/',               '0.80', 'weekly'),
     ('/jobs/',                       '0.90', 'daily'),
     ('/shop/',                       '0.90', 'weekly'),
     ('/cv-pack/',                    '0.85', 'monthly'),
@@ -385,6 +386,11 @@ for loc, pri, freq in STATIC_PAGES:
     rows.append((loc, today, freq, pri))
 for d in eds:                                     # newest first, already sorted
     rows.append((f'/blog/daily/{d["slug"]}/', d['slug'], 'never', '0.70'))
+_reading = os.path.join(ROOT, 'blog', 'reading', '_src', 'issues')
+if os.path.isdir(_reading):                       # The Reading List (scripts/build_reading.py)
+    for _f in sorted(os.listdir(_reading), reverse=True):
+        if re.fullmatch(r'\d{4}-\d{2}-\d{2}\.html', _f) and os.path.isdir(os.path.join(ROOT, 'blog', 'reading', _f[:-5])):
+            rows.append((f'/blog/reading/{_f[:-5]}/', _f[:-5], 'never', '0.60'))
 
 xml = ['<?xml version="1.0" encoding="UTF-8"?>',
        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
