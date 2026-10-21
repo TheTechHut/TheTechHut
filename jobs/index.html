@@ -115,7 +115,12 @@
     .job h3 a:hover { text-decoration: underline; text-decoration-thickness: 1px; }
     .job .co { display: inline-block; max-width: 100%; font-weight: 700; font-size: 15.5px; color: var(--ink); }
     .job .meta { display: inline; font-family: var(--mono); font-size: 13px; color: var(--dim); }
-    .job .meta span { white-space: nowrap; }
+    /* the place can be long ("South San Francisco, California, USA"), so it may wrap;
+       only the short "2 days ago" is kept on one line */
+    .job .meta span { white-space: normal; overflow-wrap: anywhere; }
+    .job .meta span + span { white-space: nowrap; }
+    .job > div { min-width: 0; }
+    .job h3, .job .co { overflow-wrap: anywhere; }
     .job .meta span::before { content: "·"; margin: 0 8px; color: #9FBAC4; }
     .job .excerpt { font-size: 15.5px; color: var(--muted); line-height: 1.5; margin: 7px 0 0; max-width: 70ch;
       display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
