@@ -613,7 +613,8 @@
     $('fcount').textContent = n ? '(' + n + ' on)' : '';
   }
 
-  function apply() {
+  // keepPage: when roles arrive while someone is reading, stay on their page.
+  function apply(keepPage) {
     updateFilterCount();
     var q = state.q.toLowerCase();
     view = all.filter(function (j) {
@@ -636,13 +637,13 @@
     if (state.sort === 'title') view.sort(function (a, b) { return a.title.localeCompare(b.title); });
     else if (state.sort === 'company') view.sort(function (a, b) { return a.company.localeCompare(b.company); });
     else view.sort(function (a, b) { return (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0); });
-    setPage(1, false);
+    setPage(keepPage ? page : 1, false);
   }
 
   function card(j) {
     var initial = esc((j.company || '?').charAt(0).toUpperCase());
     var logo = j.logo
-      ? '<img src="' + esc(j.logo) + '" alt="" decoding="async" onerror="this.remove()">'
+      ? '<img src="' + esc(j.logo) + '" alt="" loading="lazy" decoding="async" onerror="this.remove()">'
       : '';
     var stage = stageLabel(j.stage);
     var chips = (stage ? [stage] : []).concat(j.cats.slice(0, 2)).concat(j.types.slice(0, 1))
@@ -738,6 +739,8 @@
     }
     fill($('ftype'), types, 'All types');
     fill($('fcat'), cats, 'All categories');
+    $('ftype').value = types[state.type] ? state.type : '';      // keep a choice made while loading
+    $('fcat').value = cats[state.cat] ? state.cat : '';
   }
 
   // --- wiring --------------------------------------------------------------
@@ -814,13 +817,36 @@
   }).join('');
 
   var startPage = pageFromHash();          // read before apply() resets it to 1
-  function show(jobs, when) {
+  var shownOnce = false;
+  function draw(jobs) {                     // first time: open on the page in the address; after that, stay put
     all = jobs;
-    if (!all.length) throw new Error('empty');
-    try { localStorage.setItem('tth-jobs', JSON.stringify({ t: Date.now(), jobs: all.slice(0, 60) })); } catch (e) {}
-    $('count').textContent = all.length + ' open roles · updated ' + when.toLocaleString('en-KE',
+    fillSelects();
+    if (shownOnce) { apply(true); return; }
+    shownOnce = true;
+    apply(); setPage(startPage, false);
+  }
+  function show(jobs, when) {
+    if (!jobs.length) throw new Error('empty');
+    try { localStorage.setItem('tth-jobs', JSON.stringify({ t: Date.now(), jobs: jobs.slice(0, 60) })); } catch (e) {}
+    $('count').textContent = jobs.length + ' open roles · updated ' + when.toLocaleString('en-KE',
       { day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: 'Africa/Nairobi' });
-    fillSelects(); apply(); setPage(startPage, false);
+    draw(jobs);
+  }
+  // Live fallback, asynchronously: roles appear as each feed answers instead of
+  // after the slowest one, redrawn at most every 400 ms.
+  function loadLive() {
+    var timer = null, latest = null;
+    function flush() { timer = null; if (latest && latest.length) draw(latest); }
+    return F.load({
+      onProgress: function (rows, done, total) {
+        latest = rows;
+        $('count').textContent = rows.length + ' roles so far · reading ' + (total - done) + ' more job board' + (total - done === 1 ? '' : 's') + '…';
+        if (!timer) timer = setTimeout(flush, shownOnce ? 400 : 0);
+      }
+    }).then(function (jobs) {
+      if (timer) { clearTimeout(timer); timer = null; }
+      show(jobs, new Date());
+    });
   }
   // First the one small file GitHub Actions builds every few hours from all the
   // feeds (scripts/build_jobs_board.js): a single request instead of ~45 and
@@ -834,16 +860,13 @@
       if (!d || !Array.isArray(d.jobs) || d.jobs.length < 20 || isNaN(t) || Date.now() - t > STALE_MS) throw new Error('stale');
       show(d.jobs, new Date(t));
     })
-    .catch(function () {
-      return F.load().then(function (jobs) { show(jobs, new Date()); });
-    })
+    .catch(loadLive)
     .catch(function () {
     var cached = null;
     try { cached = JSON.parse(localStorage.getItem('tth-jobs') || 'null'); } catch (e) {}
     if (cached && cached.jobs && cached.jobs.length) {
-      all = cached.jobs;
-      $('count').textContent = all.length + ' roles · showing your last saved copy';
-      fillSelects(); apply(); setPage(startPage, false);
+      $('count').textContent = cached.jobs.length + ' roles · showing your last saved copy';
+      draw(cached.jobs);
     } else {
       $('count').textContent = '';
       $('list').innerHTML = '<div class="state"><h3>Couldn\'t load roles just now</h3>' +

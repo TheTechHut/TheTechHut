@@ -429,20 +429,37 @@
       .then(function (a) { return Array.isArray(a) ? fromRemoteOK(a.slice(1)) : []; }).catch(function () { return []; });
 
     var boards = COMPANIES.map(loadCompany);
+    var sources = [jobicy, rok].concat(boards);
 
-    return Promise.all([jobicy, rok].concat(boards)).then(function (res) {
-      var merged = [].concat.apply([], res).filter(function (j) { return j.title && j.url; });
-      merged.forEach(function (j) { if (!j.region) j.region = regionOf(j.location); });
-      var seen = {};
-      merged = merged.filter(function (j) {                 // same role listed on both boards
-        var k = (j.title + '|' + j.company).toLowerCase().replace(/[^a-z0-9|]/g, '');
-        if (seen[k]) return false; seen[k] = 1; return true;
+    // Roles arrive source by source: report each batch as it lands
+    // (opts.onProgress(rolesSoFar, sourcesDone, sourcesTotal)) so a page can
+    // show the first roles while slower feeds are still loading.
+    var parts = [], done = 0;
+    if (typeof opts.onProgress === 'function') {
+      sources.forEach(function (p) {
+        p.then(function (rows) {
+          parts.push(rows || []);
+          done++;
+          try { opts.onProgress(merge(parts), done, sources.length); } catch (e) {}
+        });
       });
-      merged.sort(function (a, b) { return (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0); });
-      return merged;
-    });
+    }
+    return Promise.all(sources).then(merge);
   }
 
+  // All sources' roles as one list: dropped if broken, de-duplicated when the
+  // same role is listed on two boards, newest first.
+  function merge(res) {
+    var merged = [].concat.apply([], res).filter(function (j) { return j && j.title && j.url; });
+    merged.forEach(function (j) { if (!j.region) j.region = regionOf(j.location); });
+    var seen = {};
+    merged = merged.filter(function (j) {
+      var k = (j.title + '|' + j.company).toLowerCase().replace(/[^a-z0-9|]/g, '');
+      if (seen[k]) return false; seen[k] = 1; return true;
+    });
+    merged.sort(function (a, b) { return (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0); });
+    return merged;
+  }
 
   return {
     COMPANIES: COMPANIES, load: load, clean: clean, esc: esc, ago: ago, safeUrl: safeUrl,
