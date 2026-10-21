@@ -218,7 +218,9 @@
         <button type="button" data-chip="design">Design</button>
         <button type="button" data-chip="data">Data</button>
         <button type="button" data-chip="devops">DevOps</button>
-        <button type="button" data-chip="junior">Entry level</button>
+        <button type="button" data-stage="intern">Internships</button>
+        <button type="button" data-stage="graduate">Graduate schemes</button>
+        <button type="button" data-stage="entry">Entry level</button>
       </div>
     </div>
   </header>
@@ -245,6 +247,16 @@
         </div>
       </div>
       <div class="fgroup wide">
+        <label>Level</label>
+        <div class="pills" id="fstage">
+          <button type="button" data-stage="" aria-pressed="true">Any level</button>
+          <button type="button" data-stage="intern" aria-pressed="false">Internships &amp; attachments</button>
+          <button type="button" data-stage="apprentice" aria-pressed="false">Apprenticeships</button>
+          <button type="button" data-stage="graduate" aria-pressed="false">Graduate &amp; trainee schemes</button>
+          <button type="button" data-stage="entry" aria-pressed="false">Entry level</button>
+        </div>
+      </div>
+      <div class="fgroup wide">
         <label>Date posted</label>
         <div class="pills" id="fdate">
           <button type="button" data-days="0" aria-pressed="true">Any time</button>
@@ -263,6 +275,48 @@
         <h2>Employers hiring directly</h2>
         <p>These employers run recruitment systems we can&rsquo;t read automatically. Their openings
            are not in the list above &mdash; check their own portals.</p>
+        <details>
+          <summary>Internships &amp; graduate schemes <span class="n">11</span></summary>
+          <ul>
+            <li><a href="/apprenticeship/">
+              The Tech Hut Apprenticeship <span>Ours: eight weeks with mentors on a real software project</span></a></li>
+            <li><a href="https://pscims.publicservice.go.ke/jobs/ActiveAdvertsInternsInternshipExt.aspx" target="_blank" rel="noopener">
+              Public Service Internship Programme <span>Paid stipend &middot; 12 months in a ministry or state agency</span></a></li>
+            <li><a href="https://recruitment.digitalent.go.ke/" target="_blank" rel="noopener">
+              Presidential Digital Talent Programme <span>Paid stipend &middot; 12-month ICT internship in government for graduates aged 21&ndash;29</span></a></li>
+            <li><a href="https://www.safaricom.co.ke/career/internship-program" target="_blank" rel="noopener">
+              Safaricom internships &amp; attachments <span>6-month internships and 3-month attachments, technology among them; pay not stated</span></a></li>
+            <li><a href="https://ke.kcbgroup.com/careers" target="_blank" rel="noopener">
+              KCB Management Trainee Programme <span>24 months for recent graduates, IT and computer science included; the 2026 intake closed in July</span></a></li>
+            <li><a href="https://ncbagroup.com/careers/" target="_blank" rel="noopener">
+              NCBA Go-Getter Internship <span>11 months for fresh graduates; pay not stated; watch NCBA&rsquo;s careers page</span></a></li>
+            <li><a href="https://careers.centralbank.go.ke/" target="_blank" rel="noopener">
+              Central Bank of Kenya <span>One-year internships in IT, finance and research when advertised</span></a></li>
+            <li><a href="https://hrmis.cma.or.ke/Jobpostings/" target="_blank" rel="noopener">
+              Capital Markets Authority <span>Internships when advertised, for law, finance and ICT graduates</span></a></li>
+            <li><a href="https://www.sc.com/en/global-careers/early-careers/our-programmes/graduates/" target="_blank" rel="noopener">
+              Standard Chartered graduate programmes <span>Applications usually open August&ndash;September</span></a></li>
+            <li><a href="https://www.absa.africa/careers/graduate-opportunities/" target="_blank" rel="noopener">
+              Absa graduate opportunities <span>Across Absa&rsquo;s African markets</span></a></li>
+            <li><a href="https://www.standardbank.com/sbg/standard-bank-group/careers/students-and-graduates" target="_blank" rel="noopener">
+              Standard Bank students &amp; graduates <span>Paid internships and graduate roles across the group</span></a></li>
+          </ul>
+        </details>
+        <details>
+          <summary>International internships <span class="n">5</span></summary>
+          <ul>
+            <li><a href="https://worldbank.org/en/about/careers/programs-and-internships/internship" target="_blank" rel="noopener">
+              World Bank internships <span>Paid by the hour &middot; for final-year and postgraduate students</span></a></li>
+            <li><a href="https://www.afdb.org/en/about-us/careers/internship-programme/terms-and-conditions" target="_blank" rel="noopener">
+              African Development Bank internships <span>Monthly stipend &middot; for master&rsquo;s students aged 30 or under</span></a></li>
+            <li><a href="https://www.afdb.org/en/careers/young-professionals-program-ypp/eligibility-requirements" target="_blank" rel="noopener">
+              AfDB Young Professionals Program <span>Salaried, three years &middot; master&rsquo;s degree, aged 32 or under</span></a></li>
+            <li><a href="https://www.undp.org/careers/frequently-asked-questions" target="_blank" rel="noopener">
+              UNDP internships <span>Usually a monthly stipend; students and recent graduates</span></a></li>
+            <li><a href="https://careers.microsoft.com/v2/global/en/internship_eligibility" target="_blank" rel="noopener">
+              Microsoft university internships <span>For students; Kenya is one of the listed locations</span></a></li>
+          </ul>
+        </details>
         <details open>
           <summary>Banks in Kenya <span class="n">9</span></summary>
           <ul>
@@ -431,6 +485,7 @@
               FlexJobs <span>Paid membership; remote and flexible roles screened by its team. Check each role&rsquo;s location rules.</span></a></li>
           </ul>
         </details>
+        <p class="also">Pay is as each programme states it. A real internship never asks you to pay to apply.</p>
         <p class="also">Standard Bank Group (with Stanbic and Liberty), Afreximbank, OUTsurance, Watu, Turaco and the other employers named at the foot of this page publish open job feeds, so their roles are in the list above.</p>
       </div>
 
@@ -536,7 +591,7 @@
 <script>
 (function () {
   var PAGE = 20, page = 1, all = [], view = [];
-  var state = { q: '', type: '', cat: '', region: '', days: 0, sort: 'date' };
+  var state = { q: '', type: '', cat: '', region: '', stage: '', days: 0, sort: 'date' };
   var $ = function (id) { return document.getElementById(id); };
 
   // --- helpers -------------------------------------------------------------
@@ -594,6 +649,24 @@
     }
     return main + ' + ' + others.length + ' more';
   }
+  // Early careers, from the title: internships and attachments, apprenticeships,
+  // graduate and trainee schemes, and entry-level roles.
+  var STAGES = [
+    ['intern',     /\bintern(s|ship|ships)?\b|\battach(ment|ee)\b|industrial training|work[- ]study|placement student/i, 'Internship'],
+    ['apprentice', /apprentic/i, 'Apprenticeship'],
+    ['graduate',   /graduate|trainee|early[- ]careers?|\bgrad\b|young professional/i, 'Graduate scheme'],
+    ['entry',      /junior|entry[- ]level|\bjr\b/i, 'Entry level']
+  ];
+  function stageOf(title, level) {
+    for (var i = 0; i < STAGES.length; i++) if (STAGES[i][1].test(title || '')) return STAGES[i][0];
+    return /^entry/i.test(level || '') ? 'entry' : '';
+  }
+  function stageLabel(key) {
+    for (var i = 0; i < STAGES.length; i++) if (STAGES[i][0] === key) return STAGES[i][2];
+    return '';
+  }
+  // A whole programme ("Graduate Programme 2027") is let through even without a tech word in it.
+  var PROGRAMME = /(graduate|trainee|internship|apprenticeship|attachment)\s+(programme|program|scheme)|management trainee|graduate trainee/i;
   function regionOf(loc) {
     var l = loc || '';
     if (KE.test(l)) return 'Kenya';
@@ -893,7 +966,7 @@
                : co.ats === 'breezy'     ? fromBreezy(d, co)
                : co.ats === 'wordpress'  ? fromWordPress(d, co)
                :                           fromAshby(d, co);
-      jobs = jobs.filter(function (j) { return j.title && j.url && isTechRole(j.title); });
+      jobs = jobs.filter(function (j) { return j.title && j.url && (isTechRole(j.title) || PROGRAMME.test(j.title)); });
       jobs.forEach(function (j) { j.region = regionOf(j.where || j.location); });
       jobs.sort(function (a, b) { return REGION_RANK[a.region] - REGION_RANK[b.region]; });
       return jobs.slice(0, PER_COMPANY);
@@ -931,7 +1004,7 @@
   }
   function syncFilters() { setFiltersOpen(!narrow.matches); }
   function updateFilterCount() {
-    var n = (state.type ? 1 : 0) + (state.cat ? 1 : 0) + (state.region ? 1 : 0) + (state.days ? 1 : 0);
+    var n = (state.type ? 1 : 0) + (state.cat ? 1 : 0) + (state.region ? 1 : 0) + (state.stage ? 1 : 0) + (state.days ? 1 : 0);
     $('fcount').textContent = n ? '(' + n + ' on)' : '';
   }
 
@@ -946,7 +1019,9 @@
       }
       if (state.type && j.types.indexOf(state.type) === -1) return false;
       if (state.cat && j.cats.indexOf(state.cat) === -1) return false;
+      if (j.stage === undefined) j.stage = stageOf(j.title, j.level);
       if (state.region && j.region !== state.region) return false;
+      if (state.stage && j.stage !== state.stage) return false;
       if (state.days) {
         var t = Date.parse(j.date);
         if (isNaN(t) || t < Date.now() - state.days * 864e5) return false;
@@ -964,7 +1039,9 @@
     var logo = j.logo
       ? '<img src="' + esc(j.logo) + '" alt="" decoding="async" onerror="this.remove()">'
       : '';
-    var chips = j.cats.slice(0, 2).concat(j.types.slice(0, 1)).concat(j.level ? [j.level] : []);
+    var stage = stageLabel(j.stage);
+    var chips = (stage ? [stage] : []).concat(j.cats.slice(0, 2)).concat(j.types.slice(0, 1))
+      .concat(j.level && !stage ? [j.level] : []);
     return '<article class="job">' +
       '<div class="logo">' + initial + logo + '</div>' +
       '<div>' +
@@ -1076,13 +1153,30 @@
     b.setAttribute('aria-pressed', 'true');
     state.days = +b.dataset.days; apply();
   });
+  function pressStage(key) {
+    [].forEach.call($('fstage').querySelectorAll('button'), function (x) {
+      x.setAttribute('aria-pressed', x.dataset.stage === key ? 'true' : 'false');
+    });
+  }
+  $('fstage').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-stage]'); if (!b) return;
+    pressStage(b.dataset.stage);
+    state.stage = b.dataset.stage; apply();
+  });
   document.querySelector('.chips').addEventListener('click', function (e) {
+    var s = e.target.closest('button[data-stage]');
+    if (s) {
+      pressStage(s.dataset.stage); state.stage = s.dataset.stage; apply();
+      document.querySelector('.listhead').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
     var b = e.target.closest('button[data-chip]'); if (!b) return;
     $('q').value = b.dataset.chip; state.q = b.dataset.chip; apply();
     document.querySelector('.listhead').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
   $('clear').addEventListener('click', function () {
-    state = { q: '', type: '', cat: '', region: '', days: 0, sort: 'date' };
+    state = { q: '', type: '', cat: '', region: '', stage: '', days: 0, sort: 'date' };
+    pressStage('');
     $('q').value = ''; $('ftype').value = ''; $('fcat').value = ''; $('sort').value = 'date';
     [].forEach.call($('fdate').querySelectorAll('button'), function (x, i) {
       x.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
