@@ -12,6 +12,11 @@ original author's page, and the "why read it" note is our own writing, from
 reading the original. Never paste daily.dev's summaries, scores or
 comments, and never link through daily.dev.
 
+One exception: an author's own post published directly on daily.dev (not a
+daily.dev summary, "trend" write-up or a shared link to somewhere else) has
+no other original, so it is linked at https://daily.dev/posts/<id>. Mark
+such a pick <article class="pick native"> so the build accepts it.
+
 Sources (the only files you edit):
   blog/reading/_src/issues/YYYY-MM-DD.html   one issue per file:
       <!-- date: Wednesday, 21 October 2026 -->
@@ -112,14 +117,18 @@ def load(slug):
     d['alt'] = meta('alt', 'The Reading List')
     m = re.search(r'<p class="lede">(.*?)</p>', raw, re.S)
     d['lede'] = m.group(1).strip() if m else ''
-    i = raw.find('<article class="pick">')
+    i = raw.find('<article class="pick')
     d['body'] = raw[i:].strip() if i != -1 else ''
-    d['picks'] = re.findall(r'<article class="pick">.*?<h3><a href="([^"]+)"[^>]*>(.*?)</a></h3>', d['body'], re.S)
-    if not d['picks']:
+    found = re.findall(r'<article class="pick( native)?">.*?<h3><a href="([^"]+)"[^>]*>(.*?)</a></h3>', d['body'], re.S)
+    if not found:
         sys.exit('build_reading.py: %s.html has no picks' % slug)
-    for url, _ in d['picks']:
-        if not url.startswith('https://') or 'daily.dev' in url:
-            sys.exit('build_reading.py: %s.html links to %s; link the original author over https, never daily.dev' % (slug, url))
+    for native, url, _ in found:
+        if not url.startswith('https://'):
+            sys.exit('build_reading.py: %s.html links to %s; use https' % (slug, url))
+        if 'daily.dev' in url and not (native and re.fullmatch(r'https://daily\.dev/posts/[A-Za-z0-9_-]+', url)):
+            sys.exit('build_reading.py: %s.html links to %s; link the original author, not daily.dev '
+                     '(an author\'s own daily.dev post: <article class="pick native"> and https://daily.dev/posts/<id>)' % (slug, url))
+    d['picks'] = [(url, title) for _, url, title in found]
     if '<!--' in d['body']:
         sys.exit('build_reading.py: stray comment inside the picks of %s.html' % slug)
     return d

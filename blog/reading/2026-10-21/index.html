@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Reading List, Wednesday, 21 October 2026 | The Tech Hut Blog</title>
-  <meta name="description" content="This week&#x27;s picks: How to Apply Secure By Design Practices To Money Software; Why Shopify Migrated From React Native; EP229: 8 Chunking strategies for RAG-based agents; JEP 540: Simple JSON API (Incubator); Jobs at Blender.">
+  <meta name="description" content="This week&#x27;s picks: How to Apply Secure By Design Practices To Money Software; Why Shopify Migrated From React Native; Are Dark Software Factories the Next Big Thing in Software Engineering; EP229: 8 Chunking strategies for RAG-based agents; JEP 540: Simple JSON API (Incubator); Jobs at Blender.">
   <meta name="author" content="The Tech Hut">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#073B4C">
@@ -15,14 +15,14 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="The Tech Hut">
   <meta property="og:title" content="The Reading List, Wednesday, 21 October 2026 | The Tech Hut Blog">
-  <meta property="og:description" content="This week&#x27;s picks: How to Apply Secure By Design Practices To Money Software; Why Shopify Migrated From React Native; EP229: 8 Chunking strategies for RAG-based agents; JEP 540: Simple JSON API (Incubator); Jobs at Blender.">
+  <meta property="og:description" content="This week&#x27;s picks: How to Apply Secure By Design Practices To Money Software; Why Shopify Migrated From React Native; Are Dark Software Factories the Next Big Thing in Software Engineering; EP229: 8 Chunking strategies for RAG-based agents; JEP 540: Simple JSON API (Incubator); Jobs at Blender.">
   <meta property="og:url" content="https://thetechhut.co/blog/reading/2026-10-21/">
   <meta property="og:image" content="https://images.unsplash.com/photo-1630659509436-7397fbda30e2?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop">
   <meta property="og:image:alt" content="Two developers going through code together on a laptop">
   <meta property="og:locale" content="en_KE">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="The Reading List, Wednesday, 21 October 2026 | The Tech Hut Blog">
-  <meta name="twitter:description" content="This week&#x27;s picks: How to Apply Secure By Design Practices To Money Software; Why Shopify Migrated From React Native; EP229: 8 Chunking strategies for RAG-based agents; JEP 540: Simple JSON API (Incubator); Jobs at Blender.">
+  <meta name="twitter:description" content="This week&#x27;s picks: How to Apply Secure By Design Practices To Money Software; Why Shopify Migrated From React Native; Are Dark Software Factories the Next Big Thing in Software Engineering; EP229: 8 Chunking strategies for RAG-based agents; JEP 540: Simple JSON API (Incubator); Jobs at Blender.">
   <meta name="twitter:image" content="https://images.unsplash.com/photo-1630659509436-7397fbda30e2?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,14 +65,14 @@
     <figure class="pic"><img src="https://images.unsplash.com/photo-1630659509436-7397fbda30e2?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="Two developers going through code together on a laptop" fetchpriority="high" decoding="async" onerror="this.remove()"></figure>
     <div class="panel">
       <a class="cat" href="/blog/reading/">The Reading List &middot; Nº 1</a>
-      <h1>5 things worth reading this week</h1>
+      <h1>6 things worth reading this week</h1>
       <p class="by"><b>The Tech Hut</b> &middot; <time datetime="2026-10-21">Wednesday, 21 October 2026</time></p>
     </div>
   </header>
 
   <div class="wrap art-body">
     <section class="reading">
-      <p class="lede">This week: making money code harder to get wrong, why Shopify left React Native for native apps, eight ways to cut documents up for AI search, Java's own JSON parser, and a Blender engineering job that is open to remote applicants.</p>
+      <p class="lede">This week: making money code harder to get wrong, why Shopify left React Native for native apps, the case for and against letting AI agents ship code nobody reads, eight ways to cut documents up for AI search, Java's own JSON parser, and a Blender engineering job that is open to remote applicants.</p>
 
       <article class="pick">
   <span class="kicker">Fintech</span>
@@ -86,6 +86,13 @@
   <h3><a href="https://blog.bytebytego.com/p/why-shopify-migrated-from-react-native" target="_blank" rel="noopener">Why Shopify Migrated From React Native</a></h3>
   <p class="src">ByteByteGo &middot; 20 October 2026</p>
   <p>Shopify adopted React Native in 2020 and is now moving its apps back to native Swift and Kotlin. The reason is new: AI coding agents made writing each feature twice cheap, as long as there is a working app to copy from and a way to check what the agents produce. Shopify broke the rewrite into small checkpoints, each passing behaviour tests, a visual comparison with the old app, an adversarial code review and a developer's review. The Shop app went native in 12 weeks; Android start-up time roughly halved, from about 4.4 to 2.2 seconds, and the Android app shrank from 293 MB to 184 MB. Worth reading before you choose a cross-platform framework for your next app, and as a model for checking AI-written code.</p>
+</article>
+
+<article class="pick native">
+  <span class="kicker">AI</span>
+  <h3><a href="https://daily.dev/posts/nj4ej2VBY" target="_blank" rel="noopener">Are Dark Software Factories the Next Big Thing in Software Engineering</a></h3>
+  <p class="src">Pavan Belagatti &middot; on daily.dev &middot; 18 October 2026</p>
+  <p>A "dark" software factory, named after factories that run with the lights off, is a pipeline in which AI agents plan, write, review, test, ship and monitor code, and no person reads the pull requests: automated tests and checks decide what goes live. Belagatti's short post is a useful reality check on the idea. The biggest risk, he argues, is "comprehension debt": when production breaks, nobody on the team has read the code that shipped. His advice is to keep fully autonomous pipelines for repetitive, well-tested, low-risk parts of a system, and for most teams to keep people at the approval gates. His <a href="https://dzone.com/articles/ai-software-factory" target="_blank" rel="noopener">longer guide on DZone</a> walks through each stage of such a pipeline, built around Port, the tool he uses.</p>
 </article>
 
 <article class="pick">
