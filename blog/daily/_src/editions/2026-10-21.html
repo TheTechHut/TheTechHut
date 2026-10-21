@@ -1,0 +1,58 @@
+<!-- date: Wednesday, 21 October 2026 -->
+<!-- number: Edition Nº 47 -->
+<p class="edition-lede">PHP ships emergency fixes for two flaws that let a single web request take over a server, Cassava puts Nvidia's open Nemotron models on its African AI platform, the CMA asks QVSE victims for crypto wallet details, Stanbic Ghana explores stablecoin payments to Asian suppliers, and a Kaspersky survey says half of Gen Z have been hit by an attack.</p>
+
+<article class="lead">
+      <div class="txt">
+        <span class="kicker">Featured · Security</span>
+        <h3>PHP rushes out fixes for "PHP2Shell", two flaws that can take over a web server with one request</h3>
+        <p class="dek">If your website runs on PHP, which covers WordPress, Drupal, Joomla and Laravel, update PHP itself today. The PHP project released versions 8.5.12, 8.4.27, 8.3.36 and 8.2.35 this afternoon, at about 5 PM Nairobi time, fixing two vulnerabilities each rated 9.2 out of 10 (CVSS v4.0). In PHP's words, CVE-2026-109618 lets out-of-memory handling interrupt PHP while request data is half set up, so cleanup then treats bad data as good; CVE-2026-109619 lets internal state from one request outlive its memory, so the next request on the same worker can use it. The bugs sit in PHP, not in your code, so a well-written app is still exposed. Every setup that serves web pages is affected, including PHP-FPM, Apache's mod_php, php-cgi, FrankenPHP and LiteSpeed; PHP rates mod_php the highest risk, with a demonstrated exploit in which an unauthenticated request triggers the attack before any application code runs. Researchers also showed the flaws can leak a worker's memory, and with it passwords, tokens and keys from other visitors' requests. The bugs were found by Wiz Research, Calif and OpenAI's Codex Security team, who say AI models helped turn them into working exploits; Wiz reported them to PHP on 24 August, and the code had been in PHP for more than a decade, in releases going back to 5.4. Details leaked on Hacker News on Tuesday, two days before the planned disclosure, so PHP brought the release forward. Cloudflare said it saw early exploit attempts and added firewall rules, while watchTowr had seen no attacks in the wild by this morning; the Netherlands took DigiD and other government sites offline as a precaution. What to do: update the PHP runtime and restart Apache, PHP-FPM and any long-running workers; on Linux distribution packages, check the changelog for the two CVE numbers rather than the version string; on shared hosting, check your PHP version in your control panel and ask your host whether it has patched. PHP 8.1 and older get no official updates, though PHP has published source fixes for 7.4, 8.0 and 8.1. Setting <code>session.upload_progress.enabled=0</code> and keeping <code>post_max_size</code> low reduce the risk, but PHP says such steps "do not make an installation safe".</p>
+        <p class="story-src">Sources: <a href="https://www.php.net/archive/2026.php" target="_blank" rel="noopener">PHP</a> &middot; <a href="https://thehackernews.com/2026/10/php-issues-emergency-patches-for-two.html" target="_blank" rel="noopener">The Hacker News</a> &middot; <a href="https://www.wiz.io/blog/php2shell-php-rce" target="_blank" rel="noopener">Wiz</a> &middot; <a href="https://blog.qualys.com/vulnerabilities-threat-research/2026/10/20/php-announces-critical-security-release-for-two-vulnerabilities" target="_blank" rel="noopener">Qualys</a></p>
+      </div>
+      <div class="pic"><img src="https://images.unsplash.com/photo-1584169417032-d34e8d805e8b?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="An aisle between rows of server racks in a data centre" fetchpriority="high" decoding="async" onerror="this.remove()"></div>
+    </article>
+
+    <div class="story-list">
+      <article class="story">
+        <div class="thumb">AI</div>
+        <div class="txt">
+          <h3>Cassava adds Nvidia's open Nemotron models to its African AI platform</h3>
+          <p>Cassava Technologies has added Nvidia's Nemotron family, open models built for reasoning and for agents that use tools, to its AI Factory. Businesses reach them through an API on Cassava's model exchange, CAIMEx, without running their own hardware, and because Nvidia publishes the weights, training data and methods, developers can adapt them. Cassava also announced a "token optimiser" that reuses text a model has already processed, to cut costs, and is using Nvidia's OpenShell to control what AI agents may do. It gave no prices, languages, model versions or savings figures, and Techweez notes the Kenyan data centre is described as due for an upgrade, not confirmed as running the models. The news follows yesterday's World Bank plan naming Cassava as a partner in shared, pay-as-you-go computing for African governments.</p>
+          <p class="story-src"><a href="https://techweez.com/2026/10/21/cassava-adds-nvidia-nemotron-models-to-its-ai-platform-for-african-businesses/" target="_blank" rel="noopener">Techweez</a></p>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="thumb">CRYPTO</div>
+        <div class="txt">
+          <h3>The CMA wants crypto wallet details from anyone who paid into QVSE or Global Investment Group</h3>
+          <p>The Capital Markets Authority has asked the public for crypto wallet addresses and transaction IDs linked to QVSE and Global Investment Group, two unlicensed platforms it named in September. Tech-ish's earlier investigation found QVSE asked new members for at least KES 65,000 and promised daily returns on Apple, Tesla and Nvidia shares, and that since 4 September users trying to withdraw have been shown a notice citing US rules. Two women have been charged in Nairobi with running an unlicensed collective investment scheme; they pleaded not guilty and were released on KES 200,000 bonds. Information can go to complaints@cma.or.ke or the CMA's whistleblower portal. The CMA has not said how many people lost money or how much. Separately, unlicensed crypto providers have until 4 November to get licensed under the new virtual asset law.</p>
+          <p class="story-src"><a href="https://tech-ish.com/2026/10/21/cma-seeks-crypto-wallet-details-in-qvse-gig-probe/" target="_blank" rel="noopener">Tech-ish</a></p>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="thumb">FINTECH</div>
+        <div class="txt">
+          <h3>Stanbic Ghana looks at stablecoins to pay suppliers in Asia</h3>
+          <p>Stanbic Bank Ghana, part of the Standard Bank group that owns Stanbic Kenya, is exploring a stablecoin-based way for Ghanaian businesses to pay suppliers in Asia with RD Technologies. The bank would keep the customer side, from KYC checks to settling in cedis, while RD Technologies would supply the digital-asset rails and its Asian payment network. The aim is fewer middlemen, faster settlement and lower costs than today's cross-border payments. It is at the exploratory stage: a controlled pilot depends on a regulator's no-objection, and no launch date, fees or stablecoin have been named.</p>
+          <p class="story-src"><a href="https://techtrendske.co.ke/2026/10/21/stanbic-ghana-stablecoin-payments-asia/" target="_blank" rel="noopener">TechTrends</a></p>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="thumb">SECURITY</div>
+        <div class="txt">
+          <h3>Half of Gen Z have been hit by an attack on a device or account, a Kaspersky survey says</h3>
+          <p>In a 7,200-person global survey by Kaspersky, 52% of Gen Z respondents said their devices, accounts or personal data had been attacked; 17% had a social media account hacked and 12% lost a gaming account. Two-thirds use a phone as their main way online, but only 27% run security software on it and 28% regularly back it up. Kaspersky's Irina Ermilova says being at ease with apps is not the same as being able to spot a scam. The usual caveats apply: it is a security vendor's own research, with no Kenya figures, no age range for "Gen Z" and no margin of error published.</p>
+          <p class="story-src"><a href="https://techtrendske.co.ke/2026/10/21/kaspersky-gen-z-cybersecurity-gaps-2026/" target="_blank" rel="noopener">TechTrends</a></p>
+        </div>
+      </article>
+    </div>
+
+    <div class="numbers">
+      <div class="num"><b>9.2</b><span>severity of each PHP flaw, out of 10 (CVSS v4.0)</span></div>
+      <div class="num"><b>5.4</b><span>the oldest PHP release the researchers found affected</span></div>
+      <div class="num"><b>KES 65,000</b><span>minimum QVSE asked new members to pay in, per Tech-ish</span></div>
+      <div class="num"><b>52%</b><span>of Gen Z respondents hit by an attack, in Kaspersky's survey</span></div>
+    </div>
