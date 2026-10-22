@@ -24,6 +24,8 @@
   ];
   var G = [
     // Made in Africa
+    { slug: 'matatu-manager', name: 'Matatu Manager', cat: 'africa', url: 'https://matatumanager.com/', legal: 'indie', phone: true, embed: true,
+      by: 'Kerubi Canvas Animation Studios, Kenya', line: 'Customise your matatu, take on trips and solve puzzles when things go wrong on the road. Compete in the league.' },
     { slug: 'lagos-life', name: 'Lagos Life', cat: 'africa', url: 'https://lagoslife.app', legal: 'indie', phone: true, embed: false,
       by: 'Shalom Rayhamen (Vatar), Nigeria', line: 'Build a life in Lagos: get a job, rent a place, get around the city and meet other players. Free, with optional paid extras.' },
 
