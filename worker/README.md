@@ -280,3 +280,44 @@ Sundays 04:30 UTC (07:30 Nairobi): .github/workflows/weekly-roundup.yml
   page, a privacy-policy paragraph, and a test.
 - Tests: `npm test` (Worker) and
   `python3 -m unittest scripts/tests/test_send_roundup.py scripts/tests/test_send_digest.py`.
+
+---
+
+## The games page counter
+
+`/games/` shows how many people are on the games pages right now and how many
+visits they have had in total. The numbers live in one Durable Object,
+`GameStats` (`src/games.js`); the page script is `assets/js/games-live.js`.
+
+### Setup
+
+Nothing to set. The binding and migration are already in `wrangler.toml`, so
+the next deploy from the Mac creates the object:
+
+```sh
+cd ~/Desktop/Robbie/Projects/TheTechHut/worker
+npx wrangler deploy
+```
+
+Until that deploy, the page hides the counter rather than showing an error.
+The visit total starts from zero on the first deploy.
+
+### How it counts
+
+- **Online now**: tabs that have pinged in the last 75 seconds. A tab pings
+  every 30 seconds while visible and says goodbye when it closes, so the
+  number follows people closely.
+- **Visits**: one per browser tab session on `/games/`, however many games
+  that tab opens. One IP address can add at most 30 an hour, so a script
+  can't run the number up.
+- Nothing personal is stored. Live ids are random, held in memory, and the
+  only thing written to storage is the visit total.
+
+### Things worth knowing
+
+- Both counters run on the Workers free plan (SQLite-backed Durable Objects
+  are included). The limit to watch is requests: each player costs about two
+  a minute, and the free plan allows 100,000 a day, roughly 800 hours of play.
+  The Cloudflare dashboard shows usage under Workers & Pages.
+- To check it from Terminal:
+  `curl -s -X POST https://thetechhut-pay.thetechhut.workers.dev/games/ping -H 'Origin: https://thetechhut.co' -d '{"sid":"checkcheckcheck0001"}'`

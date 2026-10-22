@@ -42,7 +42,13 @@
         .poff p { color: #cfe0e6; font-size: 17px; }
         .poff .btn { margin: 8px 10px 0 0; }
         .poff .btn.ghost { color: #fff; border-color: #fff; }
-        @media (max-width: 560px) { .pbar .wordmark { display: none; } .pact a.all { display: none; } }
+        .plive { display: inline-flex; align-items: center; gap: 7px; font: 500 12.5px var(--mono); color: #cfe0e6; white-space: nowrap; }
+        .plive[hidden] { display: none; }
+        .live-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--mint); flex: none;
+            animation: livepulse 2s ease-out infinite; }
+        @keyframes livepulse { 0% { box-shadow: 0 0 0 0 rgba(6,214,160,.55); } 70% { box-shadow: 0 0 0 8px rgba(6,214,160,0); } 100% { box-shadow: 0 0 0 0 rgba(6,214,160,0); } }
+        @media (prefers-reduced-motion: reduce) { .live-dot { animation: none; } }
+        @media (max-width: 560px) { .pbar .wordmark { display: none; } .pact a.all { display: none; } .plive { display: none; } }
     </style>
 </head>
 
@@ -50,6 +56,7 @@
     <div class="pbar">
         <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
         <div class="ptitle"><b id="gname">Games</b><span id="gby"></span></div>
+        <span class="plive" data-games-stats data-mode="compact" hidden></span>
         <div class="pact" id="pact">
             <a class="all" href="/games/">All games</a>
         </div>
@@ -57,6 +64,7 @@
     <div class="stage" id="stage"></div>
 
     <script src="/assets/js/games-data.js?v=20261022"></script>
+    <script src="/assets/js/games-live.js?v=20261022" defer></script>
     <script>
     (function () {
         var D = window.TTHGames, catName = {};

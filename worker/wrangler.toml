@@ -24,3 +24,13 @@ compatibility_date = "2026-10-01"
 
 [observability]
 enabled = true
+
+# The games page counter: live players and total visits (src/games.js).
+# SQLite-backed Durable Objects are on the Workers free plan.
+[[durable_objects.bindings]]
+name = "GAME_STATS"
+class_name = "GameStats"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["GameStats"]

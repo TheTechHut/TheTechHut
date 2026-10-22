@@ -22,6 +22,8 @@
  *   POST /webhook     Paystack signed event      -> 200
  *   POST /subscribe   { email, name?, role? }    -> sends a confirmation email   (newsletter.js)
  *   POST /confirm     { t }                      -> adds to the Brevo list       (newsletter.js)
+ *   POST /games/ping  { sid, visit? }            -> { live, visits }             (games.js)
+ *   POST /games/leave { sid }                    -> { live, visits }             (games.js)
  *   GET  /health
  *
  * Secrets (wrangler secret put <NAME> — never commit these)
@@ -36,6 +38,10 @@
  */
 
 import { handleNewsletter, newsletterConfigured } from './newsletter.js';
+import { handleGames } from './games.js';
+
+// The Durable Object class must be exported from the entry module.
+export { GameStats } from './games.js';
 
 const PAYSTACK = 'https://api.paystack.co';
 const SITE = 'https://thetechhut.co';
@@ -329,6 +335,14 @@ export default {
     if (req.method === 'POST' && (url.pathname === '/subscribe' || url.pathname === '/confirm')) {
       try {
         return await handleNewsletter(req, env, url, origin, { json, validEmail, safeEqual });
+      } catch (e) {
+        return json({ error: 'server error' }, 500, origin);
+      }
+    }
+    // The games page counter (live players, total visits). No Paystack involved.
+    if (req.method === 'POST' && (url.pathname === '/games/ping' || url.pathname === '/games/leave')) {
+      try {
+        return await handleGames(req, env, url, origin, { json, allowedOrigins: ALLOWED_ORIGINS });
       } catch (e) {
         return json({ error: 'server error' }, 500, origin);
       }
