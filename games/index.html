@@ -43,11 +43,14 @@
         .gcat-head { grid-column: 1 / -1; border-top: 0; margin: 18px 0 -8px; }
         .gcat-head h2 { font-size: clamp(22px, 2.6vw, 28px); margin: 0; }
         @media (max-width: 640px) { .gfilters { position: static; } .gcats { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; max-width: 100%; } .gcats button { flex: 0 0 auto; } }
-        .glive { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; margin: 14px 0 0;
-            font: 500 14px var(--mono); color: var(--muted); letter-spacing: .02em; }
+        /* live counter: a thin strip above the masthead, shown once the first count arrives */
+        .glive { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 2px 8px;
+            margin: 0; padding: 7px 16px; background: #04222C; color: #A9C7D1;
+            font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .1em; }
         .glive[hidden] { display: none; }
-        .glive b { color: var(--ink); font-weight: 600; }
-        .glive .sep { color: var(--dim); }
+        .glive b { color: #fff; font-weight: 600; }
+        .glive .sep { color: #5F8592; }
+        .glive .live-dot { margin-right: 2px; }
         .live-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--mint); flex: none;
             animation: livepulse 2s ease-out infinite; }
         @keyframes livepulse { 0% { box-shadow: 0 0 0 0 rgba(6,214,160,.55); } 70% { box-shadow: 0 0 0 8px rgba(6,214,160,0); } 100% { box-shadow: 0 0 0 0 rgba(6,214,160,0); } }
@@ -58,6 +61,7 @@
 <body>
 
     <a class="skip" href="#main">Skip to content</a>
+    <div class="glive" data-games-stats data-mode="full" aria-live="off" hidden></div>
     <header class="masthead">
         <div class="masthead-top"><div class="wrap"><span>Kenya's tech careers, reported daily</span><span class="hide-sm"><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a> &middot; <a href="mailto:info@thetechhut.co">info@thetechhut.co</a></span></div></div>
         <div class="wrap masthead-main">
@@ -69,7 +73,6 @@
     <header class="hero" id="main">
         <div class="wrap">
             <span class="pill">49 games &middot; free &middot; nothing to install</span>
-            <p class="glive" data-games-stats data-mode="full" aria-live="off" hidden></p>
             <h1>Games that play <em>in your browser.</em></h1>
             <p class="lede">No Steam, no Epic, no downloads. Shooters, strategy, racing, puzzles and a few
                 famous classics, including Doom and Diablo. Games marked <b style="color:var(--ink)">Plays here</b>
@@ -164,7 +167,7 @@
     </footer>
 
     <script src="/assets/js/games-data.js?v=20261022"></script>
-    <script src="/assets/js/games-live.js?v=20261022" defer></script>
+    <script src="/assets/js/games-live.js?v=20261022b" defer></script>
     <script>
     (function () {
         var D = window.TTHGames, CATS = D.CATS, GAMES = D.GAMES;
