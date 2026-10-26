@@ -1,9 +1,9 @@
 {
- "updated": "2026-10-25",
- "company_count": 152,
- "role_count": 620,
- "local_role_count": 114,
- "roles_scanned": 3637,
+ "updated": "2026-10-26",
+ "company_count": 158,
+ "role_count": 626,
+ "local_role_count": 115,
+ "roles_scanned": 3648,
  "sources": [
   "Himalayas",
   "Jobicy"
@@ -436,9 +436,146 @@
    "total": 62
   },
   {
+   "company": "Metasys",
+   "platform": "himalayas",
+   "eligible": 21,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Engineering Delivery Manager",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/metasys/jobs/engineering-delivery-manager?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Graphic designer Internship",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/metasys/jobs/graphic-designer-internship?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Cloud Architect Internship",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/metasys/jobs/cloud-architect-internship?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Security Engineer Internship",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/metasys/jobs/security-engineer-internship?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Backend Engineer Internship",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/metasys/jobs/backend-engineer-internship?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Solution Architect Internship",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/metasys/jobs/solution-architect-internship?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Site Reliability Engineer Internship",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/metasys/jobs/site-reliability-engineer-internship?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Data Engineer Internship",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/metasys/jobs/data-engineer-internship?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "UI/UX Designer Internship",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/metasys/jobs/ui-ux-designer-internship?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "AI/ML Engineer Internship",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/metasys/jobs/ai-ml-engineer-internship?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Support Engineer Internship",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/metasys/jobs/support-engineer-internship?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Frontend Engineer Internship",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/metasys/jobs/frontend-engineer-internship?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Data Architect Internship",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/metasys/jobs/data-architect-internship?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Technical Architect (Frontend/Backend) Internship",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/metasys/jobs/technical-architect-frontend-backend-internship?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "DevOps Engineer Internship",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/metasys/jobs/devops-engineer-internship?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Performance Tester Internship",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/metasys/jobs/performance-tester-internship?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Data Scientist Internship",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/metasys/jobs/data-scientist-internship?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Automation QA Engineer Internship",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/metasys/jobs/automation-qa-engineer-internship?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "MLOps Engineer Internship",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/metasys/jobs/mlops-engineer-internship?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Product Manager Internship",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/metasys/jobs/product-manager-internship?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "DevSecOps Engineer Internship",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/metasys/jobs/devsecops-engineer-internship?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 21
+  },
+  {
    "company": "micro1",
    "platform": "himalayas",
-   "eligible": 19,
+   "eligible": 16,
    "locations": [
     "Worldwide"
    ],
@@ -492,12 +629,6 @@
      "via": "Himalayas"
     },
     {
-     "title": "Competitive Data Scientist",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/micro1/jobs/competitive-data-scientist?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
      "title": "Data Science & Analytic Methodology SME",
      "location": "Worldwide",
      "url": "https://himalayas.app/companies/micro1/jobs/data-science-analytic-methodology-sme?utm_source=api",
@@ -544,21 +675,9 @@
      "location": "Worldwide",
      "url": "https://himalayas.app/companies/micro1/jobs/strategic-project-lead-coding-swe-7724173769?utm_source=api",
      "via": "Himalayas"
-    },
-    {
-     "title": "Software Engineer",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/micro1/jobs/software-engineer-1426819972?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Puzzle Solver (Coding)",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/micro1/jobs/puzzle-solver-coding-8442281333?utm_source=api",
-     "via": "Himalayas"
     }
    ],
-   "total": 19
+   "total": 16
   },
   {
    "company": "Oyster",
@@ -652,101 +771,6 @@
    "total": 23
   },
   {
-   "company": "Metasys",
-   "platform": "himalayas",
-   "eligible": 14,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "Data Engineer Internship",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/metasys/jobs/data-engineer-internship?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "UI/UX Designer Internship",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/metasys/jobs/ui-ux-designer-internship?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "AI/ML Engineer Internship",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/metasys/jobs/ai-ml-engineer-internship?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Support Engineer Internship",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/metasys/jobs/support-engineer-internship?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Frontend Engineer Internship",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/metasys/jobs/frontend-engineer-internship?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Data Architect Internship",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/metasys/jobs/data-architect-internship?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Technical Architect (Frontend/Backend) Internship",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/metasys/jobs/technical-architect-frontend-backend-internship?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "DevOps Engineer Internship",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/metasys/jobs/devops-engineer-internship?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Performance Tester Internship",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/metasys/jobs/performance-tester-internship?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Data Scientist Internship",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/metasys/jobs/data-scientist-internship?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Automation QA Engineer Internship",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/metasys/jobs/automation-qa-engineer-internship?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "MLOps Engineer Internship",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/metasys/jobs/mlops-engineer-internship?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Product Manager Internship",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/metasys/jobs/product-manager-internship?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "DevSecOps Engineer Internship",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/metasys/jobs/devsecops-engineer-internship?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 14
-  },
-  {
    "company": "KDCI",
    "platform": "himalayas",
    "eligible": 13,
@@ -836,112 +860,112 @@
    "total": 13
   },
   {
-   "company": "Ready",
+   "company": "Xperteez Technology",
    "platform": "himalayas",
-   "eligible": 13,
+   "eligible": 12,
    "locations": [
     "Worldwide"
    ],
    "roles": [
     {
-     "title": "Business Analyst T\u00e9cnico + Ingl\u00e9s",
+     "title": "Puzzle Solver (Coding) | Remote - Contract",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/joinready/jobs/business-analyst-tecnico-ingles?utm_source=api",
+     "url": "https://himalayas.app/companies/xperteez-technology/jobs/puzzle-solver-coding-remote-contract?utm_source=api",
      "via": "Himalayas"
     },
     {
-     "title": "AI Engineer / IA Data Engineer",
+     "title": "\ud83c\udf0eDentist, Remote- Contract",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/joinready/jobs/ai-engineer-ia-data-engineer?utm_source=api",
+     "url": "https://himalayas.app/companies/xperteez-technology/jobs/dentist-remote-contract?utm_source=api",
      "via": "Himalayas"
     },
     {
-     "title": "Senior Full Stack Developer (Node.js + PHP)",
+     "title": "\ud83c\udf0eMechanical Engineering Expert (MSc. or PhD), Remote- Contract",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/joinready/jobs/senior-full-stack-developer-node-js-php?utm_source=api",
+     "url": "https://himalayas.app/companies/xperteez-technology/jobs/mechanical-engineering-expert-msc-or-phd-remote-contract?utm_source=api",
      "via": "Himalayas"
     },
     {
-     "title": "Arquitecto(a) de Soluciones IA | Microsoft Power Platform",
+     "title": "\ud83c\udf0eApplied Scientist, Remote- Contract",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/joinready/jobs/arquitecto-a-de-soluciones-ia-microsoft-power-platform?utm_source=api",
+     "url": "https://himalayas.app/companies/xperteez-technology/jobs/applied-scientist-remote-contract?utm_source=api",
      "via": "Himalayas"
     },
     {
-     "title": "Windows Server Engineer",
+     "title": "Life Sciences Research Expert (Python) | Remote - Contract",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/joinready/jobs/windows-server-engineer?utm_source=api",
+     "url": "https://himalayas.app/companies/xperteez-technology/jobs/life-sciences-research-expert-python-remote-contract?utm_source=api",
      "via": "Himalayas"
     },
     {
-     "title": "L\u00edder T\u00e9cnico WSO2",
+     "title": "Aerodynamics Expert (MSc. or PhD) | Remote - Contract",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/joinready/jobs/lider-tecnico-wso2?utm_source=api",
+     "url": "https://himalayas.app/companies/xperteez-technology/jobs/aerodynamics-expert-msc-or-phd-remote-contract?utm_source=api",
      "via": "Himalayas"
     },
     {
-     "title": "Senior Full Stack Go Developer (Go + Next.js)",
+     "title": "\ud83c\udf0eML Engineer (MSc. or PhD), Remote- Contract",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/joinready/jobs/senior-full-stack-go-developer-go-next-js?utm_source=api",
+     "url": "https://himalayas.app/companies/xperteez-technology/jobs/ml-engineer-msc-or-phd-remote-contract?utm_source=api",
      "via": "Himalayas"
     },
     {
-     "title": "Data Scientist",
+     "title": "\ud83c\udf0d Cyber Threat Intelligence SME, Remote- Contract",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/joinready/jobs/data-scientist?utm_source=api",
+     "url": "https://himalayas.app/companies/xperteez-technology/jobs/cyber-threat-intelligence-sme-remote-contract?utm_source=api",
      "via": "Himalayas"
     },
     {
-     "title": "Data Engineer Semi Senior",
+     "title": "Hardware Expert (MSc. or PhD), Remote",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/joinready/jobs/data-engineer-semi-senior?utm_source=api",
+     "url": "https://himalayas.app/companies/xperteez-technology/jobs/hardware-expert-msc-or-phd-remote?utm_source=api",
      "via": "Himalayas"
     },
     {
-     "title": "Desarrollador Salesforce Semi senior",
+     "title": "Mechanical Engineering Expert (MSc. or PhD), Remote",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/joinready/jobs/desarrollador-salesforce-semi-senior?utm_source=api",
+     "url": "https://himalayas.app/companies/xperteez-technology/jobs/mechanical-engineering-expert-msc-or-phd-remote?utm_source=api",
      "via": "Himalayas"
     },
     {
-     "title": "Ingeniero de Datos Senior 3468",
+     "title": "Bilingual Mental Health Expert, Remote",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/joinready/jobs/ingeniero-de-datos-senior-3468?utm_source=api",
+     "url": "https://himalayas.app/companies/xperteez-technology/jobs/bilingual-mental-health-expert-remote?utm_source=api",
      "via": "Himalayas"
     },
     {
-     "title": "Desarrollador Legacy Visual Basic",
+     "title": "CAD Expert, Remote",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/joinready/jobs/desarrollador-legacy-visual-basic?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Desarrollador de Software Semi senior\u2013 Node.js & TypeScript",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/joinready/jobs/desarrollador-de-software-semi-senior-node-js-typescript?utm_source=api",
+     "url": "https://himalayas.app/companies/xperteez-technology/jobs/cad-expert-remote?utm_source=api",
      "via": "Himalayas"
     }
    ],
-   "total": 13
+   "total": 12
   },
   {
    "company": "Zoftify \u2014 Travel Software Development",
    "platform": "himalayas",
-   "eligible": 10,
+   "eligible": 11,
    "locations": [
     "Worldwide"
    ],
    "roles": [
     {
-     "title": "Backend Team Lead",
+     "title": "React Native Developer",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/zoftify-travel-software-development/jobs/backend-team-lead?utm_source=api",
+     "url": "https://himalayas.app/companies/zoftify-travel-software-development/jobs/react-native-developer?utm_source=api",
      "via": "Himalayas"
     },
     {
-     "title": "Full Stack Developer (React + Node.js)",
+     "title": "QA Team Lead",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/zoftify-travel-software-development/jobs/full-stack-developer-react-node-js?utm_source=api",
+     "url": "https://himalayas.app/companies/zoftify-travel-software-development/jobs/qa-team-lead?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Backend Team Lead",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/zoftify-travel-software-development/jobs/backend-team-lead?utm_source=api",
      "via": "Himalayas"
     },
     {
@@ -993,7 +1017,7 @@
      "via": "Himalayas"
     }
    ],
-   "total": 10
+   "total": 11
   },
   {
    "company": "ConsenSys",
@@ -1110,65 +1134,6 @@
      "title": "DESIGN COMMUNITY",
      "location": "Worldwide",
      "url": "https://himalayas.app/companies/rekluti/jobs/design-community?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 8
-  },
-  {
-   "company": "Clera",
-   "platform": "himalayas",
-   "eligible": 8,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "Robotics Engineer, Autonomous Systems",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/clera/jobs/robotics-engineer-autonomous-systems?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Founding Engineer",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/clera/jobs/founding-engineer?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Freelance Senior Product Designer (Fractional)",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/clera/jobs/freelance-senior-product-designer-fractional?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Senior Data Engineer",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/clera/jobs/senior-data-engineer?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Mid-Level Robotics Engineer, Autonomous Systems",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/clera/jobs/mid-level-robotics-engineer-autonomous-systems?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Senior Platform Software Engineer",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/clera/jobs/senior-platform-software-engineer?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Senior Product Designer",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/clera/jobs/senior-product-designer-9329874859?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Head of Growth",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/clera/jobs/head-of-growth-8887316628?utm_source=api",
      "via": "Himalayas"
     }
    ],
@@ -1410,48 +1375,49 @@
    "total": 6
   },
   {
-   "company": "inovex GmbH",
-   "platform": "himalayas",
+   "company": "RevenueCat",
+   "platform": "jobicy",
    "eligible": 6,
    "locations": [
-    "Worldwide"
+    "EMEA,  LATAM,  Canada,  USA",
+    "APAC,  EMEA,  LATAM,  Canada,  USA"
    ],
    "roles": [
     {
-     "title": "Initiativbewerbung",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/inovex-gmbh/jobs/initiativbewerbung?utm_source=api",
-     "via": "Himalayas"
+     "title": "Engineering Manager, RC Capital",
+     "location": "EMEA,  LATAM,  Canada,  USA",
+     "url": "https://jobicy.com/jobs/151629-engineering-manager-rc-capital",
+     "via": "Jobicy"
     },
     {
-     "title": "DevOps Engineer* Linux",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/inovex-gmbh/jobs/devops-engineer-linux?utm_source=api",
-     "via": "Himalayas"
+     "title": "Senior Product Manager, Funnels/Workflow",
+     "location": "APAC,  EMEA,  LATAM,  Canada,  USA",
+     "url": "https://jobicy.com/jobs/151545-senior-product-manager-funnels-workflow",
+     "via": "Jobicy"
     },
     {
-     "title": "Senior Data Engineer* / Machine Learning Engineer*",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/inovex-gmbh/jobs/senior-data-engineer-machine-learning-engineer?utm_source=api",
-     "via": "Himalayas"
+     "title": "Senior Product Manager, User Acquisition",
+     "location": "APAC,  EMEA,  LATAM,  Canada,  USA",
+     "url": "https://jobicy.com/jobs/156992-senior-product-manager-user-acquisition",
+     "via": "Jobicy"
     },
     {
-     "title": "Senior Technical Data & AI Consultant*",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/inovex-gmbh/jobs/senior-technical-data-ai-consultant?utm_source=api",
-     "via": "Himalayas"
+     "title": "Senior Product Manager, Ad Monetization",
+     "location": "APAC,  EMEA,  LATAM,  Canada,  USA",
+     "url": "https://jobicy.com/jobs/156738-senior-product-manager-ad-monetization",
+     "via": "Jobicy"
     },
     {
-     "title": "Cloud Engineer* Data & AI",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/inovex-gmbh/jobs/cloud-engineer-data-ai?utm_source=api",
-     "via": "Himalayas"
+     "title": "Senior Product Designer",
+     "location": "EMEA,  LATAM,  Canada,  USA",
+     "url": "https://jobicy.com/jobs/153973-senior-product-designer-13",
+     "via": "Jobicy"
     },
     {
-     "title": "Senior Data Engineer* Microsoft Fabric",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/inovex-gmbh/jobs/senior-data-engineer-microsoft-fabric?utm_source=api",
-     "via": "Himalayas"
+     "title": "Senior Software Engineer, Agents",
+     "location": "EMEA,  LATAM,  Canada,  USA",
+     "url": "https://jobicy.com/jobs/156026-senior-software-engineer-agents-2",
+     "via": "Jobicy"
     }
    ],
    "total": 6
@@ -1498,7 +1464,7 @@
    "total": 5
   },
   {
-   "company": "Utility",
+   "company": "Ready",
    "platform": "himalayas",
    "eligible": 5,
    "locations": [
@@ -1506,37 +1472,107 @@
    ],
    "roles": [
     {
-     "title": "Sr. Backend Engineer (Node/TypeScript)",
+     "title": "Business Analyst T\u00e9cnico + Ingl\u00e9s",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/utility/jobs/sr-backend-engineer-node-typescript?utm_source=api",
+     "url": "https://himalayas.app/companies/joinready/jobs/business-analyst-tecnico-ingles?utm_source=api",
      "via": "Himalayas"
     },
     {
-     "title": "QA Analyst",
+     "title": "AI Engineer / IA Data Engineer",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/utility/jobs/qa-analyst?utm_source=api",
+     "url": "https://himalayas.app/companies/joinready/jobs/ai-engineer-ia-data-engineer?utm_source=api",
      "via": "Himalayas"
     },
     {
-     "title": "Sr. Frontend Engineer (React)",
+     "title": "Senior Full Stack Developer (Node.js + PHP)",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/utility/jobs/sr-frontend-engineer-react?utm_source=api",
+     "url": "https://himalayas.app/companies/joinready/jobs/senior-full-stack-developer-node-js-php?utm_source=api",
      "via": "Himalayas"
     },
     {
-     "title": "Sr. Shopify Engineer",
+     "title": "Arquitecto(a) de Soluciones IA | Microsoft Power Platform",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/utility/jobs/sr-shopify-engineer?utm_source=api",
+     "url": "https://himalayas.app/companies/joinready/jobs/arquitecto-a-de-soluciones-ia-microsoft-power-platform?utm_source=api",
      "via": "Himalayas"
     },
     {
-     "title": "Sr. Mobile Engineer (React Native)",
+     "title": "Windows Server Engineer",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/utility/jobs/sr-mobile-engineer-react-native?utm_source=api",
+     "url": "https://himalayas.app/companies/joinready/jobs/windows-server-engineer?utm_source=api",
      "via": "Himalayas"
     }
    ],
    "total": 5
+  },
+  {
+   "company": "GoFasti",
+   "platform": "himalayas",
+   "eligible": 4,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "1182 - Junior Frontend Developer (Part-Time)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/gofasti/jobs/1182-junior-frontend-developer-part-time?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "1179 - Cost Segregation Project Engineer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/gofasti/jobs/1179-cost-segregation-project-engineer?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "1178 - Sr. Data Architect",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/gofasti/jobs/1178-sr-data-architect?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "1175 - Applied AI Engineer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/gofasti/jobs/1175-applied-ai-engineer?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 4
+  },
+  {
+   "company": "PPMI",
+   "platform": "himalayas",
+   "eligible": 4,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Data processing analyst",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/ppmi/jobs/data-processing-analyst?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Senior survey scripter (Forsta Plus / Confirmit)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/ppmi/jobs/senior-survey-scripter-forsta-plus-confirmit?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Senior data processing analyst",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/ppmi/jobs/senior-data-processing-analyst?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Survey scripter (Forsta Plus / Confirmit)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/ppmi/jobs/survey-scripter-forsta-plus-confirmit?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 4
   },
   {
    "company": "Nortal",
@@ -1644,41 +1680,6 @@
    "total": 4
   },
   {
-   "company": "Xperteez Technology",
-   "platform": "himalayas",
-   "eligible": 4,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "Hardware Expert (MSc. or PhD), Remote",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/xperteez-technology/jobs/hardware-expert-msc-or-phd-remote?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Mechanical Engineering Expert (MSc. or PhD), Remote",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/xperteez-technology/jobs/mechanical-engineering-expert-msc-or-phd-remote?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Bilingual Mental Health Expert, Remote",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/xperteez-technology/jobs/bilingual-mental-health-expert-remote?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "CAD Expert, Remote",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/xperteez-technology/jobs/cad-expert-remote?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 4
-  },
-  {
    "company": "Zipline",
    "platform": "greenhouse",
    "eligible": 3,
@@ -1733,7 +1734,7 @@
    "total": 12
   },
   {
-   "company": "GoFasti",
+   "company": "Fairarena",
    "platform": "himalayas",
    "eligible": 3,
    "locations": [
@@ -1741,21 +1742,21 @@
    ],
    "roles": [
     {
-     "title": "1179 - Cost Segregation Project Engineer",
+     "title": "DevOps Engineer \u2013 Cloud Infrastructure",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/gofasti/jobs/1179-cost-segregation-project-engineer?utm_source=api",
+     "url": "https://himalayas.app/companies/fairarena/jobs/devops-engineer-cloud-infrastructure?utm_source=api",
      "via": "Himalayas"
     },
     {
-     "title": "1178 - Sr. Data Architect",
+     "title": "Frontend Engineer",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/gofasti/jobs/1178-sr-data-architect?utm_source=api",
+     "url": "https://himalayas.app/companies/fairarena/jobs/frontend-engineer?utm_source=api",
      "via": "Himalayas"
     },
     {
-     "title": "1175 - Applied AI Engineer",
+     "title": "Founding Software Engineer \u2013 Backend & Cloud Infrastructure",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/gofasti/jobs/1175-applied-ai-engineer?utm_source=api",
+     "url": "https://himalayas.app/companies/fairarena/jobs/founding-software-engineer-backend-cloud-infrastructure?utm_source=api",
      "via": "Himalayas"
     }
    ],
@@ -1878,7 +1879,7 @@
    "total": 3
   },
   {
-   "company": "Bridges for Enterprise",
+   "company": "Clera",
    "platform": "himalayas",
    "eligible": 3,
    "locations": [
@@ -1886,81 +1887,22 @@
    ],
    "roles": [
     {
-     "title": "Tech Strategic Office (Product & Service Owner)",
+     "title": "Robotics Engineer, Autonomous Systems",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/bridges-for-enterprise/jobs/tech-strategic-office-product-service-owner?utm_source=api",
+     "url": "https://himalayas.app/companies/clera/jobs/robotics-engineer-autonomous-systems?utm_source=api",
      "via": "Himalayas"
     },
     {
-     "title": "Global AlgoOps Manager",
+     "title": "Founding Engineer",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/bridges-for-enterprise/jobs/global-algoops-manager?utm_source=api",
+     "url": "https://himalayas.app/companies/clera/jobs/founding-engineer?utm_source=api",
      "via": "Himalayas"
     },
     {
-     "title": "UI/UX Designer",
+     "title": "Freelance Senior Product Designer (Fractional)",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/bridges-for-enterprise/jobs/ui-ux-designer?utm_source=api",
+     "url": "https://himalayas.app/companies/clera/jobs/freelance-senior-product-designer-fractional?utm_source=api",
      "via": "Himalayas"
-    }
-   ],
-   "total": 3
-  },
-  {
-   "company": "RevenueCat",
-   "platform": "jobicy",
-   "eligible": 3,
-   "locations": [
-    "APAC,  EMEA,  LATAM,  Canada,  USA",
-    "EMEA,  LATAM,  Canada,  USA"
-   ],
-   "roles": [
-    {
-     "title": "Senior Product Manager, Ad Monetization",
-     "location": "APAC,  EMEA,  LATAM,  Canada,  USA",
-     "url": "https://jobicy.com/jobs/156738-senior-product-manager-ad-monetization",
-     "via": "Jobicy"
-    },
-    {
-     "title": "Senior Product Designer",
-     "location": "EMEA,  LATAM,  Canada,  USA",
-     "url": "https://jobicy.com/jobs/153973-senior-product-designer-13",
-     "via": "Jobicy"
-    },
-    {
-     "title": "Senior Software Engineer, Agents",
-     "location": "EMEA,  LATAM,  Canada,  USA",
-     "url": "https://jobicy.com/jobs/156026-senior-software-engineer-agents-2",
-     "via": "Jobicy"
-    }
-   ],
-   "total": 3
-  },
-  {
-   "company": "EDB",
-   "platform": "jobicy",
-   "eligible": 3,
-   "locations": [
-    "EMEA"
-   ],
-   "roles": [
-    {
-     "title": "Software Engineer/C Developer-PGD",
-     "location": "EMEA",
-     "url": "https://jobicy.com/jobs/156380-software-engineer-c-developer-pgd",
-     "via": "Jobicy"
-    },
-    {
-     "title": "Staff Software Engineer-ClickHouse Committer",
-     "location": "EMEA",
-     "url": "https://jobicy.com/jobs/156381-staff-software-engineer-clickhouse-committer",
-     "via": "Jobicy"
-    },
-    {
-     "title": "Machine Learning Engineer (Governance ML Platform)",
-     "location": "EMEA",
-     "url": "https://jobicy.com/jobs/155746-machine-learning-engineer-governance-ml-platform",
-     "via": "Jobicy"
     }
    ],
    "total": 3
@@ -1988,7 +1930,7 @@
    "total": 10
   },
   {
-   "company": "PPMI",
+   "company": "Fly",
    "platform": "himalayas",
    "eligible": 2,
    "locations": [
@@ -1996,15 +1938,107 @@
    ],
    "roles": [
     {
-     "title": "Senior data processing analyst",
+     "title": "Developer Relations Engineer",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/ppmi/jobs/senior-data-processing-analyst?utm_source=api",
+     "url": "https://himalayas.app/companies/fly/jobs/developer-relations-engineer?utm_source=api",
      "via": "Himalayas"
     },
     {
-     "title": "Survey scripter (Forsta Plus / Confirmit)",
+     "title": "Infrastructure Ops Engineer",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/ppmi/jobs/survey-scripter-forsta-plus-confirmit?utm_source=api",
+     "url": "https://himalayas.app/companies/fly/jobs/infrastructure-ops-engineer?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 2
+  },
+  {
+   "company": "XION",
+   "platform": "himalayas",
+   "eligible": 2,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "High-Functioning Psychopath (Front End)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/burnt/jobs/high-functioning-psychopath-front-end?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Senior Protocol Engineer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/burnt/jobs/senior-protocol-engineer?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 2
+  },
+  {
+   "company": "Mixrank",
+   "platform": "himalayas",
+   "eligible": 2,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Software Engineer - Remote (Global), Full-Time",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/mixrank/jobs/software-engineer-remote-global-full-time?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Junior Software Engineer - Remote (Global), Full-Time",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/mixrank/jobs/junior-software-engineer-remote-global-full-time?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 2
+  },
+  {
+   "company": "CovertSwarm",
+   "platform": "himalayas",
+   "eligible": 2,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "AI Engineer (Offensive Security)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/covertswarm/jobs/ai-engineer-offensive-security?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Red Team Operator (Hive Member) - Apply Anytime!",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/covertswarm/jobs/red-team-operator-hive-member-apply-anytime?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 2
+  },
+  {
+   "company": "BRND WGN",
+   "platform": "himalayas",
+   "eligible": 2,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Mid-Level Graphic & Motion Designer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/brnd-wgn/jobs/mid-level-graphic-motion-designer-363864368?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Senior Graphic Designer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/brnd-wgn/jobs/senior-graphic-designer-3040146958?utm_source=api",
      "via": "Himalayas"
     }
    ],
@@ -2311,7 +2345,7 @@
    "total": 2
   },
   {
-   "company": "Tiny",
+   "company": "Bridges for Enterprise",
    "platform": "himalayas",
    "eligible": 2,
    "locations": [
@@ -2319,22 +2353,22 @@
    ],
    "roles": [
     {
-     "title": "Senior React Native Engineer, HFC",
+     "title": "Tech Strategic Office (Product & Service Owner)",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/tiny/jobs/senior-react-native-engineer-hfc?utm_source=api",
+     "url": "https://himalayas.app/companies/bridges-for-enterprise/jobs/tech-strategic-office-product-service-owner?utm_source=api",
      "via": "Himalayas"
     },
     {
-     "title": "Operations Manager (Data & Automation)",
+     "title": "Global AlgoOps Manager",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/tiny/jobs/operations-manager-data-automation?utm_source=api",
+     "url": "https://himalayas.app/companies/bridges-for-enterprise/jobs/global-algoops-manager?utm_source=api",
      "via": "Himalayas"
     }
    ],
    "total": 2
   },
   {
-   "company": "Perena",
+   "company": "inovex GmbH",
    "platform": "himalayas",
    "eligible": 2,
    "locations": [
@@ -2342,62 +2376,85 @@
    ],
    "roles": [
     {
-     "title": "Senior Protocol & Product Engineer",
+     "title": "Initiativbewerbung",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/perena/jobs/senior-protocol-product-engineer?utm_source=api",
+     "url": "https://himalayas.app/companies/inovex-gmbh/jobs/initiativbewerbung?utm_source=api",
      "via": "Himalayas"
     },
     {
-     "title": "Frontend Engineer",
+     "title": "DevOps Engineer* Linux",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/perena/jobs/frontend-engineer?utm_source=api",
+     "url": "https://himalayas.app/companies/inovex-gmbh/jobs/devops-engineer-linux?utm_source=api",
      "via": "Himalayas"
     }
    ],
    "total": 2
   },
   {
-   "company": "Enjoy Gaming LLC",
-   "platform": "himalayas",
+   "company": "Phantom",
+   "platform": "jobicy",
    "eligible": 2,
    "locations": [
-    "Worldwide"
+    "EMEA,  LATAM,  Canada,  USA",
+    "Anywhere"
    ],
    "roles": [
     {
-     "title": "Game Client Technical Lead",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/enjoy-gaming-llc/jobs/game-client-technical-lead?utm_source=api",
-     "via": "Himalayas"
+     "title": "Staff Engineer, Full Stack (Trust, Safety & Risk)",
+     "location": "EMEA,  LATAM,  Canada,  USA",
+     "url": "https://jobicy.com/jobs/154084-staff-engineer-full-stack-trust-safety-risk",
+     "via": "Jobicy"
     },
     {
-     "title": "Senior Node.js Developer",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/enjoy-gaming-llc/jobs/senior-node-js-developer?utm_source=api",
-     "via": "Himalayas"
+     "title": "Senior Software Engineer, Backend (Money Movement)",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/154082-senior-software-engineer-backend-money-movement",
+     "via": "Jobicy"
     }
    ],
    "total": 2
   },
   {
    "company": "Customer.io",
-   "platform": "himalayas",
+   "platform": "jobicy",
    "eligible": 2,
    "locations": [
-    "Worldwide",
     "EMEA"
    ],
    "roles": [
     {
      "title": "Senior Software Engineer, Backend",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/customer-io/jobs/senior-software-engineer-backend?utm_source=api",
-     "via": "Himalayas"
+     "location": "EMEA",
+     "url": "https://jobicy.com/jobs/156558-senior-software-engineer-backend-4",
+     "via": "Jobicy"
     },
     {
      "title": "Senior Software Engineer, Product/AI",
      "location": "EMEA",
      "url": "https://jobicy.com/jobs/156560-senior-software-engineer-product-ai",
+     "via": "Jobicy"
+    }
+   ],
+   "total": 2
+  },
+  {
+   "company": "EDB",
+   "platform": "jobicy",
+   "eligible": 2,
+   "locations": [
+    "EMEA"
+   ],
+   "roles": [
+    {
+     "title": "Software Engineer/C Developer-PGD",
+     "location": "EMEA",
+     "url": "https://jobicy.com/jobs/156380-software-engineer-c-developer-pgd",
+     "via": "Jobicy"
+    },
+    {
+     "title": "Staff Software Engineer-ClickHouse Committer",
+     "location": "EMEA",
+     "url": "https://jobicy.com/jobs/156381-staff-software-engineer-clickhouse-committer",
      "via": "Jobicy"
     }
    ],
@@ -2422,29 +2479,6 @@
      "title": "Instructional Designer, TRM Academy (Compliance)",
      "location": "EMEA,  LATAM,  Canada,  USA",
      "url": "https://jobicy.com/jobs/155918-instructional-designer-trm-academy-compliance",
-     "via": "Jobicy"
-    }
-   ],
-   "total": 2
-  },
-  {
-   "company": "Superside",
-   "platform": "jobicy",
-   "eligible": 2,
-   "locations": [
-    "Anywhere"
-   ],
-   "roles": [
-    {
-     "title": "Creative (Motion Design)",
-     "location": "Anywhere",
-     "url": "https://jobicy.com/jobs/153812-creative-motion-design",
-     "via": "Jobicy"
-    },
-    {
-     "title": "Conceptual Art Director",
-     "location": "Anywhere",
-     "url": "https://jobicy.com/jobs/153608-conceptual-art-director",
      "via": "Jobicy"
     }
    ],
@@ -2542,7 +2576,7 @@
      "url": "https://sunking.pinpointhq.com/en/postings/21382d3e-69bd-4256-ae28-26853f824db4"
     }
    ],
-   "total": 191
+   "total": 190
   },
   {
    "company": "Taptap Send",
@@ -2558,10 +2592,10 @@
      "url": "https://jobs.ashbyhq.com/taptapsend/5ab6d6cb-e3be-43cc-851e-e0631f867721"
     }
    ],
-   "total": 28
+   "total": 29
   },
   {
-   "company": "BRND WGN",
+   "company": "Growe Talents",
    "platform": "himalayas",
    "eligible": 1,
    "locations": [
@@ -2569,9 +2603,332 @@
    ],
    "roles": [
     {
-     "title": "Senior Graphic Designer",
+     "title": "Casino Manager (Sportsbook Experience)",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/brnd-wgn/jobs/senior-graphic-designer-3040146958?utm_source=api",
+     "url": "https://himalayas.app/companies/growe-talents/jobs/casino-manager-sportsbook-experience?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Terminal 3",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "DevOps Engineer - Azure (Contractor)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/terminal-3/jobs/devops-engineer-azure-contractor?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Zup Innovation",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "L\u00edder Product Designer - UX",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/zup-innovation/jobs/lider-product-designer-ux?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Imagine Worldwide",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Senior Analytics Engineer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/imagine-worldwide/jobs/senior-analytics-engineer?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 2
+  },
+  {
+   "company": "Storm Ideas",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Video Editor",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/storm-ideas/jobs/video-editor?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Arora Media LLC",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "AI Developer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/arora-media-llc/jobs/ai-developer?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Vitalis Outsourcing LLC",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Social Media Management and Content Creation",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/vitalis-outsourcing-llc/jobs/social-media-management-and-content-creation?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Fuerza Studio",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Backend Developer - Go",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/fuerza-studio/jobs/backend-developer-go?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Nimble Gravity",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "BI Analyst",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/nimble-gravity/jobs/bi-analyst?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Uno Platform",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": ".NET Developer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/uno-platform/jobs/net-developer?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Together Group",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "3D Graphics Engineer (Three.js / WebGL)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/together-group/jobs/3d-graphics-engineer-three-js-webgl?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Arocom IT Solutions Pvt Ltd",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "AWS Technical Lead / Architect",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/arocom-it-solutions-pvt-ltd/jobs/aws-technical-lead-architect?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Toolbox OTT",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "TECHNICAL PROGRAM MANAGER",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/toolbox-ott/jobs/technical-program-manager?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Compass Health Network",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Database Report Writer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/compass-health-network/jobs/database-report-writer?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Luupli Ltd",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Senior UX Designer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/luupli-ltd/jobs/senior-ux-designer?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Business Web Solutions",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Web Developer Intern",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/businesswebsolutions/jobs/web-developer-intern?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Skillsecurex",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Full Stack Web Developer Intern",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/skillsecurex/jobs/full-stack-web-developer-intern?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Vetto",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "AI Research",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/vetto/jobs/ai-research?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Maisha Meds",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Engineering Manager",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/maisha-meds/jobs/engineering-manager-7839723287?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Solon Capital Partners",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Responsable de programme (C\u00f4te d'Ivoire)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/solon-capital-partners/jobs/responsable-de-programme-cote-d-ivoire-9435446816?utm_source=api",
      "via": "Himalayas"
     }
    ],
@@ -2629,40 +2986,6 @@
    "total": 1
   },
   {
-   "company": "Fly",
-   "platform": "himalayas",
-   "eligible": 1,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "Infrastructure Ops Engineer",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/fly/jobs/infrastructure-ops-engineer?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 1
-  },
-  {
-   "company": "Fairarena",
-   "platform": "himalayas",
-   "eligible": 1,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "Founding Software Engineer \u2013 Backend & Cloud Infrastructure",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/fairarena/jobs/founding-software-engineer-backend-cloud-infrastructure?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 1
-  },
-  {
    "company": "Revpanda",
    "platform": "himalayas",
    "eligible": 1,
@@ -2714,23 +3037,6 @@
    "total": 1
   },
   {
-   "company": "Mixrank",
-   "platform": "himalayas",
-   "eligible": 1,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "Junior Software Engineer - Remote (Global), Full-Time",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/mixrank/jobs/junior-software-engineer-remote-global-full-time?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 1
-  },
-  {
    "company": "Phiture",
    "platform": "himalayas",
    "eligible": 1,
@@ -2776,23 +3082,6 @@
      "title": "System Product Owner (Card processing)",
      "location": "Worldwide",
      "url": "https://himalayas.app/companies/wirexapp/jobs/system-product-owner-card-processing-7900143760?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 1
-  },
-  {
-   "company": "CovertSwarm",
-   "platform": "himalayas",
-   "eligible": 1,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "Red Team Operator (Hive Member) - Apply Anytime!",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/covertswarm/jobs/red-team-operator-hive-member-apply-anytime?utm_source=api",
      "via": "Himalayas"
     }
    ],
@@ -3598,23 +3887,6 @@
    "total": 1
   },
   {
-   "company": "CodeDecoders",
-   "platform": "himalayas",
-   "eligible": 1,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "Senior Backend Engineer - Payment Systems",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/codedecoders/jobs/senior-backend-engineer-payment-systems?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 1
-  },
-  {
    "company": "MOTIONART",
    "platform": "himalayas",
    "eligible": 1,
@@ -3663,7 +3935,7 @@
      "via": "Himalayas"
     }
    ],
-   "total": 1
+   "total": 2
   },
   {
    "company": "Adikteev",
@@ -3711,6 +3983,23 @@
      "title": "Remote UI/UX Reviewer & Quality Assurance (QA)",
      "location": "Worldwide",
      "url": "https://himalayas.app/companies/resilio-partners/jobs/remote-ui-ux-reviewer-quality-assurance-qa?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Tiny",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Senior React Native Engineer, HFC",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/tiny/jobs/senior-react-native-engineer-hfc?utm_source=api",
      "via": "Himalayas"
     }
    ],
@@ -3768,210 +4057,6 @@
    "total": 1
   },
   {
-   "company": "primion Technology GmbH",
-   "platform": "himalayas",
-   "eligible": 1,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "Solution Manager \u2013 Workforce Optimization & Compliance (m/f/d)",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/primion-technology-gmbh/jobs/solution-manager-workforce-optimization-compliance-m-f-d?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 1
-  },
-  {
-   "company": "Growe Talents",
-   "platform": "himalayas",
-   "eligible": 1,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "Product manager",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/growe-talents/jobs/product-manager?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 1
-  },
-  {
-   "company": "Logos",
-   "platform": "himalayas",
-   "eligible": 1,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "DevOps Engineer (Vac DST)",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/logos/jobs/devops-engineer-vac-dst?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 1
-  },
-  {
-   "company": "BarkleyOKRP",
-   "platform": "himalayas",
-   "eligible": 1,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "Senior Software Engineer (Java Backend)",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/barkleyokrp/jobs/senior-software-engineer-java-backend?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 1
-  },
-  {
-   "company": "IOMETE",
-   "platform": "himalayas",
-   "eligible": 1,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "AI Software Engineer",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/iomete/jobs/ai-software-engineer?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 1
-  },
-  {
-   "company": "AltScore",
-   "platform": "himalayas",
-   "eligible": 1,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "Delivery Engineer",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/altscore/jobs/delivery-engineer?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 1
-  },
-  {
-   "company": "Institute of Free Technology",
-   "platform": "himalayas",
-   "eligible": 1,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "DevOps Engineer (Vac DST)",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/institute-of-free-technology/jobs/devops-engineer-vac-dst?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 1
-  },
-  {
-   "company": "FundCount",
-   "platform": "himalayas",
-   "eligible": 1,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "Manual QA Engineer",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/fundcount/jobs/manual-qa-engineer?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 1
-  },
-  {
-   "company": "Time Doctor",
-   "platform": "himalayas",
-   "eligible": 1,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "Growth Product Manager",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/time-doctor/jobs/growth-product-manager?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 1
-  },
-  {
-   "company": "Pivotree",
-   "platform": "himalayas",
-   "eligible": 1,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "Senior Software Engineer Fluent",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/pivotree/jobs/senior-software-engineer-fluent?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 1
-  },
-  {
-   "company": "Carrot Fertility",
-   "platform": "himalayas",
-   "eligible": 1,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "Director, Information Security",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/carrot-fertility/jobs/director-information-security?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 1
-  },
-  {
-   "company": "NightOwl Consulting",
-   "platform": "himalayas",
-   "eligible": 1,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "Pre-Construction Associate",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/nightowl-consulting/jobs/pre-construction-associate?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 1
-  },
-  {
    "company": "Kraken",
    "platform": "jobicy",
    "eligible": 1,
@@ -4017,6 +4102,23 @@
      "title": "Overseas Operations Manager (P2P)",
      "location": "EMEA",
      "url": "https://jobicy.com/jobs/156330-overseas-operations-manager-p2p",
+     "via": "Jobicy"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Superside",
+   "platform": "jobicy",
+   "eligible": 1,
+   "locations": [
+    "Anywhere"
+   ],
+   "roles": [
+    {
+     "title": "Creative (Motion Design)",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/153812-creative-motion-design",
      "via": "Jobicy"
     }
    ],
