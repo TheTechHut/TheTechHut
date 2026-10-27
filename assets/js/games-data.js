@@ -46,6 +46,8 @@
       by: 'Independent', line: 'Sci-fi arena shooter in the style of Halo, with jump pads and clans.' },
     { slug: 'deadshot', name: 'Deadshot.io', cat: 'shooters', url: 'https://deadshot.io', legal: 'indie', phone: false, embed: true,
       by: 'Independent', line: 'Straightforward modern-military multiplayer shooter.' },
+    { slug: 'distrito-rabisco', name: 'Distrito Rabisco', cat: 'shooters', url: 'https://rabisco.net/', legal: 'indie', phone: true, embed: true,
+      by: 'Alan Nicolas', line: 'A first-person firefight drawn in ink on notebook paper. Play solo or with friends, on 20-plus hand-drawn maps.' },
     { slug: 'xonotic', name: 'Xonotic (browser port)', cat: 'shooters', url: 'https://dpgame.xonotic.workers.dev/', legal: 'open-source', phone: false, embed: true,
       by: 'Community port of the GPL arena shooter', line: 'Fast, open-source arena FPS in the Quake tradition. An unofficial port, so it may move.' },
     { slug: '1v1lol', name: '1v1.LOL', cat: 'shooters', url: 'https://1v1.lol', legal: 'official', phone: true, embed: false,
