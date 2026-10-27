@@ -84,6 +84,54 @@
             animation: livepulse 2s ease-out infinite; }
         @keyframes livepulse { 0% { box-shadow: 0 0 0 0 rgba(6,214,160,.55); } 70% { box-shadow: 0 0 0 8px rgba(6,214,160,0); } 100% { box-shadow: 0 0 0 0 rgba(6,214,160,0); } }
         @media (prefers-reduced-motion: reduce) { .live-dot { animation: none; } }
+        /* ---- arcade: leaderboards and the player card ---- */
+        .arcade { padding: 40px 0 36px; background: var(--paper-2); }
+        .arcade[hidden] { display: none; }
+        .aweek { font: 500 12px var(--mono); color: var(--dim); text-transform: uppercase; letter-spacing: .06em; white-space: normal; text-align: right; }
+        .agrid { display: grid; gap: 22px 28px; grid-template-columns: minmax(260px, 1.25fr) repeat(3, minmax(200px, 1fr)); }
+        @media (max-width: 1080px) { .agrid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 640px) { .agrid { grid-template-columns: 1fr; } }
+        .acard { border-top: 2px solid var(--ink); padding-top: 12px; min-width: 0; }
+        .acard h3 { font-size: 19px; margin: 0 0 10px; }
+        .ame { background: var(--ink); color: #fff; border-top: 0; border-radius: 4px; padding: 18px 18px 16px; }
+        .ame h3 { color: #fff; font-size: 24px; margin: 4px 0 8px; }
+        .ame p { color: #cfe0e6; font-size: 15px; margin: 0 0 10px; }
+        .akick { font: 500 11.5px var(--mono); color: var(--mint); text-transform: uppercase; letter-spacing: .08em; }
+        .ver { display: inline-block; width: 17px; height: 17px; line-height: 17px; text-align: center; border-radius: 50%; background: var(--mint); color: var(--ink); font-size: 11px; font-weight: 700; vertical-align: 2px; margin-left: 2px; }
+        .ajoin label { font: 500 12px var(--mono); color: #b9d3dc; text-transform: uppercase; letter-spacing: .06em; }
+        .arow { display: flex; gap: 8px; margin-top: 6px; }
+        .arow input { flex: 1; min-width: 0; font: 16px var(--sans); padding: 9px 10px; border: 1px solid #fff; border-radius: 3px; background: #fff; color: var(--ink); }
+        .arow .btn { background: var(--mint); border-color: var(--mint); color: var(--ink); padding: 9px 16px; }
+        .amsg { font-size: 13.5px !important; margin: 8px 0 0 !important; color: #b9d3dc !important; }
+        .amsg.bad { color: #ffb4b4 !important; }
+        .apriv { font-size: 12.5px !important; color: #8fb3bf !important; margin: 12px 0 0 !important; }
+        .aor { display: flex; align-items: center; gap: 10px; margin: 12px 0 10px; color: #8fb3bf; font: 500 12px var(--mono); text-transform: uppercase; }
+        .aor::before, .aor::after { content: ""; flex: 1; height: 1px; background: rgba(255,255,255,.2); }
+        .astats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 14px; margin: 6px 0 12px; }
+        .astats dt { font: 500 11px var(--mono); color: #8fb3bf; text-transform: uppercase; letter-spacing: .06em; }
+        .astats dd { margin: 2px 0 0; font: 700 20px var(--serif); color: #fff; }
+        .abadges { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+        .abadges li { font: 500 11px var(--mono); text-transform: uppercase; letter-spacing: .04em; color: #8fb3bf; border: 1px dashed rgba(255,255,255,.3); border-radius: 2px; padding: 3px 7px; }
+        .abadges li.got { color: var(--ink); background: var(--gold); border: 1px solid var(--gold); }
+        .aacts { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 10px; }
+        .alink { background: none; border: 0; padding: 0; font: 600 13.5px var(--sans); color: var(--mint); text-decoration: underline; cursor: pointer; }
+        .aboard { list-style: none; padding: 0; margin: 0; }
+        .aboard li { display: grid; grid-template-columns: 26px 1fr; column-gap: 8px; padding: 7px 0; border-bottom: 1px solid var(--rule); font-size: 15.5px; line-height: 1.3; }
+        .aboard li > a, .aboard li > b { color: var(--ink); font-weight: 700; text-decoration: none; overflow-wrap: anywhere; }
+        .aboard li > a:hover { text-decoration: underline; }
+        .aboard .v { grid-column: 2; font: 500 12px var(--mono); color: var(--dim); margin-top: 2px; }
+        .aboard .rk { grid-row: span 2; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font: 600 12px var(--mono); color: var(--ink); background: var(--paper-3); }
+        .aboard .rk.r1 { background: var(--gold); }
+        .aboard .rk.r2 { background: #d9e2e7; }
+        .aboard .rk.r3 { background: #e8b98a; }
+        .aboard li.empty { display: block; color: var(--muted); font-size: 14.5px; border-bottom: 0; }
+        @media (max-width: 640px) { .aboard li:nth-child(n+4) { display: none; } }
+        .anote { font-size: 13.5px; color: var(--muted); margin: 18px 0 0; max-width: 80ch; }
+        .game .tags .amark { border: 0; padding: 0; display: inline-flex; gap: 6px; }
+        .game .tags .amark[hidden] { display: none; }
+        .game .tags .atop, .aboard .atop { font: 600 11px var(--mono); text-transform: uppercase; letter-spacing: .05em; background: var(--gold); color: var(--ink); border-radius: 2px; padding: 2px 6px; }
+        .game .tags .anow { font: 600 11px var(--mono); text-transform: uppercase; letter-spacing: .05em; color: var(--green); border: 1px solid var(--mint); border-radius: 2px; padding: 2px 6px; display: inline-flex; align-items: center; gap: 5px; }
+        .game .tags .anow i { width: 7px; height: 7px; border-radius: 50%; background: var(--mint); display: inline-block; }
     </style>
 </head>
 
@@ -110,6 +158,19 @@
                 <a href="#why">Why some famous ones are missing</a></p>
         </div>
     </header>
+
+    <section class="arcade" id="arcade" aria-labelledby="arcade-h" hidden>
+        <div class="wrap">
+            <div class="section-head"><h2 id="arcade-h">This week&rsquo;s arcade</h2><span class="aweek" id="aweek"></span></div>
+            <div class="agrid">
+                <div class="acard ame" id="ame"></div>
+                <div class="acard"><h3>Most played</h3><ol class="aboard" id="agames"></ol></div>
+                <div class="acard"><h3>Top players</h3><ol class="aboard" id="aplayers"></ol></div>
+                <div class="acard"><h3>Longest sittings</h3><ol class="aboard" id="asessions"></ol></div>
+            </div>
+            <p class="anote">Play time counts in games marked <b>Plays here</b>, while the game is on your screen, and only for players who have joined. A player&rsquo;s time counts once however many tabs they open.</p>
+        </div>
+    </section>
 
     <div class="gfilters" role="search">
         <div class="wrap">
@@ -195,8 +256,9 @@
         </div>
     </footer>
 
-    <script src="/assets/js/games-data.js?v=20261027"></script>
-    <script src="/assets/js/games-live.js?v=20261027" defer></script>
+    <script src="/assets/js/games-data.js?v=20261027b"></script>
+    <script src="/assets/js/games-live.js?v=20261027b" defer></script>
+    <script src="/assets/js/games-arcade.js?v=20261027" defer></script>
     <script>
     (function () {
         var D = window.TTHGames, CATS = D.CATS, GAMES = D.GAMES;
@@ -220,6 +282,7 @@
             var tags = ['<span>' + esc(LEGAL[g.legal] || '') + '</span>',
                         '<span>' + (g.phone ? 'Phone &amp; desktop' : 'Keyboard') + '</span>'];
             if (g.embed) tags.unshift('<span class="here">Plays here</span>');
+            tags.push('<span class="amark" data-arcade-slug="' + esc(g.slug) + '" hidden></span>');
             var btn = g.embed
                 ? '<a class="btn" href="/games/play/?g=' + encodeURIComponent(g.slug) + '">Play</a>'
                 : '<a class="btn ghost" href="' + esc(g.url) + '" target="_blank" rel="noopener">Play on ' + esc(host(g.url)) + ' &#8599;</a>';
@@ -248,6 +311,7 @@
             }
             grid.innerHTML = html || '<p class="gempty">No games match that. Try another word or category.</p>';
             count.textContent = list.length + (list.length === 1 ? ' game' : ' games');
+            document.dispatchEvent(new Event('tth:grid'));
         }
 
         catsEl.addEventListener('click', function (e) {

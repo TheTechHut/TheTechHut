@@ -57,11 +57,14 @@
         .poff .btn.ghost { color: #fff; border-color: #fff; }
         .plive { display: inline-flex; align-items: center; gap: 7px; font: 500 12.5px var(--mono); color: #cfe0e6; white-space: nowrap; }
         .plive[hidden] { display: none; }
+        .pme { font: 600 12.5px var(--mono); color: var(--ink); background: var(--mint); border-radius: 3px; padding: 6px 9px; text-decoration: none; white-space: nowrap; }
+        .pme[hidden] { display: none; }
+        .pme.join { background: transparent; color: var(--mint); border: 1px solid var(--mint); }
         .live-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--mint); flex: none;
             animation: livepulse 2s ease-out infinite; }
         @keyframes livepulse { 0% { box-shadow: 0 0 0 0 rgba(6,214,160,.55); } 70% { box-shadow: 0 0 0 8px rgba(6,214,160,0); } 100% { box-shadow: 0 0 0 0 rgba(6,214,160,0); } }
         @media (prefers-reduced-motion: reduce) { .live-dot { animation: none; } }
-        @media (max-width: 560px) { .pbar .wordmark { display: none; } .pact a.all { display: none; } .plive { display: none; } }
+        @media (max-width: 560px) { .pbar .wordmark { display: none; } .pact a.all { display: none; } .plive { display: none; } .pme { display: none; } }
     </style>
 </head>
 
@@ -70,14 +73,29 @@
         <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
         <div class="ptitle"><b id="gname">Games</b><span id="gby"></span></div>
         <span class="plive" data-games-stats data-mode="compact" hidden></span>
+        <a class="pme" id="pme" href="/games/#arcade" hidden></a>
         <div class="pact" id="pact">
             <a class="all" href="/games/">All games</a>
         </div>
     </div>
     <div class="stage" id="stage"></div>
 
-    <script src="/assets/js/games-data.js?v=20261027"></script>
-    <script src="/assets/js/games-live.js?v=20261027" defer></script>
+    <script src="/assets/js/games-data.js?v=20261027b"></script>
+    <script src="/assets/js/games-live.js?v=20261027b" defer></script>
+    <script>
+    // Arcade chip in the player bar: your rank and time this week, or an invitation to join.
+    window.addEventListener('DOMContentLoaded', function () {
+        var el = document.getElementById('pme');
+        if (!el || !window.TTHArcade || !document.documentElement.getAttribute('data-game')) return;
+        TTHArcade.onUpdate(function (d, p) {
+            if (!p) { el.textContent = 'Join the leaderboard'; el.className = 'pme join'; el.hidden = false; return; }
+            if (!d.me) return;
+            var m = Math.floor(d.me.secs / 60);
+            el.textContent = (d.me.rank ? '#' + d.me.rank + ' · ' : '') + m + ' min this week';
+            el.className = 'pme'; el.hidden = false;
+        });
+    });
+    </script>
     <script>
     (function () {
         var D = window.TTHGames, catName = {};
@@ -110,6 +128,7 @@
         var ext = el('a', { href: g.url, target: '_blank', rel: 'noopener' }, 'Open on ' + host(g.url) + ' ↗');
 
         if (g.embed) {
+            document.documentElement.setAttribute('data-game', g.slug);   // games-live.js counts play time for it
             var fs = el('button', { type: 'button' }, 'Full screen');
             fs.addEventListener('click', function () {
                 var f = stage.requestFullscreen || stage.webkitRequestFullscreen;

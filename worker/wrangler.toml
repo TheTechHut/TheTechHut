@@ -34,3 +34,9 @@ class_name = "GameStats"
 [[migrations]]
 tag = "v1"
 new_sqlite_classes = ["GameStats"]
+
+# Sign in with Google on the games arcade (optional). Paste the OAuth web
+# client id here, put the same id in GOOGLE_CLIENT_ID at the top of
+# assets/js/games-arcade.js, and set the secret: wrangler secret put GAMES_SECRET
+[vars]
+GOOGLE_CLIENT_ID = ""

@@ -22,8 +22,11 @@
  *   POST /webhook     Paystack signed event      -> 200
  *   POST /subscribe   { email, name?, role? }    -> sends a confirmation email   (newsletter.js)
  *   POST /confirm     { t }                      -> adds to the Brevo list       (newsletter.js)
- *   POST /games/ping  { sid, visit? }            -> { live, visits }             (games.js)
+ *   POST /games/ping  { sid, visit?, slug?, pid?, name? } -> { live, visits, me? } (games.js)
  *   POST /games/leave { sid }                    -> { live, visits }             (games.js)
+ *   GET  /games/board                            -> this week's arcade leaderboards (games.js)
+ *   POST /games/login { credential }             -> { pid, sig, name }  Sign in with Google (games.js)
+ *   POST /games/forget { pid, sig? }             -> { ok }              leave the leaderboards (games.js)
  *   GET  /health
  *
  * Secrets (wrangler secret put <NAME> — never commit these)
@@ -35,6 +38,10 @@
  *                         is only meant to be shown to someone who has paid.
  *   BREVO_API_KEY, BREVO_LIST_ID, BREVO_SENDER_EMAIL, SUBSCRIBE_SECRET
  *                         the CV Pack signup; see newsletter.js
+ *   GAMES_SECRET          optional; any long random string. Needed for "Sign in with
+ *                         Google" on the games arcade (signs player ids)
+ * Vars (wrangler.toml)
+ *   GOOGLE_CLIENT_ID      optional; the OAuth web client id for the games arcade
  */
 
 import { handleNewsletter, newsletterConfigured } from './newsletter.js';
@@ -340,7 +347,8 @@ export default {
       }
     }
     // The games page counter (live players, total visits). No Paystack involved.
-    if (req.method === 'POST' && (url.pathname === '/games/ping' || url.pathname === '/games/leave')) {
+    if ((req.method === 'POST' && ['/games/ping', '/games/leave', '/games/login', '/games/forget'].includes(url.pathname)) ||
+        (req.method === 'GET' && url.pathname === '/games/board')) {
       try {
         return await handleGames(req, env, url, origin, { json, allowedOrigins: ALLOWED_ORIGINS });
       } catch (e) {

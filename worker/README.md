@@ -283,41 +283,68 @@ Sundays 04:30 UTC (07:30 Nairobi): .github/workflows/weekly-roundup.yml
 
 ---
 
-## The games page counter
+## The games arcade (live count, visits, leaderboards)
 
-`/games/` shows how many people are on the games pages right now and how many
-visits they have had in total. The numbers live in one Durable Object,
-`GameStats` (`src/games.js`); the page script is `assets/js/games-live.js`.
+`/games/` shows how many people are on the games pages, total visits, and
+three weekly leaderboards: most played games, top players and longest
+sittings. Everything lives in one Durable Object, `GameStats`
+(`src/games.js`). The page scripts are `assets/js/games-live.js` (pings,
+shared with the player page) and `assets/js/games-arcade.js` (the boards and
+the player card).
 
 ### Setup
 
-Nothing to set. The binding and migration are already in `wrangler.toml`, so
-the next deploy from the Mac creates the object:
+The binding and migration are in `wrangler.toml`, so a deploy from the Mac
+creates everything:
 
 ```sh
 cd ~/Desktop/Robbie/Projects/TheTechHut/worker
 npx wrangler deploy
 ```
 
-Until that deploy, the page hides the counter rather than showing an error.
-The visit total starts from zero on the first deploy.
+Until that deploy, the page hides the counter and the arcade instead of
+showing errors. Totals start from zero on the first deploy.
+
+### Sign in with Google (optional)
+
+Players can always join with a nickname. To also offer Google sign-in, which
+puts a verified tick next to the nickname:
+
+1. In Google Cloud console: APIs & Services → Credentials → Create
+   credentials → OAuth client ID → Web application. Under "Authorised
+   JavaScript origins" add `https://thetechhut.co` and
+   `https://www.thetechhut.co`. No redirect URI is needed.
+2. Put the client id in `GOOGLE_CLIENT_ID` in `wrangler.toml` and at the top
+   of `assets/js/games-arcade.js`.
+3. `npx wrangler secret put GAMES_SECRET` and paste any long random string
+   (`openssl rand -base64 32`). It signs player ids; changing it later gives
+   Google players new ids.
+4. `npx wrangler deploy`, then push the site.
+
+The Worker checks Google's token itself and keeps only a scrambled id, never
+the email.
 
 ### How it counts
 
-- **Online now**: tabs that have pinged in the last 75 seconds. A tab pings
-  every 30 seconds while visible and says goodbye when it closes, so the
-  number follows people closely.
-- **Visits**: one per browser tab session on `/games/`, however many games
-  that tab opens. One IP address can add at most 30 an hour, so a script
-  can't run the number up.
-- Nothing personal is stored. Live ids are random, held in memory, and the
-  only thing written to storage is the visit total.
+- **Online now**: tabs that have pinged in the last 75 seconds.
+- **Visits**: one per tab session on `/games/`; at most 30 an hour per IP.
+- **Play time**: only on the player page, only while it is on screen. Each
+  ping adds the time since that tab's last ping, at most 35 seconds. A
+  player's time counts once however many tabs they open, and one IP earns
+  time in at most six tabs at once.
+- **Players**: only people who joined with a nickname or Google appear on
+  the player boards. Rude nicknames are refused (the list is in `games.js`).
+- **Weeks** run Monday 00:00 to Sunday 23:59 Nairobi time. Player records are
+  kept for 12 months; "Leave the leaderboard" deletes all of them.
+- **New games**: add the slug to `src/game-slugs.js` as well as
+  `assets/js/games-data.js` and redeploy; `npm test` fails if they differ.
 
 ### Things worth knowing
 
-- Both counters run on the Workers free plan (SQLite-backed Durable Objects
-  are included). The limit to watch is requests: each player costs about two
-  a minute, and the free plan allows 100,000 a day, roughly 800 hours of play.
-  The Cloudflare dashboard shows usage under Workers & Pages.
+- Writes are batched once a minute, so a busy week stays inside the free
+  plan's Durable Object limits. The limit to watch is Worker requests: each
+  player costs about two a minute, and the free plan allows 100,000 a day
+  (about 800 hours of play), shared with payments and signups.
+- The boards are public at `GET /games/board` (cached for 20 seconds).
 - To check it from Terminal:
-  `curl -s -X POST https://thetechhut-pay.thetechhut.workers.dev/games/ping -H 'Origin: https://thetechhut.co' -d '{"sid":"checkcheckcheck0001"}'`
+  `curl -s https://thetechhut-pay.thetechhut.workers.dev/games/board`
