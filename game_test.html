@@ -255,6 +255,13 @@
         @media(max-width:420px){.ggrid{grid-template-columns:1fr}.game{padding:16px}.game h3{font-size:19px}}
 
         /* Match homepage layout dimensions and its shared navigation exactly. */
+        /* Keep the official homepage logo flush to the shared navbar's left edge. */
+        header:not(.hero) .wrap.nav{display:flex;width:min(1320px,calc(100% - 64px));max-width:1320px;height:100%;margin:0 auto;padding:0;align-items:center;justify-content:space-between;gap:24px}
+        header:not(.hero) .brand{display:flex;align-items:center;justify-content:flex-start;gap:10px;margin:0;padding:0;flex:0 0 auto}
+        header:not(.hero) .brand-logo{display:block;width:48px;height:48px;min-width:48px;object-fit:contain;object-position:left center;flex:0 0 48px;border-radius:12px;overflow:hidden}
+        header:not(.hero) .links{margin-left:auto}
+        @media(max-width:680px){header:not(.hero) .wrap.nav{width:calc(100% - 34px)}}
+
         header{height:66px;background:#fbfaf6ed;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;backdrop-filter:blur(14px)}
         .wrap{width:min(1320px,calc(100% - 64px));margin:auto}
         .brand-logo{width:48px;height:48px;object-fit:contain;display:block;flex:none;border-radius:12px}
