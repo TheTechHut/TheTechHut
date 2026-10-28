@@ -1,254 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Tech Hut - Ecosystem for African Tech Talent</title>
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Inter Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        /* --- Brand Colors Defined --- */
-        .text-tth-dark-blue { color: #0A3E77; } /* Dark Blue Primary */
-        .bg-tth-dark-blue { background-color: #0A3E77; }
-        .text-tth-green { color: #2DCC70; } /* Bright Green Accent */
-        .bg-tth-green { background-color: #2DCC70; }
-        .text-tth-gold { color: #D9A715; } /* Gold Highlight */
-    </style>
-</head>
-<body class="bg-gray-50 text-gray-800 scroll-smooth">
-
-    <!-- Header & Navigation -->
-    <header class="bg-white shadow-md sticky top-0 z-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <!-- Logo -->
-            <a href="#hero" class="text-2xl font-extrabold text-tth-dark-blue flex items-center">
-                <img src="https://lh3.googleusercontent.com/pw/AP1GczOPh0M7Nv7WoYW4mvejmN1fmTPjLpSDHqodOET_hHLuX3o_Kvo0fVdCu4PYvgoS_knYsgB3iMe_Ay2cjhzWmJ4gdShv5SqikF6faNV7dtcNQ-7y6EOZer5KGyAB1JrtP6XjxdSSPOlrHO4k7g73odrb=w500-h500-s-no-gm?authuser=0" alt="The Tech Hut Logo" class="w-8 h-8 mr-2 rounded-full object-cover">
-                The Tech Hut
-            </a>
-            <nav class="hidden md:flex space-x-6 font-medium text-gray-700">
-                <a href="#talent" class="hover:text-tth-green transition duration-300">Talent</a>
-                <a href="#innovate" class="hover:text-tth-green transition duration-300">Innovate</a>
-                <a href="#community" class="hover:text-tth-green transition duration-300">Community</a>
-                <a href="#media" class="hover:text-tth-green transition duration-300">Media</a>
-                <a href="#contact-cta" class="px-4 py-2 bg-tth-green text-white rounded-lg shadow-md hover:bg-green-700 transition duration-300">Contact</a>
-            </nav>
-            <button class="md:hidden text-gray-700 hover:text-tth-green">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-            </button>
-        </div>
-    </header>
-
-    <!-- 1. Hero Section -->
-    <section id="hero" class="pt-24 pb-24 bg-tth-dark-blue text-white overflow-hidden relative">
-        <div class="max-w-7xl mx-auto px-4 text-center relative z-10">
-            <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-4">
-                The <span class="text-tth-gold">Complete Ecosystem</span> for African Tech Talent
-            </h1>
-            <p class="text-xl md:text-2xl text-blue-200 mb-10 max-w-4xl mx-auto">
-                We don't just train; we build, connect, and launch careers through a full-stack platform covering <b>talent development, recruitment, community, and venture creation.</b>
-            </p>
-            <a href="#talent" class="px-10 py-4 bg-tth-green text-white text-lg font-bold rounded-xl shadow-2xl hover:bg-green-600 transform hover:scale-105 transition duration-300">
-                Explore Our Impact 👇
-            </a>
-        </div>
-        <!-- Abstract background pattern -->
-        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff33_1px,transparent_1px)] [background-size:16px_16px]"></div>
-    </section>
-
-    <!-- 2. Core Pillars / Talent Pipeline -->
-    <section id="talent" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-4xl font-extrabold text-center mb-4 text-tth-dark-blue">
-                Pillar 1: Talent Pipeline & Recruitment
-            </h2>
-            <p class="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">
-                From zero-to-hire, we cultivate disciplined, job-ready professionals aligned with modern industry needs.
-            </p>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Apprenticeship -->
-                <div class="p-8 bg-blue-50 rounded-xl shadow-lg border-t-4 border-t-tth-dark-blue transform hover:scale-[1.02] transition duration-300">
-                    <div class="text-4xl text-tth-dark-blue mb-4">🧑‍💻</div>
-                    <h3 class="text-2xl font-bold mb-2 text-tth-dark-blue">Apprenticeship Program</h3>
-                    <p class="text-gray-600">Our intensive, <b>reverse-engineered curriculum</b> guarantees practical skills. Graduates are not just trained; they're prepared for the specific roles your company needs filled immediately.</p>
-                    <span class="inline-block mt-4 text-tth-dark-blue font-semibold">#JobReady</span>
-                </div>
-
-                <!-- Talent Recruitment -->
-                <div class="p-8 bg-blue-50 rounded-xl shadow-lg border-t-4 border-t-tth-green transform hover:scale-[1.02] transition duration-300">
-                    <div class="text-4xl text-tth-green mb-4">💼</div>
-                    <h3 class="text-2xl font-bold mb-2 text-tth-dark-blue">Talent Recruitment</h3>
-                    <p class="text-gray-600">Access our exclusive pool of vetted, high-potential candidates. Reduce your time-to-hire and onboarding costs with talent that already speaks your organizational language.</p>
-                    <span class="inline-block mt-4 text-tth-green font-semibold">#DeRiskedHiring</span>
-                </div>
-
-                <!-- Capacity Building -->
-                <div class="p-8 bg-blue-50 rounded-xl shadow-lg border-t-4 border-t-tth-gold transform hover:scale-[1.02] transition duration-300">
-                    <div class="text-4xl text-tth-gold mb-4">📈</div>
-                    <h3 class="text-2xl font-bold mb-2 text-tth-dark-blue">Capacity Building</h3>
-                    <p class="text-gray-600">Beyond hiring, we offer bespoke training and upskilling programs for your existing teams, ensuring your internal capacity evolves with the latest tech standards.</p>
-                    <span class="inline-block mt-4 text-tth-gold font-semibold">#CorporateTraining</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 3. Innovation & Growth (Venture Building) -->
-    <section id="innovate" class="py-20 bg-gray-100">
-        <div class="max-w-7xl mx-auto px-4 lg:grid lg:grid-cols-2 lg:gap-12 items-center">
-            <div class="mb-10 lg:mb-0">
-                <div class="text-tth-gold text-5xl font-extrabold mb-4">✨</div>
-                <h2 class="text-4xl font-extrabold mb-4 text-tth-dark-blue">
-                    Pillar 2: Venture Building (Venture Studio)
-                </h2>
-                <p class="text-xl text-gray-600 mb-6">
-                    We empower our top students to become founders. The Tech Hut acts as an <b>in-house venture studio</b>, providing initial capital, mentorship, and operational support.
-                </p>
-                <ul class="space-y-3 text-gray-700">
-                    <li class="flex items-start">
-                        <span class="text-tth-green mr-2 mt-1">✓</span>
-                        <b>Idea Vetting:</b> Rapid prototyping and market validation by expert mentors.
-                    </li>
-                    <li class="flex items-start">
-                        <span class="text-tth-green mr-2 mt-1">✓</span>
-                        <b>Team Formation:</b> Connecting technical builders with business strategists.
-                    </li>
-                    <li class="flex items-start">
-                        <span class="text-tth-green mr-2 mt-1">✓</span>
-                        <b>Seed Funding:</b> Direct pathways to early-stage investment and pitching opportunities.
-                    </li>
-                </ul>
-            </div>
-            <!-- Mock Studio Image/Card -->
-            <div class="p-8 bg-white rounded-xl shadow-2xl border border-gray-200">
-                <div class="flex justify-between items-center mb-4">
-                    <span class="text-2xl font-bold text-tth-dark-blue">TTH LaunchPad</span>
-                    <span class="text-sm bg-tth-green text-white px-3 py-1 rounded-full font-semibold">Venture Studio</span>
-                </div>
-                <p class="text-gray-600 italic">"Turning African talent into high-growth, scalable startups."</p>
-                <div class="mt-4 flex space-x-2">
-                    <span class="text-sm bg-gray-200 px-3 py-1 rounded-full">FinTech</span>
-                    <span class="text-sm bg-gray-200 px-3 py-1 rounded-full">AgriTech</span>
-                    <span class="text-sm bg-gray-200 px-3 py-1 rounded-full">EdTech</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. Community and Media Hub -->
-    <section id="community" class="py-20 bg-blue-50">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-4xl font-extrabold text-center mb-4 text-tth-dark-blue">
-                Pillar 3: Community & Knowledge Sharing
-            </h2>
-            <p class="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">
-                We foster a vibrant environment for learning, networking, and continuous growth.
-            </p>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-
-                <!-- Community Stat -->
-                <div class="p-6 text-center bg-white rounded-xl shadow-lg border-b-4 border-b-tth-dark-blue">
-                    <div class="text-5xl font-extrabold text-tth-dark-blue">7000+</div>
-                    <p class="text-lg font-semibold text-gray-700 mt-1">Active Community Members</p>
-                    <p class="text-sm text-gray-500">The largest network of vetted tech talent and builders in the region.</p>
-                </div>
-
-                <!-- Tech Events -->
-                <div class="p-6 bg-white rounded-xl shadow-lg">
-                    <div class="text-4xl text-tth-green mb-3">🗓️</div>
-                    <h3 class="text-xl font-bold mb-1 text-tth-dark-blue">Tech Events</h3>
-                    <p class="text-gray-600 text-sm">Organizing regular hackathons, workshops, and industry meetups to keep skills sharp and connections strong.</p>
-                    <a href="#" class="text-tth-green text-sm mt-2 block hover:underline">See Upcoming Events</a>
-                </div>
-
-                <!-- Tech Blogs -->
-                <div class="p-6 bg-white rounded-xl shadow-lg">
-                    <div class="text-4xl text-tth-green mb-3">✍️</div>
-                    <h3 class="text-xl font-bold mb-1 text-tth-dark-blue">Tech Blogs</h3>
-                    <p class="text-gray-600 text-sm">In-depth articles and tutorials covering emerging technologies, career advice, and success stories from our alumni.</p>
-                    <a href="#" class="text-tth-green text-sm mt-2 block hover:underline">Read Our Insights</a>
-                </div>
-
-                <!-- Newsletter & Podcast -->
-                <div class="p-6 bg-white rounded-xl shadow-lg">
-                    <div class="text-4xl text-tth-green mb-3">🎧</div>
-                    <h3 class="text-xl font-bold mb-1 text-tth-dark-blue">Podcast & Newsletter</h3>
-                    <p class="text-gray-600 text-sm">Delivering weekly digests and auditory interviews with top industry leaders directly to our members.</p>
-                    <a href="#" class="text-tth-green text-sm mt-2 block hover:underline">Subscribe Now</a>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. Final CTA Section -->
-    <section id="contact-cta" class="py-24 bg-tth-dark-blue text-white">
-        <div class="max-w-5xl mx-auto px-4 text-center">
-            <h2 class="text-4xl font-extrabold mb-4">Ready to Build the Future of African Tech?</h2>
-            <p class="text-xl mb-10 text-blue-200 max-w-3xl mx-auto">
-                Whether you need top-tier talent, corporate capacity building, or are looking to invest in new ventures, The Tech Hut is your strategic partner.
-            </p>
-
-            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-                <a href="mailto:info@thetechhut.co" class="px-8 py-4 bg-tth-green text-white text-lg font-extrabold rounded-full shadow-2xl hover:bg-green-600 transform hover:scale-105 transition duration-300">
-                    Partner with Our Talent Team
-                </a>
-                <a href="#" class="px-8 py-4 bg-white text-tth-dark-blue text-lg font-extrabold rounded-full shadow-2xl hover:bg-gray-200 transform hover:scale-105 transition duration-300">
-                    Join the 7000+ Community
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- 6. Footer -->
-    <footer class="bg-gray-800 text-gray-300 py-12">
-        <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
-            <!-- Col 1: Logo & Mission -->
-            <div class="col-span-2 md:col-span-1">
-                <a href="#hero" class="text-xl font-extrabold text-white flex items-center mb-2">
-                    <img src="https://lh3.googleusercontent.com/pw/AP1GczOPh0M7Nv7WoYW4mvejmN1fmTPjLpSDHqodOET_hHLuX3o_Kvo0fVdCu4PYvgoS_knYsgB3iMe_Ay2cjhzWmJ4gdShv5SqikF6faNV7dtcNQ-7y6EOZer5KGyAB1JrtP6XjxdSSPOlrHO4k7g73odrb=w500-h500-s-no-gm?authuser=0" alt="The Tech Hut Logo" class="w-6 h-6 mr-2 rounded-full object-cover">
-                    The Tech Hut
-                </a>
-                <p>The full-stack ecosystem for building and connecting high-growth African tech careers.</p>
-            </div>
-
-            <!-- Col 2: Services -->
-            <div>
-                <h4 class="font-semibold text-white mb-3 uppercase">Talent & Growth</h4>
-                <ul class="space-y-2">
-                    <li><a href="#talent" class="hover:text-tth-green">Apprenticeship</a></li>
-                    <li><a href="#talent" class="hover:text-tth-green">Talent Recruitment</a></li>
-                    <li><a href="#innovate" class="hover:text-tth-green">Venture Studio</a></li>
-                    <li><a href="#talent" class="hover:text-tth-green">Capacity Building</a></li>
-                </ul>
-            </div>
-
-            <!-- Col 3: Media Hub -->
-            <div>
-                <h4 class="font-semibold text-white mb-3 uppercase">Media & Events</h4>
-                <ul class="space-y-2">
-                    <li><a href="#community" class="hover:text-tth-green">Community Hub</a></li>
-                    <li><a href="#community" class="hover:text-tth-green">Tech Events</a></li>
-                    <li><a href="#community" class="hover:text-tth-green">Tech Blogs</a></li>
-                    <li><a href="#community" class="hover:text-tth-green">Podcast / Newsletter</a></li>
-                </ul>
-            </div>
-
-            <!-- Col 4: Contact -->
-            <div>
-                <h4 class="font-semibold text-white mb-3 uppercase">Connect</h4>
-                <p><strong>Email:</strong> info@thetechhut.co</p>
-                <p><strong>HQ:</strong> Nairobi, Kenya</p>
-                <p class="mt-4 text-xs text-gray-500">© 2024 The Tech Hut. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-</body>
-</html>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f7f5ef"><meta name="description" content="A home for developers, creatives, founders and curious minds."><title>The Tech Hut — A home for tech people</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#142f52;--deep:#0d2748;--green:#27ad8b;--gold:#f4c354;--cream:#f7f5ef;--ink:#263b55;--muted:#60718a;--line:#e9e6de;--shadow:0 12px 32px #18304c12}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:80px}body{margin:0;background:var(--cream);color:var(--navy);font:14px/1.55 Inter,sans-serif}a{color:inherit;text-decoration:none}.wrap{width:min(1320px,calc(100% - 64px));margin:auto}.eyebrow{font-size:10px;font-weight:800;letter-spacing:.09em;color:#139c7d;text-transform:uppercase}.title{font:800 clamp(25px,3vw,36px)/1.16 'Plus Jakarta Sans',sans-serif;letter-spacing:-.04em;margin:8px 0 12px}.copy{color:var(--muted);font-size:13px;max-width:390px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 20px;border:1px solid var(--navy);border-radius:28px;font-size:12px;font-weight:700;transition:.2s}.btn:hover{transform:translateY(-2px);box-shadow:var(--shadow)}.primary{background:var(--navy);color:white}.green{background:var(--green);border-color:var(--green);color:white}
+header{height:66px;background:#fbfaf6ed;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;backdrop-filter:blur(14px)}.nav{height:100%;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:10px;font:800 15px 'Plus Jakarta Sans'}.mark{width:38px;height:38px;border-radius:9px;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-size:24px}.brand small{display:block;font:500 9px Inter;color:var(--muted)}.links{display:flex;gap:32px;font-size:11px;font-weight:700}.links a:hover{color:var(--green)}.actions{display:flex;align-items:center;gap:12px}.search{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:white;border:1px solid var(--line);font-size:18px}.join{background:var(--green);color:white;padding:10px 16px;border-radius:10px;font-size:11px;font-weight:800}.menu{display:none;border:0;background:none;font-size:25px;color:var(--navy)}
+.hero{padding:34px 0 40px;overflow:hidden}.hero-grid{display:grid;grid-template-columns:.88fr 1.12fr;gap:28px;align-items:center}.pill{display:inline-block;background:var(--green);color:white;padding:5px 13px;border-radius:25px;font-size:9px;font-weight:800;letter-spacing:.07em}.hero h1{font:800 clamp(40px,4.3vw,58px)/1.08 'Plus Jakarta Sans';letter-spacing:-.055em;margin:14px 0 5px}.hero h1 span{display:block;color:var(--green);font-size:.64em;letter-spacing:-.035em;margin-top:8px}.hero p{font-size:14px;max-width:480px;color:var(--ink);margin:15px 0 19px}.actions-row{display:flex;gap:13px;flex-wrap:wrap}.note{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:10px;margin-top:18px}.note b{font-size:20px;color:var(--green)}.art{position:relative;min-height:370px}.blob{position:absolute;background:var(--green);width:65%;height:75%;left:6%;top:10%;border-radius:45% 25% 42% 24%;transform:rotate(-9deg)}.photo{position:absolute;object-fit:cover;border:4px solid var(--cream);box-shadow:var(--shadow)}.main-photo{width:49%;height:78%;left:13%;top:12%;border-radius:22px;z-index:2}.top-photo{width:49%;height:48%;right:2%;top:2%;border-radius:20px;z-index:3}.bottom-photo{width:42%;height:39%;right:9%;bottom:3%;border-radius:20px;z-index:4}.tag{position:absolute;z-index:5;background:var(--gold);padding:6px 14px;border-radius:20px;font-size:10px;font-weight:800}.learn-tag{left:10%;top:13%}.connect-tag{right:4%;top:0}.build-tag{right:0;bottom:28%}
+.pillars{padding:28px 0 30px;background:white}.pillar-grid{display:grid;grid-template-columns:1.7fr repeat(4,1fr);gap:14px}.intro{padding:8px 10px 8px 0}.intro .title{font-size:25px}.card{border-radius:14px;overflow:hidden;min-height:270px;display:flex;flex-direction:column;padding:17px 17px 0}.card h3{font:800 19px 'Plus Jakarta Sans';margin:5px 0}.card p{font-size:10px;line-height:1.5;color:#536985;margin:0 0 10px}.card a{font-size:10px;font-weight:800;margin-bottom:8px}.symbol{font-size:25px}.card img{width:calc(100% + 34px);height:100px;object-fit:cover;margin:auto -17px 0}.connect-card{background:#e9f3fb}.learn-card{background:#fff1d7}.grow-card{background:#e5f4ed}.build-card{background:#eeeafb}.connect-card h3,.connect-card .symbol{color:#163c69}.learn-card h3,.learn-card .symbol{color:#a66308}.grow-card h3,.grow-card .symbol{color:#087c70}.build-card h3,.build-card .symbol{color:#393c9b}
+.events{padding:30px 0}.event-grid{display:grid;grid-template-columns:1.18fr 1.05fr 1.12fr .9fr;gap:18px;align-items:start}.feature{background:white;border-radius:13px;overflow:hidden;box-shadow:var(--shadow);position:relative}.feature img{width:100%;height:170px;object-fit:cover;display:block}.feature-body{padding:10px 13px 13px}.feature-body small{font-size:9px;color:var(--muted)}.feature h3{font:700 15px 'Plus Jakarta Sans';margin:3px 0}.feature p{font-size:10px;color:var(--muted);margin:0}.flag{position:absolute;top:9px;left:9px;background:var(--gold);padding:5px 10px;border-radius:14px;font-size:9px;font-weight:800}.mini h4{font-size:9px;color:#169b7b;margin:2px 0 10px;text-transform:uppercase}.mini-item{display:flex;gap:9px;padding:8px;background:white;border-radius:11px;margin-bottom:8px;box-shadow:0 4px 15px #142f5209;min-height:65px}.mini-item img{width:48px;height:48px;object-fit:cover;border-radius:8px}.mini-item strong{font-size:9px;display:block;line-height:1.35}.mini-item small{font-size:8px;color:var(--muted)}
+.careers{background:linear-gradient(115deg,#142f52,#0c294d);color:white;padding:28px 0}.career-grid{display:grid;grid-template-columns:.75fr 1.7fr;gap:50px;align-items:center}.careers .eyebrow{color:#55d2b0}.careers .title{font-size:28px;max-width:270px}.careers .copy{color:#d0dceb}.job-search{display:flex;background:white;border-radius:30px;padding:5px;max-width:560px;margin-bottom:10px}.job-search input{border:0;outline:0;flex:1;min-width:0;padding:0 13px;font-size:11px}.job-search button{border:0;border-radius:50%;width:31px;height:31px;background:var(--green);color:white;font-size:17px;cursor:pointer}.caption{font-size:9px;color:#d4deeb;margin-bottom:10px}.job-types{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.job-card{border:1px solid #ffffff38;border-radius:11px;padding:13px;min-height:90px}.job-card:hover{background:#ffffff12}.job-card b{display:block;color:var(--gold);font-size:20px}.job-card strong{font-size:11px;display:block;margin-top:4px}.job-card small{font-size:9px;color:#d2deeb}
+.stories{padding:28px 0;background:white}.story-grid{display:grid;grid-template-columns:1.2fr repeat(3,1fr);gap:16px}.story-intro{padding:4px 8px 4px 0}.story-card,.article{background:white;border:1px solid #eeece7;border-radius:12px;overflow:hidden;box-shadow:0 5px 18px #142f5209}.story-card img{width:100%;height:105px;object-fit:cover;display:block}.story-body{padding:10px 12px 12px}.story-body small{display:inline-block;background:#fff0d1;color:#94600a;padding:3px 7px;border-radius:10px;font-size:8px;font-weight:800}.story-body h3{font-size:11px;line-height:1.4;margin:6px 0}.story-body a{font-size:9px;color:var(--muted)}
+.knowledge{padding:24px 0 18px}.knowledge-grid{display:grid;grid-template-columns:1.15fr repeat(4,1fr);gap:14px}.knowledge-intro .title{font-size:25px}.article img{width:100%;height:78px;object-fit:cover;display:block}.article .story-body{padding:8px 10px}.article .story-body h3{font-size:10px;margin:5px 0}.article .story-body small{background:#e0f2e9;color:#087b68}
+.bottom-cta{margin:0 auto 10px;width:min(1360px,calc(100% - 48px));padding:20px 32px;border-radius:12px;background:linear-gradient(100deg,#f3c052,#f8cd69);display:flex;align-items:center;justify-content:space-between;gap:20px}.bottom-cta h2{font:800 22px 'Plus Jakarta Sans';margin:2px 0}.bottom-cta p{font-size:10px;margin:0}.bottom-cta .btn{background:var(--navy);color:white;border-color:var(--navy);white-space:nowrap}
+footer{background:var(--deep);color:white;padding:24px 0 18px;position:relative;overflow:hidden}.footer-row{display:flex;justify-content:space-between;align-items:center;gap:25px}.footer-brand{display:flex;gap:10px;align-items:center;font:800 13px 'Plus Jakarta Sans'}.footer-brand small{display:block;font:400 9px Inter;color:#c3d0de}.footer-links,.socials{display:flex;gap:24px;font-size:10px;font-weight:600}.socials{gap:14px;font-weight:800}.copyright{text-align:center;font-size:8px;color:#b8c8d8;margin-top:18px}.shape{position:absolute;width:55px;height:65px;background:var(--green);border-radius:60% 20% 60% 30%;left:-22px;bottom:-18px;transform:rotate(-30deg)}.shape.right{left:auto;right:-25px;bottom:-20px;background:var(--gold)}
+@media(max-width:1000px){.wrap{width:calc(100% - 40px)}.hero-grid{grid-template-columns:1fr 1fr;gap:10px}.art{min-height:320px}.pillar-grid{grid-template-columns:repeat(4,1fr)}.intro{grid-column:1/-1}.event-grid{grid-template-columns:1fr 1fr}.event-grid>.intro{grid-column:1/-1}.story-grid{grid-template-columns:1fr 1fr 1fr}.story-intro{grid-column:1/-1}.knowledge-grid{grid-template-columns:repeat(4,1fr)}.knowledge-intro{grid-column:1/-1}}
+@media(max-width:680px){.wrap{width:calc(100% - 34px)}header{height:60px}.brand{font-size:13px}.mark{width:34px;height:34px}.links{display:none;position:absolute;top:60px;left:0;right:0;background:#fbfaf6;padding:18px 24px;flex-direction:column;gap:18px;border-bottom:1px solid var(--line);box-shadow:var(--shadow)}.links.open{display:flex}.search{display:none}.join{padding:9px 12px}.menu{display:block}.hero{padding:24px 0 28px}.hero-grid{grid-template-columns:1fr}.hero h1{font-size:43px}.hero p{font-size:13px}.art{min-height:300px}.main-photo{width:51%;height:79%;left:10%}.top-photo{width:49%;height:47%;right:0}.bottom-photo{width:42%;height:38%;right:7%}.pillar-grid{grid-template-columns:repeat(2,1fr);gap:10px}.intro{grid-column:1/-1}.card{min-height:250px;padding:14px}.card img{width:calc(100% + 28px);margin-left:-14px;margin-right:-14px;height:100px}.event-grid{grid-template-columns:1fr}.event-grid>.intro{grid-column:auto}.feature img{height:190px}.mini{display:grid;grid-template-columns:1fr 1fr;gap:8px}.mini h4{grid-column:1/-1;margin-bottom:0}.mini-item{margin:0}.career-grid{grid-template-columns:1fr;gap:18px}.careers .title{max-width:100%}.job-types{grid-template-columns:repeat(2,1fr)}.story-grid{grid-template-columns:1fr 1fr;gap:10px}.story-intro{grid-column:1/-1}.story-card img{height:115px}.knowledge-grid{grid-template-columns:1fr 1fr;gap:10px}.knowledge-intro{grid-column:1/-1}.article img{height:95px}.bottom-cta{width:calc(100% - 24px);padding:18px;align-items:flex-start;flex-direction:column}.bottom-cta h2{font-size:20px}.footer-row{flex-wrap:wrap}.footer-links{order:3;width:100%;justify-content:space-between;gap:10px;margin-top:8px}.socials{margin-left:auto}}
+@media(max-width:390px){.hero h1{font-size:37px}.art{min-height:250px}.card{min-height:260px}.card p{font-size:9px}.story-grid,.knowledge-grid{grid-template-columns:1fr 1fr}.story-card{display:grid;grid-template-columns:42% 1fr}.story-card img{height:100%;min-height:120px}.mini{grid-template-columns:1fr}}
+</style></head><body>
+<header><div class="wrap nav"><a class="brand" href="#top"><span class="mark">⌂</span><span>THE TECH HUT<small>A home for tech people.</small></span></a><nav class="links" id="menu-links"><a href="#pillars">Explore⌄</a><a href="#events">Learn⌄</a><a href="#careers">Careers⌄</a><a href="#knowledge">Insights⌄</a></nav><div class="actions"><a class="search" href="#job-search" aria-label="Search">⌕</a><a class="join" href="#join">Join the Hut&nbsp; →</a><button class="menu" id="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button></div></div></header>
+<main id="top">
+<section class="hero"><div class="wrap hero-grid"><div><span class="pill">YOUR PEOPLE. YOUR SPACE. YOUR FUTURE.</span><h1>Find your people.<br>Build your future.<span>Welcome to The Tech Hut.</span></h1><p>A home for developers, creatives, founders and curious minds. Connect with people, learn through experience and discover opportunities to grow in technology.</p><div class="actions-row"><a class="btn primary" href="#pillars">Explore the Hut&nbsp; →</a><a class="btn" href="#careers">Find opportunities</a></div><div class="note"><b>♧</b> Built around people who love building things.</div></div><div class="art" aria-label="The Tech Hut community in action"><div class="blob"></div><img class="photo main-photo" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=85" alt="Developer working on a laptop"><img class="photo top-photo" src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=85" alt="Diverse team collaborating"><img class="photo bottom-photo" src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=900&q=85" alt="Technology community conference"><span class="tag learn-tag">LEARN</span><span class="tag connect-tag">CONNECT</span><span class="tag build-tag">BUILD</span></div></div></section>
+<section class="pillars" id="pillars"><div class="wrap pillar-grid"><div class="intro"><span class="eyebrow">ONE COMMUNITY. MANY POSSIBILITIES.</span><h2 class="title">There’s a place for you here.</h2><p class="copy">Whether you’re just starting out or already building the future, there’s a way to get involved.</p></div>
+<article class="card connect-card"><div class="symbol">♟</div><h3>Connect.</h3><p>Meet your people. Find collaborators, join conversations and attend events.</p><a href="#events">Explore community&nbsp; →</a><img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=600&q=80" alt="People sharing ideas"></article>
+<article class="card learn-card"><div class="symbol">◇</div><h3>Learn.</h3><p>Turn knowledge into experience through apprenticeships, mentorship and projects.</p><a href="#careers">Explore learning&nbsp; →</a><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" alt="Learner working on a laptop"></article>
+<article class="card grow-card"><div class="symbol">↗</div><h3>Grow.</h3><p>Discover career opportunities, resources and pathways into technology.</p><a href="#careers">Explore careers&nbsp; →</a><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80" alt="Technology professional"></article>
+<article class="card build-card"><div class="symbol">▦</div><h3>Build.</h3><p>Collaborate with our development team to create meaningful digital products.</p><a href="#join">Build with us&nbsp; →</a><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" alt="Team collaborating"></article></div></section>
+<section class="events" id="events"><div class="wrap event-grid"><div class="intro"><span class="eyebrow">EVENTS, WORKSHOPS, HACKATHONS & MORE</span><h2 class="title">There’s always something happening in the Hut.</h2><p class="copy">From developer meetups to industry conversations, find events, workshops and community activities that fit your interests.</p><a class="btn" href="#join">View all events&nbsp; →</a></div><article class="feature"><span class="flag">COMMUNITY HIGHLIGHT</span><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=900&q=85" alt="Audience at a technology event"><div class="feature-body"><small>COMMUNITY EVENTS & MEETUPS</small><h3>Ideas are better when shared.</h3><p>Meet builders, exchange ideas and learn together at The Tech Hut.</p></div></article><div class="mini"><h4>Ways to get involved</h4><div class="mini-item"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=160&q=75" alt=""><div><strong>Hands-on workshops</strong><small>Learn by doing</small></div></div><div class="mini-item"><img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=160&q=75" alt=""><div><strong>Community hackathons</strong><small>Build with others</small></div></div><div class="mini-item"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=160&q=75" alt=""><div><strong>Career conversations</strong><small>Learn from experience</small></div></div></div><div class="mini"><h4>Inside the community</h4><div class="mini-item"><img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=160&q=75" alt=""><div><strong>Meet your next collaborator</strong><small>Find your people</small></div></div><div class="mini-item"><img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=160&q=75" alt=""><div><strong>Share what you know</strong><small>Give back to the Hut</small></div></div><div class="mini-item"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=160&q=75" alt=""><div><strong>Celebrate your progress</strong><small>Grow together</small></div></div></div></div></section>
+<section class="careers" id="careers"><div class="wrap career-grid"><div><span class="eyebrow">MAKE YOUR NEXT MOVE</span><h2 class="title">Your next chapter starts here.</h2><p class="copy">Find opportunities that help you move forward in tech.</p></div><div><form class="job-search" id="job-search"><input id="job-query" type="search" placeholder="Search jobs, skills or roles…" aria-label="Search opportunities"><button type="submit" aria-label="Search">→</button></form><div class="caption" id="search-caption">Explore available opportunities</div><div class="job-types"><a class="job-card" href="#join"><b>♧</b><strong>Tech jobs</strong><small>Find your next role.</small></a><a class="job-card" href="#join"><b>♙</b><strong>Apprenticeships</strong><small>Get real experience.</small></a><a class="job-card" href="#join"><b>◇</b><strong>Internships</strong><small>Gain hands-on skills.</small></a><a class="job-card" href="#join"><b>✧</b><strong>Scholarships</strong><small>Invest in your future.</small></a></div></div></div></section>
+<section class="stories"><div class="wrap story-grid"><div class="story-intro"><span class="eyebrow">COMMUNITY STORIES</span><h2 class="title">Real people. Real journeys. Real progress.</h2><p class="copy">From apprentices to founders, mentors to community members — these are the stories that make The Tech Hut.</p><a class="btn" href="#join">Read more stories&nbsp; →</a></div><article class="story-card"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=500&q=80" alt="Smiling professional"><div class="story-body"><small>APPRENTICESHIP</small><h3>From apprentice to software engineer</h3><a href="#join">Read her story&nbsp; →</a></div></article><article class="story-card"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80" alt="Technology professional"><div class="story-body"><small>BUILDING</small><h3>Building African solutions, one product at a time</h3><a href="#join">Read his story&nbsp; →</a></div></article><article class="story-card"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=80" alt="Smiling community member"><div class="story-body"><small>COMMUNITY</small><h3>How the community helped me find my first opportunity</h3><a href="#join">Read her story&nbsp; →</a></div></article></div></section>
+<section class="knowledge" id="knowledge"><div class="wrap knowledge-grid"><div class="knowledge-intro"><span class="eyebrow">THE KNOWLEDGE CORNER</span><h2 class="title">Stay curious. Stay connected.</h2><p class="copy">Get the latest tech news, tutorials, career advice and industry insights from Daily Savannah and our resource library.</p><a class="btn" href="#join">Visit Daily Savannah&nbsp; →</a></div><article class="article"><img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=500&q=80" alt="Artificial intelligence technology"><div class="story-body"><small>AI & EMERGING TECH</small><h3>How AI is shaping the next wave of innovation</h3><a href="#join">Explore insights →</a></div></article><article class="article"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=500&q=80" alt="Web development workspace"><div class="story-body"><small>TUTORIALS</small><h3>Build a modern web app with React</h3><a href="#join">Explore insights →</a></div></article><article class="article"><img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=500&q=80" alt="Career discussion"><div class="story-body"><small>CAREER ADVICE</small><h3>5 ways to stand out in a tech job interview</h3><a href="#join">Explore insights →</a></div></article><article class="article"><img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=500&q=80" alt="City skyline"><div class="story-body"><small>INDUSTRY INSIGHTS</small><h3>The future of work in Africa’s tech ecosystem</h3><a href="#join">Explore insights →</a></div></article></div></section>
+<section class="bottom-cta" id="join"><div><span class="eyebrow" style="color:#624a13">YOUR PEOPLE ARE HERE.</span><h2>The future is better when we build it together.</h2><p>Come learn, connect, grow and build with us.</p></div><a class="btn" href="mailto:info@thetechhut.co">Become part of The Tech Hut&nbsp; →</a></section></main>
+<footer><span class="shape"></span><span class="shape right"></span><div class="wrap"><div class="footer-row"><a class="footer-brand" href="#top"><span class="mark">⌂</span><span>THE TECH HUT<small>A home for tech people.</small></span></a><nav class="footer-links"><a href="#pillars">Explore</a><a href="#events">Learn</a><a href="#careers">Careers</a><a href="#knowledge">Insights</a><a href="#join">About</a></nav><div class="socials"><a href="https://x.com/" aria-label="X">𝕏</a><a href="https://linkedin.com/" aria-label="LinkedIn">in</a><a href="https://instagram.com/" aria-label="Instagram">◎</a><a href="https://youtube.com/" aria-label="YouTube">▶</a></div></div><div class="copyright">© 2026 The Tech Hut. All rights reserved. &nbsp;·&nbsp; Privacy &nbsp; Terms &nbsp; Contact</div></div></footer>
+<script>const t=document.getElementById('menu-toggle'),m=document.getElementById('menu-links');t.addEventListener('click',()=>{let o=m.classList.toggle('open');t.setAttribute('aria-expanded',String(o));t.textContent=o?'×':'☰'});m.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{m.classList.remove('open');t.setAttribute('aria-expanded','false');t.textContent='☰'}));document.getElementById('job-search').addEventListener('submit',e=>{e.preventDefault();let q=document.getElementById('job-query').value.trim();document.getElementById('search-caption').textContent=q?'You searched for “'+q+'”. Browse the opportunity categories below or contact us to learn more.':'Explore available opportunities'});</script>
+</body></html>
