@@ -22,6 +22,25 @@ job-card{display:block}.job-list{display:flex;flex-direction:column;gap:12px}.jo
 footer{background:var(--deep);color:white;padding:26px 0 18px}.footer-row{display:flex;justify-content:space-between;align-items:center;gap:25px}.footer-brand{display:flex;gap:10px;align-items:center;font:800 15px 'Plus Jakarta Sans'}.footer-brand small{display:block;font:400 11px Inter;color:#c3d0de}.footer-links,.socials{display:flex;gap:22px;font-size:11px;font-weight:600}.copyright{text-align:center;font-size:10px;color:#b8c8d8;margin-top:18px}
 @media(max-width:900px){.hero-grid{gap:20px}.results-layout{grid-template-columns:210px 1fr}.search-panel{grid-template-columns:1fr 1fr}.field:nth-child(2){border-right:0}.search-panel .btn{grid-column:1/-1}.category-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:680px){.wrap{width:calc(100% - 34px)}header{height:62px}.brand{font-size:13px}.brand-logo{width:40px;height:40px}.links{display:none;position:absolute;top:62px;left:0;right:0;background:#fbfaf6;padding:18px 24px;flex-direction:column;gap:18px;border-bottom:1px solid var(--line);box-shadow:var(--shadow)}.links.open{display:flex}.join{padding:9px 12px}.menu{display:block}.hero{padding:36px 0 45px}.hero-grid{grid-template-columns:1fr}.hero h1{font-size:45px}.hero-art{min-height:290px}.search-section{margin-top:0;padding:16px 0 25px}.search-panel{grid-template-columns:1fr;gap:13px}.field{border-right:0;border-bottom:1px solid var(--line);padding:0 4px 10px}.search-panel .btn{grid-column:auto;width:100%}.section{padding:32px 0}.section-head{align-items:start;flex-direction:column}.section-head .title{font-size:27px}.results{padding:32px 0}.results-layout{grid-template-columns:1fr}.filters{display:none}.job-card{grid-template-columns:44px 1fr;gap:11px;padding:14px}.company-mark{width:44px;height:44px}.job-side{grid-column:2;text-align:left;display:flex;align-items:center;gap:12px}.job-side small{margin:0}.job-side .btn{margin-left:auto}.featured{grid-template-columns:1fr;padding:22px}.featured .btn{width:max-content}.guidance-grid{grid-template-columns:1fr}.bottom-cta{width:calc(100% - 24px);padding:20px;align-items:flex-start;flex-direction:column}.footer-row{flex-wrap:wrap}.footer-links{order:3;width:100%;justify-content:space-between;gap:10px;margin-top:8px}.socials{margin-left:auto}}
+
+/* Mobile navbar sizing: keep the community CTA inside the viewport. */
+@media(max-width:680px){
+  .nav{min-width:0;gap:8px}
+  .brand{min-width:0;flex:1 1 auto;gap:7px}
+  .brand-logo{width:38px;height:38px;flex:0 0 38px}
+  .brand span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .actions{flex:0 0 auto;gap:8px}
+  .join{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;flex:0 0 auto;font-size:11px;padding:9px 10px;max-width:none}
+  .menu{flex:0 0 auto;padding:0}
+}
+@media(max-width:390px){
+  .brand small{display:none}
+  .brand{font-size:14px}
+  .brand-logo{width:34px;height:34px;flex-basis:34px}
+  .join{font-size:10px;padding:8px 8px}
+  .actions{gap:5px}
+}
+
 </style>
 </head>
 <body>
