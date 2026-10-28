@@ -145,23 +145,63 @@
         .test-join{background:#39a875;color:#fff;text-decoration:none;font:800 15px 'Source Sans 3',sans-serif;padding:14px 20px;border-radius:13px;white-space:nowrap}
         .test-menu{display:none;border:0;background:transparent;color:#142b50;font-size:26px;cursor:pointer}
         @media(max-width:900px){.test-nav-wrap{min-height:76px}.test-links{display:none;position:absolute;top:76px;left:0;right:0;padding:20px 24px;background:#fff;border-bottom:1px solid #e6e3dc;flex-direction:column;align-items:flex-start;gap:16px}.test-links.open{display:flex}.test-menu{display:block}.test-join{display:none}}
-    </style>
+    
+        /* The games directory shares the redesigned test-page visual system. */
+        :root{--paper:#f7f5ef;--paper-2:#fff;--paper-3:#e9e6de;--ink:#142f52;--text:#263b55;--dim:#60718a;--muted:#60718a;--rule:#e9e6de;--green:#27ad8b;--mint:#27ad8b;--gold:#f4c354;--serif:'Plus Jakarta Sans',sans-serif;--sans:Inter,sans-serif;--mono:'IBM Plex Mono',monospace}
+        body{background:var(--paper);color:var(--ink);font:14px/1.55 Inter,sans-serif}
+        .wrap{width:min(1320px,calc(100% - 64px));margin-inline:auto}
+        header:not(.hero){height:66px;background:#fbfaf6ed;border-bottom:1px solid var(--rule);position:sticky;top:0;z-index:20;backdrop-filter:blur(14px)}
+        .nav{height:100%;display:flex;align-items:center;justify-content:space-between}
+        .brand{display:flex;align-items:center;gap:10px;font:800 15px 'Plus Jakarta Sans',sans-serif;color:var(--ink);white-space:nowrap}
+        .brand small{display:block;font:500 9px Inter,sans-serif;color:var(--dim)}
+        .mark{width:38px;height:38px;border-radius:9px;background:var(--ink);color:var(--gold);display:grid;place-items:center;font-size:20px}
+        .links{display:flex;gap:clamp(12px,2vw,28px);font-size:11px;font-weight:700}
+        .links a{color:var(--ink);text-decoration:none}.links a:hover{color:var(--green)}
+        .actions{display:flex;align-items:center;gap:12px}.join{background:var(--green);color:white;padding:10px 16px;border-radius:10px;font-size:11px;font-weight:800}
+        .menu{display:none;border:0;background:none;font-size:25px;color:var(--ink);cursor:pointer}
+        .hero{padding:52px 0 54px;background:linear-gradient(115deg,#f7f5ef 0%,#eef4ef 100%);border-bottom:1px solid var(--rule)}
+        .hero .wrap{max-width:1320px}.hero .pill{background:#e4f4ee;color:#168565;padding:7px 13px;border-radius:30px;font-size:10px;font-weight:800;letter-spacing:.08em}
+        .hero h1{font:800 clamp(40px,5.2vw,66px)/1.06 'Plus Jakarta Sans',sans-serif;letter-spacing:-.055em;color:var(--ink);max-width:780px;margin:18px 0 14px}
+        .hero h1 em{color:var(--green);font-style:normal}.hero .lede{font-size:16px;line-height:1.7;color:var(--text);max-width:700px}
+        .cta-note{font-size:13px;color:var(--dim)}.cta-note a{color:var(--green);font-weight:700}
+        .gfilters{top:66px;background:#fbfaf6ed;border-bottom:1px solid var(--rule);backdrop-filter:blur(12px)}
+        .gsearch{font:14px Inter,sans-serif;padding:12px 15px;border:1px solid var(--rule);border-radius:12px;background:white;color:var(--ink)}
+        .gcats button{font:700 10px Inter,sans-serif;letter-spacing:.04em;background:white;color:var(--ink);border:1px solid var(--rule);border-radius:20px;padding:8px 12px}
+        .gcats button[aria-pressed="true"]{background:var(--ink);color:white;border-color:var(--ink)}
+        .gphone{font:600 12px Inter,sans-serif;color:var(--text)}
+        .gcount{font:800 10px Inter,sans-serif;color:var(--green);letter-spacing:.1em}
+        .ggrid{gap:18px;grid-template-columns:repeat(auto-fill,minmax(245px,1fr));margin:18px 0 0}
+        .game{background:white;border:1px solid var(--rule);border-top:3px solid var(--green);border-radius:16px;padding:18px;box-shadow:0 8px 24px #18304c0b}
+        .game .cat{font:800 10px Inter,sans-serif;color:var(--green);letter-spacing:.09em}
+        .game h3{font:800 19px 'Plus Jakarta Sans',sans-serif;color:var(--ink);margin:8px 0 3px}
+        .game .by{font-size:12px;color:var(--dim)}.game p.line{font-size:14px;line-height:1.6;color:var(--text)}
+        .game .tags span{font:700 9px Inter,sans-serif;border-radius:20px;padding:4px 8px;background:#f7f5ef;border-color:var(--rule);color:var(--dim)}
+        .game .tags span.here{background:#e4f4ee;border-color:#c7eadd;color:#168565}
+        .game .btn{background:var(--ink);color:white;border:1px solid var(--ink);border-radius:24px;font:700 11px Inter,sans-serif;padding:10px 16px}
+        .arcade{background:#edf3ef;padding:42px 0}.acard{border-top:3px solid var(--green)}
+        .ame{background:var(--ink);border:0;border-radius:16px}.ame h3{color:white}
+        .section-head h2{font:800 clamp(24px,3vw,34px)/1.15 'Plus Jakarta Sans',sans-serif;letter-spacing:-.04em;color:var(--ink)}
+        #why{padding:48px 0 58px}#why p{color:var(--text);line-height:1.8}
+        .sitefoot{background:#102947;color:#dce6ef;padding:42px 0}.sitefoot a{color:#fff}.sitefoot p{color:#b7c7d8}
+        @media(max-width:900px){.links{display:none;position:absolute;top:66px;left:0;right:0;padding:20px 24px;background:#fbfaf6;border-bottom:1px solid var(--rule);flex-direction:column;align-items:flex-start;gap:16px}.links.open{display:flex}.menu{display:block}.join{display:none}}
+        @media(max-width:640px){.wrap{width:calc(100% - 36px)}.hero{padding:38px 0}.gfilters{position:static}.gcats{overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px;max-width:100%}.gcats button{flex:0 0 auto}}
+</style>
 </head>
 
 <body>
 
     <a class="skip" href="#main">Skip to content</a>
     <div class="glive" data-games-stats data-mode="full" aria-live="off" hidden></div>
-    <header class="test-masthead">
-        <div class="test-nav-wrap">
-            <a class="test-brand" href="test.html"><span class="test-mark">TH</span><span>THE TECH HUT<small>A home for tech people.</small></span></a>
-            <nav class="test-links" id="menu-links" aria-label="Main navigation">
+    <header>
+        <div class="wrap nav">
+            <a class="brand" href="test.html"><span class="mark">TH</span><span>THE TECH HUT<small>A home for tech people.</small></span></a>
+            <nav class="links" id="menu-links" aria-label="Main navigation">
                 <a href="test.html">Home</a><a href="communities_test.html">Community</a><a href="apprenticeship_test.html">Apprenticeship</a><a href="job_test.html">Opportunities</a><a href="game_test.html">Games</a><a href="/blog/daily/">Insights</a><a href="shop_test.html">Shop</a>
             </nav>
-            <a class="test-join" href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" target="_blank" rel="noopener noreferrer">Join the community ↗</a>
-            <button class="test-menu" id="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+            <div class="actions"><a class="join" href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" target="_blank" rel="noopener noreferrer">Join the community ↗</a>
+            <button class="menu" id="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">☰</button></div>
         </div>
-    </header>
+    </header>der>
 
     <header class="hero" id="main">
         <div class="wrap">
