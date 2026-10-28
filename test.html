@@ -15,6 +15,25 @@ footer{background:var(--deep);color:white;padding:24px 0 18px;position:relative;
 @media(max-width:680px){.wrap{width:calc(100% - 34px)}header{height:60px}.brand{font-size:13px}.mark{width:34px;height:34px}.links{display:none;position:absolute;top:60px;left:0;right:0;background:#fbfaf6;padding:18px 24px;flex-direction:column;gap:18px;border-bottom:1px solid var(--line);box-shadow:var(--shadow)}.links.open{display:flex}.search{display:none}.join{padding:9px 12px}.menu{display:block}.hero{padding:24px 0 28px}.hero-grid{grid-template-columns:1fr}.hero h1{font-size:43px}.hero p{font-size:13px}.art{min-height:300px}.main-photo{width:51%;height:79%;left:10%}.top-photo{width:49%;height:47%;right:0}.bottom-photo{width:42%;height:38%;right:7%}.pillar-grid{grid-template-columns:repeat(2,1fr);gap:10px}.intro{grid-column:1/-1}.card{min-height:250px;padding:14px}.card img{width:calc(100% + 28px);margin-left:-14px;margin-right:-14px;height:100px}.event-grid{grid-template-columns:1fr}.event-grid>.intro{grid-column:auto}.feature img{height:190px}.mini{display:grid;grid-template-columns:1fr 1fr;gap:8px}.mini h4{grid-column:1/-1;margin-bottom:0}.mini-item{margin:0}.career-grid{grid-template-columns:1fr;gap:18px}.careers .title{max-width:100%}.job-types{grid-template-columns:repeat(2,1fr)}.story-grid{grid-template-columns:1fr 1fr;gap:10px}.story-intro{grid-column:1/-1}.story-card img{height:115px}.knowledge-grid{grid-template-columns:1fr 1fr;gap:10px}.knowledge-intro{grid-column:1/-1}.article img{height:95px}.bottom-cta{width:calc(100% - 24px);padding:18px;align-items:flex-start;flex-direction:column}.bottom-cta h2{font-size:20px}.footer-row{flex-wrap:wrap}.footer-links{order:3;width:100%;justify-content:space-between;gap:10px;margin-top:8px}.socials{margin-left:auto}}
 @media(max-width:390px){.hero h1{font-size:37px}.art{min-height:250px}.card{min-height:260px}.card p{font-size:9px}.story-grid,.knowledge-grid{grid-template-columns:1fr 1fr}.story-card{display:grid;grid-template-columns:42% 1fr}.story-card img{height:100%;min-height:120px}.mini{grid-template-columns:1fr}}
 
+
+/* Prevent the community CTA from pushing the mobile navbar beyond the viewport. */
+@media(max-width:680px){
+  .nav{min-width:0;gap:8px}
+  .brand{min-width:0;flex:1 1 auto;gap:7px}
+  .brand-logo{width:38px;height:38px;flex:0 0 38px}
+  .brand span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .actions{flex:0 0 auto;gap:8px}
+  .join{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;flex:0 0 auto;font-size:11px;padding:9px 10px;max-width:none}
+  .menu{flex:0 0 auto;padding:0}
+}
+@media(max-width:390px){
+  .brand small{display:none}
+  .brand{font-size:14px}
+  .brand-logo{width:34px;height:34px;flex-basis:34px}
+  .join{font-size:10px;padding:8px 8px}
+  .actions{gap:5px}
+}
+
 /* Brand mark and improved readability */
 .brand-logo{width:48px;height:48px;object-fit:contain;display:block;flex:none;border-radius:12px;overflow:hidden}
 .footer-brand .brand-logo{width:46px;height:46px}
