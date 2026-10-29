@@ -137,6 +137,27 @@
       border: 1px solid var(--ink); border-radius: 3px; padding: 7px 14px; }
     .apply a:hover { background: var(--ink); color: #fff; }
 
+
+    /* In-board job detail view */
+    .job-detail { max-width: 820px; padding: 28px 0 40px; }
+    .job-detail .back { display:inline-flex; gap:8px; align-items:center; color:var(--green); font-weight:700; margin:0 0 26px; text-decoration:none; }
+    .job-detail .back:hover { text-decoration:underline; }
+    .job-detail .detail-kicker { font-family:var(--mono); font-size:12px; color:var(--green); text-transform:uppercase; letter-spacing:.08em; }
+    .job-detail h2 { font-size:clamp(28px,4vw,42px); line-height:1.15; margin:10px 0 8px; }
+    .job-detail .detail-company { font-size:18px; font-weight:700; color:var(--ink); }
+    .job-detail .detail-meta { display:flex; flex-wrap:wrap; gap:8px 18px; margin:18px 0 24px; color:var(--dim); font-family:var(--mono); font-size:13px; }
+    .job-detail .detail-tags { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 26px; }
+    .job-detail .detail-tags span { padding:6px 10px; border:1px solid var(--rule); border-radius:3px; font-size:12px; }
+    .job-detail .detail-section { border-top:2px solid var(--ink); padding-top:16px; margin-top:22px; }
+    .job-detail .detail-section h3 { margin:0 0 10px; font-size:20px; }
+    .job-detail .detail-section p { color:var(--muted); line-height:1.7; }
+    .job-detail .detail-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
+    .job-detail .detail-actions a { display:inline-flex; padding:12px 20px; background:var(--ink); color:white; border:1px solid var(--ink); border-radius:3px; font-weight:700; text-decoration:none; }
+    .job-detail .detail-actions a.secondary { background:transparent; color:var(--ink); }
+    .cols.is-detail { grid-template-areas:"list list"; grid-template-columns:minmax(0,1fr); }
+    .cols.is-detail .filters,.cols.is-detail .sidenotes { display:none; }
+    .results.is-detail .listhead,.results.is-detail #pager { display:none; }
+
     /* empty, error and loading states */
     .state { border-left: 3px solid var(--gold-2); background: var(--paper-2); padding: 16px 20px; margin-top: 20px; color: var(--text); }
     .state h3 { font-size: 20px; margin: 0 0 6px; }
@@ -651,7 +672,7 @@
     return '<article class="job">' +
       '<div class="logo">' + initial + logo + '</div>' +
       '<div>' +
-        '<h3><a href="' + esc(j.url) + '" target="_blank" rel="noopener">' + esc(j.title) + '</a></h3>' +
+        '<h3><a href="#job=' + encodeURIComponent(j.id) + '" data-job-id="' + esc(j.id) + '">' + esc(j.title) + '</a></h3>' +
         '<div class="co">' + esc(j.company || 'Company not listed') + '</div>' +
         '<div class="meta"><span>' + esc(j.location) + '</span>' +
           (j.date ? '<span>' + esc(ago(j.date)) + '</span>' : '') + '</div>' +
@@ -661,11 +682,67 @@
           '<span class="src">via ' + esc(j.source) + '</span>' +
         '</div>' +
       '</div>' +
-      '<div class="apply"><a href="' + esc(j.url) + '" target="_blank" rel="noopener">View job</a></div>' +
+      '<div class="apply"><a href="#job=' + encodeURIComponent(j.id) + '" data-job-id="' + esc(j.id) + '">View details</a></div>' +
     '</article>';
   }
 
+
+  function detailFromHash() {
+    var m = /^#job=(.+)$/.exec(location.hash);
+    if (!m) return null;
+    try { return decodeURIComponent(m[1]); } catch (e) { return null; }
+  }
+  function renderDetail(job) {
+    var cols = document.querySelector('.cols'), results = document.querySelector('.results');
+    cols.classList.add('is-detail'); results.classList.add('is-detail');
+    var stage = stageLabel(job.stage || stageOf(job.title, job.level));
+    var tags = (stage ? [stage] : []).concat(job.cats || [], job.types || []).filter(Boolean);
+    $('shown').textContent = '';
+    $('list').innerHTML = '<article class="job-detail">' +
+      '<a class="back" href="' + esc(location.pathname + location.search) + '">← Back to all jobs</a>' +
+      '<div class="detail-kicker">Opportunity details</div>' +
+      '<h2>' + esc(job.title) + '</h2>' +
+      '<div class="detail-company">' + esc(job.company || 'Company not listed') + '</div>' +
+      '<div class="detail-meta"><span>' + esc(job.location || 'Location not stated') + '</span>' +
+      (job.date ? '<span>Posted ' + esc(ago(job.date)) + '</span>' : '') +
+      '<span>Source: ' + esc(job.source || 'Employer') + '</span></div>' +
+      '<div class="detail-tags">' + tags.map(function (t) { return '<span>' + esc(t) + '</span>'; }).join('') + '</div>' +
+      '<section class="detail-section"><h3>About this opportunity</h3>' +
+      (job.excerpt ? '<p>' + esc(job.excerpt) + '</p>' : '<p>The source listing does not provide a description in its public feed. Visit the employer’s original posting for the full responsibilities, requirements and application details.</p>') +
+      '</section>' +
+      '<section class="detail-section"><h3>Before you apply</h3><p>Review the full job description, confirm that the location and eligibility requirements work for you, and check the employer’s application instructions. The Tech Hut links to the original posting and does not handle applications.</p></section>' +
+      '<div class="detail-actions"><a href="' + esc(job.url) + '" target="_blank" rel="noopener noreferrer">Apply on employer site ↗</a>' +
+      '<a class="secondary" href="' + esc(location.pathname + location.search) + '">Back to jobs</a></div>' +
+      '</article>';
+  }
+  function showListView() {
+    document.querySelector('.cols').classList.remove('is-detail');
+    document.querySelector('.results').classList.remove('is-detail');
+  }
+  function renderRoute() {
+    var id = detailFromHash();
+    if (id) {
+      var job = all.filter(function (j) { return String(j.id) === id; })[0];
+      if (job) { renderDetail(job); return; }
+    }
+    showListView();
+    render();
+  }
+  $('list').addEventListener('click', function (e) {
+    var link = e.target.closest('a[data-job-id]');
+    if (!link) return;
+    e.preventDefault();
+    location.hash = 'job=' + encodeURIComponent(link.getAttribute('data-job-id'));
+  });
+  window.addEventListener('hashchange', renderRoute);
+
   function render() {
+    var selectedId = detailFromHash();
+    if (selectedId) {
+      var selectedJob = all.filter(function (j) { return String(j.id) === selectedId; })[0];
+      if (selectedJob) { renderDetail(selectedJob); return; }
+    }
+    showListView();
     var list = $('list');
     $('shown').textContent = '(' + view.length + ')';
     if (!view.length) {
