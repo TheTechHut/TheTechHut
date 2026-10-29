@@ -26,7 +26,7 @@
   </url>
   <url>
     <loc>https://thetechhut.co/blog/reading/</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -459,6 +459,12 @@
   <url>
     <loc>https://thetechhut.co/blog/reading/2026-10-21/</loc>
     <lastmod>2026-10-21</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://thetechhut.co/blog/reading/2026-10-29/</loc>
+    <lastmod>2026-10-29</lastmod>
     <changefreq>never</changefreq>
     <priority>0.60</priority>
   </url>
