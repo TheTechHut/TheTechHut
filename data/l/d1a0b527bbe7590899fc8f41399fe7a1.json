@@ -1,9 +1,9 @@
 {
- "updated": "2026-10-28",
- "company_count": 32,
- "role_count": 357,
- "local_role_count": 99,
- "roles_scanned": 3334,
+ "updated": "2026-10-29",
+ "company_count": 38,
+ "role_count": 382,
+ "local_role_count": 104,
+ "roles_scanned": 3330,
  "sources": [
   "Himalayas",
   "Jobicy"
@@ -440,32 +440,153 @@
    "total": 65
   },
   {
+   "company": "EWOR GmbH",
+   "platform": "himalayas",
+   "eligible": 20,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Mobility Co-Founder / CPTO (100 % remote) (m/f/d)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/mobility-co-founder-cpto-100-remote-m-f-d-4438020311?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Cybersecurity Co-Founder / CPO (100 % remote) (m/f/d)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/cybersecurity-co-founder-cpo-100-remote-m-f-d-7339294232?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Cybersecurity Co-Founder / Head of Growth (100 % remote) (m/f/d)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/cybersecurity-co-founder-head-of-growth-100-remote-m-f-d-3064154576?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Industrial Tech Co-Founder / CPO (100 % remote) (m/f/d)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/industrial-tech-co-founder-cpo-100-remote-m-f-d-3081690888?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Semiconductor Co-Founder / Head of Product (100 % remote) (m/f/d)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/semiconductor-co-founder-head-of-product-100-remote-m-f-d-8135998118?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "DevTools Co-Founder / Head of Product (100 % remote) (m/f/d)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/devtools-co-founder-head-of-product-100-remote-m-f-d-5304431681?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Renewable Energy Co-Founder / CPO (100 % remote) (m/f/d)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/renewable-energy-co-founder-cpo-100-remote-m-f-d-838987546?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Semiconductor Co-Founder / CPTO (100 % remote) (m/f/d)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/semiconductor-co-founder-cpto-100-remote-m-f-d-7417852541?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "DevTools Co-Founder / CPTO (100 % remote) (m/f/d)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/devtools-co-founder-cpto-100-remote-m-f-d-9452532906?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Fintech Co-Founder / Head of Engineering (100 % remote) (m/f/d)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/fintech-co-founder-head-of-engineering-100-remote-m-f-d-4089450731?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Applied AI Co-Founder / CTO (100 % remote) (m/f/d)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/applied-ai-co-founder-cto-100-remote-m-f-d-4443638991?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "HealthTech Co-Founder / Head of Engineering (100 % remote) (m/f/d)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/healthtech-co-founder-head-of-engineering-100-remote-m-f-d-3060305127?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Logistics Co-Founder / Head of Engineering (100 % remote) (m/f/d)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/logistics-co-founder-head-of-engineering-100-remote-m-f-d-6164721077?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Space Tech Co-Founder / CPTO (100 % remote) (m/f/d)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/space-tech-co-founder-cpto-100-remote-m-f-d-1799673064?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Clean Energy Co-Founder / CPO (100 % remote) (m/f/d)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/clean-energy-co-founder-cpo-100-remote-m-f-d-6056127181?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "HealthTech Co-Founder / Head of Product (100 % remote) (m/f/d)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/healthtech-co-founder-head-of-product-100-remote-m-f-d-211636900?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Logistics Co-Founder / CPTO (100 % remote) (m/f/d)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/logistics-co-founder-cpto-100-remote-m-f-d-821720543?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Mobility Co-Founder / Head of Product (100 % remote) (m/f/d)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/mobility-co-founder-head-of-product-100-remote-m-f-d-3088364900?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "AI Research Lab Co-Founder / Head of Product (100 % remote) (m/f/d)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/ai-research-lab-co-founder-head-of-product-100-remote-m-f-d-6697279344?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "MedTech Co-Founder / Head of Product (100 % remote) (m/f/d)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/medtech-co-founder-head-of-product-100-remote-m-f-d-1509229415?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 20
+  },
+  {
    "company": "Oyster",
    "platform": "ashby",
-   "eligible": 16,
+   "eligible": 14,
    "locations": [
-    "EMEA; APAC; Portugal; Spain; India",
     "EMEA; Romania; Bulgaria; Portugal; Canada; United Kingdom; Spain; Poland",
     "EMEA; Romania; Hungary; Bulgaria; Portugal; Slovakia; Poland; Estonia; South Africa",
     "EMEA; Romania; Hungary; Netherlands; Portugal; Slovakia; Spain; Poland",
     "EMEA; Romania; Hungary; Netherlands; Portugal; Slovakia; Spain; Poland; South Africa; Greece",
-    "EMEA; Romania; Bulgaria; Kenya; Portugal; United Kingdom; Spain; Brazil; South Africa; Argentina; Armenia"
+    "EMEA; Romania; Bulgaria; Kenya; Portugal; United Kingdom; Spain; Brazil; South Africa; Argentina; Armenia",
+    "EMEA; Ireland; Portugal; United Kingdom; Spain; Brazil; Canada"
    ],
    "roles": [
-    {
-     "title": "Legal Counsel (Employment Products)",
-     "location": "EMEA; APAC; Portugal; Spain; India",
-     "url": "https://jobs.ashbyhq.com/oyster/f96014b7-68e5-45fe-9c53-1dea5775fc66"
-    },
     {
      "title": "Lead Product Manager",
      "location": "EMEA; Romania; Bulgaria; Portugal; Canada; United Kingdom; Spain; Poland",
      "url": "https://jobs.ashbyhq.com/oyster/20b0c812-255e-433b-99bb-2d1f399f0c7a"
-    },
-    {
-     "title": "Legal Counsel (Employment Products)",
-     "location": "EMEA; APAC; Portugal; Spain; India",
-     "url": "https://jobs.ashbyhq.com/oyster/92ee57c2-7ee4-48d9-b089-0feda448dc01"
     },
     {
      "title": "Senior Global Benefits Specialist",
@@ -533,7 +654,73 @@
      "url": "https://jobs.ashbyhq.com/oyster/34e9f726-4461-4ef7-9724-a0aba8c72a76"
     }
    ],
-   "total": 24
+   "total": 22
+  },
+  {
+   "company": "RevenueCat",
+   "platform": "jobicy",
+   "eligible": 9,
+   "locations": [
+    "EMEA,  LATAM,  Canada,  USA",
+    "APAC,  EMEA,  LATAM,  Canada,  USA"
+   ],
+   "roles": [
+    {
+     "title": "Senior Data Scientist, Product",
+     "location": "EMEA,  LATAM,  Canada,  USA",
+     "url": "https://jobicy.com/jobs/157724-senior-data-scientist-product-2",
+     "via": "Jobicy"
+    },
+    {
+     "title": "GTM Operations Manager",
+     "location": "EMEA,  LATAM,  Canada,  USA",
+     "url": "https://jobicy.com/jobs/157211-gtm-operations-manager",
+     "via": "Jobicy"
+    },
+    {
+     "title": "Senior Software Engineer, Product",
+     "location": "EMEA,  LATAM,  Canada,  USA",
+     "url": "https://jobicy.com/jobs/157109-senior-software-engineer-product",
+     "via": "Jobicy"
+    },
+    {
+     "title": "Senior Backend Engineer",
+     "location": "EMEA,  LATAM,  Canada,  USA",
+     "url": "https://jobicy.com/jobs/157106-senior-backend-engineer-13",
+     "via": "Jobicy"
+    },
+    {
+     "title": "Engineering Manager, RC Capital",
+     "location": "EMEA,  LATAM,  Canada,  USA",
+     "url": "https://jobicy.com/jobs/151629-engineering-manager-rc-capital",
+     "via": "Jobicy"
+    },
+    {
+     "title": "Senior Product Manager, Funnels/Workflow",
+     "location": "APAC,  EMEA,  LATAM,  Canada,  USA",
+     "url": "https://jobicy.com/jobs/151545-senior-product-manager-funnels-workflow",
+     "via": "Jobicy"
+    },
+    {
+     "title": "Senior Product Manager, User Acquisition",
+     "location": "APAC,  EMEA,  LATAM,  Canada,  USA",
+     "url": "https://jobicy.com/jobs/156992-senior-product-manager-user-acquisition",
+     "via": "Jobicy"
+    },
+    {
+     "title": "Senior Product Manager, Ad Monetization",
+     "location": "APAC,  EMEA,  LATAM,  Canada,  USA",
+     "url": "https://jobicy.com/jobs/156738-senior-product-manager-ad-monetization",
+     "via": "Jobicy"
+    },
+    {
+     "title": "Senior Product Designer",
+     "location": "EMEA,  LATAM,  Canada,  USA",
+     "url": "https://jobicy.com/jobs/153973-senior-product-designer-13",
+     "via": "Jobicy"
+    }
+   ],
+   "total": 9
   },
   {
    "company": "ConsenSys",
@@ -592,66 +779,6 @@
    "total": 11
   },
   {
-   "company": "RevenueCat",
-   "platform": "jobicy",
-   "eligible": 8,
-   "locations": [
-    "EMEA,  LATAM,  Canada,  USA",
-    "APAC,  EMEA,  LATAM,  Canada,  USA"
-   ],
-   "roles": [
-    {
-     "title": "GTM Operations Manager",
-     "location": "EMEA,  LATAM,  Canada,  USA",
-     "url": "https://jobicy.com/jobs/157211-gtm-operations-manager",
-     "via": "Jobicy"
-    },
-    {
-     "title": "Senior Software Engineer, Product",
-     "location": "EMEA,  LATAM,  Canada,  USA",
-     "url": "https://jobicy.com/jobs/157109-senior-software-engineer-product",
-     "via": "Jobicy"
-    },
-    {
-     "title": "Senior Backend Engineer",
-     "location": "EMEA,  LATAM,  Canada,  USA",
-     "url": "https://jobicy.com/jobs/157106-senior-backend-engineer-13",
-     "via": "Jobicy"
-    },
-    {
-     "title": "Engineering Manager, RC Capital",
-     "location": "EMEA,  LATAM,  Canada,  USA",
-     "url": "https://jobicy.com/jobs/151629-engineering-manager-rc-capital",
-     "via": "Jobicy"
-    },
-    {
-     "title": "Senior Product Manager, Funnels/Workflow",
-     "location": "APAC,  EMEA,  LATAM,  Canada,  USA",
-     "url": "https://jobicy.com/jobs/151545-senior-product-manager-funnels-workflow",
-     "via": "Jobicy"
-    },
-    {
-     "title": "Senior Product Manager, User Acquisition",
-     "location": "APAC,  EMEA,  LATAM,  Canada,  USA",
-     "url": "https://jobicy.com/jobs/156992-senior-product-manager-user-acquisition",
-     "via": "Jobicy"
-    },
-    {
-     "title": "Senior Product Manager, Ad Monetization",
-     "location": "APAC,  EMEA,  LATAM,  Canada,  USA",
-     "url": "https://jobicy.com/jobs/156738-senior-product-manager-ad-monetization",
-     "via": "Jobicy"
-    },
-    {
-     "title": "Senior Product Designer",
-     "location": "EMEA,  LATAM,  Canada,  USA",
-     "url": "https://jobicy.com/jobs/153973-senior-product-designer-13",
-     "via": "Jobicy"
-    }
-   ],
-   "total": 8
-  },
-  {
    "company": "Railway",
    "platform": "ashby",
    "eligible": 6,
@@ -693,6 +820,47 @@
    "total": 7
   },
   {
+   "company": "Nestifytech Solutions Private Limited",
+   "platform": "himalayas",
+   "eligible": 5,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Full Stack Developer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/nestifytech-solutions-private-limited/jobs/full-stack-developer?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "AI Chatbot Engineer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/nestifytech-solutions-private-limited/jobs/ai-chatbot-engineer?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Business Operations Analyst",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/nestifytech-solutions-private-limited/jobs/business-operations-analyst?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Business Consultant",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/nestifytech-solutions-private-limited/jobs/business-consultant?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "LLM Engineer (Large Language Model Engineer)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/nestifytech-solutions-private-limited/jobs/llm-engineer-large-language-model-engineer?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 5
+  },
+  {
    "company": "G2i",
    "platform": "himalayas",
    "eligible": 5,
@@ -701,9 +869,9 @@
    ],
    "roles": [
     {
-     "title": "Frontend Developer - G2i Talent Pool",
+     "title": "Remote Developer | G2i Talent Pool",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/g2i/jobs/frontend-developer-g2i-talent-pool?utm_source=api",
+     "url": "https://himalayas.app/companies/g2i/jobs/remote-developer-g2i-talent-pool?utm_source=api",
      "via": "Himalayas"
     },
     {
@@ -734,41 +902,6 @@
    "total": 5
   },
   {
-   "company": "EWOR GmbH",
-   "platform": "himalayas",
-   "eligible": 4,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "HealthTech Co-Founder / CPO (100 % remote) (m/f/d)",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/healthtech-co-founder-cpo-100-remote-m-f-d-4830362095?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "B2B Co-Founder / CPTO (100 % remote) (m/f/d)",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/b2b-co-founder-cpto-100-remote-m-f-d-2042270793?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Fintech Co-Founder / Head of Product (100 % remote) (m/f/d)",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/fintech-co-founder-head-of-product-100-remote-m-f-d-4829469484?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "MedTech Co-Founder / Head of Engineering (100 % remote) (m/f/d)",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/medtech-co-founder-head-of-engineering-100-remote-m-f-d-4442440003?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 4
-  },
-  {
    "company": "Zipline",
    "platform": "greenhouse",
    "eligible": 3,
@@ -793,7 +926,7 @@
      "url": "https://www.zipline.com/open-roles/7983316003?gh_jid=7983316003"
     }
    ],
-   "total": 347
+   "total": 341
   },
   {
    "company": "Zapier",
@@ -823,26 +956,27 @@
    "total": 12
   },
   {
-   "company": "PostHog",
-   "platform": "ashby",
+   "company": "knowmad mood",
+   "platform": "himalayas",
    "eligible": 2,
    "locations": [
-    "Remote (EMEA)",
-    "Remote (EMEA); Remote (UK)"
+    "Worldwide"
    ],
    "roles": [
     {
-     "title": "Technical Customer Success Manager - EMEA",
-     "location": "Remote (EMEA)",
-     "url": "https://jobs.ashbyhq.com/posthog/0be1b52c-2401-4ae2-b7fc-5d018c1ff96f"
+     "title": "AI Agent Developer (Latam)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/knowmad-mood/jobs/ai-agent-developer-latam?utm_source=api",
+     "via": "Himalayas"
     },
     {
-     "title": "Security Engineer ",
-     "location": "Remote (EMEA); Remote (UK)",
-     "url": "https://jobs.ashbyhq.com/posthog/36d5ce14-851c-450f-879a-45cbb896225e"
+     "title": "Web Developer & Marketing Technology Specialist",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/knowmad-mood/jobs/web-developer-marketing-technology-specialist-6454854867?utm_source=api",
+     "via": "Himalayas"
     }
    ],
-   "total": 11
+   "total": 2
   },
   {
    "company": "TRM Labs",
@@ -952,7 +1086,7 @@
      "url": "https://www.cockroachlabs.com/careers/job/?gh_jid=2578081"
     }
    ],
-   "total": 15
+   "total": 13
   },
   {
    "company": "Apollo Agriculture",
@@ -971,6 +1105,22 @@
    "total": 3
   },
   {
+   "company": "PostHog",
+   "platform": "ashby",
+   "eligible": 1,
+   "locations": [
+    "Remote (EMEA)"
+   ],
+   "roles": [
+    {
+     "title": "Technical Customer Success Manager - EMEA",
+     "location": "Remote (EMEA)",
+     "url": "https://jobs.ashbyhq.com/posthog/0be1b52c-2401-4ae2-b7fc-5d018c1ff96f"
+    }
+   ],
+   "total": 11
+  },
+  {
    "company": "Sun King",
    "platform": "pinpoint",
    "eligible": 1,
@@ -984,7 +1134,7 @@
      "url": "https://sunking.pinpointhq.com/en/postings/21382d3e-69bd-4256-ae28-26853f824db4"
     }
    ],
-   "total": 176
+   "total": 172
   },
   {
    "company": "Taptap Send",
@@ -1001,6 +1151,74 @@
     }
    ],
    "total": 27
+  },
+  {
+   "company": "Phiture",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Mobile Growth Manager - ASO",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/phiture/jobs/mobile-growth-manager-aso?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Sporty Group",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Project Manager",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/sporty-group/jobs/project-manager?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Parallel",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Associate Director, Product Design",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/parallelhq/jobs/associate-director-product-design?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Addepto",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "AI & Engineering Intern",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/addepto/jobs/ai-engineering-intern?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
   },
   {
    "company": "Yopeso",
@@ -1020,7 +1238,7 @@
    "total": 1
   },
   {
-   "company": "knowmad mood",
+   "company": "SeQura",
    "platform": "himalayas",
    "eligible": 1,
    "locations": [
@@ -1028,43 +1246,9 @@
    ],
    "roles": [
     {
-     "title": "Web Developer & Marketing Technology Specialist",
+     "title": "Senior Platform Engineer",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/knowmad-mood/jobs/web-developer-marketing-technology-specialist-6454854867?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 1
-  },
-  {
-   "company": "Growe Talents",
-   "platform": "himalayas",
-   "eligible": 1,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "Operational Project Manager",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/growe-talents/jobs/operational-project-manager?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 1
-  },
-  {
-   "company": "Phiture",
-   "platform": "himalayas",
-   "eligible": 1,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "Mobile Growth Manager - ASO",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/phiture/jobs/mobile-growth-manager-aso?utm_source=api",
+     "url": "https://himalayas.app/companies/sequra/jobs/senior-platform-engineer?utm_source=api",
      "via": "Himalayas"
     }
    ],
@@ -1088,7 +1272,7 @@
    "total": 1
   },
   {
-   "company": "micro1",
+   "company": "Haier",
    "platform": "himalayas",
    "eligible": 1,
    "locations": [
@@ -1096,9 +1280,94 @@
    ],
    "roles": [
     {
-     "title": "Intelligence Analyst",
+     "title": "Pre Sales Engineer Assistant",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/micro1/jobs/intelligence-analyst?utm_source=api",
+     "url": "https://himalayas.app/companies/haier-com/jobs/pre-sales-engineer-assistant?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "GoFasti",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "1185 - Analytics Project Manager",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/gofasti/jobs/1185-analytics-project-manager?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "SimpleTiger",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Web Developer: WordPress & HubSpot (U.S. Based, Remote Contractor)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/simpletiger/jobs/web-developer-wordpress-hubspot-u-s-based-remote-contractor?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Growe Talents",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Operational Project Manager",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/growe-talents/jobs/operational-project-manager?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Zup Innovation",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Pessoa Cientista de Dados S\u00eanior",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/zup-innovation/jobs/pessoa-cientista-de-dados-senior?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Nortal",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "(1601) Senior Data Platform and Automation Engineer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/nortal/jobs/1601-senior-data-platform-and-automation-engineer?utm_source=api",
      "via": "Himalayas"
     }
    ],
@@ -1117,6 +1386,23 @@
      "location": "Worldwide",
      "url": "https://himalayas.app/companies/askable/jobs/software-engineer-ai-coding-tasks-contract?utm_source=api",
      "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Testlio",
+   "platform": "jobicy",
+   "eligible": 1,
+   "locations": [
+    "EMEA,  USA"
+   ],
+   "roles": [
+    {
+     "title": "Principal Software Architect",
+     "location": "EMEA,  USA",
+     "url": "https://jobicy.com/jobs/157679-principal-software-architect-2",
+     "via": "Jobicy"
     }
    ],
    "total": 1
@@ -1150,74 +1436,6 @@
      "title": "Senior Manager, Professional Services - EMEA",
      "location": "EMEA",
      "url": "https://jobicy.com/jobs/156449-senior-manager-professional-services-emea",
-     "via": "Jobicy"
-    }
-   ],
-   "total": 1
-  },
-  {
-   "company": "OKX",
-   "platform": "jobicy",
-   "eligible": 1,
-   "locations": [
-    "EMEA"
-   ],
-   "roles": [
-    {
-     "title": "Overseas Operations Manager (P2P)",
-     "location": "EMEA",
-     "url": "https://jobicy.com/jobs/156330-overseas-operations-manager-p2p",
-     "via": "Jobicy"
-    }
-   ],
-   "total": 1
-  },
-  {
-   "company": "Superside",
-   "platform": "jobicy",
-   "eligible": 1,
-   "locations": [
-    "Anywhere"
-   ],
-   "roles": [
-    {
-     "title": "Creative (Motion Design)",
-     "location": "Anywhere",
-     "url": "https://jobicy.com/jobs/153812-creative-motion-design",
-     "via": "Jobicy"
-    }
-   ],
-   "total": 1
-  },
-  {
-   "company": "DuckDuckGo",
-   "platform": "jobicy",
-   "eligible": 1,
-   "locations": [
-    "Anywhere"
-   ],
-   "roles": [
-    {
-     "title": "Senior Web Security Engineer, Browser Platform",
-     "location": "Anywhere",
-     "url": "https://jobicy.com/jobs/151281-senior-web-security-engineer-browser-platform",
-     "via": "Jobicy"
-    }
-   ],
-   "total": 1
-  },
-  {
-   "company": "Spotify",
-   "platform": "jobicy",
-   "eligible": 1,
-   "locations": [
-    "EMEA"
-   ],
-   "roles": [
-    {
-     "title": "Senior Web Engineer - Subscriptions",
-     "location": "EMEA",
-     "url": "https://jobicy.com/jobs/156186-senior-web-engineer-subscriptions",
      "via": "Jobicy"
     }
    ],
