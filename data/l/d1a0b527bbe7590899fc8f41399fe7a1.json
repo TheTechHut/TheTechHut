@@ -1,9 +1,9 @@
 {
- "updated": "2026-10-30",
- "company_count": 43,
- "role_count": 369,
- "local_role_count": 107,
- "roles_scanned": 3348,
+ "updated": "2026-10-31",
+ "company_count": 52,
+ "role_count": 378,
+ "local_role_count": 111,
+ "roles_scanned": 3372,
  "sources": [
   "Himalayas",
   "Jobicy"
@@ -231,8 +231,7 @@
    "eligible": 40,
    "locations": [
     "Remote, Global",
-    "Remote, EMEA",
-    "Remote, EMEA; Europe"
+    "Remote, EMEA"
    ],
    "roles": [
     {
@@ -259,11 +258,6 @@
      "title": "Support Engineer (EMEA - Weekends)",
      "location": "Remote, Global",
      "url": "https://jobs.ashbyhq.com/supabase/590a0742-97f1-47f4-81a2-567efc939ae2"
-    },
-    {
-     "title": " Account Executive (EMEA)",
-     "location": "Remote, EMEA; Europe",
-     "url": "https://jobs.ashbyhq.com/supabase/a069c886-1107-408e-88b4-e1aa8d33d4bc"
     },
     {
      "title": "Multigres Deployment Engineer",
@@ -434,6 +428,11 @@
      "title": "Software Engineer - Turso",
      "location": "Remote, Global",
      "url": "https://jobs.ashbyhq.com/supabase/7c5eb3fc-1087-4c1c-b3a2-a19fe01dd259"
+    },
+    {
+     "title": "Software Engineer - AI Tooling Infrastructure",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/fb0b563a-e541-43fd-8555-9eb6473aaa11"
     }
    ],
    "total": 65
@@ -441,7 +440,7 @@
   {
    "company": "Oyster",
    "platform": "ashby",
-   "eligible": 13,
+   "eligible": 16,
    "locations": [
     "EMEA; Romania; Bulgaria; Portugal; Canada; United Kingdom; Spain; Poland",
     "EMEA; Romania; Hungary; Bulgaria; Portugal; Slovakia; Poland; Estonia; South Africa",
@@ -515,18 +514,63 @@
      "title": "Senior AI Solutions Engineer ",
      "location": "EMEA; Romania; Ireland; Portugal; United Kingdom; Spain; Brazil; Poland; Canada",
      "url": "https://jobs.ashbyhq.com/oyster/34e9f726-4461-4ef7-9724-a0aba8c72a76"
+    },
+    {
+     "title": "Global Payroll Analyst",
+     "location": "EMEA; Romania; Hungary; Portugal; Slovakia; Poland; South Africa",
+     "url": "https://jobs.ashbyhq.com/oyster/52e6101c-ebc8-4c08-9bad-f44e3a287148"
+    },
+    {
+     "title": "Software Engineer (Ruby on Rails, APIs)",
+     "location": "EMEA",
+     "url": "https://jobs.ashbyhq.com/oyster/4f5d4a8a-59a8-4696-b499-c01e740795c1"
+    },
+    {
+     "title": "Offboard Operations Expert",
+     "location": "EMEA; Portugal; Spain; Poland",
+     "url": "https://jobs.ashbyhq.com/oyster/2787e757-6496-42b6-a3bb-b8798507feb5"
     }
    ],
-   "total": 21
+   "total": 24
   },
   {
    "company": "micro1",
    "platform": "himalayas",
-   "eligible": 11,
+   "eligible": 16,
    "locations": [
     "Worldwide"
    ],
    "roles": [
+    {
+     "title": "Principal Engineer / Professor \u2014 Technical Expert",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/principal-engineer-professor-technical-expert?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Materials Science Expert",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/materials-science-expert-1075051173?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Manufacturing & Industrial Engineering Expert",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/manufacturing-industrial-engineering-expert?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Semiconductor Engineering Expert",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/semiconductor-engineering-expert?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Aerospace Engineering Expert",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/aerospace-engineering-expert?utm_source=api",
+     "via": "Himalayas"
+    },
     {
      "title": "Senior Advanced NDT and Imaging Specialist",
      "location": "Worldwide",
@@ -594,12 +638,12 @@
      "via": "Himalayas"
     }
    ],
-   "total": 11
+   "total": 16
   },
   {
    "company": "ConsenSys",
    "platform": "greenhouse",
-   "eligible": 9,
+   "eligible": 10,
    "locations": [
     "EMEA - Remote, United States - Remote",
     "UNITED STATES - Remote, EMEA - Remote, CANADA - Remote, LATAM - Remote",
@@ -640,6 +684,11 @@
      "url": "https://job-boards.greenhouse.io/consensys/jobs/8288570"
     },
     {
+     "title": "Senior People Operations Associate",
+     "location": "EMEA - Remote",
+     "url": "https://job-boards.greenhouse.io/consensys/jobs/8329366"
+    },
+    {
      "title": "Senior Product Manager \u2013 Universal KYC (MetaMask Passport)",
      "location": "EMEA - Remote, UNITED STATES - Remote",
      "url": "https://job-boards.greenhouse.io/consensys/jobs/7903661"
@@ -655,7 +704,7 @@
      "url": "https://job-boards.greenhouse.io/consensys/jobs/8138475"
     }
    ],
-   "total": 12
+   "total": 13
   },
   {
    "company": "Railway",
@@ -699,115 +748,37 @@
    "total": 7
   },
   {
-   "company": "EWOR GmbH",
-   "platform": "himalayas",
-   "eligible": 5,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "Cybersecurity Co-Founder / Head of Sales (100 % remote) (m/f/d)",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/cybersecurity-co-founder-head-of-sales-100-remote-m-f-d-4407176928?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Logistics Co-Founder / Head of Product (100 % remote) (m/f/d)",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/logistics-co-founder-head-of-product-100-remote-m-f-d?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Renewable Energy Co-Founder / Head of Engineering (100 % remote) (m/f/d)",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/renewable-energy-co-founder-head-of-engineering-100-remote-m-f-d-6553601270?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "DevTools Co-Founder / Head of Engineering (100 % remote) (m/f/d)",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/devtools-co-founder-head-of-engineering-100-remote-m-f-d-5697610489?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Cybersecurity Co-Founder / CPTO (100 % remote) (m/f/d)",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/ewor-gmbh/jobs/cybersecurity-co-founder-cpto-100-remote-m-f-d-4326517641?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 5
-  },
-  {
-   "company": "Centene Corporation",
-   "platform": "himalayas",
+   "company": "Zapier",
+   "platform": "ashby",
    "eligible": 4,
    "locations": [
-    "Worldwide"
+    "NAMER; India; European Union; EMEA",
+    "EMEA",
+    "NAMER; EMEA"
    ],
    "roles": [
     {
-     "title": "Senior Manager, Technical Platform Management",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/centene-corporation/jobs/senior-manager-technical-platform-management?utm_source=api",
-     "via": "Himalayas"
+     "title": "Manager, Analytics & Strategy",
+     "location": "NAMER; India; European Union; EMEA",
+     "url": "https://jobs.ashbyhq.com/zapier/7dd68291-3696-4fd0-a5d0-24ab73d22fff"
     },
     {
-     "title": "Digital Design Operations Intern (Master's - Summer 2027)",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/centene-corporation/jobs/digital-design-operations-intern-master-s-summer-2027?utm_source=api",
-     "via": "Himalayas"
+     "title": "Sr. Motion Designer",
+     "location": "EMEA",
+     "url": "https://jobs.ashbyhq.com/zapier/c0582311-18cb-4415-9c86-79014f1b74f6"
     },
     {
-     "title": "Business Analyst III Encounters Claims, EDI, SQL",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/centene-corporation/jobs/business-analyst-iii-encounters-claims-edi-sql?utm_source=api",
-     "via": "Himalayas"
+     "title": "Sr. Engineer, Database Reliability",
+     "location": "NAMER; EMEA",
+     "url": "https://jobs.ashbyhq.com/zapier/904eb3dd-2cc0-48af-bb54-8ade5f7db686"
     },
     {
-     "title": "Senior Enterprise Platforms Product Manager",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/centene-corporation/jobs/senior-enterprise-platforms-product-manager?utm_source=api",
-     "via": "Himalayas"
+     "title": "Sr. Engineer, Infrastructure Security",
+     "location": "NAMER; EMEA",
+     "url": "https://jobs.ashbyhq.com/zapier/7683bf9a-cb86-47de-a15b-4bcc0b70e2e2"
     }
    ],
-   "total": 4
-  },
-  {
-   "company": "G2i",
-   "platform": "himalayas",
-   "eligible": 4,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "Frontend Developer - G2i Talent Pool",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/g2i/jobs/frontend-developer-g2i-talent-pool-214144156?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Remote Developer | G2i Talent Pool",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/g2i/jobs/remote-developer-g2i-talent-pool?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Full Stack Developer - G2i Talent Pool",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/g2i/jobs/full-stack-developer-g2i-talent-pool?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Senior FullStack Developer",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/g2i/jobs/senior-fullstack-developer?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 4
+   "total": 11
   },
   {
    "company": "Zipline",
@@ -837,31 +808,27 @@
    "total": 360
   },
   {
-   "company": "Zapier",
-   "platform": "ashby",
-   "eligible": 3,
+   "company": "Centene Corporation",
+   "platform": "himalayas",
+   "eligible": 2,
    "locations": [
-    "EMEA",
-    "NAMER; EMEA"
+    "Worldwide"
    ],
    "roles": [
     {
-     "title": "Sr. Motion Designer",
-     "location": "EMEA",
-     "url": "https://jobs.ashbyhq.com/zapier/c0582311-18cb-4415-9c86-79014f1b74f6"
+     "title": "AI Design Systems Intern (Master's - Summer 2027)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/centene-corporation/jobs/ai-design-systems-intern-master-s-summer-2027?utm_source=api",
+     "via": "Himalayas"
     },
     {
-     "title": "Sr. Engineer, Database Reliability",
-     "location": "NAMER; EMEA",
-     "url": "https://jobs.ashbyhq.com/zapier/904eb3dd-2cc0-48af-bb54-8ade5f7db686"
-    },
-    {
-     "title": "Sr. Engineer, Infrastructure Security",
-     "location": "NAMER; EMEA",
-     "url": "https://jobs.ashbyhq.com/zapier/7683bf9a-cb86-47de-a15b-4bcc0b70e2e2"
+     "title": "Digital Design Operations Intern (Master's - Summer 2027)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/centene-corporation/jobs/digital-design-operations-intern-master-s-summer-2027?utm_source=api",
+     "via": "Himalayas"
     }
    ],
-   "total": 11
+   "total": 2
   },
   {
    "company": "Zup Innovation",
@@ -910,29 +877,6 @@
    "total": 2
   },
   {
-   "company": "RevenueCat",
-   "platform": "jobicy",
-   "eligible": 2,
-   "locations": [
-    "EMEA,  LATAM,  Canada,  USA"
-   ],
-   "roles": [
-    {
-     "title": "Senior Data Scientist, Product",
-     "location": "EMEA,  LATAM,  Canada,  USA",
-     "url": "https://jobicy.com/jobs/157724-senior-data-scientist-product-2",
-     "via": "Jobicy"
-    },
-    {
-     "title": "GTM Operations Manager",
-     "location": "EMEA,  LATAM,  Canada,  USA",
-     "url": "https://jobicy.com/jobs/157211-gtm-operations-manager",
-     "via": "Jobicy"
-    }
-   ],
-   "total": 2
-  },
-  {
    "company": "Cockroach Labs",
    "platform": "greenhouse",
    "eligible": 1,
@@ -962,7 +906,7 @@
      "url": "https://job-boards.greenhouse.io/turing/jobs/6218247004"
     }
    ],
-   "total": 38
+   "total": 39
   },
   {
    "company": "Apollo Agriculture",
@@ -1010,7 +954,7 @@
      "url": "https://sunking.pinpointhq.com/en/postings/21382d3e-69bd-4256-ae28-26853f824db4"
     }
    ],
-   "total": 173
+   "total": 179
   },
   {
    "company": "Taptap Send",
@@ -1027,6 +971,210 @@
     }
    ],
    "total": 27
+  },
+  {
+   "company": "Myriad360",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Data Platform Admin",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/myriad360/jobs/data-platform-admin?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Fifth Third Bank",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Senior Technical Engineer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/fifth-third-bank/jobs/senior-technical-engineer?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Grady Health System",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Sr. Integration Engineer-Epic Bridges/Corepoint",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/grady-health-system/jobs/sr-integration-engineer-epic-bridges-corepoint?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "AIS (Applied Information Sciences)",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Operations and Maintenance Technician \u2013 Azure Landing Zone & Azure Virtual Deskt",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/ais-applied-information-sciences/jobs/operations-and-maintenance-technician-azure-landing-zone-azure-virtual-deskt-2756271304?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Oscar",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Provider Data Operations Lead",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/oscar/jobs/provider-data-operations-lead?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Banco Plata, S.A., Instituci\u00f3n de Banca M\u00faltiple",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Business Analyst Junior [Antifraud & Disputes]",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/banco-plata-s-a-institucion-de-banca-multiple/jobs/business-analyst-junior-antifraud-disputes?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Anduril",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Senior Product Sourcing Engineer, Counter Intrusion",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/anduril/jobs/senior-product-sourcing-engineer-counter-intrusion-2150500924?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Franciscan Health",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Application Business Analyst III",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/franciscan-health/jobs/application-business-analyst-iii?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Premera Blue Cross",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Member Engagement Consultant I",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/premera-blue-cross/jobs/member-engagement-consultant-i?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Health Care Service Corporation",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Enterprise Data Analyst Specialist",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/health-care-service-corporation/jobs/enterprise-data-analyst-specialist?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Milestone Technologies",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Data Center Compliance Manager",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/milestone-technologies/jobs/data-center-compliance-manager?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Meade Engineering, Inc.",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Electrical Engineer III",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/meade-engineering-inc/jobs/electrical-engineer-iii-8033770866?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
   },
   {
    "company": "Arizona Department of Economic Security",
@@ -1369,6 +1517,23 @@
    "total": 1
   },
   {
+   "company": "RevenueCat",
+   "platform": "jobicy",
+   "eligible": 1,
+   "locations": [
+    "EMEA,  LATAM,  Canada,  USA"
+   ],
+   "roles": [
+    {
+     "title": "Senior Data Scientist, Product",
+     "location": "EMEA,  LATAM,  Canada,  USA",
+     "url": "https://jobicy.com/jobs/157724-senior-data-scientist-product-2",
+     "via": "Jobicy"
+    }
+   ],
+   "total": 1
+  },
+  {
    "company": "Testlio",
    "platform": "jobicy",
    "eligible": 1,
@@ -1380,23 +1545,6 @@
      "title": "Principal Software Architect",
      "location": "EMEA,  USA",
      "url": "https://jobicy.com/jobs/157679-principal-software-architect-2",
-     "via": "Jobicy"
-    }
-   ],
-   "total": 1
-  },
-  {
-   "company": "TRM Labs",
-   "platform": "jobicy",
-   "eligible": 1,
-   "locations": [
-    "EMEA,  USA"
-   ],
-   "roles": [
-    {
-     "title": "GEOINT Analyst, Scams",
-     "location": "EMEA,  USA",
-     "url": "https://jobicy.com/jobs/157174-geoint-analyst-scams",
      "via": "Jobicy"
     }
    ],
