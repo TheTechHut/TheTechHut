@@ -273,6 +273,50 @@ footer{background:var(--deep);color:white;padding:28px 0 18px}
 .copyright{text-align:center;font-size:11px;color:#b8c8d8;margin-top:18px}
 @media(max-width:900px){.cols{grid-template-columns:1fr;grid-template-areas:"filters" "list" "notes"}.fbody{grid-template-columns:1fr 1fr}.sidenotes{margin-top:24px}}
 @media(max-width:680px){.wrap{width:calc(100% - 34px)}header{height:62px}.brand{font-size:13px;gap:7px}.brand-logo{width:38px;height:38px}.links{display:none;position:absolute;top:62px;left:0;right:0;background:#fbfaf6;padding:18px 24px;flex-direction:column;gap:18px;border-bottom:1px solid var(--line);box-shadow:var(--shadow)}.links.open{display:flex}.join{padding:9px 10px;font-size:10px}.menu{display:block}.pagehead.jobshead{padding:38px 0 30px}.jobshead h1{font-size:42px}.searchbar{flex-direction:column}.searchbar .btn{width:100%}.cols{padding-top:24px}.fbody{grid-template-columns:1fr}.job{grid-template-columns:1fr}.apply{margin-top:10px}.footer-row{flex-wrap:wrap}.footer-links{order:3;width:100%;justify-content:space-between;gap:9px}.socials{margin-left:auto}}
+
+/* Layout correction: the jobs hero is a full-height content section, not the sticky site navbar. */
+body > header:not(.pagehead){height:72px;position:sticky;top:0;z-index:30}
+main > header.pagehead.jobshead{
+  display:block;
+  position:relative;
+  top:auto;
+  z-index:1;
+  height:auto !important;
+  min-height:0;
+  padding:52px 0 38px;
+  overflow:visible;
+}
+main > header.pagehead.jobshead .wrap{
+  display:block;
+  text-align:left;
+}
+main > header.pagehead.jobshead h1{margin:12px 0}
+main > header.pagehead.jobshead .lede{margin:0 0 18px}
+main > header.pagehead.jobshead .count{margin:18px 0}
+main > header.pagehead.jobshead .searchbar{margin:0;max-width:850px}
+main > header.pagehead.jobshead .chips{justify-content:flex-start;margin-top:14px}
+main > header.pagehead.jobshead [role="note"]{margin:24px 0 18px}
+main > .wrap.cols{
+  display:grid;
+  grid-template-columns:245px minmax(0,1fr);
+  grid-template-rows:auto 1fr;
+  grid-template-areas:"filters list" "notes list";
+  align-items:start;
+  gap:0 34px;
+  padding-top:34px;
+  padding-bottom:56px;
+}
+main > .wrap.cols > aside.filters{grid-area:filters;min-width:0}
+main > .wrap.cols > .results{grid-area:list;min-width:0}
+main > .wrap.cols > .sidenotes{grid-area:notes;min-width:0;margin-top:28px}
+@media(max-width:899px){
+ main > .wrap.cols{grid-template-columns:minmax(0,1fr);grid-template-rows:auto;grid-template-areas:"filters" "list" "notes"}
+}
+@media(max-width:680px){
+ main > header.pagehead.jobshead{padding:36px 0 28px}
+ main > .wrap.cols{padding-top:24px}
+ main > header.pagehead.jobshead .searchbar{max-width:none}
+}
 </style>
 </head>
 <body>
