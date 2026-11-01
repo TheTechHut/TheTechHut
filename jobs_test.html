@@ -26,7 +26,7 @@
   <meta name="twitter:description" content="Remote tech roles a Nairobi-based developer can actually apply to. Updated live.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/thh.css">
   <style>
     [hidden] { display: none !important; }
@@ -326,6 +326,23 @@ main > header.pagehead.jobshead .lede{margin:0 auto 18px}
 main > header.pagehead.jobshead .count{margin:18px auto}
 main > header.pagehead.jobshead .searchbar{margin:0 auto}
 main > header.pagehead.jobshead .chips{justify-content:center}
+
+/* Match typography and navigation shared by the other test pages */
+:root{--sans:'Inter',sans-serif;--serif:'Plus Jakarta Sans',sans-serif;--mono:'Inter',sans-serif}
+body{font-family:'Inter',sans-serif}
+h1,h2,h3,h4,.brand,.nav,.btn,.join,.links{font-family:'Plus Jakarta Sans',sans-serif}
+header:not(.pagehead){height:72px;background:#fbfaf6ed;border-bottom:1px solid #e9e6de;position:sticky;top:0;z-index:30;backdrop-filter:blur(14px)}
+header:not(.pagehead) .wrap.nav{width:min(1240px,calc(100% - 64px));height:100%;margin-inline:auto;display:flex;align-items:center;justify-content:space-between}
+header:not(.pagehead) .brand{display:flex;align-items:center;gap:10px;color:#142f52;text-decoration:none;font-size:16px;font-weight:800;line-height:1.2;white-space:nowrap}
+header:not(.pagehead) .brand-logo{width:46px;height:46px;object-fit:contain;border-radius:12px}
+header:not(.pagehead) .brand small{display:block;font:500 11px 'Inter',sans-serif;color:#60718a;margin-top:3px}
+header:not(.pagehead) .links{display:flex;align-items:center;gap:25px}
+header:not(.pagehead) .links a{font:700 12px 'Inter',sans-serif;color:#39a875;text-decoration:none}
+header:not(.pagehead) .links a:hover,header:not(.pagehead) .links a[aria-current=page]{color:#142f52}
+header:not(.pagehead) .join{background:#39a875;color:#fff;border-radius:10px;padding:11px 16px;font:800 12px 'Inter',sans-serif;text-decoration:none}
+header:not(.pagehead) .menu{display:none;border:0;background:none;font-size:25px;color:#142f52}
+@media(max-width:900px){header:not(.pagehead) .links{gap:14px}header:not(.pagehead) .links a{font-size:11px}}
+@media(max-width:760px){header:not(.pagehead){height:62px}header:not(.pagehead) .wrap.nav{width:calc(100% - 34px)}header:not(.pagehead) .brand{font-size:13px;gap:7px}header:not(.pagehead) .brand-logo{width:38px;height:38px}header:not(.pagehead) .links{display:none;position:absolute;top:62px;left:0;right:0;background:#fbfaf6;padding:18px 24px;flex-direction:column;align-items:flex-start;gap:18px;border-bottom:1px solid #e9e6de;box-shadow:0 12px 32px #18304c12}header:not(.pagehead) .links.open{display:flex}header:not(.pagehead) .join{padding:9px 10px;font-size:10px}header:not(.pagehead) .menu{display:block}}
 </style>
 </head>
 <body>
