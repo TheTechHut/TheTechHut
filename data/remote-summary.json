@@ -1,9 +1,9 @@
 {
- "updated": "2026-10-31",
- "company_count": 52,
- "role_count": 378,
+ "updated": "2026-11-01",
+ "company_count": 51,
+ "role_count": 386,
  "local_role_count": 111,
- "roles_scanned": 3372,
+ "roles_scanned": 3376,
  "sources": [
   "Himalayas",
   "Jobicy"
@@ -26,11 +26,12 @@
   {
    "company": "Supabase",
    "platform": "ashby",
-   "eligible": 40,
-   "total": 65,
+   "eligible": 43,
+   "total": 68,
    "locations": [
     "Remote, Global",
-    "Remote, EMEA"
+    "Remote, EMEA",
+    "Remote, EMEA; Europe"
    ]
   },
   {
@@ -50,8 +51,8 @@
   {
    "company": "micro1",
    "platform": "himalayas",
-   "eligible": 16,
-   "total": 16,
+   "eligible": 13,
+   "total": 13,
    "locations": [
     "Worldwide"
    ]
@@ -68,6 +69,15 @@
     "UNITED STATES - Remote, LATAM - Remote, EMEA - Remote",
     "United States - Remote, EMEA - Remote",
     "EMEA - Remote"
+   ]
+  },
+  {
+   "company": "G2i",
+   "platform": "himalayas",
+   "eligible": 10,
+   "total": 10,
+   "locations": [
+    "Worldwide"
    ]
   },
   {
@@ -101,7 +111,7 @@
    ]
   },
   {
-   "company": "Centene Corporation",
+   "company": "Zup Innovation",
    "platform": "himalayas",
    "eligible": 2,
    "total": 2,
@@ -110,7 +120,7 @@
    ]
   },
   {
-   "company": "Zup Innovation",
+   "company": "Myriad360",
    "platform": "himalayas",
    "eligible": 2,
    "total": 2,
@@ -167,7 +177,7 @@
    "company": "Sun King",
    "platform": "pinpoint",
    "eligible": 1,
-   "total": 179,
+   "total": 178,
    "locations": [
     "Global"
    ]
@@ -182,7 +192,7 @@
    ]
   },
   {
-   "company": "Myriad360",
+   "company": "HumanSignal",
    "platform": "himalayas",
    "eligible": 1,
    "total": 1,
@@ -191,7 +201,7 @@
    ]
   },
   {
-   "company": "Fifth Third Bank",
+   "company": "ACCEL Schools",
    "platform": "himalayas",
    "eligible": 1,
    "total": 1,
@@ -200,7 +210,7 @@
    ]
   },
   {
-   "company": "Grady Health System",
+   "company": "Invisible Technologies",
    "platform": "himalayas",
    "eligible": 1,
    "total": 1,
@@ -282,24 +292,6 @@
   },
   {
    "company": "Meade Engineering, Inc.",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Arizona Department of Economic Security",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Boundless Life",
    "platform": "himalayas",
    "eligible": 1,
    "total": 1,

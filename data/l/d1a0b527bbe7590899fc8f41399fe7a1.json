@@ -1,9 +1,9 @@
 {
- "updated": "2026-10-31",
- "company_count": 52,
- "role_count": 378,
+ "updated": "2026-11-01",
+ "company_count": 51,
+ "role_count": 386,
  "local_role_count": 111,
- "roles_scanned": 3372,
+ "roles_scanned": 3376,
  "sources": [
   "Himalayas",
   "Jobicy"
@@ -228,10 +228,11 @@
   {
    "company": "Supabase",
    "platform": "ashby",
-   "eligible": 40,
+   "eligible": 43,
    "locations": [
     "Remote, Global",
-    "Remote, EMEA"
+    "Remote, EMEA",
+    "Remote, EMEA; Europe"
    ],
    "roles": [
     {
@@ -258,6 +259,11 @@
      "title": "Support Engineer (EMEA - Weekends)",
      "location": "Remote, Global",
      "url": "https://jobs.ashbyhq.com/supabase/590a0742-97f1-47f4-81a2-567efc939ae2"
+    },
+    {
+     "title": " Account Executive DACH (German-Speaking)",
+     "location": "Remote, EMEA; Europe",
+     "url": "https://jobs.ashbyhq.com/supabase/a069c886-1107-408e-88b4-e1aa8d33d4bc"
     },
     {
      "title": "Multigres Deployment Engineer",
@@ -428,14 +434,9 @@
      "title": "Software Engineer - Turso",
      "location": "Remote, Global",
      "url": "https://jobs.ashbyhq.com/supabase/7c5eb3fc-1087-4c1c-b3a2-a19fe01dd259"
-    },
-    {
-     "title": "Software Engineer - AI Tooling Infrastructure",
-     "location": "Remote, Global",
-     "url": "https://jobs.ashbyhq.com/supabase/fb0b563a-e541-43fd-8555-9eb6473aaa11"
     }
    ],
-   "total": 65
+   "total": 68
   },
   {
    "company": "Oyster",
@@ -536,39 +537,21 @@
   {
    "company": "micro1",
    "platform": "himalayas",
-   "eligible": 16,
+   "eligible": 13,
    "locations": [
     "Worldwide"
    ],
    "roles": [
     {
-     "title": "Principal Engineer / Professor \u2014 Technical Expert",
+     "title": "Music & Sound Annotation Expert",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/micro1/jobs/principal-engineer-professor-technical-expert?utm_source=api",
+     "url": "https://himalayas.app/companies/micro1/jobs/music-sound-annotation-expert-2823077045?utm_source=api",
      "via": "Himalayas"
     },
     {
      "title": "Materials Science Expert",
      "location": "Worldwide",
      "url": "https://himalayas.app/companies/micro1/jobs/materials-science-expert-1075051173?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Manufacturing & Industrial Engineering Expert",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/micro1/jobs/manufacturing-industrial-engineering-expert?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Semiconductor Engineering Expert",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/micro1/jobs/semiconductor-engineering-expert?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Aerospace Engineering Expert",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/micro1/jobs/aerospace-engineering-expert?utm_source=api",
      "via": "Himalayas"
     },
     {
@@ -638,7 +621,7 @@
      "via": "Himalayas"
     }
    ],
-   "total": 16
+   "total": 13
   },
   {
    "company": "ConsenSys",
@@ -705,6 +688,77 @@
     }
    ],
    "total": 13
+  },
+  {
+   "company": "G2i",
+   "platform": "himalayas",
+   "eligible": 10,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Remote Developer | G2i Talent Pool",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/g2i/jobs/remote-developer-g2i-talent-pool-8240194431?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Backend Developer - G2i Talent Pool",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/g2i/jobs/backend-developer-g2i-talent-pool-4846950038?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Frontend Developer - G2i Talent Pool",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/g2i/jobs/frontend-developer-g2i-talent-pool-230941308?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Remote Full Stack Developer - G2i Talent Pool",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/g2i/jobs/remote-full-stack-developer-g2i-talent-pool?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "AI Engineer / LLM Engineer - Talent Pool",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/g2i/jobs/ai-engineer-llm-engineer-talent-pool?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Tech Talent Pool: Engineers, Data and AI/ML",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/g2i/jobs/tech-talent-pool-engineers-data-and-ai-ml-5668161601?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Full Stack Developer - G2i Talent Pool",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/g2i/jobs/full-stack-developer-g2i-talent-pool-2528939820?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Remote Python Senior Software Engineer, AI Training",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/g2i/jobs/remote-python-senior-software-engineer-ai-training?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "AI Engineer / LLM Engineer - G2i Talent Pool",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/g2i/jobs/ai-engineer-llm-engineer-g2i-talent-pool-5753734984?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Remote Senior Software Engineer, (OpenAI Codex, Claude Code or Cursor)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/g2i/jobs/remote-senior-software-engineer-openai-codex-claude-code-or-cursor?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 10
   },
   {
    "company": "Railway",
@@ -808,29 +862,6 @@
    "total": 360
   },
   {
-   "company": "Centene Corporation",
-   "platform": "himalayas",
-   "eligible": 2,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "AI Design Systems Intern (Master's - Summer 2027)",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/centene-corporation/jobs/ai-design-systems-intern-master-s-summer-2027?utm_source=api",
-     "via": "Himalayas"
-    },
-    {
-     "title": "Digital Design Operations Intern (Master's - Summer 2027)",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/centene-corporation/jobs/digital-design-operations-intern-master-s-summer-2027?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 2
-  },
-  {
    "company": "Zup Innovation",
    "platform": "himalayas",
    "eligible": 2,
@@ -839,15 +870,38 @@
    ],
    "roles": [
     {
+     "title": "Pessoa Desenvolvedor Back-end Senior (AI Advocate)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/zup-innovation/jobs/pessoa-desenvolvedor-back-end-senior-ai-advocate?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
      "title": "Pessoa Desenvolvedora Backend Golang S\u00eanior",
      "location": "Worldwide",
      "url": "https://himalayas.app/companies/zup-innovation/jobs/pessoa-desenvolvedora-backend-golang-senior?utm_source=api",
      "via": "Himalayas"
+    }
+   ],
+   "total": 2
+  },
+  {
+   "company": "Myriad360",
+   "platform": "himalayas",
+   "eligible": 2,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Analytics Engineer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/myriad360/jobs/analytics-engineer?utm_source=api",
+     "via": "Himalayas"
     },
     {
-     "title": "Pessoa Cientista de Dados S\u00eanior",
+     "title": "Data Platform Admin",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/zup-innovation/jobs/pessoa-cientista-de-dados-senior?utm_source=api",
+     "url": "https://himalayas.app/companies/myriad360/jobs/data-platform-admin?utm_source=api",
      "via": "Himalayas"
     }
    ],
@@ -954,7 +1008,7 @@
      "url": "https://sunking.pinpointhq.com/en/postings/21382d3e-69bd-4256-ae28-26853f824db4"
     }
    ],
-   "total": 179
+   "total": 178
   },
   {
    "company": "Taptap Send",
@@ -973,7 +1027,7 @@
    "total": 27
   },
   {
-   "company": "Myriad360",
+   "company": "HumanSignal",
    "platform": "himalayas",
    "eligible": 1,
    "locations": [
@@ -981,16 +1035,16 @@
    ],
    "roles": [
     {
-     "title": "Data Platform Admin",
+     "title": "Freelance Graphic Designer - AI Training",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/myriad360/jobs/data-platform-admin?utm_source=api",
+     "url": "https://himalayas.app/companies/humansignal/jobs/freelance-graphic-designer-ai-training-6239232528?utm_source=api",
      "via": "Himalayas"
     }
    ],
    "total": 1
   },
   {
-   "company": "Fifth Third Bank",
+   "company": "ACCEL Schools",
    "platform": "himalayas",
    "eligible": 1,
    "locations": [
@@ -998,16 +1052,16 @@
    ],
    "roles": [
     {
-     "title": "Senior Technical Engineer",
+     "title": "EMIS/ CTE Specialist",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/fifth-third-bank/jobs/senior-technical-engineer?utm_source=api",
+     "url": "https://himalayas.app/companies/accel-schools/jobs/emis-cte-specialist?utm_source=api",
      "via": "Himalayas"
     }
    ],
    "total": 1
   },
   {
-   "company": "Grady Health System",
+   "company": "Invisible Technologies",
    "platform": "himalayas",
    "eligible": 1,
    "locations": [
@@ -1015,9 +1069,9 @@
    ],
    "roles": [
     {
-     "title": "Sr. Integration Engineer-Epic Bridges/Corepoint",
+     "title": "Audio Specialist - Freelance AI Trainer Project",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/grady-health-system/jobs/sr-integration-engineer-epic-bridges-corepoint?utm_source=api",
+     "url": "https://himalayas.app/companies/inv/jobs/audio-specialist-freelance-ai-trainer-project?utm_source=api",
      "via": "Himalayas"
     }
    ],
@@ -1171,40 +1225,6 @@
      "title": "Electrical Engineer III",
      "location": "Worldwide",
      "url": "https://himalayas.app/companies/meade-engineering-inc/jobs/electrical-engineer-iii-8033770866?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 1
-  },
-  {
-   "company": "Arizona Department of Economic Security",
-   "platform": "himalayas",
-   "eligible": 1,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "PERFORMANCE IMPROVEMENT SPECIALIST",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/arizona-department-of-economic-security/jobs/performance-improvement-specialist?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 1
-  },
-  {
-   "company": "Boundless Life",
-   "platform": "himalayas",
-   "eligible": 1,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "Middle Years Program Lead (Trailblazers)",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/boundless-life/jobs/middle-years-program-lead-trailblazers?utm_source=api",
      "via": "Himalayas"
     }
    ],
