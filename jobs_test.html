@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Jobs (Test) | The Tech Hut</title>
+  <meta name="description" content="Remote tech jobs open worldwide — curated for Kenyan developers, designers and data people by The Tech Hut. Read every few hours from 40 employers’ own job boards, Jobicy and Remote OK.">
+  <meta name="keywords" content="remote tech jobs, Kenya developer jobs, Nairobi tech jobs, remote developer jobs Africa, worldwide remote jobs, The Tech Hut">
+  <meta name="author" content="The Tech Hut">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#073B4C">
+  <link rel="canonical" href="https://thetechhut.co/jobs_test.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="The Tech Hut">
+  <meta property="og:title" content="Tech Jobs — Remote roles open worldwide">
+  <meta property="og:description" content="Remote tech jobs open worldwide — curated for Kenyan developers, designers and data people by The Tech Hut.">
+  <meta property="og:url" content="https://thetechhut.co/jobs_test.html">
+  <meta property="og:image" content="https://thetechhut.co/assets/img/social/jobs.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The Tech Hut jobs board: Kenya tech openings read live from employers’ own hiring systems">
+  <meta name="twitter:image" content="https://thetechhut.co/assets/img/social/jobs.jpg">
+  <meta property="og:locale" content="en_KE">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tech Jobs — Remote roles open worldwide">
+  <meta name="twitter:description" content="Remote tech roles a Nairobi-based developer can actually apply to. Updated live.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/thh.css">
+  <style>
+    [hidden] { display: none !important; }
+
+    /* title block and search */
+    .pagehead.jobshead { padding: 40px 0 26px; border-bottom: 0; }
+    .jobshead .wrap { text-align: center; }
+    .jobshead h1 { margin: 8px auto 12px; }
+    .jobshead .lede { margin: 0 auto 14px; }
+    .count { display: block; min-height: 1.4em; font-family: var(--mono); font-size: 13px; color: var(--green); margin: 0 0 22px; }
+    .searchbar { display: flex; gap: 8px; max-width: 720px; margin: 0 auto; text-align: left; }
+    .searchbar input { flex: 1 1 auto; min-width: 0; width: auto; }
+    .searchbar button { flex: 0 0 auto; }
+    .chips { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 4px 18px; margin-top: 12px; font-size: 15px; color: var(--dim); }
+    .chips > span { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; margin-right: -4px; }
+    .chips button { font: inherit; font-size: 15px; font-weight: 600; color: var(--ink); background: none; border: 0; padding: 2px 0;
+      cursor: pointer; text-decoration: underline; text-decoration-color: var(--mint); text-decoration-thickness: 2px; text-underline-offset: .25em; }
+    .chips button:hover { text-decoration-color: var(--ink); }
+
+    /* layout: filters left, list right; on phones filters, then list, then the side notes */
+    .cols { display: grid; gap: 0 48px; grid-template-columns: 236px minmax(0, 1fr); grid-template-rows: auto 1fr;
+      grid-template-areas: "filters list" "notes list"; align-items: start; padding-bottom: 56px; }
+    aside.filters { grid-area: filters; }
+    .sidenotes { grid-area: notes; }
+    .results { grid-area: list; min-width: 0; }
+
+    /* filters: a plain sidebar with ruled groups */
+    aside.filters h2, .listhead h2 { font-size: 22px; margin: 0; }
+    aside.filters > h2 { border-top: 2px solid var(--ink); padding: 10px 0 12px; }
+    /* on wide screens the toggle is just the heading; on phones it opens and closes the filters */
+    .ftoggle { display: flex; align-items: baseline; gap: 8px; width: 100%; font: inherit; color: inherit; text-align: left;
+      background: none; border: 0; padding: 0; cursor: default; }
+    .fcount { font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--green); }
+    .fgroup { border-top: 1px solid var(--rule); padding: 12px 0 14px; }
+    .fgroup > label { display: block; font-family: var(--mono); font-size: 11.5px; font-weight: 500; text-transform: uppercase;
+      letter-spacing: .08em; color: var(--dim); margin: 0 0 8px; }
+    .fgroup select { font-size: 15px; padding: 8px 10px; cursor: pointer; }
+    .pills { display: flex; flex-direction: column; }
+    .pills button { position: relative; font: inherit; font-size: 15.5px; text-align: left; color: var(--text); background: none;
+      border: 0; padding: 4px 0 4px 20px; cursor: pointer; }
+    .pills button::before { content: ""; position: absolute; left: 1px; top: .78em; width: 9px; height: 9px; border: 1px solid #9FBAC4; }
+    .pills button:hover { color: var(--ink); text-decoration: underline; text-underline-offset: .2em; }
+    .pills button[aria-pressed="true"] { color: var(--ink); font-weight: 700; }
+    .pills button[aria-pressed="true"]::before { background: var(--mint); border-color: var(--mint); }
+    .clearbtn { font: inherit; font-size: 15px; font-weight: 700; color: var(--ink); background: none; border: 0; padding: 2px 0;
+      border-bottom: 1px solid var(--mint); cursor: pointer; margin: 2px 0 0; }
+    .clearbtn:hover { border-bottom-color: var(--ink); }
+    aside.filters .clearwrap { border-top: 1px solid var(--rule); padding-top: 12px; }
+
+    /* employers hiring directly, and the two notes */
+    .direct { border-top: 2px solid var(--ink); padding-top: 10px; margin-top: 34px; }
+    .direct h2, .promo h2 { font-size: 19px; line-height: 1.25; margin: 0 0 6px; }
+    .direct > p { font-size: 14.5px; color: var(--muted); line-height: 1.5; margin: 0 0 10px; }
+    .direct ul { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--rule); }
+    .direct li { border-bottom: 1px solid var(--rule); }
+    .direct a { display: block; padding: 9px 0; color: var(--ink); text-decoration: none; font-family: var(--serif); font-weight: 600; font-size: 17px; line-height: 1.3; }
+    .direct a:hover { text-decoration: underline; }
+    .direct a span { display: block; font-family: var(--sans); font-weight: 400; font-size: 14px; color: var(--dim); margin-top: 2px; }
+    .direct h3, .direct summary { font-family: var(--mono); font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; color: var(--green); margin: 18px 0 6px; }
+    .direct details { border-top: 1px solid var(--rule); }
+    .direct details:last-of-type { border-bottom: 1px solid var(--rule); }
+    .direct summary { cursor: pointer; padding: 10px 0; margin: 0; }
+    .direct summary .n { color: var(--dim); margin-left: 4px; }
+    .direct details ul { margin-bottom: 8px; }
+    .direct summary:hover { color: var(--ink); }
+    .direct details[open] summary { margin-bottom: 6px; }
+    .direct p.also { font-size: 14px; color: var(--muted); line-height: 1.5; margin: 14px 0 0; }
+    .promo { border-top: 4px solid var(--mint); padding-top: 12px; margin-top: 34px; }
+    .promo p { font-size: 15px; color: var(--text); line-height: 1.5; margin: 0 0 14px; }
+    .promo a.go { display: block; text-align: center; font-weight: 700; font-size: 15px; line-height: 1.25; padding: 11px 14px;
+      background: var(--ink); color: #fff; border-radius: 3px; text-decoration: none; }
+    .promo a.go:hover { background: var(--ink-2); }
+    .promo a.alt { display: inline-block; margin-top: 12px; font-size: 15px; font-weight: 700; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--mint); }
+    .promo a.alt:hover { border-bottom-color: var(--ink); }
+
+    /* list head */
+    .listhead { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 16px;
+      border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink); padding: 10px 0 12px; }
+    .listhead h2 span { font-family: var(--mono); font-size: 15px; font-weight: 500; color: var(--green); letter-spacing: 0; margin-left: 4px; }
+    .sortwrap { display: inline-flex; align-items: baseline; gap: 8px; font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--dim); }
+    .sortwrap label { font: inherit; color: inherit; }
+    .sortwrap select { width: auto; font-family: var(--sans); font-size: 15px; text-transform: none; letter-spacing: 0; padding: 6px 8px; cursor: pointer; }
+
+    /* one role per row, separated by hairlines (the markup is built by the script below) */
+    .job { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 28px; align-items: start;
+      padding: 18px 0 17px; border-bottom: 1px solid var(--rule); }
+    .job .logo { display: none; }
+    .job h3 { font-size: 21px; line-height: 1.25; margin: 0 0 5px; }
+    .job h3 a { color: var(--ink); text-decoration: none; }
+    .job h3 a:hover { text-decoration: underline; text-decoration-thickness: 1px; }
+    .job .co { display: inline-block; max-width: 100%; font-weight: 700; font-size: 15.5px; color: var(--ink); }
+    .job .meta { display: inline; font-family: var(--mono); font-size: 13px; color: var(--dim); }
+    /* the place can be long ("South San Francisco, California, USA"), so it may wrap;
+       only the short "2 days ago" is kept on one line */
+    .job .meta span { white-space: normal; overflow-wrap: anywhere; }
+    .job .meta span + span { white-space: nowrap; }
+    .job > div { min-width: 0; }
+    .job h3, .job .co { overflow-wrap: anywhere; }
+    .job .meta span::before { content: "·"; margin: 0 8px; color: #9FBAC4; }
+    .job .excerpt { font-size: 15.5px; color: var(--muted); line-height: 1.5; margin: 7px 0 0; max-width: 70ch;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .tags { display: flex; flex-wrap: wrap; align-items: baseline; margin-top: 7px; font-family: var(--mono); font-size: 11.5px;
+      text-transform: uppercase; letter-spacing: .06em; color: var(--green); }
+    .tags span + span::before { content: "/"; margin: 0 8px; color: #9FBAC4; }
+    .tags span.src { color: var(--dim); text-transform: none; letter-spacing: 0; font-size: 12px; }
+    .apply { padding-top: 4px; }
+    .apply a { display: inline-block; font-weight: 700; font-size: 15px; color: var(--ink); text-decoration: none; white-space: nowrap;
+      border: 1px solid var(--ink); border-radius: 3px; padding: 7px 14px; }
+    .apply a:hover { background: var(--ink); color: #fff; }
+
+
+    /* In-board job detail view */
+    .job-detail { max-width: 820px; padding: 28px 0 40px; }
+    .job-detail .back { display:inline-flex; gap:8px; align-items:center; color:var(--green); font-weight:700; margin:0 0 26px; text-decoration:none; }
+    .job-detail .back:hover { text-decoration:underline; }
+    .job-detail .detail-kicker { font-family:var(--mono); font-size:12px; color:var(--green); text-transform:uppercase; letter-spacing:.08em; }
+    .job-detail h2 { font-size:clamp(28px,4vw,42px); line-height:1.15; margin:10px 0 8px; }
+    .job-detail .detail-company { font-size:18px; font-weight:700; color:var(--ink); }
+    .job-detail .detail-meta { display:flex; flex-wrap:wrap; gap:8px 18px; margin:18px 0 24px; color:var(--dim); font-family:var(--mono); font-size:13px; }
+    .job-detail .detail-tags { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 26px; }
+    .job-detail .detail-tags span { padding:6px 10px; border:1px solid var(--rule); border-radius:3px; font-size:12px; }
+    .job-detail .detail-section { border-top:2px solid var(--ink); padding-top:16px; margin-top:22px; }
+    .job-detail .detail-section h3 { margin:0 0 10px; font-size:20px; }
+    .job-detail .detail-section p { color:var(--muted); line-height:1.7; }
+    .job-detail .detail-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
+    .job-detail .detail-actions a { display:inline-flex; padding:12px 20px; background:var(--ink); color:white; border:1px solid var(--ink); border-radius:3px; font-weight:700; text-decoration:none; }
+    .job-detail .detail-actions a.secondary { background:transparent; color:var(--ink); }
+    .cols.is-detail { grid-template-areas:"list list"; grid-template-columns:minmax(0,1fr); }
+    .cols.is-detail .filters,.cols.is-detail .sidenotes { display:none; }
+    .results.is-detail .listhead,.results.is-detail #pager { display:none; }
+
+    /* empty, error and loading states */
+    .state { border-left: 3px solid var(--gold-2); background: var(--paper-2); padding: 16px 20px; margin-top: 20px; color: var(--text); }
+    .state h3 { font-size: 20px; margin: 0 0 6px; }
+    .state p { margin: 0; font-size: 16px; }
+    .skeleton { padding: 20px 0 19px; border-bottom: 1px solid var(--rule); }
+    .skeleton > .sk:first-child { display: none; }
+    .sk { background: var(--paper-3); border-radius: 0; animation: thhpulse 1.4s ease-in-out infinite; }
+    .skeleton .sk:nth-child(1) { height: 1.3rem !important; }
+    @keyframes thhpulse { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
+    /* numbered pages under the list */
+    .pager { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px;
+      border-top: 2px solid var(--ink); margin: 28px 0 0; padding-top: 14px; }
+    .pager .range { font-family: var(--mono); font-size: 13px; color: var(--dim); }
+    .pager ol { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; }
+    .pager button { font: inherit; font-family: var(--mono); font-size: 14px; min-width: 40px; height: 40px; padding: 0 10px;
+      color: var(--ink); background: transparent; border: 1px solid var(--rule); border-radius: 3px; cursor: pointer; }
+    .pager button:hover { border-color: var(--ink); }
+    .pager button[aria-current="page"] { background: var(--ink); border-color: var(--ink); color: #fff; cursor: default; }
+    .pager button:disabled { color: var(--dim); border-color: var(--rule); opacity: .55; cursor: default; }
+    .pager .gap { display: inline-flex; align-items: center; height: 40px; padding: 0 2px; color: var(--dim); font-family: var(--mono); }
+    @media (max-width: 560px) { .pager { justify-content: center; } .pager .range { width: 100%; text-align: center; }
+      .pager ol { justify-content: center; } .pager .lbl { display: none; } }
+
+    .pagefoot .credits { font-size: 14.5px; }
+    .pagefoot .credits a { color: var(--green); }
+
+    @media (max-width: 899px) {
+      .cols { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-template-areas: "filters" "list" "notes"; }
+      aside.filters { margin-bottom: 30px; }
+      aside.filters > h2 { padding: 0; }
+      .ftoggle { cursor: pointer; padding: 12px 0; min-height: 44px; }
+      .ftoggle::after { content: ""; margin-left: auto; align-self: center; width: 8px; height: 8px;
+        border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); transform: rotate(45deg) translateY(-3px); }
+      .ftoggle[aria-expanded="true"]::after { transform: rotate(-135deg) translate(-2px, -1px); }
+      .fbody { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; }
+      .fbody[hidden] { display: none !important; }
+      aside.filters .clearwrap, .fgroup.wide { grid-column: 1 / -1; }
+      aside.filters:has(.fbody[hidden]) { border-bottom: 1px solid var(--rule); }
+      .fgroup.wide .pills { flex-direction: row; flex-wrap: wrap; gap: 0 22px; }
+      .sidenotes { margin-top: 20px; }
+    }
+    @media (max-width: 600px) {
+      .pagehead.jobshead { padding: 28px 0 22px; }
+      .searchbar .btn { padding: 11px 16px; }
+      .job { grid-template-columns: minmax(0, 1fr); }
+      .job h3 { font-size: 19.5px; }
+      .apply { padding-top: 2px; }
+      .apply a { border: 0; border-bottom: 1px solid var(--mint); border-radius: 0; padding: 0 0 1px; font-size: 15px; }
+      .apply a::after { content: " \2192"; }
+      .apply a:hover { background: none; color: var(--ink); border-bottom-color: var(--ink); }
+    }
+    @media (prefers-reduced-motion: reduce) { .sk { animation: none; } }
+  </style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+    <header class="masthead">
+        <div class="masthead-top"><div class="wrap"><span>Kenya's tech careers, reported daily</span><span class="hide-sm"><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a> &middot; <a href="mailto:info@thetechhut.co">info@thetechhut.co</a></span></div></div>
+        <div class="wrap masthead-main">
+            <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+            <nav class="sitenav" aria-label="Site"><a href="/blog/daily/">Daily</a><a href="jobs_test.html" aria-current="page">Jobs</a><a href="/remote/">Remote</a><a href="/cv-pack/">CV Pack</a><a href="/shop/">Shop</a><a href="/events/">Events</a><a href="/apprenticeship/">Apprenticeship</a><a href="/blog/">Blog</a></nav>
+        </div>
+    </header>
+
+<main id="main">
+  <header class="pagehead jobshead">
+    <div class="wrap">
+      <span class="eyebrow">Jobs board &middot; read live from the employers</span>
+      <h1>Tech <em>jobs</em></h1>
+      <p class="lede">Remote roles open worldwide &mdash; the ones you can actually take from Nairobi. Read from the employers&rsquo; own job boards every few hours.</p>
+      <div role="note" aria-label="Recommended CV support" style="margin:20px 0 18px;padding:18px 20px;background:#f5f3ed;border:2px solid #39a875;border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+        <div style="flex:1;min-width:220px"><span style="display:block;font:700 11px/1.4 sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#397b62;margin-bottom:5px">CV SUPPORT · RECOMMENDED</span><strong style="display:block;color:#142b50;font-size:19px;line-height:1.3">Found a role worth applying for? Make your CV count.</strong><span style="display:block;color:#45515d;font-size:14px;line-height:1.5;margin-top:4px">Get extra help preparing or polishing your CV with this independent service. Prefer DIY? Our free CV Pack is still available.</span><a href="/cv-pack/" style="display:inline-block;margin-top:7px;color:#27664e;font-weight:700;font-size:13px">Use the free CV Pack →</a></div><a href="https://www.mnimoniko.com/cv?via=thetechhut" target="_blank" rel="sponsored noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;background:#142b50;color:#fff;text-decoration:none;font-weight:800;padding:12px 18px;border-radius:8px;white-space:nowrap">Get CV help ↗</a>
+      </div>
+      <span class="count" id="count">Loading roles…</span>
+      <form class="searchbar" id="searchform" role="search">
+        <input id="q" type="search" placeholder="Search roles, companies, or skills…" aria-label="Search jobs">
+        <button class="btn" type="submit">Search</button>
+      </form>
+      <div class="chips">
+        <span>Popular:</span>
+        <button type="button" data-chip="developer">Developer</button>
+        <button type="button" data-chip="design">Design</button>
+        <button type="button" data-chip="data">Data</button>
+        <button type="button" data-chip="devops">DevOps</button>
+        <button type="button" data-stage="intern">Internships</button>
+        <button type="button" data-stage="graduate">Graduate schemes</button>
+        <button type="button" data-stage="entry">Entry level</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap cols">
+    <aside class="filters" id="filters" aria-label="Filters">
+      <h2><button type="button" class="ftoggle" id="ftoggle" aria-expanded="true" aria-controls="fbody">Filters<span class="fcount" id="fcount"></span></button></h2>
+      <div class="fbody" id="fbody">
+      <div class="fgroup">
+        <label for="ftype">Job type</label>
+        <select id="ftype"><option value="">All types</option></select>
+      </div>
+      <div class="fgroup">
+        <label for="fcat">Category</label>
+        <select id="fcat"><option value="">All categories</option></select>
+      </div>
+      <div class="fgroup wide">
+        <label>Region</label>
+        <div class="pills" id="fregion">
+          <button type="button" data-region="" aria-pressed="true">Everywhere</button>
+          <button type="button" data-region="Kenya" aria-pressed="false">Kenya</button>
+          <button type="button" data-region="Rest of Africa" aria-pressed="false">Rest of Africa</button>
+          <button type="button" data-region="Remote" aria-pressed="false">Remote</button>
+        </div>
+      </div>
+      <div class="fgroup wide">
+        <label>Level</label>
+        <div class="pills" id="fstage">
+          <button type="button" data-stage="" aria-pressed="true">Any level</button>
+          <button type="button" data-stage="intern" aria-pressed="false">Internships &amp; attachments</button>
+          <button type="button" data-stage="apprentice" aria-pressed="false">Apprenticeships</button>
+          <button type="button" data-stage="graduate" aria-pressed="false">Graduate &amp; trainee schemes</button>
+          <button type="button" data-stage="entry" aria-pressed="false">Entry level</button>
+        </div>
+      </div>
+      <div class="fgroup wide">
+        <label>Date posted</label>
+        <div class="pills" id="fdate">
+          <button type="button" data-days="0" aria-pressed="true">Any time</button>
+          <button type="button" data-days="1" aria-pressed="false">Past 24 hours</button>
+          <button type="button" data-days="3" aria-pressed="false">Last 3 days</button>
+          <button type="button" data-days="7" aria-pressed="false">Past week</button>
+          <button type="button" data-days="30" aria-pressed="false">Past month</button>
+        </div>
+      </div>
+      <div class="clearwrap"><button class="clearbtn" id="clear" type="button">Clear filters</button></div>
+      </div>
+    </aside>
+
+    <div class="sidenotes">
+      <div class="direct">
+        <h2>Employers hiring directly</h2>
+        <p>These employers run recruitment systems we can&rsquo;t read automatically. Their openings
+           are not in the list above &mdash; check their own portals.</p>
+        <details>
+          <summary>Internships &amp; graduate schemes <span class="n">11</span></summary>
+          <ul>
+            <li><a href="/apprenticeship/">
+              The Tech Hut Apprenticeship <span>Ours: eight weeks with mentors on a real software project</span></a></li>
+            <li><a href="https://pscims.publicservice.go.ke/jobs/ActiveAdvertsInternsInternshipExt.aspx" target="_blank" rel="noopener">
+              Public Service Internship Programme <span>Paid stipend &middot; 12 months in a ministry or state agency</span></a></li>
+            <li><a href="https://recruitment.digitalent.go.ke/" target="_blank" rel="noopener">
+              Presidential Digital Talent Programme <span>Paid stipend &middot; 12-month ICT internship in government for graduates aged 21&ndash;29</span></a></li>
+            <li><a href="https://www.safaricom.co.ke/career/internship-program" target="_blank" rel="noopener">
+              Safaricom internships &amp; attachments <span>6-month internships and 3-month attachments, technology among them; pay not stated</span></a></li>
+            <li><a href="https://ke.kcbgroup.com/careers" target="_blank" rel="noopener">
+              KCB Management Trainee Programme <span>24 months for recent graduates, IT and computer science included; the 2026 intake closed in July</span></a></li>
+            <li><a href="https://ncbagroup.com/careers/" target="_blank" rel="noopener">
+              NCBA Go-Getter Internship <span>11 months for fresh graduates; pay not stated; watch NCBA&rsquo;s careers page</span></a></li>
+            <li><a href="https://careers.centralbank.go.ke/" target="_blank" rel="noopener">
+              Central Bank of Kenya <span>One-year internships in IT, finance and research when advertised</span></a></li>
+            <li><a href="https://hrmis.cma.or.ke/Jobpostings/" target="_blank" rel="noopener">
+              Capital Markets Authority <span>Internships when advertised, for law, finance and ICT graduates</span></a></li>
+            <li><a href="https://www.sc.com/en/global-careers/early-careers/our-programmes/graduates/" target="_blank" rel="noopener">
+              Standard Chartered graduate programmes <span>Applications usually open August&ndash;September</span></a></li>
+            <li><a href="https://www.absa.africa/careers/graduate-opportunities/" target="_blank" rel="noopener">
+              Absa graduate opportunities <span>Across Absa&rsquo;s African markets</span></a></li>
+            <li><a href="https://www.standardbank.com/sbg/standard-bank-group/careers/students-and-graduates" target="_blank" rel="noopener">
+              Standard Bank students &amp; graduates <span>Paid internships and graduate roles across the group</span></a></li>
+          </ul>
+        </details>
+        <details>
+          <summary>International internships <span class="n">5</span></summary>
+          <ul>
+            <li><a href="https://worldbank.org/en/about/careers/programs-and-internships/internship" target="_blank" rel="noopener">
+              World Bank internships <span>Paid by the hour &middot; for final-year and postgraduate students</span></a></li>
+            <li><a href="https://www.afdb.org/en/about-us/careers/internship-programme/terms-and-conditions" target="_blank" rel="noopener">
+              African Development Bank internships <span>Monthly stipend &middot; for master&rsquo;s students aged 30 or under</span></a></li>
+            <li><a href="https://www.afdb.org/en/careers/young-professionals-program-ypp/eligibility-requirements" target="_blank" rel="noopener">
+              AfDB Young Professionals Program <span>Salaried, three years &middot; master&rsquo;s degree, aged 32 or under</span></a></li>
+            <li><a href="https://www.undp.org/careers/frequently-asked-questions" target="_blank" rel="noopener">
+              UNDP internships <span>Usually a monthly stipend; students and recent graduates</span></a></li>
+            <li><a href="https://careers.microsoft.com/v2/global/en/internship_eligibility" target="_blank" rel="noopener">
+              Microsoft university internships <span>For students; Kenya is one of the listed locations</span></a></li>
+          </ul>
+        </details>
+        <details open>
+          <summary>Banks in Kenya <span class="n">9</span></summary>
+          <ul>
+            <li><a href="https://eoin.fa.em3.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_3001/jobs" target="_blank" rel="noopener">
+              KCB Group <span>Oracle candidate portal</span></a></li>
+            <li><a href="https://equitybank.taleo.net/careersection/ext_new/jobsearch.ftl" target="_blank" rel="noopener">
+              Equity Bank <span>Taleo job search</span></a></li>
+            <li><a href="https://ncbagroup.com/careers/join-our-team/" target="_blank" rel="noopener">
+              NCBA <span>Open roles across its markets</span></a></li>
+            <li><a href="https://www.co-opbank.co.ke/career_tax/co-op-bank/" target="_blank" rel="noopener">
+              Co-operative Bank <span>Current vacancies</span></a></li>
+            <li><a href="https://absa.wd3.myworkdayjobs.com/ABSAcareersite" target="_blank" rel="noopener">
+              Absa Bank Kenya <span>Workday portal for every Absa market</span></a></li>
+            <li><a href="https://jobs.standardchartered.com/" target="_blank" rel="noopener">
+              Standard Chartered <span>Global job search; filter for Kenya</span></a></li>
+            <li><a href="https://imbank.myadrenalin.com/CANDMICROSITE/#/" target="_blank" rel="noopener">
+              I&amp;M Bank <span>Candidate portal</span></a></li>
+            <li><a href="https://dtbk.dtbafrica.com/careers" target="_blank" rel="noopener">
+              Diamond Trust Bank <span>Kenya careers page</span></a></li>
+            <li><a href="https://familybank.co.ke/?page_id=2696" target="_blank" rel="noopener">
+              Family Bank <span>Careers page</span></a></li>
+          </ul>
+        </details>
+        <details>
+          <summary>Insurers in Kenya <span class="n">12</span></summary>
+          <ul>
+            <li><a href="https://jubileeinsurance.com/ke/career-opportunities/" target="_blank" rel="noopener">
+              Jubilee Insurance <span>Kenya career opportunities</span></a></li>
+            <li><a href="https://careers.cicinsurancegroup.com/" target="_blank" rel="noopener">
+              CIC Insurance Group <span>Kenya, Uganda, Malawi and South Sudan</span></a></li>
+            <li><a href="https://oldmutual.wd3.myworkdayjobs.com/Old_Mutual_Careers" target="_blank" rel="noopener">
+              Old Mutual <span>Workday portal for the whole group; filter for Kenya</span></a></li>
+            <li><a href="https://britam.taleo.net/careersection/ke/jobsearch.ftl?lang=en" target="_blank" rel="noopener">
+              Britam <span>Kenya job search</span></a></li>
+            <li><a href="https://icealion.co.ke/open-roles" target="_blank" rel="noopener">
+              ICEA LION <span>Open roles</span></a></li>
+            <li><a href="https://www.apainsurance.org/careers" target="_blank" rel="noopener">
+              APA Insurance <span>Open careers</span></a></li>
+            <li><a href="https://www.madison.co.ke/careers/" target="_blank" rel="noopener">
+              Madison Group <span>Careers page</span></a></li>
+            <li><a href="https://www.liberty.co.ke/careers" target="_blank" rel="noopener">
+              Liberty Kenya <span>Includes the former Heritage</span></a></li>
+            <li><a href="https://www.gakenya.com/ga-insurance-limited/working-at-ga/careers/" target="_blank" rel="noopener">
+              GA Insurance <span>Careers page</span></a></li>
+            <li><a href="https://pula.bamboohr.com/careers" target="_blank" rel="noopener">
+              Pula <span>Agricultural insurance; BambooHR portal</span></a></li>
+            <li><a href="https://zep-re.com/about-us/careers-at-zep-re/" target="_blank" rel="noopener">
+              ZEP-RE <span>Regional reinsurer, Nairobi head office</span></a></li>
+            <li><a href="https://www.kenyare.co.ke/about-us/careers" target="_blank" rel="noopener">
+              Kenya Re <span>Adverts posted as PDFs</span></a></li>
+          </ul>
+        </details>
+        <details>
+          <summary>Tech companies in Kenya <span class="n">8</span></summary>
+          <ul>
+            <li><a href="https://africastalking.com/careers" target="_blank" rel="noopener">
+              Africa&rsquo;s Talking <span>Careers page</span></a></li>
+            <li><a href="https://craftsilicon.com/careers/" target="_blank" rel="noopener">
+              Craft Silicon <span>Careers page</span></a></li>
+            <li><a href="https://kopokopo.co.ke/careers/" target="_blank" rel="noopener">
+              Kopo Kopo <span>Careers page</span></a></li>
+            <li><a href="https://careers.paystack.com/jobs" target="_blank" rel="noopener">
+              Paystack <span>Some roles list Nairobi</span></a></li>
+            <li><a href="https://www.wave.com/en/careers/" target="_blank" rel="noopener">
+              Wave <span>Some roles open to Kenya</span></a></li>
+            <li><a href="https://careers.glovoapp.com/jobs-at-glovo/" target="_blank" rel="noopener">
+              Glovo <span>Filter for Kenya</span></a></li>
+            <li><a href="https://bolt.eu/en/careers/positions/" target="_blank" rel="noopener">
+              Bolt <span>Filter for Nairobi</span></a></li>
+            <li><a href="https://branch.co/careers/openings" target="_blank" rel="noopener">
+              Branch International <span>Careers page</span></a></li>
+          </ul>
+        </details>
+        <details>
+          <summary>Other employers in Kenya <span class="n">3</span></summary>
+          <ul>
+            <li><a href="https://egjd.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX/jobs" target="_blank" rel="noopener">
+              Safaricom <span>Oracle candidate portal</span></a></li>
+            <li><a href="https://careers.zetech.ac.ke/index.php?mod=vacancies" target="_blank" rel="noopener">
+              Zetech University <span>Academic and staff vacancies</span></a></li>
+            <li><a href="https://jobs.deel.com/4a9f4504-6058-403a-9cb7-5dc27b7fe85b-1789634936748" target="_blank" rel="noopener">
+              Accelera Digital Group <span>Engineering, data and AI roles; Nairobi among the hybrid locations</span></a></li>
+          </ul>
+        </details>
+        <details>
+          <summary>Banks across Africa <span class="n">9</span></summary>
+          <ul>
+            <li><a href="https://firstrand.wd3.myworkdayjobs.com/en-US/FRB/jobs" target="_blank" rel="noopener">
+              FirstRand / FNB <span>South Africa and its other markets</span></a></li>
+            <li><a href="https://jobs.nedbank.co.za/search/" target="_blank" rel="noopener">
+              Nedbank <span>Now NCBA&rsquo;s parent; mostly South Africa</span></a></li>
+            <li><a href="https://careers.capitecbank.co.za/search/" target="_blank" rel="noopener">
+              Capitec <span>South Africa</span></a></li>
+            <li><a href="https://fa-emqf-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1004" target="_blank" rel="noopener">
+              Ecobank <span>Oracle portal, 30+ African markets</span></a></li>
+            <li><a href="https://careers.accessbankplc.com/jobs" target="_blank" rel="noopener">
+              Access Bank <span>Nigeria and its African subsidiaries</span></a></li>
+            <li><a href="https://gtcoplc.zohorecruit.com/jobs/Careers" target="_blank" rel="noopener">
+              GTCO <span>Guaranty Trust Holding Company</span></a></li>
+            <li><a href="https://www.firstbanknigeria.com/home/careers/jobs/" target="_blank" rel="noopener">
+              First Bank of Nigeria <span>Careers page</span></a></li>
+            <li><a href="https://careers.crdbbank.co.tz/jobs" target="_blank" rel="noopener">
+              CRDB Bank <span>Tanzania</span></a></li>
+            <li><a href="https://recrutement.attijariwafa.com/" target="_blank" rel="noopener">
+              Attijariwafa Bank <span>Morocco and its African network</span></a></li>
+          </ul>
+        </details>
+        <details>
+          <summary>Insurers across Africa <span class="n">9</span></summary>
+          <ul>
+            <li><a href="https://careers.discovery.co.za/go/All-Jobs/4509301/" target="_blank" rel="noopener">
+              Discovery <span>South Africa</span></a></li>
+            <li><a href="https://www.momentum.co.za/momentum/about-us/careers" target="_blank" rel="noopener">
+              Momentum <span>South Africa</span></a></li>
+            <li><a href="https://www.hollard.co.za/our-world/careers/available-jobs" target="_blank" rel="noopener">
+              Hollard <span>South Africa</span></a></li>
+            <li><a href="https://www.santam.co.za/careers/jobs/" target="_blank" rel="noopener">
+              Santam <span>South Africa</span></a></li>
+            <li><a href="https://www.prudentialplc.com/en/careers/overview/" target="_blank" rel="noopener">
+              Prudential <span>Group careers, including its African markets</span></a></li>
+            <li><a href="https://corporate.axamansard.com/current-jobs/" target="_blank" rel="noopener">
+              AXA Mansard <span>Nigeria</span></a></li>
+            <li><a href="https://careers.leadway.com" target="_blank" rel="noopener">
+              Leadway Assurance <span>Nigeria</span></a></li>
+            <li><a href="https://africa-re.com/career" target="_blank" rel="noopener">
+              Africa Re <span>Pan-African reinsurer, offices include Nairobi</span></a></li>
+            <li><a href="https://www.curacel.co/more-vacancy" target="_blank" rel="noopener">
+              Curacel <span>Insurance technology, Nigeria</span></a></li>
+          </ul>
+        </details>
+        <details>
+          <summary>Tech companies across Africa <span class="n">13</span></summary>
+          <ul>
+            <li><a href="https://flutterwave.com/us/careers/vacancies" target="_blank" rel="noopener">
+              Flutterwave <span>Payments; mostly Nigeria</span></a></li>
+            <li><a href="https://careers.moove.io/jobs" target="_blank" rel="noopener">
+              Moove <span>Vehicle financing for ride-hailing drivers</span></a></li>
+            <li><a href="https://onafriq.com/careers" target="_blank" rel="noopener">
+              Onafriq <span>Payments network across Africa</span></a></li>
+            <li><a href="https://careers.opayweb.com" target="_blank" rel="noopener">
+              OPay <span>Nigeria</span></a></li>
+            <li><a href="https://www.yoco.com/za/careers/open-roles/" target="_blank" rel="noopener">
+              Yoco <span>South Africa</span></a></li>
+            <li><a href="https://peachpayments.bamboohr.com/careers" target="_blank" rel="noopener">
+              Peach Payments <span>South Africa and Mauritius</span></a></li>
+            <li><a href="https://clickatell.com/jobs/" target="_blank" rel="noopener">
+              Clickatell <span>South Africa and Nigeria</span></a></li>
+            <li><a href="https://aerobotics.bamboohr.com/careers" target="_blank" rel="noopener">
+              Aerobotics <span>South Africa</span></a></li>
+            <li><a href="https://www.instadeep.com/about-us/careers/" target="_blank" rel="noopener">
+              InstaDeep <span>AI; Tunis, Kigali and Cape Town among its offices</span></a></li>
+            <li><a href="https://www.fawry.com/jobs/" target="_blank" rel="noopener">
+              Fawry <span>Egypt</span></a></li>
+            <li><a href="https://paymob.com/en/careers.html" target="_blank" rel="noopener">
+              Paymob <span>Egypt</span></a></li>
+            <li><a href="https://www.breadfast.com/careers/" target="_blank" rel="noopener">
+              Breadfast <span>Egypt</span></a></li>
+            <li><a href="https://erp.mpharma.com/jobs" target="_blank" rel="noopener">
+              mPharma <span>Ghana</span></a></li>
+          </ul>
+        </details>
+        <details>
+          <summary>Remote job boards <span class="n">1</span></summary>
+          <ul>
+            <li><a href="https://www.flexjobs.com/remote-jobs" target="_blank" rel="noopener">
+              FlexJobs <span>Paid membership; remote and flexible roles screened by its team. Check each role&rsquo;s location rules.</span></a></li>
+          </ul>
+        </details>
+        <p class="also">Pay is as each programme states it. A real internship never asks you to pay to apply.</p>
+        <p class="also">Standard Bank Group (with Stanbic and Liberty), Afreximbank, OUTsurance, Watu, Turaco and the other employers named at the foot of this page publish open job feeds, so their roles are in the list above.</p>
+      </div>
+
+      <div class="promo">
+        <h2>Which system reads your CV?</h2>
+        <p>Safaricom runs Oracle. Britam runs Taleo. M-KOPA runs Ashby. The free CV pack maps
+           every employer on this board and the six formatting rules that get you past all of them.</p>
+        <a class="go" href="/cv-pack/">Open the free CV pack</a>
+        <a class="alt" href="/early-access/">Or get these roles 24 hours early &rarr;</a>
+      </div>
+
+
+      <div class="promo">
+        <h2>Want expert help with your CV?</h2>
+        <p>If you would rather have someone help prepare or polish your CV, explore this independent CV service. The free Tech Hut CV Pack is still here if you prefer to do it yourself.</p>
+        <a class="go" href="https://www.mnimoniko.com/cv?via=thetechhut" target="_blank" rel="sponsored noopener noreferrer">Explore the CV service ↗</a>
+      </div>
+
+      <div class="promo">
+        <h2>&ldquo;Remote&rdquo; often means &ldquo;not you&rdquo;</h2>
+        <p>Remote, France. Italy (Remote). Remote India. Plenty of the remote roles above are only
+           open to people already living somewhere else. We scanned 2,445 openings to find the ones
+           that will genuinely employ you from Nairobi.</p>
+        <a class="go" href="/remote/">See the Remote-From-Kenya list</a>
+      </div>
+    </div>
+
+    <div class="results">
+      <div class="listhead">
+        <h2>Available jobs <span id="shown"></span></h2>
+        <span class="sortwrap"><label for="sort">Sort</label>
+          <select id="sort">
+            <option value="date">Newest first</option>
+            <option value="title">Title A–Z</option>
+            <option value="company">Company A–Z</option>
+          </select>
+        </span>
+      </div>
+      <div id="list"></div>
+      <nav class="pager" id="pager" aria-label="Pages of jobs" hidden></nav>
+    </div>
+  </div>
+</main>
+
+<div class="pagefoot"><div class="wrap">
+<p class="credits">
+  Listings are read every few hours from
+  <a href="https://jobicy.com/" target="_blank" rel="noopener">Jobicy</a>,
+  <a href="https://remoteok.com/" target="_blank" rel="noopener">Remote OK</a>, and the public job-board
+  APIs of 40 employers hiring in Kenya and across Africa &mdash; M-KOPA, Andela, One Acre Fund, Jumia, Zipline, Tala, Apollo Agriculture, Sun King, GiveDirectly, Canonical, Moniepoint, Standard Bank Group, Afreximbank, Ajua, Watu, Turaco, Cellulant, Wasoko, Ilara Health, Gebeya, Irembo, Yassir, FairMoney, Taptap Send, LemFi, Optasia, Kuda, Helium Health, Gozem, Djamo, Takealot, Ozow, Luno, Entersekt, Mukuru, Lula, valU, Thndr, OUTsurance and ACRE Africa.
+  Every apply button opens the original posting on the source site — The Tech Hut does not host applications
+  and is not the employer. Always verify a role before sharing personal details; never pay to apply.
+</p>
+</div></div>
+
+<footer class="sitefoot">
+        <div class="wrap">
+            <div class="sitefoot-grid">
+                <div>
+                    <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+                    <p>Helping Kenyans into tech work: jobs you can take from Nairobi, a daily read on the industry, and projects with mentors.</p>
+                </div>
+                <div>
+                    <h4>Read</h4>
+                    <ul>
+                        <li><a href="/blog/daily/">Daily Savannah</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Find work</h4>
+                    <ul>
+                        <li><a href="jobs_test.html">Jobs board</a></li>
+                        <li><a href="/remote/">Remote-from-Kenya list</a></li>
+                        <li><a href="/cv-pack/">CV Pack</a></li>
+                        <li><a href="/early-access/">Early Access</a></li>
+                        <li><a href="/shop/">Everything we make</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="/apprenticeship/">Apprenticeship</a></li>
+                        <li><a href="/events/">Events</a></li>
+                        <li><a href="/communities/">Tech communities</a></li>
+                        <li><a href="/tools/">Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Employers</h4>
+                    <ul>
+                        <li><a href="/advertise/">Advertise</a></li>
+                        <li><a href="/jobs-for-your-community/">A jobs board for your community</a></li>
+                        <li><a href="/recruiters/">Recruiters</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sitefoot-base">
+                <span>&copy; 2026 The Tech Hut Community</span>
+                <a href="mailto:info@thetechhut.co">info@thetechhut.co</a>
+                <span>+254 115 017 058</span>
+                <a href="/data_privacy_policy/">Privacy</a>
+                <a href="https://linkedin.com/company/digital-transformation-partner/" rel="noopener">LinkedIn</a>
+                <a href="https://x.com/Ekiprop_kimutai" rel="noopener">X</a>
+            </div>
+        </div>
+    </footer>
+
+<script src="/assets/js/jobs-feeds.js"></script>
+<script>
+(function () {
+  var PAGE = 20, page = 1, all = [], view = [];
+  var state = { q: '', type: '', cat: '', region: '', stage: '', days: 0, sort: 'date' };
+  var $ = function (id) { return document.getElementById(id); };
+
+  // Feeds, parsers and the role classifiers live in /assets/js/jobs-feeds.js,
+  // shared with scripts/build_jobs_board.js.
+  var F = window.TTHFeeds;
+  var esc = F.esc, ago = F.ago, regionOf = F.regionOf, stageOf = F.stageOf, stageLabel = F.stageLabel;
+
+  // --- filtering & rendering ----------------------------------------------
+  // Filters fold away on phones (closed to start with) and are always open on wider screens.
+  var narrow = window.matchMedia('(max-width: 899px)');
+  function setFiltersOpen(open) {
+    $('ftoggle').setAttribute('aria-expanded', open ? 'true' : 'false');
+    $('fbody').hidden = !open;
+  }
+  function syncFilters() { setFiltersOpen(!narrow.matches); }
+  function updateFilterCount() {
+    var n = (state.type ? 1 : 0) + (state.cat ? 1 : 0) + (state.region ? 1 : 0) + (state.stage ? 1 : 0) + (state.days ? 1 : 0);
+    $('fcount').textContent = n ? '(' + n + ' on)' : '';
+  }
+
+  // keepPage: when roles arrive while someone is reading, stay on their page.
+  function apply(keepPage) {
+    updateFilterCount();
+    var q = state.q.toLowerCase();
+    view = all.filter(function (j) {
+      if (q) {
+        var hay = (j.title + ' ' + j.company + ' ' + j.cats.join(' ') + ' ' +
+                   (j._tags || []).join(' ') + ' ' + j.excerpt).toLowerCase();
+        if (hay.indexOf(q) === -1) return false;
+      }
+      if (state.type && j.types.indexOf(state.type) === -1) return false;
+      if (state.cat && j.cats.indexOf(state.cat) === -1) return false;
+      if (j.stage === undefined) j.stage = stageOf(j.title, j.level);
+      if (state.region && j.region !== state.region) return false;
+      if (state.stage && j.stage !== state.stage) return false;
+      if (state.days) {
+        var t = Date.parse(j.date);
+        if (isNaN(t) || t < Date.now() - state.days * 864e5) return false;
+      }
+      return true;
+    });
+    if (state.sort === 'title') view.sort(function (a, b) { return a.title.localeCompare(b.title); });
+    else if (state.sort === 'company') view.sort(function (a, b) { return a.company.localeCompare(b.company); });
+    else view.sort(function (a, b) { return (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0); });
+    setPage(keepPage ? page : 1, false);
+  }
+
+  function card(j) {
+    var initial = esc((j.company || '?').charAt(0).toUpperCase());
+    var logo = j.logo
+      ? '<img src="' + esc(j.logo) + '" alt="" loading="lazy" decoding="async" onerror="this.remove()">'
+      : '';
+    var stage = stageLabel(j.stage);
+    var chips = (stage ? [stage] : []).concat(j.cats.slice(0, 2)).concat(j.types.slice(0, 1))
+      .concat(j.level && !stage ? [j.level] : []);
+    return '<article class="job">' +
+      '<div class="logo">' + initial + logo + '</div>' +
+      '<div>' +
+        '<h3><a href="#job=' + encodeURIComponent(j.id) + '" data-job-id="' + esc(j.id) + '">' + esc(j.title) + '</a></h3>' +
+        '<div class="co">' + esc(j.company || 'Company not listed') + '</div>' +
+        '<div class="meta"><span>' + esc(j.location) + '</span>' +
+          (j.date ? '<span>' + esc(ago(j.date)) + '</span>' : '') + '</div>' +
+        (j.excerpt ? '<p class="excerpt">' + esc(j.excerpt) + '</p>' : '') +
+        '<div class="tags">' +
+          chips.map(function (c) { return '<span>' + esc(c) + '</span>'; }).join('') +
+          '<span class="src">via ' + esc(j.source) + '</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="apply"><a href="#job=' + encodeURIComponent(j.id) + '" data-job-id="' + esc(j.id) + '">View details</a></div>' +
+    '</article>';
+  }
+
+
+  function detailFromHash() {
+    var m = /^#job=(.+)$/.exec(location.hash);
+    if (!m) return null;
+    try { return decodeURIComponent(m[1]); } catch (e) { return null; }
+  }
+  function renderDetail(job) {
+    var cols = document.querySelector('.cols'), results = document.querySelector('.results');
+    cols.classList.add('is-detail'); results.classList.add('is-detail');
+    var stage = stageLabel(job.stage || stageOf(job.title, job.level));
+    var tags = (stage ? [stage] : []).concat(job.cats || [], job.types || []).filter(Boolean);
+    $('shown').textContent = '';
+    $('list').innerHTML = '<article class="job-detail">' +
+      '<a class="back" href="' + esc(location.pathname + location.search) + '">← Back to all jobs</a>' +
+      '<div class="detail-kicker">Opportunity details</div>' +
+      '<h2>' + esc(job.title) + '</h2>' +
+      '<div class="detail-company">' + esc(job.company || 'Company not listed') + '</div>' +
+      '<div class="detail-meta"><span>' + esc(job.location || 'Location not stated') + '</span>' +
+      (job.date ? '<span>Posted ' + esc(ago(job.date)) + '</span>' : '') +
+      '<span>Source: ' + esc(job.source || 'Employer') + '</span></div>' +
+      '<div class="detail-tags">' + tags.map(function (t) { return '<span>' + esc(t) + '</span>'; }).join('') + '</div>' +
+      '<section class="detail-section"><h3>About this opportunity</h3>' +
+      (job.excerpt ? '<p>' + esc(job.excerpt) + '</p>' : '<p>The source listing does not provide a description in its public feed. Visit the employer’s original posting for the full responsibilities, requirements and application details.</p>') +
+      '</section>' +
+      '<section class="detail-section"><h3>Before you apply</h3><p>Review the full job description, confirm that the location and eligibility requirements work for you, and check the employer’s application instructions. The Tech Hut links to the original posting and does not handle applications.</p></section>' +
+      '<div class="detail-actions"><a href="' + esc(job.url) + '" target="_blank" rel="noopener noreferrer">Apply on employer site ↗</a>' +
+      '<a class="secondary" href="' + esc(location.pathname + location.search) + '">Back to jobs</a></div>' +
+      '</article>';
+  }
+  function showListView() {
+    document.querySelector('.cols').classList.remove('is-detail');
+    document.querySelector('.results').classList.remove('is-detail');
+  }
+  function renderRoute() {
+    var id = detailFromHash();
+    if (id) {
+      var job = all.filter(function (j) { return String(j.id) === id; })[0];
+      if (job) { renderDetail(job); return; }
+    }
+    showListView();
+    render();
+  }
+  $('list').addEventListener('click', function (e) {
+    var link = e.target.closest('a[data-job-id]');
+    if (!link) return;
+    e.preventDefault();
+    location.hash = 'job=' + encodeURIComponent(link.getAttribute('data-job-id'));
+  });
+  window.addEventListener('hashchange', renderRoute);
+
+  function render() {
+    var selectedId = detailFromHash();
+    if (selectedId) {
+      var selectedJob = all.filter(function (j) { return String(j.id) === selectedId; })[0];
+      if (selectedJob) { renderDetail(selectedJob); return; }
+    }
+    showListView();
+    var list = $('list');
+    $('shown').textContent = '(' + view.length + ')';
+    if (!view.length) {
+      list.innerHTML = '<div class="state"><h3>No roles match those filters</h3>' +
+        '<p>Try clearing a filter or searching a broader term.</p></div>';
+      $('pager').hidden = true;
+      return;
+    }
+    var pages = Math.ceil(view.length / PAGE);
+    if (page > pages) page = pages;
+    var from = (page - 1) * PAGE;
+    list.innerHTML = view.slice(from, from + PAGE).map(card).join('');
+    renderPager(pages, from);
+  }
+
+  // Page links: first, last, and two either side of the current page, with gaps between.
+  function pageNumbers(pages) {
+    var out = [], last = 0;
+    for (var n = 1; n <= pages; n++) {
+      if (n === 1 || n === pages || Math.abs(n - page) <= 2) {
+        if (last && n - last > 1) out.push(0);
+        out.push(n); last = n;
+      }
+    }
+    return out;
+  }
+  function renderPager(pages, from) {
+    var pager = $('pager');
+    if (pages <= 1) { pager.hidden = true; pager.innerHTML = ''; return; }
+    var btn = function (n, label, aria) {
+      return '<button type="button" data-page="' + n + '"' + (aria ? ' aria-label="' + aria + '"' : '') +
+        (n === page && !aria ? ' aria-current="page"' : '') +
+        ((n < 1 || n > pages) ? ' disabled' : '') + '>' + label + '</button>';
+    };
+    pager.innerHTML =
+      '<span class="range">' + (from + 1) + '&ndash;' + Math.min(from + PAGE, view.length) + ' of ' + view.length + '</span>' +
+      '<ol>' +
+        '<li>' + btn(page - 1, '&larr;<span class="lbl"> Prev</span>', 'Previous page') + '</li>' +
+        pageNumbers(pages).map(function (n) {
+          return '<li>' + (n ? btn(n, String(n)) : '<span class="gap" aria-hidden="true">&hellip;</span>') + '</li>';
+        }).join('') +
+        '<li>' + btn(page + 1, '<span class="lbl">Next </span>&rarr;', 'Next page') + '</li>' +
+      '</ol>';
+    pager.hidden = false;
+  }
+  // The page number lives in the address (#page=3) so a link or a refresh keeps your place.
+  function setPage(n, scroll) {
+    page = Math.max(1, n | 0);
+    render();
+    var want = page > 1 ? '#page=' + page : '', cur = location.hash;
+    if (cur !== want && (cur === '' || /^#page=\d+$/.test(cur))) {
+      try { history.replaceState(null, '', location.pathname + location.search + want); } catch (e) {}
+    }
+    if (scroll) document.querySelector('.listhead').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  function pageFromHash() {
+    var m = /^#page=(\d+)$/.exec(location.hash);
+    return m ? +m[1] : 1;
+  }
+
+  function fillSelects() {
+    var types = {}, cats = {};
+    all.forEach(function (j) {
+      j.types.forEach(function (t) { types[t] = 1; });
+      j.cats.forEach(function (c) { cats[c] = 1; });
+    });
+    function fill(el, obj, label) {
+      var keys = Object.keys(obj).sort();
+      el.innerHTML = '<option value="">' + label + '</option>' +
+        keys.map(function (k) { return '<option value="' + esc(k) + '">' + esc(k) + '</option>'; }).join('');
+    }
+    fill($('ftype'), types, 'All types');
+    fill($('fcat'), cats, 'All categories');
+    $('ftype').value = types[state.type] ? state.type : '';      // keep a choice made while loading
+    $('fcat').value = cats[state.cat] ? state.cat : '';
+  }
+
+  // --- wiring --------------------------------------------------------------
+  $('searchform').addEventListener('submit', function (e) { e.preventDefault(); state.q = $('q').value.trim(); apply(); });
+  $('q').addEventListener('input', function () { state.q = this.value.trim(); apply(); });
+  $('ftype').addEventListener('change', function () { state.type = this.value; apply(); });
+  $('fcat').addEventListener('change', function () { state.cat = this.value; apply(); });
+  $('sort').addEventListener('change', function () { state.sort = this.value; apply(); });
+  $('fregion').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-region]'); if (!b) return;
+    [].forEach.call(this.querySelectorAll('button'), function (x) { x.setAttribute('aria-pressed', 'false'); });
+    b.setAttribute('aria-pressed', 'true');
+    state.region = b.dataset.region; apply();
+  });
+  $('fdate').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-days]'); if (!b) return;
+    [].forEach.call(this.querySelectorAll('button'), function (x) { x.setAttribute('aria-pressed', 'false'); });
+    b.setAttribute('aria-pressed', 'true');
+    state.days = +b.dataset.days; apply();
+  });
+  function pressStage(key) {
+    [].forEach.call($('fstage').querySelectorAll('button'), function (x) {
+      x.setAttribute('aria-pressed', x.dataset.stage === key ? 'true' : 'false');
+    });
+  }
+  $('fstage').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-stage]'); if (!b) return;
+    pressStage(b.dataset.stage);
+    state.stage = b.dataset.stage; apply();
+  });
+  document.querySelector('.chips').addEventListener('click', function (e) {
+    var s = e.target.closest('button[data-stage]');
+    if (s) {
+      pressStage(s.dataset.stage); state.stage = s.dataset.stage; apply();
+      document.querySelector('.listhead').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+    var b = e.target.closest('button[data-chip]'); if (!b) return;
+    $('q').value = b.dataset.chip; state.q = b.dataset.chip; apply();
+    document.querySelector('.listhead').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  $('clear').addEventListener('click', function () {
+    state = { q: '', type: '', cat: '', region: '', stage: '', days: 0, sort: 'date' };
+    pressStage('');
+    $('q').value = ''; $('ftype').value = ''; $('fcat').value = ''; $('sort').value = 'date';
+    [].forEach.call($('fdate').querySelectorAll('button'), function (x, i) {
+      x.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
+    });
+    [].forEach.call($('fregion').querySelectorAll('button'), function (x, i) {
+      x.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
+    });
+    apply();
+  });
+  $('ftoggle').addEventListener('click', function () {
+    if (!narrow.matches) return;
+    setFiltersOpen(this.getAttribute('aria-expanded') !== 'true');
+  });
+  syncFilters();
+  if (narrow.addEventListener) narrow.addEventListener('change', syncFilters);
+  else if (narrow.addListener) narrow.addListener(syncFilters);
+
+  $('pager').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-page]');
+    if (!b || b.disabled || b.getAttribute('aria-current')) return;
+    setPage(+b.dataset.page, true);
+  });
+
+  // --- boot ----------------------------------------------------------------
+  $('list').innerHTML = new Array(5).join('x').split('x').map(function () {
+    return '<div class="skeleton"><div class="sk" style="width:3.25rem;height:3.25rem"></div>' +
+      '<div><div class="sk" style="height:1rem;width:55%;margin-bottom:.55rem"></div>' +
+      '<div class="sk" style="height:.8rem;width:32%;margin-bottom:.55rem"></div>' +
+      '<div class="sk" style="height:.8rem;width:85%"></div></div></div>';
+  }).join('');
+
+  var startPage = pageFromHash();          // read before apply() resets it to 1
+  var shownOnce = false;
+  function draw(jobs) {                     // first time: open on the page in the address; after that, stay put
+    all = jobs;
+    fillSelects();
+    if (shownOnce) { apply(true); return; }
+    shownOnce = true;
+    apply(); setPage(startPage, false);
+  }
+  function show(jobs, when) {
+    if (!jobs.length) throw new Error('empty');
+    try { localStorage.setItem('tth-jobs', JSON.stringify({ t: Date.now(), jobs: jobs.slice(0, 60) })); } catch (e) {}
+    $('count').textContent = jobs.length + ' open roles · updated ' + when.toLocaleString('en-KE',
+      { day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: 'Africa/Nairobi' });
+    draw(jobs);
+  }
+  // Live fallback, asynchronously: roles appear as each feed answers instead of
+  // after the slowest one, redrawn at most every 400 ms.
+  function loadLive() {
+    var timer = null, latest = null;
+    function flush() { timer = null; if (latest && latest.length) draw(latest); }
+    return F.load({
+      onProgress: function (rows, done, total) {
+        latest = rows;
+        $('count').textContent = rows.length + ' roles so far · reading ' + (total - done) + ' more job board' + (total - done === 1 ? '' : 's') + '…';
+        if (!timer) timer = setTimeout(flush, shownOnce ? 400 : 0);
+      }
+    }).then(function (jobs) {
+      if (timer) { clearTimeout(timer); timer = null; }
+      show(jobs, new Date());
+    });
+  }
+  // First the one small file GitHub Actions builds every few hours from all the
+  // feeds (scripts/build_jobs_board.js): a single request instead of ~45 and
+  // several megabytes. If it is missing or more than a day and a half old, read
+  // the feeds live as before.
+  var STALE_MS = 36 * 36e5;
+  fetch('/data/jobs-board.json', { cache: 'no-cache' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (d) {
+      var t = d && Date.parse(d.updated);
+      if (!d || !Array.isArray(d.jobs) || d.jobs.length < 20 || isNaN(t) || Date.now() - t > STALE_MS) throw new Error('stale');
+      show(d.jobs, new Date(t));
+    })
+    .catch(loadLive)
+    .catch(function () {
+    var cached = null;
+    try { cached = JSON.parse(localStorage.getItem('tth-jobs') || 'null'); } catch (e) {}
+    if (cached && cached.jobs && cached.jobs.length) {
+      $('count').textContent = cached.jobs.length + ' roles · showing your last saved copy';
+      draw(cached.jobs);
+    } else {
+      $('count').textContent = '';
+      $('list').innerHTML = '<div class="state"><h3>Couldn\'t load roles just now</h3>' +
+        '<p>The job feeds are unreachable from this network. Try again shortly, or browse ' +
+        '<a href="https://jobicy.com/" target="_blank" rel="noopener">Jobicy</a>, ' +
+        '<a href="https://remoteok.com/" target="_blank" rel="noopener">Remote OK</a> or the employers\' ' +
+        'own careers pages directly.</p></div>';
+      $('pager').hidden = true;
+    }
+  });
+})();
+</script>
+</body>
+</html>
