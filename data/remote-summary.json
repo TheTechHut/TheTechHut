@@ -1,11 +1,10 @@
 {
- "updated": "2026-11-01",
- "company_count": 51,
- "role_count": 386,
- "local_role_count": 111,
- "roles_scanned": 3376,
+ "updated": "2026-11-02",
+ "company_count": 15,
+ "role_count": 326,
+ "local_role_count": 96,
+ "roles_scanned": 3307,
  "sources": [
-  "Himalayas",
   "Jobicy"
  ],
  "companies": [
@@ -49,15 +48,6 @@
    ]
   },
   {
-   "company": "micro1",
-   "platform": "himalayas",
-   "eligible": 13,
-   "total": 13,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
    "company": "ConsenSys",
    "platform": "greenhouse",
    "eligible": 10,
@@ -69,15 +59,6 @@
     "UNITED STATES - Remote, LATAM - Remote, EMEA - Remote",
     "United States - Remote, EMEA - Remote",
     "EMEA - Remote"
-   ]
-  },
-  {
-   "company": "G2i",
-   "platform": "himalayas",
-   "eligible": 10,
-   "total": 10,
-   "locations": [
-    "Worldwide"
    ]
   },
   {
@@ -111,33 +92,6 @@
    ]
   },
   {
-   "company": "Zup Innovation",
-   "platform": "himalayas",
-   "eligible": 2,
-   "total": 2,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Myriad360",
-   "platform": "himalayas",
-   "eligible": 2,
-   "total": 2,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Cresteo",
-   "platform": "himalayas",
-   "eligible": 2,
-   "total": 2,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
    "company": "Cockroach Labs",
    "platform": "greenhouse",
    "eligible": 1,
@@ -150,7 +104,7 @@
    "company": "Turing",
    "platform": "greenhouse",
    "eligible": 1,
-   "total": 39,
+   "total": 40,
    "locations": [
     "Global - Remote"
    ]
@@ -192,273 +146,12 @@
    ]
   },
   {
-   "company": "HumanSignal",
-   "platform": "himalayas",
+   "company": "Fueled",
+   "platform": "jobicy",
    "eligible": 1,
    "total": 1,
    "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "ACCEL Schools",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Invisible Technologies",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "AIS (Applied Information Sciences)",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Oscar",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Banco Plata, S.A., Instituci\u00f3n de Banca M\u00faltiple",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Anduril",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Franciscan Health",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Premera Blue Cross",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Health Care Service Corporation",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Milestone Technologies",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Meade Engineering, Inc.",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Xperteez Technology",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "7-Eleven Inc",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Milestone Technologies, Inc.",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "TensorOps",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Clera",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "State of Arizona",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "JustPlay GmbH",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "WVU Medicine",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "DEME Group",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Sigitek Software Services",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Sensus AI - FZCO",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Able",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "SIL International",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Sigma Growth Specialists",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "TMC International",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "SimpleTiger",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "DataKrew Pvt. Ltd.",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Askable",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
+    "EMEA"
    ]
   },
   {
@@ -468,24 +161,6 @@
    "total": 1,
    "locations": [
     "EMEA,  LATAM,  Canada,  USA"
-   ]
-  },
-  {
-   "company": "Testlio",
-   "platform": "jobicy",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "EMEA,  USA"
-   ]
-  },
-  {
-   "company": "Phantom",
-   "platform": "jobicy",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Anywhere"
    ]
   }
  ]
