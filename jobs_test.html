@@ -545,6 +545,21 @@ header:not(.pagehead) .join{font:800 11px 'Plus Jakarta Sans',sans-serif}
  header:not(.pagehead) .brand small{font-size:9px}
  header:not(.pagehead) .links a{font-size:14px}
 }
+
+/* Match the homepage's broad page gutters; center only the hero content */
+@media(min-width:1001px){
+  body .wrap{width:min(1504px,calc(100% - 80px));margin-left:auto;margin-right:auto}
+  header:not(.pagehead) .wrap.nav{width:min(1504px,calc(100% - 80px));margin-left:auto;margin-right:auto}
+  main > .wrap.cols{width:min(1504px,calc(100% - 80px));margin-left:auto;margin-right:auto}
+}
+@media(min-width:681px) and (max-width:1000px){
+  body .wrap{width:calc(100% - 40px);margin-left:auto;margin-right:auto}
+  header:not(.pagehead) .wrap.nav,main > .wrap.cols{width:calc(100% - 40px);margin-left:auto;margin-right:auto}
+}
+@media(max-width:680px){
+  body .wrap{width:calc(100% - 34px);margin-left:auto;margin-right:auto}
+  header:not(.pagehead) .wrap.nav,main > .wrap.cols{width:calc(100% - 34px);margin-left:auto;margin-right:auto}
+}
 </style>
 </head>
 <body>
