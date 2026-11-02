@@ -455,6 +455,25 @@ header:not(.pagehead) .menu{display:none}
  header:not(.pagehead) .join{font-size:11px;padding:9px 10px}
 }
 
+
+/* Final navbar alignment: mirror test.html's logo, navigation and right actions */
+@media(min-width:761px){
+  header:not(.pagehead){height:66px}
+  header:not(.pagehead) .wrap.nav{width:min(1320px,calc(100% - 64px));height:100%;margin:0 auto;padding:0;display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative}
+  header:not(.pagehead) .brand{flex:0 0 auto;min-width:0;margin:0;display:flex;align-items:center;gap:10px;font:800 17px 'Plus Jakarta Sans',sans-serif}
+  header:not(.pagehead) .brand-logo{width:48px;height:48px;flex:0 0 48px}
+  header:not(.pagehead) .brand small{display:block;font:500 11px Inter,sans-serif;margin-top:2px}
+  header:not(.pagehead) .links{position:static;flex:0 1 auto;display:flex;align-items:center;justify-content:center;gap:34px;margin:0;padding:0;background:transparent;box-shadow:none;border:0;font:700 13px 'Plus Jakarta Sans',sans-serif}
+  header:not(.pagehead) .links a{padding:0;border:0;font:700 13px 'Plus Jakarta Sans',sans-serif}
+  header:not(.pagehead) .actions{flex:0 0 auto;margin-left:0;display:flex;align-items:center;justify-content:flex-end;gap:12px}
+  header:not(.pagehead) .search{width:38px;height:38px;flex:0 0 38px}
+  header:not(.pagehead) .join{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;white-space:nowrap;padding:11px 17px;font:800 13px 'Plus Jakarta Sans',sans-serif}
+}
+@media(max-width:760px){
+  header:not(.pagehead) .wrap.nav{width:calc(100% - 34px);margin:0 auto}
+  header:not(.pagehead) .brand{flex:1 1 auto;min-width:0}
+  header:not(.pagehead) .actions{flex:0 0 auto;margin-left:auto;display:flex;align-items:center;gap:8px}
+}
 </style>
 </head>
 <body>
