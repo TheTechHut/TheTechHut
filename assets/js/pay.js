@@ -11,7 +11,15 @@
                https://thetechhut-pay.<subdomain>.workers.dev
                or https://api.thetechhut.co once the custom domain is set up.
 
-   Leave either blank and every buy button falls back to WhatsApp with the
+   TURNSTILE_SITE_KEY  optional: the site key of a Cloudflare Turnstile widget
+               (Cloudflare dashboard -> Turnstile -> Add widget, hostnames
+               thetechhut.co and www.thetechhut.co, mode "Managed"). Public by
+               design. Its secret key goes into the Worker:
+                 cd worker && npx wrangler secret put TURNSTILE_SECRET
+               Deploy the site with the site key FIRST, then set the secret:
+               the Worker only demands the check once it has the secret.
+
+   Leave PUBLIC_KEY or API_BASE blank and every buy button falls back to WhatsApp with the
    product and price already written into the message. Nothing is ever broken;
    it just costs you a message instead of being automatic.
 
@@ -27,6 +35,8 @@
 
     var PUBLIC_KEY = 'pk_live_0ea0b49d018982026271a8d153bc6b5d3955b895';
     var API_BASE = 'https://thetechhut-pay.thetechhut.workers.dev';
+    var TURNSTILE_SITE_KEY = '';
+    var TURNSTILE_JS = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
 
     var WHATSAPP = '254115017058';
     var INLINE_JS = 'https://js.paystack.co/v2/inline.js';
@@ -77,7 +87,9 @@
         '.tthpay .amt{font-family:"IBM Plex Mono",ui-monospace,monospace;color:#073B4C;font-weight:600}',
         '.tthpay .ok{background:#F7FAFC;border:0;border-left:3px solid #06D6A0;',
         'border-radius:0;padding:12px 14px;margin:0 0 14px;word-break:break-all}',
-        '.tthpay .ok a{color:#046b52;font-weight:700}'
+        '.tthpay .ok a{color:#046b52;font-weight:700}',
+        '.tthpay .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}',
+        '.tthpay .ts{margin:0 0 12px;min-height:0}'
     ].join('');
 
     function styles() {
@@ -129,7 +141,58 @@
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body)
-        }).then(function (r) { return r.json().catch(function () { return {}; }); });
+        }).then(function (r) {
+            return r.json().catch(function () { return {}; }).then(function (b) { b._status = r.status; return b; });
+        });
+    }
+
+    /* ------------------------------------------------------------ turnstile */
+
+    /* Cloudflare's bot check. "Managed" mode shows nothing to most people and a
+       one-click box to a few. A token works once, so the widget is reset after
+       each attempt. Without a site key this does nothing and resolves ''. */
+    var tsLoading = null;
+    function loadTurnstile() {
+        if (window.turnstile) return Promise.resolve();
+        if (tsLoading) return tsLoading;
+        tsLoading = new Promise(function (resolve, reject) {
+            var s = document.createElement('script');
+            s.src = TURNSTILE_JS;
+            s.async = true;
+            s.onload = function () { resolve(); };
+            s.onerror = function () { tsLoading = null; reject(new Error('could not load the check')); };
+            document.head.appendChild(s);
+        });
+        return tsLoading;
+    }
+    function botCheck(box) {
+        var state = { id: null, token: '', waiters: [] };
+        if (!TURNSTILE_SITE_KEY) return { token: function () { return Promise.resolve(''); }, reset: function () {} };
+        function settle(t) { state.token = t || ''; var w = state.waiters; state.waiters = []; w.forEach(function (f) { f(state.token); }); }
+        loadTurnstile().then(function () {
+            state.id = window.turnstile.render(box, {
+                sitekey: TURNSTILE_SITE_KEY,
+                action: 'checkout',
+                size: 'flexible',
+                appearance: 'interaction-only',
+                callback: function (t) { settle(t); },
+                'expired-callback': function () { state.token = ''; },
+                'error-callback': function () { settle(''); }
+            });
+        }).catch(function () { settle(''); });
+        return {
+            token: function () {
+                if (state.token) return Promise.resolve(state.token);
+                return new Promise(function (resolve) {
+                    state.waiters.push(resolve);
+                    setTimeout(function () { resolve(state.token); }, 20000);
+                });
+            },
+            reset: function () {
+                state.token = '';
+                if (state.id !== null && window.turnstile) { try { window.turnstile.reset(state.id); } catch (e) {} }
+            }
+        };
     }
 
     /* The popup's callback shape has changed between InlineJS versions, so the
@@ -193,6 +256,10 @@
             '<input id="tthEmail" type="email" autocomplete="email" placeholder="you@email.com">',
             '<label for="tthWa">WhatsApp number</label>',
             '<input id="tthWa" type="tel" inputmode="tel" autocomplete="tel" placeholder="0712 345 678">',
+            /* left empty by people; bots fill every field they find */
+            '<div class="hp" aria-hidden="true"><label for="tthSite">Website</label>',
+            '<input id="tthSite" type="text" tabindex="-1" autocomplete="off"></div>',
+            '<div class="ts" id="tthTs"></div>',
             '<div class="row"><button class="go" id="tthGo">Pay KSh ' + p.kes.toLocaleString('en-KE') + '</button>',
             '<button class="x" id="tthX">Cancel</button></div>'
         ].join(''));
@@ -202,6 +269,8 @@
         var email = veil.querySelector('#tthEmail');
         var name = veil.querySelector('#tthName');
         var wa = veil.querySelector('#tthWa');
+        var site = veil.querySelector('#tthSite');
+        var check = botCheck(veil.querySelector('#tthTs'));
         veil.querySelector('#tthX').addEventListener('click', function () { close(veil); });
         setTimeout(function () { name.focus(); }, 30);
 
@@ -221,9 +290,22 @@
             go.disabled = true;
             go.textContent = 'Opening…';
 
-            api('/initialize', { product: key, email: e, whatsapp: w, name: (name.value || '').trim() })
+            check.token()
+                .then(function (token) {
+                    return api('/initialize', { product: key, email: e, whatsapp: w, name: (name.value || '').trim(),
+                        website: site.value || '', turnstile: token });
+                })
                 .then(function (init) {
-                    if (!init.access_code) throw new Error(init.error || 'could not start the payment');
+                    check.reset();                       // a token is good for one attempt
+                    if (!init.access_code) {
+                        var why = init.reason === 'rate' ? (init.error || 'Too many attempts. Wait a few minutes and try again.')
+                            : init.reason === 'turnstile' ? 'We could not confirm you are not a bot. Tick the box above if it shows, then try again.'
+                            : init.reason === 'email' ? 'That email address cannot receive mail. Check the part after the @.'
+                            : init._status === 400 && init.error ? init.error.charAt(0).toUpperCase() + init.error.slice(1) + '.'
+                            : '';
+                        if (why) { var stop = new Error(why); stop.shown = true; throw stop; }
+                        throw new Error(init.error || 'could not start the payment');
+                    }
                     return openPopup(init.access_code).then(function () {
                         go.textContent = 'Checking…';
                         return api('/verify', { reference: init.reference });
@@ -249,8 +331,10 @@
                     ].join(''));
                     document.getElementById('tthDone').addEventListener('click', function () { close(current); });
                 })
-                .catch(function () {
-                    fail('Something went wrong on our side. Nothing has been charged — try again, or message us on WhatsApp.');
+                .catch(function (x) {
+                    check.reset();
+                    fail(x && x.shown ? x.message
+                        : 'Something went wrong on our side. Nothing has been charged — try again, or message us on WhatsApp.');
                 });
         });
 

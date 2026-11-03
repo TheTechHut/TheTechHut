@@ -40,15 +40,20 @@
  *                         the CV Pack signup; see newsletter.js
  *   GAMES_SECRET          optional; any long random string. Needed for "Sign in with
  *                         Google" on the games arcade (signs player ids)
+ *   TURNSTILE_SECRET      optional; the secret key of the Cloudflare Turnstile widget
+ *                         whose site key is in assets/js/pay.js. Set, every checkout
+ *                         must pass the bot check (see payguard.js)
  * Vars (wrangler.toml)
  *   GOOGLE_CLIENT_ID      optional; the OAuth web client id for the games arcade
  */
 
 import { handleNewsletter, newsletterConfigured } from './newsletter.js';
 import { handleGames } from './games.js';
+import { LIMITS, guard, turnstileOk, emailDomainOk, sha256Hex } from './payguard.js';
 
-// The Durable Object class must be exported from the entry module.
+// Durable Object classes must be exported from the entry module.
 export { GameStats } from './games.js';
+export { PayGuard } from './payguard.js';
 
 const PAYSTACK = 'https://api.paystack.co';
 const SITE = 'https://thetechhut.co';
@@ -225,30 +230,64 @@ async function sendReceipt(env, to, product, delivery, reference) {
 
 /* ----------------------------------------------------------------- routes */
 
+const BUSY = 'Too many attempts from here. Wait a few minutes and try again, or message us on WhatsApp.';
+
 async function initialize(req, env, origin) {
+  // Layer 1: only our own pages start a checkout, and people leave the hidden field empty.
+  if (!ALLOWED_ORIGINS.includes(origin)) return json({ error: 'forbidden' }, 403, origin);
   const b = await req.json().catch(() => ({}));
+  if (typeof b.website === 'string' && b.website.trim() !== '') return json({ error: 'could not start the payment' }, 400, origin);
   const p = PRODUCTS[b.product];
   if (!p) return json({ error: 'unknown product' }, 400, origin);
-  if (!validEmail(b.email)) return json({ error: 'a valid email is required' }, 400, origin);
+  const email = typeof b.email === 'string' ? b.email.trim().toLowerCase() : '';
+  if (!validEmail(email)) return json({ error: 'a valid email is required' }, 400, origin);
   const whatsapp = normalizeWhatsApp(b.whatsapp);
   if (!whatsapp) return json({ error: 'a valid WhatsApp number is required' }, 400, origin);
+  const name = (b.name || '').toString().replace(/\s+/g, ' ').trim().slice(0, 80);
+  if (/https?:|www\.|[<>{}\\]/i.test(name)) return json({ error: 'please enter just your name' }, 400, origin);
+  const ip = req.headers.get('CF-Connecting-IP') || '';
+
+  // Layer 2: Cloudflare Turnstile (on once TURNSTILE_SECRET is set).
+  if (!(await turnstileOk(env, b.turnstile, ip))) {
+    return json({ error: 'verification failed', reason: 'turnstile' }, 403, origin);
+  }
+
+  // Layer 3: limits per IP, email, number and overall.
+  const [eh, wh] = await Promise.all([sha256Hex(email), sha256Hex(whatsapp)]);
+  const g = await guard(env, { op: 'hit', keys: [
+    { k: 'ipb:' + ip, ...LIMITS.ipBurst },
+    { k: 'ipd:' + ip, ...LIMITS.ipDay },
+    { k: 'em:' + eh, ...LIMITS.emailDay },
+    { k: 'wa:' + wh, ...LIMITS.phoneDay },
+    { k: 'all', ...LIMITS.allHour },
+  ].map(({ k, limit, window }) => ({ k, limit, window })) });
+  if (g && g.ok === false) {
+    return new Response(JSON.stringify({ error: BUSY, reason: 'rate' }), {
+      status: 429, headers: { 'Content-Type': 'application/json', 'Retry-After': String(g.retryAfter || 600), ...cors(origin) },
+    });
+  }
+
+  // Layer 4: the email's domain has to be real and take mail.
+  if (!(await emailDomainOk(email))) {
+    return json({ error: 'that email address cannot receive mail. Check the part after the @.', reason: 'email' }, 400, origin);
+  }
 
   const res = await paystack('/transaction/initialize', env.PAYSTACK_SECRET_KEY, {
     method: 'POST',
     body: JSON.stringify({
-      email: b.email,
+      email,
       amount: p.kes * SUBUNIT,               // server-side price, always
       currency: CURRENCY,
       channels: ['card', 'mobile_money', 'bank_transfer'],
       metadata: {
         product: b.product,
         product_name: p.name,
-        customer_name: (b.name || '').toString().slice(0, 80),
+        customer_name: name,
         whatsapp,
         // custom_fields are what the Paystack dashboard shows on each transaction
         custom_fields: [
           { display_name: 'WhatsApp', variable_name: 'whatsapp', value: whatsapp },
-          { display_name: 'Name', variable_name: 'customer_name', value: (b.name || '').toString().slice(0, 80) },
+          { display_name: 'Name', variable_name: 'customer_name', value: name },
         ],
         cancel_action: SITE,
       },
@@ -258,6 +297,7 @@ async function initialize(req, env, origin) {
   if (!res.ok || !res.body.status) {
     return json({ error: 'could not start the payment', detail: res.body.message || null }, 502, origin);
   }
+  await guard(env, { op: 'order', ref: res.body.data.reference, product: b.product });
   return json({
     access_code: res.body.data.access_code,
     reference: res.body.data.reference,
@@ -271,6 +311,9 @@ async function verify(req, env, origin) {
   const b = await req.json().catch(() => ({}));
   const ref = (b.reference || '').toString();
   if (!/^[A-Za-z0-9._=-]{6,100}$/.test(ref)) return json({ error: 'bad reference' }, 400, origin);
+  const ip = req.headers.get('CF-Connecting-IP') || '';
+  const g = await guard(env, { op: 'hit', keys: [{ k: 'vip:' + ip, limit: LIMITS.verifyIp.limit, window: LIMITS.verifyIp.window }] });
+  if (g && g.ok === false) return json({ paid: false, reason: 'rate', error: BUSY }, 429, origin);
 
   const res = await paystack('/transaction/verify/' + encodeURIComponent(ref), env.PAYSTACK_SECRET_KEY);
   if (!res.ok || !res.body.status) return json({ paid: false, reason: 'not found' }, 404, origin);
@@ -287,7 +330,11 @@ async function verify(req, env, origin) {
   if (Number(d.amount) < p.kes * SUBUNIT) return json({ paid: false, reason: 'underpaid' }, 200, origin);
 
   const delivery = deliveryFor(product, env);
-  const emailed = await sendReceipt(env, d.customer && d.customer.email, product, delivery, ref);
+  // One receipt per payment: the page, a reload and the webhook all land here.
+  const once = await guard(env, { op: 'paid', ref, product, via: 'verify' });
+  const emailed = !once || once.first
+    ? await sendReceipt(env, d.customer && d.customer.email, product, delivery, ref)
+    : !!env.RESEND_API_KEY;
 
   return json({
     paid: true,
@@ -321,8 +368,11 @@ async function webhook(req, env) {
     const product = (d.metadata && d.metadata.product) || null;
     const p = PRODUCTS[product];
     if (p && d.currency === CURRENCY && Number(d.amount) >= p.kes * SUBUNIT) {
-      const delivery = deliveryFor(product, env);
-      await sendReceipt(env, d.customer && d.customer.email, product, delivery, d.reference);
+      const once = await guard(env, { op: 'paid', ref: String(d.reference || ''), product, via: 'webhook' });
+      if (!once || once.first) {
+        const delivery = deliveryFor(product, env);
+        await sendReceipt(env, d.customer && d.customer.email, product, delivery, d.reference);
+      }
     }
   }
   // Always 200 a signed event, or Paystack retries it for hours.
@@ -335,7 +385,7 @@ export default {
     const origin = req.headers.get('Origin') || '';
 
     if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors(origin) });
-    if (url.pathname === '/health') return json({ ok: true, products: Object.keys(PRODUCTS), newsletter: newsletterConfigured(env), newsletterDaily: newsletterConfigured(env, 'daily') }, 200, origin);
+    if (url.pathname === '/health') return json({ ok: true, products: Object.keys(PRODUCTS), checkoutGuard: !!env.PAY_GUARD, turnstile: !!env.TURNSTILE_SECRET, newsletter: newsletterConfigured(env), newsletterDaily: newsletterConfigured(env, 'daily') }, 200, origin);
 
     // The CV Pack signup does not touch Paystack, so it must not depend on the
     // Paystack key being set.

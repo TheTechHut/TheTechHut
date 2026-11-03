@@ -348,3 +348,30 @@ the email.
 - The boards are public at `GET /games/board` (cached for 20 seconds).
 - To check it from Terminal:
   `curl -s https://thetechhut-pay.thetechhut.workers.dev/games/board`
+
+## Checkout protection (bots)
+
+`src/payguard.js`. Bots were calling `/initialize` with made-up details, and
+every call left a customer and an abandoned transaction in Paystack. Before
+the Worker calls Paystack now, a checkout must:
+
+1. come from one of our pages (`Origin`), with the hidden `website` field empty;
+2. pass Cloudflare Turnstile, once `TURNSTILE_SECRET` is set (below);
+3. be inside the limits: 5 per IP per 10 minutes, 20 per IP a day, 6 per email
+   and 6 per WhatsApp number a day, 200 overall an hour (`LIMITS`);
+4. use an email whose domain exists and takes mail (MX over DNS-over-HTTPS).
+
+The `PayGuard` Durable Object keeps the counters (as SHA-256 hashes, never the
+email or number) and one record per order, so a receipt is emailed once per
+payment however often `/verify` or the webhook fire. `/health` shows
+`checkoutGuard` and `turnstile` so you can see both are on.
+
+### Switching on Turnstile
+
+1. Cloudflare dashboard → Turnstile → Add widget. Hostnames `thetechhut.co`
+   and `www.thetechhut.co`; widget mode **Managed**.
+2. Put the **site key** in `TURNSTILE_SITE_KEY` at the top of
+   `assets/js/pay.js` and deploy the site.
+3. Then set the **secret key** on the Worker:
+   `npx wrangler secret put TURNSTILE_SECRET`
+   (in that order: the Worker only demands the check once it has the secret).
