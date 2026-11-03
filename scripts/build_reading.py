@@ -52,6 +52,7 @@ FONTS = ('  <link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
          '  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">\n'
          '  <link rel="stylesheet" href="/assets/css/thh.css">\n'
+         '  <script src="/assets/js/motion.js?v=1"></script>\n'
          '  <link rel="stylesheet" href="/assets/css/blog.css">')
 ICONS = ('  <link rel="icon" href="/favicon.ico" sizes="any">\n'
          '  <link rel="icon" href="/assets/img/favicon-192.png" type="image/png" sizes="192x192">\n'
