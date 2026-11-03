@@ -242,6 +242,40 @@
     { name: 'GTCO',              ats: 'zoho', host: 'gtcoplc.zohorecruit.com', page: 'Careers', server: true },
     // Adrenalin (myadrenalin.com) candidate microsite. `company` and `ou` are the
     // encoded ids its own page sends (seen in the browser's network panel).
+    // Employers' own careers web pages, read from their HTML (ats: 'html') or from
+    // the RSS feed WordPress publishes for them (ats: 'rss'). These break when a
+    // site is redesigned: the employer then shows nothing until the pattern here
+    // is updated (the build log lists it under "no tech roles today (or no answer)").
+    //   url    the page that lists the openings
+    //   link   pattern for the href of each opening's own link
+    //   side   where its details sit relative to that link: 'before' (default) or 'after'
+    //   title  pattern whose first group is the title, searched on that side;
+    //          without one, the link's own text (unless it is "Read more" and the like)
+    //   place  pattern for the location (else `location`, else Kenya)
+    //   strip  pattern removed from titles; mdy: dates written month/day/year
+    { name: 'Co-operative Bank', ats: 'html', url: 'https://www.co-opbank.co.ke/career_tax/co-op-bank/',
+      link: '/careers/co-op-bank/[^/"]+/?$', title: 'text-2xl[^>]*>\\s*([^<]+)<', server: true },
+    { name: 'Family Bank',       ats: 'html', url: 'https://familybank.co.ke/?page_id=2696',
+      link: '/wp-content/uploads/[^"]*/JA-[^/"]+\\.pdf$', server: true },
+    { name: 'Jubilee Insurance', ats: 'html', url: 'https://jubileeinsurance.com/ke/career-opportunities/',
+      link: '/ke/career/[^/"]+/?$', title: '<h2[^>]*>([\\s\\S]*?)</h2>', server: true },
+    { name: 'ICEA LION',         ats: 'html', url: 'https://icealion.co.ke/open-roles',
+      link: 'open-role-description\\?jobId=\\d+', title: '<h6[^>]*>([\\s\\S]*?)</h6>', place: 'class="[^"]*country"[^>]*>([^<]+)<', server: true },
+    { name: 'Madison Group',     ats: 'html', url: 'https://www.madison.co.ke/careers/',
+      link: '/careers/[^/"]+/?$', title: 'careers-position[^>]*>([\\s\\S]*?)</h6>', place: 'Location:\\s*</span>\\s*<span[^>]*>([^<]+)<', server: true },
+    { name: 'ZEP-RE',            ats: 'html', url: 'https://zep-re.com/about-us/careers-at-zep-re/',
+      link: '/job/[^/"]+/?$', location: 'Nairobi, Kenya', server: true },
+    { name: 'NCBA',              ats: 'html', url: 'https://ncbagroup.com/careers/join-our-team/', side: 'after',
+      link: '/blog/job/[^/"]+/?$', title: '<h3[^>]*>([\\s\\S]*?)</h3>',
+      place: '>\\s*(Kenya|Uganda|Rwanda|Tanzania)\\s*<', server: true },
+    { name: 'Capital Markets Authority', ats: 'html', url: 'https://hrmis.cma.or.ke/Jobpostings/', mdy: true, all: true,
+      link: '/Jobpostings/DetailsJobPosting/\\d+', title: '<tr[^>]*>\\s*<td[^>]*>([\\s\\S]*?)</td>',
+      closes: '(\\d{1,2}/\\d{1,2}/\\d{4})', server: true },
+    { name: 'Zetech University', ats: 'html', url: 'https://careers.zetech.ac.ke/index.php?mod=vacancies', side: 'after',
+      link: 'mod=vacancies&(amp;)?do=details&(amp;)?vacid=', strip: '\\s*\\[\\s*Ref\\b[^\\]]*\\]\\s*$', server: true },
+    { name: 'CIC Insurance Group', ats: 'rss', url: 'https://careers.cicinsurancegroup.com/?feed=job_feed', server: true },
+    { name: 'Craft Silicon',     ats: 'rss', url: 'https://www.craftsilicon.com/careers/feed/', maxAge: 75, server: true },
+    { name: "Africa's Talking",  ats: 'bamboohr', slug: 'africastalking', server: true },
     // Government internship schemes. Every advert counts (all: true), not only tech
     // titles: they are internships open to graduates of any field, ICT included.
     { name: 'Public Service Commission', ats: 'psc', host: 'pscims.publicservice.go.ke', all: true, server: true },
@@ -522,11 +556,11 @@
   // --- the "more work" systems ---------------------------------------------
   var MON = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11 };
   // "Nov 9, 2026", "9 Nov 2026", "03-Nov-2026" or "27-10-2026" -> "2026-11-09" ('' if unreadable)
-  function dayOf(t) {
-    t = String(t || '').trim(); var m, y, mo, d;
+  function dayOf(t, mdy) {
+    t = String(t || '').trim().replace(/(\d)(st|nd|rd|th)\b/gi, '$1'); var m, y, mo, d;
     if ((m = /^([A-Za-z]{3})[a-z]*\.? (\d{1,2}),? (\d{4})/.exec(t))) { mo = MON[m[1].toLowerCase()]; d = +m[2]; y = +m[3]; }
     else if ((m = /^(\d{1,2})[ -]([A-Za-z]{3})[a-z]*[ -](\d{4})/.exec(t))) { d = +m[1]; mo = MON[m[2].toLowerCase()]; y = +m[3]; }
-    else if ((m = /^(\d{1,2})[-\/.](\d{1,2})[-\/.](\d{4})/.exec(t))) { d = +m[1]; mo = +m[2] - 1; y = +m[3]; }
+    else if ((m = /^(\d{1,2})[-\/.](\d{1,2})[-\/.](\d{4})/.exec(t))) { d = +m[mdy ? 2 : 1]; mo = +m[mdy ? 1 : 2] - 1; y = +m[3]; }
     if (mo === undefined || !y) return '';
     return y + '-' + ('0' + (mo + 1)).slice(-2) + '-' + ('0' + d).slice(-2);
   }
@@ -638,6 +672,80 @@
       return [o];
     });
   }
+  // A careers web page: every link matching co.link is one opening; its title, place
+  // and dates come from the markup beside it (see the notes at COMPANIES).
+  var CTA = /^(read more|learn more|tell me more|more details?|apply|view|details|explore|see more|click here|find out more)\b/i;
+  var CLOSES = '(?:closing date|date closing|application deadline|deadline|closes|close date|apply by)\\s*:?\\s*(?:<[^>]*>\\s*)*([A-Za-z0-9 ,/.-]{5,24}?\\d{4})';
+  var POSTED = '(?:date posted|posted on|posted)\\s*:?\\s*(?:<[^>]*>\\s*)*([A-Za-z0-9 ,/.-]{5,24}?\\d{4})';
+  function loadHTML(co) {
+    var today = new Date().toISOString().slice(0, 10);
+    return getJSON(co.url, null, true).then(function (html) {
+      html = String(html || '').replace(/<!--[\s\S]*?-->/g, '');
+      var re = /<a\b[^>]*?href\s*=\s*["']([^"']+)["'][^>]*>/gi, m, groups = [], by = {}, occ = [];
+      var link = new RegExp(co.link, 'i');
+      while ((m = re.exec(html))) {
+        var href = decode(m[1]);
+        if (!link.test(href)) continue;
+        var close = html.indexOf('</a>', re.lastIndex);
+        var text = clean(html.slice(re.lastIndex, close < 0 ? re.lastIndex : close));
+        var g = by[href];
+        if (!g) { g = by[href] = { href: href, at: occ.length, texts: [] }; groups.push(g); }
+        g.texts.push(text);
+        occ.push({ start: m.index, end: re.lastIndex });
+      }
+      function find(src, pat, last) {
+        if (!pat) return '';
+        var r = new RegExp(pat, 'gi'), mm, out = '';
+        while ((mm = r.exec(src))) { out = mm[1]; if (!last) break; if (!mm[0].length) r.lastIndex++; }
+        return clean(out);
+      }
+      // A page can repeat its list (desktop and phone layouts), so the details of an
+      // opening are looked for between its first link and the job links either side of it.
+      return groups.slice(0, 80).map(function (g) {
+        var me = occ[g.at], prev = occ[g.at - 1], next = occ[g.at + 1], after = co.side === 'after';
+        var win = after ? html.slice(me.end, next ? next.start : me.end + 5000)
+                        : html.slice(prev ? prev.end : Math.max(0, me.start - 5000), me.start);
+        var title = find(win, co.title, !after) ||
+          g.texts.filter(function (t) { return t && t.length < 260 && !CTA.test(t); })[0] || '';
+        if (co.strip) title = title.replace(new RegExp(co.strip, 'i'), '');
+        // \uFFFD: a dash the site saved in the wrong encoding
+        title = capsTitle(title.replace(/\s*\uFFFD\s*/g, ' – ').replace(/\s+/g, ' ').trim());
+        if (!title) return null;
+        var closes = dayOf(find(win, co.closes || CLOSES, !after), co.mdy);
+        if (closes && closes < today) return null;
+        var posted = dayOf(find(win, co.posted || POSTED, !after), co.mdy);
+        var url;
+        try { url = new URL(g.href, co.url).href; } catch (e) { return null; }
+        var qid = (/[?&](?:jobId|vacid|id)=([^&#]+)/i.exec(g.href) || [])[1];
+        var o = job('pg', co, qid ? qid.slice(0, 32) : g.href.replace(/[?#].*$/, '').replace(/\/$/, '').split('/').pop().slice(-60),
+          title, find(win, co.place, !after) || co.location || 'Kenya', posted && posted <= today ? posted : '', url);
+        if (closes) o.excerpt = 'Applications close ' + new Date(closes + 'T12:00:00Z')
+          .toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }) + '.';
+        return o;
+      }).filter(Boolean);
+    });
+  }
+  // A WordPress RSS feed of job posts (WP Job Manager's ?feed=job_feed, or a careers
+  // post type's /feed/). Posts don't close themselves, so old ones are dropped.
+  function fromRSS(xml, co) {
+    var cutoff = new Date(Date.now() - (co.maxAge || 60) * 864e5).toISOString().slice(0, 10);
+    var items = String(xml || '').split('<item>').slice(1);
+    function tag(it, t) {
+      var m = new RegExp('<' + t + '>(?:\\s*<!\\[CDATA\\[)?([\\s\\S]*?)(?:\\]\\]>\\s*)?</' + t + '>').exec(it);
+      return m ? decode(m[1]).trim() : '';
+    }
+    return items.map(function (it) {
+      var title = capsTitle(tag(it, 'title'));
+      var d = new Date(tag(it, 'pubDate')), date = isNaN(d) ? '' : d.toISOString().slice(0, 10);
+      if (date && date < cutoff) return null;
+      var o = job('rss', co, (/[?&]p=(\d+)/.exec(tag(it, 'guid')) || /([^\/]+)\/?$/.exec(tag(it, 'link')) || ['', title])[1],
+        title, tag(it, 'job_listing:location') || co.location || 'Kenya', date, tag(it, 'link'));
+      var type = tag(it, 'job_listing:job_type');
+      if (type) o.types = [clean(type)];
+      o.excerpt = clean(tag(it, 'description'), 190);
+      return o;
+    }).filter(Boolean);
+  }
   // SuccessFactors search results, newest first, 25 rows a page.
   function loadSFSearch(co) {
     var rows = [];
@@ -669,17 +777,19 @@
     if (co.server && IN_BROWSER) return Promise.resolve([]);
     var special = co.ats === 'taleo' ? loadTaleo : co.ats === 'adrenalin' ? loadAdrenalin
                 : co.ats === 'psc' ? loadPSC : co.ats === 'digitalent' ? loadDigitalent
+                : co.ats === 'html' ? loadHTML
                 : co.ats === 'successfactors' && co.mode === 'search' ? loadSFSearch : null;
     if (special) return special(co).then(function (j) { return finish(j, co); }).catch(function () { return []; });
     if (!co.slug) co.slug = String(co.site || co.name).replace(/[^a-z0-9]+/gi, '-').toLowerCase();
     if (co.ats === 'workday') return loadWorkday(co).then(finish).catch(function () { return []; });
-    var asText = co.ats === 'successfactors' || co.ats === 'zoho';
+    var asText = co.ats === 'successfactors' || co.ats === 'zoho' || co.ats === 'rss';
     var url = co.ats === 'oracle' ? 'https://' + co.host + '/hcmRestApi/resources/latest/recruitingCEJobRequisitions' +
                                     '?onlyData=true&expand=requisitionList.secondaryLocations&finder=findReqs;siteNumber=' +
                                     co.site + ',limit=100,sortBy=POSTING_DATES_DESC'
             : co.ats === 'bamboohr'   ? 'https://' + co.slug + '.bamboohr.com/careers/list'
             : co.ats === 'successfactors' ? 'https://' + co.host + '/sitemap.xml'
             : co.ats === 'zoho'       ? 'https://' + co.host + '/jobs/' + co.page
+            : co.ats === 'rss'        ? co.url
             : co.ats === 'greenhouse' ? 'https://boards-api.greenhouse.io/v1/boards/' + co.slug + '/jobs'
             : co.ats === 'lever'      ? 'https://api.lever.co/v0/postings/' + co.slug + '?mode=json'
             : co.ats === 'pinpoint'   ? 'https://' + co.slug + '.pinpointhq.com/postings.json'
@@ -695,6 +805,7 @@
            : co.ats === 'bamboohr'   ? fromBamboo(d, co)
            : co.ats === 'successfactors' ? fromSuccessFactors(d, co)
            : co.ats === 'zoho'       ? fromZoho(d, co)
+           : co.ats === 'rss'        ? fromRSS(d, co)
            : co.ats === 'greenhouse' ? fromGreenhouse(d, co)
                : co.ats === 'lever'      ? fromLever(d, co)
                : co.ats === 'pinpoint'   ? fromPinpoint(d, co)
@@ -779,6 +890,8 @@
   return {
     COMPANIES: COMPANIES, load: load, clean: clean, esc: esc, ago: ago, safeUrl: safeUrl,
     regionOf: regionOf, stageOf: stageOf, stageLabel: stageLabel, catFromTitle: catFromTitle,
-    isTechRole: isTechRole
+    isTechRole: isTechRole,
+    // for checking one employer's adapter by hand (also in a browser, on that site)
+    _loadOne: function (co) { var c = {}; Object.keys(co).forEach(function (k) { c[k] = co[k]; }); c.server = false; return loadCompany(c); }
   };
 });
