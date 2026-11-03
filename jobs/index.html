@@ -185,6 +185,36 @@
     .pagefoot .credits { font-size: 14.5px; }
     .pagefoot .credits a { color: var(--green); }
 
+    /* list tabs: open roles from feeds | employers whose portals we link to */
+    .listtabs { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 22px; margin: 0; }
+    .listtabs button { font: inherit; font-family: var(--serif); font-size: 22px; font-weight: 700; line-height: 1.2; color: var(--dim);
+      background: none; border: 0; padding: 0 0 3px; cursor: pointer; border-bottom: 3px solid transparent; }
+    .listtabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--mint); }
+    .listtabs button:hover { color: var(--ink); }
+    .listtabs button span { font-family: var(--mono); font-size: 15px; font-weight: 500; color: var(--green); margin-left: 4px; }
+    .results.on-portals .sortwrap, .results.on-portals #pager { display: none; }
+    .direct.is-merged { display: none; }
+
+    /* direct-hiring portals, inside the list */
+    .job.portal .excerpt { -webkit-line-clamp: 3; }
+    .pgroup { font-family: var(--mono); font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; color: var(--green);
+      margin: 26px 0 0; padding-bottom: 6px; border-bottom: 1px solid var(--ink); }
+    .pgroup:first-child { margin-top: 14px; }
+    .pgroup .n { color: var(--dim); margin-left: 4px; }
+    .pintro { font-size: 15px; color: var(--muted); line-height: 1.5; margin: 14px 0 0; max-width: 70ch; }
+    .pnotes p { font-size: 14px; color: var(--muted); line-height: 1.5; margin: 14px 0 0; max-width: 70ch; }
+    .pstrip { margin: 0; padding: 16px 18px 14px; background: var(--paper-2); border-left: 3px solid var(--mint); border-bottom: 1px solid var(--rule); }
+    .pstrip h3 { font-family: var(--mono); font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; color: var(--green); margin: 0 0 4px; }
+    .pstrip p { font-size: 14.5px; color: var(--muted); line-height: 1.45; margin: 0 0 8px; }
+    .pstrip ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px 20px; }
+    .pstrip li a { display: block; color: var(--ink); text-decoration: none; font-family: var(--serif); font-weight: 600; font-size: 16.5px; line-height: 1.3; overflow-wrap: anywhere; }
+    .pstrip li a:hover { text-decoration: underline; }
+    .pstrip li a span { display: block; font-family: var(--sans); font-weight: 400; font-size: 13.5px; color: var(--dim); margin-top: 2px; }
+    .pstrip .more { font: inherit; font-size: 15px; font-weight: 700; color: var(--ink); background: none; border: 0; padding: 2px 0 1px; margin-top: 12px;
+      cursor: pointer; border-bottom: 1px solid var(--mint); }
+    .pstrip .more:hover { border-bottom-color: var(--ink); }
+    .state .more { font: inherit; font-weight: 700; color: var(--ink); background: none; border: 0; padding: 0; cursor: pointer; border-bottom: 1px solid var(--mint); }
+
     @media (max-width: 899px) {
       .cols { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-template-areas: "filters" "list" "notes"; }
       aside.filters { margin-bottom: 30px; }
@@ -205,6 +235,8 @@
       .searchbar .btn { padding: 11px 16px; }
       .job { grid-template-columns: minmax(0, 1fr); }
       .job h3 { font-size: 19.5px; }
+      .listtabs button { font-size: 19px; }
+      .pstrip ul { grid-template-columns: minmax(0, 1fr); }
       .apply { padding-top: 2px; }
       .apply a { border: 0; border-bottom: 1px solid var(--mint); border-radius: 0; padding: 0 0 1px; font-size: 15px; }
       .apply a::after { content: " \2192"; }
@@ -299,7 +331,7 @@
       <div class="direct">
         <h2>Employers hiring directly</h2>
         <p>These employers run recruitment systems we can&rsquo;t read automatically. Their openings
-           are not in the list above &mdash; check their own portals.</p>
+           are not in the list &mdash; check their own portals.</p>
         <details>
           <summary>Internships &amp; graduate schemes <span class="n">11</span></summary>
           <ul>
@@ -540,7 +572,10 @@
 
     <div class="results">
       <div class="listhead">
-        <h2>Available jobs <span id="shown"></span></h2>
+        <h2 class="listtabs" role="tablist" aria-label="What to show">
+          <button type="button" role="tab" id="tab-jobs" aria-selected="true" aria-controls="list">Available jobs<span id="shown"></span></button>
+          <button type="button" role="tab" id="tab-portals" aria-selected="false" aria-controls="list" hidden>Hiring directly<span id="pshown"></span></button>
+        </h2>
         <span class="sortwrap"><label for="sort">Sort</label>
           <select id="sort">
             <option value="date">Newest first</option>
@@ -632,6 +667,110 @@
   var F = window.TTHFeeds;
   var esc = F.esc, ago = F.ago, regionOf = F.regionOf, stageOf = F.stageOf, stageLabel = F.stageLabel;
 
+  // --- employers hiring directly -------------------------------------------
+  // Their portals can't be read automatically, so they're listed in the page
+  // markup (.direct, the single source). Read it once and fold it into the list:
+  // a tab of its own plus a strip among the jobs.
+  var tab = /^#direct$/.test(location.hash) ? 'portals' : 'jobs';
+  var portals = [], pview = [], portalNotes = '', portalIntro = '';
+  (function readPortals() {
+    var box = document.querySelector('.direct');
+    if (!box) return;
+    [].forEach.call(box.querySelectorAll('details'), function (d) {
+      var sum = d.querySelector('summary');
+      var group = sum ? sum.childNodes[0].textContent.trim() : '';
+      var region = /in Kenya/i.test(group) ? 'Kenya'
+        : /across Africa/i.test(group) ? 'Rest of Africa'
+        : /remote/i.test(group) ? 'Remote'
+        : /international/i.test(group) ? 'Abroad' : 'Kenya';
+      var early = /intern|graduate/i.test(group);
+      [].forEach.call(d.querySelectorAll('li > a'), function (a) {
+        var span = a.querySelector('span');
+        var desc = span ? span.textContent.trim() : '';
+        var name = a.cloneNode(true);
+        if (name.querySelector('span')) name.removeChild(name.querySelector('span'));
+        portals.push({ name: name.textContent.trim(), desc: desc, url: a.getAttribute('href'),
+          external: a.getAttribute('target') === '_blank', group: group, region: region, early: early });
+      });
+    });
+    portalNotes = [].map.call(box.querySelectorAll('p.also'), function (p) { return p.outerHTML; }).join('');
+    portalIntro = 'These employers recruit through their own portals, which we can\u2019t read automatically, ' +
+      'so their openings aren\u2019t among the jobs. Check them directly.';
+    if (portals.length) {
+      box.classList.add('is-merged');
+      $('tab-portals').hidden = false;
+    }
+  })();
+  function filterPortals() {
+    var q = state.q.toLowerCase();
+    pview = portals.filter(function (p) {
+      if (q && (p.name + ' ' + p.desc + ' ' + p.group).toLowerCase().indexOf(q) === -1) return false;
+      if (state.region && p.region !== state.region) return false;
+      // Every employer hires at entry level; the schemes are where interns and graduates start.
+      if (state.stage && state.stage !== 'entry' && !p.early) return false;
+      return true;
+    });
+    // With an early-career filter on, the schemes come first.
+    if (state.stage) pview.sort(function (a, b) { return (b.early ? 1 : 0) - (a.early ? 1 : 0); });
+    $('pshown').textContent = '(' + pview.length + ')';
+  }
+  function portalLink(p, inner) {
+    return '<a href="' + esc(p.url) + '"' + (p.external ? ' target="_blank" rel="noopener"' : '') + '>' + inner + '</a>';
+  }
+  function portalCard(p) {
+    return '<article class="job portal"><div>' +
+      '<h3>' + portalLink(p, esc(p.name)) + '</h3>' +
+      (p.desc ? '<p class="excerpt">' + esc(p.desc) + '</p>' : '') +
+      '</div><div class="apply">' + portalLink(p, p.external ? 'Visit careers page' : 'See the programme') + '</div></article>';
+  }
+  function renderPortals() {
+    var list = $('list');
+    if (!pview.length) {
+      list.innerHTML = '<div class="state"><h3>No direct-hiring employers match those filters</h3>' +
+        '<p>Try clearing a filter or searching a broader term. Type, category and date filters only apply to the jobs.</p></div>';
+      return;
+    }
+    var html = '<p class="pintro">' + portalIntro + '</p>', last = null, counts = {};
+    pview.forEach(function (p) { counts[p.group] = (counts[p.group] || 0) + 1; });
+    pview.forEach(function (p) {
+      if (p.group !== last) {
+        html += '<h3 class="pgroup">' + esc(p.group) + '<span class="n">' + counts[p.group] + '</span></h3>';
+        last = p.group;
+      }
+      html += portalCard(p);
+    });
+    list.innerHTML = html + '<div class="pnotes">' + portalNotes + '</div>';
+  }
+  // A few portals matching the current filters, shown among the jobs so they aren't missed.
+  function portalStrip() {
+    if (!pview.length) return '';
+    var seen = {}, pick = [];
+    pview.forEach(function (p) { if (pick.length < 3 && !seen[p.group]) { seen[p.group] = 1; pick.push(p); } });
+    pview.forEach(function (p) { if (pick.length < 3 && pick.indexOf(p) === -1) pick.push(p); });
+    return '<aside class="pstrip" aria-label="Employers hiring directly">' +
+      '<h3>Also hiring directly</h3>' +
+      '<p>' + pview.length + ' employer' + (pview.length === 1 ? '' : 's') +
+        (state.q || state.region || state.stage ? ' matching your filters' : '') + ' recruit through their own portals, so their roles aren\u2019t listed here.</p>' +
+      '<ul>' + pick.map(function (p) {
+        return '<li>' + portalLink(p, esc(p.name) + '<span>' + esc(p.group) + '</span>') + '</li>';
+      }).join('') + '</ul>' +
+      '<button type="button" class="more" data-tab="portals">See all ' + pview.length + ' direct-hiring employers \u2192</button>' +
+      '</aside>';
+  }
+  function setTab(t, scroll) {
+    tab = t;
+    $('tab-jobs').setAttribute('aria-selected', t === 'jobs' ? 'true' : 'false');
+    $('tab-portals').setAttribute('aria-selected', t === 'portals' ? 'true' : 'false');
+    document.querySelector('.results').classList.toggle('on-portals', t === 'portals');
+    var want = t === 'portals' ? '#direct' : (page > 1 ? '#page=' + page : '');
+    if (location.hash !== want && !/^#job=/.test(location.hash)) {
+      try { history.replaceState(null, '', location.pathname + location.search + want); } catch (e) {}
+    }
+    if (t === 'jobs' && !all.length) $('list').innerHTML = skeleton;   // still loading
+    else render();
+    if (scroll) document.querySelector('.listhead').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   // --- filtering & rendering ----------------------------------------------
   // Filters fold away on phones (closed to start with) and are always open on wider screens.
   var narrow = window.matchMedia('(max-width: 899px)');
@@ -669,6 +808,7 @@
     if (state.sort === 'title') view.sort(function (a, b) { return a.title.localeCompare(b.title); });
     else if (state.sort === 'company') view.sort(function (a, b) { return a.company.localeCompare(b.company); });
     else view.sort(function (a, b) { return (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0); });
+    filterPortals();
     setPage(keepPage ? page : 1, false);
   }
 
@@ -731,6 +871,7 @@
     document.querySelector('.results').classList.remove('is-detail');
   }
   function renderRoute() {
+    if (location.hash === '#direct' && tab !== 'portals') { setTab('portals'); return; }
     var id = detailFromHash();
     if (id) {
       var job = all.filter(function (j) { return String(j.id) === id; })[0];
@@ -740,6 +881,8 @@
     render();
   }
   $('list').addEventListener('click', function (e) {
+    var more = e.target.closest('button[data-tab]');
+    if (more) { setTab(more.getAttribute('data-tab'), true); return; }
     var link = e.target.closest('a[data-job-id]');
     if (!link) return;
     e.preventDefault();
@@ -755,17 +898,22 @@
     }
     showListView();
     var list = $('list');
-    $('shown').textContent = '(' + view.length + ')';
+    $('shown').textContent = all.length ? '(' + view.length + ')' : '';
+    if (tab === 'portals') { renderPortals(); return; }
     if (!view.length) {
       list.innerHTML = '<div class="state"><h3>No roles match those filters</h3>' +
-        '<p>Try clearing a filter or searching a broader term.</p></div>';
+        '<p>Try clearing a filter or searching a broader term.' +
+        (pview.length ? ' Or <button type="button" class="more" data-tab="portals">check the ' + pview.length +
+          ' employer' + (pview.length === 1 ? '' : 's') + ' hiring directly</button>.' : '') + '</p></div>';
       $('pager').hidden = true;
       return;
     }
     var pages = Math.ceil(view.length / PAGE);
     if (page > pages) page = pages;
     var from = (page - 1) * PAGE;
-    list.innerHTML = view.slice(from, from + PAGE).map(card).join('');
+    var cards = view.slice(from, from + PAGE).map(card);
+    if (page === 1) cards.splice(Math.min(3, cards.length), 0, portalStrip());
+    list.innerHTML = cards.join('');
     renderPager(pages, from);
   }
 
@@ -803,6 +951,7 @@
   function setPage(n, scroll) {
     page = Math.max(1, n | 0);
     render();
+    if (tab === 'portals') return;
     var want = page > 1 ? '#page=' + page : '', cur = location.hash;
     if (cur !== want && (cur === '' || /^#page=\d+$/.test(cur))) {
       try { history.replaceState(null, '', location.pathname + location.search + want); } catch (e) {}
@@ -890,6 +1039,8 @@
   if (narrow.addEventListener) narrow.addEventListener('change', syncFilters);
   else if (narrow.addListener) narrow.addListener(syncFilters);
 
+  $('tab-jobs').addEventListener('click', function () { setTab('jobs'); });
+  $('tab-portals').addEventListener('click', function () { setTab('portals'); });
   $('pager').addEventListener('click', function (e) {
     var b = e.target.closest('button[data-page]');
     if (!b || b.disabled || b.getAttribute('aria-current')) return;
@@ -897,12 +1048,15 @@
   });
 
   // --- boot ----------------------------------------------------------------
-  $('list').innerHTML = new Array(5).join('x').split('x').map(function () {
+  var skeleton = new Array(5).join('x').split('x').map(function () {
     return '<div class="skeleton"><div class="sk" style="width:3.25rem;height:3.25rem"></div>' +
       '<div><div class="sk" style="height:1rem;width:55%;margin-bottom:.55rem"></div>' +
       '<div class="sk" style="height:.8rem;width:32%;margin-bottom:.55rem"></div>' +
       '<div class="sk" style="height:.8rem;width:85%"></div></div></div>';
   }).join('');
+  $('list').innerHTML = skeleton;
+  filterPortals();
+  if (tab === 'portals') setTab('portals');
 
   var startPage = pageFromHash();          // read before apply() resets it to 1
   var shownOnce = false;
