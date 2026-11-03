@@ -64,7 +64,7 @@
   }
   // Where is the role? Kenya first, then the rest of Africa, then anywhere-remote.
   var KE = /(kenya|nairobi|mombasa|kisumu|eldoret|nakuru|nyeri|kakamega|thika|machakos|kilifi|rukanga|sagana|naivasha|malindi)/i;
-  var AF = /(africa|casablanca|rabat|marrakech|tunis|algiers|oran|lom[eé]|cotonou|douala|yaound|libreville|gabon|gaborone|harare|lusaka|lilongwe|bamako|ouagadougou|niamey|conakry|freetown|monrovia|banjul|giza|alexandria|kano|ibadan|port harcourt|durban|pretoria|stellenbosch|centurion|sandton|bloemfontein|ebene|port louis|angola|luanda|namibia|windhoek|mozambique|maputo|mauritius|lesotho|eswatini|madagascar|south sudan|somalia|burundi|congo|kinshasa|cameroon|tunisia|algeria|nigeria|lagos|abuja|oyo|ilorin|ghana|accra|uganda|kampala|tanzania|dar es|rwanda|kigali|ethiopia|addis|egypt|cairo|johannesburg|cape town|senegal|dakar|ivory coast|abidjan|zambia|malawi|morocco|benin|togo|zimbabwe|botswana)/i;
+  var AF = /(africa|casablanca|rabat|marrakech|tunis|algiers|oran|lom[eé]|cotonou|douala|yaound|libreville|gabon|gaborone|harare|lusaka|lilongwe|bamako|ouagadougou|niamey|conakry|freetown|monrovia|banjul|giza|alexandria|kano|ibadan|port harcourt|durban|pretoria|stellenbosch|centurion|sandton|bloemfontein|ebene|port louis|angola|luanda|namibia|windhoek|mozambique|maputo|mauritius|lesotho|eswatini|madagascar|south sudan|somalia|burundi|congo|kinshasa|cameroon|tunisia|algeria|nigeria|lagos|abuja|oyo|ilorin|ghana|accra|uganda|kampala|tanzania|dar es|rwanda|kigali|ethiopia|addis|egypt|cairo|johannesburg|cape town|senegal|dakar|ivory coast|c[oô]te d.?ivoire|western cape|gauteng|abidjan|zambia|malawi|morocco|benin|togo|zimbabwe|botswana)/i;
   var RM = /(remote|anywhere|worldwide|distributed|global)/i;
   var REGION_RANK = { 'Kenya': 0, 'Rest of Africa': 1, 'Remote': 2, 'Elsewhere': 3 };
   // A role posted in several places: show the main one, but say so when Kenya is among the
@@ -213,8 +213,26 @@
     // WordPress careers pages: posts in a named category, read through the site's
     // own public REST API. `site` is the host, `cat` the category id
     // (find it at /wp-json/wp/v2/categories?search=careers).
-    { name: 'ACRE Africa',       ats: 'wordpress',  site: 'acreafrica.com', cat: 17 }
+    { name: 'ACRE Africa',       ats: 'wordpress',  site: 'acreafrica.com', cat: 17 },
+    // Big employers' enterprise systems. These answer a server but not a browser
+    // (no CORS), so only the GitHub Actions build reads them (server: true);
+    // the page's live fallback skips them.
+    // Workday: `host` is <tenant>.wdN.myworkdayjobs.com, `site` the careers site in its URL.
+    { name: 'Absa',              ats: 'workday',    host: 'absa.wd3.myworkdayjobs.com', site: 'ABSAcareersite', server: true },
+    { name: 'Old Mutual',        ats: 'workday',    host: 'oldmutual.wd3.myworkdayjobs.com', site: 'Old_Mutual_Careers', server: true },
+    { name: 'FirstRand / FNB',   ats: 'workday',    host: 'firstrand.wd3.myworkdayjobs.com', site: 'FRB', server: true },
+    // Oracle Recruiting Cloud: `host` and `site` from .../hcmUI/CandidateExperience/en/sites/<site>/jobs
+    { name: 'Safaricom',         ats: 'oracle',     host: 'egjd.fa.us6.oraclecloud.com', site: 'CX', server: true },
+    { name: 'KCB Group',         ats: 'oracle',     host: 'eoin.fa.em3.oraclecloud.com', site: 'CX_3001', server: true },
+    { name: 'Ecobank',           ats: 'oracle',     host: 'fa-emqf-saasfaprod1.fa.ocs.oraclecloud.com', site: 'CX_1004', server: true },
+    // BambooHR: <slug>.bamboohr.com/careers
+    { name: 'Pula',              ats: 'bamboohr',   slug: 'pula', server: true },
+    { name: 'Peach Payments',    ats: 'bamboohr',   slug: 'peachpayments', server: true },
+    { name: 'Aerobotics',        ats: 'bamboohr',   slug: 'aerobotics', server: true },
+    // SAP SuccessFactors career sites that publish a job feed at /sitemap.xml
+    { name: 'Nedbank',           ats: 'successfactors', host: 'jobs.nedbank.co.za', server: true }
   ];
+  var IN_BROWSER = typeof window !== 'undefined' && typeof document !== 'undefined';
   var PER_COMPANY = 25;          // one big global board must not swamp the page
 
   function fromGreenhouse(d, co) {
@@ -376,9 +394,126 @@
       };
     });
   }
+  // Workday: the list gives title and path; the role's own page gives the country,
+  // the posting date and a description, so those are read for tech roles only.
+  var WD_PAGES = 30;           // 20 roles a page; Old Mutual alone lists 500+
+  function loadWorkday(co) {
+    var base = 'https://' + co.host + '/wday/cxs/' + co.host.split('.')[0] + '/' + co.site;
+    var rows = [];
+    function page(n) {
+      return getJSON(base + '/jobs', { method: 'POST', body: JSON.stringify({ limit: 20, offset: n * 20, searchText: '', appliedFacets: {} }) })
+        .then(function (d) {
+          var got = (d && d.jobPostings) || [];
+          rows = rows.concat(got);
+          if (got.length === 20 && n + 1 < WD_PAGES && rows.length < (d.total || 0)) return page(n + 1);
+        });
+    }
+    return page(0).then(function () {
+      var keep = rows.filter(function (j) {
+        var t = clean(j.title); return j.externalPath && (isTechRole(t) || PROGRAMME.test(t));
+      }).slice(0, PER_COMPANY * 2);
+      return Promise.all(keep.map(function (j) {
+        return getJSON(base + j.externalPath).then(function (d) { return fromWorkday(j, d && d.jobPostingInfo, co); });
+      }));
+    });
+  }
+  function fromWorkday(j, info, co) {
+    info = info || {};
+    var title = clean(info.title || j.title);
+    var country = info.country && info.country.descriptor;
+    var place = clean(info.location || j.locationsText);
+    if (country && place.indexOf(country) === -1) place = place ? place + ', ' + country : country;
+    if (/remote/i.test(info.remoteType || '')) place = 'Remote, ' + place;
+    return {
+      id: 'wd-' + co.host.split('.')[0] + '-' + (info.jobReqId || (j.bulletFields || [])[0] || j.externalPath),
+      title: title, company: co.name, logo: '',
+      location: place || 'Not stated',
+      types: info.timeType ? [clean(info.timeType)] : [],
+      cats: [catFromTitle(title)], level: '',
+      excerpt: clean(String(info.jobDescription || '').replace(/<[^>]*>/g, ' '), 190),
+      url: safeUrl(info.externalUrl || ('https://' + co.host + '/' + co.site + j.externalPath)),
+      date: info.startDate || '',
+      source: co.name
+    };
+  }
+  function fromOracle(d, co) {
+    var list = (d && d.items && d.items[0] && d.items[0].requisitionList) || [];
+    return list.map(function (j) {
+      var title = clean(j.Title);
+      var others = (j.secondaryLocations || []).map(function (x) { return x.Name || x.LocationName || ''; });
+      var place = placeLabel(j.PrimaryLocation, others);
+      if (/remote/i.test(j.WorkplaceType || '')) place = 'Remote, ' + place;
+      return {
+        id: 'or-' + co.host.split('.')[0] + '-' + j.Id,
+        title: title, company: co.name, logo: '',
+        location: place || 'Not stated',
+        where: [j.PrimaryLocation].concat(others).join('; '),
+        types: j.JobSchedule ? [clean(j.JobSchedule)] : [],
+        cats: [catFromTitle(title)], level: '',
+        excerpt: clean(j.ShortDescriptionStr, 190),
+        url: safeUrl('https://' + co.host + '/hcmUI/CandidateExperience/en/sites/' + co.site + '/job/' + j.Id),
+        date: j.PostedDate || '',
+        source: co.name
+      };
+    });
+  }
+  function fromBamboo(d, co) {
+    return (d && d.result || []).map(function (j) {
+      var title = clean(j.jobOpeningName);
+      var loc = j.location || {}, ats = j.atsLocation || {};
+      var place = [loc.city, loc.state || ats.province || ats.state, ats.country]
+        .filter(function (x) { return x && x !== 'NA'; }).join(', ');
+      if (j.isRemote || String(j.locationType) === '1') place = place ? 'Remote, ' + place : 'Remote';
+      return {
+        id: 'bh-' + co.slug + '-' + j.id,
+        title: title, company: co.name, logo: '',
+        location: clean(place) || 'Not stated',
+        types: j.employmentStatusLabel ? [clean(j.employmentStatusLabel)] : [],
+        cats: [catFromTitle(title)], level: '',
+        excerpt: '',
+        url: safeUrl('https://' + co.slug + '.bamboohr.com/careers/' + j.id),
+        date: '',                       // the list carries no posted date
+        source: co.name
+      };
+    });
+  }
+  // SuccessFactors' Google-jobs feed is RSS; read with plain patterns, since the
+  // build has no XML parser. Titles end "(City, CC)", which is dropped.
+  var CC = { ZA: 'South Africa', NA: 'Namibia', BW: 'Botswana', LS: 'Lesotho', SZ: 'Eswatini', KE: 'Kenya',
+             ZW: 'Zimbabwe', MZ: 'Mozambique', ZM: 'Zambia', MW: 'Malawi', UG: 'Uganda', TZ: 'Tanzania', GB: 'United Kingdom' };
+  function fromSuccessFactors(xml, co) {
+    var items = String(xml || '').split('<item>').slice(1);
+    function tag(it, t) {
+      var m = new RegExp('<' + t + '>(?:<!\\[CDATA\\[)?([\\s\\S]*?)(?:\\]\\]>)?</' + t + '>').exec(it);
+      return m ? decode(m[1]).trim() : '';
+    }
+    return items.map(function (it) {
+      var title = clean(tag(it, 'title').replace(/\s*\([^()]*,\s*[A-Z]{2}\)\s*$/, ''));
+      var place = tag(it, 'g:location').replace(/,\s*([A-Z]{2})$/, function (m, c) { return ', ' + (CC[c] || c); });
+      return {
+        id: 'sf-' + co.host.split('.')[1] + '-' + (tag(it, 'g:id') || title),
+        title: title, company: co.name, logo: '',
+        location: clean(place) || 'Not stated',
+        types: [], cats: [catFromTitle(title)], level: '',
+        excerpt: '',
+        url: safeUrl(tag(it, 'link')),
+        date: '',
+        source: co.name
+      };
+    });
+  }
+
   function loadCompany(co) {
+    if (co.server && IN_BROWSER) return Promise.resolve([]);
     if (!co.slug) co.slug = String(co.site || co.name).replace(/[^a-z0-9]+/gi, '-').toLowerCase();
-    var url = co.ats === 'greenhouse' ? 'https://boards-api.greenhouse.io/v1/boards/' + co.slug + '/jobs'
+    if (co.ats === 'workday') return loadWorkday(co).then(finish).catch(function () { return []; });
+    var asText = co.ats === 'successfactors';
+    var url = co.ats === 'oracle' ? 'https://' + co.host + '/hcmRestApi/resources/latest/recruitingCEJobRequisitions' +
+                                    '?onlyData=true&expand=requisitionList.secondaryLocations&finder=findReqs;siteNumber=' +
+                                    co.site + ',limit=100,sortBy=POSTING_DATES_DESC'
+            : co.ats === 'bamboohr'   ? 'https://' + co.slug + '.bamboohr.com/careers/list'
+            : co.ats === 'successfactors' ? 'https://' + co.host + '/sitemap.xml'
+            : co.ats === 'greenhouse' ? 'https://boards-api.greenhouse.io/v1/boards/' + co.slug + '/jobs'
             : co.ats === 'lever'      ? 'https://api.lever.co/v0/postings/' + co.slug + '?mode=json'
             : co.ats === 'pinpoint'   ? 'https://' + co.slug + '.pinpointhq.com/postings.json'
             : co.ats === 'smartrecruiters' ? 'https://api.smartrecruiters.com/v1/companies/' + co.slug + '/postings?limit=100'
@@ -387,9 +522,12 @@
             : co.ats === 'wordpress'  ? 'https://' + co.site + '/wp-json/wp/v2/posts?categories=' + co.cat +
                                         '&per_page=20&_fields=id,date,modified,link,title,excerpt'
             :                           'https://api.ashbyhq.com/posting-api/job-board/' + co.slug;
-    return getJSON(url).then(function (d) {
+    return getJSON(url, null, asText).then(function (d) {
       if (!d) return [];
-      var jobs = co.ats === 'greenhouse' ? fromGreenhouse(d, co)
+      return co.ats === 'oracle'     ? fromOracle(d, co)
+           : co.ats === 'bamboohr'   ? fromBamboo(d, co)
+           : co.ats === 'successfactors' ? fromSuccessFactors(d, co)
+           : co.ats === 'greenhouse' ? fromGreenhouse(d, co)
                : co.ats === 'lever'      ? fromLever(d, co)
                : co.ats === 'pinpoint'   ? fromPinpoint(d, co)
                : co.ats === 'smartrecruiters' ? fromSmartRecruiters(d, co)
@@ -397,25 +535,32 @@
                : co.ats === 'breezy'     ? fromBreezy(d, co)
                : co.ats === 'wordpress'  ? fromWordPress(d, co)
                :                           fromAshby(d, co);
-      jobs = jobs.filter(function (j) { return j.title && j.url && (isTechRole(j.title) || PROGRAMME.test(j.title)); });
+    }).then(finish).catch(function () { return []; });
+  }
+  function finish(jobs) {
+      jobs = (jobs || []).filter(function (j) { return j.title && j.url && (isTechRole(j.title) || PROGRAMME.test(j.title)); });
       jobs.forEach(function (j) { j.region = regionOf(j.where || j.location); });
       jobs.sort(function (a, b) { return REGION_RANK[a.region] - REGION_RANK[b.region]; });
       return jobs.slice(0, PER_COMPANY);
-    }).catch(function () { return []; });
   }
 
   // One feed that hangs must not hold up the rest: each request gets TIMEOUT_MS.
   var TIMEOUT_MS = 12000, FETCH_HEADERS = null;
-  function getJSON(url) {
+  // init: { method, body } for a POST (sent as JSON); asText: return the body as text.
+  function getJSON(url, init, asText) {
     var ctrl = typeof AbortController === 'function' ? new AbortController() : null;
     var timer;
     var opts = ctrl ? { signal: ctrl.signal } : {};
-    if (FETCH_HEADERS) opts.headers = FETCH_HEADERS;
+    var headers = {};
+    if (FETCH_HEADERS) Object.keys(FETCH_HEADERS).forEach(function (k) { headers[k] = FETCH_HEADERS[k]; });
+    if (init && init.body) { opts.method = init.method || 'POST'; opts.body = init.body; headers['Content-Type'] = 'application/json'; }
+    if (init || asText !== undefined) headers.Accept = asText ? 'application/xml, text/xml, */*' : 'application/json';
+    if (Object.keys(headers).length) opts.headers = headers;
     // Race the request against the clock rather than trusting abort alone.
     var late = new Promise(function (resolve) {
       timer = setTimeout(function () { if (ctrl) ctrl.abort(); resolve(null); }, TIMEOUT_MS);
     });
-    var got = fetch(url, opts).then(function (r) { return r.ok ? r.json() : null; })
+    var got = fetch(url, opts).then(function (r) { return r.ok ? (asText ? r.text() : r.json()) : null; })
       .catch(function () { return null; });
     return Promise.race([got, late]).then(function (d) { clearTimeout(timer); return d; });
   }
