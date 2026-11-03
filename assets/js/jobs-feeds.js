@@ -242,6 +242,10 @@
     { name: 'GTCO',              ats: 'zoho', host: 'gtcoplc.zohorecruit.com', page: 'Careers', server: true },
     // Adrenalin (myadrenalin.com) candidate microsite. `company` and `ou` are the
     // encoded ids its own page sends (seen in the browser's network panel).
+    // Government internship schemes. Every advert counts (all: true), not only tech
+    // titles: they are internships open to graduates of any field, ICT included.
+    { name: 'Public Service Commission', ats: 'psc', host: 'pscims.publicservice.go.ke', all: true, server: true },
+    { name: 'Presidential Digital Talent Programme', ats: 'digitalent', host: 'recruitment.digitalent.go.ke', all: true, server: true },
     { name: 'I&M Bank',          ats: 'adrenalin', host: 'imbank.myadrenalin.com', company: 'BQ6DBcTkVmYb2zG8XExn7A==', ou: 'vrr0nzxsgCyo6GkEF0XU1g==', server: true }
   ];
   var IN_BROWSER = typeof window !== 'undefined' && typeof document !== 'undefined';
@@ -598,6 +602,42 @@
         });
       });
   }
+  // Public Service Commission internship adverts: one ASP.NET table. Its links are
+  // postbacks, so every advert points at the table, where Apply sits beside it.
+  function loadPSC(co) {
+    var url = 'https://' + co.host + '/jobs/ActiveAdvertsInternsInternshipExt.aspx';
+    var today = new Date().toISOString().slice(0, 10);
+    return getJSON(url, null, true).then(function (html) {
+      return String(html || '').split(/<tr[\s>]/i).slice(1).map(function (r) {
+        var td = r.split(/<td[^>]*>/i).slice(1).map(function (c) { return clean(c.split(/<\/td>/i)[0]); });
+        // # | advert no. | position | ministry | vacancies | advert date | close date | action
+        if (td.length < 7 || !/^\d+\/\d{4}$/.test(td[1])) return null;
+        var closes = dayOf(td[6]);
+        if (closes && closes < today) return null;
+        var o = job('psc', co, td[1].replace('/', '-'), td[2], 'Kenya', dayOf(td[5]), url);
+        o.excerpt = (+td[4] ? Number(td[4]).toLocaleString('en-KE') + ' places' : 'Places') + ' in the ' + td[3] +
+          '. Advert ' + td[1] + (closes ? ', closes ' + td[6] : '') + '. Apply on the Public Service Commission site.';
+        o.types = ['Internship'];
+        return o;
+      }).filter(Boolean);
+    });
+  }
+  // The Digital Talent Programme recruits one cohort at a time. List it only
+  // while its page shows an open deadline.
+  function loadDigitalent(co) {
+    var url = 'https://' + co.host + '/';
+    return getJSON(url, null, true).then(function (html) {
+      html = String(html || '');
+      var dl = clean((/class="dl-date"[^>]*>([\s\S]*?)<\/div>/.exec(html) || [])[1]);
+      var cohort = clean((/Call for Applications\s+(COHORT\s+[A-Z0-9]+)\s+is Open/i.exec(html) || [])[1]);
+      if (!cohort || !dl || /closed/i.test(dl) || /Applications Closed/i.test(html)) return [];
+      var o = job('pdtp', co, cohort.replace(/\s+/g, '-'), 'Presidential Digital Talent Programme: ' +
+        'Cohort ' + cohort.split(/\s+/)[1] + ' (ICT internship)', 'Kenya', '', url);
+      o.excerpt = 'Paid 12-month ICT internship in government for recent graduates. Applications close ' + dl + '.';
+      o.types = ['Internship'];
+      return [o];
+    });
+  }
   // SuccessFactors search results, newest first, 25 rows a page.
   function loadSFSearch(co) {
     var rows = [];
@@ -628,8 +668,9 @@
   function loadCompany(co) {
     if (co.server && IN_BROWSER) return Promise.resolve([]);
     var special = co.ats === 'taleo' ? loadTaleo : co.ats === 'adrenalin' ? loadAdrenalin
+                : co.ats === 'psc' ? loadPSC : co.ats === 'digitalent' ? loadDigitalent
                 : co.ats === 'successfactors' && co.mode === 'search' ? loadSFSearch : null;
-    if (special) return special(co).then(finish).catch(function () { return []; });
+    if (special) return special(co).then(function (j) { return finish(j, co); }).catch(function () { return []; });
     if (!co.slug) co.slug = String(co.site || co.name).replace(/[^a-z0-9]+/gi, '-').toLowerCase();
     if (co.ats === 'workday') return loadWorkday(co).then(finish).catch(function () { return []; });
     var asText = co.ats === 'successfactors' || co.ats === 'zoho';
@@ -664,8 +705,9 @@
                :                           fromAshby(d, co);
     }).then(finish).catch(function () { return []; });
   }
-  function finish(jobs) {
-      jobs = (jobs || []).filter(function (j) { return j.title && j.url && (isTechRole(j.title) || PROGRAMME.test(j.title)); });
+  function finish(jobs, co) {
+      var all = !!(co && co.all);
+      jobs = (jobs || []).filter(function (j) { return j.title && j.url && (all || isTechRole(j.title) || PROGRAMME.test(j.title)); });
       jobs.forEach(function (j) { j.region = regionOf(j.where || j.location); });
       jobs.sort(function (a, b) { return REGION_RANK[a.region] - REGION_RANK[b.region]; });
       return jobs.slice(0, PER_COMPANY);
