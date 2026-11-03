@@ -19,12 +19,6 @@
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>https://thetechhut.co/blog/daily/2026-10-28/</loc>
-    <lastmod>2026-10-28</lastmod>
-    <changefreq>never</changefreq>
-    <priority>0.70</priority>
-  </url>
-  <url>
     <loc>https://thetechhut.co/blog/reading/</loc>
     <lastmod>2026-11-03</lastmod>
     <changefreq>weekly</changefreq>
@@ -481,14 +475,14 @@
     <priority>0.70</priority>
   </url>
   <url>
-    <loc>https://thetechhut.co/blog/reading/2026-10-21/</loc>
-    <lastmod>2026-10-21</lastmod>
+    <loc>https://thetechhut.co/blog/reading/2026-10-29/</loc>
+    <lastmod>2026-10-29</lastmod>
     <changefreq>never</changefreq>
     <priority>0.60</priority>
   </url>
   <url>
-    <loc>https://thetechhut.co/blog/reading/2026-10-29/</loc>
-    <lastmod>2026-10-29</lastmod>
+    <loc>https://thetechhut.co/blog/reading/2026-10-21/</loc>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>never</changefreq>
     <priority>0.60</priority>
   </url>
