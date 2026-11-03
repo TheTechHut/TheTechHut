@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!-- Source for /cv-pack/Kenyan-ATS-Pack.pdf. Printed to A4 with Chromium (Playwright page.pdf).
+     Keep in step with /cv-pack/index.html when the map or the rules change. -->
+<html lang="en"><head><meta charset="utf-8"><title>The Kenyan ATS Pack | The Tech Hut</title>
+<style>
+@font-face{font-family:'Newsreader';font-weight:200 800;src:url(FONTS/@fontsource-variable/newsreader/files/newsreader-latin-opsz-normal.woff2)}
+@font-face{font-family:'Newsreader';font-style:italic;font-weight:200 800;src:url(FONTS/@fontsource-variable/newsreader/files/newsreader-latin-opsz-italic.woff2)}
+@font-face{font-family:'Source Sans 3';font-weight:400;src:url(FONTS/@fontsource/source-sans-3/files/source-sans-3-latin-400-normal.woff2)}
+@font-face{font-family:'Source Sans 3';font-weight:600;src:url(FONTS/@fontsource/source-sans-3/files/source-sans-3-latin-600-normal.woff2)}
+@font-face{font-family:'Source Sans 3';font-weight:700;src:url(FONTS/@fontsource/source-sans-3/files/source-sans-3-latin-700-normal.woff2)}
+@font-face{font-family:'IBM Plex Mono';font-weight:400;src:url(FONTS/@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2)}
+@font-face{font-family:'IBM Plex Mono';font-weight:600;src:url(FONTS/@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-600-normal.woff2)}
+@page{size:A4;margin:16mm 16mm 18mm}
+:root{--ink:#073B4C;--mint:#06D6A0;--green:#046B52;--text:#2D3B45;--muted:#4A5568;--rule:#CFE0E6;--paper2:#F7FAFC;--gold:#C5A500;--red:#9B2020}
+*{box-sizing:border-box}
+body{font:10.5pt/1.5 'Source Sans 3',sans-serif;color:var(--text);margin:0}
+h1,h2,h3{font-family:'Newsreader',serif;color:var(--ink);margin:0}
+.mast{display:flex;justify-content:space-between;align-items:baseline;border-bottom:3px double var(--ink);padding-bottom:6px;margin-bottom:18px}
+.wm{font:700 15pt 'Newsreader',serif;color:var(--ink)}.wm i{font-style:normal;color:var(--mint)}
+.mono{font:600 7.5pt 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+h1{font-size:30pt;line-height:1.02;letter-spacing:-.01em;margin:6px 0 10px}
+h1 em{color:var(--green)}
+.lede{font-size:12pt;color:var(--muted);max-width:150mm;margin:0 0 6px}
+h2{font-size:17pt;margin:22px 0 6px;padding-top:8px;border-top:2px solid var(--ink)}
+.eyebrow{display:block;margin-top:20px}
+table{width:100%;border-collapse:collapse;margin-top:8px;font-size:9.5pt}
+th{text-align:left;font:600 7.5pt 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:1.5px solid var(--ink);padding:5px 6px}
+td{border-bottom:1px solid var(--rule);padding:6px;vertical-align:top}
+td.co{font-weight:700;color:var(--ink);white-space:nowrap}
+td.sys{white-space:nowrap;font-family:'IBM Plex Mono',monospace;font-size:8.5pt}
+tr{break-inside:avoid}
+.callout{border-left:3px solid var(--ink);background:var(--paper2);padding:8px 12px;margin:12px 0 0;break-inside:avoid}
+.callout.tip{border-left-color:var(--mint)}
+.callout b{color:var(--ink)}
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;margin-top:8px}
+.rule{border-top:2px solid var(--ink);padding-top:6px;break-inside:avoid}
+.rule h3{font-size:12.5pt;margin:2px 0 3px}
+.rule p{margin:0;font-size:9.8pt}
+pre{font:8.6pt/1.42 'IBM Plex Mono',monospace;background:var(--paper2);border:1px solid var(--rule);padding:10px 12px;white-space:pre;margin:8px 0 0;break-inside:avoid}
+.break{break-before:page}
+.foot{margin-top:18px;border-top:1px solid var(--rule);padding-top:8px;font-size:9pt;color:var(--muted)}
+.foot a{color:var(--green)}
+</style></head><body>
+<div class="mast"><span class="wm">The Tech Hut<i>.</i></span><span class="mono">The Kenyan ATS Pack · Updated October 2026</span></div>
+<span class="mono">Free · thetechhut.co/cv-pack</span>
+<h1>A robot reads your CV first. <em>Here is which one.</em></h1>
+<p class="lede">Safaricom runs Oracle. Britam runs Taleo. M-KOPA and Andela run Ashby. Tala runs Lever. Each of those systems reads your CV differently, and formatting that sails through one gets you silently filtered by another. We checked the live job feed of every major Kenyan tech employer we track and wrote down what we found.</p>
+
+<span class="mono eyebrow">Part one · the map</span>
+<h2 style="margin-top:4px">Who runs what</h2>
+<p>Every row was confirmed against the employer's own live careers feed in October 2026. Employers do change systems, so treat this as a snapshot.</p>
+<table><thead><tr><th>Employer</th><th>System</th><th>What that means for you</th></tr></thead><tbody>
+<tr><td class="co">Safaricom</td><td class="sys">Oracle Recruiting Cloud</td><td>Your uploaded CV is parsed, then you re-enter everything by hand anyway. The form fields are what get searched, not your PDF. Budget 40 minutes for a first application.</td></tr>
+<tr><td class="co">Britam</td><td class="sys">Oracle Taleo</td><td>Oldest system on this list. Hates tables, columns, headers and footers. Build a profile once and reuse it; Taleo keeps it between applications.</td></tr>
+<tr><td class="co">M-KOPA</td><td class="sys">Ashby</td><td>Clean parse, short form, structured screening questions. Your answers to those questions matter more than your CV design.</td></tr>
+<tr><td class="co">Andela</td><td class="sys">Ashby</td><td>Skills are matched as discrete tags, so name your stack explicitly: "React", not "modern frontend frameworks".</td></tr>
+<tr><td class="co">One Acre Fund</td><td class="sys">Greenhouse</td><td>Parses a plain PDF almost perfectly. Keyword search runs on the parsed text, so the words in your CV are the words recruiters find you by.</td></tr>
+<tr><td class="co">Jumia</td><td class="sys">Greenhouse</td><td>Same engine. Expect a cover-letter field: usually optional, and usually read when a shortlist is close.</td></tr>
+<tr><td class="co">Zipline</td><td class="sys">Greenhouse</td><td>Posts Kenya roles alongside global ones on one board. Filter by location before you apply.</td></tr>
+<tr><td class="co">GiveDirectly</td><td class="sys">Greenhouse</td><td>Heavy on structured application questions. Written answers carry real weight here.</td></tr>
+<tr><td class="co">Tala</td><td class="sys">Lever</td><td>Lever auto-fills the form from your CV or LinkedIn. <b>Check what it filled in</b>: a bad parse is the most common silent rejection.</td></tr>
+<tr><td class="co">Apollo Agriculture</td><td class="sys">Lever</td><td>Same auto-fill. Lever also de-duplicates applicants, so a second application to the same role does nothing.</td></tr>
+<tr><td class="co">Sun King</td><td class="sys">Pinpoint</td><td>Short, forgiving form. Being specific about your county and language skills helps.</td></tr>
+<tr><td class="co">Watu Credit</td><td class="sys">JazzHR</td><td>Plain form, light parsing. A screener mostly sees your CV itself, so the first third of page one does the work.</td></tr>
+<tr><td class="co">ACRE Africa</td><td class="sys">Careers page + email</td><td>No ATS: a human opens your mail. Your subject line and first two sentences are the whole filter.</td></tr>
+<tr><td class="co">Canonical</td><td class="sys">Greenhouse</td><td>Fully remote, hires "home based, EMEA", which includes Kenya. Written application essays are formally scored.</td></tr>
+</tbody></table>
+<div class="callout"><b>The pattern worth memorising:</b> if the apply link goes to <b>oraclecloud.com</b> or <b>taleo.net</b>, you are in a form-first system: the fields are everything. If it goes to <b>greenhouse.io</b>, <b>lever.co</b>, <b>ashbyhq.com</b> or <b>pinpointhq.com</b>, your CV file is parsed and searched directly, so formatting is everything.</div>
+
+<span class="mono eyebrow">Part two · the rules</span>
+<h2 style="margin-top:4px">Six formatting rules that satisfy every system above</h2>
+<div class="rules">
+<div class="rule"><span class="mono">Rule 01</span><h3>One column. Always.</h3><p>Two-column CVs, the ones with a coloured sidebar, are read left to right across the page by most parsers. Your job titles end up merged with your skills list.</p></div>
+<div class="rule"><span class="mono">Rule 02</span><h3>No tables, text boxes or icons.</h3><p>Taleo drops table contents entirely. Icons become nothing: if a phone icon replaces the word "Phone", some parsers lose your number. Write the words.</p></div>
+<div class="rule"><span class="mono">Rule 03</span><h3>Use the boring headings.</h3><p>"Work Experience", "Education", "Skills", "Certifications". Parsers match headings against a fixed list; a creative heading means that section is never categorised.</p></div>
+<div class="rule"><span class="mono">Rule 04</span><h3>Dates as MM/YYYY, right of the role.</h3><p>03/2024 – Present. Not "Mar '24 to date". Dates are how systems calculate your years of experience, and that number is often a hard filter.</p></div>
+<div class="rule"><span class="mono">Rule 05</span><h3>Mirror the posting's exact nouns.</h3><p>If the ad says "Node.js", write Node.js, not NodeJS. Keyword matching is literal. Put the stack in a Skills line and inside the bullet where you used it.</p></div>
+<div class="rule"><span class="mono">Rule 06</span><h3>Submit a PDF, unless asked for Word.</h3><p>Modern systems parse PDF cleanly; Taleo and some Oracle set-ups still prefer .docx. Keep both, named <b>Firstname-Lastname-Role.pdf</b>, never "CV final v3".</p></div>
+</div>
+<div class="callout tip"><b>The 60-second test:</b> open your CV, select all, copy, and paste into a blank plain-text note. That is almost exactly what the parser sees. If the order is scrambled, your dates vanish or your name is missing, that is your rejection, before any human was involved.</div>
+
+<div class="break"></div>
+<span class="mono eyebrow" style="margin-top:0">Part three · the skeleton</span>
+<h2 style="margin-top:4px">Copy this structure</h2>
+<p>Replace the content, keep the order and the headings. It is deliberately plain. An editable Word version is at thetechhut.co/cv-pack.</p>
+<pre>FIRSTNAME LASTNAME
+Backend Engineer
+Nairobi, Kenya | +254 7XX XXX XXX | you@email.com
+linkedin.com/in/yourname | github.com/yourname
+
+SUMMARY
+Backend engineer with 4 years building payment and lending
+services in Kenya. Node.js, PostgreSQL, AWS. Shipped an
+M-Pesa Daraja integration handling 12,000 transactions a day.
+
+SKILLS
+Languages: JavaScript (Node.js), Python, SQL
+Frameworks: Express, NestJS, Django
+Data: PostgreSQL, Redis, MongoDB
+Cloud and tooling: AWS (EC2, RDS, Lambda), Docker, GitHub Actions
+Integrations: M-Pesa Daraja API, Stripe, Africa&#x27;s Talking
+
+WORK EXPERIENCE
+
+Backend Engineer                              03/2024 - Present
+Company Name, Nairobi, Kenya
+- Cut checkout failures 31% by rebuilding the M-Pesa callback
+  handler with idempotency keys and a retry queue.
+- Moved 18 services onto GitHub Actions, taking deploys from
+  45 minutes to 6.
+- Owned the PostgreSQL schema for a loan book of 240,000 users.
+
+Software Developer                            01/2022 - 02/2024
+Company Name, Nairobi, Kenya
+- Built the customer API used by 3 mobile clients, 1.2M monthly
+  requests, 99.9% uptime.
+- Reduced median query time from 820ms to 140ms by adding
+  composite indexes and removing N+1 reads.
+
+EDUCATION
+
+BSc Computer Science                          09/2017 - 11/2021
+University Name, Nairobi, Kenya
+
+CERTIFICATIONS
+AWS Certified Solutions Architect - Associate, 2025</pre>
+<div class="callout tip"><b>Every bullet is X-Y-Z:</b> did X, measured by Y, by doing Z. "Cut checkout failures 31% (Y) by rebuilding the M-Pesa callback handler (Z)". A bullet with no number in it is a sentence a screener skips.</div>
+<p class="foot">From The Tech Hut, thetechhut.co. Live tech jobs you can take from Kenya: <a href="https://thetechhut.co/jobs/">thetechhut.co/jobs</a> · The Monday openings digest and keyword checklist: <a href="https://thetechhut.co/cv-pack/#list">thetechhut.co/cv-pack</a> · Free to share; please don't sell it.</p>
+</body></html>
