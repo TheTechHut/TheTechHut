@@ -120,6 +120,7 @@ FEEDS = [
     ('Oyster',             'ashby',      'oyster'),
     ('PostHog',            'ashby',      'posthog'),
     ('Railway',            'ashby',      'railway'),
+    ('Notion',             'ashby',      'notion'),     # added 3 Nov 2026; mostly hybrid US/EU/APAC, few remote
     ('Sun King',           'pinpoint',   'sunking'),
 ]
 

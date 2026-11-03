@@ -208,6 +208,7 @@
     { name: 'Lula',              ats: 'breezy',     slug: 'lulalend' },
     { name: 'valU',              ats: 'smartrecruiters', slug: 'ValU1' },
     { name: 'Thndr',             ats: 'ashby',      slug: 'thndr' },
+    { name: 'Notion',            ats: 'ashby',      slug: 'notion' },
     { name: 'OUTsurance',        ats: 'smartrecruiters', slug: 'OUTsurance' },
     // WordPress careers pages: posts in a named category, read through the site's
     // own public REST API. `site` is the host, `cat` the category id

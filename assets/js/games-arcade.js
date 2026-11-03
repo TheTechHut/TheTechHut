@@ -61,7 +61,18 @@
       el.innerHTML = h; el.hidden = !h;
     });
   }
-  function refresh() { return A.board().then(function (b) { if (b) { board = b; drawBoards(); } }).catch(function () {}); }
+  function offline() {
+    // The Worker didn't answer (not deployed yet, or down). Show the section anyway so
+    // "Join the leaderboard" links land somewhere useful; a nickname is still saved here.
+    if (board) return;
+    var msg = 'The leaderboards are switching on. Join now and your play time counts as soon as they are live.';
+    ['agames', 'aplayers', 'asessions'].forEach(function (id) { $(id).innerHTML = '<li class="empty">' + msg + '</li>'; msg = ''; });
+    $('aweek').textContent = 'Resets every Monday 00:00 Nairobi time';
+    root.hidden = false;
+  }
+  function refresh() {
+    return A.board().then(function (b) { if (b && b.week) { board = b; drawBoards(); } else offline(); }).catch(offline);
+  }
 
   /* ---- the player card --------------------------------------------------- */
   var BADGES = [
@@ -160,6 +171,8 @@
   A.onUpdate(function () { if (!editing) drawCard(); });
   document.addEventListener('tth:grid', marks);
   drawCard();
+  root.hidden = false;                       // visible from the start; boards fill in when they load
+  if (location.hash === '#arcade') setTimeout(function () { root.scrollIntoView({ block: 'start' }); }, 50);
   refresh();
   setInterval(function () { if (!document.hidden) refresh(); }, 60000);
 })();
