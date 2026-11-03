@@ -230,7 +230,19 @@
     { name: 'Peach Payments',    ats: 'bamboohr',   slug: 'peachpayments', server: true },
     { name: 'Aerobotics',        ats: 'bamboohr',   slug: 'aerobotics', server: true },
     // SAP SuccessFactors career sites that publish a job feed at /sitemap.xml
-    { name: 'Nedbank',           ats: 'successfactors', host: 'jobs.nedbank.co.za', server: true }
+    { name: 'Nedbank',           ats: 'successfactors', host: 'jobs.nedbank.co.za', server: true },
+    // ...and ones without the feed, read from their search results page (mode: 'search')
+    { name: 'Capitec',           ats: 'successfactors', host: 'careers.capitecbank.co.za', mode: 'search', server: true },
+    { name: 'Discovery',         ats: 'successfactors', host: 'careers.discovery.co.za', mode: 'search', server: true },
+    // Taleo: `section` from .../careersection/<section>/jobsearch.ftl; `portal` is the
+    // number in that page's source. `dates` says what the third column holds.
+    { name: 'Equity Bank',       ats: 'taleo', host: 'equitybank.taleo.net', section: 'ext_new', portal: '12300100254', dates: 'closing', server: true },
+    { name: 'Britam',            ats: 'taleo', host: 'britam.taleo.net', section: 'ke', portal: '101430233', dates: 'posted', server: true },
+    // Zoho Recruit: the roles are a JSON list in the careers page itself
+    { name: 'GTCO',              ats: 'zoho', host: 'gtcoplc.zohorecruit.com', page: 'Careers', server: true },
+    // Adrenalin (myadrenalin.com) candidate microsite. `company` and `ou` are the
+    // encoded ids its own page sends (seen in the browser's network panel).
+    { name: 'I&M Bank',          ats: 'adrenalin', host: 'imbank.myadrenalin.com', company: 'BQ6DBcTkVmYb2zG8XExn7A==', ou: 'vrr0nzxsgCyo6GkEF0XU1g==', server: true }
   ];
   var IN_BROWSER = typeof window !== 'undefined' && typeof document !== 'undefined';
   var PER_COMPANY = 25;          // one big global board must not swamp the page
@@ -503,16 +515,130 @@
     });
   }
 
+  // --- the "more work" systems ---------------------------------------------
+  var MON = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11 };
+  // "Nov 9, 2026", "9 Nov 2026", "03-Nov-2026" or "27-10-2026" -> "2026-11-09" ('' if unreadable)
+  function dayOf(t) {
+    t = String(t || '').trim(); var m, y, mo, d;
+    if ((m = /^([A-Za-z]{3})[a-z]*\.? (\d{1,2}),? (\d{4})/.exec(t))) { mo = MON[m[1].toLowerCase()]; d = +m[2]; y = +m[3]; }
+    else if ((m = /^(\d{1,2})[ -]([A-Za-z]{3})[a-z]*[ -](\d{4})/.exec(t))) { d = +m[1]; mo = MON[m[2].toLowerCase()]; y = +m[3]; }
+    else if ((m = /^(\d{1,2})[-\/.](\d{1,2})[-\/.](\d{4})/.exec(t))) { d = +m[1]; mo = +m[2] - 1; y = +m[3]; }
+    if (mo === undefined || !y) return '';
+    return y + '-' + ('0' + (mo + 1)).slice(-2) + '-' + ('0' + d).slice(-2);
+  }
+  function capsTitle(t) {           // "ASSISTANT MANAGER, DATA SCIENTIST" -> "Assistant Manager, Data Scientist"
+    t = clean(t);
+    if (t !== t.toUpperCase()) return t;
+    return t.toLowerCase().replace(/(^|[\s,(\/-])([a-z])/g, function (m, a, c) { return a + c.toUpperCase(); })
+      .replace(/\b(Ict|It|Hr|Ai|Ui|Ux|Qa|Erp|Crm|Sme|Ceo|Cto|Cfo)\b/g, function (w) { return w.toUpperCase(); });
+  }
+  function job(prefix, co, id, title, place, date, url, extra) {
+    var j = { id: prefix + '-' + co.name.replace(/[^a-z0-9]+/gi, '-').toLowerCase() + '-' + id, title: title, company: co.name, logo: '',
+      location: clean(place) || 'Not stated', types: [], cats: [catFromTitle(title)], level: '', excerpt: '',
+      url: safeUrl(url), date: date || '', source: co.name };
+    if (extra) Object.keys(extra).forEach(function (k) { j[k] = extra[k]; });
+    return j;
+  }
+  // Taleo's own search screen calls this; 25 a page.
+  function loadTaleo(co) {
+    var base = 'https://' + co.host + '/careersection/';
+    var today = new Date().toISOString().slice(0, 10), rows = [];
+    function page(n) {
+      return getJSON(base + 'rest/jobboard/searchjobs?lang=en&portal=' + co.portal, { method: 'POST', body: JSON.stringify({
+        multilineEnabled: false, sortingSelection: { sortBySelectionParam: '3', ascendingSortingOrder: 'false' },
+        fieldData: { fields: { KEYWORD: '', LOCATION: '' }, valid: true },
+        filterSelectionParam: { searchFilterSelections: [] }, advancedSearchFiltersSelectionParam: { searchFilterSelections: [] },
+        pageNo: n }) }).then(function (d) {
+          var got = (d && d.requisitionList) || [];
+          rows = rows.concat(got);
+          var total = (d && d.pagingData && d.pagingData.totalCount) || 0;
+          if (got.length && rows.length < total && n < 6) return page(n + 1);
+        });
+    }
+    return page(1).then(function () {
+      return rows.map(function (r) {
+        var c = r.column || [], places = [];
+        try { places = JSON.parse(c[1] || '[]'); } catch (e) { places = [c[1]]; }
+        places = places.map(function (p) { return String(p || '').replace(/, United Republic of/, '').replace(/-/g, ', '); });
+        var when = dayOf(c[2]);
+        if (co.dates === 'closing' && when && when < today) return null;          // closed
+        return job('tl', co, r.jobId || r.contestNo, clean(c[0]), placeLabel(places[0], places.slice(1)),
+          co.dates === 'posted' ? when : '',
+          base + co.section + '/jobdetail.ftl?job=' + encodeURIComponent(r.contestNo || r.jobId) + '&lang=en',
+          { where: places.join('; ') });
+      }).filter(Boolean);
+    });
+  }
+  function fromZoho(html, co) {
+    var m = /<input[^>]*value="([^"]*)"[^>]*id="jobs"/.exec(String(html || '')) ||
+            /<input[^>]*id="jobs"[^>]*value="([^"]*)"/.exec(String(html || ''));
+    var list = [];
+    try { list = JSON.parse(decode(m ? m[1] : '[]')); } catch (e) { list = []; }
+    return list.filter(function (j) { return j && j.Posting_Title && j.Publish !== false; }).map(function (j) {
+      var title = clean(j.Posting_Title);
+      var place = [j.City, j.State, j.Country].filter(function (x) { return x && x !== 'null'; }).join(', ');
+      if (j.Remote_Job) place = place ? 'Remote, ' + place : 'Remote';
+      var o = job('zr', co, j.id, title, place, j.Date_Opened,
+        'https://' + co.host + '/jobs/' + co.page + '/' + j.id + '/' + title.replace(/[^A-Za-z0-9]+/g, '-').replace(/^-|-$/g, '') + '?source=CareerSite');
+      if (j.Job_Type) o.types = [clean(j.Job_Type)];
+      return o;
+    });
+  }
+  function loadAdrenalin(co) {
+    return getJSON('https://' + co.host + '/CANDMICROSITE/CPVacancyDetails/GetVacancyInformationWithoutToken',
+      { method: 'POST', body: JSON.stringify({ CompanyID: co.company, Flag: 'OP', OU_ID: co.ou, JOBID: '' }) })
+      .then(function (d) {
+        var list = (d && d.Data && d.Data[0] && d.Data[0].VacancyInformation) || [];
+        return list.map(function (v) {
+          var o = job('ad', co, v.FUNCTION_ID, capsTitle(String(v.FUNCTION_NAME || '').replace(/_\d+\s*$/, '')),
+            [v.CITY, 'Kenya'].filter(Boolean).join(', '), String(v.POSTED_ON || '').slice(0, 10),
+            'https://' + co.host + '/CANDMICROSITE/#/search-results');
+          o.excerpt = clean(v.FUNCTION_DESC, 190);
+          return o;
+        });
+      });
+  }
+  // SuccessFactors search results, newest first, 25 rows a page.
+  function loadSFSearch(co) {
+    var rows = [];
+    function page(n) {
+      return getJSON('https://' + co.host + '/search/?q=&sortColumn=referencedate&sortDirection=desc&startrow=' + n * 25, null, true)
+        .then(function (html) {
+          var got = String(html || '').split('class="data-row').slice(1);
+          rows = rows.concat(got);
+          if (got.length === 25 && n < 7) return page(n + 1);
+        });
+    }
+    return page(0).then(function () {
+      var seen = {};
+      return rows.map(function (r) {
+        var a = /<a[^>]*href="(\/job\/[^"]+)"[^>]*class="jobTitle-link"[^>]*>([^<]+)<|<a[^>]*class="jobTitle-link"[^>]*href="(\/job\/[^"]+)"[^>]*>([^<]+)</.exec(r);
+        if (!a) return null;
+        var href = a[1] || a[3], title = clean(a[2] || a[4]);
+        var id = (/\/(\d+)\/?$/.exec(href) || [])[1] || href;
+        if (seen[id]) return null; seen[id] = 1;
+        var loc = (/class="jobLocation[^"]*">\s*([^<\s][^<]*)</.exec(r) || [])[1] || 'South Africa';
+        loc = clean(loc).replace(/,\s*([A-Z]{2})$/, function (m, c) { return ', ' + (CC[c] || c); });
+        var date = dayOf((/class="jobDate[^"]*">\s*([^<]+)</.exec(r) || [])[1]);
+        return job('sf', co, id, title, loc, date, 'https://' + co.host + decode(href));
+      }).filter(Boolean);
+    });
+  }
+
   function loadCompany(co) {
     if (co.server && IN_BROWSER) return Promise.resolve([]);
+    var special = co.ats === 'taleo' ? loadTaleo : co.ats === 'adrenalin' ? loadAdrenalin
+                : co.ats === 'successfactors' && co.mode === 'search' ? loadSFSearch : null;
+    if (special) return special(co).then(finish).catch(function () { return []; });
     if (!co.slug) co.slug = String(co.site || co.name).replace(/[^a-z0-9]+/gi, '-').toLowerCase();
     if (co.ats === 'workday') return loadWorkday(co).then(finish).catch(function () { return []; });
-    var asText = co.ats === 'successfactors';
+    var asText = co.ats === 'successfactors' || co.ats === 'zoho';
     var url = co.ats === 'oracle' ? 'https://' + co.host + '/hcmRestApi/resources/latest/recruitingCEJobRequisitions' +
                                     '?onlyData=true&expand=requisitionList.secondaryLocations&finder=findReqs;siteNumber=' +
                                     co.site + ',limit=100,sortBy=POSTING_DATES_DESC'
             : co.ats === 'bamboohr'   ? 'https://' + co.slug + '.bamboohr.com/careers/list'
             : co.ats === 'successfactors' ? 'https://' + co.host + '/sitemap.xml'
+            : co.ats === 'zoho'       ? 'https://' + co.host + '/jobs/' + co.page
             : co.ats === 'greenhouse' ? 'https://boards-api.greenhouse.io/v1/boards/' + co.slug + '/jobs'
             : co.ats === 'lever'      ? 'https://api.lever.co/v0/postings/' + co.slug + '?mode=json'
             : co.ats === 'pinpoint'   ? 'https://' + co.slug + '.pinpointhq.com/postings.json'
@@ -527,6 +653,7 @@
       return co.ats === 'oracle'     ? fromOracle(d, co)
            : co.ats === 'bamboohr'   ? fromBamboo(d, co)
            : co.ats === 'successfactors' ? fromSuccessFactors(d, co)
+           : co.ats === 'zoho'       ? fromZoho(d, co)
            : co.ats === 'greenhouse' ? fromGreenhouse(d, co)
                : co.ats === 'lever'      ? fromLever(d, co)
                : co.ats === 'pinpoint'   ? fromPinpoint(d, co)
