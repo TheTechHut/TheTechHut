@@ -35,7 +35,7 @@
 
     var PUBLIC_KEY = 'pk_live_0ea0b49d018982026271a8d153bc6b5d3955b895';
     var API_BASE = 'https://thetechhut-pay.thetechhut.workers.dev';
-    var TURNSTILE_SITE_KEY = '';
+    var TURNSTILE_SITE_KEY = '0x4AAAAAAFyY5bhNlGvl9AIr';
     var TURNSTILE_JS = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
 
     var WHATSAPP = '254115017058';
