@@ -1,10 +1,11 @@
 {
- "updated": "2026-11-02",
- "company_count": 15,
- "role_count": 326,
- "local_role_count": 96,
- "roles_scanned": 3307,
+ "updated": "2026-11-03",
+ "company_count": 26,
+ "role_count": 341,
+ "local_role_count": 104,
+ "roles_scanned": 3326,
  "sources": [
+  "Himalayas",
   "Jobicy"
  ],
  "companies": [
@@ -227,7 +228,7 @@
   {
    "company": "Supabase",
    "platform": "ashby",
-   "eligible": 43,
+   "eligible": 44,
    "locations": [
     "Remote, Global",
     "Remote, EMEA",
@@ -435,7 +436,7 @@
      "url": "https://jobs.ashbyhq.com/supabase/7c5eb3fc-1087-4c1c-b3a2-a19fe01dd259"
     }
    ],
-   "total": 68
+   "total": 69
   },
   {
    "company": "Oyster",
@@ -698,7 +699,76 @@
      "url": "https://www.zipline.com/open-roles/7983316003?gh_jid=7983316003"
     }
    ],
-   "total": 360
+   "total": 356
+  },
+  {
+   "company": "Clera",
+   "platform": "himalayas",
+   "eligible": 2,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Senior Product Designer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/clera/jobs/senior-product-designer-9163035966?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Senior Data Scientist",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/clera/jobs/senior-data-scientist?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 2
+  },
+  {
+   "company": "Motu Novu LLC",
+   "platform": "himalayas",
+   "eligible": 2,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Front-End Developer (Flex-Time) (Remote/Global)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/motu-novu-llc/jobs/front-end-developer-flex-time-global?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "PHP Developer (Flex-Time) (Remote/Global)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/motu-novu-llc/jobs/php-developer-flex-time-global?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 2
+  },
+  {
+   "company": "micro1",
+   "platform": "himalayas",
+   "eligible": 2,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Godot Game Developer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/godot-game-developer?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Video Annotation",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/video-annotation?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 2
   },
   {
    "company": "Cockroach Labs",
@@ -714,7 +784,7 @@
      "url": "https://www.cockroachlabs.com/careers/job/?gh_jid=2578081"
     }
    ],
-   "total": 12
+   "total": 10
   },
   {
    "company": "Turing",
@@ -762,7 +832,7 @@
      "url": "https://jobs.ashbyhq.com/posthog/0be1b52c-2401-4ae2-b7fc-5d018c1ff96f"
     }
    ],
-   "total": 11
+   "total": 10
   },
   {
    "company": "Sun King",
@@ -778,7 +848,7 @@
      "url": "https://sunking.pinpointhq.com/en/postings/21382d3e-69bd-4256-ae28-26853f824db4"
     }
    ],
-   "total": 178
+   "total": 181
   },
   {
    "company": "Taptap Send",
@@ -797,6 +867,159 @@
    "total": 27
   },
   {
+   "company": "vCluster Labs",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Staff Network Engineer (AI Infrastructure)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/vcluster-labs/jobs/staff-network-engineer-ai-infrastructure-4191862459?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "MonetizeMore",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Lead Solutions Engineer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/monetizemore/jobs/lead-solutions-engineer?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "VAme Ltd",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Technical Sales Engineer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/vame-ltd/jobs/technical-sales-engineer?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Religiate Interactive Brand Consulting Pvt Ltd",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Senior Graphic Designer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/religiate-interactive-brand-consulting-pvt-ltd/jobs/senior-graphic-designer?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Support Tech LLC",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Technical Project Manager- Low Voltage, CCTV and Access Control",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/support-tech-llc/jobs/technical-project-manager-low-voltage-cctv-and-access-control?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "G2i",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Remote Developer | G2i Talent Pool",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/g2i/jobs/remote-developer-g2i-talent-pool-8240194431?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "SimpleTiger",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Web Developer: WordPress & HubSpot (U.S. Based, Remote Contractor)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/simpletiger/jobs/web-developer-wordpress-hubspot-u-s-based-remote-contractor?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Askable",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Software Engineer, AI Coding Tasks (Contract)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/askable/jobs/software-engineer-ai-coding-tasks-contract?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Testlio",
+   "platform": "jobicy",
+   "eligible": 1,
+   "locations": [
+    "EMEA"
+   ],
+   "roles": [
+    {
+     "title": "Engineering Manager, EMEA (Platform)",
+     "location": "EMEA",
+     "url": "https://jobicy.com/jobs/154448-engineering-manager-emea-platform",
+     "via": "Jobicy"
+    }
+   ],
+   "total": 1
+  },
+  {
    "company": "Fueled",
    "platform": "jobicy",
    "eligible": 1,
@@ -808,23 +1031,6 @@
      "title": "UX Designer | EMEA | Contract",
      "location": "EMEA",
      "url": "https://jobicy.com/jobs/158378-ux-designer-emea-contract",
-     "via": "Jobicy"
-    }
-   ],
-   "total": 1
-  },
-  {
-   "company": "RevenueCat",
-   "platform": "jobicy",
-   "eligible": 1,
-   "locations": [
-    "EMEA,  LATAM,  Canada,  USA"
-   ],
-   "roles": [
-    {
-     "title": "Senior Data Scientist, Product",
-     "location": "EMEA,  LATAM,  Canada,  USA",
-     "url": "https://jobicy.com/jobs/157724-senior-data-scientist-product-2",
      "via": "Jobicy"
     }
    ],
