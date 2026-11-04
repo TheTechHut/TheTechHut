@@ -259,6 +259,34 @@ await t('boards survive a restart once flushed', async () => {
   assert.equal(b.games[0].secs, 90); assert.equal(b.players[0].name, 'Wanjiku'); assert.equal(b.sessions[0].secs, 90);
 });
 
+// Cloudflare can evict the object after ~10 idle seconds, between two pings.
+// Every ping here reaches a brand-new GameStats over the same storage.
+function evictingNamespace(store = new Map()) {
+  const storage = fakeStorage(store);
+  return { store, idFromName: n => n, get: () => { const obj = new GameStats({ storage }); return { fetch: (u, init) => obj.fetch(new Request(u, init)) }; } };
+}
+
+await t('play time, plays and rank survive eviction between every ping', async () => {
+  const env = { GAME_STATS: evictingNamespace() };
+  await play(env, sid(1), 'hextris', 120, { pid: nick('e'), name: 'Achieng' });
+  const me = (await call(env, '/games/ping', { sid: sid(1), slug: 'hextris', pid: nick('e'), name: 'Achieng' })).body.me;
+  assert.equal(me.secs, 120); assert.equal(me.rank, 1); assert.deepEqual(me.played, ['hextris']);
+  const b = await board(env);
+  assert.equal(b.games[0].slug, 'hextris'); assert.equal(b.games[0].plays, 1); assert.equal(b.games[0].secs, 120);
+  assert.equal(b.players[0].name, 'Achieng'); assert.equal(b.sessions[0].secs, 120);
+  assert.equal(b.live, 1);
+});
+
+await t('a tab record is deleted once the tab has gone quiet', async () => {
+  const env = { GAME_STATS: evictingNamespace() };
+  await call(env, '/games/ping', { sid: sid(2), slug: 'doom' });
+  assert.ok(env.GAME_STATS.store.has('s:' + sid(2)));
+  tick(120);
+  const b = await board(env);
+  assert.equal(b.live, 0);
+  assert.ok(!env.GAME_STATS.store.has('s:' + sid(2)));
+});
+
 await t('the Worker\'s game list matches the directory', async () => {
   const require = createRequire(import.meta.url);
   const site = require('../../assets/js/games-data.js').GAMES.map(g => g.slug);

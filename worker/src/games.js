@@ -28,8 +28,15 @@
  * What is stored
  *   Visit total; per game: play time and plays (this week and all time); per
  *   named player: nickname, play time per game this week, best session and the
- *   days played. Live tab ids are held in memory only. Writes are batched and
- *   flushed once a minute, which keeps the Durable Object inside the free plan.
+ *   days played. Each live tab has a small record (s:<tab id>) that is deleted
+ *   75 seconds after its last ping.
+ *
+ * Everything is written to storage before a request returns. Cloudflare can
+ * evict a Durable Object from memory after about ten idle seconds, well inside
+ * the 30 seconds between pings, so nothing may live only in memory: a woken
+ * object rebuilds its live tabs from the s: records. (The first version
+ * batched writes for a minute and kept tabs in memory only; every eviction
+ * dropped them, so play time and plays were never recorded.)
  *
  * Bodies are sent as text/plain so the browser skips the CORS preflight.
  */
@@ -42,7 +49,6 @@ const HOUR = 60 * 60 * 1000;
 const VISITS_PER_IP_PER_HOUR = 30;
 const ACCRUING_TABS_PER_IP = 6;
 const MAX_LIVE = 50000;
-const FLUSH_MS = 60 * 1000;
 const TOP_SESSIONS = 10;
 const SLUGS = new Set(GAME_SLUGS);
 
@@ -89,6 +95,9 @@ export class GameStats {
     this.pidLast = new Map();   // pid -> last time play time was credited
     this.ipTabs = new Map();    // ip -> Map(sid -> last credit), tabs earning time
     this.sessions = new Map();  // "sid|slug" -> { pid, n, v, slug, s }
+    this.tabRec = new Map();    // sid -> { w, played: [slug], sess: { slug: secs } }, mirrored to s:<sid>
+    this.dead = new Set();      // s:<sid> keys to delete
+    this.restored = false;
     this.visits = null;
     this.week = null;
     this.gw = {}; this.ga = {}; this.top = []; this.pw = new Map();
@@ -102,7 +111,29 @@ export class GameStats {
       this.ga = (await st.get('ga')) || {};
     }
     const wk = weekOf(now);
-    if (wk === this.week) return;
+    if (wk !== this.week) await this.loadWeek(wk, now);
+    if (!this.restored) await this.restore(now);
+  }
+
+  /** Rebuild the live tabs after the object was evicted from memory. */
+  async restore(now) {
+    this.restored = true;
+    const rows = await this.state.storage.list({ prefix: 's:' });
+    for (const [k, v] of rows) {
+      const sid = k.slice(2);
+      if (!v || now - v.t > LIVE_MS) { this.dead.add(k); continue; }
+      this.seen.set(sid, { t: v.t, slug: v.slug, ip: v.ip, pid: v.pid });
+      if (v.w !== this.week) continue;                 // a tab left over from last week
+      const rec = { w: v.w, played: v.played || [], sess: v.sess || {} };
+      this.tabRec.set(sid, rec);
+      for (const g of rec.played) this.played.add(sid + '|' + g);
+      for (const [g, secs] of Object.entries(rec.sess)) this.sessions.set(sid + '|' + g, { s: secs, slug: g, pid: v.pid, n: v.n, v: v.vv });
+    }
+    for (const p of this.pw.values()) if (p.l) this.pidLast.set(p.id, p.l);
+  }
+
+  async loadWeek(wk, now) {
+    const st = this.state.storage;
     if (this.week) await this.flush();                // close the old week first
     this.week = wk;
     // Keep 12 months of weekly player records (see the privacy policy).
@@ -112,13 +143,12 @@ export class GameStats {
     this.top = (await st.get('top:' + wk)) || [];
     this.pw = new Map();
     const rows = await st.list({ prefix: 'pw:' + wk + ':' });
-    for (const [k, v] of rows) this.pw.set(k.slice(('pw:' + wk + ':').length), v);
-    this.sessions.clear(); this.played.clear(); this.pidLast.clear();
+    for (const [k, v] of rows) { const id = k.slice(('pw:' + wk + ':').length); v.id = id; this.pw.set(id, v); }
+    this.sessions.clear(); this.played.clear(); this.pidLast.clear(); this.tabRec.clear();
   }
 
   markDirty(key, pid) {
     if (pid) this.dirty.pids.add(pid); else this.dirty[key] = true;
-    if (!this.alarmSet) { this.alarmSet = true; this.state.storage.setAlarm(Date.now() + FLUSH_MS); }
   }
 
   async flush() {
@@ -127,15 +157,37 @@ export class GameStats {
     if (d.ga) puts.ga = this.ga;
     if (d.gw && wk) puts['gw:' + wk] = this.gw;
     if (d.top && wk) puts['top:' + wk] = this.top;
-    for (const pid of d.pids) { const p = this.pw.get(pid); if (p && wk) puts['pw:' + wk + ':' + pid] = p; }
+    for (const pid of d.pids) { const p = this.pw.get(pid); if (p && wk) { const { id, ...row } = p; puts['pw:' + wk + ':' + pid] = row; } }
     this.dirty = { visits: false, gw: false, ga: false, top: false, pids: new Set() };
-    if (Object.keys(puts).length) await st.put(puts);
+    const keys = Object.keys(puts);
+    for (let i = 0; i < keys.length; i += 128) {             // storage.put takes at most 128 keys
+      const part = {}; for (const k of keys.slice(i, i + 128)) part[k] = puts[k];
+      await st.put(part);
+    }
+    if (this.dead.size) {
+      const gone = [...this.dead]; this.dead.clear();
+      for (let i = 0; i < gone.length; i += 128) await st.delete(gone.slice(i, i + 128));
+    }
   }
 
-  async alarm() { this.alarmSet = false; await this.flush(); }
+  /** Mirror one tab to storage, so it survives the object being evicted. */
+  async saveTab(sid) {
+    const s = this.seen.get(sid);
+    if (!s) return;
+    const rec = this.tabRec.get(sid) || {};
+    const sess = this.sessions.get(sid + '|' + s.slug);
+    this.dead.delete('s:' + sid);
+    await this.state.storage.put('s:' + sid, {
+      t: s.t, slug: s.slug, ip: s.ip, pid: s.pid, w: this.week,
+      n: sess && sess.n, vv: sess && sess.v, played: rec.played || [], sess: rec.sess || {},
+    });
+  }
+
+  // Writes no longer wait for an alarm; one left over from the first version just flushes.
+  async alarm() { await this.flush(); }
 
   prune(now) {
-    for (const [sid, s] of this.seen) if (now - s.t > LIVE_MS) this.seen.delete(sid);
+    for (const [sid, s] of this.seen) if (now - s.t > LIVE_MS) { this.seen.delete(sid); this.tabRec.delete(sid); this.dead.add('s:' + sid); }
     if (this.perIp.size > 10000) for (const [ip, w] of this.perIp) if (now - w.start > HOUR) this.perIp.delete(ip);
     if (this.counted.size > 100000) this.counted.clear();
     if (this.played.size > 100000) this.played.clear();
@@ -161,8 +213,11 @@ export class GameStats {
   credit(now, sid, slug, ip, who) {
     const prev = this.seen.get(sid);
     const key = sid + '|' + slug;
+    let rec = this.tabRec.get(sid);
+    if (!rec) { rec = { w: this.week, played: [], sess: {} }; this.tabRec.set(sid, rec); }
     if (!this.played.has(key)) {                                  // a new play of this game in this tab
       this.played.add(key);
+      rec.played.push(slug);
       for (const g of [this.gw, this.ga]) { g[slug] = g[slug] || { s: 0, p: 0 }; g[slug].p++; }
       this.markDirty('gw'); this.markDirty('ga');
     }
@@ -176,18 +231,20 @@ export class GameStats {
     const dt = Math.min(now - prev.t, MAX_STEP_MS) / 1000;
     if (dt <= 0) return;
     this.gw[slug].s += dt; this.ga[slug].s += dt;
+    this.markDirty('gw'); this.markDirty('ga');
 
     const sess = this.sessions.get(key) || { s: 0, slug };
     sess.s += dt;
     if (who) { sess.pid = who.pid; sess.n = who.name; sess.v = who.v; }
     this.sessions.set(key, sess);
+    rec.sess[slug] = r1(sess.s);
     this.updateTop(key, sess);
 
     if (who) {
       const pdt = Math.min(dt, (now - (this.pidLast.get(who.pid) || 0)) / 1000);   // many tabs count once
       this.pidLast.set(who.pid, now);
-      const p = this.pw.get(who.pid) || { n: who.name, v: who.v, s: 0, g: {}, b: 0, d: [] };
-      p.n = who.name; p.v = who.v;
+      const p = this.pw.get(who.pid) || { id: who.pid, n: who.name, v: who.v, s: 0, g: {}, b: 0, d: [] };
+      p.n = who.name; p.v = who.v; p.l = now; p.id = who.pid;
       if (pdt > 0) {
         p.s = r1(p.s + pdt);
         p.g[slug] = r1((p.g[slug] || 0) + pdt);
@@ -237,6 +294,7 @@ export class GameStats {
 
     if (op === 'board') {
       this.prune(now);
+      await this.flush();
       return Response.json(this.board());
     }
     if (op === 'forget') {
@@ -249,11 +307,12 @@ export class GameStats {
         for (const s of this.sessions.values()) if (s.pid === b.pid) s.pid = null;
         this.pidLast.delete(b.pid);
         this.markDirty('top');
+        await this.flush();
       }
       return Response.json({ ok: true });
     }
     if (op === 'leave') {
-      this.seen.delete(sid);
+      this.seen.delete(sid); this.tabRec.delete(sid); this.dead.add('s:' + sid);
     } else if (op === 'ping' && sid) {
       if (b.visit && !this.counted.has(sid)) {
         let w = this.perIp.get(b.ip || '');
@@ -267,8 +326,10 @@ export class GameStats {
       if (this.seen.has(sid) || this.seen.size < MAX_LIVE) this.seen.set(sid, { t: now, slug, ip: b.ip || '', pid: who && who.pid });
       if (who) out.me = this.me(who.pid) || { name: who.name, verified: !!who.v, secs: 0, games: 0, best: 0, days: 0, rank: null, players: this.pw.size, played: [] };
       if (slug) out.playing = this.liveBySlug()[slug] || 1;
+      await this.saveTab(sid);
     }
     this.prune(now);
+    await this.flush();
     return Response.json({ live: this.seen.size, visits: this.visits, ...out });
   }
 }
