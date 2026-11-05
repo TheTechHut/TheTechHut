@@ -1,9 +1,9 @@
 {
- "updated": "2026-11-03",
- "company_count": 26,
- "role_count": 341,
- "local_role_count": 104,
- "roles_scanned": 3326,
+ "updated": "2026-11-05",
+ "company_count": 43,
+ "role_count": 447,
+ "local_role_count": 141,
+ "roles_scanned": 3655,
  "sources": [
   "Himalayas",
   "Jobicy"
@@ -12,7 +12,7 @@
   {
    "company": "Canonical",
    "platform": "greenhouse",
-   "eligible": 236,
+   "eligible": 239,
    "locations": [
     "Home based - EMEA",
     "Home based - EMEA; Office Based - London, UK",
@@ -223,16 +223,17 @@
      "url": "https://job-boards.greenhouse.io/canonical/jobs/4175808"
     }
    ],
-   "total": 314
+   "total": 317
   },
   {
    "company": "Supabase",
    "platform": "ashby",
-   "eligible": 44,
+   "eligible": 45,
    "locations": [
     "Remote, Global",
     "Remote, EMEA",
-    "Remote, EMEA; Europe"
+    "Remote, EMEA; Europe",
+    "Anywhere"
    ],
    "roles": [
     {
@@ -246,22 +247,17 @@
      "url": "https://jobs.ashbyhq.com/supabase/c01f7436-1fdd-4a3e-8b96-8cadc33b006e"
     },
     {
-     "title": "Support Engineer (APAC - Weekends)",
-     "location": "Remote, Global",
-     "url": "https://jobs.ashbyhq.com/supabase/4857bb69-da99-4027-87f1-a6a4d03699b3"
-    },
-    {
      "title": "Multigres Engineer",
      "location": "Remote, Global",
      "url": "https://jobs.ashbyhq.com/supabase/2e718684-4f75-4a99-8d6b-3b6bd44e4228"
     },
     {
      "title": "Support Engineer (EMEA - Weekends)",
-     "location": "Remote, Global",
+     "location": "Remote, EMEA",
      "url": "https://jobs.ashbyhq.com/supabase/590a0742-97f1-47f4-81a2-567efc939ae2"
     },
     {
-     "title": " Account Executive DACH (German-Speaking)",
+     "title": " Account Executive (German-Speaking)",
      "location": "Remote, EMEA; Europe",
      "url": "https://jobs.ashbyhq.com/supabase/a069c886-1107-408e-88b4-e1aa8d33d4bc"
     },
@@ -269,6 +265,11 @@
      "title": "Multigres Deployment Engineer",
      "location": "Remote, Global",
      "url": "https://jobs.ashbyhq.com/supabase/f035bda1-b5d3-4c5b-8736-b9c335fe1c3b"
+    },
+    {
+     "title": "Senior Developer Relations, Twitter Brand Rep",
+     "location": "Remote, Global",
+     "url": "https://jobs.ashbyhq.com/supabase/985abb8d-cb2b-4f32-97d7-497e9f89e3ce"
     },
     {
      "title": "Database Support Engineer (EMEA)",
@@ -436,19 +437,485 @@
      "url": "https://jobs.ashbyhq.com/supabase/7c5eb3fc-1087-4c1c-b3a2-a19fe01dd259"
     }
    ],
-   "total": 69
+   "total": 71
+  },
+  {
+   "company": "micro1",
+   "platform": "himalayas",
+   "eligible": 38,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "National Security Technology Expert",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/national-security-technology-expert?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Senior Protection Engineer (Medium Voltage / Utility Distribution)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/senior-protection-engineer-medium-voltage-utility-distribution?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Video Production Specialist",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/video-production-specialist?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Photography and Cinematography Expert",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/photography-and-cinematography-expert?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Set and Production Design Expert",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/set-and-production-design-expert?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Fashion and Interior Styling Expert",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/fashion-and-interior-styling-expert?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Graphic and Editorial Design Expert",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/graphic-and-editorial-design-expert?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Engineering PhD",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/engineering-phd?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "NDT Subject Matter Expert \u2013 Laser Shearography (Level II / Level III)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/ndt-subject-matter-expert-laser-shearography-level-ii-level-iii?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "2D Game Developer (Defold)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/2d-game-developer-defold?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Electronics Specialist - LTspice",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/electronics-specialist-ltspice?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "MBSE Engineer - SysML v2",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/mbse-engineer-sysml-v2?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Software Engineer (Open 3D Engine)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/software-engineer-open-3d-engine?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Electronic Engineer (Qucs-S)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/electronic-engineer-qucs-s?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Inkscape Design Specialist",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/inkscape-design-specialist?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Python Game Developer (Panda3D)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/python-game-developer-panda3d-3488967032?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "SolidWorks Specialist",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/solidworks-specialist?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Electronics Simulation Engineer (NgSpice)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/electronics-simulation-engineer-ngspice?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Solar2D Game Developer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/solar2d-game-developer?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Libresprite Expert",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/libresprite-expert?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "OpenSCAD Developer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/openscad-developer-1456806188?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Godot Game Engine expert",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/godot-game-engine-expert?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "KiCad PCB Design Specialist",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/kicad-pcb-design-specialist?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Godot Game Developer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/godot-game-developer?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Video Annotation",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/video-annotation?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Music & Sound Annotation Expert",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/music-sound-annotation-expert-2823077045?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Materials Science Expert",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/materials-science-expert-1075051173?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Senior Advanced NDT and Imaging Specialist",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/senior-advanced-ndt-and-imaging-specialist?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "CATIA Specialist - CAD Engineering",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/catia-specialist-cad-engineering?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "2D Graphic Design & Image Editing Expert (GIMP)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/2d-graphic-design-image-editing-expert-gimp?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "SolveSpace Specialist \u2013 CAD",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/solvespace-specialist-cad?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "DesignSpark PCB Specialist",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/designspark-pcb-specialist?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Audio Editing & Production Expert (Audacity)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/audio-editing-production-expert-audacity?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "ParaView Specialist - Scientific Visualization",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/paraview-specialist-scientific-visualization?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Nuclear & Radiological Security Expert",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/nuclear-radiological-security-expert-4660345743?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Senior Industrial Trades and Maintenance Expert",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/senior-industrial-trades-and-maintenance-expert?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "AI Jailbreak & Prompt-Injection Security Expert",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/ai-jailbreak-prompt-injection-security-expert-517584351?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Food Delivery AI Response Evaluator",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/micro1/jobs/food-delivery-ai-response-evaluator?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 38
+  },
+  {
+   "company": "Welo Global",
+   "platform": "jobicy",
+   "eligible": 36,
+   "locations": [
+    "Anywhere"
+   ],
+   "roles": [
+    {
+     "title": "Brazilian Subject Matter Expert in Religion or Philosophy",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/159097-brazilian-subject-matter-expert-in-religion-or-philosophy",
+     "via": "Jobicy"
+    },
+    {
+     "title": "Brazilian Subject Matter Expert in History",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/159095-brazilian-subject-matter-expert-in-history",
+     "via": "Jobicy"
+    },
+    {
+     "title": "English to Maltese Review Lead for UI, Marketing & Product Content",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158982-english-to-maltese-review-lead-for-ui-marketing-product-content",
+     "via": "Jobicy"
+    },
+    {
+     "title": "English to Lao Review Lead for UI, Marketing & Product Content",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158980-english-to-lao-review-lead-for-ui-marketing-product-content",
+     "via": "Jobicy"
+    },
+    {
+     "title": "English to Kyrgyz Review Lead for UI, Marketing & Product Content",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158978-english-to-kyrgyz-review-lead-for-ui-marketing-product-content",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Welsh",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158809-ai-trainers-network-welsh",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Vietnamese",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158808-ai-trainers-network-vietnamese",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Uzbek",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158807-ai-trainers-network-uzbek",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Ukrainian",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158806-ai-trainers-network-ukrainian",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Twi",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158805-ai-trainers-network-twi",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Turkish",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158804-ai-trainers-network-turkish",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Thai",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158803-ai-trainers-network-thai",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Tagalog",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158802-ai-trainers-network-tagalog",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Swedish",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158801-ai-trainers-network-swedish",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Swahili",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158800-ai-trainers-network-swahili",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Southeast Asia Talent Hub (Ex-Singapore Residents)",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158799-ai-trainers-network-southeast-asia-talent-hub-ex-singapore-residents",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Somali",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158798-ai-trainers-network-somali",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Slovenian",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158797-ai-trainers-network-slovenian",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Slovak",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158796-ai-trainers-network-slovak",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Serbian",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158795-ai-trainers-network-serbian",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Romanian",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158794-ai-trainers-network-romanian",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Portuguese",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158793-ai-trainers-network-portuguese",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Polish",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158792-ai-trainers-network-polish",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Persian",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158791-ai-trainers-network-persian",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Norwegian",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158790-ai-trainers-network-norwegian",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Mongolian",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158789-ai-trainers-network-mongolian",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Maori",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158788-ai-trainers-network-maori",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Malay",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158787-ai-trainers-network-malay",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Lithuanian",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158784-ai-trainers-network-lithuanian",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Latvian",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158743-ai-trainers-network-latvian",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Lao",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158741-ai-trainers-network-lao",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Kyrgyz",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158739-ai-trainers-network-kyrgyz",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Italian",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158737-ai-trainers-network-italian",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Irish",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158734-ai-trainers-network-irish",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Hungarian",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158731-ai-trainers-network-hungarian",
+     "via": "Jobicy"
+    },
+    {
+     "title": "AI Trainers Network - Hebrew",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/158726-ai-trainers-network-hebrew",
+     "via": "Jobicy"
+    }
+   ],
+   "total": 36
   },
   {
    "company": "Oyster",
    "platform": "ashby",
-   "eligible": 16,
+   "eligible": 14,
    "locations": [
     "EMEA; Romania; Bulgaria; Portugal; Canada; United Kingdom; Spain; Poland",
-    "EMEA; Romania; Hungary; Bulgaria; Portugal; Slovakia; Poland; Estonia; South Africa",
-    "EMEA; Romania; Hungary; Netherlands; Portugal; Slovakia; Spain; Poland",
+    "EMEA; Romania; Hungary; Bulgaria; Ireland; Slovakia; United Kingdom; Poland; Estonia; South Africa; Greece",
     "EMEA; Romania; Hungary; Netherlands; Portugal; Slovakia; Spain; Poland; South Africa; Greece",
-    "EMEA; Romania; Bulgaria; Kenya; Portugal; United Kingdom; Spain; Brazil; South Africa; Argentina; Armenia",
-    "EMEA; Ireland; Portugal; United Kingdom; Spain; Brazil; Canada"
+    "EMEA; Ireland; Portugal; United Kingdom; Spain; Brazil; Canada",
+    "EMEA; Toronto; Ireland; Portugal; United Kingdom; Spain",
+    "EMEA; Hungary; Austria; Ireland; Portugal; United Kingdom; Spain; Poland"
    ],
    "roles": [
     {
@@ -458,23 +925,13 @@
     },
     {
      "title": "Senior Global Benefits Specialist",
-     "location": "EMEA; Romania; Hungary; Bulgaria; Portugal; Slovakia; Poland; Estonia; South Africa",
+     "location": "EMEA; Romania; Hungary; Bulgaria; Ireland; Slovakia; United Kingdom; Poland; Estonia; South Africa; Greece",
      "url": "https://jobs.ashbyhq.com/oyster/b4e8fbc9-3510-42bf-ad76-6230091cfb3e"
-    },
-    {
-     "title": "Senior Payroll Specialist (Netherlands)",
-     "location": "EMEA; Romania; Hungary; Netherlands; Portugal; Slovakia; Spain; Poland",
-     "url": "https://jobs.ashbyhq.com/oyster/c54574a5-31fb-4f72-9cb2-9431f3c61935"
     },
     {
      "title": "Business Development Representative (EMEA)",
      "location": "EMEA; Romania; Hungary; Netherlands; Portugal; Slovakia; Spain; Poland; South Africa; Greece",
      "url": "https://jobs.ashbyhq.com/oyster/2843c3ed-da41-422a-8c19-edcbbf95f8b0"
-    },
-    {
-     "title": "Senior Data Engineer",
-     "location": "EMEA; Romania; Bulgaria; Kenya; Portugal; United Kingdom; Spain; Brazil; South Africa; Argentina; Armenia",
-     "url": "https://jobs.ashbyhq.com/oyster/7c2d418d-d817-4e9f-b73c-41fa5f6549af"
     },
     {
      "title": "Content Marketing Lead",
@@ -522,22 +979,99 @@
      "url": "https://jobs.ashbyhq.com/oyster/52e6101c-ebc8-4c08-9bad-f44e3a287148"
     },
     {
-     "title": "Software Engineer (Ruby on Rails, APIs)",
-     "location": "EMEA",
-     "url": "https://jobs.ashbyhq.com/oyster/4f5d4a8a-59a8-4696-b499-c01e740795c1"
-    },
-    {
      "title": "Offboard Operations Expert",
      "location": "EMEA; Portugal; Spain; Poland",
      "url": "https://jobs.ashbyhq.com/oyster/2787e757-6496-42b6-a3bb-b8798507feb5"
+    },
+    {
+     "title": "Senior AI Product Engineer ",
+     "location": "EMEA",
+     "url": "https://jobs.ashbyhq.com/oyster/b3c1e89e-f45b-4c14-9fea-42310ee9231b"
     }
    ],
-   "total": 24
+   "total": 21
+  },
+  {
+   "company": "G2i",
+   "platform": "himalayas",
+   "eligible": 11,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Remote Developer | G2i Talent Pool",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/g2i/jobs/remote-developer-g2i-talent-pool-8240194431?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Backend Developer - G2i Talent Pool",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/g2i/jobs/backend-developer-g2i-talent-pool-4846950038?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Frontend Developer - G2i Talent Pool",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/g2i/jobs/frontend-developer-g2i-talent-pool-230941308?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Remote Full Stack Developer - G2i Talent Pool",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/g2i/jobs/remote-full-stack-developer-g2i-talent-pool?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "AI Engineer / LLM Engineer - Talent Pool",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/g2i/jobs/ai-engineer-llm-engineer-talent-pool?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Tech Talent Pool: Engineers, Data and AI/ML",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/g2i/jobs/tech-talent-pool-engineers-data-and-ai-ml-5668161601?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Full Stack Developer - G2i Talent Pool",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/g2i/jobs/full-stack-developer-g2i-talent-pool-2528939820?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Remote Python Senior Software Engineer, AI Training",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/g2i/jobs/remote-python-senior-software-engineer-ai-training?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "AI Engineer / LLM Engineer - G2i Talent Pool",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/g2i/jobs/ai-engineer-llm-engineer-g2i-talent-pool-5753734984?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Remote Senior Software Engineer, (OpenAI Codex, Claude Code or Cursor)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/g2i/jobs/remote-senior-software-engineer-openai-codex-claude-code-or-cursor?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Senior FullStack Developer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/g2i/jobs/senior-fullstack-developer?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 11
   },
   {
    "company": "ConsenSys",
    "platform": "greenhouse",
-   "eligible": 10,
+   "eligible": 9,
    "locations": [
     "EMEA - Remote, United States - Remote",
     "UNITED STATES - Remote, EMEA - Remote, CANADA - Remote, LATAM - Remote",
@@ -591,14 +1125,9 @@
      "title": "Senior Systems Administrator",
      "location": "UNITED STATES - Remote, EMEA - Remote, LATAM - Remote, CANADA - Remote",
      "url": "https://job-boards.greenhouse.io/consensys/jobs/8334532"
-    },
-    {
-     "title": "Staff Software Engineer: Perpetuals",
-     "location": "EMEA - Remote",
-     "url": "https://job-boards.greenhouse.io/consensys/jobs/8138475"
     }
    ],
-   "total": 13
+   "total": 12
   },
   {
    "company": "Railway",
@@ -675,34 +1204,95 @@
    "total": 11
   },
   {
-   "company": "Zipline",
-   "platform": "greenhouse",
-   "eligible": 3,
+   "company": "RevenueCat",
+   "platform": "jobicy",
+   "eligible": 4,
    "locations": [
-    "Remote from Anywhere",
-    "Remote in USA; Remote, EMEA"
+    "APAC,  EMEA,  Canada,  USA",
+    "EMEA,  Canada,  USA",
+    "APAC,  EMEA,  USA",
+    "EMEA,  LATAM,  Canada,  USA"
    ],
    "roles": [
     {
-     "title": "Principal Counsel, Africa Legal",
-     "location": "Remote from Anywhere",
-     "url": "https://www.zipline.com/open-roles/7821937003?gh_jid=7821937003"
+     "title": "Senior CRO Designer, Paywalls and Funnels",
+     "location": "APAC,  EMEA,  Canada,  USA",
+     "url": "https://jobicy.com/jobs/154654-senior-cro-designer-paywalls-and-funnels",
+     "via": "Jobicy"
     },
     {
-     "title": "Staff Software Engineer, Healthcare \u2014 Customer Experience",
-     "location": "Remote in USA; Remote, EMEA",
-     "url": "https://www.zipline.com/open-roles/7983305003?gh_jid=7983305003"
+     "title": "Senior Product Manager, Analytics Features",
+     "location": "EMEA,  Canada,  USA",
+     "url": "https://jobicy.com/jobs/154650-senior-product-manager-analytics-features",
+     "via": "Jobicy"
     },
     {
-     "title": "Staff Software Engineer, Healthcare \u2014 Systems & Integrations",
-     "location": "Remote in USA; Remote, EMEA",
-     "url": "https://www.zipline.com/open-roles/7983316003?gh_jid=7983316003"
+     "title": "Senior Software Engineer, Internal Tooling",
+     "location": "APAC,  EMEA,  USA",
+     "url": "https://jobicy.com/jobs/154567-senior-software-engineer-internal-tooling",
+     "via": "Jobicy"
+    },
+    {
+     "title": "Senior SDK Engineer",
+     "location": "EMEA,  LATAM,  Canada,  USA",
+     "url": "https://jobicy.com/jobs/154563-senior-sdk-engineer",
+     "via": "Jobicy"
     }
    ],
-   "total": 356
+   "total": 4
   },
   {
    "company": "Clera",
+   "platform": "himalayas",
+   "eligible": 3,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Senior Platform Software Engineer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/clera/jobs/senior-platform-software-engineer-447849997?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Product Marketing Manager",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/clera/jobs/product-marketing-manager?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Senior Product Designer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/clera/jobs/senior-product-designer-9163035966?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 3
+  },
+  {
+   "company": "Sun King",
+   "platform": "pinpoint",
+   "eligible": 2,
+   "locations": [
+    "Global"
+   ],
+   "roles": [
+    {
+     "title": "Global Marketing Manager - PAYG Phones",
+     "location": "Global",
+     "url": "https://sunking.pinpointhq.com/en/postings/21382d3e-69bd-4256-ae28-26853f824db4"
+    },
+    {
+     "title": "Global Digital Sales Lead \u2013 Call Center",
+     "location": "Global",
+     "url": "https://sunking.pinpointhq.com/en/postings/2deb6083-7b0e-48a5-a529-68864197948c"
+    }
+   ],
+   "total": 187
+  },
+  {
+   "company": "G2i Inc.",
    "platform": "himalayas",
    "eligible": 2,
    "locations": [
@@ -710,15 +1300,61 @@
    ],
    "roles": [
     {
-     "title": "Senior Product Designer",
+     "title": "Senior Software Engineer, (OpenAI Codex, Claude Code or Cursor)",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/clera/jobs/senior-product-designer-9163035966?utm_source=api",
+     "url": "https://himalayas.app/companies/g2i-inc/jobs/senior-software-engineer-openai-codex-claude-code-or-cursor?utm_source=api",
      "via": "Himalayas"
     },
     {
-     "title": "Senior Data Scientist",
+     "title": "Senior Software Engineer, AI Training",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/clera/jobs/senior-data-scientist?utm_source=api",
+     "url": "https://himalayas.app/companies/g2i-inc/jobs/senior-software-engineer-ai-training?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 2
+  },
+  {
+   "company": "Babou AI",
+   "platform": "himalayas",
+   "eligible": 2,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Freelance After Effects Motion Designer, Flexible Hours",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/babou-ai/jobs/freelance-after-effects-motion-designer-flexible-hours?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Designer, AI Video (After Effects), Flexible Hours",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/babou-ai/jobs/designer-ai-video-after-effects-flexible-hours?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 2
+  },
+  {
+   "company": "VAme Ltd",
+   "platform": "himalayas",
+   "eligible": 2,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Control Engineer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/vame-ltd/jobs/control-engineer?utm_source=api",
+     "via": "Himalayas"
+    },
+    {
+     "title": "Technical Sales Engineer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/vame-ltd/jobs/technical-sales-engineer?utm_source=api",
      "via": "Himalayas"
     }
    ],
@@ -748,27 +1384,44 @@
    "total": 2
   },
   {
-   "company": "micro1",
-   "platform": "himalayas",
+   "company": "Testlio",
+   "platform": "jobicy",
    "eligible": 2,
    "locations": [
-    "Worldwide"
+    "Anywhere",
+    "EMEA"
    ],
    "roles": [
     {
-     "title": "Godot Game Developer",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/micro1/jobs/godot-game-developer?utm_source=api",
-     "via": "Himalayas"
+     "title": "QA Tester (Future Roles)",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/152401-qa-tester-future-roles",
+     "via": "Jobicy"
     },
     {
-     "title": "Video Annotation",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/micro1/jobs/video-annotation?utm_source=api",
-     "via": "Himalayas"
+     "title": "Engineering Manager, EMEA (Platform)",
+     "location": "EMEA",
+     "url": "https://jobicy.com/jobs/154448-engineering-manager-emea-platform",
+     "via": "Jobicy"
     }
    ],
    "total": 2
+  },
+  {
+   "company": "Zipline",
+   "platform": "greenhouse",
+   "eligible": 1,
+   "locations": [
+    "Remote from Anywhere"
+   ],
+   "roles": [
+    {
+     "title": "Principal Counsel, Africa Legal",
+     "location": "Remote from Anywhere",
+     "url": "https://www.zipline.com/open-roles/7821937003?gh_jid=7821937003"
+    }
+   ],
+   "total": 351
   },
   {
    "company": "Cockroach Labs",
@@ -784,7 +1437,7 @@
      "url": "https://www.cockroachlabs.com/careers/job/?gh_jid=2578081"
     }
    ],
-   "total": 10
+   "total": 9
   },
   {
    "company": "Turing",
@@ -800,7 +1453,7 @@
      "url": "https://job-boards.greenhouse.io/turing/jobs/6218247004"
     }
    ],
-   "total": 40
+   "total": 43
   },
   {
    "company": "Apollo Agriculture",
@@ -832,23 +1485,7 @@
      "url": "https://jobs.ashbyhq.com/posthog/0be1b52c-2401-4ae2-b7fc-5d018c1ff96f"
     }
    ],
-   "total": 10
-  },
-  {
-   "company": "Sun King",
-   "platform": "pinpoint",
-   "eligible": 1,
-   "locations": [
-    "Global"
-   ],
-   "roles": [
-    {
-     "title": "Global Marketing Manager - PAYG Phones",
-     "location": "Global",
-     "url": "https://sunking.pinpointhq.com/en/postings/21382d3e-69bd-4256-ae28-26853f824db4"
-    }
-   ],
-   "total": 181
+   "total": 8
   },
   {
    "company": "Taptap Send",
@@ -865,6 +1502,40 @@
     }
    ],
    "total": 27
+  },
+  {
+   "company": "ASG Company",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Full Stack Developer Intern",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/asg-company/jobs/full-stack-developer-intern?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Human Power BG",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Senior Front-End Developer",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/human-power-bg/jobs/senior-front-end-developer?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
   },
   {
    "company": "vCluster Labs",
@@ -895,23 +1566,6 @@
      "title": "Lead Solutions Engineer",
      "location": "Worldwide",
      "url": "https://himalayas.app/companies/monetizemore/jobs/lead-solutions-engineer?utm_source=api",
-     "via": "Himalayas"
-    }
-   ],
-   "total": 1
-  },
-  {
-   "company": "VAme Ltd",
-   "platform": "himalayas",
-   "eligible": 1,
-   "locations": [
-    "Worldwide"
-   ],
-   "roles": [
-    {
-     "title": "Technical Sales Engineer",
-     "location": "Worldwide",
-     "url": "https://himalayas.app/companies/vame-ltd/jobs/technical-sales-engineer?utm_source=api",
      "via": "Himalayas"
     }
    ],
@@ -952,7 +1606,7 @@
    "total": 1
   },
   {
-   "company": "G2i",
+   "company": "apricot",
    "platform": "himalayas",
    "eligible": 1,
    "locations": [
@@ -960,9 +1614,60 @@
    ],
    "roles": [
     {
-     "title": "Remote Developer | G2i Talent Pool",
+     "title": "Producer | Human Stories & Social Video",
      "location": "Worldwide",
-     "url": "https://himalayas.app/companies/g2i/jobs/remote-developer-g2i-talent-pool-8240194431?utm_source=api",
+     "url": "https://himalayas.app/companies/apricot/jobs/producer-human-stories-social-video?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Invisible Technologies",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Audio Specialist - Freelance AI Trainer Project",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/inv/jobs/audio-specialist-freelance-ai-trainer-project?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 2
+  },
+  {
+   "company": "Banco Plata, S.A., Instituci\u00f3n de Banca M\u00faltiple",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Business Analyst Junior [Antifraud & Disputes]",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/banco-plata-s-a-institucion-de-banca-multiple/jobs/business-analyst-junior-antifraud-disputes?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 2
+  },
+  {
+   "company": "JustPlay GmbH",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Senior Product Manager - Ad Traffic Quality (all genders)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/justplay-gmbh/jobs/senior-product-manager-ad-traffic-quality-all-genders?utm_source=api",
      "via": "Himalayas"
     }
    ],
@@ -986,6 +1691,40 @@
    "total": 1
   },
   {
+   "company": "DataKrew Pvt. Ltd.",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Backend Developer (.NET - C#)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/datakrew-pvt-ltd/jobs/backend-developer-net-c?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Growe Talents",
+   "platform": "himalayas",
+   "eligible": 1,
+   "locations": [
+    "Worldwide"
+   ],
+   "roles": [
+    {
+     "title": "Casino Manager (Sportsbook Experience)",
+     "location": "Worldwide",
+     "url": "https://himalayas.app/companies/growe-talents/jobs/casino-manager-sportsbook-experience?utm_source=api",
+     "via": "Himalayas"
+    }
+   ],
+   "total": 1
+  },
+  {
    "company": "Askable",
    "platform": "himalayas",
    "eligible": 1,
@@ -1003,7 +1742,24 @@
    "total": 1
   },
   {
-   "company": "Testlio",
+   "company": "Udacity",
+   "platform": "jobicy",
+   "eligible": 1,
+   "locations": [
+    "Anywhere"
+   ],
+   "roles": [
+    {
+     "title": "External Contractor - Mentor role for Data Product Manager track",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/154527-external-contractor-mentor-role-for-data-product-manager-track",
+     "via": "Jobicy"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Spotify",
    "platform": "jobicy",
    "eligible": 1,
    "locations": [
@@ -1011,9 +1767,60 @@
    ],
    "roles": [
     {
-     "title": "Engineering Manager, EMEA (Platform)",
+     "title": "Senior Product Manager - Core Experience",
      "location": "EMEA",
-     "url": "https://jobicy.com/jobs/154448-engineering-manager-emea-platform",
+     "url": "https://jobicy.com/jobs/158991-senior-product-manager-core-experience",
+     "via": "Jobicy"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Softgic",
+   "platform": "jobicy",
+   "eligible": 1,
+   "locations": [
+    "Anywhere"
+   ],
+   "roles": [
+    {
+     "title": "1775 RPG/AS400 & JD Edwards EnterpriseOne Developer",
+     "location": "Anywhere",
+     "url": "https://jobicy.com/jobs/150052-1775-rpg-as400-jd-edwards-enterpriseone-developer",
+     "via": "Jobicy"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "Fivetran",
+   "platform": "jobicy",
+   "eligible": 1,
+   "locations": [
+    "EMEA"
+   ],
+   "roles": [
+    {
+     "title": "Staff Solutions Architect",
+     "location": "EMEA",
+     "url": "https://jobicy.com/jobs/158620-staff-solutions-architect",
+     "via": "Jobicy"
+    }
+   ],
+   "total": 1
+  },
+  {
+   "company": "TRM Labs",
+   "platform": "jobicy",
+   "eligible": 1,
+   "locations": [
+    "EMEA"
+   ],
+   "roles": [
+    {
+     "title": "Global Investigator (EMEA)",
+     "location": "EMEA",
+     "url": "https://jobicy.com/jobs/158617-global-investigator-emea",
      "via": "Jobicy"
     }
    ],
