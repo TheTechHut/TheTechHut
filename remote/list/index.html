@@ -67,6 +67,18 @@
                 </div>
             </div>
 
+            <div id="stale" class="gate" hidden>
+                <span class="pill">Link changed</span>
+                <h2 style="margin-top:18px">This access link no longer works</h2>
+                <p>
+                    We changed the list&rsquo;s link to keep it for members. If you bought it, message us
+                    with your payment reference and we will send you the current link.
+                </p>
+                <div class="cta-row" style="justify-content:center;margin-top:18px">
+                    <a class="btn light" href="https://wa.me/254115017058?text=My%20Remote%20List%20link%20has%20changed.%20Reference%3A%20" target="_blank" rel="noopener">Get the new link</a>
+                </div>
+            </div>
+
             <div id="list" hidden>
                 <span class="eyebrow">Your list</span>
                 <h2 style="margin-bottom:8px">Companies that will employ you from Kenya</h2>
@@ -159,19 +171,32 @@
     </footer>
 
     <script>
-        /* The access token arrives as the URL fragment, which browsers never send
-           to the server and which stays out of referrer headers. Rotating the
-           token in scripts/remote_token.txt invalidates every old link. */
-        var token = (location.hash || '').replace(/^#/, '').trim();
+        /* The list is published encrypted (data/remote-list.enc.json, written by
+           the daily job with scripts/encrypt_remote_list.mjs). The key is the part
+           of the access link after #, which browsers never send to a server and
+           which stays out of referrer headers. A new key retires every old link. */
+        var key = (location.hash || '').replace(/^#/, '').trim();
         var show = function (id) { document.getElementById(id).hidden = false; };
-
-        if (!/^[a-f0-9]{8,64}$/i.test(token)) {
+        function fromB64(s) {
+            s = s.replace(/-/g, '+').replace(/_/g, '/'); while (s.length % 4) s += '=';
+            var bin = atob(s), a = new Uint8Array(bin.length);
+            for (var i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i);
+            return a;
+        }
+        if (/^[a-f0-9]{8,42}$/i.test(key)) {
+            show('stale');                         // an old token link, from before the list was encrypted
+        } else if (!/^[A-Za-z0-9_-]{43}$/.test(key) || !window.crypto || !crypto.subtle) {
             show('gate');
         } else {
-            fetch('/data/l/' + token + '.json', { cache: 'no-store' })
+            fetch('/data/remote-list.enc.json', { cache: 'no-store' })
                 .then(function (r) { if (!r.ok) throw new Error('missing'); return r.json(); })
+                .then(function (box) {
+                    return crypto.subtle.importKey('raw', fromB64(key), 'AES-GCM', false, ['decrypt'])
+                        .then(function (k) { return crypto.subtle.decrypt({ name: 'AES-GCM', iv: fromB64(box.iv) }, k, fromB64(box.ct)); })
+                        .then(function (buf) { return JSON.parse(new TextDecoder().decode(buf)); }, function () { throw new Error('stale'); });
+                })
                 .then(render)
-                .catch(function () { show('pending'); });
+                .catch(function (e) { show(e && e.message === 'stale' ? 'stale' : 'pending'); });
         }
 
         function n(x) { return Number(x || 0).toLocaleString('en-KE'); }

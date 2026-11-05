@@ -31,7 +31,10 @@
  *
  * Secrets (wrangler secret put <NAME> — never commit these)
  *   PAYSTACK_SECRET_KEY   sk_test_… while testing, sk_live_… when you go live
- *   REMOTE_LIST_TOKEN     the token from scripts/remote_token.txt
+ *   REMOTE_LIST_KEY       the Remote-From-Kenya List key (43 characters, from
+ *                         node scripts/encrypt_remote_list.mjs --new-key). Also a GitHub
+ *                         Actions secret: the daily job encrypts the list with it, and
+ *                         the buyer's link carries it after #, where it decrypts the list.
  *   RESEND_API_KEY        optional; receipts go through Resend when set, otherwise
  *                         through Brevo (BREVO_API_KEY + BREVO_SENDER_EMAIL, below)
  *   COMMUNITIES_URL       the African Tech Community Database access link,
@@ -197,11 +200,12 @@ export function deliveryFor(product, env) {
       note: 'Bookmark it. We check and update the links every two weeks, and this link always opens the latest version.',
     };
   }
-  if (p.delivers === 'remote-list' && env.REMOTE_LIST_TOKEN) {
+  const listKey = (env.REMOTE_LIST_KEY || '').toString().trim();
+  if (p.delivers === 'remote-list' && /^[A-Za-z0-9_-]{43}$/.test(listKey)) {
     const d = {
       kind: 'link',
       label: 'Your Remote-From-Kenya List',
-      url: SITE + '/remote/list/#' + env.REMOTE_LIST_TOKEN,
+      url: SITE + '/remote/list/#' + listKey,
       note: 'Bookmark this. It is rebuilt every morning, so it stays current.',
     };
     if (p.includesEarlyAccess && invite) d.also = [earlyGroupLink(invite, true)];

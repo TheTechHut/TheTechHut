@@ -249,7 +249,7 @@ class WholeRun(unittest.TestCase):
         fj.SNAPS = os.path.join(self.tmp, 'snapshots')
         fj.FEEDS = [('Good Co', 'greenhouse', 'goodco')]
         fj.PROBATION = [('Maybe Co', 'ashby', 'maybeco')]
-        os.environ.pop('REMOTE_LIST_TOKEN', None)
+        os.environ.pop('REMOTE_LIST_PLAIN', None)
 
     def tearDown(self):
         fj.DATA, fj.SNAPS, fj.FEEDS, fj.PROBATION, fj.get, fj.fetch_himalayas = self.saved
@@ -309,22 +309,31 @@ class WholeRun(unittest.TestCase):
     def test_himalayas_roles_are_credited_and_the_source_is_declared(self):
         code, snap, summary, _ = self.run_main([self.hm('Newco', 'Data Engineer', 'de-1')])
         self.assertEqual(summary['sources'], ['Himalayas'])
-        paid = os.path.join(self.tmp, 'l')
-        self.assertFalse(os.path.exists(paid))                       # no token, no paid file (as before)
+        self.assertEqual([f for f in os.listdir(self.tmp) if 'l' == f or f.startswith('remote-list')], [])   # no path, no paid file
         self.assertTrue(any(r['platform'] == 'himalayas' for r in snap['roles']))
 
     def test_himalayas_roles_in_the_paid_file_carry_via_and_link_to_himalayas(self):
-        os.environ['REMOTE_LIST_TOKEN'] = 'a' * 24
+        outside = tempfile.mkdtemp()
+        os.environ['REMOTE_LIST_PLAIN'] = os.path.join(outside, 'remote-list.json')
         try:
             self.run_main([self.hm('Newco', 'Data Engineer', 'de-1')])
         finally:
-            os.environ.pop('REMOTE_LIST_TOKEN', None)
-        full = _load(os.path.join(self.tmp, 'l', 'a' * 24 + '.json'))
+            os.environ.pop('REMOTE_LIST_PLAIN', None)
+        full = _load(os.path.join(outside, 'remote-list.json'))
         newco = [c for c in full['companies'] if c['company'] == 'Newco'][0]
         self.assertEqual(newco['roles'][0]['via'], 'Himalayas')
         self.assertTrue(newco['roles'][0]['url'].startswith('https://himalayas.app/'))
         goodco = [c for c in full['companies'] if c['company'] == 'Good Co'][0]
         self.assertNotIn('via', goodco['roles'][0])                  # employer links are untouched
+
+    def test_the_paid_list_is_never_written_in_plain_text_inside_the_repo(self):
+        os.environ['REMOTE_LIST_PLAIN'] = os.path.join(fj.ROOT, 'data', 'remote-list.json')
+        try:
+            _, _, _, out = self.run_main([self.hm('Newco', 'Data Engineer', 'de-1')])
+        finally:
+            os.environ.pop('REMOTE_LIST_PLAIN', None)
+        self.assertFalse(os.path.exists(os.path.join(fj.ROOT, 'data', 'remote-list.json')))
+        self.assertIn('NOT written', out)
 
     def test_an_employer_feed_wins_over_the_aggregators_copy(self):
         code, snap, summary, _ = self.run_main([self.hm('Good Co', 'Platform Engineer', 'dup'), self.hm('Newco', 'SRE', 'n1')])

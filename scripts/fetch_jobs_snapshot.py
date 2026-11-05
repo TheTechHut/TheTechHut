@@ -17,11 +17,15 @@ maintains three rolling files the site and the products read:
                                   location wording, so the sales page can show
                                   live proof the list is real and current.
                                   Deliberately carries no apply links.
-  data/l/<token>.json             THE PAID FILE. Every eligible role with its
-                                  apply link. The token lives in
-                                  scripts/remote_token.txt, which is not served,
-                                  so the only way to the file is to be given it.
-                                  Rotate the token and buyers get a new URL.
+  data/remote-list.enc.json      THE PAID FILE, ENCRYPTED. Every eligible role
+                                  with its apply link. This script writes it in
+                                  plain text only to the path in REMOTE_LIST_PLAIN
+                                  (a temp file on the runner, never in data/);
+                                  scripts/encrypt_remote_list.mjs then encrypts it
+                                  with the REMOTE_LIST_KEY secret. The key is the
+                                  part of a buyer's link after #, so neither the
+                                  public repo nor the server holds a readable copy.
+                                  Rotate the key and old links stop working.
   data/hiring-index.json          rolling counts per company and per skill,
                                   the raw material for a quarterly report
 
@@ -697,21 +701,22 @@ def main():
     with open(os.path.join(DATA, 'remote-summary.json'), 'w') as fh:
         json.dump(summary, fh, indent=1)
 
-    # paid: the same companies with every role and its apply link.
-    # The token only ever comes from the environment. A file in this repo gets
-    # published by GitHub Pages, which is exactly how the first one leaked.
-    token = (os.environ.get('REMOTE_LIST_TOKEN') or '').strip()
-    if not re.fullmatch(r'[A-Za-z0-9_-]{16,64}', token):
-        print('\n!! REMOTE_LIST_TOKEN missing or malformed -- the paid list was '
-              'NOT written.\n   Set it under Settings -> Secrets and variables '
-              '-> Actions.\n   The public summary is still current.')
+    # paid: the same companies with every role and its apply link. Written in
+    # plain text ONLY outside the repo (REMOTE_LIST_PLAIN, a temp file on the
+    # runner); scripts/encrypt_remote_list.mjs encrypts it into data/. The repo
+    # is public, which is how the earlier plain-text data/l/<token>.json leaked.
+    plain = (os.environ.get('REMOTE_LIST_PLAIN') or '').strip()
+    if not plain or os.path.abspath(plain).startswith(os.path.abspath(ROOT) + os.sep):
+        print('\n!! REMOTE_LIST_PLAIN missing, or inside the repo -- the paid list was '
+              'NOT written.\n   The workflow sets it to a temp file. '
+              'The public summary is still current.')
     else:
         full = dict(meta)
         full['companies'] = companies
-        os.makedirs(os.path.join(DATA, 'l'), exist_ok=True)
-        with open(os.path.join(DATA, 'l', token + '.json'), 'w') as fh:
-            json.dump(full, fh, indent=1)
-        print('paid list written for the configured token')
+        os.makedirs(os.path.dirname(os.path.abspath(plain)), exist_ok=True)
+        with open(plain, 'w') as fh:
+            json.dump(full, fh)
+        print('paid list written to REMOTE_LIST_PLAIN for encryption')
 
     # ---- data/hiring-index.json: the rolling report data ----------------
     idx_path = os.path.join(DATA, 'hiring-index.json')

@@ -11,3 +11,6 @@ data/jobs-board.json
 
 # paid content sources and keys, never committed (scripts/build_communities.mjs)
 private/
+
+# the old plain-text paid list; the list is now data/remote-list.enc.json
+data/l/

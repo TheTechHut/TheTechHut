@@ -171,8 +171,10 @@ in GitHub Actions secrets and Cloudflare. Never put the replacement in a file.
 
 Two ways out, when it starts to matter:
 
-1. **Rotate the token.** Change `scripts/remote_token.txt`, redeploy, send
-   existing buyers the new link. Cuts off a leak, annoys honest buyers.
+1. **Rotate the key.** `node scripts/encrypt_remote_list.mjs --new-key`, set
+   it as `REMOTE_LIST_KEY` in GitHub Actions and on the Worker, and email
+   existing buyers the new link (`worker/scripts/send-communities-access.mjs
+   --product remote-list`). Cuts off a leak, annoys honest buyers.
 2. **A token per buyer.** The Worker issues a unique link on each verified
    payment and stores it. Then a leak is traceable to one person and
    revocable on its own. Small change — ask me and I will build it.

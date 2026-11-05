@@ -71,7 +71,7 @@ const call = async (env, path, body, opts) => {
 const buyer = (n = 1, over = {}) => ({
   product: 'remote-list', email: 'buyer' + n + '@example.com', whatsapp: '07' + String(10000000 + n).slice(-8), name: 'Wanjiru', turnstile: 'tok_' + 'x'.repeat(20), ...over,
 });
-const baseEnv = () => ({ PAYSTACK_SECRET_KEY: 'sk_test_fake', REMOTE_LIST_TOKEN: 'tok', PAY_GUARD: fakeGuard() });
+const baseEnv = () => ({ PAYSTACK_SECRET_KEY: 'sk_test_fake', REMOTE_LIST_KEY: 'Kfake_key_for_tests_only_0123456789abcdefgh', PAY_GUARD: fakeGuard() });
 const paystackCalls = () => calls.filter((u) => u.includes('api.paystack.co')).length;
 
 console.log('\nonly our pages, and only people');

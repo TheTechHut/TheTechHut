@@ -10,7 +10,7 @@ import assert from 'node:assert';
 const SECRET = 'sk_test_fake_for_tests';
 const env = {
   PAYSTACK_SECRET_KEY: SECRET,
-  REMOTE_LIST_TOKEN: 'fake_token_for_tests_only',
+  REMOTE_LIST_KEY: 'Kfake_key_for_tests_only_0123456789abcdefgh',
   // RESEND_API_KEY deliberately unset: receipts must be optional
 };
 
@@ -107,7 +107,7 @@ await t('a successful full-price payment is accepted and returns the link', asyn
   assert.equal(b.paid, true);
   assert.equal(b.amount, 500);
   assert.equal(b.delivery.kind, 'link');
-  assert.ok(b.delivery.url.endsWith('#fake_token_for_tests_only'), 'token must come from env, not the client');
+  assert.ok(b.delivery.url.endsWith('#Kfake_key_for_tests_only_0123456789abcdefgh'), 'token must come from env, not the client');
   assert.equal(b.emailed, false, 'no RESEND_API_KEY set, so no email — but the sale still completes');
 });
 

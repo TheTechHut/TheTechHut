@@ -44,7 +44,7 @@ Cloudflare.
 
 ```sh
 npx wrangler secret put PAYSTACK_SECRET_KEY   # sk_test_… for now
-npx wrangler secret put REMOTE_LIST_TOKEN     # the value from step 3a below
+npx wrangler secret put REMOTE_LIST_KEY       # the key from step 3a below
 npx wrangler secret put EARLY_ACCESS_INVITE   # the Early Access WhatsApp group invite link
 npx wrangler secret put RESEND_API_KEY        # optional — skip it for now
 ```
@@ -54,22 +54,28 @@ written to a file and never appears in this repo.
 
 Paystack keys: Dashboard → Settings → API Keys & Webhooks.
 
-#### 3a. Generate the list token yourself
+#### 3a. Generate the list key yourself
 
 ```sh
-openssl rand -hex 16
+node scripts/encrypt_remote_list.mjs --new-key
 ```
 
-Paste that same value into **two** places and nowhere else:
+The daily job encrypts the paid list with this key into
+`data/remote-list.enc.json`, and the buyer's link carries it after `#`, where
+`/remote/list/` uses it to decrypt the list in their browser. The repo and the
+site only ever hold the encrypted file. Paste the key into **two** places and
+nowhere else:
 
-- `wrangler secret put REMOTE_LIST_TOKEN` (above), so the Worker can build the
+- `wrangler secret put REMOTE_LIST_KEY` (above), so the Worker can build the
   buyer's link
-- GitHub → Settings → Secrets and variables → Actions → **REMOTE_LIST_TOKEN**,
-  so the daily job knows what to name the file
+- GitHub → Settings → Secrets and variables → Actions → **REMOTE_LIST_KEY**,
+  so the daily job can encrypt the list
 
 Do not put it in a file in this repo. GitHub Pages publishes this repository,
-so a token in a file is a public token — that is exactly how the first one
-leaked, at `https://thetechhut.co/scripts/remote_token.txt`. Do not paste it
+so a key in a file is a public key — that is exactly how the first token
+leaked, at `https://thetechhut.co/scripts/remote_token.txt`. A new key retires
+every old link: email buyers the new one with
+`worker/scripts/send-communities-access.mjs --product remote-list`. Do not paste it
 into a chat either, including to me: I do not need it, and a transcript is one
 more copy of it.
 

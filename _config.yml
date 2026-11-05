@@ -17,6 +17,7 @@ exclude:
   - README.md
   - CLAUDE.md
 
-# data/remote-summary.json, data/hiring-index.json and data/l/ stay published:
-# the first two are public proof on /remote/, and data/l/<token>.json is the
-# product itself, which has to be fetchable by the people who bought it.
+# data/remote-summary.json, data/hiring-index.json, data/remote-list.enc.json and
+# data/communities.enc.json stay published: the first two are public proof on
+# /remote/, and the .enc.json files are the paid lists, encrypted. They have to
+# be fetchable by buyers, whose link carries the key after # to decrypt them.
