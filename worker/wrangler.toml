@@ -9,6 +9,7 @@ compatibility_date = "2026-10-01"
 #   wrangler secret put REMOTE_LIST_TOKEN     # from scripts/remote_token.txt
 #   wrangler secret put RESEND_API_KEY        # optional, for the receipt email
 #   wrangler secret put TURNSTILE_SECRET      # optional, the checkout bot check
+#   wrangler secret put COMMUNITIES_URL       # the Notion link emailed to database buyers
 #
 # The CV Pack email signup (see README, "The CV Pack email list") adds more (the Daily Savannah list is a second product on the same Worker):
 #   BREVO_API_KEY, BREVO_LIST_ID (CV Pack), BREVO_LIST_ID_DAILY (Daily Savannah),

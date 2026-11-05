@@ -375,3 +375,15 @@ payment however often `/verify` or the webhook fire. `/health` shows
 3. Then set the **secret key** on the Worker:
    `npx wrangler secret put TURNSTILE_SECRET`
    (in that order: the Worker only demands the check once it has the secret).
+
+## African Tech Community Database delivery
+
+A paid `communities` order shows the database link on the page and emails it
+(`/verify` and the webhook, once per payment). The link is the secret
+`COMMUNITIES_URL` (a `https://….notion.site/…` page), not a file, because this
+repo is public. Receipts go through Resend if `RESEND_API_KEY` is set,
+otherwise through Brevo with the newsletter key and sender.
+
+People who bought before this: `scripts/send-communities-access.mjs` reads
+their orders from Paystack and sends them the same email. Dry run by default;
+instructions at the top of the file.

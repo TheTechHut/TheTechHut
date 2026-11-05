@@ -229,5 +229,59 @@ await t('a missing secret key fails closed', async () => {
   assert.equal(r.status, 500);
 });
 
+console.log('\nthe community database is emailed to buyers');
+const DB = 'https://example-workspace.notion.site/Test-Database-0000';
+const BREVO_ENV = { ...env, COMMUNITIES_URL: DB, BREVO_API_KEY: 'xkeysib-fake', BREVO_SENDER_EMAIL: 'info@thetechhut.co' };
+const communitiesPaid = verifyPayload({ amount: 25000, reference: 'ref_comm_1', metadata: { product: 'communities' } });
+
+await t('a paid communities order gets the database link on the page and by Brevo email', async () => {
+  const mails = [];
+  stubPaystack(async (url, init) => {
+    if (String(url).includes('api.brevo.com')) { mails.push(JSON.parse(init.body)); return new Response('{"messageId":"m"}', { status: 201 }); }
+    return new Response(JSON.stringify(communitiesPaid), { status: 200 });
+  });
+  const b = await (await worker.fetch(post('/verify', { reference: 'ref_comm_1' }), BREVO_ENV)).json();
+  restore();
+  assert.equal(b.paid, true);
+  assert.equal(b.delivery.kind, 'link'); assert.equal(b.delivery.url, DB);
+  assert.equal(b.emailed, true);
+  assert.equal(mails.length, 1);
+  assert.deepEqual(mails[0].to, [{ email: 'buyer@example.com' }]);
+  assert.ok(mails[0].htmlContent.includes(DB) && mails[0].textContent.includes(DB));
+  assert.equal(mails[0].subject, 'African Tech Community Database \u2014 your access');
+});
+
+await t('the webhook emails the link too (buyer closed the tab before M-Pesa confirmed)', async () => {
+  const mails = [];
+  stubPaystack(async (url, init) => { mails.push(JSON.parse(init.body)); return new Response('{}', { status: 201 }); });
+  const body = JSON.stringify({ event: 'charge.success', data: communitiesPaid.data });
+  const sig = await hmac512Hex(SECRET, body);
+  const r = await worker.fetch(post('/webhook', body, { 'x-paystack-signature': sig }), BREVO_ENV);
+  restore();
+  assert.equal(r.status, 200); assert.equal(mails.length, 1); assert.ok(mails[0].textContent.includes(DB));
+});
+
+await t('without COMMUNITIES_URL buyers are sent to WhatsApp, never shown a broken link', async () => {
+  stubPaystack(async () => new Response(JSON.stringify(communitiesPaid), { status: 200 }));
+  const b = await (await worker.fetch(post('/verify', { reference: 'ref_comm_1' }), env)).json();
+  restore();
+  assert.equal(b.paid, true); assert.equal(b.delivery.kind, 'whatsapp');
+});
+
+await t('a COMMUNITIES_URL that is not a Notion page is ignored', async () => {
+  stubPaystack(async () => new Response(JSON.stringify(communitiesPaid), { status: 200 }));
+  const b = await (await worker.fetch(post('/verify', { reference: 'ref_comm_1' }), { ...env, COMMUNITIES_URL: 'https://evil.example/db' })).json();
+  restore();
+  assert.equal(b.delivery.kind, 'whatsapp');
+});
+
+await t('an underpaid communities order gets no link and no email', async () => {
+  let mailed = 0;
+  stubPaystack(async (url) => { if (String(url).includes('brevo')) mailed++; return new Response(JSON.stringify(verifyPayload({ amount: 100, metadata: { product: 'communities' } })), { status: 200 }); });
+  const b = await (await worker.fetch(post('/verify', { reference: 'ref_comm_1' }), BREVO_ENV)).json();
+  restore();
+  assert.equal(b.paid, false); assert.equal(mailed, 0); assert.ok(!JSON.stringify(b).includes('notion'));
+});
+
 console.log('\n' + pass + ' passed, ' + fail + ' failed\n');
 process.exit(fail ? 1 : 0);

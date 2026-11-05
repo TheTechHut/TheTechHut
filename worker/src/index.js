@@ -32,7 +32,11 @@
  * Secrets (wrangler secret put <NAME> — never commit these)
  *   PAYSTACK_SECRET_KEY   sk_test_… while testing, sk_live_… when you go live
  *   REMOTE_LIST_TOKEN     the token from scripts/remote_token.txt
- *   RESEND_API_KEY        optional; without it the page still reveals the link
+ *   RESEND_API_KEY        optional; receipts go through Resend when set, otherwise
+ *                         through Brevo (BREVO_API_KEY + BREVO_SENDER_EMAIL, below)
+ *   COMMUNITIES_URL       the Notion page of the African Tech Community Database
+ *                         (https://….notion.site/…). A secret for the same reason as
+ *                         the invite below: only buyers should see it.
  *   EARLY_ACCESS_INVITE   the WhatsApp group invite link (https://chat.whatsapp.com/...).
  *                         A secret, NOT a file: this repo is published, and the link
  *                         is only meant to be shown to someone who has paid.
@@ -81,7 +85,7 @@ const PRODUCTS = {
   'early-quarter': { name: 'Early Access — three months', kes: 600,  delivers: 'early-group'    },
   'early-annual':  { name: 'Early Access — one year',     kes: 2000, delivers: 'early-group'    },
   'cv-blueprint':  { name: 'The CV Blueprint',            kes: 250,  delivers: 'whatsapp'    },
-  'communities':   { name: 'African Tech Community Database', kes: 250, delivers: 'whatsapp' },
+  'communities':   { name: 'African Tech Community Database', kes: 250, delivers: 'communities-db' },
 };
 
 /* ------------------------------------------------------------------ utils */
@@ -161,6 +165,12 @@ function earlyInvite(env) {
   return /^https:\/\/chat\.whatsapp\.com\/[A-Za-z0-9]{10,40}(\?[\w=&.%-]*)?$/.test(u) ? u : null;
 }
 
+/** The database link, but only if it really is a Notion page. */
+export function communitiesUrl(env) {
+  const u = (env.COMMUNITIES_URL || '').toString().trim();
+  return /^https:\/\/[a-z0-9-]+\.notion\.site\/[A-Za-z0-9%._~-]+(\?[\w=&.%-]*)?$/.test(u) ? u : null;
+}
+
 const earlyGroupLink = (url, included) => ({
   kind: 'link',
   label: included ? 'Early Access group (three months included)' : 'Your Early Access group',
@@ -169,11 +179,21 @@ const earlyGroupLink = (url, included) => ({
   note: 'Tap to request to join, from the WhatsApp number you gave us. We approve you against your payment, usually the same day.',
 });
 
-function deliveryFor(product, env) {
+export function deliveryFor(product, env) {
   const p = PRODUCTS[product];
   if (!p) return null;
   const invite = earlyInvite(env);
   if (p.delivers === 'early-group' && invite) return earlyGroupLink(invite, false);
+  const db = p.delivers === 'communities-db' ? communitiesUrl(env) : null;
+  if (db) {
+    return {
+      kind: 'link',
+      label: 'Your African Tech Community Database',
+      url: db,
+      cta: 'Open the database',
+      note: 'Bookmark it. We check and update the links every two weeks, and this link always opens the latest version.',
+    };
+  }
   if (p.delivers === 'remote-list' && env.REMOTE_LIST_TOKEN) {
     const d = {
       kind: 'link',
@@ -193,35 +213,63 @@ function deliveryFor(product, env) {
   };
 }
 
-async function sendReceipt(env, to, product, delivery, reference) {
-  if (!env.RESEND_API_KEY) return false;      // optional: the page still shows the link
+/** Can this Worker email a receipt at all? Resend first, Brevo otherwise. */
+export const receiptsOn = (env) => !!(env.RESEND_API_KEY || (env.BREVO_API_KEY && env.BREVO_SENDER_EMAIL));
+
+const escHtml = (v) => String(v == null ? '' : v)
+  .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+/** The receipt, as plain text and as HTML, for one paid product. */
+export function receiptEmail(product, delivery, reference) {
   const p = PRODUCTS[product];
-  const body = {
-    from: 'The Tech Hut <info@thetechhut.co>',
-    to: [to],
-    subject: p.name + ' — your access',
-    text: [
-      'Thanks for buying ' + p.name + '.',
-      '',
-      delivery.kind === 'link' ? delivery.label + ': ' + delivery.url : delivery.note,
-      ...(delivery.kind === 'link' && delivery.cta ? ['', delivery.note] : []),
-      ...((delivery.also || []).flatMap((a) => ['', a.label + ': ' + a.url, a.note])),
-      '',
-      'Payment reference: ' + reference,
-      'Questions: info@thetechhut.co or +254 115 017 058',
-      '',
-      'The Tech Hut',
-    ].join('\n'),
-  };
+  const blocks = [delivery, ...(delivery.also || [])];
+  const text = [
+    'Thanks for buying ' + p.name + '.',
+    '',
+    ...blocks.flatMap((d) => d.kind === 'link' ? [d.label + ': ' + d.url, d.note || '', ''] : [d.note || '', '']),
+    'Payment reference: ' + reference,
+    'Questions: info@thetechhut.co or +254 115 017 058',
+    '',
+    'The Tech Hut',
+  ].join('\n');
+  const html = '<div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;padding:24px;color:#073B4C;line-height:1.55">'
+    + '<p style="font-weight:700;font-size:20px;margin:0 0 20px">The Tech Hut<span style="color:#06D6A0">.</span></p>'
+    + '<p>Thanks for buying <b>' + escHtml(p.name) + '</b>.</p>'
+    + blocks.map((d) => d.kind === 'link'
+      ? '<p style="margin:22px 0 8px"><b>' + escHtml(d.label) + '</b></p>'
+        + '<p style="margin:0 0 10px"><a href="' + escHtml(d.url) + '" style="display:inline-block;background:#06D6A0;color:#073B4C;font-weight:700;padding:12px 20px;border-radius:3px;text-decoration:none">'
+        + escHtml(d.cta || 'Open') + '</a></p>'
+        + '<p style="margin:0 0 6px;font-size:14px;word-break:break-all">' + escHtml(d.url) + '</p>'
+        + (d.note ? '<p style="margin:0;font-size:14px;color:#4A5568">' + escHtml(d.note) + '</p>' : '')
+      : '<p>' + escHtml(d.note || '') + '</p>').join('')
+    + '<p style="margin-top:28px;font-size:13px;color:#5B6B7B">Payment reference: ' + escHtml(reference)
+    + '<br>Questions: info@thetechhut.co or +254 115 017 058</p></div>';
+  return { subject: p.name + ' — your access', text, html };
+}
+
+export async function sendReceipt(env, to, product, delivery, reference) {
+  if (!to || !receiptsOn(env)) return false;     // optional: the page still shows the link
+  const mail = receiptEmail(product, delivery, reference);
   try {
-    const r = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: 'Bearer ' + env.RESEND_API_KEY,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    });
+    let r;
+    if (env.RESEND_API_KEY) {
+      r = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: { Authorization: 'Bearer ' + env.RESEND_API_KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ from: 'The Tech Hut <info@thetechhut.co>', to: [to], subject: mail.subject, text: mail.text, html: mail.html }),
+      });
+    } else {
+      r = await fetch('https://api.brevo.com/v3/smtp/email', {
+        method: 'POST',
+        headers: { 'api-key': env.BREVO_API_KEY, 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          sender: { name: (env.BREVO_SENDER_NAME || 'The Tech Hut').trim(), email: env.BREVO_SENDER_EMAIL.trim() },
+          to: [{ email: to }],
+          subject: mail.subject, textContent: mail.text, htmlContent: mail.html,
+          tags: ['receipt', product],
+        }),
+      });
+    }
     return r.ok;
   } catch (e) {
     return false;                              // never fail a paid order over email
@@ -334,7 +382,7 @@ async function verify(req, env, origin) {
   const once = await guard(env, { op: 'paid', ref, product, via: 'verify' });
   const emailed = !once || once.first
     ? await sendReceipt(env, d.customer && d.customer.email, product, delivery, ref)
-    : !!env.RESEND_API_KEY;
+    : receiptsOn(env);
 
   return json({
     paid: true,
