@@ -13,7 +13,7 @@
  *   export PAYSTACK_SECRET_KEY=sk_live_...        # Paystack -> Settings -> API Keys
  *   export BREVO_API_KEY=xkeysib-...              # Brevo -> SMTP & API -> API keys
  *   export BREVO_SENDER_EMAIL=info@thetechhut.co  # the verified sender
- *   export COMMUNITIES_URL='https://....notion.site/...'
+ *   export COMMUNITIES_URL='https://thetechhut.co/communities/db/#...'  # from scripts/build_communities.mjs
  *   node scripts/send-communities-access.mjs           # dry run: lists who would get it
  *   node scripts/send-communities-access.mjs --send    # sends
  *
@@ -36,7 +36,7 @@ const LOG = join(dirname(fileURLToPath(import.meta.url)), '.communities-sent.jso
 
 function need(k) { if (!env[k]) { console.error('Set ' + k + ' first (see the top of this file).'); process.exit(1); } }
 need('PAYSTACK_SECRET_KEY'); need('COMMUNITIES_URL');
-if (!communitiesUrl(env)) { console.error('COMMUNITIES_URL must be the https://….notion.site/… link.'); process.exit(1); }
+if (!communitiesUrl(env)) { console.error('COMMUNITIES_URL must be the members page link (https://thetechhut.co/communities/db/#…) or a notion.site page.'); process.exit(1); }
 if (SEND) { need('BREVO_API_KEY'); need('BREVO_SENDER_EMAIL'); }
 delete env.RESEND_API_KEY;                       // this script sends through Brevo
 

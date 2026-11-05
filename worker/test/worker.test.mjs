@@ -268,6 +268,15 @@ await t('without COMMUNITIES_URL buyers are sent to WhatsApp, never shown a brok
   assert.equal(b.paid, true); assert.equal(b.delivery.kind, 'whatsapp');
 });
 
+await t('the members page link with its key is delivered as is', async () => {
+  const link = 'https://thetechhut.co/communities/db/#' + 'A'.repeat(43);
+  stubPaystack(async () => new Response(JSON.stringify(communitiesPaid), { status: 200 }));
+  const b = await (await worker.fetch(post('/verify', { reference: 'ref_comm_1' }), { ...env, COMMUNITIES_URL: link })).json();
+  const short = await (await worker.fetch(post('/verify', { reference: 'ref_comm_1' }), { ...env, COMMUNITIES_URL: link.slice(0, -1) })).json();
+  restore();
+  assert.equal(b.delivery.url, link); assert.equal(short.delivery.kind, 'whatsapp');
+});
+
 await t('a COMMUNITIES_URL that is not a Notion page is ignored', async () => {
   stubPaystack(async () => new Response(JSON.stringify(communitiesPaid), { status: 200 }));
   const b = await (await worker.fetch(post('/verify', { reference: 'ref_comm_1' }), { ...env, COMMUNITIES_URL: 'https://evil.example/db' })).json();

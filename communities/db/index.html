@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your African Tech Community Database | The Tech Hut</title>
+    <link rel="canonical" href="https://thetechhut.co/communities/db/">
+
+    <meta name="description" content="The African Tech Community Database: tech communities and groups across Africa, with their join links. For members.">
+    <meta name="keywords" content="African tech communities, WhatsApp tech groups Kenya">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Your African Tech Community Database">
+    <meta property="og:description" content="Tech communities across Africa, with their join links.">
+    <meta property="og:url" content="https://thetechhut.co/communities/db/">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="https://images.unsplash.com/photo-1698767008609-f5fa6137b9e6?q=80&amp;w=32&amp;h=32&amp;auto=format&amp;fit=crop">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="https://images.unsplash.com/photo-1698767008609-f5fa6137b9e6?q=80&amp;w=180&amp;h=180&amp;auto=format&amp;fit=crop">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/thh.css">
+    <script src="/assets/js/motion.js?v=1"></script>
+</head>
+
+<body>
+
+    <a class="skip" href="#top">Skip to content</a>
+    <header class="masthead">
+        <div class="masthead-top"><div class="wrap"><span>Kenya's tech careers, reported daily</span><span class="hide-sm"><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a> &middot; <a href="mailto:info@thetechhut.co">info@thetechhut.co</a></span></div></div>
+        <div class="wrap masthead-main">
+            <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+            <nav class="sitenav" aria-label="Site"><a href="/blog/daily/">Daily</a><a href="/jobs/">Jobs</a><a href="/remote/">Remote</a><a href="/cv-pack/">CV Pack</a><a href="/shop/">Shop</a><a href="/events/">Events</a><a href="/games/">Games</a><a href="/apprenticeship/">Apprenticeship</a><a href="/blog/">Blog</a></nav>
+        </div>
+    </header>
+    <nav class="pagenav" aria-label="On this page"><div class="wrap"><span class="pagenav-label">Members list</span><a href="/communities/">About the database</a><a href="/jobs/">Jobs board</a><a class="btn" href="/blog/daily/">Daily Savannah</a></div></nav>
+
+    <style>
+        .cdb-tools { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; margin: 22px 0 8px; }
+        .cdb-tools input { flex: 1 1 260px; min-width: 0; }
+        .cdb-topics { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 22px; }
+        .cdb-topics button { font: inherit; font-size: 14px; font-weight: 600; color: var(--ink); background: var(--paper); border: 1px solid var(--rule); border-radius: 999px; padding: 6px 13px; cursor: pointer; }
+        .cdb-topics button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+        .cdb-topics button span { font-family: var(--mono); font-size: 12px; opacity: .75; margin-left: 4px; }
+        .cdb-group h3.cdb-topic { font-family: var(--mono); font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; color: var(--green); margin: 30px 0 0; padding-bottom: 6px; border-bottom: 2px solid var(--ink); }
+        .cdb-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 24px; align-items: start; padding: 16px 0; border-bottom: 1px solid var(--rule); }
+        .cdb-item h4 { font-family: var(--serif); font-size: 20px; line-height: 1.25; margin: 0 0 4px; overflow-wrap: anywhere; }
+        .cdb-item p { margin: 0; color: var(--muted); font-size: 15.5px; line-height: 1.5; max-width: 70ch; white-space: pre-line;
+          display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        .cdb-item p.open { -webkit-line-clamp: unset; display: block; }
+        .cdb-item .more { font: inherit; font-size: 14px; font-weight: 700; color: var(--green); background: none; border: 0; padding: 4px 0 0; cursor: pointer; }
+        .cdb-links { display: flex; flex-direction: column; gap: 8px; align-items: stretch; min-width: 190px; }
+        .cdb-links a { display: block; text-align: center; font-weight: 700; font-size: 14.5px; color: var(--ink); text-decoration: none; border: 1px solid var(--ink); border-radius: 3px; padding: 8px 12px; white-space: nowrap; }
+        .cdb-links a:hover { background: var(--ink); color: #fff; }
+        .cdb-links a small { display: block; font-weight: 400; font-size: 12px; color: var(--dim); white-space: normal; max-width: 220px; margin: 2px auto 0; }
+        .cdb-links a:hover small { color: #dfe8ec; }
+        .cdb-empty { padding: 30px 0; color: var(--muted); }
+        @media (max-width: 640px) {
+          .cdb-item { grid-template-columns: minmax(0, 1fr); }
+          .cdb-links { min-width: 0; flex-direction: row; flex-wrap: wrap; }
+          .cdb-links a { flex: 1 1 160px; }
+        }
+    </style>
+
+    <section id="top" style="padding-top:44px">
+        <div class="wrap">
+            <div id="gate" class="gate" hidden>
+                <span class="pill">Members only</span>
+                <h2 style="margin-top:18px">This page needs your access link</h2>
+                <p>
+                    The database opens from the link we sent you after you bought it. Open that link
+                    again (it ends in a long code), or message us and we will resend it.
+                </p>
+                <div class="cta-row" style="justify-content:center;margin-top:18px">
+                    <a class="btn light" href="https://wa.me/254115017058?text=Please%20resend%20my%20African%20Tech%20Community%20Database%20link" target="_blank" rel="noopener">Resend my link</a>
+                    <a class="btn ghost" href="/communities/">What is this?</a>
+                </div>
+            </div>
+
+            <div id="stale" class="gate" hidden>
+                <span class="pill">Link changed</span>
+                <h2 style="margin-top:18px">This access link no longer works</h2>
+                <p>
+                    We change the link from time to time to keep the list for members. If you bought the
+                    database, message us with your payment reference and we will send you the current link.
+                </p>
+                <div class="cta-row" style="justify-content:center;margin-top:18px">
+                    <a class="btn light" href="https://wa.me/254115017058?text=My%20African%20Tech%20Community%20Database%20link%20has%20changed.%20Reference%3A%20" target="_blank" rel="noopener">Get the new link</a>
+                </div>
+            </div>
+
+            <div id="db" hidden>
+                <span class="eyebrow">Members list</span>
+                <h2 style="margin-bottom:8px">The African Tech Community Database</h2>
+                <p class="tight" style="max-width:66ch">
+                    <b id="count">—</b> tech communities across Africa, by topic, with their join links.
+                    Last updated <span id="updated">—</span>. Bookmark this page: it always shows the latest version.
+                </p>
+                <div class="cdb-tools">
+                    <input type="search" id="q" placeholder="Search: try &quot;react&quot;, &quot;jobs&quot;, &quot;cyber&quot;, &quot;funding&quot;" aria-label="Search the communities">
+                </div>
+                <div class="cdb-topics" id="topics" role="group" aria-label="Topics"></div>
+                <div id="rows"></div>
+                <div class="callout tip" style="margin-top:28px">
+                    <b>Join two or three, not twenty.</b> Pick the groups for your stack and your next step
+                    (a job, a co-founder, a hackathon), introduce yourself, and answer someone else&rsquo;s question
+                    in your first week. That is how a group turns into opportunities.
+                </div>
+                <p style="font-size:14px;color:var(--dim);margin-top:18px">
+                    These groups are run by their own admins, not by The Tech Hut. Never pay anyone in a group
+                    for a job or a place on a programme. A link that has stopped working?
+                    <a href="https://wa.me/254115017058?text=A%20link%20in%20the%20community%20database%20is%20broken%3A%20" target="_blank" rel="noopener">Tell us</a> and we will fix it.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="pagefoot"><div class="wrap">
+            <p>Your access link is for you. We change it from time to time, and members get the new one.</p>
+        </div></div>
+    <footer class="sitefoot">
+        <div class="wrap">
+            <div class="sitefoot-grid">
+                <div>
+                    <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+                    <p>Helping Kenyans into tech work: jobs you can take from Nairobi, a daily read on the industry, and projects with mentors.</p>
+                </div>
+                <div>
+                    <h4>Read</h4>
+                    <ul>
+                        <li><a href="/blog/daily/">Daily Savannah</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Find work</h4>
+                    <ul>
+                        <li><a href="/jobs/">Jobs board</a></li>
+                        <li><a href="/remote/">Remote-from-Kenya list</a></li>
+                        <li><a href="/cv-pack/">CV Pack</a></li>
+                        <li><a href="/early-access/">Early Access</a></li>
+                        <li><a href="/shop/">Everything we make</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="/apprenticeship/">Apprenticeship</a></li>
+                        <li><a href="/events/">Events</a></li>
+                        <li><a href="/communities/">Tech communities</a></li>
+                        <li><a href="/tools/">Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Employers</h4>
+                    <ul>
+                        <li><a href="/advertise/">Advertise</a></li>
+                        <li><a href="/jobs-for-your-community/">A jobs board for your community</a></li>
+                        <li><a href="/recruiters/">Recruiters</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sitefoot-base">
+                <span>&copy; 2026 The Tech Hut Community</span>
+                <a href="mailto:info@thetechhut.co">info@thetechhut.co</a>
+                <span>+254 115 017 058</span>
+                <a href="/data_privacy_policy/">Privacy</a>
+                <a href="https://linkedin.com/company/digital-transformation-partner/" rel="noopener">LinkedIn</a>
+                <a href="https://x.com/Ekiprop_kimutai" rel="noopener">X</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    /* The list is stored encrypted (data/communities.enc.json, built by
+       scripts/build_communities.mjs). The key is the part of the access link
+       after #, which browsers never send to a server, so the list is only
+       readable by someone holding the link. A new key retires old links. */
+    (function () {
+        var key = (location.hash || '').replace(/^#/, '').trim();
+        var $ = function (id) { return document.getElementById(id); };
+        var show = function (id) { $(id).hidden = false; };
+        function fromB64(s) {
+            s = s.replace(/-/g, '+').replace(/_/g, '/'); while (s.length % 4) s += '=';
+            var bin = atob(s), a = new Uint8Array(bin.length);
+            for (var i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i);
+            return a;
+        }
+        if (!/^[A-Za-z0-9_-]{43}$/.test(key) || !window.crypto || !crypto.subtle) { show('gate'); return; }
+        try { history.replaceState(null, '', location.pathname + location.hash); } catch (e) {}
+
+        fetch('/data/communities.enc.json', { cache: 'no-cache' })
+            .then(function (r) { if (!r.ok) throw new Error('missing'); return r.json(); })
+            .then(function (box) {
+                return crypto.subtle.importKey('raw', fromB64(key), 'AES-GCM', false, ['decrypt'])
+                    .then(function (k) { return crypto.subtle.decrypt({ name: 'AES-GCM', iv: fromB64(box.iv) }, k, fromB64(box.ct)); })
+                    .then(function (buf) { return JSON.parse(new TextDecoder().decode(buf)); });
+            })
+            .then(render)
+            .catch(function () { show('stale'); });
+
+        var ALL = [], TOPICS = [], topic = '', q = '';
+        var VERB = { 'WhatsApp group': 'Join on WhatsApp', 'WhatsApp channel': 'Follow the WhatsApp channel', 'Telegram': 'Join on Telegram', 'Linktree': 'Open their links' };
+
+        function render(d) {
+            ALL = d.items || []; TOPICS = d.topics || [];
+            $('count').textContent = ALL.length;
+            $('updated').textContent = new Date(d.updated + 'T12:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+            var tb = $('topics');
+            [''].concat(d.topics || []).forEach(function (t) {
+                var b = document.createElement('button');
+                b.type = 'button';
+                b.setAttribute('aria-pressed', t === '' ? 'true' : 'false');
+                b.dataset.topic = t;
+                b.textContent = t || 'All';
+                var n = document.createElement('span');
+                n.textContent = t ? ALL.filter(function (i) { return i.topic === t; }).length : ALL.length;
+                b.appendChild(n);
+                tb.appendChild(b);
+            });
+            tb.addEventListener('click', function (e) {
+                var b = e.target.closest('button'); if (!b) return;
+                [].forEach.call(tb.querySelectorAll('button'), function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+                topic = b.dataset.topic; draw();
+            });
+            $('q').addEventListener('input', function () { q = this.value.toLowerCase().trim(); draw(); });
+            show('db');
+            draw();
+        }
+
+        function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+
+        function draw() {
+            var box = $('rows'); box.innerHTML = '';
+            var list = ALL.filter(function (i) {
+                if (topic && i.topic !== topic) return false;
+                if (!q) return true;
+                var hay = (i.title + ' ' + i.desc + ' ' + i.topic + ' ' + i.links.map(function (l) { return l.name + ' ' + l.kind; }).join(' ')).toLowerCase();
+                return hay.indexOf(q) > -1;
+            });
+            if (!list.length) { box.appendChild(el('p', 'cdb-empty', 'No communities match that. Try a broader word, or pick All.')); return; }
+            var order = [], groups = {};
+            list.forEach(function (i) { (groups[i.topic] = groups[i.topic] || []).push(i); });
+            order = TOPICS.filter(function (t) { return groups[t]; });
+            order.forEach(function (t) {
+                var g = el('div', 'cdb-group');
+                g.appendChild(el('h3', 'cdb-topic', t + ' · ' + groups[t].length));
+                groups[t].forEach(function (i) {
+                    var row = el('article', 'cdb-item');
+                    var txt = el('div');
+                    txt.appendChild(el('h4', '', i.title));
+                    if (i.desc) {
+                        var p = el('p', '', i.desc);
+                        txt.appendChild(p);
+                        if (i.desc.length > 220) {
+                            var m = el('button', 'more', 'Read more');
+                            m.type = 'button';
+                            m.addEventListener('click', function () { var o = p.classList.toggle('open'); m.textContent = o ? 'Show less' : 'Read more'; });
+                            txt.appendChild(m);
+                        }
+                    }
+                    row.appendChild(txt);
+                    var links = el('div', 'cdb-links');
+                    i.links.forEach(function (l) {
+                        if (!/^https:\/\/((chat\.)?whatsapp\.com|www\.whatsapp\.com|t\.me|linktr\.ee)\//.test(l.url)) return;
+                        var a = el('a', '', VERB[l.kind] || ('Open on ' + l.kind) + ' ↗');
+                        if (VERB[l.kind]) a.textContent = VERB[l.kind] + ' ↗';
+                        a.href = l.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+                        if (i.links.length > 1 && l.name) a.appendChild(el('small', '', l.name));
+                        links.appendChild(a);
+                    });
+                    row.appendChild(links);
+                    g.appendChild(row);
+                });
+                box.appendChild(g);
+            });
+        }
+    })();
+    </script>
+</body>
+
+</html>

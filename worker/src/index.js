@@ -34,9 +34,11 @@
  *   REMOTE_LIST_TOKEN     the token from scripts/remote_token.txt
  *   RESEND_API_KEY        optional; receipts go through Resend when set, otherwise
  *                         through Brevo (BREVO_API_KEY + BREVO_SENDER_EMAIL, below)
- *   COMMUNITIES_URL       the Notion page of the African Tech Community Database
- *                         (https://….notion.site/…). A secret for the same reason as
- *                         the invite below: only buyers should see it.
+ *   COMMUNITIES_URL       the African Tech Community Database access link,
+ *                         https://thetechhut.co/communities/db/#<key> (printed by
+ *                         scripts/build_communities.mjs; the key decrypts the list).
+ *                         A Notion page link (https://….notion.site/…) also works.
+ *                         A secret for the same reason as the invite below.
  *   EARLY_ACCESS_INVITE   the WhatsApp group invite link (https://chat.whatsapp.com/...).
  *                         A secret, NOT a file: this repo is published, and the link
  *                         is only meant to be shown to someone who has paid.
@@ -165,9 +167,10 @@ function earlyInvite(env) {
   return /^https:\/\/chat\.whatsapp\.com\/[A-Za-z0-9]{10,40}(\?[\w=&.%-]*)?$/.test(u) ? u : null;
 }
 
-/** The database link, but only if it really is a Notion page. */
+/** The database link, but only if it is our members page with its key, or a Notion page. */
 export function communitiesUrl(env) {
   const u = (env.COMMUNITIES_URL || '').toString().trim();
+  if (/^https:\/\/thetechhut\.co\/communities\/db\/#[A-Za-z0-9_-]{43}$/.test(u)) return u;
   return /^https:\/\/[a-z0-9-]+\.notion\.site\/[A-Za-z0-9%._~-]+(\?[\w=&.%-]*)?$/.test(u) ? u : null;
 }
 

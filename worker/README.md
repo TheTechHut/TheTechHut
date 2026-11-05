@@ -387,3 +387,13 @@ otherwise through Brevo with the newsletter key and sender.
 People who bought before this: `scripts/send-communities-access.mjs` reads
 their orders from Paystack and sends them the same email. Dry run by default;
 instructions at the top of the file.
+
+### The members page (replaces the public Notion page)
+
+`/communities/db/` shows the database only to people holding the access link
+`https://thetechhut.co/communities/db/#<key>`. The list is stored encrypted in
+`data/communities.enc.json`; the key is the part after `#`, which never reaches
+any server. Source and key live in `private/` (git-ignored). To update the list,
+export the Notion page as Markdown to `private/communities-export.md` and run
+`node scripts/build_communities.mjs`. To retire a leaked link, run it with
+`--new-key`, set the new link as `COMMUNITIES_URL`, and email buyers.

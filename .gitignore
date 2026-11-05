@@ -8,3 +8,6 @@ worker/.wrangler/
 
 # built on GitHub Actions and deployed, never committed (scripts/build_jobs_board.js)
 data/jobs-board.json
+
+# paid content sources and keys, never committed (scripts/build_communities.mjs)
+private/
