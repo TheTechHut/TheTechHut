@@ -1,9 +1,9 @@
 {
- "updated": "2026-11-05",
- "company_count": 43,
- "role_count": 447,
- "local_role_count": 141,
- "roles_scanned": 3655,
+ "updated": "2026-11-06",
+ "company_count": 44,
+ "role_count": 449,
+ "local_role_count": 135,
+ "roles_scanned": 3641,
  "sources": [
   "Himalayas",
   "Jobicy"
@@ -27,7 +27,7 @@
    "company": "Supabase",
    "platform": "ashby",
    "eligible": 45,
-   "total": 71,
+   "total": 70,
    "locations": [
     "Remote, Global",
     "Remote, EMEA",
@@ -56,8 +56,8 @@
   {
    "company": "Oyster",
    "platform": "ashby",
-   "eligible": 14,
-   "total": 21,
+   "eligible": 13,
+   "total": 20,
    "locations": [
     "EMEA; Romania; Bulgaria; Portugal; Canada; United Kingdom; Spain; Poland",
     "EMEA; Romania; Hungary; Bulgaria; Ireland; Slovakia; United Kingdom; Poland; Estonia; South Africa; Greece",
@@ -103,7 +103,7 @@
    "company": "Zapier",
    "platform": "ashby",
    "eligible": 4,
-   "total": 11,
+   "total": 10,
    "locations": [
     "NAMER; India; European Union; EMEA",
     "EMEA",
@@ -132,10 +132,20 @@
    ]
   },
   {
+   "company": "Turing",
+   "platform": "greenhouse",
+   "eligible": 2,
+   "total": 45,
+   "locations": [
+    "Global - Remote",
+    "Global - Remote; United States"
+   ]
+  },
+  {
    "company": "Sun King",
    "platform": "pinpoint",
    "eligible": 2,
-   "total": 187,
+   "total": 186,
    "locations": [
     "Global"
    ]
@@ -177,6 +187,15 @@
    ]
   },
   {
+   "company": "Spotify",
+   "platform": "jobicy",
+   "eligible": 2,
+   "total": 2,
+   "locations": [
+    "EMEA"
+   ]
+  },
+  {
    "company": "Testlio",
    "platform": "jobicy",
    "eligible": 2,
@@ -190,7 +209,7 @@
    "company": "Zipline",
    "platform": "greenhouse",
    "eligible": 1,
-   "total": 351,
+   "total": 347,
    "locations": [
     "Remote from Anywhere"
    ]
@@ -199,18 +218,9 @@
    "company": "Cockroach Labs",
    "platform": "greenhouse",
    "eligible": 1,
-   "total": 9,
+   "total": 12,
    "locations": [
     "Global"
-   ]
-  },
-  {
-   "company": "Turing",
-   "platform": "greenhouse",
-   "eligible": 1,
-   "total": 43,
-   "locations": [
-    "Global - Remote"
    ]
   },
   {
@@ -367,7 +377,7 @@
    ]
   },
   {
-   "company": "Udacity",
+   "company": "Carrot",
    "platform": "jobicy",
    "eligible": 1,
    "total": 1,
@@ -376,12 +386,21 @@
    ]
   },
   {
-   "company": "Spotify",
+   "company": "Contentstack",
    "platform": "jobicy",
    "eligible": 1,
    "total": 1,
    "locations": [
     "EMEA"
+   ]
+  },
+  {
+   "company": "Udacity",
+   "platform": "jobicy",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Anywhere"
    ]
   },
   {
@@ -404,15 +423,6 @@
   },
   {
    "company": "TRM Labs",
-   "platform": "jobicy",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "EMEA"
-   ]
-  },
-  {
-   "company": "Fueled",
    "platform": "jobicy",
    "eligible": 1,
    "total": 1,
