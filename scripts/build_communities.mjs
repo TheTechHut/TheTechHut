@@ -21,18 +21,30 @@
  * on the Worker (npx wrangler secret put COMMUNITIES_URL), then email buyers the
  * new link (worker/scripts/send-communities-access.mjs). Old links stop working.
  *
- *   node scripts/build_communities.mjs            build with the existing key
- *   node scripts/build_communities.mjs --new-key  build with a fresh key
+ * Pictures: each group's own preview picture (the og:image WhatsApp, Telegram and
+ * Linktree show when a link is shared) is fetched once, shrunk to 96px with
+ * macOS's built-in `sips`, cached in private/communities-img/ and embedded in
+ * the encrypted list. They are not hot-linked: WhatsApp's picture links expire
+ * within weeks. A group with no picture shows its initials.
+ *
+ *   node scripts/build_communities.mjs                 build with the existing key
+ *   node scripts/build_communities.mjs --new-key       build with a fresh key
+ *   node scripts/build_communities.mjs --refresh-images   fetch every picture again
+ *   node scripts/build_communities.mjs --no-images     skip pictures (offline)
  */
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync, unlinkSync, statSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = join(ROOT, 'private', 'communities-export.md');
 const KEYFILE = join(ROOT, 'private', 'communities_key.txt');
 const OUT = join(ROOT, 'data', 'communities.enc.json');
 const SITE = 'https://thetechhut.co/communities/db/';
+const IMGDIR = join(ROOT, 'private', 'communities-img');
+const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 14_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15';
 
 const b64u = (buf) => Buffer.from(buf).toString('base64url');
 
@@ -122,6 +134,79 @@ export function parse(md) {
   return items;
 }
 
+/* --------------------------------------------------------------- pictures */
+
+/** The og:image of a page, from its HTML. */
+export function ogImage(html) {
+  const tags = String(html || '').match(/<meta\b[^>]*>/gi) || [];
+  for (const t of tags) {
+    if (!/(property|name)\s*=\s*["'](og:image|twitter:image)["']/i.test(t)) continue;
+    const m = /content\s*=\s*["']([^"']+)["']/i.exec(t);
+    if (m) return m[1].replace(/&amp;/g, '&').replace(/&amp$/, '');
+  }
+  return null;
+}
+
+async function get(url, ms = 12000) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), ms);
+  try {
+    const r = await fetch(url, { headers: { 'User-Agent': UA, 'Accept-Language': 'en' }, redirect: 'follow', signal: ctrl.signal });
+    return r.ok ? r : null;
+  } catch (e) { return null; } finally { clearTimeout(timer); }
+}
+
+/** One link's picture as a data: URL, from the cache or fetched and shrunk. */
+export async function picture(url, { refresh = false, log = () => {} } = {}) {
+  mkdirSync(IMGDIR, { recursive: true });
+  const id = createHash('sha1').update(url).digest('hex').slice(0, 16);
+  const jpg = join(IMGDIR, id + '.jpg'), none = join(IMGDIR, id + '.none');
+  if (!refresh && existsSync(jpg)) return 'data:image/jpeg;base64,' + readFileSync(jpg).toString('base64');
+  if (!refresh && existsSync(none) && Date.now() - statSync(none).mtimeMs < 7 * 864e5) return null;   // retry weekly
+  const page = await get(url);
+  const html = page ? await page.text() : '';
+  // A reset or revoked WhatsApp invite still loads, with an empty title and
+  // WhatsApp's own logo as its picture: report it, so the link can be fixed.
+  if (/^https:\/\/chat\.whatsapp\.com\//.test(url) && page && !/og:title"\s+content="[^"]+"/.test(html)) {
+    deadLinks.push(url);
+  }
+  let src = ogImage(html);
+  if (src && /static\.whatsapp\.net\//.test(src)) src = null;     // WhatsApp's logo, not the group's
+  const img = src && /^https:\/\//.test(src) ? await get(src) : null;
+  const buf = img && /^image\//.test(img.headers.get('content-type') || '') ? Buffer.from(await img.arrayBuffer()) : null;
+  if (!buf || buf.length < 200) { writeFileSync(none, ''); log('  no picture: ' + url); return null; }
+  const raw = join(IMGDIR, id + '.src');
+  writeFileSync(raw, buf);
+  try {
+    // macOS ships `sips`; elsewhere keep the picture only if it is already small.
+    execFileSync('sips', ['-s', 'format', 'jpeg', '-s', 'formatOptions', '70', '-Z', '96', raw, '--out', jpg], { stdio: 'ignore' });
+  } catch (e) {
+    if (buf.length <= 15000 && /jpe?g/.test(img.headers.get('content-type'))) writeFileSync(jpg, buf);
+  }
+  try { unlinkSync(raw); } catch (e) {}
+  if (!existsSync(jpg)) { writeFileSync(none, ''); log('  could not shrink: ' + url); return null; }
+  try { unlinkSync(none); } catch (e) {}
+  return 'data:image/jpeg;base64,' + readFileSync(jpg).toString('base64');
+}
+
+const deadLinks = [];
+
+async function addPictures(items, refresh) {
+  let got = 0;
+  for (const i of items) {
+    for (const l of i.links) {
+      const p = await picture(l.url, { refresh, log: console.log });
+      if (p) { i.img = p; got++; break; }
+      await new Promise((r) => setTimeout(r, 250));      // be gentle with WhatsApp
+    }
+  }
+  console.log(`pictures: ${got} of ${items.length}`);
+  if (deadLinks.length) {
+    console.log(`\n${deadLinks.length} WhatsApp invite(s) look reset or revoked (no group name on the invite page). Check them in WhatsApp and update the export:`);
+    for (const u of deadLinks) console.log('  ' + (items.find((i) => i.links.some((l) => l.url === u)) || {}).title + '  ' + u);
+  }
+}
+
 /* ---------------------------------------------------------------- encrypt */
 
 async function encrypt(obj, keyBytes) {
@@ -134,6 +219,7 @@ async function encrypt(obj, keyBytes) {
 async function main() {
   if (!existsSync(SRC)) { console.error('Missing ' + SRC + ': export the Notion page as Markdown and save it there.'); process.exit(1); }
   const items = parse(readFileSync(SRC, 'utf8'));
+  if (!process.argv.includes('--no-images')) await addPictures(items, process.argv.includes('--refresh-images'));
   mkdirSync(dirname(KEYFILE), { recursive: true });
   let key;
   if (process.argv.includes('--new-key') || !existsSync(KEYFILE)) {
