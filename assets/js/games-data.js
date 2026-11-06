@@ -76,6 +76,8 @@
       by: 'Topograph', line: 'An endless, calm drive through landscapes generated as you go.' },
     { slug: 'hexgl', name: 'HexGL', cat: 'racing', url: 'https://hexgl.bkcore.com', legal: 'open-source', phone: false, embed: false,
       by: 'Thibaut Despoulain (MIT)', line: 'Futuristic anti-gravity racer in the spirit of Wipeout.' },
+    { slug: 'drive-mad', name: 'Drive Mad', cat: 'racing', url: 'https://poki.com/en/g/drive-mad', legal: 'official', phone: true, embed: false,
+      by: 'Fancade (Martin Magni), on Poki', line: 'Physics driving puzzles: get odd vehicles over bridges and ramps to the finish without flipping. Short ads between levels.' },
     { slug: 'smash-karts', name: 'Smash Karts', cat: 'racing', url: 'https://smashkarts.io', legal: 'official', phone: true, embed: true,
       by: 'Tall Team', line: 'Multiplayer kart battles with weapons. Short ads before rounds.' },
     { slug: 'js-racer', name: 'Javascript Racer', cat: 'racing', url: 'https://jakesgordon.com/games/racer/', legal: 'indie', phone: false, embed: false,

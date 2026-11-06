@@ -4,7 +4,7 @@
 export const GAME_SLUGS = [
   'matatu-manager', 'lagos-life', 'quake3', 'doom', 'krunker', 'shell-shockers', 'venge', 'kour', 'evio',
   'deadshot', 'distrito-rabisco', 'xonotic', '1v1lol', 'freeciv', 'openfront', 'hedgewars', 'lichess',
-  'chesscom', 'bitburner', 'shapez', 'polytrack', 'slow-roads', 'hexgl', 'smash-karts', 'js-racer', 'wordle',
+  'chesscom', 'bitburner', 'shapez', 'polytrack', 'slow-roads', 'hexgl', 'drive-mad', 'smash-karts', 'js-racer', 'wordle',
   '2048', 'hextris', 'tetris', 'little-alchemy-2', 'solitaire', 'minesweeper', 'skribbl', 'snake', 'pacman',
   'celeste-classic', 'qwop', 'line-rider', 'minecraft-classic', 'bloxd', 'townscaper', 'sandspiel',
   'infinite-craft', 'slither', 'agar', 'diep', 'diablo', 'a-dark-room', 'cookie-clicker', 'paperclips',
