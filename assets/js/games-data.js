@@ -130,8 +130,8 @@
       by: 'Richard Mann', line: 'Wordle with sums: guess the hidden equation in six tries.' },
     { slug: 'worldle', name: 'Worldle', cat: 'puzzle', url: 'https://worldle.teuteuf.fr/', legal: 'indie', phone: true, embed: false,
       by: 'teuteuf', line: 'Guess the country from its outline. Each wrong guess tells you how far off and in which direction.' },
-    { slug: 'sudoku', name: 'Sudoku.com', cat: 'puzzle', url: 'https://sudoku.com/', legal: 'official', phone: true, embed: false,
-      by: 'Easybrain', line: 'Classic sudoku from easy to expert, with a daily challenge, hints and notes. Free with ads.' },
+    { slug: 'sudoku', name: 'Sudoku (sudoku.coach)', cat: 'puzzle', url: 'https://sudoku.coach/', legal: 'indie', phone: true, embed: true,
+      by: 'sudoku.coach', line: 'Free, ad-free sudoku from easy to expert, plus variants and step-by-step tutorials on solving techniques.' },
     { slug: 'globle', name: 'Globle', cat: 'puzzle', url: 'https://globle-game.com/', legal: 'indie', phone: true, embed: true,
       by: 'Abe Train', line: 'Find the mystery country on a globe. Your guesses glow hotter the closer you get.' },
 
