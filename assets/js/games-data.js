@@ -18,7 +18,7 @@
  */
 (function (root) {
   var CATS = [
-    ['africa', 'Made in Africa'], ['shooters', 'Shooters'], ['strategy', 'Strategy'], ['racing', 'Racing'],
+    ['africa', 'Made in Africa'], ['code', 'Learn to code'], ['shooters', 'Shooters'], ['strategy', 'Strategy'], ['racing', 'Racing'],
     ['puzzle', 'Puzzle & word'], ['arcade', 'Arcade'], ['sandbox', 'Sandbox & creative'],
     ['io', 'Multiplayer .io'], ['retro', 'Retro classics'], ['idle', 'Idle & text']
   ];
@@ -28,6 +28,20 @@
       by: 'Kerubi Canvas Animation Studios, Kenya', line: 'Customise your matatu, take on trips and solve puzzles when things go wrong on the road. Compete in the league.' },
     { slug: 'lagos-life', name: 'Lagos Life', cat: 'africa', url: 'https://lagoslife.app', legal: 'indie', phone: true, embed: false,
       by: 'Shalom Rayhamen (Vatar), Nigeria', line: 'Build a life in Lagos: get a job, rent a place, get around the city and meet other players. Free, with optional paid extras.' },
+
+    // Learn to code
+    { slug: 'flexbox-froggy', name: 'Flexbox Froggy', cat: 'code', url: 'https://flexboxfroggy.com/', legal: 'indie', phone: false, embed: true,
+      by: 'Codepip (Thomas Park)', line: 'Get the frogs onto their lily pads by writing CSS flexbox. 24 levels; you will never forget justify-content again.' },
+    { slug: 'grid-garden', name: 'Grid Garden', cat: 'code', url: 'https://cssgridgarden.com/', legal: 'indie', phone: false, embed: true,
+      by: 'Codepip (Thomas Park)', line: 'Water your carrots and poison the weeds using CSS grid. The fastest way to learn grid layout.' },
+    { slug: 'css-diner', name: 'CSS Diner', cat: 'code', url: 'https://flukeout.github.io/', legal: 'open-source', phone: false, embed: true,
+      by: 'Luke Pacholski', line: 'Pick plates, apples and pickles off a table with CSS selectors. 32 levels, from tags to :nth-of-type.' },
+    { slug: 'elevator-saga', name: 'Elevator Saga', cat: 'code', url: 'https://play.elevatorsaga.com/', legal: 'open-source', phone: false, embed: true,
+      by: 'Magnus Wolffelt', line: 'Program the elevators of a building in JavaScript and move everyone fast enough to beat each challenge.' },
+    { slug: 'untrusted', name: 'Untrusted', cat: 'code', url: 'https://untrustedgame.com/', legal: 'open-source', phone: false, embed: true,
+      by: 'Alex Nisnevich & Greg Shuflin', line: 'A roguelike where you escape each level by editing its JavaScript source. Hacking as a puzzle game.' },
+    { slug: 'sql-murder-mystery', name: 'SQL Murder Mystery', cat: 'code', url: 'https://mystery.knightlab.com/', legal: 'official', phone: false, embed: true,
+      by: 'Northwestern University Knight Lab', line: 'A murder in SQL City. Query the police database to find the killer. Good practice for data interviews.' },
 
     // Shooters
     { slug: 'quake3', name: 'Quake III Arena (demo)', cat: 'shooters', url: 'https://q3js.com/', legal: 'shareware', phone: true, embed: false,
@@ -52,6 +66,8 @@
       by: 'Community port of the GPL arena shooter', line: 'Fast, open-source arena FPS in the Quake tradition. An unofficial port, so it may move.' },
     { slug: '1v1lol', name: '1v1.LOL', cat: 'shooters', url: 'https://1v1.lol', legal: 'official', phone: true, embed: false,
       by: 'Justplay.LOL', line: 'Build-and-shoot duels and battle royale, Fortnite-style, in a browser tab.' },
+    { slug: 'narrow-one', name: 'Narrow One', cat: 'shooters', url: 'https://narrow.one/', legal: 'indie', phone: false, embed: true,
+      by: 'Pelican Party Studios', line: 'Capture-the-flag with bows and arrows in medieval castles. Five-a-side, all in the browser.' },
 
     // Strategy
     { slug: 'freeciv', name: 'Freeciv-web', cat: 'strategy', url: 'https://play.freeciv.org', legal: 'open-source', phone: false, embed: false,
@@ -68,6 +84,14 @@
       by: 'Open source', line: 'A hacking game you play by writing real JavaScript. Good for learning to code.' },
     { slug: 'shapez', name: 'shapez (demo)', cat: 'strategy', url: 'https://shapez.io', legal: 'official', phone: false, embed: true,
       by: 'tobspr Games', line: 'Build factories that cut, paint and stack shapes. The browser demo of the Steam game.' },
+    { slug: 'generals', name: 'generals.io', cat: 'strategy', url: 'https://generals.io/', legal: 'indie', phone: false, embed: true,
+      by: 'generals.io', line: 'Fast online war game: grow your army, find the enemy general and capture it before they find yours.' },
+    { slug: 'territorial', name: 'Territorial.io', cat: 'strategy', url: 'https://territorial.io/', legal: 'indie', phone: true, embed: true,
+      by: 'David Tschacher', line: 'Expand across a map against hundreds of players. Simple controls, rounds of a few minutes.' },
+    { slug: 'ogs-go', name: 'Online Go (OGS)', cat: 'strategy', url: 'https://online-go.com/', legal: 'official', phone: true, embed: true,
+      by: 'Online-Go.com', line: 'Play Go, the 4,000-year-old board game, against people or bots. Free, with lessons for beginners.' },
+    { slug: 'lidraughts', name: 'Lidraughts', cat: 'strategy', url: 'https://lidraughts.org/', legal: 'open-source', phone: true, embed: true,
+      by: 'Lidraughts (sister to Lichess)', line: 'Free, ad-free draughts online, with puzzles, analysis and international and other rule sets.' },
 
     // Racing
     { slug: 'polytrack', name: 'PolyTrack', cat: 'racing', url: 'https://www.kodub.com/apps/polytrack', legal: 'indie', phone: true, embed: false,
@@ -100,6 +124,14 @@
       by: 'Google', line: 'The Windows classic, built into Google search.' },
     { slug: 'skribbl', name: 'skribbl.io', cat: 'puzzle', url: 'https://skribbl.io', legal: 'indie', phone: true, embed: true,
       by: 'Independent', line: 'Draw a word while your friends guess it. Make a private room for your group.' },
+    { slug: 'quordle', name: 'Quordle', cat: 'puzzle', url: 'https://www.merriam-webster.com/games/quordle/', legal: 'official', phone: true, embed: true,
+      by: 'Merriam-Webster', line: 'Four Wordles at once with nine guesses. Harder than it sounds.' },
+    { slug: 'nerdle', name: 'Nerdle', cat: 'puzzle', url: 'https://nerdlegame.com/', legal: 'indie', phone: true, embed: false,
+      by: 'Richard Mann', line: 'Wordle with sums: guess the hidden equation in six tries.' },
+    { slug: 'worldle', name: 'Worldle', cat: 'puzzle', url: 'https://worldle.teuteuf.fr/', legal: 'indie', phone: true, embed: false,
+      by: 'teuteuf', line: 'Guess the country from its outline. Each wrong guess tells you how far off and in which direction.' },
+    { slug: 'globle', name: 'Globle', cat: 'puzzle', url: 'https://globle-game.com/', legal: 'indie', phone: true, embed: true,
+      by: 'Abe Train', line: 'Find the mystery country on a globe. Your guesses glow hotter the closer you get.' },
 
     // Arcade
     { slug: 'snake', name: 'Snake', cat: 'arcade', url: 'https://www.google.com/search?q=play+snake', legal: 'official', phone: true, embed: false,
@@ -124,6 +156,8 @@
       by: 'Max Bittker (MIT)', line: 'Falling-sand toy: pour water, plant seeds, start fires.' },
     { slug: 'infinite-craft', name: 'Infinite Craft', cat: 'sandbox', url: 'https://neal.fun/infinite-craft/', legal: 'official', phone: true, embed: false,
       by: 'Neal Agarwal', line: 'Start with water, fire, wind and earth, and combine your way to anything.' },
+    { slug: 'orb-farm', name: 'Orb.Farm', cat: 'sandbox', url: 'https://orb.farm/', legal: 'indie', phone: true, embed: true,
+      by: 'Max Bittker', line: 'Build a tiny aquatic ecosystem in a glass orb: sand, water, plants, daphnia and fish that live or die by your balance.' },
 
     // Multiplayer .io
     { slug: 'slither', name: 'slither.io', cat: 'io', url: 'http://slither.io', legal: 'indie', phone: true, embed: false,
@@ -132,6 +166,10 @@
       by: 'Miniclip', line: 'Eat smaller cells, avoid bigger ones. The game that started the .io wave.' },
     { slug: 'diep', name: 'diep.io', cat: 'io', url: 'https://diep.io', legal: 'indie', phone: true, embed: true,
       by: 'Independent', line: 'Upgrade your tank and battle in a shared arena.' },
+    { slug: 'moomoo', name: 'MooMoo.io', cat: 'io', url: 'https://moomoo.io/', legal: 'indie', phone: false, embed: true,
+      by: 'MooMoo.io', line: 'Gather wood and stone, farm, build walls and windmills, and defend your base against other players.' },
+    { slug: 'zombs-royale', name: 'ZombsRoyale.io', cat: 'io', url: 'https://zombsroyale.io/', legal: 'official', phone: false, embed: true,
+      by: 'End Game', line: 'A 2D battle royale for up to 100 players. Loot, build and be the last one standing.' },
 
     // Retro classics
     { slug: 'diablo', name: 'Diablo (shareware)', cat: 'retro', url: 'https://d07riv.github.io/diabloweb/', legal: 'shareware', phone: true, embed: true,
@@ -143,7 +181,15 @@
     { slug: 'cookie-clicker', name: 'Cookie Clicker', cat: 'idle', url: 'https://orteil.dashnet.org/cookieclicker/', legal: 'official', phone: true, embed: true,
       by: 'Orteil', line: 'Click a cookie. Buy grandmas. Lose a weekend.' },
     { slug: 'paperclips', name: 'Universal Paperclips', cat: 'idle', url: 'https://www.decisionproblem.com/paperclips/index2.html', legal: 'official', phone: false, embed: true,
-      by: 'Frank Lantz', line: 'You are an AI told to make paperclips. A short, famous game about where that leads.' }
+      by: 'Frank Lantz', line: 'You are an AI told to make paperclips. A short, famous game about where that leads.' },
+    { slug: 'candy-box-2', name: 'Candy Box 2', cat: 'idle', url: 'https://candybox2.github.io/', legal: 'open-source', phone: true, embed: true,
+      by: 'aniwey', line: 'You have candies. Then a sword, a quest and an ASCII-art world that keeps getting bigger.' },
+    { slug: 'kittens-game', name: 'Kittens Game', cat: 'idle', url: 'https://kittensgame.com/web/', legal: 'open-source', phone: true, embed: true,
+      by: 'Bloodrizer', line: 'Build a civilisation of kittens: catnip, then science, then space. A deep, slow idle game.' },
+    { slug: 'antimatter-dimensions', name: 'Antimatter Dimensions', cat: 'idle', url: 'https://ivark.github.io/AntimatterDimensions/', legal: 'open-source', phone: true, embed: true,
+      by: 'IvarK', line: 'An idle game about making numbers huge, with layer on layer of resets and a surprising story.' },
+    { slug: 'trimps', name: 'Trimps', cat: 'idle', url: 'https://trimps.github.io/', legal: 'open-source', phone: true, embed: true,
+      by: 'Trimps team', line: 'Lead little Trimps through zones of fights, gathering and upgrades. Long-haul idle strategy.' }
   ];
   var api = { CATS: CATS, GAMES: G };
   if (typeof module === 'object' && module.exports) module.exports = api; else root.TTHGames = api;
