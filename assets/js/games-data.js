@@ -108,8 +108,6 @@
       by: 'DashCraft', line: 'Build a stunt track out of blocks, then race it against other players online. Loops, jumps and ramps.' },
     { slug: 'free-rider-hd', name: 'Free Rider HD', cat: 'racing', url: 'https://www.freeriderhd.com/', legal: 'official', phone: false, embed: true,
       by: 'Kano Games', line: 'Ride a bike over tracks drawn by other players, or draw your own. Thousands of community tracks.' },
-    { slug: 'bruno-simon', name: 'Bruno Simon\'s car portfolio', cat: 'racing', url: 'https://bruno-simon.com/', legal: 'open-source', phone: true, embed: true,
-      by: 'Bruno Simon', line: 'A developer\'s portfolio you explore by driving a toy car around a 3D world. Knock things over, find the secrets.' },
     { slug: 'smash-karts', name: 'Smash Karts', cat: 'racing', url: 'https://smashkarts.io', legal: 'official', phone: true, embed: true,
       by: 'Tall Team', line: 'Multiplayer kart battles with weapons. Short ads before rounds.' },
     { slug: 'js-racer', name: 'Javascript Racer', cat: 'racing', url: 'https://jakesgordon.com/games/racer/', legal: 'indie', phone: false, embed: false,
