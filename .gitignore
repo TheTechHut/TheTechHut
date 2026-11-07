@@ -14,3 +14,7 @@ private/
 
 # the old plain-text paid list; the list is now data/remote-list.enc.json
 data/l/
+.DS_Store
+assets/.DS_Store
+assets/.DS_Store
+assets/.DS_Store
