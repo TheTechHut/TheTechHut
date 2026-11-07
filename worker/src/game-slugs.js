@@ -8,5 +8,6 @@ export const GAME_SLUGS = [
   '2048', 'hextris', 'tetris', 'little-alchemy-2', 'solitaire', 'minesweeper', 'skribbl', 'snake', 'pacman',
   'celeste-classic', 'qwop', 'line-rider', 'minecraft-classic', 'bloxd', 'townscaper', 'sandspiel',
   'infinite-craft', 'slither', 'agar', 'diep', 'diablo', 'a-dark-room', 'cookie-clicker', 'paperclips',
+  'sudoku',
   'flexbox-froggy', 'grid-garden', 'css-diner', 'elevator-saga', 'untrusted', 'sql-murder-mystery', 'narrow-one', 'generals', 'territorial', 'ogs-go', 'lidraughts', 'quordle', 'nerdle', 'worldle', 'globle', 'orb-farm', 'moomoo', 'zombs-royale', 'candy-box-2', 'kittens-game', 'antimatter-dimensions', 'trimps',
 ];
