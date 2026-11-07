@@ -40,7 +40,7 @@
       by: 'Magnus Wolffelt', line: 'Program the elevators of a building in JavaScript and move everyone fast enough to beat each challenge.' },
     { slug: 'untrusted', name: 'Untrusted', cat: 'code', url: 'https://untrustedgame.com/', legal: 'open-source', phone: false, embed: true,
       by: 'Alex Nisnevich & Greg Shuflin', line: 'A roguelike where you escape each level by editing its JavaScript source. Hacking as a puzzle game.' },
-    { slug: 'sql-murder-mystery', name: 'SQL Murder Mystery', cat: 'code', url: 'https://mystery.knightlab.com/', legal: 'official', phone: false, embed: true,
+    { slug: 'sql-murder-mystery', name: 'SQL Murder Mystery', cat: 'code', url: 'https://mystery.knightlab.com/', legal: 'official', phone: false, embed: false,
       by: 'Northwestern University Knight Lab', line: 'A murder in SQL City. Query the police database to find the killer. Good practice for data interviews.' },
 
     // Shooters
