@@ -133,6 +133,8 @@
         .game .tags .atop, .aboard .atop { font: 600 11px var(--mono); text-transform: uppercase; letter-spacing: .05em; background: var(--gold); color: var(--ink); border-radius: 2px; padding: 2px 6px; }
         .game .tags .anow { font: 600 11px var(--mono); text-transform: uppercase; letter-spacing: .05em; color: var(--green); border: 1px solid var(--mint); border-radius: 2px; padding: 2px 6px; display: inline-flex; align-items: center; gap: 5px; }
         .game .tags .anow i { width: 7px; height: 7px; border-radius: 50%; background: var(--mint); display: inline-block; }
+        .game .tags .anow.zero { color: #5F8592; border-color: var(--rule); }
+        .game .tags .anow.zero i { background: #b7c6cb; }
     </style>
 </head>
 
@@ -259,7 +261,7 @@
 
     <script src="/assets/js/games-data.js?v=20261107f"></script>
     <script src="/assets/js/games-live.js?v=20261027b" defer></script>
-    <script src="/assets/js/games-arcade.js?v=20261103" defer></script>
+    <script src="/assets/js/games-arcade.js?v=20261108" defer></script>
     <script>
     (function () {
         var D = window.TTHGames, CATS = D.CATS, GAMES = D.GAMES;

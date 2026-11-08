@@ -337,6 +337,31 @@ await t('without the client id and secret, Google sign-in is switched off', asyn
   assert.equal((await call({ GAME_STATS: fakeNamespace() }, '/games/login', { credential: 'x' })).status, 503);
 });
 
+await t('a game added to the site counts without redeploying the Worker', async () => {
+  const storage = fakeStorage();
+  const obj = new GameStats({ storage }, { GAMES_DATA_URL: 'https://site.test/games-data.js' });
+  let fetches = 0;
+  const filler = Array.from({ length: 12 }, (_, i) => `{ slug: 'filler-${i}' }`).join(', ');
+  globalThis.fetch = async () => { fetches++; return new Response(`var G = [${filler}, { slug: 'brand-new-game', name: 'X' }];`); };
+  const ping = (id, slug) => obj.fetch(new Request('https://x/ping', { method: 'POST', body: JSON.stringify({ op: 'ping', sid: id, slug }) })).then(r => r.json());
+  const first = await ping(sid(901), 'brand-new-game');
+  assert.equal(first.playing, 1, 'new slug accepted after reading the site');
+  assert.equal(fetches, 1);
+  await ping(sid(902), 'not-a-game');                 // unknown, but the list was read under 10 minutes ago
+  assert.equal(fetches, 1, 'no second fetch inside 10 minutes');
+  const fresh = new GameStats({ storage }, { GAMES_DATA_URL: 'https://site.test/games-data.js' });
+  const again = await fresh.fetch(new Request('https://x/ping', { method: 'POST', body: JSON.stringify({ op: 'ping', sid: sid(903), slug: 'brand-new-game' }) })).then(r => r.json());
+  assert.ok(again.playing >= 1, 'a woken object remembers the list from storage');
+  assert.equal(fetches, 1);
+  globalThis.fetch = async () => new Response('', { status: 500 });
+  tick(11 * 60);
+  await ping(sid(904), 'still-unknown');
+  assert.equal((await ping(sid(905), 'brand-new-game')).playing >= 1, true, 'a failed fetch keeps the old list');
+  const noEnv = new GameStats({ storage: fakeStorage() });
+  const r = await noEnv.fetch(new Request('https://x/ping', { method: 'POST', body: JSON.stringify({ op: 'ping', sid: sid(906), slug: 'brand-new-game' }) })).then(r => r.json());
+  assert.equal(r.playing, undefined, 'without env only built-in slugs count');
+});
+
 globalThis.fetch = realFetch;
 Date.now = realNow;
 console.log(`\n${pass} passed, ${fail} failed`);

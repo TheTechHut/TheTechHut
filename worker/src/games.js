@@ -51,6 +51,18 @@ const ACCRUING_TABS_PER_IP = 6;
 const MAX_LIVE = 50000;
 const TOP_SESSIONS = 10;
 const SLUGS = new Set(GAME_SLUGS);
+const SLUG_RE = /^[a-z0-9][a-z0-9-]{0,39}$/;
+// New games reach the boards without a Worker redeploy: an unknown slug makes the
+// object re-read the site's own game list (at most every 10 minutes) and keep it.
+export const GAMES_DATA_URL = 'https://thetechhut.co/assets/js/games-data.js';
+const SLUG_REFRESH_MS = 10 * 60 * 1000;
+
+/** Slugs listed in games-data.js. */
+export function slugsFromData(js) {
+  const out = new Set();
+  for (const m of String(js).matchAll(/slug:\s*'([a-z0-9-]+)'/g)) out.add(m[1]);
+  return out;
+}
 
 /** ISO week in Nairobi time (UTC+3, no daylight saving), e.g. "2026-W44". */
 export function weekOf(ms) {
@@ -86,8 +98,11 @@ function shortHash(str) {                                     // FNV-1a, enough 
 }
 
 export class GameStats {
-  constructor(state) {
+  constructor(state, env) {
     this.state = state;
+    this.env = env || null;     // no env (tests): only the built-in GAME_SLUGS count
+    this.siteSlugs = null;      // slugs read from the site, cached in storage as 'slugs'
+    this.slugsAt = 0;
     this.seen = new Map();      // sid -> { t, slug, ip, pid }
     this.counted = new Set();   // sids whose visit is counted
     this.played = new Set();    // "sid|slug" already counted as a play
@@ -193,6 +208,28 @@ export class GameStats {
     if (this.played.size > 100000) this.played.clear();
     if (this.ipTabs.size > 10000) for (const [ip, m] of this.ipTabs) { for (const [id, at] of m) if (now - at > LIVE_MS) m.delete(id); if (!m.size) this.ipTabs.delete(ip); }
     if (this.sessions.size > 20000) for (const [k] of this.sessions) { if (!this.seen.has(k.split('|')[0])) this.sessions.delete(k); }
+  }
+
+  /** Is this a game in the directory? Built-in list first, then the site's own list. */
+  async knows(slug, now) {
+    if (typeof slug !== 'string' || !SLUG_RE.test(slug)) return false;
+    if (SLUGS.has(slug)) return true;
+    const st = this.state.storage;
+    if (!this.siteSlugs) {
+      const c = await st.get('slugs');
+      if (c) { this.siteSlugs = new Set(c.list); this.slugsAt = c.at; }
+    }
+    if (this.siteSlugs && this.siteSlugs.has(slug)) return true;
+    if (!this.env || now - this.slugsAt < SLUG_REFRESH_MS) return false;
+    this.slugsAt = now;
+    try {
+      const url = this.env.GAMES_DATA_URL || GAMES_DATA_URL;
+      const r = await fetch(url + '?t=' + Math.floor(now / SLUG_REFRESH_MS), { signal: AbortSignal.timeout(4000) });
+      const found = r.ok ? slugsFromData(await r.text()) : new Set();
+      if (found.size >= 10) this.siteSlugs = found;          // a broken or empty file never wipes the list
+    } catch (e) { /* site unreachable: try again in 10 minutes */ }
+    await st.put('slugs', { at: this.slugsAt, list: [...(this.siteSlugs || [])] });
+    return !!(this.siteSlugs && this.siteSlugs.has(slug));
   }
 
   liveBySlug() {
@@ -320,7 +357,7 @@ export class GameStats {
         if (w.n < VISITS_PER_IP_PER_HOUR) { w.n++; this.visits++; this.counted.add(sid); this.markDirty('visits'); }
         this.perIp.set(b.ip || '', w);
       }
-      const slug = SLUGS.has(b.slug) ? b.slug : null;
+      const slug = (await this.knows(b.slug, now)) ? b.slug : null;
       const who = b.who || null;
       if (slug) this.credit(now, sid, slug, b.ip || '', who);
       if (this.seen.has(sid) || this.seen.size < MAX_LIVE) this.seen.set(sid, { t: now, slug, ip: b.ip || '', pid: who && who.pid });

@@ -57,7 +57,9 @@
     document.querySelectorAll('[data-arcade-slug]').forEach(function (el) {
       var slug = el.getAttribute('data-arcade-slug'), n = (board.liveBySlug || {})[slug] || 0, i = top.indexOf(slug), h = '';
       if (i >= 0) h += '<span class="atop">#' + (i + 1) + ' this week</span>';
-      if (n) h += '<span class="anow"><i></i>' + n + ' playing</span>';
+      // Every game that plays here shows its live count, 0 included; games that open on
+      // their own site can't report players back, so they show none.
+      if (NAMES[slug] && NAMES[slug].embed) h += '<span class="anow' + (n ? '' : ' zero') + '"><i></i>' + n + ' playing</span>';
       el.innerHTML = h; el.hidden = !h;
     });
   }
@@ -174,5 +176,5 @@
   root.hidden = false;                       // visible from the start; boards fill in when they load
   if (location.hash === '#arcade') setTimeout(function () { root.scrollIntoView({ block: 'start' }); }, 50);
   refresh();
-  setInterval(function () { if (!document.hidden) refresh(); }, 60000);
+  setInterval(function () { if (!document.hidden) refresh(); }, 30000);
 })();

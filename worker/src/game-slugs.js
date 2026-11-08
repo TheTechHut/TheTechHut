@@ -1,6 +1,7 @@
-// Every game the arcade will count play time for. Must match the slugs in
-// assets/js/games-data.js; test/games.test.mjs fails if the two drift apart.
-// When you add a game to the directory, add its slug here too and redeploy.
+// Built-in list of games the arcade counts play time for. Should match the slugs
+// in assets/js/games-data.js; test/games.test.mjs fails if the two drift apart.
+// A game added to the site without updating this list still counts: the Worker
+// re-reads games-data.js from thetechhut.co when it sees an unknown slug.
 export const GAME_SLUGS = [
   'matatu-manager', 'lagos-life', 'quake3', 'doom', 'krunker', 'shell-shockers', 'venge', 'kour', 'evio',
   'deadshot', 'distrito-rabisco', 'xonotic', '1v1lol', 'freeciv', 'openfront', 'hedgewars', 'lichess',
