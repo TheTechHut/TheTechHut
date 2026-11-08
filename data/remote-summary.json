@@ -1,9 +1,9 @@
 {
- "updated": "2026-11-07",
- "company_count": 45,
+ "updated": "2026-11-08",
+ "company_count": 46,
  "role_count": 460,
  "local_role_count": 146,
- "roles_scanned": 3667,
+ "roles_scanned": 3668,
  "sources": [
   "Himalayas",
   "Jobicy"
@@ -12,8 +12,8 @@
   {
    "company": "Canonical",
    "platform": "greenhouse",
-   "eligible": 239,
-   "total": 317,
+   "eligible": 238,
+   "total": 316,
    "locations": [
     "Home based - EMEA",
     "Home based - EMEA; Office Based - London, UK",
@@ -153,7 +153,7 @@
    "company": "Turing",
    "platform": "greenhouse",
    "eligible": 2,
-   "total": 44,
+   "total": 47,
    "locations": [
     "Global - Remote",
     "Global - Remote; United States"
@@ -163,7 +163,7 @@
    "company": "Sun King",
    "platform": "pinpoint",
    "eligible": 2,
-   "total": 183,
+   "total": 182,
    "locations": [
     "Global"
    ]
@@ -364,6 +364,15 @@
    "total": 1,
    "locations": [
     "Worldwide"
+   ]
+  },
+  {
+   "company": "TRM Labs",
+   "platform": "jobicy",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "EMEA,  Singapore,  South Korea,  USA"
    ]
   },
   {
