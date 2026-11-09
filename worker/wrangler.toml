@@ -14,6 +14,10 @@ compatibility_date = "2026-10-01"
 # The CV Pack email signup (see README, "The CV Pack email list") adds more (the Daily Savannah list is a second product on the same Worker):
 #   BREVO_API_KEY, BREVO_LIST_ID (CV Pack), BREVO_LIST_ID_DAILY (Daily Savannah),
 #   BREVO_LIST_ID_JOBS (daily job alert, /jobs/daily/),
+#
+# The prompt marketplace adds:
+#   wrangler secret put MARKET_SECRET          # any long random string; signs sign-in links and sessions
+#   MARKET_ADMINS (optional var)              # comma-separated emails allowed to remove any prompt
 #   BREVO_SENDER_EMAIL, SUBSCRIBE_SECRET
 #
 # Deploying without a custom domain gives you
@@ -46,6 +50,15 @@ class_name = "PayGuard"
 [[migrations]]
 tag = "v2"
 new_sqlite_classes = ["PayGuard"]
+
+# The prompt marketplace (src/market.js): accounts, prompts and purchases.
+[[durable_objects.bindings]]
+name = "MARKET"
+class_name = "Market"
+
+[[migrations]]
+tag = "v3"
+new_sqlite_classes = ["Market"]
 
 # Sign in with Google on the games arcade (optional). Paste the OAuth web
 # client id here, put the same id in GOOGLE_CLIENT_ID at the top of

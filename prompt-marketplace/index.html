@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt marketplace: buy, sell and share AI prompts | The Tech Hut</title>
+    <meta name="description" content="Buy, sell and share AI prompts with The Tech Hut community. Sign in with just your email. Sellers keep 90% of every sale, paid to their bank account through Paystack.">
+    <link rel="canonical" href="https://thetechhut.co/prompt-marketplace/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="The Tech Hut">
+    <meta property="og:title" content="Prompt marketplace: prompts that work, from people who use them">
+    <meta property="og:description" content="Buy, sell and share AI prompts. Sign in with your email. Sellers keep 90%.">
+    <meta property="og:url" content="https://thetechhut.co/prompt-marketplace/">
+    <meta property="og:image" content="https://thetechhut.co/assets/img/social/jobs.jpg">
+    <meta property="og:locale" content="en_KE">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#073B4C">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/assets/img/favicon-192.png" type="image/png" sizes="192x192">
+    <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/thh.css">
+    <script src="/assets/js/motion.js?v=1"></script>
+    <style>
+        /* Prompt marketplace. Built on thh.css: ink, mint, green; Newsreader headlines,
+           Plex Mono labels, ruled columns, square corners. */
+        [hidden] { display: none !important; }
+        .pm-head { padding-bottom: 44px; }
+        .pm-head-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 40px; align-items: end; }
+        .pm-head h1 { max-width: 18ch; }
+        .pm-acct { background: var(--paper-2); border-top: 3px solid var(--ink); padding: 20px 22px; font-size: 16px; }
+        .pm-acct p { margin: 0 0 14px; color: var(--text); }
+        .pm-acct-h { font-family: var(--serif); font-size: 21px; color: var(--ink) !important; margin-bottom: 6px !important; }
+        .pm-dim { color: var(--dim); font-size: 14.5px; }
+
+        .pm-browse { padding-top: 28px; }
+        .pm-tools { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+        .pm-search { flex: 1 1 320px; }
+        .pm-search input { width: 100%; box-sizing: border-box; font-size: 16px; padding: 12px 14px; }
+        .pm-free { display: inline-flex; gap: 8px; align-items: center; font-weight: 600; color: var(--ink); white-space: nowrap; }
+        .pm-cats { display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0 6px; }
+        .pm-cats button { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--ink);
+            background: var(--paper); border: 1px solid var(--rule); border-radius: 2px; padding: 6px 10px; cursor: pointer; }
+        .pm-cats button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+        .pm-count { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--dim); margin: 10px 0 0; min-height: 1.4em; }
+        .pm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 30px 32px; margin-top: 18px; }
+        .pm-card { border-top: 2px solid var(--ink); padding: 12px 0 4px; cursor: pointer; outline: none; }
+        .pm-card:hover h3, .pm-card:focus-visible h3 { color: var(--green); }
+        .pm-card:focus-visible { box-shadow: 0 -2px 0 var(--mint); }
+        .pm-card-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+        .pm-cat { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--green); }
+        .pm-card h3 { font-size: 21px; line-height: 1.22; margin: 10px 0 6px; }
+        .pm-card-desc { font-size: 15.5px; color: var(--text); margin: 0 0 8px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        .pm-card-meta { font-size: 13.5px; color: var(--dim); margin: 0; }
+        .pm-empty { grid-column: 1 / -1; border-top: 2px solid var(--ink); padding: 18px 0; max-width: 60ch; }
+        .pm-empty h3 { font-size: 24px; margin: 0 0 8px; }
+
+        .pm-dlg { border: 0; border-top: 3px solid var(--ink); border-radius: 0; padding: 26px 28px 24px; width: min(680px, calc(100vw - 32px));
+            max-height: calc(100vh - 40px); box-sizing: border-box; color: var(--text); background: var(--paper); }
+        .pm-dlg::backdrop { background: rgba(7, 59, 76, .55); }
+        .pm-narrow { width: min(460px, calc(100vw - 32px)); }
+        .pm-wide { width: min(820px, calc(100vw - 32px)); }
+        .pm-dlg h2 { font-size: clamp(24px, 3.4vw, 32px); margin: 0 0 6px; padding-right: 30px; }
+        .pm-x { position: absolute; top: 10px; right: 12px; margin: 0; }
+        .pm-x button { background: none; border: 0; font-size: 28px; line-height: 1; color: var(--ink); cursor: pointer; padding: 4px 8px; }
+        .pm-desc { font-size: 17px; margin: 14px 0; }
+        .pm-preview { background: var(--paper-2); border-left: 3px solid var(--mint); padding: 12px 14px; margin: 0 0 16px; }
+        .pm-preview pre, .pm-body { white-space: pre-wrap; word-wrap: break-word; font: 14px/1.55 var(--mono); color: var(--ink); margin: 6px 0 0; }
+        .pm-preview pre { background: none; padding: 0; overflow: visible; }
+        .pm-body { background: var(--paper-2); border-left: 3px solid var(--ink); padding: 14px 16px; max-height: 46vh; overflow: auto; }
+        .pm-body-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+        .pm-small { padding: 6px 12px; font-size: 13.5px; }
+        .pm-fine { margin: 18px 0 0; }
+        .pm-link { background: none; border: 0; padding: 0; color: var(--dim); text-decoration: underline; cursor: pointer; font: inherit; font-size: 14px; }
+        .pm-link:hover { color: var(--ink); }
+        #dpActions { margin-top: 6px; }
+
+        .pm-field { display: grid; gap: 6px; font-weight: 700; font-size: 14.5px; color: var(--ink); margin: 0 0 14px; }
+        .pm-field input, .pm-field select, .pm-field textarea { width: 100%; box-sizing: border-box; font: 16px var(--sans); font-weight: 400; }
+        .pm-mono { font-family: var(--mono) !important; font-size: 14px !important; }
+        .pm-opt, .pm-hint { font-weight: 400; color: var(--dim); font-size: 13.5px; }
+        .pm-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0 16px; }
+        .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+        .pm-tabs { display: flex; gap: 2px 18px; flex-wrap: wrap; border-bottom: 1px solid var(--rule); margin: 14px 0 20px; }
+        .pm-tabs button { background: none; border: 0; border-bottom: 2px solid transparent; padding: 8px 0; font: 700 15px var(--sans); color: var(--dim); cursor: pointer; margin-bottom: -1px; }
+        .pm-tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--mint); }
+        .pm-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+        .pm-list li { display: flex; justify-content: space-between; gap: 14px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+        .pm-li-main { display: grid; gap: 2px; }
+        .pm-li-main b { color: var(--ink); }
+        .pm-li-act { display: flex; gap: 14px; flex: none; }
+
+        .pm-how { border-bottom: 0; }
+        .pm-toast { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); background: var(--ink); color: #fff; padding: 12px 18px;
+            border-left: 3px solid var(--mint); font-size: 15px; max-width: calc(100vw - 40px); z-index: 1000; box-sizing: border-box; }
+        @media (max-width: 760px) {
+            .pm-head-grid { grid-template-columns: 1fr; gap: 26px; }
+            .pm-dlg { padding: 22px 18px 20px; }
+            .pm-list li { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+    <header class="masthead">
+        <div class="masthead-top"><div class="wrap"><span>Kenya's tech careers, reported daily</span><span class="hide-sm"><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a> &middot; <a href="mailto:info@thetechhut.co">info@thetechhut.co</a></span></div></div>
+        <div class="wrap masthead-main">
+            <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+            <nav class="sitenav" aria-label="Site"><a href="/blog/daily/">Daily</a><a href="/jobs/">Jobs</a><a href="/remote/">Remote</a><a href="/cv-pack/">CV Pack</a><a href="/shop/">Shop</a><a href="/events/">Events</a><a href="/games/">Games</a><a href="/apprenticeship/">Apprenticeship</a><a href="/blog/">Blog</a></nav>
+        </div>
+    </header>
+<main id="main">
+<header class="pagehead pm-head">
+  <div class="wrap pm-head-grid">
+    <div>
+      <span class="eyebrow">Prompt marketplace</span>
+      <h1>Prompts that work, <em>from people who use them.</em></h1>
+      <p class="lede">Buy, sell and share AI prompts with The Tech Hut community: for CVs, code, content, data and more. Sign in with just your email. Sellers keep 90% of every sale, paid straight to their account.</p>
+      <div class="cta-row">
+        <button class="btn mint" type="button" data-act="sell">Sell or share a prompt</button>
+        <a class="btn ghost" href="#browse">Browse prompts</a>
+      </div>
+    </div>
+    <aside class="pm-acct" aria-live="polite">
+      <div id="acctOut">
+        <p class="pm-acct-h">No password. No forms.</p>
+        <p>Type your email, click the link we send, and you're in. Your first sign-in creates your account.</p>
+        <button class="btn" type="button" data-act="signin">Sign in or join</button>
+      </div>
+      <div id="acctIn" hidden>
+        <p class="pm-acct-h">Signed in as <b id="acctName"></b></p>
+        <p id="acctMeta" class="pm-dim"></p>
+        <div class="cta-row"><button class="btn" type="button" data-act="account">My account</button><button class="btn ghost" type="button" data-act="sell">Sell a prompt</button></div>
+      </div>
+    </aside>
+  </div>
+</header>
+
+<section id="browse" class="pm-browse">
+  <div class="wrap">
+    <div class="pm-tools">
+      <label class="pm-search"><span class="sr-only">Search prompts</span><input type="search" id="q" placeholder="Search prompts: cover letter, SQL, LinkedIn post…"></label>
+      <label class="pm-free"><input type="checkbox" id="freeOnly"> Free only</label>
+    </div>
+    <div class="pm-cats" id="cats" role="group" aria-label="Categories"></div>
+    <p class="pm-count" id="count" aria-live="polite">Loading prompts…</p>
+    <div class="pm-grid" id="grid"></div>
+  </div>
+</section>
+
+<section class="pm-how">
+  <div class="wrap">
+    <div class="section-head"><h2>How it works</h2></div>
+    <div class="cards">
+      <div class="card"><span class="n">01 &middot; Join in one click</span><h3>Email, then a link</h3><p>No password to remember. We email you a sign-in link; the first one creates your account.</p></div>
+      <div class="card"><span class="n">02 &middot; Post a prompt</span><h3>Free or paid</h3><p>Share a prompt for free, or set a price from KES 50. Buyers see your title, description and a short preview; the full prompt unlocks when they buy.</p></div>
+      <div class="card"><span class="n">03 &middot; Get paid</span><h3>90% to you, automatically</h3><p>Buyers pay by M-PESA or card through Paystack. Paystack sends 90% straight to your bank account; The Tech Hut keeps 10%.</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- Prompt details -->
+<dialog class="pm-dlg" id="dlgPrompt" aria-labelledby="dpTitle">
+  <form method="dialog" class="pm-x"><button aria-label="Close">&times;</button></form>
+  <span class="eyebrow" id="dpCat"></span>
+  <h2 id="dpTitle"></h2>
+  <p class="pm-dim" id="dpBy"></p>
+  <p id="dpDesc" class="pm-desc"></p>
+  <div class="pm-preview"><span class="label">Preview</span><pre id="dpPreview"></pre></div>
+  <div id="dpBodyWrap" hidden>
+    <div class="pm-body-head"><span class="label">The prompt</span><button class="btn ghost pm-small" type="button" id="dpCopy">Copy</button></div>
+    <pre id="dpBody" class="pm-body"></pre>
+  </div>
+  <p class="formmsg" id="dpMsg" role="status"></p>
+  <div class="cta-row" id="dpActions"></div>
+  <p class="pm-fine"><button type="button" class="pm-link" id="dpReport">Report this prompt</button></p>
+</dialog>
+
+<!-- Sign in -->
+<dialog class="pm-dlg pm-narrow" id="dlgSignin" aria-labelledby="siTitle">
+  <form method="dialog" class="pm-x"><button aria-label="Close">&times;</button></form>
+  <span class="eyebrow">Sign in or join</span>
+  <h2 id="siTitle">Just your email</h2>
+  <p id="siWhy" class="pm-dim">We'll email you a link. Click it and you're signed in. New here? The same link creates your account.</p>
+  <form id="siForm" novalidate>
+    <label class="pm-field">Email<input type="email" name="email" autocomplete="email" placeholder="you@email.com" required></label>
+    <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <button class="btn" type="submit" id="siBtn">Email me a sign-in link</button>
+  </form>
+  <p class="formmsg" id="siMsg" role="status"></p>
+</dialog>
+
+<!-- Account -->
+<dialog class="pm-dlg pm-wide" id="dlgAccount" aria-labelledby="acTitle">
+  <form method="dialog" class="pm-x"><button aria-label="Close">&times;</button></form>
+  <span class="eyebrow">My account</span>
+  <h2 id="acTitle">Your prompts</h2>
+  <nav class="pm-tabs" role="tablist">
+    <button type="button" role="tab" data-tab="sell" aria-selected="true">Sell or share</button>
+    <button type="button" role="tab" data-tab="mine">My prompts</button>
+    <button type="button" role="tab" data-tab="bought">Bought</button>
+    <button type="button" role="tab" data-tab="payout">Payouts</button>
+    <button type="button" role="tab" data-tab="profile">Profile</button>
+  </nav>
+
+  <div class="pm-tab" data-pane="sell">
+    <form id="sellForm" novalidate>
+      <input type="hidden" name="id">
+      <label class="pm-field">Title<input type="text" name="title" maxlength="90" placeholder="e.g. Cover letter that sounds like you" required></label>
+      <label class="pm-field">What it does<textarea name="desc" maxlength="600" rows="3" placeholder="Who it's for, what it produces, and what the buyer needs to paste in." required></textarea></label>
+      <div class="pm-row">
+        <label class="pm-field">Category<select name="cat" id="sellCat"></select></label>
+        <label class="pm-field">Works with<select name="model" id="sellModel"></select></label>
+        <label class="pm-field">Price (KES)<input name="price" type="number" min="0" max="20000" step="10" value="0" inputmode="numeric"><span class="pm-hint">0 = free. Paid: KES 50 to 20,000.</span></label>
+      </div>
+      <label class="pm-field">Preview <span class="pm-opt">(everyone sees this)</span><textarea name="preview" maxlength="400" rows="3" placeholder="The first lines, or an example of the output."></textarea></label>
+      <label class="pm-field">The full prompt <span class="pm-opt">(unlocks for buyers)</span><textarea name="body" maxlength="12000" rows="8" class="pm-mono" placeholder="Paste the prompt. Mark the parts buyers fill in, like {job ad} or {your CV}." required></textarea></label>
+      <div class="cta-row"><button class="btn mint" type="submit" id="sellBtn">Publish prompt</button><button class="btn ghost" type="button" id="sellReset" hidden>Cancel editing</button></div>
+      <p class="formmsg" id="sellMsg" role="status"></p>
+    </form>
+  </div>
+
+  <div class="pm-tab" data-pane="mine" hidden><ul class="pm-list" id="mineList"></ul></div>
+  <div class="pm-tab" data-pane="bought" hidden><ul class="pm-list" id="boughtList"></ul></div>
+
+  <div class="pm-tab" data-pane="payout" hidden>
+    <p>Where your 90% goes. Paystack checks the account name with your bank and pays you directly after each sale, on its normal settlement schedule.</p>
+    <p class="pm-dim" id="payoutNow"></p>
+    <form id="payoutForm" novalidate>
+      <div class="pm-row">
+        <label class="pm-field">Bank<select name="bank" id="bankSel"><option value="">Loading banks…</option></select></label>
+        <label class="pm-field">Account number<input type="text" name="account" inputmode="numeric" autocomplete="off" placeholder="Digits only"></label>
+      </div>
+      <button class="btn" type="submit" id="payoutBtn">Save payout account</button>
+      <p class="formmsg" id="payoutMsg" role="status"></p>
+    </form>
+  </div>
+
+  <div class="pm-tab" data-pane="profile" hidden>
+    <form id="profileForm" novalidate>
+      <label class="pm-field">Name shown on your prompts<input type="text" name="name" maxlength="30"></label>
+      <button class="btn" type="submit">Save</button>
+      <p class="formmsg" id="profileMsg" role="status"></p>
+    </form>
+    <p class="pm-dim" id="profileEmail"></p>
+    <button class="btn ghost" type="button" id="signOut">Sign out on this device</button>
+  </div>
+</dialog>
+
+<div class="pm-toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<footer class="sitefoot">
+        <div class="wrap">
+            <div class="sitefoot-grid">
+                <div>
+                    <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+                    <p>Helping Kenyans into tech work: jobs you can take from Nairobi, a daily read on the industry, and projects with mentors.</p>
+                </div>
+                <div>
+                    <h4>Read</h4>
+                    <ul>
+                        <li><a href="/blog/daily/">Daily Savannah</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Find work</h4>
+                    <ul>
+                        <li><a href="/jobs/">Jobs board</a></li>
+                        <li><a href="/remote/">Remote-from-Kenya list</a></li>
+                        <li><a href="/cv-pack/">CV Pack</a></li>
+                        <li><a href="/early-access/">Early Access</a></li>
+                        <li><a href="/shop/">Everything we make</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="/apprenticeship/">Apprenticeship</a></li>
+                        <li><a href="/events/">Events</a></li>
+                        <li><a href="/communities/">Tech communities</a></li>
+                        <li><a href="/tools/">Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Employers</h4>
+                    <ul>
+                        <li><a href="/advertise/">Advertise</a></li>
+                        <li><a href="/jobs-for-your-community/">A jobs board for your community</a></li>
+                        <li><a href="/recruiters/">Recruiters</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sitefoot-base">
+                <span>&copy; 2026 The Tech Hut Community</span>
+                <a href="mailto:info@thetechhut.co">info@thetechhut.co</a>
+                <span>+254 115 017 058</span>
+                <a href="/data_privacy_policy/">Privacy</a>
+                <a href="https://linkedin.com/company/digital-transformation-partner/" rel="noopener">LinkedIn</a>
+                <a href="https://x.com/Ekiprop_kimutai" rel="noopener">X</a>
+            </div>
+        </div>
+    </footer>
+<script>
+(function () {
+  var API = 'https://thetechhut-pay.thetechhut.workers.dev/market/';
+  var CATS = [['all', 'All'], ['writing', 'Writing'], ['coding', 'Coding'], ['career', 'Career & CVs'], ['marketing', 'Marketing'],
+              ['data', 'Data & analysis'], ['images', 'Images'], ['business', 'Business'], ['learning', 'Learning'], ['other', 'Other']];
+  var MODELS = [['any', 'Any AI'], ['chatgpt', 'ChatGPT'], ['claude', 'Claude'], ['gemini', 'Gemini'], ['copilot', 'Copilot'], ['midjourney', 'Midjourney'], ['other', 'Other']];
+  var catName = {}, modelName = {};
+  CATS.forEach(function (c) { catName[c[0]] = c[1]; });
+  MODELS.forEach(function (m) { modelName[m[0]] = m[1]; });
+  var $ = function (id) { return document.getElementById(id); };
+  var state = { cat: 'all', q: '', free: false, prompts: [], me: null, mine: [], bought: [] };
+
+  /* ---------- session (kept in this browser only) ---------- */
+  var KEY = 'tthMarketSession';
+  function sess() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function setSess(v) { try { if (v) localStorage.setItem(KEY, v); else localStorage.removeItem(KEY); } catch (e) {} }
+
+  function api(path, body) {
+    var opts = body ? { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) } : {};
+    return fetch(API + path, opts).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) { j._status = r.status; return j; });
+    });
+  }
+  function authed(path, body) {
+    body = body || {}; body.session = sess();
+    return api(path, body).then(function (j) {
+      if (j._status === 401) { setSess(null); state.me = null; drawAcct(); }
+      return j;
+    });
+  }
+  function toast(text) {
+    var t = $('toast'); t.textContent = text; t.hidden = false;
+    clearTimeout(toast.t); toast.t = setTimeout(function () { t.hidden = true; }, 4500);
+  }
+  function msg(node, text, ok) { node.textContent = text || ''; node.className = 'formmsg' + (text ? (ok ? ' ok' : ' bad') : ''); }
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function price(p) { return p > 0 ? 'KES ' + Number(p).toLocaleString('en-KE') : 'Free'; }
+  function open(d) { if (d.showModal) { if (!d.open) d.showModal(); } else d.setAttribute('open', ''); }
+  function close(d) { if (d.close) d.close(); else d.removeAttribute('open'); }
+
+  /* ---------- browse ---------- */
+  function drawCats() {
+    $('cats').innerHTML = '';
+    CATS.forEach(function (c) {
+      var b = el('button', null, c[1]); b.type = 'button'; b.setAttribute('aria-pressed', String(state.cat === c[0]));
+      b.addEventListener('click', function () { state.cat = c[0]; drawCats(); drawGrid(); });
+      $('cats').appendChild(b);
+    });
+  }
+  function drawGrid() {
+    var q = state.q.toLowerCase();
+    var list = state.prompts.filter(function (p) {
+      if (state.cat !== 'all' && p.cat !== state.cat) return false;
+      if (state.free && p.price > 0) return false;
+      return !q || (p.title + ' ' + p.desc + ' ' + p.seller + ' ' + (catName[p.cat] || '')).toLowerCase().indexOf(q) >= 0;
+    });
+    var g = $('grid'); g.innerHTML = '';
+    $('count').textContent = state.prompts.length ? list.length + (list.length === 1 ? ' prompt' : ' prompts') : '';
+    if (!state.prompts.length) {
+      var e = el('div', 'pm-empty');
+      e.appendChild(el('h3', null, 'Be the first to post a prompt.'));
+      e.appendChild(el('p', null, 'The marketplace is new. Share a prompt you rely on, free or paid, and it shows up here for the whole community.'));
+      var b = el('button', 'btn mint', 'Post the first prompt'); b.type = 'button'; b.setAttribute('data-act', 'sell');
+      e.appendChild(b); g.appendChild(e); return;
+    }
+    if (!list.length) { g.appendChild(el('p', 'pm-dim', 'No prompts match that. Try another word or category.')); return; }
+    list.forEach(function (p) {
+      var a = el('article', 'pm-card'); a.tabIndex = 0; a.setAttribute('role', 'button');
+      a.setAttribute('aria-label', p.title + ', ' + price(p.price));
+      var top = el('div', 'pm-card-top');
+      top.appendChild(el('span', 'pm-cat', catName[p.cat] || 'Other'));
+      top.appendChild(el('span', 'tag' + (p.price > 0 ? '' : ' mint'), price(p.price)));
+      a.appendChild(top);
+      a.appendChild(el('h3', null, p.title));
+      a.appendChild(el('p', 'pm-card-desc', p.desc));
+      a.appendChild(el('p', 'pm-card-meta', 'by ' + p.seller + ' · ' + (modelName[p.model] || 'Any AI') + (p.sales ? ' · ' + p.sales + ' sold' : '')));
+      var go = function () { showPrompt(p.id); };
+      a.addEventListener('click', go);
+      a.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+      g.appendChild(a);
+    });
+  }
+  function load() {
+    return api('prompts').then(function (j) {
+      if (j._status !== 200) { $('count').textContent = j.error || 'The marketplace is switching on. Check back soon.'; state.prompts = []; return; }
+      state.prompts = j.prompts || []; drawGrid();
+    }).catch(function () { $('count').textContent = 'Could not load prompts. Check your connection and reload.'; });
+  }
+
+  /* ---------- one prompt ---------- */
+  var current = null;
+  function findPrompt(id) {
+    var i;
+    for (i = 0; i < state.prompts.length; i++) if (state.prompts[i].id === id) return state.prompts[i];
+    for (i = 0; i < state.mine.length; i++) if (state.mine[i].id === id) return state.mine[i];
+    return null;
+  }
+  function showBody(text) { $('dpBody').textContent = text; $('dpBodyWrap').hidden = false; $('dpActions').innerHTML = ''; }
+  function showPrompt(id, preset) {
+    var p = findPrompt(id) || preset; if (!p) return;
+    current = p;
+    $('dpCat').textContent = (catName[p.cat] || 'Prompt') + ' · ' + (modelName[p.model] || 'Any AI');
+    $('dpTitle').textContent = p.title;
+    $('dpBy').textContent = 'by ' + (p.seller || (state.me && state.me.name) || 'Member') + (p.sales ? ' · ' + p.sales + ' sold' : '');
+    $('dpDesc').textContent = p.desc || '';
+    $('dpPreview').textContent = p.preview || '';
+    $('dpPreview').parentNode.hidden = !p.preview;
+    $('dpBodyWrap').hidden = true; msg($('dpMsg'), '');
+    var acts = $('dpActions'); acts.innerHTML = '';
+    var owned = state.mine.some(function (x) { return x.id === p.id; }) || state.bought.some(function (x) { return x.id === p.id; });
+    if (p.price > 0 && !owned) {
+      var buy = el('button', 'btn mint', 'Buy for ' + price(p.price)); buy.type = 'button';
+      buy.addEventListener('click', function () { startBuy(p, buy); });
+      acts.appendChild(buy);
+      acts.appendChild(el('span', 'pm-dim', 'M-PESA or card, via Paystack'));
+    } else {
+      var show = el('button', 'btn', 'Show the full prompt'); show.type = 'button';
+      show.addEventListener('click', function () {
+        show.disabled = true;
+        authed('open', { id: p.id }).then(function (j) {
+          if (j.body) showBody(j.body); else { show.disabled = false; msg($('dpMsg'), j.error || 'Could not open it. Try again.'); }
+        });
+      });
+      acts.appendChild(show);
+    }
+    open($('dlgPrompt'));
+  }
+  function startBuy(p, btn) {
+    if (!sess()) { close($('dlgPrompt')); askSignin('Sign in to buy. It takes one email and one click.', { buy: p.id }); return; }
+    btn.disabled = true; btn.textContent = 'Opening Paystack…'; msg($('dpMsg'), '');
+    authed('buy', { id: p.id, website: '' }).then(function (j) {
+      if (j.url) { location.href = j.url; return; }
+      btn.disabled = false; btn.textContent = 'Buy for ' + price(p.price);
+      if (j.error === 'owned') { msg($('dpMsg'), 'You already own this prompt.', true); refreshMe().then(function () { showPrompt(p.id); }); return; }
+      if (j.error === 'signin') { close($('dlgPrompt')); askSignin('Your session ended. Sign in again to buy.', { buy: p.id }); return; }
+      msg($('dpMsg'), j.error || 'Could not start the payment. Try again.');
+    });
+  }
+  $('dpCopy').addEventListener('click', function () {
+    var t = $('dpBody').textContent;
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { toast('Prompt copied.'); }, function () { toast('Select the text and copy it.'); });
+  });
+  $('dpReport').addEventListener('click', function () {
+    if (!current) return;
+    if (!window.confirm('Report this prompt as spam, copied or harmful?')) return;
+    api('report', { id: current.id }).then(function () { toast('Thanks. We will take a look.'); });
+  });
+
+  /* ---------- sign in ---------- */
+  var DEFAULT_WHY = "We'll email you a link. Click it and you're signed in. New here? The same link creates your account.";
+  function askSignin(why, then) {
+    $('siWhy').textContent = why || DEFAULT_WHY;
+    try { if (then) sessionStorage.setItem('tthMarketAfter', JSON.stringify(then)); } catch (e) {}
+    msg($('siMsg'), ''); $('siBtn').disabled = false; $('siBtn').textContent = 'Email me a sign-in link';
+    open($('dlgSignin'));
+    setTimeout(function () { $('siForm').email.focus(); }, 50);
+  }
+  $('siForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = e.target, email = f.email.value.trim();
+    var reset = function () { $('siBtn').disabled = false; $('siBtn').textContent = 'Email me a sign-in link'; };
+    if (!email || email.indexOf('@') < 1) { msg($('siMsg'), 'Enter your email address.'); return; }
+    $('siBtn').disabled = true; $('siBtn').textContent = 'Sending…';
+    api('login', { email: email, website: f.website.value }).then(function (j) {
+      if (j._status === 200) { msg($('siMsg'), 'Check your inbox: we sent a sign-in link to ' + email + '. It works once, for 20 minutes. Check spam if you do not see it.', true); $('siBtn').textContent = 'Link sent'; }
+      else { msg($('siMsg'), j.error || 'Could not send the link. Try again.'); reset(); }
+    }).catch(function () { msg($('siMsg'), 'Could not reach the server. Check your connection.'); reset(); });
+  });
+
+  /* ---------- account ---------- */
+  function drawAcct() {
+    var me = state.me;
+    $('acctOut').hidden = !!me; $('acctIn').hidden = !me;
+    if (!me) return;
+    $('acctName').textContent = me.name;
+    $('acctMeta').textContent = state.mine.length + ' posted · ' + state.bought.length + ' bought' + (me.payout ? ' · payouts on' : '');
+  }
+  function refreshMe() {
+    if (!sess()) { state.me = null; drawAcct(); return Promise.resolve(); }
+    return authed('me').then(function (j) {
+      if (j.user) { state.me = j.user; state.mine = j.mine || []; state.bought = j.bought || []; }
+      drawAcct(); drawMine(); drawBought(); drawPayout();
+    });
+  }
+  function tab(name) {
+    document.querySelectorAll('#dlgAccount [role=tab]').forEach(function (b) { b.setAttribute('aria-selected', String(b.getAttribute('data-tab') === name)); });
+    document.querySelectorAll('#dlgAccount .pm-tab').forEach(function (p) { p.hidden = p.getAttribute('data-pane') !== name; });
+    if (name === 'payout') loadBanks();
+  }
+  document.querySelectorAll('#dlgAccount [role=tab]').forEach(function (b) { b.addEventListener('click', function () { tab(b.getAttribute('data-tab')); }); });
+  function openAccount(which) {
+    if (!sess()) { askSignin(which === 'sell' ? 'Sign in to post a prompt. It takes one email and one click.' : null, { account: which || 'mine' }); return; }
+    $('profileForm').name.value = state.me ? state.me.name : '';
+    $('profileEmail').textContent = state.me ? 'Signed in with ' + state.me.email : '';
+    tab(which || 'mine'); open($('dlgAccount'));
+  }
+  function drawMine() {
+    var ul = $('mineList'); ul.innerHTML = '';
+    if (!state.mine.length) { ul.appendChild(el('li', 'pm-dim', 'Nothing posted yet. Use "Sell or share" to post your first prompt.')); return; }
+    state.mine.forEach(function (p) {
+      var li = el('li');
+      var h = el('div', 'pm-li-main'); h.appendChild(el('b', null, p.title));
+      h.appendChild(el('span', 'pm-dim', price(p.price) + ' · ' + (p.sales || 0) + ' sold' + (p.hidden ? ' · hidden' : '')));
+      li.appendChild(h);
+      var act = el('div', 'pm-li-act');
+      var ed = el('button', 'pm-link', 'Edit'); ed.type = 'button'; ed.addEventListener('click', function () { editPrompt(p); });
+      var del = el('button', 'pm-link', 'Remove'); del.type = 'button';
+      del.addEventListener('click', function () {
+        if (!window.confirm('Remove "' + p.title + '"? People who bought it keep their copy.')) return;
+        authed('delete', { id: p.id }).then(function () { toast('Removed.'); refreshMe(); load(); });
+      });
+      act.appendChild(ed); act.appendChild(del); li.appendChild(act); ul.appendChild(li);
+    });
+  }
+  function drawBought() {
+    var ul = $('boughtList'); ul.innerHTML = '';
+    if (!state.bought.length) { ul.appendChild(el('li', 'pm-dim', 'Prompts you buy appear here, ready to copy, on any device you sign in on.')); return; }
+    state.bought.forEach(function (p) {
+      var li = el('li');
+      var h = el('div', 'pm-li-main'); h.appendChild(el('b', null, p.title));
+      h.appendChild(el('span', 'pm-dim', (modelName[p.model] || 'Any AI') + (p.amount ? ' · paid KES ' + p.amount : '')));
+      li.appendChild(h);
+      var act = el('div', 'pm-li-act'); var v = el('button', 'pm-link', 'Open'); v.type = 'button';
+      v.addEventListener('click', function () { close($('dlgAccount')); showPrompt(p.id, p); showBody(p.body); });
+      act.appendChild(v); li.appendChild(act); ul.appendChild(li);
+    });
+  }
+  function drawPayout() {
+    var po = state.me && state.me.payout;
+    $('payoutNow').textContent = po ? 'Paid to ' + po.bank + ', account ending ' + po.last4 + (po.holder ? ' (' + po.holder + ')' : '') + '. Save a new one to change it.' : 'No payout account yet. You can post free prompts without one.';
+  }
+  var banksLoaded = false;
+  function loadBanks() {
+    if (banksLoaded) return; banksLoaded = true;
+    api('banks').then(function (j) {
+      var s = $('bankSel'); s.innerHTML = '';
+      var first = el('option', null, 'Choose your bank'); first.value = ''; s.appendChild(first);
+      (j.banks || []).forEach(function (b) { var o = el('option', null, b.name); o.value = b.code; s.appendChild(o); });
+      if (!(j.banks || []).length) { first.textContent = 'Banks could not load. Reload and try again.'; banksLoaded = false; }
+    });
+  }
+  $('payoutForm').addEventListener('submit', function (e) {
+    e.preventDefault(); var f = e.target;
+    $('payoutBtn').disabled = true; msg($('payoutMsg'), 'Checking the account with Paystack…', true);
+    authed('payout', { bank: f.bank.value, account: f.account.value }).then(function (j) {
+      $('payoutBtn').disabled = false;
+      if (j.user) { state.me = j.user; drawPayout(); drawAcct(); f.account.value = ''; msg($('payoutMsg'), 'Saved. You can now sell paid prompts.', true); }
+      else msg($('payoutMsg'), j.error || 'Could not save that account.');
+    });
+  });
+  $('profileForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    authed('profile', { name: e.target.name.value }).then(function (j) {
+      if (j.user) { state.me = j.user; drawAcct(); msg($('profileMsg'), 'Saved.', true); load(); } else msg($('profileMsg'), j.error || 'Could not save.');
+    });
+  });
+  $('signOut').addEventListener('click', function () {
+    setSess(null); state.me = null; state.mine = []; state.bought = []; drawAcct(); close($('dlgAccount')); toast('Signed out on this device.');
+  });
+
+  /* ---------- sell ---------- */
+  function fillSelect(sel, items, skipFirst) {
+    sel.innerHTML = '';
+    items.slice(skipFirst ? 1 : 0).forEach(function (c) { var o = el('option', null, c[1]); o.value = c[0]; sel.appendChild(o); });
+  }
+  fillSelect($('sellCat'), CATS, true); fillSelect($('sellModel'), MODELS);
+  var FIELDS = ['id', 'title', 'desc', 'cat', 'model', 'price', 'preview', 'body'];
+  function editPrompt(p) {
+    var f = $('sellForm');
+    FIELDS.forEach(function (k) { f[k].value = p[k] == null ? '' : p[k]; });
+    $('sellBtn').textContent = 'Save changes'; $('sellReset').hidden = false; tab('sell');
+  }
+  function resetSell() { var f = $('sellForm'); f.reset(); f.id.value = ''; $('sellBtn').textContent = 'Publish prompt'; $('sellReset').hidden = true; }
+  $('sellReset').addEventListener('click', resetSell);
+  $('sellForm').addEventListener('submit', function (e) {
+    e.preventDefault(); var f = e.target, data = {};
+    FIELDS.forEach(function (k) { data[k] = f[k].value; });
+    data.price = Number(data.price) || 0;
+    $('sellBtn').disabled = true; msg($('sellMsg'), '');
+    authed('save', data).then(function (j) {
+      $('sellBtn').disabled = false;
+      if (j.prompt) { msg($('sellMsg'), data.id ? 'Saved.' : 'Published. It is live in the marketplace now.', true); resetSell(); refreshMe(); load(); return; }
+      if (j.error === 'payout') { msg($('sellMsg'), j.message); setTimeout(function () { tab('payout'); }, 1400); return; }
+      msg($('sellMsg'), j.error === 'signin' ? 'Your session ended. Sign in again.' : (j.error || 'Could not save. Try again.'));
+    });
+  });
+
+  /* ---------- buttons with data-act ---------- */
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-act]'); if (!b) return;
+    var a = b.getAttribute('data-act');
+    if (a === 'signin') askSignin();
+    if (a === 'account') openAccount('mine');
+    if (a === 'sell') openAccount('sell');
+  });
+  $('q').addEventListener('input', function (e) { state.q = e.target.value.trim(); drawGrid(); });
+  $('freeOnly').addEventListener('change', function (e) { state.free = e.target.checked; drawGrid(); });
+
+  /* ---------- arriving from an email link or back from Paystack ---------- */
+  function resume() {
+    var then = null;
+    try { then = JSON.parse(sessionStorage.getItem('tthMarketAfter') || 'null'); sessionStorage.removeItem('tthMarketAfter'); } catch (e) {}
+    if (!then) return;
+    if (then.account) openAccount(then.account);
+    if (then.buy && findPrompt(then.buy)) showPrompt(then.buy);
+  }
+  function start() {
+    drawCats();
+    var m = /[#&]login=([A-Za-z0-9._-]+)/.exec(location.hash || '');
+    var params = new URLSearchParams(location.search);
+    var ref = params.get('reference') || params.get('trxref');
+    var first = Promise.resolve();
+    if (m) {
+      history.replaceState(null, '', location.pathname + location.search);   // never leave the link in the address bar
+      first = api('session', { t: m[1] }).then(function (j) {
+        if (j.session) { setSess(j.session); toast('You are signed in. Welcome, ' + j.user.name + '.'); }
+        else toast(j.error || 'That sign-in link did not work. Ask for a new one.');
+      });
+    }
+    first.then(function () { return Promise.all([load(), refreshMe()]); }).then(function () {
+      if (ref) {
+        history.replaceState(null, '', location.pathname);
+        return authed('verify', { reference: ref }).then(function (j) {
+          if (j.paid && j.body) {
+            refreshMe(); load();
+            showPrompt(j.id, findPrompt(j.id) || { id: j.id, title: j.title, price: 0 }); showBody(j.body);
+            toast('Payment received. The prompt is yours.');
+          } else if (j.paid) toast('Payment received. Sign in with the email you paid with to open it.');
+          else toast('That payment did not complete' + (j.reason ? ' (' + j.reason + ')' : '') + '. If money left your account, email info@thetechhut.co with reference ' + ref + '.');
+        });
+      }
+      if (m) resume();
+    });
+  }
+  // The sign-in link opened in a tab that already had the page: swap it without a reload.
+  window.addEventListener('hashchange', function () {
+    var m = /[#&]login=([A-Za-z0-9._-]+)/.exec(location.hash || '');
+    if (!m) return;
+    history.replaceState(null, '', location.pathname + location.search);
+    api('session', { t: m[1] }).then(function (j) {
+      if (j.session) { setSess(j.session); toast('You are signed in. Welcome, ' + j.user.name + '.'); }
+      else toast(j.error || 'That sign-in link did not work. Ask for a new one.');
+      if ($('dlgSignin').open) close($('dlgSignin'));
+      return refreshMe();
+    }).then(resume);
+  });
+  start();
+})();
+</script>
+</body>
+</html>

@@ -58,11 +58,13 @@
 
 import { handleNewsletter, newsletterConfigured } from './newsletter.js';
 import { handleGames } from './games.js';
+import { handleMarket, settle as settleMarket } from './market.js';
 import { LIMITS, guard, turnstileOk, emailDomainOk, sha256Hex } from './payguard.js';
 
 // Durable Object classes must be exported from the entry module.
 export { GameStats } from './games.js';
 export { PayGuard } from './payguard.js';
+export { Market } from './market.js';
 
 const PAYSTACK = 'https://api.paystack.co';
 const SITE = 'https://thetechhut.co';
@@ -418,7 +420,9 @@ async function webhook(req, env) {
   let event = {};
   try { event = JSON.parse(raw); } catch (e) { return new Response('bad json', { status: 400 }); }
 
-  if (event.event === 'charge.success') {
+  if (event.event === 'charge.success' && event.data && event.data.metadata && event.data.metadata.kind === 'market') {
+    await settleMarket(env, event.data);   // a prompt-marketplace sale: unlock it for the buyer
+  } else if (event.event === 'charge.success') {
     const d = event.data || {};
     const product = (d.metadata && d.metadata.product) || null;
     const p = PRODUCTS[product];
@@ -440,7 +444,7 @@ export default {
     const origin = req.headers.get('Origin') || '';
 
     if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors(origin) });
-    if (url.pathname === '/health') return json({ ok: true, products: Object.keys(PRODUCTS), checkoutGuard: !!env.PAY_GUARD, turnstile: !!env.TURNSTILE_SECRET, newsletter: newsletterConfigured(env), newsletterDaily: newsletterConfigured(env, 'daily'), newsletterJobs: newsletterConfigured(env, 'jobs') }, 200, origin);
+    if (url.pathname === '/health') return json({ ok: true, products: Object.keys(PRODUCTS), checkoutGuard: !!env.PAY_GUARD, turnstile: !!env.TURNSTILE_SECRET, newsletter: newsletterConfigured(env), newsletterDaily: newsletterConfigured(env, 'daily'), newsletterJobs: newsletterConfigured(env, 'jobs'), market: !!(env.MARKET && env.MARKET_SECRET) }, 200, origin);
 
     // The CV Pack signup does not touch Paystack, so it must not depend on the
     // Paystack key being set.
@@ -456,6 +460,14 @@ export default {
         (req.method === 'GET' && url.pathname === '/games/board')) {
       try {
         return await handleGames(req, env, url, origin, { json, allowedOrigins: ALLOWED_ORIGINS });
+      } catch (e) {
+        return json({ error: 'server error' }, 500, origin);
+      }
+    }
+    // The prompt marketplace (accounts, prompts, split payments). See market.js.
+    if (url.pathname.startsWith('/market/')) {
+      try {
+        return await handleMarket(req, env, url, origin, { json, cors, allowedOrigins: ALLOWED_ORIGINS });
       } catch (e) {
         return json({ error: 'server error' }, 500, origin);
       }

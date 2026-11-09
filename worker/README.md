@@ -320,6 +320,45 @@ list and are never included; Kenya-based roles are listed first in each field.
 
 ---
 
+## The prompt marketplace (/prompt-marketplace/)
+
+Community members post AI prompts, free or paid, and buy each other's. Code:
+`src/market.js` (one Durable Object, `Market`) and `prompt-marketplace/index.html`.
+
+- **Accounts:** email only. `POST /market/login` emails a sign-in link (Brevo) that
+  works once, for 20 minutes; the page swaps it for a signed 60-day session kept in
+  the browser. The first sign-in creates the account. No passwords are stored.
+- **Money:** Paystack split payments. When a seller saves a payout bank account we
+  create a Paystack **subaccount** with `percentage_charge: 10`, so each sale sends
+  90% to the seller (Paystack settles them directly) and 10% to The Tech Hut.
+  Paystack's fee comes out of the seller's share (`bearer: subaccount`). Prices are
+  always taken from the server; a paid prompt only unlocks after `/transaction/verify`
+  (or the `charge.success` webhook) shows the full amount in KES.
+- **Rules:** free prompts need no payout account; paid ones cost KES 50–20,000; 20
+  new prompts per member per day; a prompt reported 5 times is hidden; a sold prompt
+  that its seller removes stays with its buyers.
+
+### Setup
+
+1. **Paystack:** make sure split payments / subaccounts are enabled on your Kenyan
+   account (Settings → Subaccounts). Test in test mode first: add a payout account,
+   post a KES 50 prompt, buy it from another email, and check the split in the dashboard.
+2. **Worker secret**, then deploy (adds the `Market` Durable Object, migration v3):
+
+   ```sh
+   npx wrangler secret put MARKET_SECRET    # any long random string
+   npx wrangler deploy
+   ```
+
+   Optional: set `MARKET_ADMINS` (comma-separated emails) under `[vars]` to let those
+   accounts remove any prompt.
+3. **Check:** `/health` shows `"market": true`. Sign in on /prompt-marketplace/ with
+   your own email.
+
+Tests: `node test/market.test.mjs` (part of `npm test`).
+
+---
+
 ## The games arcade (live count, visits, leaderboards)
 
 `/games/` shows how many people are on the games pages, total visits, and
