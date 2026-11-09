@@ -1,9 +1,9 @@
 {
- "updated": "2026-11-08",
- "company_count": 46,
- "role_count": 460,
- "local_role_count": 146,
- "roles_scanned": 3668,
+ "updated": "2026-11-09",
+ "company_count": 52,
+ "role_count": 487,
+ "local_role_count": 156,
+ "roles_scanned": 3695,
  "sources": [
   "Himalayas",
   "Jobicy"
@@ -12,8 +12,8 @@
   {
    "company": "Canonical",
    "platform": "greenhouse",
-   "eligible": 238,
-   "total": 316,
+   "eligible": 239,
+   "total": 317,
    "locations": [
     "Home based - EMEA",
     "Home based - EMEA; Office Based - London, UK",
@@ -21,6 +21,15 @@
     "Home based - Worldwide",
     "Home Based - APAC; Home based - EMEA",
     "Home Based - Americas; Home based - EMEA"
+   ]
+  },
+  {
+   "company": "micro1",
+   "platform": "himalayas",
+   "eligible": 55,
+   "total": 55,
+   "locations": [
+    "Worldwide"
    ]
   },
   {
@@ -36,19 +45,10 @@
    ]
   },
   {
-   "company": "micro1",
-   "platform": "himalayas",
-   "eligible": 44,
-   "total": 44,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
    "company": "Welo Global",
    "platform": "jobicy",
-   "eligible": 36,
-   "total": 36,
+   "eligible": 35,
+   "total": 35,
    "locations": [
     "Anywhere"
    ]
@@ -56,8 +56,8 @@
   {
    "company": "Oyster",
    "platform": "ashby",
-   "eligible": 12,
-   "total": 19,
+   "eligible": 11,
+   "total": 18,
    "locations": [
     "EMEA; Romania; Bulgaria; Portugal; Canada; United Kingdom; Spain; Poland",
     "EMEA; Romania; Hungary; Bulgaria; Ireland; Slovakia; United Kingdom; Poland; Estonia; South Africa; Greece",
@@ -65,15 +65,6 @@
     "EMEA; Ireland; Portugal; United Kingdom; Spain; Brazil; Canada",
     "EMEA; Toronto; Ireland; Portugal; United Kingdom; Spain",
     "Global; Portugal; Spain; Brazil; Colombia; Canada"
-   ]
-  },
-  {
-   "company": "G2i",
-   "platform": "himalayas",
-   "eligible": 10,
-   "total": 10,
-   "locations": [
-    "Worldwide"
    ]
   },
   {
@@ -88,6 +79,33 @@
     "UNITED STATES - Remote, LATAM - Remote, EMEA - Remote",
     "United States - Remote, EMEA - Remote",
     "EMEA - Remote"
+   ]
+  },
+  {
+   "company": "G2i",
+   "platform": "himalayas",
+   "eligible": 9,
+   "total": 9,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "TELUS Digital",
+   "platform": "himalayas",
+   "eligible": 8,
+   "total": 8,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Health Hue Digital",
+   "platform": "himalayas",
+   "eligible": 7,
+   "total": 7,
+   "locations": [
+    "Worldwide"
    ]
   },
   {
@@ -117,18 +135,6 @@
     "NAMER; India; European Union; EMEA",
     "EMEA",
     "NAMER; EMEA"
-   ]
-  },
-  {
-   "company": "RevenueCat",
-   "platform": "jobicy",
-   "eligible": 4,
-   "total": 4,
-   "locations": [
-    "APAC,  EMEA,  Canada,  USA",
-    "EMEA,  Canada,  USA",
-    "APAC,  EMEA,  USA",
-    "EMEA,  LATAM,  Canada,  USA"
    ]
   },
   {
@@ -166,6 +172,24 @@
    "total": 182,
    "locations": [
     "Global"
+   ]
+  },
+  {
+   "company": "apricot",
+   "platform": "himalayas",
+   "eligible": 2,
+   "total": 2,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "RustLabs",
+   "platform": "himalayas",
+   "eligible": 2,
+   "total": 2,
+   "locations": [
+    "Worldwide"
    ]
   },
   {
@@ -250,6 +274,69 @@
    ]
   },
   {
+   "company": "Tydy",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Mi \u00c1guila",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Xperteez Technology",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Kreative Media",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Flex",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Human Power BG",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "RecruitingDash",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
    "company": "Little Pixies",
    "platform": "himalayas",
    "eligible": 1,
@@ -304,15 +391,6 @@
    ]
   },
   {
-   "company": "apricot",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
    "company": "Invisible Technologies",
    "platform": "himalayas",
    "eligible": 1,
@@ -332,24 +410,6 @@
   },
   {
    "company": "SimpleTiger",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "DataKrew Pvt. Ltd.",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Growe Talents",
    "platform": "himalayas",
    "eligible": 1,
    "total": 1,
@@ -407,15 +467,6 @@
    "platform": "jobicy",
    "eligible": 1,
    "total": 1,
-   "locations": [
-    "EMEA"
-   ]
-  },
-  {
-   "company": "Spotify",
-   "platform": "jobicy",
-   "eligible": 1,
-   "total": 2,
    "locations": [
     "EMEA"
    ]
