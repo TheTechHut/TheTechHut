@@ -11,7 +11,7 @@
     <meta property="og:title" content="Prompt marketplace: prompts that work, from people who use them">
     <meta property="og:description" content="Buy, sell and share AI prompts. Sign in with your email. Sellers keep 90%.">
     <meta property="og:url" content="https://thetechhut.co/prompt-marketplace/">
-    <meta property="og:image" content="https://thetechhut.co/assets/img/social/prompts.jpg?v=1">
+    <meta property="og:image" content="https://thetechhut.co/assets/img/social/prompts.jpg?v=2">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="The Tech Hut prompt marketplace: prompts that work, from people who use them. Sellers keep 90% of every sale.">
@@ -19,7 +19,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Prompt marketplace: prompts that work, from people who use them">
     <meta name="twitter:description" content="Buy, sell and share AI prompts. Sign in with your email. Sellers keep 90%.">
-    <meta name="twitter:image" content="https://thetechhut.co/assets/img/social/prompts.jpg?v=1">
+    <meta name="twitter:image" content="https://thetechhut.co/assets/img/social/prompts.jpg?v=2">
     <meta name="theme-color" content="#073B4C">
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" href="/assets/img/favicon-192.png" type="image/png" sizes="192x192">
@@ -36,8 +36,10 @@
         .pm-head { padding-bottom: 44px; }
         .pm-head-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 44px; align-items: center; }
         .pm-head h1 { max-width: 18ch; }
-        .pm-hero-img { margin: 0; border-top: 3px solid var(--ink); }
-        .pm-hero-img img { display: block; width: 100%; height: auto; aspect-ratio: 50 / 38; object-fit: cover; background: var(--paper-3); }
+        /* Rounded, unlike the square editorial images elsewhere: the marketplace is the community's space. */
+        .pm-hero-img { margin: 0 0 14px 14px; position: relative; isolation: isolate; }
+        .pm-hero-img::after { content: ''; position: absolute; left: -14px; bottom: -14px; width: 46%; height: 42%; border-radius: 28px; background: var(--mint); z-index: -1; }
+        .pm-hero-img img { display: block; width: 100%; height: auto; aspect-ratio: 50 / 38; object-fit: cover; background: var(--paper-3); border-radius: 28px; }
         .pm-acct { margin-top: 18px; font-size: 15.5px; color: var(--text); }
         .pm-acct p { margin: 0; }
         .pm-link.pm-strong { color: var(--ink); font-weight: 700; font-size: 15.5px; text-decoration-color: var(--mint); text-underline-offset: 3px; }
