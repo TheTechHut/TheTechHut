@@ -155,6 +155,29 @@ class DailyAlert(unittest.TestCase):
                         ('2026-10-13', [role('u1b', title='Head of  finance'), role('u2', title='Analyst')], [])])
         self.assertEqual(sd.build_digest(d, today=datetime.date(2026, 10, 13), daily=True)['count'], 1)
 
+    def test_email_runs_header_sections_cta_close(self):
+        d = self.snaps([('2026-10-12', [], []), ('2026-10-13', [role('u1', title='Data Analyst'), role('u2', title='Backend Engineer')], [])])
+        orig = sd.remote_numbers
+        sd.remote_numbers = lambda: (460, 46)
+        try:
+            h = sd.build_digest(d, today=datetime.date(2026, 10, 13), daily=True)['html']
+        finally:
+            sd.remote_numbers = orig
+        order = [h.index('<h1'), h.index('href="u2"'), h.index('href="u1"'), h.index('/remote/'), h.index('Good luck'), h.index('{{ unsubscribe }}')]
+        self.assertEqual(order, sorted(order))
+        self.assertIn('460 open roles at 46 companies', h)
+        self.assertIn('KES 500', h)
+
+    def test_no_cta_without_live_remote_numbers(self):
+        d = self.snaps([('2026-10-12', [], []), ('2026-10-13', [role('u1', title='Role u1')], [])])
+        orig = sd.remote_numbers
+        sd.remote_numbers = lambda: None
+        try:
+            h = sd.build_digest(d, today=datetime.date(2026, 10, 13), daily=True)['html']
+        finally:
+            sd.remote_numbers = orig
+        self.assertNotIn('KES 500', h)
+
     def test_weekly_wording_is_unchanged(self):
         d = self.snaps([('2026-10-06', [], []), ('2026-10-13', [role('u1', title='Role u1')], [])])
         out = sd.build_digest(d)

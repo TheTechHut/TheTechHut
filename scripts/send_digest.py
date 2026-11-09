@@ -207,6 +207,108 @@ def esc(s):
     return html.escape(str(s or ''), quote=True)
 
 
+INK, MINT, GREEN, TEXT, MUTED, DIM, RULE, PAPER2 = '#073B4C', '#06D6A0', '#046B52', '#2D3B45', '#4A5568', '#5B6B7B', '#CFE0E6', '#F7FAFC'
+SERIF = "Newsreader,Georgia,'Times New Roman',serif"
+SANS = "'Source Sans 3','Segoe UI',Helvetica,Arial,sans-serif"
+MONO = "'IBM Plex Mono',Menlo,Consolas,monospace"
+REMOTE_SUMMARY = os.path.join(ROOT, 'data', 'remote-summary.json')
+
+
+def remote_numbers():
+    """Live counts for the Remote-From-Kenya List call to action, or None."""
+    try:
+        with open(REMOTE_SUMMARY, encoding='utf-8') as fh:
+            d = json.load(fh)
+        if int(d.get('role_count') or 0) > 0 and int(d.get('company_count') or 0) > 0:
+            return int(d['role_count']), int(d['company_count'])
+    except (OSError, ValueError, TypeError):
+        pass
+    return None
+
+
+def _label(text, color=GREEN):
+    return ('<p style="margin:0 0 8px;font-family:%s;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:%s">%s</p>'
+            % (MONO, color, text))
+
+
+def render_email(*, kicker, headline, intro, sections, tips_html, remote, why, preheader, luck='Good luck this week.'):
+    """One self-contained, table-based HTML email: header, sections, product CTA, close.
+    Inline styles throughout, so it holds up in Gmail, Outlook and phone mail apps."""
+    cta = ''
+    if remote:
+        roles, cos = remote
+        cta = (
+            '<tr><td style="padding:8px 28px 8px">'
+            '<table role="presentation" width="100%%" cellpadding="0" cellspacing="0" style="background:%s;border-radius:4px">'
+            '<tr><td style="padding:26px 26px 28px">'
+            '%s'
+            '<p style="margin:0 0 10px;font-family:%s;font-size:24px;line-height:1.2;font-weight:700;color:#ffffff">'
+            'Work from Nairobi, <em style="color:%s;font-weight:500">paid from abroad.</em></p>'
+            '<p style="margin:0 0 18px;font-family:%s;font-size:16px;line-height:1.55;color:#CFE0E6">'
+            'This email leaves out the roles you can do remotely from Kenya. Those are in the Remote-From-Kenya List: '
+            '<b style="color:#ffffff">%s open roles at %d companies</b> that hire in Kenya on a foreign payroll, checked every morning.</p>'
+            '<table role="presentation" cellpadding="0" cellspacing="0"><tr><td style="background:%s;border-radius:3px">'
+            '<a href="%s/remote/?utm_source=email&amp;utm_medium=%s" style="display:inline-block;padding:13px 22px;font-family:%s;font-size:16px;font-weight:700;color:%s;text-decoration:none">'
+            'Get the list for KES 500 &rarr;</a></td></tr></table>'
+            '<p style="margin:12px 0 0;font-family:%s;font-size:12px;color:#9FB8C2">One payment, paid with M-PESA or card. No subscription.</p>'
+            '</td></tr></table></td></tr>'
+        ) % (INK, _label('From The Tech Hut', MINT), SERIF, MINT, SANS, '{:,}'.format(roles), cos, MINT, SITE,
+             'daily-alert' if 'daily' in why else 'weekly-digest', SANS, INK, MONO)
+
+    return (
+        '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">'
+        '<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light">'
+        '<title>%(headline)s</title>'
+        '<style>@media (max-width:620px){.px{padding-left:18px!important;padding-right:18px!important}.h1{font-size:30px!important}}</style>'
+        '</head><body style="margin:0;padding:0;background:%(paper2)s">'
+        '<div style="display:none;max-height:0;overflow:hidden;opacity:0">%(preheader)s</div>'
+        '<table role="presentation" width="100%%" cellpadding="0" cellspacing="0" style="background:%(paper2)s"><tr><td align="center" style="padding:24px 10px">'
+        '<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:100%%;max-width:600px;background:#ffffff;border:1px solid %(rule)s">'
+
+        # 1. header
+        '<tr><td style="background:%(ink)s;padding:14px 28px" class="px">'
+        '<span style="font-family:%(serif)s;font-size:22px;font-weight:700;color:#ffffff">The Tech Hut<span style="color:%(mint)s">.</span></span>'
+        '</td></tr>'
+        '<tr><td style="padding:30px 28px 22px;border-bottom:3px double %(ink)s" class="px">'
+        '%(kicker)s'
+        '<h1 class="h1" style="margin:0 0 12px;font-family:%(serif)s;font-size:36px;line-height:1.1;font-weight:700;color:%(ink)s">%(headline)s</h1>'
+        '<p style="margin:0;font-family:%(sans)s;font-size:17px;line-height:1.55;color:%(muted)s">%(intro)s</p>'
+        '</td></tr>'
+
+        # 2. body sections
+        '%(sections)s'
+
+        # how the systems read your CV
+        '<tr><td style="padding:8px 28px 26px" class="px">'
+        '<table role="presentation" width="100%%" cellpadding="0" cellspacing="0" style="background:%(paper2)s;border-left:3px solid %(mint)s">'
+        '<tr><td style="padding:16px 18px">%(tipslabel)s%(tips)s</td></tr></table></td></tr>'
+
+        # 3. call to action
+        '%(cta)s'
+
+        # 4. close
+        '<tr><td style="padding:26px 28px 10px" class="px">'
+        '<p style="margin:0 0 12px;font-family:%(sans)s;font-size:16px;line-height:1.6;color:%(text)s">'
+        'Apply early, and make your CV match the words in the posting. %(luck)s</p>'
+        '<p style="margin:0;font-family:%(serif)s;font-size:18px;color:%(ink)s">The Tech Hut</p>'
+        '<p style="margin:2px 0 0;font-family:%(sans)s;font-size:14px;color:%(dim)s">Questions or feedback: <a href="mailto:info@thetechhut.co" style="color:%(dim)s">info@thetechhut.co</a></p>'
+        '</td></tr>'
+        '<tr><td style="padding:22px 28px 26px;border-top:1px solid %(rule)s" class="px">'
+        '<p style="margin:0;font-family:%(sans)s;font-size:12px;line-height:1.6;color:%(dim)s">'
+        'You are receiving this because you asked for it on %(why)s. '
+        '<a href="{{ unsubscribe }}" style="color:%(dim)s">Unsubscribe</a> in one click. '
+        'The Tech Hut Community, Nairobi, Kenya &middot; <a href="%(site)s" style="color:%(dim)s">thetechhut.co</a></p>'
+        '</td></tr>'
+        '</table></td></tr></table></body></html>'
+    ) % {
+        'headline': esc(headline), 'preheader': esc(preheader), 'kicker': _label(kicker),   # built from fixed text and dates, already HTML 'intro': intro,
+        'sections': sections, 'tips': tips_html, 'tipslabel': _label('How these hiring systems read your CV'),
+        'cta': cta, 'why': esc(why), 'site': SITE, 'luck': esc(luck),
+        'ink': INK, 'mint': MINT, 'text': TEXT, 'muted': MUTED, 'dim': DIM, 'rule': RULE, 'paper2': PAPER2,
+        'serif': SERIF, 'sans': SANS, 'mono': MONO,
+    }
+
+
 def build_digest(snaps_dir, today=None, checklist=None, daily=False):
     checklist = checklist or load_checklist()
     latest, baseline, roles = find_new_roles(snaps_dir, today, daily)
@@ -216,19 +318,26 @@ def build_digest(snaps_dir, today=None, checklist=None, daily=False):
     week_label = '%d-W%02d' % (iso[0], iso[1])
     when = latest.strftime('%-d %B')
     s_ = '' if n == 1 else 's'
+    es = '' if employers == 1 else 's'
     if daily:
         subject = '%d new opening%s today' % (n, s_)
-        kicker = 'Daily openings, %s' % latest.strftime('%A %-d %B')
+        kicker = 'Daily openings &middot; %s' % latest.strftime('%A %-d %B')
         since = 'since yesterday' if (latest - baseline).days == 1 else 'since %s' % baseline.strftime('%A')
         why = 'thetechhut.co/jobs/daily'
+        headline = subject
+        intro = ('%d new role%s went up on the employer pages we read %s, from %d employer%s. '
+                 'Every link goes straight to the employer\'s own application page.' % (n, s_, since, employers, es))
     else:
         subject = '%d new Kenyan tech opening%s this week' % (n, s_)
-        kicker = 'Monday openings, week of %s' % when
+        kicker = 'Monday openings &middot; week of %s' % when
         since = 'since last week'
         why = 'thetechhut.co/cv-pack'
+        headline = '%d new opening%s in Kenya this week' % (n, s_)
+        intro = ('%d new Kenya-based role%s appeared on the employer feeds we read %s, from %d employer%s. '
+                 'Every link goes straight to the employer\'s own application page.' % (n, s_, since, employers, es))
 
     groups = {f: [r for r in roles if family_of(r.get('title')) == f] for f in FAMILY_ORDER}
-    shown, parts, platforms_seen = 0, [], []
+    shown, sections, platforms_seen = 0, [], []
     for f in FAMILY_ORDER:
         rows = groups[f]
         if not rows:
@@ -245,39 +354,46 @@ def build_digest(snaps_dir, today=None, checklist=None, daily=False):
             pl = checklist['platforms'].get(plat, {}).get('label') or plat.title() or 'the employer site'
             loc = r.get('location') or ('Location not listed' if daily else 'Kenya')
             items.append(
-                '<p style="margin:0 0 10px"><a href="%s" style="color:#073B4C;font-weight:700;text-decoration:none">%s</a><br>'
-                '<span style="color:#4a5568;font-size:14px">%s · %s · applies through %s</span></p>'
-                % (esc(r['url']), esc((r.get('title') or '').strip()), esc(r.get('company')), esc(loc), esc(pl)))
+                '<tr><td style="padding:12px 0;border-bottom:1px solid %s">'
+                '<a href="%s" style="font-family:%s;font-size:17px;line-height:1.35;font-weight:700;color:%s;text-decoration:none">%s</a>'
+                '<p style="margin:4px 0 0;font-family:%s;font-size:14px;line-height:1.45;color:%s">'
+                '<b style="color:%s">%s</b> &middot; %s</p>'
+                '<p style="margin:3px 0 0;font-family:%s;font-size:12px;color:%s">Applies through %s</p>'
+                '</td></tr>'
+                % (RULE, esc(r['url']), SANS, INK, esc((r.get('title') or '').strip()), SANS, MUTED, TEXT,
+                   esc(r.get('company')), esc(loc), MONO, DIM, esc(pl)))
+        if not items:
+            continue
         more = len(rows) - len(items)
-        parts.append(
-            '<h3 style="margin:26px 0 10px;font-family:Poppins,Arial,sans-serif;font-size:17px">%s <span style="color:#4a5568;font-weight:400">(%d)</span></h3>%s%s'
-            '<p style="margin:6px 0 0;font-size:13px;color:#4a5568"><b>Keywords to check your CV for:</b> %s.</p>'
-            % (esc(fam['label']), len(rows), ''.join(items),
-               ('<p style="margin:0;font-size:13px;color:#4a5568">+ %d more at <a href="%s/jobs/">thetechhut.co/jobs</a></p>' % (more, SITE)) if more > 0 else '',
-               esc(', '.join(fam['terms']))))
+        more_html = ('<p style="margin:12px 0 0;font-family:%s;font-size:14px;color:%s">+ %d more %s role%s on '
+                     '<a href="%s/jobs/" style="color:%s;font-weight:700">the jobs board</a></p>'
+                     % (SANS, MUTED, more, esc(fam['label']).lower(), '' if more == 1 else 's', SITE, GREEN)) if more > 0 else ''
+        sections.append(
+            '<tr><td style="padding:26px 28px 14px" class="px">'
+            '<table role="presentation" width="100%%" cellpadding="0" cellspacing="0"><tr>'
+            '<td style="border-top:2px solid %s;padding-top:10px">'
+            '<span style="font-family:%s;font-size:22px;font-weight:700;color:%s">%s</span>'
+            '<span style="font-family:%s;font-size:13px;color:%s;margin-left:8px">%d new</span>'
+            '</td></tr></table>'
+            '<table role="presentation" width="100%%" cellpadding="0" cellspacing="0">%s</table>%s'
+            '<p style="margin:12px 0 0;font-family:%s;font-size:13px;line-height:1.5;color:%s">'
+            '<b style="color:%s">Keywords to check your CV for:</b> %s.</p>'
+            '</td></tr>'
+            % (INK, SERIF, INK, esc(fam['label']), MONO, GREEN, len(rows), ''.join(items), more_html,
+               SANS, MUTED, INK, esc(', '.join(fam['terms']))))
 
     tips = ''.join(
-        '<p style="margin:0 0 8px;font-size:14px"><b>%s.</b> %s</p>' % (esc(checklist['platforms'][p]['label']), esc(checklist['platforms'][p]['tip']))
+        '<p style="margin:0 0 8px;font-family:%s;font-size:14px;line-height:1.5;color:%s"><b style="color:%s">%s.</b> %s</p>'
+        % (SANS, TEXT, INK, esc(checklist['platforms'][p]['label']), esc(checklist['platforms'][p]['tip']))
         for p in platforms_seen if p in checklist['platforms'])
+    if not tips:
+        tips = ('<p style="margin:0;font-family:%s;font-size:14px;color:%s">Open the guide at '
+                '<a href="%s/cv-pack/" style="color:%s">thetechhut.co/cv-pack</a>.</p>' % (SANS, TEXT, SITE, GREEN))
 
-    body = (
-        '<div style="font-family:Inter,Arial,sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#073B4C;line-height:1.55">'
-        '<p style="font-family:Poppins,Arial,sans-serif;font-weight:700;font-size:20px;margin:0 0 6px">The Tech Hut<span style="color:#06D6A0">.</span></p>'
-        '<p style="margin:0 0 20px;color:#4a5568;font-size:14px">%s</p>'
-        '<p>%d new %srole%s appeared on the employer feeds we read %s, from %d employer%s. '
-        'Every link goes to the employer\'s own application page.</p>'
-        '%s'
-        '%s'
-        '<div style="background:#f0f4f8;border-radius:12px;padding:14px 16px;margin:28px 0 0">'
-        '<p style="margin:0 0 8px;font-family:Poppins,Arial,sans-serif;font-weight:700">How these systems read your CV</p>%s</div>'
-        '<p style="margin:26px 0 0;font-size:14px">Looking for roles that will employ you from Nairobi on a foreign payroll? That is a separate, paid list: '
-        '<a href="%s/remote/">thetechhut.co/remote</a>.</p>'
-        '<hr style="border:0;border-top:1px solid #dfe6ed;margin:28px 0 14px">'
-        '<p style="font-size:12px;color:#4a5568">You are receiving this because you asked for it on %s. '
-        '<a href="{{ unsubscribe }}" style="color:#4a5568">Unsubscribe</a> in one click.</p>'
-        '</div>'
-    ) % (esc(kicker), n, '' if daily else 'Kenya-based ', s_, since, employers, '' if employers == 1 else 's',
-         ''.join(parts), '', tips or '<p style="margin:0;font-size:14px">Open the guide at <a href="%s/cv-pack/">thetechhut.co/cv-pack</a>.</p>' % SITE, SITE, why)
+    body = render_email(kicker=kicker, headline=headline, intro=intro, sections=''.join(sections),
+                        tips_html=tips, remote=remote_numbers(), why=why,
+                        preheader='%d new role%s from %d employer%s, %s.' % (n, s_, employers, es, since),
+                        luck='Good luck today.' if daily else 'Good luck this week.')
 
     return {
         'subject': subject, 'html': body, 'count': n, 'employers': employers,
