@@ -165,7 +165,7 @@ class DailyAlert(unittest.TestCase):
             sd.remote_numbers = orig
         order = [h.index('<h1'), h.index('href="u2"'), h.index('href="u1"'), h.index('/remote/'), h.index('Good luck'), h.index('{{ unsubscribe }}')]
         self.assertEqual(order, sorted(order))
-        self.assertIn('460 open roles at 46 companies', h)
+        self.assertIn('460 remote roles at 46 companies', h)
         self.assertIn('KES 500', h)
 
     def test_no_cta_without_live_remote_numbers(self):
