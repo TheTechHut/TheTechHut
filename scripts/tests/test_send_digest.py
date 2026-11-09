@@ -93,5 +93,60 @@ class ParsePosted(unittest.TestCase):
             self.assertIsNone(sd.parse_posted(bad))
 
 
+class DailyAlert(unittest.TestCase):
+    snaps = Digest.snaps
+
+    def test_compares_with_the_previous_day(self):
+        d = self.snaps([('2026-10-12', [role('u1', title='Role u1')], []), ('2026-10-13', [role('u1', title='Role u1'), role('u2', title='Role u2')], [])])
+        out = sd.build_digest(d, today=datetime.date(2026, 10, 13), daily=True)
+        self.assertEqual(out['count'], 1)
+        self.assertEqual(out['baseline'], datetime.date(2026, 10, 12))
+        self.assertEqual(out['name'], 'Daily openings 2026-10-13')
+        self.assertIn('since yesterday', out['html'])
+        self.assertIn('thetechhut.co/jobs/daily', out['html'])
+        self.assertIn('today', out['subject'])
+
+    def test_skips_a_baseline_day_whose_feeds_failed(self):
+        d = self.snaps([('2026-10-11', [role('u1', title='Role u1'), role('u2', title='Role u2')], []), ('2026-10-12', [role('u1', title='Role u1')], ['M-KOPA']),
+                        ('2026-10-13', [role('u1', title='Role u1'), role('u2', title='Role u2'), role('u3', title='Role u3')], [])])
+        out = sd.build_digest(d, today=datetime.date(2026, 10, 13), daily=True)
+        self.assertEqual(out['baseline'], datetime.date(2026, 10, 11))
+        self.assertEqual(out['count'], 1)
+
+    def test_refuses_without_todays_snapshot_or_recent_history(self):
+        d = self.snaps([('2026-10-12', [role('u1', title='Role u1')], []), ('2026-10-13', [role('u2', title='Role u2')], [])])
+        with self.assertRaises(ValueError):
+            sd.build_digest(d, today=datetime.date(2026, 10, 14), daily=True)
+        d = self.snaps([('2026-10-01', [role('u1', title='Role u1')], []), ('2026-10-13', [role('u2', title='Role u2')], [])])
+        with self.assertRaises(ValueError):
+            sd.build_digest(d, today=datetime.date(2026, 10, 13), daily=True)
+
+    def test_remote_and_failed_today_rules_still_apply(self):
+        d = self.snaps([('2026-10-12', [], []), ('2026-10-13', [role('g1', title='Role g1', reach='global'), role('l1', title='Role l1')], [])])
+        self.assertEqual(sd.build_digest(d, today=datetime.date(2026, 10, 13), daily=True)['count'], 1)
+        d = self.snaps([('2026-10-12', [], []), ('2026-10-13', [role('l1', title='Role l1')], ['Safaricom'])])
+        with self.assertRaises(ValueError):
+            sd.build_digest(d, today=datetime.date(2026, 10, 13), daily=True)
+
+    def test_a_role_that_flickers_out_and_back_is_not_new_again(self):
+        d = self.snaps([('2026-10-10', [role('u1', title='Role u1')], []), ('2026-10-11', [role('u1', title='Role u1')], []), ('2026-10-12', [], []),
+                        ('2026-10-13', [role('u1', title='Role u1'), role('u2', title='Role u2')], [])])
+        out = sd.build_digest(d, today=datetime.date(2026, 10, 13), daily=True)
+        self.assertEqual(out['count'], 1)
+        self.assertNotIn('href="u1"', out['html'])
+
+    def test_a_repost_under_a_new_link_is_not_new(self):
+        d = self.snaps([('2026-10-12', [role('u1', title='Head of Finance')], []),
+                        ('2026-10-13', [role('u1b', title='Head of  finance'), role('u2', title='Analyst')], [])])
+        self.assertEqual(sd.build_digest(d, today=datetime.date(2026, 10, 13), daily=True)['count'], 1)
+
+    def test_weekly_wording_is_unchanged(self):
+        d = self.snaps([('2026-10-06', [], []), ('2026-10-13', [role('u1', title='Role u1')], [])])
+        out = sd.build_digest(d)
+        self.assertIn('since last week', out['html'])
+        self.assertIn('thetechhut.co/cv-pack', out['html'])
+        self.assertTrue(out['name'].startswith('Monday openings'))
+
+
 if __name__ == '__main__':
     unittest.main()

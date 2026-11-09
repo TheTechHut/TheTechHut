@@ -289,6 +289,37 @@ Sundays 04:30 UTC (07:30 Nairobi): .github/workflows/weekly-roundup.yml
 
 ---
 
+## The daily job alert (/jobs/daily/)
+
+A third product on the same signup Worker: people subscribe on
+`/jobs/daily/`, confirm on `/jobs/daily/welcome/`, and land on their own
+Brevo list. Every morning, right after the **Daily hiring snapshot** workflow
+succeeds, `.github/workflows/daily-jobs.yml` runs
+`scripts/send_digest.py --daily`, which emails the Kenya-based roles that are
+new since the previous day whose feeds all answered (never more than three days
+back), skipping anything seen in the past week, including the same role re-posted
+under a new link. Nothing is sent on a day with no new roles, and a date is never sent twice
+(the campaign is named `Daily openings YYYY-MM-DD`). The paid Remote list is never
+included.
+
+### Setup
+
+1. **Third list.** In Brevo, *Contacts → Lists → Create a list* named `Daily job alert`. Note its ID.
+2. **Worker secret**, then redeploy:
+
+   ```sh
+   npx wrangler secret put BREVO_LIST_ID_JOBS    # the number from step 1
+   npx wrangler deploy
+   ```
+
+3. **GitHub secret**: `BREVO_LIST_ID_JOBS`. The existing `BREVO_API_KEY`,
+   `BREVO_SENDER_EMAIL` and `BREVO_SENDER_NAME` are reused.
+4. **Check**: `/health` shows `"newsletterJobs": true`. Sign up on `/jobs/daily/`
+   with your own address, confirm, then run **Daily job alert** by hand with your
+   address in `test_email` (or tick `dry_run`).
+
+---
+
 ## The games arcade (live count, visits, leaderboards)
 
 `/games/` shows how many people are on the games pages, total visits, and

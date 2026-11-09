@@ -13,6 +13,7 @@ compatibility_date = "2026-10-01"
 #
 # The CV Pack email signup (see README, "The CV Pack email list") adds more (the Daily Savannah list is a second product on the same Worker):
 #   BREVO_API_KEY, BREVO_LIST_ID (CV Pack), BREVO_LIST_ID_DAILY (Daily Savannah),
+#   BREVO_LIST_ID_JOBS (daily job alert, /jobs/daily/),
 #   BREVO_SENDER_EMAIL, SUBSCRIBE_SECRET
 #
 # Deploying without a custom domain gives you

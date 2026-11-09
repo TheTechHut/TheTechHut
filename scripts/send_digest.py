@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-The Monday openings digest.
+The Monday openings digest, and the daily job alert (--daily).
 
 Reads the daily snapshots in data/snapshots/, finds the Kenya-based roles that
 appeared on the employer feeds in the last week, and sends them to the Brevo
@@ -21,7 +21,15 @@ Environment (GitHub secrets):
   BREVO_SENDER_EMAIL   a sender verified in Brevo
   BREVO_SENDER_NAME    optional, default "The Tech Hut"
 
+Daily mode (--daily) sends the same kind of email every morning to the
+daily jobs list (thetechhut.co/jobs/daily): roles that are new since the most
+recent earlier snapshot without feed failures, at most 3 days back. It uses
+BREVO_LIST_ID_JOBS instead of BREVO_LIST_ID, sends nothing on a day with no
+new roles, and never sends the same date twice. Runs from
+.github/workflows/daily-jobs.yml.
+
 Usage:
+  python3 scripts/send_digest.py --daily [--dry-run | --test EMAIL]
   python3 scripts/send_digest.py --dry-run             write digest-preview.html, send nothing
   python3 scripts/send_digest.py --test you@x.com      send ONE copy to that address only
   python3 scripts/send_digest.py                       create and send the campaign
@@ -107,25 +115,62 @@ def parse_posted(s):
         return None
 
 
-def find_new_roles(snaps_dir, today=None):
+DAILY_MAX_GAP_DAYS = 3    # daily: compare with the previous clean day, never older than this
+DAILY_MEMORY_DAYS = 7     # daily: a role seen on any clean day this past week is not new again
+
+
+def _job_key(r):
+    norm = lambda x: re.sub(r'\W+', ' ', (x or '').lower()).strip()
+    return 'k:' + norm(r.get('company')) + '|' + norm(r.get('title')) + '|' + norm(r.get('location'))
+
+
+def _clean(path):
+    with open(path, encoding='utf-8') as fh:
+        return not json.load(fh).get('failures')
+
+
+def find_new_roles(snaps_dir, today=None, daily=False):
     """-> (latest_date, baseline_date, [role, ...]) or raises ValueError with a plain reason."""
     snaps = load_snapshots(snaps_dir)
     if not snaps:
         raise ValueError('no snapshots found in ' + snaps_dir)
     latest = max(d for d in snaps if today is None or d <= today)
-    candidates = [d for d in snaps if (latest - d).days >= MIN_GAP_DAYS]
-    if not candidates:
-        raise ValueError('not enough history: need a snapshot at least %d days older than %s' % (MIN_GAP_DAYS, latest))
-    baseline = min(candidates, key=lambda d: abs((latest - d).days - BASELINE_TARGET_DAYS))
+    if daily:
+        if today is not None and latest != today:
+            raise ValueError('no snapshot for %s yet (latest is %s)' % (today, latest))
+        # The previous day whose feeds all answered: a feed that failed on the
+        # baseline day would make all of its roles look new today.
+        candidates = sorted((d for d in snaps if 1 <= (latest - d).days <= DAILY_MAX_GAP_DAYS and _clean(snaps[d])), reverse=True)
+        if not candidates:
+            raise ValueError('no clean snapshot in the %d days before %s' % (DAILY_MAX_GAP_DAYS, latest))
+        baseline = candidates[0]
+    else:
+        candidates = [d for d in snaps if (latest - d).days >= MIN_GAP_DAYS]
+        if not candidates:
+            raise ValueError('not enough history: need a snapshot at least %d days older than %s' % (MIN_GAP_DAYS, latest))
+        baseline = min(candidates, key=lambda d: abs((latest - d).days - BASELINE_TARGET_DAYS))
 
     with open(snaps[latest], encoding='utf-8') as fh:
         now = json.load(fh)
     with open(snaps[baseline], encoding='utf-8') as fh:
         before = json.load(fh)
+    extra_seen = set()
+    if daily:
+        # Some feeds drop a role for a day and bring it back; without this it
+        # would be emailed as new each time it reappears.
+        for d in snaps:
+            if d != baseline and 1 <= (latest - d).days <= DAILY_MEMORY_DAYS and _clean(snaps[d]):
+                with open(snaps[d], encoding='utf-8') as fh:
+                    extra_seen.update(r.get('url') for r in json.load(fh).get('roles', []))
+                    fh.seek(0)
+                    extra_seen.update(_job_key(r) for r in json.load(fh).get('roles', []))
     if now.get('failures'):
         # A feed that failed today makes yesterday's roles look "new" tomorrow.
         raise ValueError('the latest snapshot has feed failures (%s); refusing to guess what is new' % ', '.join(map(str, now['failures'])))
-    seen = {r.get('url') for r in before.get('roles', [])}
+    seen = {r.get('url') for r in before.get('roles', [])} | extra_seen
+    if daily:
+        # The same opening re-posted under a new link is not news either.
+        seen |= {_job_key(r) for r in before.get('roles', [])}
     out, urls = [], set()
     for r in now.get('roles', []):
         # Himalayas rows link to Himalayas, not the employer, and the digest promises
@@ -138,6 +183,8 @@ def find_new_roles(snaps_dir, today=None):
         if r.get('platform') == 'careers-page':
             continue
         if r.get('reach') != 'local' or not r.get('url') or r['url'] in seen or r['url'] in urls:
+            continue
+        if daily and _job_key(r) in seen:
             continue
         posted = parse_posted(r.get('posted'))
         if posted and (latest - posted).days > STALE_AFTER_DAYS:
@@ -152,15 +199,25 @@ def esc(s):
     return html.escape(str(s or ''), quote=True)
 
 
-def build_digest(snaps_dir, today=None, checklist=None):
+def build_digest(snaps_dir, today=None, checklist=None, daily=False):
     checklist = checklist or load_checklist()
-    latest, baseline, roles = find_new_roles(snaps_dir, today)
+    latest, baseline, roles = find_new_roles(snaps_dir, today, daily)
     n = len(roles)
     employers = len({r.get('company') for r in roles})
     iso = latest.isocalendar()
     week_label = '%d-W%02d' % (iso[0], iso[1])
     when = latest.strftime('%-d %B')
-    subject = '%d new Kenyan tech opening%s this week' % (n, '' if n == 1 else 's')
+    s_ = '' if n == 1 else 's'
+    if daily:
+        subject = '%d new Kenya opening%s today' % (n, s_) if n != 1 else '1 new Kenya opening today'
+        kicker = 'Daily openings, %s' % latest.strftime('%A %-d %B')
+        since = 'since yesterday' if (latest - baseline).days == 1 else 'since %s' % baseline.strftime('%A')
+        why = 'thetechhut.co/jobs/daily'
+    else:
+        subject = '%d new Kenyan tech opening%s this week' % (n, s_)
+        kicker = 'Monday openings, week of %s' % when
+        since = 'since last week'
+        why = 'thetechhut.co/cv-pack'
 
     groups = {f: [r for r in roles if family_of(r.get('title')) == f] for f in FAMILY_ORDER}
     shown, parts, platforms_seen = 0, [], []
@@ -198,8 +255,8 @@ def build_digest(snaps_dir, today=None, checklist=None):
     body = (
         '<div style="font-family:Inter,Arial,sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#073B4C;line-height:1.55">'
         '<p style="font-family:Poppins,Arial,sans-serif;font-weight:700;font-size:20px;margin:0 0 6px">The Tech Hut<span style="color:#06D6A0">.</span></p>'
-        '<p style="margin:0 0 20px;color:#4a5568;font-size:14px">Monday openings, week of %s</p>'
-        '<p>%d new Kenya-based role%s appeared on the employer feeds we read since last week, from %d employer%s. '
+        '<p style="margin:0 0 20px;color:#4a5568;font-size:14px">%s</p>'
+        '<p>%d new Kenya-based role%s appeared on the employer feeds we read %s, from %d employer%s. '
         'Every link goes to the employer\'s own application page.</p>'
         '%s'
         '%s'
@@ -208,15 +265,15 @@ def build_digest(snaps_dir, today=None, checklist=None):
         '<p style="margin:26px 0 0;font-size:14px">Looking for roles that will employ you from Nairobi on a foreign payroll? That is a separate, paid list: '
         '<a href="%s/remote/">thetechhut.co/remote</a>.</p>'
         '<hr style="border:0;border-top:1px solid #dfe6ed;margin:28px 0 14px">'
-        '<p style="font-size:12px;color:#4a5568">You are receiving this because you asked for it on thetechhut.co/cv-pack. '
+        '<p style="font-size:12px;color:#4a5568">You are receiving this because you asked for it on %s. '
         '<a href="{{ unsubscribe }}" style="color:#4a5568">Unsubscribe</a> in one click.</p>'
         '</div>'
-    ) % (esc(when), n, '' if n == 1 else 's', employers, '' if employers == 1 else 's',
-         ''.join(parts), '', tips or '<p style="margin:0;font-size:14px">Open the guide at <a href="%s/cv-pack/">thetechhut.co/cv-pack</a>.</p>' % SITE, SITE)
+    ) % (esc(kicker), n, s_, since, employers, '' if employers == 1 else 's',
+         ''.join(parts), '', tips or '<p style="margin:0;font-size:14px">Open the guide at <a href="%s/cv-pack/">thetechhut.co/cv-pack</a>.</p>' % SITE, SITE, why)
 
     return {
         'subject': subject, 'html': body, 'count': n, 'employers': employers,
-        'week': week_label, 'name': 'Monday openings ' + week_label,
+        'week': week_label, 'name': ('Daily openings ' + latest.isoformat()) if daily else ('Monday openings ' + week_label),
         'latest': latest, 'baseline': baseline,
     }
 
@@ -243,11 +300,13 @@ def main(argv=None):
     ap.add_argument('--dry-run', action='store_true')
     ap.add_argument('--test', metavar='EMAIL')
     ap.add_argument('--force', action='store_true')
+    ap.add_argument('--daily', action='store_true', help='daily job alert to BREVO_LIST_ID_JOBS')
     ap.add_argument('--out', default=os.path.join(tempfile.gettempdir(), 'digest-preview.html'))
     a = ap.parse_args(argv)
 
     try:
-        d = build_digest(SNAPS)
+        today = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=3))).date() if a.daily else None
+        d = build_digest(SNAPS, today=today, daily=a.daily)
     except ValueError as e:
         print('digest: nothing sent -', e)
         return 0
@@ -259,14 +318,15 @@ def main(argv=None):
         print('digest: preview written to', a.out)
         return 0
     if d['count'] == 0 and not a.force:
-        print('digest: no new roles this week, nothing sent')
+        print('digest: no new roles, nothing sent')
         return 0
 
     key = os.environ.get('BREVO_API_KEY', '')
     sender = {'name': os.environ.get('BREVO_SENDER_NAME') or 'The Tech Hut', 'email': os.environ.get('BREVO_SENDER_EMAIL', '')}
-    list_id = os.environ.get('BREVO_LIST_ID', '')
+    list_env = 'BREVO_LIST_ID_JOBS' if a.daily else 'BREVO_LIST_ID'
+    list_id = os.environ.get(list_env, '')
     if not (key and sender['email'] and list_id.isdigit()):
-        print('digest: BREVO_API_KEY, BREVO_LIST_ID and BREVO_SENDER_EMAIL must all be set', file=sys.stderr)
+        print('digest: BREVO_API_KEY, %s and BREVO_SENDER_EMAIL must all be set' % list_env, file=sys.stderr)
         return 1
 
     if a.test:

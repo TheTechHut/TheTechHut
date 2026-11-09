@@ -351,6 +351,7 @@ STATIC_PAGES = [
     ('/blog/daily/',                 '0.90', 'daily'),
     ('/blog/reading/',               '0.80', 'weekly'),
     ('/jobs/',                       '0.90', 'daily'),
+    ('/jobs/daily/',                 '0.80', 'monthly'),
     ('/shop/',                       '0.90', 'weekly'),
     ('/cv-pack/',                    '0.85', 'monthly'),
     ('/remote/',                     '0.85', 'daily'),

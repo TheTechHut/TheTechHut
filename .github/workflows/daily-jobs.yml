@@ -1,0 +1,73 @@
+# Daily job alert -> Brevo campaign to the daily jobs list (thetechhut.co/jobs/daily).
+#
+# Runs right after the Daily hiring snapshot finishes (about 06:30 EAT), so
+# today's snapshot is committed. scripts/send_digest.py --daily compares it
+# with the previous day whose feeds all answered, and emails the new
+# Kenya-based roles. Nothing is sent on a day with no new roles, and the same
+# date is never sent twice (the campaign is named "Daily openings YYYY-MM-DD").
+#
+# Secrets (Settings -> Secrets and variables -> Actions):
+#   BREVO_API_KEY        v3 API key (the same one the Worker uses)
+#   BREVO_LIST_ID_JOBS   numeric id of the daily jobs list (the same one the Worker uses)
+#   BREVO_SENDER_EMAIL   a sender verified in Brevo
+#   BREVO_SENDER_NAME    optional
+#
+# Try it safely first: Actions -> Daily job alert -> Run workflow, and fill in
+# "test_email" to get ONE copy, or tick "dry_run" to see it in the log.
+#
+# Like the snapshot workflow, this only runs from the repository's DEFAULT
+# branch (chore/redesign here). See the note at the top of jobs-snapshot.yml.
+name: Daily job alert
+
+'on':
+  workflow_run:
+    workflows: ['Daily hiring snapshot']
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      test_email:
+        description: 'Send ONE test copy to this address instead of the list'
+        required: false
+        default: ''
+      dry_run:
+        description: 'Build the email and print it, send nothing'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: daily-jobs
+  cancel-in-progress: false
+
+jobs:
+  alert:
+    # A failed snapshot means no new data today: send nothing.
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chore/redesign
+
+      - name: Unit tests
+        run: python3 -m unittest scripts/tests/test_send_digest.py
+
+      - name: Send the daily alert
+        env:
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          BREVO_LIST_ID_JOBS: ${{ secrets.BREVO_LIST_ID_JOBS }}
+          BREVO_SENDER_EMAIL: ${{ secrets.BREVO_SENDER_EMAIL }}
+          BREVO_SENDER_NAME: ${{ secrets.BREVO_SENDER_NAME }}
+          TEST_EMAIL: ${{ github.event.inputs.test_email }}
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
+        run: |
+          if [ "$DRY_RUN" = "true" ]; then
+            python3 scripts/send_digest.py --daily --dry-run --out "$RUNNER_TEMP/daily.html"
+            head -c 4000 "$RUNNER_TEMP/daily.html"
+          elif [ -n "$TEST_EMAIL" ]; then
+            python3 scripts/send_digest.py --daily --test "$TEST_EMAIL"
+          else
+            python3 scripts/send_digest.py --daily
+          fi

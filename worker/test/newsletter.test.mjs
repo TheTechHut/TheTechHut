@@ -276,6 +276,33 @@ await t('daily: confirming adds the contact to the DAILY list only, with its own
   assert.deepStrictEqual(welcome.tags, ['daily-welcome']);
 });
 
+await t('jobs: the daily job alert has its own page, list, role and wording', async () => {
+  const envJobs = { ...envBoth, BREVO_LIST_ID_JOBS: '11' };
+  let calls = stubBrevo();
+  const r = await worker.fetch(post('/subscribe', { email: 'a@b.co', name: 'Ana', product: 'jobs', role: 'Data analyst' }), envJobs);
+  const mail = calls[0].body;
+  const token = tokenFrom(calls);
+  restore();
+  assert.strictEqual(r.status, 200);
+  assert.ok(mail.htmlContent.includes('https://thetechhut.co/jobs/daily/welcome/#t='));
+  assert.ok(mail.subject.includes('daily job alert'));
+  assert.deepStrictEqual(mail.tags, ['jobs-confirm']);
+  calls = stubBrevo();
+  await worker.fetch(post('/confirm', { t: token }), envJobs);
+  restore();
+  const add = calls.find((c) => c.path === '/contacts').body;
+  assert.deepStrictEqual(add.listIds, [11]);
+  assert.strictEqual(add.attributes.ROLE, 'Data analyst');
+  assert.strictEqual(add.attributes.SOURCE, 'jobs');
+  const welcome = calls.find((c) => c.path === '/smtp/email').body;
+  assert.deepStrictEqual(welcome.tags, ['jobs-welcome']);
+  assert.ok(welcome.htmlContent.includes('nothing new, we send nothing'));
+  calls = stubBrevo();
+  const off = await worker.fetch(post('/subscribe', { email: 'a@b.co', product: 'jobs' }), envBoth);   // no BREVO_LIST_ID_JOBS
+  restore();
+  assert.strictEqual(off.status, 503);
+});
+
 await t('cv-pack still goes to its own list when both are configured', async () => {
   let calls = stubBrevo();
   await worker.fetch(post('/subscribe', { email: 'a@b.co' }), envBoth);   // no product: the old form

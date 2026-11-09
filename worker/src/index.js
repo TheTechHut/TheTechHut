@@ -440,7 +440,7 @@ export default {
     const origin = req.headers.get('Origin') || '';
 
     if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors(origin) });
-    if (url.pathname === '/health') return json({ ok: true, products: Object.keys(PRODUCTS), checkoutGuard: !!env.PAY_GUARD, turnstile: !!env.TURNSTILE_SECRET, newsletter: newsletterConfigured(env), newsletterDaily: newsletterConfigured(env, 'daily') }, 200, origin);
+    if (url.pathname === '/health') return json({ ok: true, products: Object.keys(PRODUCTS), checkoutGuard: !!env.PAY_GUARD, turnstile: !!env.TURNSTILE_SECRET, newsletter: newsletterConfigured(env), newsletterDaily: newsletterConfigured(env, 'daily'), newsletterJobs: newsletterConfigured(env, 'jobs') }, 200, origin);
 
     // The CV Pack signup does not touch Paystack, so it must not depend on the
     // Paystack key being set.

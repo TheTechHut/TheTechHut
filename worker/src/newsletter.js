@@ -26,6 +26,7 @@
  *   BREVO_API_KEY        Brevo -> SMTP & API -> API keys (a v3 key)
  *   BREVO_LIST_ID        numeric id of the CV Pack list
  *   BREVO_LIST_ID_DAILY  numeric id of the Daily Savannah list
+ *   BREVO_LIST_ID_JOBS   numeric id of the daily job alert list (/jobs/daily/)
  *   BREVO_SENDER_EMAIL   a sender verified in Brevo (ideally on an authenticated
  *                        domain, or confirmation emails land in spam)
  *   BREVO_SENDER_NAME    optional, defaults to "The Tech Hut"
@@ -44,6 +45,7 @@ const SHARED = ['BREVO_API_KEY', 'BREVO_SENDER_EMAIL', 'SUBSCRIBE_SECRET'];
 const PRODUCTS = {
   'cv-pack': { listEnv: 'BREVO_LIST_ID', page: '/cv-pack/welcome/', tag: 'cv-pack', role: true },
   daily: { listEnv: 'BREVO_LIST_ID_DAILY', page: '/blog/daily/welcome/', tag: 'daily', role: false },
+  jobs: { listEnv: 'BREVO_LIST_ID_JOBS', page: '/jobs/daily/welcome/', tag: 'jobs', role: true },
 };
 const DEFAULT_PRODUCT = 'cv-pack';
 
@@ -204,10 +206,42 @@ export function dailyWelcomeEmail(name) {
   return { subject: 'You are on the Daily Savannah weekly roundup', html, text };
 }
 
+export function jobsConfirmEmail(link, name) {
+  const hi = name ? 'Hi ' + esc(name) + ',' : 'Hi,';
+  const line = 'Someone (hopefully you) asked for the daily job alert from The Tech Hut: new Kenya-based roles from employers\' own career pages, in your inbox every morning there is something new. Confirm your email to start getting it.';
+  const html = WRAP_OPEN
+    + '<p>' + hi + '</p>'
+    + '<p>' + esc(line) + '</p>'
+    + '<p style="margin:24px 0"><a href="' + esc(link) + '" style="background:#073B4C;color:#fff;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:700">Confirm my email</a></p>'
+    + '<p style="font-size:13px;color:#4a5568">The link works for 48 hours. If it was not you, ignore this email and nothing will happen: you will not be added to anything.</p>'
+    + WRAP_CLOSE;
+  const text = hi + '\n\n' + line + '\n\n' + link
+    + '\n\nThe link works for 48 hours. If it was not you, ignore this email and nothing will happen: you will not be added to anything.\n';
+  return { subject: 'Confirm your email for the daily job alert', html, text };
+}
+
+export function jobsWelcomeEmail(name) {
+  const hi = name ? 'Hi ' + esc(name) + ',' : 'Hi,';
+  const hiText = name ? 'Hi ' + name + ',' : 'Hi,';
+  const p1 = 'You are confirmed. Every morning, about 7:00 AM Nairobi time, we check the career pages of the employers we track and email you the Kenya-based roles that appeared since the day before. On a day with nothing new, we send nothing.';
+  const p2 = 'Every link goes straight to the employer\'s own application page, never to a job board in between.';
+  const html = WRAP_OPEN
+    + '<p>' + hi + '</p>'
+    + '<p>' + esc(p1) + '</p>'
+    + '<p>' + esc(p2) + '</p>'
+    + '<p>Want everything open right now? The full board is at <a href="' + SITE + '/jobs/">thetechhut.co/jobs</a>.</p>'
+    + '<p style="font-size:13px;color:#4a5568">Every alert has an unsubscribe link at the bottom, and one click removes you.</p>'
+    + WRAP_CLOSE;
+  const text = hiText + '\n\n' + p1 + '\n\n' + p2 + '\n\nThe full board: ' + SITE + '/jobs/\n\n'
+    + 'Every alert has an unsubscribe link at the bottom, and one click removes you.\n';
+  return { subject: 'You are on the daily job alert', html, text };
+}
+
 // Wording per product. Kept next to the registry so a new product is one entry.
 const MAILS = {
   'cv-pack': { confirm: confirmEmail, welcome: welcomeEmail },
   daily: { confirm: dailyConfirmEmail, welcome: dailyWelcomeEmail },
+  jobs: { confirm: jobsConfirmEmail, welcome: jobsWelcomeEmail },
 };
 
 async function sendMail(env, to, name, mail, tag) {
