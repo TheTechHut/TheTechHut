@@ -24,7 +24,8 @@ Environment (GitHub secrets):
 Daily mode (--daily) sends the same kind of email every morning to the
 daily jobs list (thetechhut.co/jobs/daily): roles that are new since the most
 recent earlier snapshot without feed failures, at most 3 days back. It uses
-BREVO_LIST_ID_JOBS instead of BREVO_LIST_ID, sends nothing on a day with no
+BREVO_LIST_ID_JOBS instead of BREVO_LIST_ID, includes roles in any country
+(except those open to remote hires anywhere, which are the paid list), sends nothing on a day with no
 new roles, and never sends the same date twice. Runs from
 .github/workflows/daily-jobs.yml.
 
@@ -59,6 +60,8 @@ BASELINE_TARGET_DAYS = 7
 STALE_AFTER_DAYS = 30     # a role posted months ago that just re-entered a feed is not news
 PER_FAMILY = 15
 OVERALL_CAP = 60
+DAILY_PER_FAMILY = 25     # a daily email covers every country, so a typical day runs 50-90 roles
+DAILY_OVERALL_CAP = 100
 
 FAMILY_ORDER = ['engineering', 'data', 'product', 'design', 'ops']
 # First match wins, so "Product Designer" is design and "Data Engineer" is data.
@@ -182,7 +185,11 @@ def find_new_roles(snaps_dir, today=None, daily=False):
         # sources have a clean run history.
         if r.get('platform') == 'careers-page':
             continue
-        if r.get('reach') != 'local' or not r.get('url') or r['url'] in seen or r['url'] in urls:
+        # Weekly: Kenya-based roles only. Daily: roles in any country, except those
+        # open to remote hires anywhere (reach 'global'), which are the paid list.
+        if (r.get('reach') == 'global') if daily else (r.get('reach') != 'local'):
+            continue
+        if not r.get('url') or r['url'] in seen or r['url'] in urls:
             continue
         if daily and _job_key(r) in seen:
             continue
@@ -191,7 +198,8 @@ def find_new_roles(snaps_dir, today=None, daily=False):
             continue
         urls.add(r['url'])
         out.append(r)
-    out.sort(key=lambda r: (FAMILY_ORDER.index(family_of(r.get('title'))), (r.get('company') or '').lower(), (r.get('title') or '').lower()))
+    out.sort(key=lambda r: (FAMILY_ORDER.index(family_of(r.get('title'))), r.get('reach') != 'local',
+                            (r.get('company') or '').lower(), (r.get('title') or '').lower()))
     return latest, baseline, out
 
 
@@ -209,7 +217,7 @@ def build_digest(snaps_dir, today=None, checklist=None, daily=False):
     when = latest.strftime('%-d %B')
     s_ = '' if n == 1 else 's'
     if daily:
-        subject = '%d new Kenya opening%s today' % (n, s_) if n != 1 else '1 new Kenya opening today'
+        subject = '%d new opening%s today' % (n, s_)
         kicker = 'Daily openings, %s' % latest.strftime('%A %-d %B')
         since = 'since yesterday' if (latest - baseline).days == 1 else 'since %s' % baseline.strftime('%A')
         why = 'thetechhut.co/jobs/daily'
@@ -227,15 +235,15 @@ def build_digest(snaps_dir, today=None, checklist=None, daily=False):
             continue
         fam = checklist['families'][f]
         items = []
-        for r in rows[:PER_FAMILY]:
-            if shown >= OVERALL_CAP:
+        for r in rows[:DAILY_PER_FAMILY if daily else PER_FAMILY]:
+            if shown >= (DAILY_OVERALL_CAP if daily else OVERALL_CAP):
                 break
             shown += 1
             plat = (r.get('platform') or '').lower()
             if plat and plat not in platforms_seen:
                 platforms_seen.append(plat)
             pl = checklist['platforms'].get(plat, {}).get('label') or plat.title() or 'the employer site'
-            loc = r.get('location') or 'Kenya'
+            loc = r.get('location') or ('Location not listed' if daily else 'Kenya')
             items.append(
                 '<p style="margin:0 0 10px"><a href="%s" style="color:#073B4C;font-weight:700;text-decoration:none">%s</a><br>'
                 '<span style="color:#4a5568;font-size:14px">%s · %s · applies through %s</span></p>'
@@ -256,7 +264,7 @@ def build_digest(snaps_dir, today=None, checklist=None, daily=False):
         '<div style="font-family:Inter,Arial,sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#073B4C;line-height:1.55">'
         '<p style="font-family:Poppins,Arial,sans-serif;font-weight:700;font-size:20px;margin:0 0 6px">The Tech Hut<span style="color:#06D6A0">.</span></p>'
         '<p style="margin:0 0 20px;color:#4a5568;font-size:14px">%s</p>'
-        '<p>%d new Kenya-based role%s appeared on the employer feeds we read %s, from %d employer%s. '
+        '<p>%d new %srole%s appeared on the employer feeds we read %s, from %d employer%s. '
         'Every link goes to the employer\'s own application page.</p>'
         '%s'
         '%s'
@@ -268,7 +276,7 @@ def build_digest(snaps_dir, today=None, checklist=None, daily=False):
         '<p style="font-size:12px;color:#4a5568">You are receiving this because you asked for it on %s. '
         '<a href="{{ unsubscribe }}" style="color:#4a5568">Unsubscribe</a> in one click.</p>'
         '</div>'
-    ) % (esc(kicker), n, s_, since, employers, '' if employers == 1 else 's',
+    ) % (esc(kicker), n, '' if daily else 'Kenya-based ', s_, since, employers, '' if employers == 1 else 's',
          ''.join(parts), '', tips or '<p style="margin:0;font-size:14px">Open the guide at <a href="%s/cv-pack/">thetechhut.co/cv-pack</a>.</p>' % SITE, SITE, why)
 
     return {

@@ -295,12 +295,12 @@ A third product on the same signup Worker: people subscribe on
 `/jobs/daily/`, confirm on `/jobs/daily/welcome/`, and land on their own
 Brevo list. Every morning, right after the **Daily hiring snapshot** workflow
 succeeds, `.github/workflows/daily-jobs.yml` runs
-`scripts/send_digest.py --daily`, which emails the Kenya-based roles that are
+`scripts/send_digest.py --daily`, which emails the roles, in any country, that are
 new since the previous day whose feeds all answered (never more than three days
 back), skipping anything seen in the past week, including the same role re-posted
 under a new link. Nothing is sent on a day with no new roles, and a date is never sent twice
-(the campaign is named `Daily openings YYYY-MM-DD`). The paid Remote list is never
-included.
+(the campaign is named `Daily openings YYYY-MM-DD`). Roles open to remote hires anywhere are the paid Remote
+list and are never included; Kenya-based roles are listed first in each field.
 
 ### Setup
 

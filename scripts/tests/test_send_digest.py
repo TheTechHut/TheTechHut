@@ -121,6 +121,21 @@ class DailyAlert(unittest.TestCase):
         with self.assertRaises(ValueError):
             sd.build_digest(d, today=datetime.date(2026, 10, 13), daily=True)
 
+    def test_daily_covers_every_country_but_never_the_paid_remote_roles(self):
+        d = self.snaps([('2026-10-12', [], []), ('2026-10-13', [
+            role('ke', title='Role ke'), role('gh', title='Role gh', reach='', location='Accra, Ghana'),
+            role('rm', title='Role rm', reach='global', location='Remote, worldwide')], [])])
+        out = sd.build_digest(d, today=datetime.date(2026, 10, 13), daily=True)
+        self.assertEqual(out['count'], 2)
+        self.assertIn('Accra, Ghana', out['html'])
+        self.assertNotIn('href="rm"', out['html'])
+        self.assertNotIn('Kenya', out['subject'])
+        self.assertLess(out['html'].index('href="ke"'), out['html'].index('href="gh"'), 'Kenya roles first')
+
+    def test_weekly_stays_kenya_only(self):
+        d = self.snaps([('2026-10-06', [], []), ('2026-10-13', [role('ke', title='Role ke'), role('gh', title='Role gh', reach='')], [])])
+        self.assertEqual(sd.build_digest(d)['count'], 1)
+
     def test_remote_and_failed_today_rules_still_apply(self):
         d = self.snaps([('2026-10-12', [], []), ('2026-10-13', [role('g1', title='Role g1', reach='global'), role('l1', title='Role l1')], [])])
         self.assertEqual(sd.build_digest(d, today=datetime.date(2026, 10, 13), daily=True)['count'], 1)

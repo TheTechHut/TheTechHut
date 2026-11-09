@@ -208,7 +208,7 @@ export function dailyWelcomeEmail(name) {
 
 export function jobsConfirmEmail(link, name) {
   const hi = name ? 'Hi ' + esc(name) + ',' : 'Hi,';
-  const line = 'Someone (hopefully you) asked for the daily job alert from The Tech Hut: new Kenya-based roles from employers\' own career pages, in your inbox every morning there is something new. Confirm your email to start getting it.';
+  const line = 'Someone (hopefully you) asked for the daily job alert from The Tech Hut: new openings from employers\' own career pages, in your inbox every morning there is something new. Confirm your email to start getting it.';
   const html = WRAP_OPEN
     + '<p>' + hi + '</p>'
     + '<p>' + esc(line) + '</p>'
@@ -223,7 +223,7 @@ export function jobsConfirmEmail(link, name) {
 export function jobsWelcomeEmail(name) {
   const hi = name ? 'Hi ' + esc(name) + ',' : 'Hi,';
   const hiText = name ? 'Hi ' + name + ',' : 'Hi,';
-  const p1 = 'You are confirmed. Every morning, about 7:00 AM Nairobi time, we check the career pages of the employers we track and email you the Kenya-based roles that appeared since the day before. On a day with nothing new, we send nothing.';
+  const p1 = 'You are confirmed. Every morning, about 7:00 AM Nairobi time, we check the career pages of the employers we track and email you the roles that appeared since the day before, wherever they are based. On a day with nothing new, we send nothing.';
   const p2 = 'Every link goes straight to the employer\'s own application page, never to a job board in between.';
   const html = WRAP_OPEN
     + '<p>' + hi + '</p>'
