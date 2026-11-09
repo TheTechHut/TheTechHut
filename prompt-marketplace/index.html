@@ -28,11 +28,13 @@
            Plex Mono labels, ruled columns, square corners. */
         [hidden] { display: none !important; }
         .pm-head { padding-bottom: 44px; }
-        .pm-head-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 40px; align-items: end; }
+        .pm-head-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 44px; align-items: center; }
         .pm-head h1 { max-width: 18ch; }
-        .pm-acct { background: var(--paper-2); border-top: 3px solid var(--ink); padding: 20px 22px; font-size: 16px; }
-        .pm-acct p { margin: 0 0 14px; color: var(--text); }
-        .pm-acct-h { font-family: var(--serif); font-size: 21px; color: var(--ink) !important; margin-bottom: 6px !important; }
+        .pm-hero-img { margin: 0; border-top: 3px solid var(--ink); }
+        .pm-hero-img img { display: block; width: 100%; height: auto; aspect-ratio: 50 / 38; object-fit: cover; background: var(--paper-3); }
+        .pm-acct { margin-top: 18px; font-size: 15.5px; color: var(--text); }
+        .pm-acct p { margin: 0; }
+        .pm-link.pm-strong { color: var(--ink); font-weight: 700; font-size: 15.5px; text-decoration-color: var(--mint); text-underline-offset: 3px; }
         .pm-dim { color: var(--dim); font-size: 14.5px; }
 
         .pm-browse { padding-top: 28px; }
@@ -122,19 +124,15 @@
         <button class="btn mint" type="button" data-act="sell">Sell or share a prompt</button>
         <a class="btn ghost" href="#browse">Browse prompts</a>
       </div>
+      <div class="pm-acct" aria-live="polite">
+        <p id="acctOut">No password needed. <button class="pm-link pm-strong" type="button" data-act="signin">Sign in or join with your email</button></p>
+        <p id="acctIn" hidden>Signed in as <b id="acctName"></b> <span id="acctMeta" class="pm-dim"></span> &middot; <button class="pm-link pm-strong" type="button" data-act="account">My account</button></p>
+      </div>
     </div>
-    <aside class="pm-acct" aria-live="polite">
-      <div id="acctOut">
-        <p class="pm-acct-h">No password. No forms.</p>
-        <p>Type your email, click the link we send, and you're in. Your first sign-in creates your account.</p>
-        <button class="btn" type="button" data-act="signin">Sign in or join</button>
-      </div>
-      <div id="acctIn" hidden>
-        <p class="pm-acct-h">Signed in as <b id="acctName"></b></p>
-        <p id="acctMeta" class="pm-dim"></p>
-        <div class="cta-row"><button class="btn" type="button" data-act="account">My account</button><button class="btn ghost" type="button" data-act="sell">Sell a prompt</button></div>
-      </div>
-    </aside>
+    <figure class="pm-hero-img">
+      <img src="https://images.unsplash.com/photo-1604933762021-54a5858c9832?q=75&amp;w=1000&amp;h=760&amp;auto=format&amp;fit=crop" width="1000" height="760"
+           alt="A young woman with long braids working on a laptop at a desk; a stock photo" fetchpriority="high" decoding="async" onerror="this.parentNode.remove()">
+    </figure>
   </div>
 </header>
 
@@ -482,7 +480,7 @@
     $('acctOut').hidden = !!me; $('acctIn').hidden = !me;
     if (!me) return;
     $('acctName').textContent = me.name;
-    $('acctMeta').textContent = state.mine.length + ' posted · ' + state.bought.length + ' bought' + (me.payout ? ' · payouts on' : '');
+    $('acctMeta').textContent = '(' + state.mine.length + ' posted, ' + state.bought.length + ' bought)';
   }
   function refreshMe() {
     if (!sess()) { state.me = null; drawAcct(); return Promise.resolve(); }
