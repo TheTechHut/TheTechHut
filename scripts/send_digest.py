@@ -301,7 +301,7 @@ def render_email(*, kicker, headline, intro, sections, tips_html, remote, why, p
         '</td></tr>'
         '</table></td></tr></table></body></html>'
     ) % {
-        'headline': esc(headline), 'preheader': esc(preheader), 'kicker': _label(kicker),   # built from fixed text and dates, already HTML 'intro': intro,
+        'headline': esc(headline), 'preheader': esc(preheader), 'kicker': _label(kicker), 'intro': intro,  # kicker is fixed text and dates, already HTML
         'sections': sections, 'tips': tips_html, 'tipslabel': _label('How these hiring systems read your CV'),
         'cta': cta, 'why': esc(why), 'site': SITE, 'luck': esc(luck),
         'ink': INK, 'mint': MINT, 'text': TEXT, 'muted': MUTED, 'dim': DIM, 'rule': RULE, 'paper2': PAPER2,
