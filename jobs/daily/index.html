@@ -34,8 +34,7 @@
         .jd-hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px; align-items: center; }
         .jd-brand { display: flex; align-items: center; gap: 12px; margin: 0 0 48px; font: 700 16px var(--sans); letter-spacing: .06em;
             text-transform: uppercase; color: #fff; }
-        .jd-mark { width: 44px; height: 44px; border-radius: 50%; background: var(--mint); color: var(--ink); display: grid; place-items: center;
-            font: 700 24px/1 var(--serif); text-transform: none; letter-spacing: 0; padding-top: 2px; box-sizing: border-box; }
+        .jd-mark { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex: none; box-shadow: 0 0 0 2px rgba(255,255,255,.18); }
         .jd-hero h1 { font-family: var(--sans); font-weight: 700; text-transform: uppercase; color: #fff; letter-spacing: -.01em;
             font-size: clamp(36px, 5.4vw, 64px); line-height: 1.02; margin: 0 0 18px; max-width: 15ch; }
         .jd-sub { font-size: clamp(17px, 1.7vw, 19px); line-height: 1.5; color: #B9CED5; max-width: 46ch; margin: 0 0 32px; }
@@ -127,7 +126,7 @@
 <section class="jd-hero">
   <div class="wrap jd-hero-grid">
     <div class="jd-hero-copy">
-      <p class="jd-brand"><span class="jd-mark" aria-hidden="true">T</span>The Tech Hut &middot; Daily job alert</p>
+      <p class="jd-brand"><img class="jd-mark" src="/assets/img/the_tech_hut_logo.webp" width="56" height="56" alt="" decoding="async">The Tech Hut &middot; Daily job alert</p>
       <h1>Get new job openings in your inbox every morning</h1>
       <p class="jd-sub">Join the job seekers getting new roles from employers&rsquo; own career pages, across engineering, data, product, design and operations, sent directly to your inbox every morning. Free.</p>
       <a class="jd-cta" href="#signup">Subscribe</a>
