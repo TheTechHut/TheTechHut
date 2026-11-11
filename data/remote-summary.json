@@ -1,9 +1,9 @@
 {
- "updated": "2026-11-10",
- "company_count": 54,
- "role_count": 502,
- "local_role_count": 157,
- "roles_scanned": 3700,
+ "updated": "2026-11-11",
+ "company_count": 52,
+ "role_count": 470,
+ "local_role_count": 159,
+ "roles_scanned": 3671,
  "sources": [
   "Himalayas",
   "Jobicy"
@@ -26,8 +26,8 @@
   {
    "company": "micro1",
    "platform": "himalayas",
-   "eligible": 66,
-   "total": 66,
+   "eligible": 70,
+   "total": 70,
    "locations": [
     "Worldwide"
    ]
@@ -35,21 +35,12 @@
   {
    "company": "Supabase",
    "platform": "ashby",
-   "eligible": 50,
-   "total": 77,
+   "eligible": 47,
+   "total": 76,
    "locations": [
     "Remote, Global",
     "Remote, EMEA",
     "Remote, EMEA; Europe",
-    "Anywhere"
-   ]
-  },
-  {
-   "company": "Welo Global",
-   "platform": "jobicy",
-   "eligible": 35,
-   "total": 35,
-   "locations": [
     "Anywhere"
    ]
   },
@@ -70,8 +61,8 @@
   {
    "company": "G2i",
    "platform": "himalayas",
-   "eligible": 9,
-   "total": 9,
+   "eligible": 10,
+   "total": 10,
    "locations": [
     "Worldwide"
    ]
@@ -127,13 +118,21 @@
    ]
   },
   {
+   "company": "Welo Global",
+   "platform": "jobicy",
+   "eligible": 4,
+   "total": 4,
+   "locations": [
+    "Anywhere"
+   ]
+  },
+  {
    "company": "Zapier",
    "platform": "ashby",
-   "eligible": 4,
-   "total": 10,
+   "eligible": 3,
+   "total": 9,
    "locations": [
     "NAMER; India; European Union; EMEA",
-    "EMEA",
     "NAMER; EMEA"
    ]
   },
@@ -159,7 +158,7 @@
    "company": "Turing",
    "platform": "greenhouse",
    "eligible": 2,
-   "total": 47,
+   "total": 49,
    "locations": [
     "Global - Remote",
     "Global - Remote; United States"
@@ -169,7 +168,7 @@
    "company": "Sun King",
    "platform": "pinpoint",
    "eligible": 2,
-   "total": 184,
+   "total": 183,
    "locations": [
     "Global"
    ]
@@ -232,7 +231,7 @@
    "company": "Zipline",
    "platform": "greenhouse",
    "eligible": 1,
-   "total": 345,
+   "total": 341,
    "locations": [
     "Remote from Anywhere"
    ]
@@ -241,7 +240,7 @@
    "company": "Cockroach Labs",
    "platform": "greenhouse",
    "eligible": 1,
-   "total": 11,
+   "total": 12,
    "locations": [
     "Global"
    ]
@@ -259,7 +258,7 @@
    "company": "PostHog",
    "platform": "ashby",
    "eligible": 1,
-   "total": 10,
+   "total": 9,
    "locations": [
     "Remote (EMEA)"
    ]
@@ -271,24 +270,6 @@
    "total": 27,
    "locations": [
     "Global"
-   ]
-  },
-  {
-   "company": "Tydy",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Mi \u00c1guila",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
    ]
   },
   {
@@ -320,15 +301,6 @@
   },
   {
    "company": "RecruitingDash",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Little Pixies",
    "platform": "himalayas",
    "eligible": 1,
    "total": 1,
@@ -418,12 +390,30 @@
    ]
   },
   {
+   "company": "Growe Talents",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
    "company": "Askable",
    "platform": "himalayas",
    "eligible": 1,
    "total": 1,
    "locations": [
     "Worldwide"
+   ]
+  },
+  {
+   "company": "Orkes",
+   "platform": "jobicy",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "EMEA,  Australia"
    ]
   },
   {
@@ -500,15 +490,6 @@
   },
   {
    "company": "Testlio",
-   "platform": "jobicy",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Anywhere"
-   ]
-  },
-  {
-   "company": "Softgic",
    "platform": "jobicy",
    "eligible": 1,
    "total": 1,
