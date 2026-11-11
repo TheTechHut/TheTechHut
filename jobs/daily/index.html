@@ -109,6 +109,26 @@
             .jd-steps h3 { font-size: 19px; }
             .jd-sign .capture { padding: 20px; }
         }
+        /* sign-up success pop-up */
+        .jd-done { border: 0; padding: 0; border-radius: 20px; width: min(460px, calc(100vw - 32px)); background: var(--paper);
+            color: var(--text); overflow: hidden; box-shadow: 0 30px 80px -20px rgba(7,59,76,.55); }
+        .jd-done::backdrop { background: rgba(7,59,76,.6); }
+        .jd-done[open] { animation: jdPop .35s cubic-bezier(.2,1.3,.4,1); }
+        @keyframes jdPop { from { transform: scale(.9) translateY(12px); opacity: 0; } to { transform: none; opacity: 1; } }
+        .jd-confetti { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+        .jd-done-body { position: relative; padding: 34px 30px 26px; text-align: center; }
+        .jd-done-icon { width: 76px; height: 76px; margin: 0 auto 16px; border-radius: 50%; background: var(--mint); color: var(--ink);
+            display: grid; place-items: center; }
+        .jd-done .eyebrow { display: block; }
+        .jd-done h2 { font-size: 32px; margin: 4px 0 12px; }
+        .jd-done p { font-size: 16.5px; margin: 0 0 12px; }
+        .jd-done b { color: var(--ink); overflow-wrap: anywhere; }
+        .jd-done-hint { font-size: 14.5px !important; color: var(--dim); background: var(--paper-2); border-radius: 10px; padding: 10px 12px; }
+        .jd-done-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 18px 0 6px; }
+        .jd-done-actions .btn { border-radius: 10px; }
+        .jd-done-fine { font-size: 14px !important; color: var(--dim); margin: 8px 0 0 !important; }
+        .jd-linkbtn { background: none; border: 0; padding: 0; font: inherit; color: var(--green); text-decoration: underline; cursor: pointer; }
+        @media (prefers-reduced-motion: reduce) { .jd-done[open] { animation: none; } }
     </style>
 </head>
 <body>
@@ -205,6 +225,23 @@
 </section>
 </main>
 
+<!-- Shown after a successful sign-up: the next step, made hard to miss. -->
+<dialog class="jd-done" id="doneDlg" aria-labelledby="doneTitle">
+  <canvas class="jd-confetti" id="confetti" aria-hidden="true"></canvas>
+  <div class="jd-done-body">
+    <div class="jd-done-icon" aria-hidden="true"><svg viewBox="0 0 48 48" width="48" height="48"><path d="M6 12h36v24H6z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M6 12l18 14 18-14" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg></div>
+    <span class="eyebrow">Almost there</span>
+    <h2 id="doneTitle">Check your inbox</h2>
+    <p>We sent a confirmation link to <b id="doneEmail"></b>. Click it to start getting new openings every morning.</p>
+    <p class="jd-done-hint">Not there in a minute? Check spam or Promotions once, and mark it &ldquo;Not spam&rdquo; so the daily alerts reach you.</p>
+    <div class="jd-done-actions">
+      <a class="btn mint" id="doneOpen" href="#" target="_blank" rel="noopener" hidden>Open Gmail</a>
+      <button class="btn ghost" type="button" id="doneClose">Done</button>
+    </div>
+    <p class="jd-done-fine">Wrong address? <button type="button" class="jd-linkbtn" id="doneRetry">Use a different email</button></p>
+  </div>
+</dialog>
+
 <footer class="sitefoot">
         <div class="wrap">
             <div class="sitefoot-grid">
@@ -266,6 +303,54 @@
     var form = document.getElementById('subForm');
     var msg = document.getElementById('subMsg'), btn = document.getElementById('subBtn');
     var label = btn.innerHTML;
+
+    /* ---- success pop-up with confetti ---- */
+    var dlg = document.getElementById('doneDlg');
+    var INBOX = { 'gmail.com': ['Open Gmail', 'https://mail.google.com/'],
+                  'googlemail.com': ['Open Gmail', 'https://mail.google.com/'],
+                  'outlook.com': ['Open Outlook', 'https://outlook.live.com/mail/'], 'hotmail.com': ['Open Outlook', 'https://outlook.live.com/mail/'],
+                  'live.com': ['Open Outlook', 'https://outlook.live.com/mail/'], 'yahoo.com': ['Open Yahoo Mail', 'https://mail.yahoo.com/'],
+                  'icloud.com': ['Open iCloud Mail', 'https://www.icloud.com/mail'] };
+    function showDone(email) {
+        var de = document.getElementById('doneEmail'), at = email.indexOf('@');   // let a long address wrap at the @, not mid-name
+        de.textContent = ''; de.appendChild(document.createTextNode(email.slice(0, at)));
+        de.appendChild(document.createElement('wbr')); de.appendChild(document.createTextNode(email.slice(at)));
+        var box = INBOX[(email.split('@')[1] || '').toLowerCase()], open = document.getElementById('doneOpen');
+        if (box) { open.textContent = box[0]; open.href = box[1]; open.hidden = false; } else open.hidden = true;
+        if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
+        confetti();
+    }
+    function closeDone() { if (dlg.close) dlg.close(); else dlg.removeAttribute('open'); }
+    document.getElementById('doneClose').addEventListener('click', closeDone);
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) closeDone(); });   // click on the backdrop
+    document.getElementById('doneRetry').addEventListener('click', function () {
+        closeDone(); btn.disabled = false; btn.innerHTML = label; msg.textContent = ''; msg.className = 'formmsg';
+        form.email.focus();
+    });
+    function confetti() {
+        if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var c = document.getElementById('confetti'), ctx = c.getContext && c.getContext('2d'); if (!ctx) return;
+        var dpr = window.devicePixelRatio || 1, W = c.offsetWidth, H = c.offsetHeight;
+        c.width = W * dpr; c.height = H * dpr; ctx.scale(dpr, dpr);
+        var colors = ['#06D6A0', '#073B4C', '#FFD700', '#046B52', '#9BE8D2', '#EF476F'], bits = [];
+        for (var i = 0; i < 140; i++) bits.push({
+            x: W / 2 + (Math.random() - .5) * 60, y: H * .3, vx: (Math.random() - .5) * 11, vy: -Math.random() * 11 - 4,
+            w: 6 + Math.random() * 6, h: 8 + Math.random() * 8, r: Math.random() * 6, vr: (Math.random() - .5) * .35,
+            c: colors[i % colors.length], round: Math.random() < .3
+        });
+        var start = null;
+        (function frame(t) {
+            if (!start) start = t;
+            var age = t - start; ctx.clearRect(0, 0, W, H);
+            bits.forEach(function (b) {
+                b.vy += .32; b.vx *= .985; b.x += b.vx; b.y += b.vy; b.r += b.vr;
+                ctx.save(); ctx.globalAlpha = Math.max(0, 1 - age / 2600); ctx.translate(b.x, b.y); ctx.rotate(b.r); ctx.fillStyle = b.c;
+                if (b.round) { ctx.beginPath(); ctx.arc(0, 0, b.w / 2, 0, 6.3); ctx.fill(); } else ctx.fillRect(-b.w / 2, -b.h / 2, b.w, b.h * .6);
+                ctx.restore();
+            });
+            if (age < 2600 && dlg.open) requestAnimationFrame(frame); else ctx.clearRect(0, 0, W, H);
+        })(performance.now());
+    }
     form.addEventListener('submit', function (e) {
         e.preventDefault();
         var fd = new FormData(form);
@@ -291,8 +376,9 @@
             if (!r.ok) throw new Error('bad status');
             form.reset();
             msg.className = 'formmsg ok';
-            msg.textContent = 'Almost there. We sent a link to ' + email + '. Click it to confirm. Check spam once if it is not in your inbox.';
+            msg.textContent = 'Almost there. We sent a link to ' + email + '. Click it to confirm.';
             btn.textContent = 'Check your inbox';
+            showDone(email);
         }).catch(function () {
             msg.className = 'formmsg bad';
             msg.textContent = 'That did not go through. Try again in a minute, or email info@thetechhut.co and we will add you by hand.';
