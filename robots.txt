@@ -16,3 +16,4 @@ Disallow: /guide.html
 Disallow: /remote/list/
 
 Sitemap: https://thetechhut.co/sitemap.xml
+Sitemap: https://thetechhut.co/jobs/role/sitemap.xml

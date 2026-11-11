@@ -43,6 +43,9 @@ jobs:
       - name: Read the feeds and write data/jobs-board.json
         run: node scripts/build_jobs_board.js
 
+      - name: Write one page per role (jobs/role/)
+        run: node scripts/build_job_pages.js
+
       - name: Deploy
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:

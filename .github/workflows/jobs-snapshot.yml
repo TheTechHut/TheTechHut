@@ -90,6 +90,11 @@ jobs:
         continue-on-error: true
         run: node scripts/build_jobs_board.js
 
+      - name: Write one page per role (jobs/role/)
+        if: steps.commit.outputs.changed == 'yes'
+        continue-on-error: true
+        run: node scripts/build_job_pages.js
+
       # A push made with GITHUB_TOKEN does not trigger other workflows, so the
       # hosting deploy has to be called from here or the new data never goes live.
       - name: Deploy the new data

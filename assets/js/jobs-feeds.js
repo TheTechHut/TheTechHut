@@ -293,7 +293,7 @@
         company: co.name,
         logo: '',
         location: clean(j.location && j.location.name) || 'Not stated',
-        types: [], cats: [catFromTitle(clean(j.title))], level: '', excerpt: '',
+        types: [], cats: [catFromTitle(clean(j.title))], level: '', excerpt: clean(j.content, 190),
         url: safeUrl(j.absolute_url),
         date: j.updated_at || j.first_published || '',
         source: co.name
@@ -332,7 +332,7 @@
         where: [j.location].concat((j.secondaryLocations || []).map(function (x) { return x.location; })).join('; '),
         types: j.employmentType ? [clean(j.employmentType)] : [],
         cats: [catFromTitle(clean(j.title))], level: '',
-        excerpt: '',
+        excerpt: clean(j.descriptionPlain, 190),
         url: safeUrl(j.jobUrl || j.applyUrl),
         date: j.publishedAt || j.updatedAt || '',
         source: co.name
@@ -790,7 +790,7 @@
             : co.ats === 'successfactors' ? 'https://' + co.host + '/sitemap.xml'
             : co.ats === 'zoho'       ? 'https://' + co.host + '/jobs/' + co.page
             : co.ats === 'rss'        ? co.url
-            : co.ats === 'greenhouse' ? 'https://boards-api.greenhouse.io/v1/boards/' + co.slug + '/jobs'
+            : co.ats === 'greenhouse' ? 'https://boards-api.greenhouse.io/v1/boards/' + co.slug + '/jobs' + (IN_BROWSER ? '' : '?content=true')
             : co.ats === 'lever'      ? 'https://api.lever.co/v0/postings/' + co.slug + '?mode=json'
             : co.ats === 'pinpoint'   ? 'https://' + co.slug + '.pinpointhq.com/postings.json'
             : co.ats === 'smartrecruiters' ? 'https://api.smartrecruiters.com/v1/companies/' + co.slug + '/postings?limit=100'
