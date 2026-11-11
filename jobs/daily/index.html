@@ -28,30 +28,43 @@
     <style>
         /* Daily job alert. Built on thh.css: ink, mint and green, Newsreader headlines,
            IBM Plex Mono labels, square corners and ruled columns. */
-        .jd-hero { padding: 56px 0 0; border-bottom: 1px solid var(--rule); overflow: hidden; }
-        .jd-cue { display: flex; align-items: center; gap: 9px; }
-        .jd-cue::before { content: ''; width: 8px; height: 8px; background: var(--mint); flex: none; }
-        .jd-hero h1 { max-width: 19ch; margin-top: 6px; }
-        .jd-hero .lede { max-width: 56ch; }
-        .jd-cta { font-size: 16px; padding: 14px 22px; display: inline-flex; align-items: center; gap: 14px; }
-        .jd-proof { display: flex; align-items: center; gap: 12px; margin-top: 24px; font-size: 15px; color: var(--muted); }
-        .jd-chips { display: inline-flex; gap: 4px; flex: none; }
-        .jd-chips i { font: 500 10.5px var(--mono); font-style: normal; width: 30px; height: 30px; display: grid; place-items: center;
-            border: 1px solid var(--ink); border-radius: 2px; color: var(--ink); background: var(--paper); }
-        .jd-chips i:nth-child(2) { background: var(--mint); border-color: var(--mint); }
+        /* Hero: a dark, single-screen sign-up pitch with the alert shown on a phone. */
+        .jd-hero { background: radial-gradient(520px 520px at 76% 50%, #0F5A70 0%, rgba(15,90,112,0) 70%), var(--ink);
+            color: #CFE0E6; padding: 72px 0 80px; border-bottom: 0; overflow: hidden; }
+        .jd-hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px; align-items: center; }
+        .jd-brand { display: flex; align-items: center; gap: 12px; margin: 0 0 48px; font: 700 16px var(--sans); letter-spacing: .06em;
+            text-transform: uppercase; color: #fff; }
+        .jd-mark { width: 44px; height: 44px; border-radius: 50%; background: var(--mint); color: var(--ink); display: grid; place-items: center;
+            font: 700 24px/1 var(--serif); text-transform: none; letter-spacing: 0; padding-top: 2px; box-sizing: border-box; }
+        .jd-hero h1 { font-family: var(--sans); font-weight: 700; text-transform: uppercase; color: #fff; letter-spacing: -.01em;
+            font-size: clamp(36px, 5.4vw, 64px); line-height: 1.02; margin: 0 0 18px; max-width: 15ch; }
+        .jd-sub { font-size: clamp(17px, 1.7vw, 19px); line-height: 1.5; color: #B9CED5; max-width: 46ch; margin: 0 0 32px; }
+        .jd-cta { display: inline-block; background: #fff; color: var(--ink); font: 700 19px var(--sans); letter-spacing: .04em;
+            padding: 18px 44px; border-radius: 16px; text-decoration: none; transition: background .15s, transform .15s; }
+        .jd-cta:hover { background: var(--mint); color: var(--ink); transform: translateY(-1px); }
+        .jd-note { margin: 22px 0 0; font-size: 14.5px; color: #8FAFB9; max-width: 48ch; }
 
-        .jd-strip { --edge: max(20px, calc((100vw - 1120px) / 2 + 20px)); display: flex; gap: 0; overflow-x: auto;
-            scroll-snap-type: x proximity; scroll-padding-inline: var(--edge); padding: 40px var(--edge) 0; scrollbar-width: none;
-            border-top: 0; margin-top: 8px; }
-        .jd-strip::-webkit-scrollbar { display: none; }
-        .jd-card { flex: 0 0 min(280px, 78vw); scroll-snap-align: start; box-sizing: border-box; padding: 14px 20px 18px 0; margin-right: 24px;
-            border-top: 2px solid var(--ink); display: flex; flex-direction: column; min-height: 196px; }
-        .jd-card .tag { align-self: flex-start; }
-        .jd-card:nth-child(3n+1) .tag { background: var(--mint); border-color: var(--mint); }
-        .jd-card h3 { font-size: 21px; line-height: 1.22; margin: 14px 0 6px; }
-        .jd-card p { margin: 0; font-size: 15.5px; color: var(--muted); }
-        .jd-src { margin-top: auto; padding-top: 14px; font: 500 12px var(--mono); color: var(--dim); }
-        .jd-strip-note { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--dim); margin: 14px auto 40px; }
+        .jd-phone-wrap { display: flex; flex-direction: column; align-items: center; }
+        .jd-phone { position: relative; width: min(330px, 78vw); aspect-ratio: 9 / 18.6; box-sizing: border-box; padding: 14px;
+            border-radius: 52px; background: #050E12; border: 3px solid #E9DCCB; box-shadow: 0 40px 80px -30px rgba(0,0,0,.6); }
+        .jd-notch { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); width: 46%; height: 26px; background: #050E12;
+            border-radius: 0 0 16px 16px; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .jd-notch i { width: 54px; height: 5px; border-radius: 3px; background: #2A3A40; }
+        .jd-notch b { width: 7px; height: 7px; border-radius: 50%; background: #2A3A40; }
+        .jd-screen { height: 100%; border-radius: 40px; overflow: hidden; background: #fff; color: var(--text); font-size: 12px; line-height: 1.35; }
+        .jd-mail-bar { background: var(--ink); color: #fff; font: 700 15px var(--serif); padding: 40px 18px 10px; }
+        .jd-mail-bar i { font-style: normal; color: var(--mint); }
+        .jd-mail-head { padding: 12px 18px 12px; border-bottom: 3px double var(--ink); }
+        .jd-mail-head span { display: block; font: 500 9.5px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--green); }
+        .jd-mail-head strong { display: block; font: 700 21px/1.1 var(--serif); color: var(--ink); margin: 5px 0 4px; }
+        .jd-mail-head em { font-style: normal; color: var(--muted); font-size: 11.5px; }
+        .jd-mail-sec { margin: 12px 18px 2px; padding-top: 6px; border-top: 2px solid var(--ink); font: 700 14px var(--serif); color: var(--ink); }
+        .jd-mail-sec small { font: 500 9.5px var(--mono); color: var(--green); margin-left: 4px; }
+        .jd-mail-row { margin: 0 18px; padding: 6px 0; border-bottom: 1px solid var(--rule); }
+        .jd-mail-row b { display: block; color: var(--ink); font-size: 12px; }
+        .jd-mail-row span { color: var(--muted); font-size: 11px; }
+        .jd-mail-row u { text-decoration: none; font-weight: 700; color: var(--text); }
+        .jd-phone-cap { margin: 16px 0 0; font: 500 12px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: #8FAFB9; }
 
         .jd-how { background: var(--ink); color: #CFE0E6; padding: 72px 0 80px; border-bottom: 0; }
         .jd-how .eyebrow { color: var(--mint); }
@@ -80,13 +93,17 @@
             color: var(--ink); width: 100%; box-sizing: border-box; }
         .jd-form input:focus { outline: 2px solid var(--mint); outline-offset: 0; border-color: var(--ink); }
         .jd-form .btn { justify-self: start; margin-top: 4px; }
+        .jd-submit { display: inline-flex; align-items: center; gap: 14px; font-size: 16px; padding: 14px 22px; }
         .jd-form .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
         .jd-more { margin: 26px 0 0; font-size: 16px; color: var(--muted); }
+        @media (max-width: 860px) {
+            .jd-hero-grid { grid-template-columns: 1fr; gap: 44px; }
+        }
         @media (max-width: 600px) {
-            .jd-hero { padding-top: 36px; }
-            .jd-hero h1 br { display: none; }
-            .jd-proof { align-items: flex-start; }
-            .jd-cta, .jd-form .btn { width: 100%; justify-content: space-between; box-sizing: border-box; justify-self: stretch; }
+            .jd-hero { padding: 40px 0 56px; }
+            .jd-brand { margin-bottom: 30px; }
+            .jd-cta { display: block; text-align: center; }
+            .jd-form .btn { width: 100%; justify-content: space-between; box-sizing: border-box; justify-self: stretch; }
             .jd-steps li { gap: 16px; }
             .jd-steps li:not(:last-child)::before { left: 21px; top: 44px; }
             .jd-step-ico { width: 44px; height: 44px; }
@@ -108,30 +125,52 @@
 
 <!-- HERO -->
 <section class="jd-hero">
-  <div class="wrap">
-    <p class="eyebrow jd-cue">Your cue to apply</p>
-    <h1>Stop refreshing job boards. <br><em>New openings</em>, in your inbox every morning.</h1>
-    <p class="lede">We read the career pages of the employers we track every morning and email you the roles that went up since yesterday. Free, and nothing on days with nothing new.</p>
-    <a class="btn mint jd-cta" href="#signup">Get daily job alerts &mdash; Free <span aria-hidden="true">&#8599;</span></a>
-    <div class="jd-proof">
-      <span class="jd-chips" aria-hidden="true"><i>MK</i><i>SK</i><i>OA</i><i>JU</i></span>
-      <span>From the career pages of 48 employers, including M-KOPA, Sun King, One Acre Fund and Jumia</span>
+  <div class="wrap jd-hero-grid">
+    <div class="jd-hero-copy">
+      <p class="jd-brand"><span class="jd-mark" aria-hidden="true">T</span>The Tech Hut &middot; Daily job alert</p>
+      <h1>Get new job openings in your inbox every morning</h1>
+      <p class="jd-sub">Join the job seekers getting new roles from employers&rsquo; own career pages, across engineering, data, product, design and operations, sent directly to your inbox every morning. Free.</p>
+      <a class="jd-cta" href="#signup">Subscribe</a>
+      <p class="jd-note">From 48 employers&rsquo; career pages, including M-KOPA, Sun King, Cloudflare and Jumia. Nothing on days with nothing new.</p>
+    </div>
+
+    <!-- The 7 November 2026 alert, as it would have looked on a phone. Real roles from that day's check. -->
+    <div class="jd-phone-wrap" aria-label="Example: the daily alert for Saturday 7 November 2026 on a phone">
+      <div class="jd-phone">
+        <div class="jd-notch" aria-hidden="true"><i></i><b></b></div>
+        <div class="jd-screen">
+          <div class="jd-mail-bar">The Tech Hut<i>.</i></div>
+          <div class="jd-mail-head">
+            <span>Daily openings &middot; Sat 7 Nov</span>
+            <strong>66 new openings today</strong>
+            <em>From 17 employers, since yesterday.</em>
+          </div>
+          <div class="jd-mail-sec">Engineering <small>18 new</small></div>
+          <div class="jd-mail-row"><b>Network Deployment Engineer</b><span><u>Cloudflare</u> &middot; Hybrid</span></div>
+          <div class="jd-mail-row"><b>Software Engineer, Load Balancing</b><span><u>Cloudflare</u> &middot; Hybrid</span></div>
+          <div class="jd-mail-sec">Data <small>7 new</small></div>
+          <div class="jd-mail-row"><b>Senior Data Engineer</b><span><u>Lula</u> &middot; Cape Town</span></div>
+          <div class="jd-mail-sec">Operations &amp; finance <small>41 new</small></div>
+          <div class="jd-mail-row"><b>Credit Manager, PayGo Phones</b><span><u>Sun King</u> &middot; Kenya</span></div>
+          <div class="jd-mail-row"><b>Senior Regional Finance Lead</b><span><u>Turaco</u> &middot; Nairobi</span></div>
+        </div>
+      </div>
+      <p class="jd-phone-cap">The 7 November alert</p>
     </div>
   </div>
-
-  <!-- Real examples: roles our check found new on 5, 6 and 7 November 2026. -->
-  <div class="jd-strip" aria-label="Examples of roles that were new on 5 to 7 November 2026">
-    <article class="jd-card"><span class="tag">New &middot; Sat 7 Nov</span><h3>Credit Manager, PayGo Phones</h3><p>Sun King &middot; Kenya</p><span class="jd-src">Applies through Pinpoint</span></article>
-    <article class="jd-card"><span class="tag">New &middot; Sat 7 Nov</span><h3>Senior Regional Finance Lead</h3><p>Turaco &middot; Nairobi</p><span class="jd-src">Applies through Breezy</span></article>
-    <article class="jd-card"><span class="tag">New &middot; Sat 7 Nov</span><h3>Business Development Manager, Bancassurance</h3><p>Turaco &middot; Nairobi</p><span class="jd-src">Applies through Breezy</span></article>
-    <article class="jd-card"><span class="tag">New &middot; Fri 6 Nov</span><h3>Senior CRM Manager, Conversion &amp; Lifecycle</h3><p>M-KOPA &middot; Nairobi</p><span class="jd-src">Applies through Ashby</span></article>
-    <article class="jd-card"><span class="tag">New &middot; Fri 6 Nov</span><h3>Head of People Partnering</h3><p>M-KOPA &middot; Nairobi</p><span class="jd-src">Applies through Ashby</span></article>
-    <article class="jd-card"><span class="tag">New &middot; Thu 5 Nov</span><h3>Associate Field Manager, Internal Audit</h3><p>GiveDirectly &middot; Kaloleni</p><span class="jd-src">Applies through Greenhouse</span></article>
-  </div>
-  <p class="wrap jd-strip-note">Real examples: roles our morning check found new between 5 and 7 November.</p>
 </section>
 
 <!-- HOW IT WORKS -->
+<section class="jd-get">
+  <div class="wrap"><div class="section-head"><h2>What lands in your inbox</h2></div><div class="cards">
+    <div class="card"><h3>Straight to the employer</h3><p>Every link goes to the company's own application page. No middle-man board, no sign-up walls.</p></div>
+    <div class="card"><h3>Only what's new</h3><p>Roles you already saw this week never come back, even if a company re-posts them.</p></div>
+    <div class="card"><h3>Quiet days stay quiet</h3><p>If nothing new went up, we send nothing. Some days that's most of the week.</p></div>
+    <div class="card"><h3>Every field</h3><p>Engineering, data, product, design and operations roles, grouped so you can skip straight to yours.</p></div>
+  </div></div>
+</section>
+
+<!-- WHAT YOU GET -->
 <section class="jd-how" aria-labelledby="how-h">
   <div class="wrap">
     <span class="eyebrow">How the daily alert works</span>
@@ -143,16 +182,6 @@
       <li><span class="jd-step-ico" aria-hidden="true">03</span><div><h3>Apply first</h3><p>By about 7:00 AM Nairobi time the new roles are in your inbox, grouped by field, each linking straight to the employer's application page.</p></div></li>
     </ol>
   </div>
-</section>
-
-<!-- WHAT YOU GET -->
-<section class="jd-get">
-  <div class="wrap"><div class="section-head"><h2>What lands in your inbox</h2></div><div class="cards">
-    <div class="card"><h3>Straight to the employer</h3><p>Every link goes to the company's own application page. No middle-man board, no sign-up walls.</p></div>
-    <div class="card"><h3>Only what's new</h3><p>Roles you already saw this week never come back, even if a company re-posts them.</p></div>
-    <div class="card"><h3>Quiet days stay quiet</h3><p>If nothing new went up, we send nothing. Some days that's most of the week.</p></div>
-    <div class="card"><h3>CV tips that match</h3><p>Each email says which keywords the roles ask for, and how the hiring system reads your CV.</p></div>
-  </div></div>
 </section>
 
 <!-- SIGNUP -->
@@ -167,7 +196,7 @@
       <label><span>First name <span class="opt">(optional)</span></span><input type="text" name="name" placeholder="Amina" autocomplete="given-name"></label>
       <label><span>Roles you want <span class="opt">(optional)</span></span><input type="text" name="role" placeholder="e.g. backend, data analyst, product"></label>
       <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <button type="submit" id="subBtn" class="btn jd-cta">Get daily job alerts &mdash; Free <span aria-hidden="true">&#8599;</span></button>
+      <button type="submit" id="subBtn" class="btn jd-submit">Get daily job alerts &mdash; Free <span aria-hidden="true">&#8599;</span></button>
     </form>
     <p class="formmsg" id="subMsg" role="status" aria-live="polite"></p>
     <p class="formnote">No spam: only new roles, and one click unsubscribes. Emails go out through Brevo. <a href="/data_privacy_policy/">How we handle your data</a>.</p>
