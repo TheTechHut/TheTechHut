@@ -22,6 +22,9 @@
  * them works; most feeds do not send a description yet (jobs-feeds.js drops it
  * to keep jobs-board.json small), which is the next thing to fix.
  *
+ * Each role's slug is also written back to jobs-board.json as `page`, so the
+ * list on /jobs/ links to its page instead of the in-page #job= view.
+ *
  * Every page links to the employer's own posting as the way to apply, and says
  * so. The description is the short excerpt the feed gives; no salary or closing
  * date is published unless a feed supplies one (none do yet), so none is made up.
@@ -131,6 +134,7 @@ function main() {
   var urls = [];
   rows.forEach(function (j) {
     var slug = slugOf(j);
+    j.page = slug;   /* the list links here (jobs/index.html card) */
     var dir = path.join(OUT, slug);
     fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(path.join(dir, 'index.html'), page(j, slug));
@@ -140,6 +144,7 @@ function main() {
     '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     urls.map(function (u) { return '  <url><loc>' + u.loc + '</loc><lastmod>' + u.lastmod + '</lastmod></url>'; }).join('\n') +
     '\n</urlset>\n');
+  fs.writeFileSync(BOARD, JSON.stringify(board));
   console.log('job pages: %d written to %s', rows.length, path.relative(ROOT, OUT));
 }
 

@@ -760,6 +760,13 @@
     setPage(keepPage ? page : 1, false);
   }
 
+  // A role with its own page (jobs/role/, written into jobs-board.json as `page`)
+  // links there, so each job has a URL search engines can index; the others
+  // keep the in-page #job= view.
+  function jobLink(j, label) {
+    if (j.page) return '<a href="/jobs/role/' + encodeURIComponent(j.page) + '/">' + label + '</a>';
+    return '<a href="#job=' + encodeURIComponent(j.id) + '" data-job-id="' + esc(j.id) + '">' + label + '</a>';
+  }
   function card(j) {
     var initial = esc((j.company || '?').charAt(0).toUpperCase());
     var logo = j.logo
@@ -771,7 +778,7 @@
     return '<article class="job">' +
       '<div class="logo">' + initial + logo + '</div>' +
       '<div>' +
-        '<h3><a href="#job=' + encodeURIComponent(j.id) + '" data-job-id="' + esc(j.id) + '">' + esc(j.title) + '</a></h3>' +
+        '<h3>' + jobLink(j, esc(j.title)) + '</h3>' +
         '<div class="co">' + esc(j.company || 'Company not listed') + '</div>' +
         '<div class="meta"><span>' + esc(j.location) + '</span>' +
           (j.date ? '<span>' + esc(ago(j.date)) + '</span>' : '') + '</div>' +
@@ -781,7 +788,7 @@
           '<span class="src">via ' + esc(j.source) + '</span>' +
         '</div>' +
       '</div>' +
-      '<div class="apply"><a href="#job=' + encodeURIComponent(j.id) + '" data-job-id="' + esc(j.id) + '">View details</a></div>' +
+      '<div class="apply">' + jobLink(j, 'View details') + '</div>' +
     '</article>';
   }
 
