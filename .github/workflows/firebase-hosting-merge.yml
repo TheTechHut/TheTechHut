@@ -6,11 +6,35 @@ name: Deploy to Firebase Hosting on merge
   push:
     branches:
       - chore/redesign
+
+# One deploy at a time, shared with jobs-board.yml and jobs-snapshot.yml, so a
+# push cannot land on top of a data deploy (or the reverse).
+concurrency:
+  group: site-deploy
+  cancel-in-progress: false
+
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      # data/jobs-board.json and jobs/role/ are built, never committed (see
+      # .gitignore). A deploy without them removes them from the live site, so
+      # build them here too. If the feeds are down the deploy still goes ahead,
+      # and the jobs page reads the feeds live as it always did.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Build the jobs board data
+        id: board
+        continue-on-error: true
+        run: node scripts/build_jobs_board.js
+      - name: Write one page per role (jobs/role/)
+        if: steps.board.outcome == 'success'
+        continue-on-error: true
+        run: node scripts/build_job_pages.js
+
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
