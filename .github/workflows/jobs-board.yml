@@ -43,9 +43,9 @@ jobs:
       - name: Read the feeds and write data/jobs-board.json
         run: node scripts/build_jobs_board.js
 
-      - name: Install the image library for the share cards
+      - name: Install the image libraries for the share cards
         continue-on-error: true
-        run: npm install --no-save --no-audit --no-fund sharp@0.33.5
+        run: npm install --no-save --no-audit --no-fund sharp@0.33.5 opentype.js@1.3.4
 
       - name: Write one page per role (jobs/role/)
         run: node scripts/build_job_pages.js
