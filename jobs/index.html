@@ -1055,6 +1055,8 @@
     .then(function (d) {
       var t = d && Date.parse(d.updated);
       if (!d || !Array.isArray(d.jobs) || d.jobs.length < 20 || isNaN(t) || Date.now() - t > STALE_MS) throw new Error('stale');
+      // build_jobs_board.js leaves out empty fields to keep the file small; the page expects them
+      d.jobs.forEach(function (j) { j.types = j.types || []; j.cats = j.cats || []; j.excerpt = j.excerpt || ''; });
       show(d.jobs, new Date(t));
     })
     .catch(loadLive)
