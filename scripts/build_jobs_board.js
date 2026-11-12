@@ -29,7 +29,11 @@ var OUT = path.join(ROOT, 'data', 'jobs-board.json');
 // so firebase.json's "**/.*" keeps it off the site and .gitignore keeps it out of git.
 var BODIES = path.join(ROOT, '.job-bodies.json');
 var MIN_ROLES = 50;
-var KEEP = ['id', 'title', 'company', 'logo', 'location', 'where', 'types', 'cats', 'level', 'excerpt', 'url', 'date', 'source', 'region', '_tags'];
+// salary (free text, e.g. "USD 160,000 – 200,000/year"), deadline (ISO date the
+// posting closes) and workplace ("On-site", "Hybrid" or "Remote") are present only
+// when the source states them; the WhatsApp channel posts read them from here.
+var KEEP = ['id', 'title', 'company', 'logo', 'location', 'where', 'types', 'cats', 'level', 'excerpt', 'url', 'date',
+            'salary', 'deadline', 'workplace', 'source', 'region', '_tags'];
 
 function slim(j) {
   var o = {};
@@ -63,7 +67,10 @@ async function addDetails(jobs) {
       try {
         var r = await fetch(j.detail, { headers: { 'User-Agent': 'TheTechHutBot/1.0 (+https://thetechhut.co/jobs/)', Accept: 'application/json' }, signal: AbortSignal.timeout(15000) });
         if (!r.ok) continue;
-        j.body = detailBody(j.detail, await r.json());
+        var d = await r.json();
+        j.body = detailBody(j.detail, d);
+        // Workable's list only flags remote roles; the posting says "on_site" or "hybrid" too
+        if (!j.workplace && d && d.workplace) j.workplace = F.workplaceOf(d.workplace);
         if (j.body) { j.excerpt = F.clean(j.body, 190); got++; }
       } catch (e) { /* keep the role without a description */ }
     }

@@ -116,6 +116,28 @@
     return 'Software Engineering';
   }
 
+  // salary, deadline and workplace are set only from a field the source fills in
+  // itself, never read into a title or a "Remote" in the location text.
+  // workplace: "On-site", "Hybrid" or "Remote", from each system's own spelling
+  // ("OnSite", "on_site", "ORA_HYBRID", ...); '' for anything else.
+  function workplaceOf(s) {
+    s = String(s || '').toLowerCase().replace(/[^a-z]/g, '');
+    if (/hybrid/.test(s)) return 'Hybrid';
+    if (/remote|telecommut/.test(s)) return 'Remote';
+    if (/onsite|office/.test(s)) return 'On-site';
+    return '';
+  }
+  // salary: "USD 160,000 – 200,000/year" from a range; '' without a number.
+  function payOf(min, max, currency, per) {
+    min = +min || 0; max = +max || 0;
+    if (!min && !max) return '';
+    var n = function (x) { return Math.round(x).toLocaleString('en-US'); };
+    var amount = min && max && min !== max ? n(min) + ' – ' + n(max) : n(min || max);
+    var p = /year|annual/i.test(per) ? '/year' : /month/i.test(per) ? '/month' : /week/i.test(per) ? '/week'
+          : /day|daily/i.test(per) ? '/day' : /hour/i.test(per) ? '/hour' : '';
+    return (currency ? clean(currency) + ' ' : '') + amount + p;
+  }
+
   // --- sources -------------------------------------------------------------
   function fromJobicy(d) {
     return (d && d.jobs || []).map(function (j) {
@@ -131,6 +153,8 @@
         excerpt: clean(j.jobExcerpt, 190),
         url: safeUrl(j.url),
         date: j.pubDate,
+        salary: payOf(j.annualSalaryMin, j.annualSalaryMax, j.salaryCurrency, j.salaryPeriod || 'year'),
+        workplace: 'Remote',            // Jobicy lists remote roles only
         source: 'Jobicy'
       };
     });
@@ -151,6 +175,9 @@
           excerpt: clean(j.description, 190),
           url: safeUrl(j.url || j.apply_url),
           date: j.date,
+          // US dollars a year. Some posters type 21 or 114000000; those are left out.
+          salary: j.salary_min >= 1000 && (j.salary_max || j.salary_min) <= 1e6 ? payOf(j.salary_min, j.salary_max, 'USD', 'year') : '',
+          workplace: 'Remote',          // Remote OK lists remote roles only
           source: 'Remote OK',
           _tags: (j.tags || []).map(clean).filter(Boolean)
         };
@@ -297,6 +324,7 @@
         body: IN_BROWSER ? '' : (j.content || ''),    // full text for the role pages, built on the runner only
         url: safeUrl(j.absolute_url),
         date: j.updated_at || j.first_published || '',
+        deadline: j.application_deadline || '',
         source: co.name
       };
     });
@@ -323,6 +351,8 @@
         body: IN_BROWSER ? '' : leverBody(j),
         url: safeUrl(j.hostedUrl),
         date: j.createdAt ? new Date(j.createdAt).toISOString() : '',
+        salary: j.salaryRange ? payOf(j.salaryRange.min, j.salaryRange.max, j.salaryRange.currency, j.salaryRange.interval) : '',
+        workplace: workplaceOf(j.workplaceType),
         source: co.name
       };
     });
@@ -344,6 +374,10 @@
         body: IN_BROWSER ? '' : (j.descriptionHtml || ''),
         url: safeUrl(j.jobUrl || j.applyUrl),
         date: j.publishedAt || j.updatedAt || '',
+        // the employer's own summary ("€65K – €75K • Offers Equity"), only where it shows it on the posting
+        salary: j.shouldDisplayCompensationOnJobPostings && j.compensation && j.compensation.compensationTierSummary
+          ? clean(String(j.compensation.compensationTierSummary).split(' • ')[0]) : '',
+        workplace: workplaceOf(j.workplaceType),
         source: co.name
       };
     });
@@ -364,6 +398,10 @@
         body: IN_BROWSER ? '' : String(j.description || ''),
         url: safeUrl(j.url),
         date: '',                       // Pinpoint's feed carries no posted date
+        salary: !j.compensation_visible ? '' : (typeof j.compensation === 'string' && clean(j.compensation)) ||
+          payOf(j.compensation_minimum, j.compensation_maximum, j.compensation_currency, j.compensation_frequency),
+        deadline: j.deadline_at || '',
+        workplace: workplaceOf(j.workplace_type),
         source: co.name
       };
     });
@@ -387,6 +425,7 @@
         detail: IN_BROWSER ? '' : 'https://api.smartrecruiters.com/v1/companies/' + encodeURIComponent(slug) + '/postings/' + encodeURIComponent(j.id),
         url: safeUrl('https://jobs.smartrecruiters.com/' + encodeURIComponent(slug) + '/' + encodeURIComponent(j.id)),
         date: j.releasedDate || '',
+        workplace: loc.hybrid ? 'Hybrid' : loc.remote ? 'Remote' : '',   // both false is the default, not "on-site"
         source: co.name
       };
     });
@@ -407,6 +446,7 @@
         detail: IN_BROWSER || !j.shortcode ? '' : 'https://apply.workable.com/api/v2/accounts/' + encodeURIComponent(co.slug) + '/jobs/' + encodeURIComponent(j.shortcode),
         url: safeUrl(j.url || j.shortlink),
         date: j.published_on || j.created_at || '',
+        workplace: j.telecommuting ? 'Remote' : '',   // the posting itself says on-site/hybrid; build_jobs_board.js reads it
         source: co.name
       };
     });
@@ -427,6 +467,8 @@
         excerpt: '',
         url: safeUrl(j.url),
         date: j.published_date || '',
+        salary: clean(j.salary),
+        workplace: loc.is_remote ? 'Remote' : '',
         source: co.name
       };
     });
@@ -497,6 +539,8 @@
       body: IN_BROWSER ? '' : String(info.jobDescription || ''),
       url: safeUrl(info.externalUrl || ('https://' + co.host + '/' + co.site + j.externalPath)),
       date: info.startDate || '',
+      deadline: info.endDate || '',   // the day the posting comes down
+      workplace: workplaceOf(info.remoteType),
       source: co.name
     };
   }
@@ -517,6 +561,8 @@
         excerpt: clean(j.ShortDescriptionStr, 190),
         url: safeUrl('https://' + co.host + '/hcmUI/CandidateExperience/en/sites/' + co.site + '/job/' + j.Id),
         date: j.PostedDate || '',
+        deadline: j.PostingEndDate || '',
+        workplace: workplaceOf(j.WorkplaceTypeCode || j.WorkplaceType),
         source: co.name
       };
     });
@@ -537,6 +583,8 @@
         excerpt: '',
         url: safeUrl('https://' + co.slug + '.bamboohr.com/careers/' + j.id),
         date: '',                       // the list carries no posted date
+        // BambooHR's locationType: 0 in the office, 1 remote, 2 hybrid
+        workplace: j.isRemote ? 'Remote' : ({ 0: 'On-site', 1: 'Remote', 2: 'Hybrid' })[j.locationType] || '',
         source: co.name
       };
     });
@@ -617,7 +665,7 @@
         return job('tl', co, r.jobId || r.contestNo, clean(c[0]), placeLabel(places[0], places.slice(1)),
           co.dates === 'posted' ? when : '',
           base + co.section + '/jobdetail.ftl?job=' + encodeURIComponent(r.contestNo || r.jobId) + '&lang=en',
-          { where: places.join('; ') });
+          { where: places.join('; '), deadline: co.dates === 'closing' ? when : '' });
       }).filter(Boolean);
     });
   }
@@ -633,6 +681,7 @@
       var o = job('zr', co, j.id, title, place, j.Date_Opened,
         'https://' + co.host + '/jobs/' + co.page + '/' + j.id + '/' + title.replace(/[^A-Za-z0-9]+/g, '-').replace(/^-|-$/g, '') + '?source=CareerSite');
       if (j.Job_Type) o.types = [clean(j.Job_Type)];
+      if (j.Remote_Job) o.workplace = 'Remote';
       return o;
     });
   }
@@ -666,6 +715,7 @@
         o.excerpt = (+td[4] ? Number(td[4]).toLocaleString('en-KE') + ' places' : 'Places') + ' in the ' + td[3] +
           '. Advert ' + td[1] + (closes ? ', closes ' + td[6] : '') + '. Apply on the Public Service Commission site.';
         o.types = ['Internship'];
+        o.deadline = closes;
         return o;
       }).filter(Boolean);
     });
@@ -683,6 +733,7 @@
         'Cohort ' + cohort.split(/\s+/)[1] + ' (ICT internship)', 'Kenya', '', url);
       o.excerpt = 'Paid 12-month ICT internship in government for recent graduates. Applications close ' + dl + '.';
       o.types = ['Internship'];
+      o.deadline = dayOf(dl);
       return [o];
     });
   }
@@ -733,6 +784,7 @@
         var qid = (/[?&](?:jobId|vacid|id)=([^&#]+)/i.exec(g.href) || [])[1];
         var o = job('pg', co, qid ? qid.slice(0, 32) : g.href.replace(/[?#].*$/, '').replace(/\/$/, '').split('/').pop().slice(-60),
           title, find(win, co.place, !after) || co.location || 'Kenya', posted && posted <= today ? posted : '', url);
+        o.deadline = closes;
         if (closes) o.excerpt = 'Applications close ' + new Date(closes + 'T12:00:00Z')
           .toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }) + '.';
         return o;
@@ -904,7 +956,7 @@
   return {
     COMPANIES: COMPANIES, load: load, clean: clean, esc: esc, ago: ago, safeUrl: safeUrl,
     regionOf: regionOf, stageOf: stageOf, stageLabel: stageLabel, catFromTitle: catFromTitle,
-    isTechRole: isTechRole,
+    isTechRole: isTechRole, workplaceOf: workplaceOf,
     // for checking one employer's adapter by hand (also in a browser, on that site)
     _loadOne: function (co) { var c = {}; Object.keys(co).forEach(function (k) { c[k] = co[k]; }); c.server = false; return loadCompany(c); }
   };
