@@ -88,7 +88,25 @@ function employmentType(types) {
   return null;
 }
 
+// ISO 3166 code for the role's country, or null when the text does not name one.
+// Kenya roles are Kenya by definition; elsewhere only a country named in the
+// location text counts ("Cape Town" alone says nothing), so none is guessed.
+var COUNTRIES = {
+  'south africa': 'ZA', nigeria: 'NG', egypt: 'EG', ghana: 'GH', tanzania: 'TZ', uganda: 'UG', rwanda: 'RW',
+  ethiopia: 'ET', morocco: 'MA', tunisia: 'TN', botswana: 'BW', angola: 'AO', zambia: 'ZM', zimbabwe: 'ZW',
+  senegal: 'SN', 'ivory coast': 'CI', "cote d'ivoire": 'CI', mauritius: 'MU', namibia: 'NA', algeria: 'DZ', kenya: 'KE'
+};
+function countryOf(j) {
+  if (j.region === 'Kenya') return 'KE';
+  var loc = String(j.location || '').toLowerCase();
+  for (var name in COUNTRIES) if (loc.indexOf(name) !== -1) return COUNTRIES[name];
+  var iso = /(?:^|[\s,])(ZA|NG|EG|GH|TZ|UG|RW|ET|MA|TN|BW|AO|ZM|ZW|SN|NA|DZ)(?=$|[\s,])/.exec(String(j.location || ''));
+  return iso ? iso[1] : null;
+}
+// JobPosting needs datePosted: without a real publication date the page gets no
+// markup (null) rather than an invented one.
 function jsonLd(j, url, body) {
+  if (!/^\d{4}-\d{2}-\d{2}/.test(j.date || '')) return null;
   var d = {
     '@context': 'https://schema.org',
     '@type': 'JobPosting',
@@ -99,13 +117,19 @@ function jsonLd(j, url, body) {
     url: url,
     directApply: false
   };
-  if (j.date) d.datePosted = j.date.slice(0, 10);
+  d.datePosted = j.date.slice(0, 10);
+  if (/^\d{4}-\d{2}-\d{2}$/.test(j.deadline || '')) d.validThrough = j.deadline;
   var et = employmentType(j.types);
   if (et) d.employmentType = et;
   // "Remote" here only means the location text says remote/anywhere/worldwide;
   // nothing says a Kenyan may take it. JobPosting needs the countries a remote
   // role is open to, so those pages get no markup rather than a guessed country.
-  if (j.location) d.jobLocation = { '@type': 'Place', address: { '@type': 'PostalAddress', addressLocality: j.location } };
+  if (j.location) {
+    var address = { '@type': 'PostalAddress', addressLocality: j.location };
+    var country = countryOf(j);
+    if (country) address.addressCountry = country;
+    d.jobLocation = { '@type': 'Place', address: address };
+  }
   return JSON.stringify(d).replace(/</g, '\\u003c');
 }
 
@@ -115,6 +139,7 @@ function page(j, slug, body, hasCard) {
   var title = j.title + ' at ' + j.company + ' — ' + where;
   var desc = j.title + ' at ' + j.company + ' (' + where + '). Apply on ' + j.company + '’s own careers page. Listed by The Tech Hut.';
   var image = hasCard ? url + 'card.png' : SITE + '/assets/img/social/jobs.jpg';
+  var ld = j.excerpt && j.region !== 'Remote' ? jsonLd(j, url, body) : null;
   var posted = j.date ? new Date(j.date).toISOString().slice(0, 10) : '';
   var meta = [where, (j.types || [])[0], posted && 'Posted ' + posted].filter(Boolean);
   return '<!DOCTYPE html>\n<html lang="en">\n<head>\n' +
@@ -129,7 +154,7 @@ function page(j, slug, body, hasCard) {
     '  <meta property="og:image" content="' + image + '">\n  <meta property="og:image:width" content="1200">\n  <meta property="og:image:height" content="630">\n' +
     '  <meta name="twitter:card" content="summary_large_image">\n  <meta name="twitter:image" content="' + image + '">\n' +
     '  <link rel="stylesheet" href="/assets/css/thh.css">\n' +
-    (j.excerpt && j.region !== 'Remote' ? '  <script type="application/ld+json">' + jsonLd(j, url, body) + '</script>\n' : '') +
+    (ld ? '  <script type="application/ld+json">' + ld + '</script>\n' : '') +
     '</head>\n<body>\n<a class="skip" href="#main">Skip to content</a>\n' +
     '<header class="masthead"><div class="wrap masthead-main"><a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>' +
     '<nav class="sitenav" aria-label="Site"><a href="/blog/daily/">Daily</a><a href="/jobs/" aria-current="page">Jobs</a><a href="/remote/">Remote</a><a href="/cv-pack/">CV Pack</a><a href="/blog/">Blog</a></nav></div></header>\n' +
