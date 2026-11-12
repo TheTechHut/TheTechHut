@@ -41,6 +41,8 @@ var OUT = path.join(ROOT, 'jobs', 'role');
 var SITE = 'https://thetechhut.co';
 var AGGREGATORS = /^(rok|jobicy)-/;
 var REGIONS = { Kenya: 1, Remote: 1, 'Rest of Africa': 1 };
+var cards = require('./job_card.js');
+var REGION_TAG = { Kenya: 'Kenya', Remote: 'Remote', 'Rest of Africa': 'Africa' };
 var MIN_PAGES = 20;
 var BODIES = path.join(ROOT, '.job-bodies.json');   // written by build_jobs_board.js
 var MAX_BODY = 20000;
@@ -107,11 +109,12 @@ function jsonLd(j, url, body) {
   return JSON.stringify(d).replace(/</g, '\\u003c');
 }
 
-function page(j, slug, body) {
+function page(j, slug, body, hasCard) {
   var url = SITE + '/jobs/role/' + slug + '/';
   var where = j.region === 'Remote' ? 'Remote' + (j.location ? ' · ' + j.location : '') : (j.location || j.region);
   var title = j.title + ' at ' + j.company + ' — ' + where;
   var desc = j.title + ' at ' + j.company + ' (' + where + '). Apply on ' + j.company + '’s own careers page. Listed by The Tech Hut.';
+  var image = hasCard ? url + 'card.png' : SITE + '/assets/img/social/jobs.jpg';
   var posted = j.date ? new Date(j.date).toISOString().slice(0, 10) : '';
   var meta = [where, (j.types || [])[0], posted && 'Posted ' + posted].filter(Boolean);
   return '<!DOCTYPE html>\n<html lang="en">\n<head>\n' +
@@ -123,7 +126,8 @@ function page(j, slug, body) {
     '  <meta property="og:type" content="website">\n  <meta property="og:site_name" content="The Tech Hut">\n' +
     '  <meta property="og:title" content="' + esc(title) + '">\n  <meta property="og:description" content="' + esc(desc) + '">\n' +
     '  <meta property="og:url" content="' + url + '">\n' +
-    '  <meta property="og:image" content="' + SITE + '/assets/img/social/jobs.jpg">\n  <meta name="twitter:card" content="summary_large_image">\n' +
+    '  <meta property="og:image" content="' + image + '">\n  <meta property="og:image:width" content="1200">\n  <meta property="og:image:height" content="630">\n' +
+    '  <meta name="twitter:card" content="summary_large_image">\n  <meta name="twitter:image" content="' + image + '">\n' +
     '  <link rel="stylesheet" href="/assets/css/thh.css">\n' +
     (j.excerpt && j.region !== 'Remote' ? '  <script type="application/ld+json">' + jsonLd(j, url, body) + '</script>\n' : '') +
     '</head>\n<body>\n<a class="skip" href="#main">Skip to content</a>\n' +
@@ -142,7 +146,7 @@ function page(j, slug, body) {
     '</div></main>\n</body>\n</html>\n';
 }
 
-function main() {
+async function main() {
   var board = JSON.parse(fs.readFileSync(BOARD, 'utf8'));
   var bodies = {};
   try { bodies = JSON.parse(fs.readFileSync(BODIES, 'utf8')); } catch (e) { /* none: pages fall back to the excerpt */ }
@@ -153,16 +157,29 @@ function main() {
     console.error('only %d eligible roles; leaving jobs/role untouched', rows.length);
     process.exit(1);
   }
+  var drawCard = cards.cardWriter();   // null without sharp: pages then keep the generic share image
+  if (!drawCard) console.log('job pages: sharp is not installed, share images fall back to the generic one');
   fs.rmSync(OUT, { recursive: true, force: true });
   var urls = [];
-  rows.forEach(function (j) {
+  for (var r = 0; r < rows.length; r++) {
+    var j = rows[r];
     var slug = slugOf(j);
     j.page = slug;   /* the list links here (jobs/index.html card) */
     var dir = path.join(OUT, slug);
     fs.mkdirSync(dir, { recursive: true });
-    fs.writeFileSync(path.join(dir, 'index.html'), page(j, slug, bodies[j.id] ? cleanBody(bodies[j.id], j.id) : ''));
-    if (j.excerpt && j.region !== 'Remote') urls.push({ loc: SITE + '/jobs/role/' + slug + '/', lastmod: (j.date || board.updated).slice(0, 10) });
-  });
+    var indexable = j.excerpt && j.region !== 'Remote';
+    var hasCard = false;
+    if (drawCard && indexable) {   // a card only helps a page people will share and search engines will show
+      try {
+        fs.writeFileSync(path.join(dir, 'card.png'), await drawCard({
+          title: j.title, company: j.company, tag: REGION_TAG[j.region], where: (j.location || '').replace(/\s*;\s*/g, ' \u00b7 ')
+        }));
+        hasCard = true;
+      } catch (e) { console.error('job pages: no card for %s: %s', slug, e.message); }
+    }
+    fs.writeFileSync(path.join(dir, 'index.html'), page(j, slug, bodies[j.id] ? cleanBody(bodies[j.id], j.id) : '', hasCard));
+    if (indexable) urls.push({ loc: SITE + '/jobs/role/' + slug + '/', lastmod: (j.date || board.updated).slice(0, 10) });
+  }
   fs.writeFileSync(path.join(OUT, 'sitemap.xml'),
     '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     urls.map(function (u) { return '  <url><loc>' + u.loc + '</loc><lastmod>' + u.lastmod + '</lastmod></url>'; }).join('\n') +
@@ -171,4 +188,4 @@ function main() {
   console.log('job pages: %d written to %s', rows.length, path.relative(ROOT, OUT));
 }
 
-main();
+main().catch(function (e) { console.error(e); process.exit(1); });

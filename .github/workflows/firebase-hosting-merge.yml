@@ -30,6 +30,11 @@ jobs:
         id: board
         continue-on-error: true
         run: node scripts/build_jobs_board.js
+      - name: Install the image library for the share cards
+        if: steps.board.outcome == 'success'
+        continue-on-error: true
+        run: npm install --no-save --no-audit --no-fund sharp@0.33.5
+
       - name: Write one page per role (jobs/role/)
         if: steps.board.outcome == 'success'
         continue-on-error: true
