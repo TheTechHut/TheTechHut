@@ -42,11 +42,32 @@ var SITE = 'https://thetechhut.co';
 var AGGREGATORS = /^(rok|jobicy)-/;
 var REGIONS = { Kenya: 1, Remote: 1, 'Rest of Africa': 1 };
 var MIN_PAGES = 20;
+var BODIES = path.join(ROOT, '.job-bodies.json');   // written by build_jobs_board.js
+var MAX_BODY = 20000;
 
 function esc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
     return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
   });
+}
+
+// Employer text is untrusted markup: keep a short allow-list of tags, drop every
+// attribute (so no links, images, styles or handlers survive), and escape the rest.
+var KEEP_TAGS = { p: 1, br: 1, ul: 1, ol: 1, li: 1, strong: 1, b: 1, em: 1, i: 1, h3: 1 };
+function cleanBody(raw, id) {
+  var h = String(raw || '');
+  if (/^gh-/.test(id)) h = h.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&');
+  h = h.replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style|iframe|object|embed)[\s\S]*?<\/\1>/gi, '');
+  h = h.replace(/<\/?([a-z][a-z0-9]*)\b[^>]*>/gi, function (m, tag) {
+    tag = tag.toLowerCase();
+    if (/^h[1-6]$/.test(tag)) tag = 'h3';
+    if (/^(div|section|article|tr)$/.test(tag)) tag = 'p';
+    if (!KEEP_TAGS[tag]) return ' ';
+    return tag === 'br' ? '<br>' : (m.charAt(1) === '/' ? '</' + tag + '>' : '<' + tag + '>');
+  });
+  h = h.replace(/<(?![a-z\/])/gi, '&lt;').replace(/&(?!(?:[a-z]+|#\d+|#x[0-9a-f]+);)/gi, '&amp;');
+  h = h.replace(/&nbsp;/g, ' ').replace(/<(p|li|h3)>\s*(<br>\s*)*<\/\1>/g, '').replace(/[ \t\r\n]+/g, ' ').trim();
+  return h.length > MAX_BODY ? '' : h;   // a runaway feed is skipped rather than cut mid-tag
 }
 
 function slugOf(j) {
@@ -65,12 +86,12 @@ function employmentType(types) {
   return null;
 }
 
-function jsonLd(j, url) {
+function jsonLd(j, url, body) {
   var d = {
     '@context': 'https://schema.org',
     '@type': 'JobPosting',
     title: j.title,
-    description: '<p>' + esc(j.excerpt) + '</p>',
+    description: body || '<p>' + esc(j.excerpt) + '</p>',
     identifier: { '@type': 'PropertyValue', name: j.company, value: j.id },
     hiringOrganization: { '@type': 'Organization', name: j.company },
     url: url,
@@ -86,7 +107,7 @@ function jsonLd(j, url) {
   return JSON.stringify(d).replace(/</g, '\\u003c');
 }
 
-function page(j, slug) {
+function page(j, slug, body) {
   var url = SITE + '/jobs/role/' + slug + '/';
   var where = j.region === 'Remote' ? 'Remote' + (j.location ? ' · ' + j.location : '') : (j.location || j.region);
   var title = j.title + ' at ' + j.company + ' — ' + where;
@@ -104,7 +125,7 @@ function page(j, slug) {
     '  <meta property="og:url" content="' + url + '">\n' +
     '  <meta property="og:image" content="' + SITE + '/assets/img/social/jobs.jpg">\n  <meta name="twitter:card" content="summary_large_image">\n' +
     '  <link rel="stylesheet" href="/assets/css/thh.css">\n' +
-    (j.excerpt && j.region !== 'Remote' ? '  <script type="application/ld+json">' + jsonLd(j, url) + '</script>\n' : '') +
+    (j.excerpt && j.region !== 'Remote' ? '  <script type="application/ld+json">' + jsonLd(j, url, body) + '</script>\n' : '') +
     '</head>\n<body>\n<a class="skip" href="#main">Skip to content</a>\n' +
     '<header class="masthead"><div class="wrap masthead-main"><a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>' +
     '<nav class="sitenav" aria-label="Site"><a href="/blog/daily/">Daily</a><a href="/jobs/" aria-current="page">Jobs</a><a href="/remote/">Remote</a><a href="/cv-pack/">CV Pack</a><a href="/blog/">Blog</a></nav></div></header>\n' +
@@ -113,9 +134,9 @@ function page(j, slug) {
     '  <h1>' + esc(j.title) + '</h1>\n' +
     '  <p class="lede">' + esc(j.company) + '</p>\n' +
     '  <p>' + meta.map(esc).join(' &middot; ') + '</p>\n' +
-    (j.excerpt ? '  <p>' + esc(j.excerpt) + '</p>\n' : '') +
+    (body ? '  <div class="role-body">' + body + '</div>\n' : j.excerpt ? '  <p>' + esc(j.excerpt) + '</p>\n' : '') +
     '  <p><a class="btn" href="' + esc(j.url) + '" target="_blank" rel="noopener nofollow">Apply on ' + esc(j.company) + '’s careers page</a></p>\n' +
-    '  <p style="font-size:14px">The full description and the application form are on ' + esc(j.company) + '’s own site. ' +
+    '  <p style="font-size:14px">' + (body ? 'Description as published by ' + esc(j.company) + ' on its own careers page. The application form is there. ' : 'The full description and the application form are on ' + esc(j.company) + '’s own site. ') +
     (j.region === 'Remote' ? 'Remote roles often limit which countries can apply: check the list of eligible countries there. ' : '') +
     'The Tech Hut does not take applications, and no employer pays to be listed here. Check the closing date there before you apply.</p>\n' +
     '</div></main>\n</body>\n</html>\n';
@@ -123,6 +144,8 @@ function page(j, slug) {
 
 function main() {
   var board = JSON.parse(fs.readFileSync(BOARD, 'utf8'));
+  var bodies = {};
+  try { bodies = JSON.parse(fs.readFileSync(BODIES, 'utf8')); } catch (e) { /* none: pages fall back to the excerpt */ }
   var rows = board.jobs.filter(function (j) {
     return !AGGREGATORS.test(j.id) && REGIONS[j.region] && j.title && j.company && /^https:\/\//.test(j.url || '');
   });
@@ -137,7 +160,7 @@ function main() {
     j.page = slug;   /* the list links here (jobs/index.html card) */
     var dir = path.join(OUT, slug);
     fs.mkdirSync(dir, { recursive: true });
-    fs.writeFileSync(path.join(dir, 'index.html'), page(j, slug));
+    fs.writeFileSync(path.join(dir, 'index.html'), page(j, slug, bodies[j.id] ? cleanBody(bodies[j.id], j.id) : ''));
     if (j.excerpt && j.region !== 'Remote') urls.push({ loc: SITE + '/jobs/role/' + slug + '/', lastmod: (j.date || board.updated).slice(0, 10) });
   });
   fs.writeFileSync(path.join(OUT, 'sitemap.xml'),

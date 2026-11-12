@@ -25,6 +25,9 @@ var F = require('../assets/js/jobs-feeds.js');
 
 var ROOT = path.join(__dirname, '..');
 var OUT = path.join(ROOT, 'data', 'jobs-board.json');
+// Full descriptions for the role pages (scripts/build_job_pages.js). Dot-prefixed
+// so firebase.json's "**/.*" keeps it off the site and .gitignore keeps it out of git.
+var BODIES = path.join(ROOT, '.job-bodies.json');
 var MIN_ROLES = 50;
 var KEEP = ['id', 'title', 'company', 'logo', 'location', 'where', 'types', 'cats', 'level', 'excerpt', 'url', 'date', 'source', 'region', '_tags'];
 
@@ -41,7 +44,10 @@ function slim(j) {
 async function main() {
   var t0 = Date.now();
   var jobs = await F.load({ timeoutMs: 25000, headers: { 'User-Agent': 'TheTechHutBot/1.0 (+https://thetechhut.co/jobs/)' } });
-  jobs = jobs.filter(function (j) { return j.title && /^https:\/\//.test(j.url || ''); }).map(slim);
+  jobs = jobs.filter(function (j) { return j.title && /^https:\/\//.test(j.url || ''); });
+  var bodies = {};
+  jobs.forEach(function (j) { if (j.body) bodies[j.id] = j.body; });
+  jobs = jobs.map(slim);
   var by = {};
   jobs.forEach(function (j) { by[j.source] = (by[j.source] || 0) + 1; });
   var silent = F.COMPANIES.map(function (c) { return c.name; }).filter(function (n) { return !by[n]; });
@@ -54,6 +60,7 @@ async function main() {
   var out = { updated: new Date().toISOString(), count: jobs.length, jobs: jobs };
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
   fs.writeFileSync(OUT, JSON.stringify(out));
+  fs.writeFileSync(BODIES, JSON.stringify(bodies));
   console.log('wrote %s (%d KB)', path.relative(ROOT, OUT), Math.round(fs.statSync(OUT).size / 1024));
 }
 

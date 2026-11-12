@@ -294,11 +294,18 @@
         logo: '',
         location: clean(j.location && j.location.name) || 'Not stated',
         types: [], cats: [catFromTitle(clean(j.title))], level: '', excerpt: clean(j.content, 190),
+        body: IN_BROWSER ? '' : (j.content || ''),    // full text for the role pages, built on the runner only
         url: safeUrl(j.absolute_url),
         date: j.updated_at || j.first_published || '',
         source: co.name
       };
     });
+  }
+  // Lever sends the intro, then named lists (responsibilities, requirements), then a closing note.
+  function leverBody(j) {
+    return [j.description || ''].concat((j.lists || []).map(function (l) {
+      return '<h3>' + (l.text || '') + '</h3><ul>' + (l.content || '') + '</ul>';
+    })).concat([j.additional || '']).join('');
   }
   function fromLever(arr, co) {
     return (Array.isArray(arr) ? arr : []).map(function (j) {
@@ -313,6 +320,7 @@
         types: c.commitment ? [clean(c.commitment)] : [],
         cats: [catFromTitle(clean(j.text))], level: '',
         excerpt: clean(j.descriptionPlain, 190),
+        body: IN_BROWSER ? '' : leverBody(j),
         url: safeUrl(j.hostedUrl),
         date: j.createdAt ? new Date(j.createdAt).toISOString() : '',
         source: co.name
@@ -333,6 +341,7 @@
         types: j.employmentType ? [clean(j.employmentType)] : [],
         cats: [catFromTitle(clean(j.title))], level: '',
         excerpt: clean(j.descriptionPlain, 190),
+        body: IN_BROWSER ? '' : (j.descriptionHtml || ''),
         url: safeUrl(j.jobUrl || j.applyUrl),
         date: j.publishedAt || j.updatedAt || '',
         source: co.name
