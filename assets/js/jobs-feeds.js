@@ -361,6 +361,7 @@
         cats: [catFromTitle(clean(j.title))],
         level: '',
         excerpt: clean(String(j.description || '').replace(/<[^>]*>/g, ' '), 190),
+        body: IN_BROWSER ? '' : String(j.description || ''),
         url: safeUrl(j.url),
         date: '',                       // Pinpoint's feed carries no posted date
         source: co.name
@@ -382,6 +383,8 @@
         types: j.typeOfEmployment && j.typeOfEmployment.label ? [clean(j.typeOfEmployment.label)] : [],
         cats: [catFromTitle(clean(j.name))], level: '',
         excerpt: '',
+        // the list has no text; build_jobs_board.js fetches this one posting for the role page
+        detail: IN_BROWSER ? '' : 'https://api.smartrecruiters.com/v1/companies/' + encodeURIComponent(slug) + '/postings/' + encodeURIComponent(j.id),
         url: safeUrl('https://jobs.smartrecruiters.com/' + encodeURIComponent(slug) + '/' + encodeURIComponent(j.id)),
         date: j.releasedDate || '',
         source: co.name
@@ -401,6 +404,7 @@
         types: j.employment_type ? [clean(j.employment_type)] : [],
         cats: [catFromTitle(clean(j.title))], level: '',
         excerpt: '',
+        detail: IN_BROWSER || !j.shortcode ? '' : 'https://apply.workable.com/api/v2/accounts/' + encodeURIComponent(co.slug) + '/jobs/' + encodeURIComponent(j.shortcode),
         url: safeUrl(j.url || j.shortlink),
         date: j.published_on || j.created_at || '',
         source: co.name
@@ -490,6 +494,7 @@
       types: info.timeType ? [clean(info.timeType)] : [],
       cats: [catFromTitle(title)], level: '',
       excerpt: clean(String(info.jobDescription || '').replace(/<[^>]*>/g, ' '), 190),
+      body: IN_BROWSER ? '' : String(info.jobDescription || ''),
       url: safeUrl(info.externalUrl || ('https://' + co.host + '/' + co.site + j.externalPath)),
       date: info.startDate || '',
       source: co.name

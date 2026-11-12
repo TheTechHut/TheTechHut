@@ -41,10 +41,42 @@ function slim(j) {
   return o;
 }
 
+// SmartRecruiters and Workable list their openings without any text. For the
+// roles that get a page (open to Kenya, remote or Africa) fetch the one posting
+// for its description, a few at a time. A posting that does not answer just keeps
+// no description: the page falls back to the title and the apply link.
+var PAGE_REGIONS = { Kenya: 1, Remote: 1, 'Rest of Africa': 1 };
+function detailBody(url, d) {
+  if (/smartrecruiters/.test(url)) {
+    var sec = (d && d.jobAd && d.jobAd.sections) || {};
+    return ['companyDescription', 'jobDescription', 'qualifications', 'additionalInformation']
+      .map(function (k) { return sec[k] && sec[k].text ? (sec[k].title ? '<h3>' + sec[k].title + '</h3>' : '') + sec[k].text : ''; }).join('');
+  }
+  return [d && d.description, d && d.requirements, d && d.benefits].filter(Boolean).join('');
+}
+async function addDetails(jobs) {
+  var todo = jobs.filter(function (j) { return j.detail && !j.body && PAGE_REGIONS[j.region]; });
+  var got = 0, next = 0;
+  async function worker() {
+    while (next < todo.length) {
+      var j = todo[next++];
+      try {
+        var r = await fetch(j.detail, { headers: { 'User-Agent': 'TheTechHutBot/1.0 (+https://thetechhut.co/jobs/)', Accept: 'application/json' }, signal: AbortSignal.timeout(15000) });
+        if (!r.ok) continue;
+        j.body = detailBody(j.detail, await r.json());
+        if (j.body) { j.excerpt = F.clean(j.body, 190); got++; }
+      } catch (e) { /* keep the role without a description */ }
+    }
+  }
+  await Promise.all([worker(), worker(), worker(), worker()]);
+  console.log('role descriptions fetched one by one: %d of %d', got, todo.length);
+}
+
 async function main() {
   var t0 = Date.now();
   var jobs = await F.load({ timeoutMs: 25000, headers: { 'User-Agent': 'TheTechHutBot/1.0 (+https://thetechhut.co/jobs/)' } });
   jobs = jobs.filter(function (j) { return j.title && /^https:\/\//.test(j.url || ''); });
+  await addDetails(jobs);
   var bodies = {};
   jobs.forEach(function (j) { if (j.body) bodies[j.id] = j.body; });
   jobs = jobs.map(slim);
