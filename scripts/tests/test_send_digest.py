@@ -186,5 +186,35 @@ class DailyAlert(unittest.TestCase):
         self.assertTrue(out['name'].startswith('Monday openings'))
 
 
+class WhatsAppPost(unittest.TestCase):
+    def build(self, n):
+        d = tempfile.mkdtemp()
+        today = datetime.date(2026, 10, 14)
+        roles = [role('https://e.co/%d' % i, 'Engineer %d' % i, 'Co%d' % i) for i in range(n)] + [role('https://abroad.co/1', 'Engineer X', 'AbroadCo', reach='', location='Berlin')]
+        for date, rs in (('2026-10-13', []), ('2026-10-14', roles)):
+            with open(os.path.join(d, date + '.json'), 'w') as fh:
+                json.dump({'date': date, 'count': len(rs), 'failures': [], 'roles': rs}, fh)
+        return sd.build_digest(d, today=today, daily=True)
+
+    def test_post_is_whatsapp_text_with_links_and_a_cap(self):
+        t = self.build(30)['whatsapp']
+        self.assertTrue(t.startswith('*30 new tech openings today* (Wed 14 Oct)'))
+        self.assertEqual(t.count('https://e.co/'), sd.WHATSAPP_PER_FAMILY)
+        self.assertIn('+ 26 more on the jobs board', t)
+        self.assertIn('https://thetechhut.co/jobs/daily/', t)
+        self.assertNotIn('<', t)
+        self.assertNotIn('abroad.co', t)   # roles outside Kenya stay out of the Channel post
+
+    def test_no_post_on_a_day_without_kenyan_roles(self):
+        self.assertEqual(self.build(0)['whatsapp'], '')
+
+    def test_weekly_digest_has_no_whatsapp_post(self):
+        d = tempfile.mkdtemp()
+        for date, rs in (('2026-10-06', []), ('2026-10-13', [role('u2')])):
+            with open(os.path.join(d, date + '.json'), 'w') as fh:
+                json.dump({'date': date, 'count': len(rs), 'failures': [], 'roles': rs}, fh)
+        self.assertEqual(sd.build_digest(d)['whatsapp'], '')
+
+
 if __name__ == '__main__':
     unittest.main()

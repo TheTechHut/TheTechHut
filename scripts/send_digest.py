@@ -304,6 +304,41 @@ def render_email(*, kicker, headline, intro, sections, remote, why, preheader, l
     }
 
 
+WHATSAPP_PER_FAMILY = 4   # a channel post is read on a phone: short, with the rest one link away
+WHATSAPP_OVERALL_CAP = 12
+
+
+def whatsapp_post(roles, latest, checklist):
+    """The day's new roles as one WhatsApp Channel post. WhatsApp has no way to post to a
+    Channel from software, so this is text for a person to paste into the Channel.
+    Kenya-based roles only; an empty post means nothing to share today. *bold* is WhatsApp's own markup; links on their own line get a preview."""
+    roles = [r for r in roles if r.get('reach') == 'local']   # the Channel is for Kenyans: Kenya-based roles only
+    if not roles:
+        return ''
+    n = len(roles)
+    out = ['*%d new tech opening%s today* (%s)' % (n, '' if n == 1 else 's', latest.strftime('%a %-d %b')), '']
+    shown = 0
+    for f in FAMILY_ORDER:
+        rows = [r for r in roles if family_of(r.get('title')) == f]
+        rows = rows[:WHATSAPP_PER_FAMILY]
+        if not rows or shown >= WHATSAPP_OVERALL_CAP:
+            continue
+        out.append('*%s*' % checklist['families'][f]['label'])
+        for r in rows:
+            if shown >= WHATSAPP_OVERALL_CAP:
+                break
+            shown += 1
+            loc = r.get('location') or 'Location not listed'
+            out.append('%s - %s, %s' % ((r.get('title') or '').strip(), (r.get('company') or '').strip(), loc))
+            out.append(r['url'])
+        out.append('')
+    if n > shown:
+        out.append('+ %d more on the jobs board' % (n - shown))
+    out.append('All roles: %s/jobs/' % SITE)
+    out.append('One email a day with new roles: %s/jobs/daily/' % SITE)
+    return '\n'.join(out)
+
+
 def build_digest(snaps_dir, today=None, checklist=None, daily=False):
     checklist = checklist or load_checklist()
     latest, baseline, roles = find_new_roles(snaps_dir, today, daily)
@@ -376,6 +411,7 @@ def build_digest(snaps_dir, today=None, checklist=None, daily=False):
         'subject': subject, 'html': body, 'count': n, 'employers': employers,
         'week': week_label, 'name': ('Daily openings ' + latest.isoformat()) if daily else ('Monday openings ' + week_label),
         'latest': latest, 'baseline': baseline,
+        'whatsapp': whatsapp_post(roles, latest, checklist) if daily else '',
     }
 
 
@@ -394,6 +430,23 @@ def brevo(path, key, method='GET', payload=None):
             return e.code, json.loads(raw)
         except ValueError:
             return e.code, {'message': raw[:300]}
+
+
+def send_whatsapp_post(d, key, sender):
+    """Email the Channel post to WHATSAPP_POST_EMAIL so it can be pasted into the Channel from a
+    phone. Runs only after the campaign went out, so a day is never posted twice; a failure here
+    is reported but does not fail the alert, which has already been sent."""
+    to = os.environ.get('WHATSAPP_POST_EMAIL', '').strip()
+    if not (to and d.get('whatsapp')):
+        return
+    print('\n--- WhatsApp Channel post ---\n%s\n--- end ---' % d['whatsapp'])
+    status, body = brevo('/smtp/email', key, 'POST', {
+        'sender': sender, 'to': [{'email': to}],
+        'subject': 'WhatsApp post for today: %d new role%s' % (d['count'], '' if d['count'] == 1 else 's'),
+        'textContent': d['whatsapp'],
+        'htmlContent': '<pre style="white-space:pre-wrap;font:15px/1.5 sans-serif">%s</pre>' % esc(d['whatsapp']),
+        'tags': ['whatsapp-post']})
+    print('digest: WhatsApp post', 'emailed to ' + to if status < 300 else 'NOT emailed: %s %s' % (status, body), file=sys.stderr if status >= 300 else sys.stdout)
 
 
 def main(argv=None):
@@ -417,6 +470,8 @@ def main(argv=None):
         with open(a.out, 'w', encoding='utf-8') as fh:
             fh.write(d['html'].replace('{{ unsubscribe }}', '#'))
         print('digest: preview written to', a.out)
+        if d['whatsapp']:
+            print('\n--- WhatsApp Channel post ---\n%s\n--- end ---' % d['whatsapp'])
         return 0
     if d['count'] == 0 and not a.force:
         print('digest: no new roles, nothing sent')
@@ -456,6 +511,7 @@ def main(argv=None):
         print('digest: campaign %d created but sendNow failed: %s %s' % (body['id'], status, body2), file=sys.stderr)
         return 1
     print('digest: campaign %d sent' % body['id'])
+    send_whatsapp_post(d, key, sender)
     return 0
 
 

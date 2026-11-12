@@ -11,6 +11,7 @@
 #   BREVO_LIST_ID_JOBS   numeric id of the daily jobs list (the same one the Worker uses)
 #   BREVO_SENDER_EMAIL   a sender verified in Brevo
 #   BREVO_SENDER_NAME    optional
+#   WHATSAPP_POST_EMAIL  optional; where the day's WhatsApp Channel post is emailed, ready to paste
 #
 # Try it safely first: Actions -> Daily job alert -> Run workflow, and fill in
 # "test_email" to get ONE copy, or tick "dry_run" to see it in the log.
@@ -60,6 +61,7 @@ jobs:
           BREVO_LIST_ID_JOBS: ${{ secrets.BREVO_LIST_ID_JOBS }}
           BREVO_SENDER_EMAIL: ${{ secrets.BREVO_SENDER_EMAIL }}
           BREVO_SENDER_NAME: ${{ secrets.BREVO_SENDER_NAME }}
+          WHATSAPP_POST_EMAIL: ${{ secrets.WHATSAPP_POST_EMAIL }}
           TEST_EMAIL: ${{ github.event.inputs.test_email }}
           DRY_RUN: ${{ github.event.inputs.dry_run }}
         run: |
