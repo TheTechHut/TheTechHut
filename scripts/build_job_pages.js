@@ -169,7 +169,7 @@ async function main() {
     fs.mkdirSync(dir, { recursive: true });
     var indexable = j.excerpt && j.region !== 'Remote';
     var hasCard = false;
-    if (drawCard && indexable) {   // a card only helps a page people will share and search engines will show
+    if (drawCard) {   // every role page gets one: noindex pages are still shared from the list
       try {
         fs.writeFileSync(path.join(dir, 'card.png'), await drawCard({
           title: j.title, company: j.company, tag: REGION_TAG[j.region], where: (j.location || '').replace(/\s*;\s*/g, ' \u00b7 ')
