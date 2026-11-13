@@ -505,3 +505,41 @@ class AshbySecondaryLocations(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class FirstSeen(unittest.TestCase):
+    """Undated roles keep the day they first appeared, even after pruning."""
+
+    def setUp(self):
+        self.tmp = tempfile.mkdtemp()
+        self.snaps = os.path.join(self.tmp, 'snapshots')
+        os.makedirs(self.snaps)
+        self.path = os.path.join(self.tmp, 'first-seen.json')
+
+    def snap(self, day, roles):
+        with open(os.path.join(self.snaps, day + '.json'), 'w') as fh:
+            json.dump({'date': day, 'roles': roles}, fh)
+
+    def run_(self, roles, today):
+        return fj.update_first_seen(roles, today, path=self.path, snaps_dir=self.snaps)
+
+    def test_seeds_from_existing_snapshots_and_skips_dated_roles(self):
+        self.snap('2026-10-08', [{'url': 'https://a/1', 'posted': ''}])
+        self.snap('2026-10-09', [{'url': 'https://a/1', 'posted': ''}, {'url': 'https://a/2', 'posted': ''},
+                                 {'url': 'https://a/3', 'posted': '2026-10-01'}])
+        seen = self.run_([{'url': 'https://a/2', 'posted': ''}], '2026-10-10')
+        self.assertEqual(seen, {'https://a/1': ['2026-10-08', '2026-10-09'],
+                                'https://a/2': ['2026-10-09', '2026-10-10']})
+
+    def test_first_date_survives_pruned_snapshots(self):
+        self.snap('2026-10-08', [{'url': 'https://a/1', 'posted': ''}])
+        self.run_([{'url': 'https://a/1', 'posted': ''}], '2026-10-09')
+        os.remove(os.path.join(self.snaps, '2026-10-08.json'))
+        seen = self.run_([{'url': 'https://a/1', 'posted': ''}, {'url': 'https://a/9', 'posted': ''}], '2026-11-30')
+        self.assertEqual(seen['https://a/1'], ['2026-10-08', '2026-11-30'])
+        self.assertEqual(seen['https://a/9'], ['2026-11-30', '2026-11-30'])
+
+    def test_drops_roles_gone_for_ninety_days(self):
+        self.run_([{'url': 'https://a/1', 'posted': ''}], '2026-01-01')
+        seen = self.run_([], '2026-04-15')
+        self.assertEqual(seen, {})

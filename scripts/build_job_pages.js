@@ -45,6 +45,7 @@ var cards = require('./job_card.js');
 var REGION_TAG = { Kenya: 'Kenya', Remote: 'Remote', 'Rest of Africa': 'Africa' };
 var MIN_PAGES = 20;
 var BODIES = path.join(ROOT, '.job-bodies.json');   // written by build_jobs_board.js
+var FIRST_SEEN = path.join(ROOT, 'data', 'first-seen.json');   // fetch_jobs_snapshot.py: url -> [first, last]
 var MAX_BODY = 20000;
 
 function esc(s) {
@@ -103,10 +104,17 @@ function countryOf(j) {
   var iso = /(?:^|[\s,])(ZA|NG|EG|GH|TZ|UG|RW|ET|MA|TN|BW|AO|ZM|ZW|SN|NA|DZ)(?=$|[\s,])/.exec(String(j.location || ''));
   return iso ? iso[1] : null;
 }
-// JobPosting needs datePosted: without a real publication date the page gets no
-// markup (null) rather than an invented one.
+// JobPosting needs datePosted. Feeds with no posting date (Pinpoint, so Sun
+// King) use the day the role first appeared in our snapshots (j.seen), which
+// the page also shows; with neither, the page gets no markup (null) rather
+// than an invented date.
+function postedOn(j) {
+  if (/^\d{4}-\d{2}-\d{2}/.test(j.date || '')) return j.date.slice(0, 10);
+  if (/^\d{4}-\d{2}-\d{2}$/.test(j.seen || '')) return j.seen;
+  return '';
+}
 function jsonLd(j, url, body) {
-  if (!/^\d{4}-\d{2}-\d{2}/.test(j.date || '')) return null;
+  if (!postedOn(j)) return null;
   var d = {
     '@context': 'https://schema.org',
     '@type': 'JobPosting',
@@ -117,7 +125,7 @@ function jsonLd(j, url, body) {
     url: url,
     directApply: false
   };
-  d.datePosted = j.date.slice(0, 10);
+  d.datePosted = postedOn(j);
   if (/^\d{4}-\d{2}-\d{2}$/.test(j.deadline || '')) d.validThrough = j.deadline;
   var et = employmentType(j.types);
   if (et) d.employmentType = et;
@@ -141,7 +149,8 @@ function page(j, slug, body, hasCard) {
   var image = hasCard ? url + 'card.png' : SITE + '/assets/img/social/jobs.jpg';
   var ld = j.excerpt && j.region !== 'Remote' ? jsonLd(j, url, body) : null;
   var posted = j.date ? new Date(j.date).toISOString().slice(0, 10) : '';
-  var meta = [where, (j.types || [])[0], posted && 'Posted ' + posted].filter(Boolean);
+  var listed = !posted && j.seen ? 'First listed here ' + j.seen : '';
+  var meta = [where, (j.types || [])[0], posted && 'Posted ' + posted, listed].filter(Boolean);
   return '<!DOCTYPE html>\n<html lang="en">\n<head>\n' +
     '  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n' +
     '  <title>' + esc(title) + ' | The Tech Hut</title>\n' +
@@ -175,6 +184,8 @@ async function main() {
   var board = JSON.parse(fs.readFileSync(BOARD, 'utf8'));
   var bodies = {};
   try { bodies = JSON.parse(fs.readFileSync(BODIES, 'utf8')); } catch (e) { /* none: pages fall back to the excerpt */ }
+  var firstSeen = {};
+  try { firstSeen = JSON.parse(fs.readFileSync(FIRST_SEEN, 'utf8')); } catch (e) { /* none: undated roles get no markup */ }
   var rows = board.jobs.filter(function (j) {
     return !AGGREGATORS.test(j.id) && REGIONS[j.region] && j.title && j.company && /^https:\/\//.test(j.url || '');
   });
@@ -190,6 +201,8 @@ async function main() {
     var j = rows[r];
     var slug = slugOf(j);
     j.page = slug;   /* the list links here (jobs/index.html card) */
+    var seen = !j.date && firstSeen[j.url];
+    var pageJob = seen ? Object.assign({}, j, { seen: seen[0] }) : j;   // seen stays out of jobs-board.json
     var dir = path.join(OUT, slug);
     fs.mkdirSync(dir, { recursive: true });
     var indexable = j.excerpt && j.region !== 'Remote';
@@ -202,8 +215,8 @@ async function main() {
         hasCard = true;
       } catch (e) { console.error('job pages: no card for %s: %s', slug, e.message); }
     }
-    fs.writeFileSync(path.join(dir, 'index.html'), page(j, slug, bodies[j.id] ? cleanBody(bodies[j.id], j.id) : '', hasCard));
-    if (indexable) urls.push({ loc: SITE + '/jobs/role/' + slug + '/', lastmod: (j.date || board.updated).slice(0, 10) });
+    fs.writeFileSync(path.join(dir, 'index.html'), page(pageJob, slug, bodies[j.id] ? cleanBody(bodies[j.id], j.id) : '', hasCard));
+    if (indexable) urls.push({ loc: SITE + '/jobs/role/' + slug + '/', lastmod: (postedOn(pageJob) || board.updated).slice(0, 10) });
   }
   fs.writeFileSync(path.join(OUT, 'sitemap.xml'),
     '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +

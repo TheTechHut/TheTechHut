@@ -594,6 +594,59 @@ def fetch_careers_sources(registry=None, fetch=None, sleep=time.sleep, today=Non
     return rows, notes
 
 
+FIRST_SEEN_KEEP_DAYS = 90
+
+
+def update_first_seen(snapshot, today, path=None, snaps_dir=None):
+    """Remember the day each undated role first appeared, by URL.
+
+    Some feeds (Pinpoint, so Sun King) send no posting date, and Google drops
+    JobPosting markup that has no datePosted. The first day a role turns up in
+    a snapshot is the closest true date we have. Raw snapshots are pruned after
+    SNAPSHOT_DAYS, so the date is kept here instead, where pruning cannot move
+    it forward. Each entry is [first, last]; a role not seen for
+    FIRST_SEEN_KEEP_DAYS is dropped. The first run seeds the file from the
+    snapshots already on disk.
+    """
+    path = path or os.path.join(DATA, 'first-seen.json')
+    snaps_dir = snaps_dir or SNAPS
+    try:
+        with open(path) as fh:
+            seen = json.load(fh)
+    except (OSError, ValueError):
+        seen = {}
+        names = sorted(n for n in os.listdir(snaps_dir) if re.match(r'^\d{4}-\d{2}-\d{2}\.json$', n)) \
+            if os.path.isdir(snaps_dir) else []
+        for name in names:
+            if name[:10] >= today:
+                continue
+            try:
+                with open(os.path.join(snaps_dir, name)) as fh:
+                    old = json.load(fh).get('roles', [])
+            except (OSError, ValueError):
+                continue
+            _mark_seen(seen, old, name[:10])
+    _mark_seen(seen, snapshot, today)
+    cutoff = (datetime.date.fromisoformat(today) - datetime.timedelta(days=FIRST_SEEN_KEEP_DAYS)).isoformat()
+    seen = {u: v for u, v in seen.items() if v[1] >= cutoff}
+    with open(path, 'w') as fh:
+        json.dump(seen, fh, separators=(',', ':'), sort_keys=True)
+    return seen
+
+
+def _mark_seen(seen, roles, day):
+    for r in roles:
+        url = r.get('url')
+        if not url or r.get('posted'):
+            continue
+        slot = seen.get(url)
+        if slot is None:
+            seen[url] = [day, day]
+        else:
+            slot[0] = min(slot[0], day)
+            slot[1] = max(slot[1], day)
+
+
 def main():
     today = datetime.date.today().isoformat()
     os.makedirs(SNAPS, exist_ok=True)
@@ -657,6 +710,7 @@ def main():
     with open(os.path.join(SNAPS, today + '.json'), 'w') as fh:
         json.dump({'date': today, 'count': len(snapshot), 'failures': failures,
                    'notes': notes, 'roles': snapshot}, fh, separators=(',', ':'))
+    update_first_seen(snapshot, today)
 
     # ---- the product: public summary + token-gated full list ------------
     by_co = {}
