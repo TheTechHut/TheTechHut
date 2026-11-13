@@ -35,7 +35,7 @@
   /* 2. Hero ---------------------------------------------------------------- */
   var hero = document.querySelector('.front, header.hero, .pagehead, .art-hero');
   function heroIn() {
-    if (!hero) { M.reveal(); return; }
+    if (!hero || M.heroMotion === false) { M.reveal(); return; }   // phones: hero stays as painted (see motion.js)
     var h1 = hero.querySelector('h1');
     var lead = $$('.eyebrow, .pill, .cat', hero).slice(0, 1);
     var after = $$('.lede, .cta-row, .cta-note, .by', hero);

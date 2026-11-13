@@ -8,6 +8,11 @@
  *   /assets/js/motion-run.js (the effects themselves)
  * The libraries are self-hosted in /assets/vendor/ (versions in the file names).
  *
+ * Phones get no hero entrance: the hero text is what Google measures as the
+ * Largest Contentful Paint, and hiding it until ~150 KB of scripts and the web
+ * fonts arrive pushed LCP on /jobs/ past 2.5 s on mobile (Search Console,
+ * Nov 2026). On phones the hero is never hidden; scroll reveals still run.
+ *
  * No motion when the visitor asks for less (prefers-reduced-motion), on the
  * game player, or on any page with <html data-no-motion>. If anything fails
  * to load, the hero is shown again after 2.5 seconds, so nothing stays hidden.
@@ -40,14 +45,15 @@
     '#tth-progress{position:fixed;left:0;top:0;height:3px;width:100%;background:var(--mint,#06D6A0);transform:scaleX(0);transform-origin:0 50%;z-index:100;pointer-events:none}' +
     '.m-shine{background:linear-gradient(100deg,currentColor 0%,currentColor 40%,var(--mint,#06D6A0) 50%,currentColor 60%,currentColor 100%);background-size:250% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}';
   document.head.appendChild(css);
-  d.classList.add('motion-pending');
+  var heroMotion = !!matchMedia('(min-width: 768px) and (pointer: fine)').matches;
+  if (heroMotion) d.classList.add('motion-pending');
   var reveal = function () { d.classList.remove('motion-pending'); };
   var safety = setTimeout(reveal, 2500);
-  window.TTHMotion = { reveal: function () { clearTimeout(safety); reveal(); } };
+  window.TTHMotion = { heroMotion: heroMotion, reveal: function () { clearTimeout(safety); reveal(); } };
 
   var V = '/assets/vendor/';
   var files = [V + 'gsap-3.15.0/gsap.min.js', V + 'gsap-3.15.0/ScrollTrigger.min.js', V + 'gsap-3.15.0/SplitText.min.js',
-               V + 'lenis-1.3.27/lenis.min.js', '/assets/js/motion-run.js?v=1'];
+               V + 'lenis-1.3.27/lenis.min.js', '/assets/js/motion-run.js?v=2'];
   files.forEach(function (src) {
     var s = document.createElement('script');
     s.src = src; s.async = false;                  // keep order, don't block the page
