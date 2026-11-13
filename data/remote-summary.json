@@ -1,9 +1,9 @@
 {
- "updated": "2026-11-12",
- "company_count": 52,
- "role_count": 490,
- "local_role_count": 231,
- "roles_scanned": 3796,
+ "updated": "2026-11-13",
+ "company_count": 55,
+ "role_count": 492,
+ "local_role_count": 230,
+ "roles_scanned": 3771,
  "sources": [
   "Himalayas",
   "Jobicy"
@@ -26,8 +26,8 @@
   {
    "company": "micro1",
    "platform": "himalayas",
-   "eligible": 65,
-   "total": 65,
+   "eligible": 66,
+   "total": 66,
    "locations": [
     "Worldwide"
    ]
@@ -35,22 +35,13 @@
   {
    "company": "Supabase",
    "platform": "ashby",
-   "eligible": 49,
-   "total": 79,
+   "eligible": 51,
+   "total": 80,
    "locations": [
     "Remote, Global",
     "Remote, EMEA",
     "Remote, EMEA; Europe",
     "Anywhere"
-   ]
-  },
-  {
-   "company": "Hivex",
-   "platform": "himalayas",
-   "eligible": 14,
-   "total": 14,
-   "locations": [
-    "Worldwide"
    ]
   },
   {
@@ -66,7 +57,7 @@
    "company": "Oyster",
    "platform": "ashby",
    "eligible": 10,
-   "total": 22,
+   "total": 23,
    "locations": [
     "EMEA; Romania; Bulgaria; Portugal; Canada; United Kingdom; Spain; Poland",
     "EMEA; Romania; Hungary; Bulgaria; Ireland; Slovakia; United Kingdom; Poland; Estonia; South Africa; Greece",
@@ -74,6 +65,15 @@
     "EMEA; Ireland; Portugal; United Kingdom; Spain; Brazil; Canada",
     "EMEA; Toronto; Ireland; Portugal; United Kingdom; Spain",
     "Global; Portugal; Spain; Brazil; Colombia; Canada"
+   ]
+  },
+  {
+   "company": "Hivex",
+   "platform": "himalayas",
+   "eligible": 9,
+   "total": 9,
+   "locations": [
+    "Worldwide"
    ]
   },
   {
@@ -89,7 +89,7 @@
    "company": "ConsenSys",
    "platform": "greenhouse",
    "eligible": 8,
-   "total": 11,
+   "total": 12,
    "locations": [
     "EMEA - Remote, United States - Remote",
     "UNITED STATES - Remote, EMEA - Remote, LATAM - Remote",
@@ -183,6 +183,15 @@
    ]
   },
   {
+   "company": "Keepgo",
+   "platform": "himalayas",
+   "eligible": 2,
+   "total": 2,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
    "company": "ASG Company",
    "platform": "himalayas",
    "eligible": 2,
@@ -249,7 +258,7 @@
    "company": "Cockroach Labs",
    "platform": "greenhouse",
    "eligible": 1,
-   "total": 12,
+   "total": 13,
    "locations": [
     "Global"
    ]
@@ -279,6 +288,15 @@
    "total": 27,
    "locations": [
     "Global"
+   ]
+  },
+  {
+   "company": "TECDATA ENGINEERING",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
    ]
   },
   {
@@ -417,6 +435,24 @@
    ]
   },
   {
+   "company": "Kayzen",
+   "platform": "jobicy",
+   "eligible": 1,
+   "total": 3,
+   "locations": [
+    "EMEA"
+   ]
+  },
+  {
+   "company": "Spotify",
+   "platform": "jobicy",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "EMEA"
+   ]
+  },
+  {
    "company": "Softgic",
    "platform": "jobicy",
    "eligible": 1,
@@ -481,15 +517,6 @@
   },
   {
    "company": "RelationalAI",
-   "platform": "jobicy",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Anywhere"
-   ]
-  },
-  {
-   "company": "Carrot",
    "platform": "jobicy",
    "eligible": 1,
    "total": 1,
