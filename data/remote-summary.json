@@ -1,9 +1,9 @@
 {
- "updated": "2026-11-13",
- "company_count": 55,
- "role_count": 492,
- "local_role_count": 230,
- "roles_scanned": 3771,
+ "updated": "2026-11-14",
+ "company_count": 52,
+ "role_count": 486,
+ "local_role_count": 229,
+ "roles_scanned": 3728,
  "sources": [
   "Himalayas",
   "Jobicy"
@@ -35,8 +35,8 @@
   {
    "company": "Supabase",
    "platform": "ashby",
-   "eligible": 51,
-   "total": 80,
+   "eligible": 49,
+   "total": 78,
    "locations": [
     "Remote, Global",
     "Remote, EMEA",
@@ -54,24 +54,10 @@
    ]
   },
   {
-   "company": "Oyster",
-   "platform": "ashby",
-   "eligible": 10,
-   "total": 23,
-   "locations": [
-    "EMEA; Romania; Bulgaria; Portugal; Canada; United Kingdom; Spain; Poland",
-    "EMEA; Romania; Hungary; Bulgaria; Ireland; Slovakia; United Kingdom; Poland; Estonia; South Africa; Greece",
-    "EMEA; Romania; Hungary; Netherlands; Portugal; Slovakia; Spain; Poland; South Africa; Greece",
-    "EMEA; Ireland; Portugal; United Kingdom; Spain; Brazil; Canada",
-    "EMEA; Toronto; Ireland; Portugal; United Kingdom; Spain",
-    "Global; Portugal; Spain; Brazil; Colombia; Canada"
-   ]
-  },
-  {
-   "company": "Hivex",
+   "company": "Xperteez Technology",
    "platform": "himalayas",
-   "eligible": 9,
-   "total": 9,
+   "eligible": 10,
+   "total": 10,
    "locations": [
     "Worldwide"
    ]
@@ -100,7 +86,21 @@
    ]
   },
   {
-   "company": "Xperteez Technology",
+   "company": "Oyster",
+   "platform": "ashby",
+   "eligible": 8,
+   "total": 21,
+   "locations": [
+    "EMEA; Romania; Bulgaria; Portugal; Canada; United Kingdom; Spain; Poland",
+    "EMEA; Romania; Hungary; Bulgaria; Ireland; Slovakia; United Kingdom; Poland; Estonia; South Africa; Greece",
+    "EMEA; Romania; Hungary; Netherlands; Portugal; Slovakia; Spain; Poland; South Africa; Greece",
+    "EMEA; Ireland; Portugal; United Kingdom; Spain; Brazil; Canada",
+    "EMEA; Toronto; Ireland; Portugal; United Kingdom; Spain",
+    "Global; Portugal; Spain; Brazil; Colombia; Canada"
+   ]
+  },
+  {
+   "company": "TELUS Digital",
    "platform": "himalayas",
    "eligible": 8,
    "total": 8,
@@ -109,10 +109,10 @@
    ]
   },
   {
-   "company": "TELUS Digital",
+   "company": "Hivex",
    "platform": "himalayas",
-   "eligible": 8,
-   "total": 8,
+   "eligible": 7,
+   "total": 7,
    "locations": [
     "Worldwide"
    ]
@@ -139,7 +139,7 @@
    "company": "Zapier",
    "platform": "ashby",
    "eligible": 3,
-   "total": 9,
+   "total": 10,
    "locations": [
     "NAMER; India; European Union; EMEA",
     "NAMER; EMEA"
@@ -167,7 +167,7 @@
    "company": "Turing",
    "platform": "greenhouse",
    "eligible": 2,
-   "total": 49,
+   "total": 48,
    "locations": [
     "Global - Remote",
     "Global - Remote; United States"
@@ -177,13 +177,13 @@
    "company": "Sun King",
    "platform": "pinpoint",
    "eligible": 2,
-   "total": 202,
+   "total": 186,
    "locations": [
     "Global"
    ]
   },
   {
-   "company": "Keepgo",
+   "company": "Clera",
    "platform": "himalayas",
    "eligible": 2,
    "total": 2,
@@ -201,6 +201,15 @@
    ]
   },
   {
+   "company": "Keepgo",
+   "platform": "himalayas",
+   "eligible": 2,
+   "total": 2,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
    "company": "RustLabs",
    "platform": "himalayas",
    "eligible": 2,
@@ -210,16 +219,17 @@
    ]
   },
   {
-   "company": "Nordic Investin Group",
+   "company": "Flex",
    "platform": "himalayas",
    "eligible": 2,
    "total": 2,
    "locations": [
-    "Worldwide"
+    "Worldwide",
+    "Anywhere"
    ]
   },
   {
-   "company": "Clera",
+   "company": "Nordic Investin Group",
    "platform": "himalayas",
    "eligible": 2,
    "total": 2,
@@ -291,6 +301,24 @@
    ]
   },
   {
+   "company": "Tugi Tark",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "EVB",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
    "company": "TECDATA ENGINEERING",
    "platform": "himalayas",
    "eligible": 1,
@@ -337,15 +365,6 @@
   },
   {
    "company": "Kreative Media",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Flex",
    "platform": "himalayas",
    "eligible": 1,
    "total": 1,
@@ -471,52 +490,7 @@
    ]
   },
   {
-   "company": "Orkes",
-   "platform": "jobicy",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "EMEA,  Australia"
-   ]
-  },
-  {
    "company": "Language Services Associates",
-   "platform": "jobicy",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Anywhere"
-   ]
-  },
-  {
-   "company": "Notabene",
-   "platform": "jobicy",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "EMEA"
-   ]
-  },
-  {
-   "company": "Stripe",
-   "platform": "jobicy",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "EMEA,  Canada,  USA"
-   ]
-  },
-  {
-   "company": "DuckDuckGo",
-   "platform": "jobicy",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Anywhere"
-   ]
-  },
-  {
-   "company": "RelationalAI",
    "platform": "jobicy",
    "eligible": 1,
    "total": 1,
