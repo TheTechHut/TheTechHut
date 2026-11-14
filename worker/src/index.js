@@ -59,12 +59,14 @@
 import { handleNewsletter, newsletterConfigured } from './newsletter.js';
 import { handleGames } from './games.js';
 import { handleMarket, settle as settleMarket } from './market.js';
+import { handleEvents } from './events.js';
 import { LIMITS, guard, turnstileOk, emailDomainOk, sha256Hex } from './payguard.js';
 
 // Durable Object classes must be exported from the entry module.
 export { GameStats } from './games.js';
 export { PayGuard } from './payguard.js';
 export { Market } from './market.js';
+export { Events } from './events.js';
 
 const PAYSTACK = 'https://api.paystack.co';
 const SITE = 'https://thetechhut.co';
@@ -444,7 +446,7 @@ export default {
     const origin = req.headers.get('Origin') || '';
 
     if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors(origin) });
-    if (url.pathname === '/health') return json({ ok: true, products: Object.keys(PRODUCTS), checkoutGuard: !!env.PAY_GUARD, turnstile: !!env.TURNSTILE_SECRET, newsletter: newsletterConfigured(env), newsletterDaily: newsletterConfigured(env, 'daily'), newsletterJobs: newsletterConfigured(env, 'jobs'), market: !!(env.MARKET && env.MARKET_SECRET) }, 200, origin);
+    if (url.pathname === '/health') return json({ ok: true, products: Object.keys(PRODUCTS), checkoutGuard: !!env.PAY_GUARD, turnstile: !!env.TURNSTILE_SECRET, newsletter: newsletterConfigured(env), newsletterDaily: newsletterConfigured(env, 'daily'), newsletterJobs: newsletterConfigured(env, 'jobs'), market: !!(env.MARKET && env.MARKET_SECRET), events: !!(env.EVENTS && env.MARKET_SECRET) }, 200, origin);
 
     // The CV Pack signup does not touch Paystack, so it must not depend on the
     // Paystack key being set.
@@ -460,6 +462,14 @@ export default {
         (req.method === 'GET' && url.pathname === '/games/board')) {
       try {
         return await handleGames(req, env, url, origin, { json, allowedOrigins: ALLOWED_ORIGINS });
+      } catch (e) {
+        return json({ error: 'server error' }, 500, origin);
+      }
+    }
+    // Community events: the list on /events/, Luma + posted. See events.js.
+    if (url.pathname.startsWith('/events/')) {
+      try {
+        return await handleEvents(req, env, url, origin, { json, cors, allowedOrigins: ALLOWED_ORIGINS });
       } catch (e) {
         return json({ error: 'server error' }, 500, origin);
       }

@@ -473,3 +473,34 @@ any server. Source and key live in `private/` (git-ignored). To update the list,
 export the Notion page as Markdown to `private/communities-export.md` and run
 `node scripts/build_communities.mjs`. To retire a leaked link, run it with
 `--new-key`, set the new link as `COMMUNITIES_URL`, and email buyers.
+
+## Events page (`/events/`)
+
+`src/events.js` serves the list on thetechhut.co/events/ from two places:
+
+- **Luma.** Events hosted by luma.com/user/TheTechHut, read from Luma's public
+  profile API (no key) and cached for 6 hours. A new Luma event shows up on the
+  page by itself within that time. If Luma is down, the last copy is served.
+- **Posted on the page.** Use "Organiser sign-in" in the page footer. A sign-in
+  link is emailed (works once, 20 minutes); then "+ Add an event" appears, with
+  Edit on events posted this way. Only admin addresses are ever sent a link.
+
+### Setup
+
+1. `npx wrangler deploy` (creates the `EVENTS` Durable Object, migration `v4`).
+2. `MARKET_SECRET` must be set (shared with the prompt marketplace; it signs
+   the links and sessions). Brevo must be configured for the sign-in email.
+3. Admins default to `info@thetechhut.co`. To change, set the `EVENTS_ADMINS`
+   var to a comma-separated list of emails.
+
+`/health` reports `"events": true` when it is on.
+
+### Things worth knowing
+
+- A posted event whose registration link matches a Luma event replaces the Luma
+  copy, so a Luma event can be given a description, price or different poster.
+- The poster is a link to an image (https), not an upload. On Luma, right-click
+  the event cover and copy the image address.
+- Times are entered and shown in Nairobi time.
+- The public list is cached for 5 minutes, so visitors may see a new event a
+  few minutes after it is published.

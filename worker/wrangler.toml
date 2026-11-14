@@ -60,6 +60,15 @@ class_name = "Market"
 tag = "v3"
 new_sqlite_classes = ["Market"]
 
+# Community events on /events/: the Luma cache and posted events (src/events.js).
+[[durable_objects.bindings]]
+name = "EVENTS"
+class_name = "Events"
+
+[[migrations]]
+tag = "v4"
+new_sqlite_classes = ["Events"]
+
 # Sign in with Google on the games arcade (optional). Paste the OAuth web
 # client id here, put the same id in GOOGLE_CLIENT_ID at the top of
 # assets/js/games-arcade.js, and set the secret: wrangler secret put GAMES_SECRET

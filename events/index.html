@@ -1,294 +1,337 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events — meetups, build nights and masterclasses | The Tech Hut</title>
+  <meta name="description" content="Meetups, build nights and masterclasses for people building tech careers in Kenya. Hosted by The Tech Hut community, online and in Nairobi.">
+  <link rel="canonical" href="https://thetechhut.co/events/">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/Logo.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/Logo.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="The Tech Hut">
+  <meta property="og:title" content="Events — The Tech Hut">
+  <meta property="og:description" content="Meetups, build nights and masterclasses for people building tech careers in Kenya. Online and in Nairobi.">
+  <meta property="og:url" content="https://thetechhut.co/events/">
+  <meta property="og:image" content="https://thetechhut.co/assets/img/social/home.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://thetechhut.co/assets/img/social/home.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/thh.css">
+  <script src="/assets/js/motion.js?v=1"></script>
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/pw/AP1GczMvA6poKtPsVOqEpI69CBxzkMKb-C6YH-_8xx4dnChgKRp1kdxv-tpCkfLRmuAQ8uViYfOe8ApruVcddTcuN7YB0P0Y8vzlT6_yJXrIK70giQ4_pp1ExCsePBAkLZOcA4aORRDErShRduiig5a0VeaV=w500-h500-s-no-gm?authuser=0" />
-    <meta property="og:image" content="https://lh3.googleusercontent.com/pw/AP1GczMvA6poKtPsVOqEpI69CBxzkMKb-C6YH-_8xx4dnChgKRp1kdxv-tpCkfLRmuAQ8uViYfOe8ApruVcddTcuN7YB0P0Y8vzlT6_yJXrIK70giQ4_pp1ExCsePBAkLZOcA4aORRDErShRduiig5a0VeaV=w500-h500-s-no-gm?authuser=0" name="image">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:title" content="The Tech Hut">
-    <meta property="og:description"
-        content="Your company's go to place for digital transformation and tech talent. The Tech Hut is a leading Ed Tech and Talent Sourcing company based in Kenya.">
-    <meta property="og:url" content="https://thetechhut.co/">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="The Tech Hut">
-    <meta property="og:locale" content="en_US">
-    <meta property="og:locale:alternate" content="en_GB">
-    <meta property="og:image:secure_url"
-        content="https://lh3.googleusercontent.com/pw/AP1GczMvA6poKtPsVOqEpI69CBxzkMKb-C6YH-_8xx4dnChgKRp1kdxv-tpCkfLRmuAQ8uViYfOe8ApruVcddTcuN7YB0P0Y8vzlT6_yJXrIK70giQ4_pp1ExCsePBAkLZOcA4aORRDErShRduiig5a0VeaV=w500-h500-s-no-gm?authuser=0">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:alt" content="The Tech Hut">
-
-    <!-- Twitter meta tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@Ekiprop_kimutai">
-    <meta name="twitter:creator" content="@Ekiprop_kimutai">
-    <meta name="twitter:title" content="The Tech Hut">
-    <meta name="twitter:description"
-        content="Your company's go to place for digital transformation and tech talent. The Tech Hut is a leading Ed Tech and Talent Sourcing company based in Kenya.">
-    <meta name="twitter:image"
-        content="https://lh3.googleusercontent.com/pw/AP1GczMvA6poKtPsVOqEpI69CBxzkMKb-C6YH-_8xx4dnChgKRp1kdxv-tpCkfLRmuAQ8uViYfOe8ApruVcddTcuN7YB0P0Y8vzlT6_yJXrIK70giQ4_pp1ExCsePBAkLZOcA4aORRDErShRduiig5a0VeaV=w500-h500-s-no-gm?authuser=0">
-    <meta name="twitter:image:alt" content="The Tech Hut">
-
-    <!-- Whatsapp meta tags-->
-    <meta property="og:site_name" content="The Tech Hut">
-    <meta property="og:title" content="The Tech Hut">
-    <meta property="og:description"
-        content="Your company's go to place for digital transformation and tech talent. The Tech Hut is a leading Ed Tech and Talent Sourcing company based in Kenya.">
-    <meta property="og:image"
-        content="https://lh3.googleusercontent.com/pw/AP1GczMvA6poKtPsVOqEpI69CBxzkMKb-C6YH-_8xx4dnChgKRp1kdxv-tpCkfLRmuAQ8uViYfOe8ApruVcddTcuN7YB0P0Y8vzlT6_yJXrIK70giQ4_pp1ExCsePBAkLZOcA4aORRDErShRduiig5a0VeaV=w500-h500-s-no-gm?authuser=0">
-    <meta property="og:image:secure_url"
-        content="https://lh3.googleusercontent.com/pw/AP1GczMvA6poKtPsVOqEpI69CBxzkMKb-C6YH-_8xx4dnChgKRp1kdxv-tpCkfLRmuAQ8uViYfOe8ApruVcddTcuN7YB0P0Y8vzlT6_yJXrIK70giQ4_pp1ExCsePBAkLZOcA4aORRDErShRduiig5a0VeaV=w500-h500-s-no-gm?authuser=0">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:url" content="https://thetechhut.co/">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="en_US">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="https://lh3.googleusercontent.com/pw/AP1GczMvA6poKtPsVOqEpI69CBxzkMKb-C6YH-_8xx4dnChgKRp1kdxv-tpCkfLRmuAQ8uViYfOe8ApruVcddTcuN7YB0P0Y8vzlT6_yJXrIK70giQ4_pp1ExCsePBAkLZOcA4aORRDErShRduiig5a0VeaV=w500-h500-s-no-gm?authuser=0" type="image/x-icon">
-    <meta name="description" content="The Tech Hut is a leading Ed Tech and Talent Sourcing company based in Kenya.">
-
-    <!-- Microsoft Clarity user monitoring
-    <script type="text/javascript">
-        (function (c, l, a, r, i, t, y) {
-            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
-            t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
-            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
-        })(window, document, "clarity", "script", "oyfqmhb1kh");
-    </script> -->
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Tech Hut - Events</title>
-
-
-    <link rel="canonical" href="https://thetechhut.co/events/">
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/Logo.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/Logo.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/img/Logo.png">
-    <link rel="manifest" href="../assets/img/Logo.png">
-    <link rel="mask-icon" href="../assets/img/Logo.png" color="#5bbad5">
-    <link rel="shortcut icon" href="../assets/img/Logo.png">
-
-    <!-- Meta tags -->
-    <meta name="apple-mobile-web-app-title" content="The Tech Hut">
-    <meta name="application-name" content="The Tech Hut">
-    <meta name="description"
-        content="The Tech Hut is a community of tech enthusiasts who come together to learn, share and grow.">
-    <meta name="keywords"
-        content="tech, technology, coding, programming, web development, software development, tech community, tech enthusiasts">
-    <meta name="author" content="The Tech Hut">
-    <meta property="og:title" content="The Tech Hut - The Entrepreneurial Masterclass">
-    <meta property="og:description"
-        content="The Tech Hut is a community of tech enthusiasts who come together to learn, share and grow.">
-    <meta property="og:image"
-        content="https://thetechhut.co/events/assets/img/entrepreneurial_masterclass_poster_1.png">
-    <meta property="og:image:secure_url"
-        content="https://thetechhut.co/events/assets/img/entrepreneurial_masterclass_poster_1.png">
-    <meta property="og:image:width" content="980" />
-    <meta property="og:image:height" content="1080" />
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="The Tech Hut">
-    <meta property="og:locale" content="en_US">
-    <meta property="og:locale:alternate" content="en_GB">
-    <meta property="og:locale:alternate" content="en_CA">
-    <meta property="og:locale:alternate" content="en_AU">
-    <meta property="og:locale:alternate" content="en_NZ">
-    <meta property="og:locale:alternate" content="en_IN">
-    <meta property="og:locale:alternate" content="en_PK">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/thh.css">
-    <script src="/assets/js/motion.js?v=1"></script>
-
-    <style>
-        .event { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px; align-items: start; border-top: 2px solid var(--ink); padding-top: 24px; }
-        .event .poster img { display: block; width: 100%; height: auto; }
-        .event h2 { margin: 0 0 6px; }
-        .event h3 { font-size: 19px; margin: 22px 0 6px; }
-        .agenda { list-style: none; padding: 0; margin: 10px 0 0; border-top: 1px solid var(--rule); counter-reset: a; }
-        .agenda li { counter-increment: a; display: grid; grid-template-columns: 34px 1fr; gap: 10px; padding: 11px 0; border-bottom: 1px solid var(--rule); font-size: 16px; }
-        .agenda li::before { content: counter(a, decimal-leading-zero); font-family: var(--mono); font-size: 12.5px; color: var(--green); padding-top: 3px; }
-        .event .ledger { max-width: 440px; margin-top: 24px; }
-        .event .ledger li span { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--dim); padding-top: 3px; }
-        .event .ledger li b { font-size: 14.5px; text-align: right; }
-        .event .act { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 22px; }
-        .event .act p { margin: 0; color: var(--muted); font-size: 15.5px; }
-        .lineup { display: grid; gap: 24px; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); margin-top: 22px; }
-        .lineup figure { margin: 0; border-top: 2px solid var(--ink); padding-top: 10px; }
-        .lineup img { display: block; width: 100%; height: auto; }
-        .lineup figcaption { font-size: 15px; color: var(--ink); font-weight: 600; margin-top: 8px; }
-        .lineup figcaption span { display: block; font-weight: 400; color: var(--dim); font-size: 14px; }
-        .circle-parent { display: none; }
-        @media (max-width: 860px) {
-            .event { grid-template-columns: 1fr; gap: 24px; }
-            .event .poster { max-width: 420px; }
-        }
-        @media (max-width: 480px) {
-            .lineup { grid-template-columns: 1fr 1fr; gap: 18px 14px; }
-        }
-    
-    </style>
+  <style>
+    .ev-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 28px; margin-top: 26px; }
+    .ev-card { border-top: 2px solid var(--ink); padding-top: 14px; display: flex; flex-direction: column; }
+    .ev-card .cover { aspect-ratio: 16 / 10; background: var(--ink); overflow: hidden; margin-bottom: 14px; }
+    .ev-card .cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .ev-card .cover.blank { display: grid; place-items: center; color: var(--mint); font-family: var(--mono); font-size: 13px; letter-spacing: .08em; }
+    .ev-when { font-family: var(--mono); font-size: 12.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--green); }
+    .ev-card h3 { font-size: 21px; margin: 6px 0 6px; }
+    .ev-meta { color: var(--dim); font-size: 14.5px; margin: 0 0 10px; }
+    .ev-desc { color: var(--muted); font-size: 15px; margin: 0 0 14px; white-space: pre-line; }
+    .ev-card .act { margin-top: auto; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .ev-admin { font-size: 13px; }
+    .ev-past { margin-top: 10px; border-top: 1px solid var(--rule); }
+    .ev-past li { display: grid; grid-template-columns: 112px 1fr auto; gap: 14px; padding: 13px 0; border-bottom: 1px solid var(--rule); align-items: baseline; }
+    .ev-past .ev-when { color: var(--dim); }
+    .ev-past a { font-weight: 600; }
+    .ev-past .where { color: var(--dim); font-size: 14px; }
+    #evState { color: var(--dim); font-size: 15px; margin-top: 22px; }
+    dialog.evd { border: 2px solid var(--ink); padding: 0; max-width: 560px; width: calc(100vw - 32px); }
+    dialog.evd::backdrop { background: rgba(7, 59, 76, .55); }
+    dialog.evd .inner { padding: 26px 26px 30px; }
+    dialog.evd h2 { margin: 0 0 4px; }
+    dialog.evd .close { float: right; background: none; border: 0; font-size: 22px; cursor: pointer; color: var(--dim); }
+    .evform { display: grid; gap: 12px; margin-top: 16px; }
+    .evform label { display: grid; gap: 5px; font-size: 13.5px; font-weight: 600; color: var(--ink); }
+    .evform input, .evform textarea { border: 1.5px solid var(--ink); padding: 9px 11px; font: 400 15.5px/1.4 var(--sans); width: 100%; }
+    .evform textarea { min-height: 90px; resize: vertical; }
+    .evform .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .evform .hint { font-weight: 400; color: var(--dim); font-size: 12.5px; }
+    @media (max-width: 560px) { .ev-past li { grid-template-columns: 1fr; gap: 2px; } .evform .row2 { grid-template-columns: 1fr; } }
+  </style>
 </head>
-
 <body>
-        <a class="skip" href="#main">Skip to content</a>
-    <header class="masthead">
-        <div class="masthead-top"><div class="wrap"><span>Kenya's tech careers, reported daily</span><span class="hide-sm"><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a> &middot; <a href="mailto:info@thetechhut.co">info@thetechhut.co</a></span></div></div>
-        <div class="wrap masthead-main">
-            <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
-            <nav class="sitenav" aria-label="Site"><a href="/blog/daily/">Daily</a><a href="/jobs/">Jobs</a><a href="/remote/">Remote</a><a href="/cv-pack/">CV Pack</a><a href="/shop/">Shop</a><a href="/events/" aria-current="page">Events</a><a href="/games/">Games</a><a href="/apprenticeship/">Apprenticeship</a><a href="/blog/">Blog</a></nav>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead">
+    <div class="masthead-top"><div class="wrap"><span>Kenya's tech careers, reported daily</span><span class="hide-sm"><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a> &middot; <a href="mailto:info@thetechhut.co">info@thetechhut.co</a></span></div></div>
+    <div class="wrap masthead-main">
+      <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+      <nav class="sitenav" aria-label="Site"><a href="/blog/daily/">Daily</a><a href="/jobs/">Jobs</a><a href="/remote/">Remote</a><a href="/cv-pack/">CV Pack</a><a href="/shop/">Shop</a><a href="/events/" aria-current="page">Events</a><a href="/games/">Games</a><a href="/apprenticeship/">Apprenticeship</a><a href="/blog/">Blog</a></nav>
+    </div>
+  </header>
+
+  <header class="pagehead" id="main">
+    <div class="wrap">
+      <span class="eyebrow">The Tech Hut community</span>
+      <h1>Events</h1>
+      <p class="lede">Meetups, build nights and masterclasses &mdash; online and in Nairobi. Most are free; register and we&rsquo;ll remind you.</p>
+    </div>
+  </header>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><h2>Coming up</h2></div>
+      <div class="ev-grid" id="upcoming"></div>
+      <p id="evState">Loading events&hellip;</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><h2>Past events</h2></div>
+      <ul class="ev-past" id="past" style="list-style:none;padding:0"></ul>
+      <p class="formnote" style="margin-top:14px">Follow us on <a href="https://luma.com/user/TheTechHut" target="_blank" rel="noopener">Luma</a> or the <a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a> to hear about the next one first.</p>
+    </div>
+  </section>
+
+  <!-- Add / edit an event (The Tech Hut team only) -->
+  <dialog class="evd" id="dlgEvent">
+    <div class="inner">
+      <button class="close" data-close aria-label="Close">&times;</button>
+      <h2 id="dlgEventTitle">Add an event</h2>
+      <p class="formnote" id="evWho"></p>
+      <form class="evform" id="evForm">
+        <label>Title <input name="title" maxlength="120" required placeholder="Build Night: ship a project in one evening"></label>
+        <div class="row2">
+          <label>Starts <input name="start" type="datetime-local" required></label>
+          <label>Ends <span class="hint">(optional)</span> <input name="end" type="datetime-local"></label>
         </div>
-    </header>
-
-    <div class="circle-parent" aria-hidden="true"></div>
-
-    <header class="pagehead" id="main">
-        <div class="wrap">
-            <span class="eyebrow">The Tech Hut community</span>
-            <h1>Events</h1>
-            <p class="lede">Where The Tech Hut community comes together to learn, share and grow.</p>
+        <label>Where <input name="location" maxlength="160" required placeholder="Online, or the venue and area"></label>
+        <label>Registration link <input name="url" type="url" required pattern="https://.*" placeholder="https://luma.com/..."></label>
+        <label>Poster image link <span class="hint">(optional, https. On Luma: right-click the event cover, copy image address.)</span> <input name="cover" type="url" pattern="https://.*"></label>
+        <label>Price <span class="hint">(optional, e.g. Free or KES 200)</span> <input name="price" maxlength="40"></label>
+        <label>About it <span class="hint">(optional)</span> <textarea name="desc" maxlength="2000"></textarea></label>
+        <p class="formmsg" id="evMsg" role="status"></p>
+        <div style="display:flex;gap:12px;align-items:center">
+          <button class="btn mint" id="evSave" type="submit">Publish event</button>
+          <button class="btn ghost" id="evDelete" type="button" hidden>Delete</button>
         </div>
-    </header>
+      </form>
+    </div>
+  </dialog>
 
-    <section id="masterclass">
-        <div class="wrap">
-            <div class="event">
-                <div class="poster">
-                    <img class="event_image" src="./assets/img/entrepreneurial_masterclass_poster_1.png" alt="Poster for The Entrepreneurial Masterclass, 16 November, online" width="1920" height="2688">
-                </div>
-                <div class="event_info">
-                    <span class="eyebrow">Masterclass &middot; Online</span>
-                    <h2><span class="event_title">The Entrepreneurial Masterclass</span></h2>
-                    <h3>The agenda</h3>
-                    <p>Building your journey in entrepreneurship with Robi and experts like:</p>
-                    <ol class="agenda event_description">
-                        <li><div><b>The Art of Pitching</b> with Caleb Jephune - Founder of <a href="">Bricklabs ai</a></div></li>
-                        <li><div><b>The art of selling</b> with Robi - Founder of <a href="">The Tech Hut</a></div></li>
-                        <li><div><b>Indie Hacking - starting from scratch</b> with Peter Okwara - Founder of <a href="">Career Go</a></div></li>
-                        <li><div><b>Developing an MVP</b> with Gabriel Okemwa - Co Founder &amp; CTO of <a href="">The Tech Hut</a> and a couple of other startups</div></li>
-                        <li><div><b>The art of content</b> with Ivy Joy - Content Cartel of <a href="">The Tech Hut</a></div></li>
-                        <li><div><b>The art of building</b> with Valarie Chebet - Lead of Cohort One at <a href="">The Tech Hut</a></div></li>
-                    </ol>
+  <!-- Sign in (magic link) -->
+  <dialog class="evd" id="dlgSignin">
+    <div class="inner">
+      <button class="close" data-close aria-label="Close">&times;</button>
+      <h2>Organiser sign-in</h2>
+      <p class="formnote">For The Tech Hut team. We email you a sign-in link; no password.</p>
+      <form class="evform" id="siForm">
+        <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-5000px" aria-hidden="true">
+        <label>Email <input name="email" type="email" required placeholder="info@thetechhut.co"></label>
+        <p class="formmsg" id="siMsg" role="status"></p>
+        <button class="btn mint" id="siBtn" type="submit">Email me a sign-in link</button>
+      </form>
+    </div>
+  </dialog>
 
-                    <ul class="ledger">
-                        <li class="event_date"><span>Date</span> <b>16th November, 2024</b></li>
-                        <li class="event_date"><span>Time</span> <b>7:00pm - 9:30pm (EAT)</b></li>
-                        <li class="event_date"><span>Where</span> <b>Online</b></li>
-                        <li class="event_date"><span>Price</span> <b>Ksh. 98</b></li>
-                    </ul>
-
-                    <div class="act">
-                        <a class="btn ghost" href="../entrepreneurial_challenge/index.html" target="_self">Sold Out</a>
-                        <p>Moderated by: Ivy Joy</p>
-                    </div>
-                </div>
-            </div>
-
-        <!-- <div class="pay_container">
-            <h1>Pay</h1>
-            <p>Secure Checkout</p>
-            <form action="https://formspree.io/f/xwpkvrjo" method="POST" id="eventForm"> -->
-        <!-- <label for="name">Name</label> -->
-        <!-- <input type="text" id="name" name="name" placeholder="What's your name?" required> -->
-        <!-- <label for="email">Email</label> -->
-        <!-- <input type="email" id="email" name="email" placeholder="What's your email?" required> -->
-        <!-- </form>
-
-            <span style="display:block; text-align: center">
-                <a href="https://intasend.com/security" target="_blank">
-                    <img src="https://intasend-prod-static.s3.amazonaws.com/img/trust-badges/intasend-trust-badge-with-mpesa-hr-light.png"
-                        width="100%" alt="IntaSend Secure Payments (PCI-DSS Compliant)">
-                </a>
-                <strong>
-                    <a style="display: block; color: #454545; text-decoration: none; font-size: 0.8em; margin-top: 0.6em;"
-                        href="https://intasend.com/security" target="_blank">Secured by IntaSend Payments</a>
-                </strong>
-            </span>
-        </div> -->
+  <footer class="sitefoot">
+    <div class="wrap">
+      <div class="sitefoot-grid">
+        <div>
+          <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+          <p>Helping Kenyans into tech work: jobs you can take from Nairobi, a daily read on the industry, and projects with mentors.</p>
         </div>
-    </section>
-
-    <section class="speakers" id="speakers">
-        <div class="wrap">
-            <div class="section-head"><h2>Speaker line-up</h2></div>
-            <div class="lineup grid">
-                <figure><img src="./assets/img/Caleb_Speaker_One.png" alt="Caleb Jephune, The Art of Pitching" width="1920" height="2688" loading="lazy"><figcaption>Caleb Jephune<span>The Art of Pitching</span></figcaption></figure>
-                <figure><img src="./assets/img/Robi_Speaker_Two.png" alt="Robi, The art of selling" width="1920" height="2688" loading="lazy"><figcaption>Robi<span>The art of selling</span></figcaption></figure>
-                <figure><img src="./assets/img/Peter_Speaker_Three.png" alt="Peter Okwara, Indie Hacking" width="1920" height="2688" loading="lazy"><figcaption>Peter Okwara<span>Indie Hacking</span></figcaption></figure>
-                <figure><img src="./assets/img/Okemwa_Speaker_Four.png" alt="Gabriel Okemwa, Developing an MVP" width="1920" height="2688" loading="lazy"><figcaption>Gabriel Okemwa<span>Developing an MVP</span></figcaption></figure>
-                <figure><img src="./assets/img/Valarie_Speaker_Five.png" alt="Valarie Chebet, The art of building" width="1920" height="2688" loading="lazy"><figcaption>Valarie Chebet<span>The art of building</span></figcaption></figure>
-            </div>
-
-            <div class="section-head" style="margin-top:44px"><h2>Our moderator</h2></div>
-            <div class="lineup grid">
-                <figure><img src="./assets/img/Ivy_The_Moderator.png" alt="Ivy Joy, moderator" width="1920" height="2688" loading="lazy"><figcaption>Ivy Joy<span>Moderator</span></figcaption></figure>
-            </div>
+        <div>
+          <h4>Read</h4>
+          <ul>
+            <li><a href="/blog/daily/">Daily Savannah</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a></li>
+          </ul>
         </div>
-    </section>
-
-    <footer class="sitefoot">
-        <div class="wrap">
-            <div class="sitefoot-grid">
-                <div>
-                    <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
-                    <p>Helping Kenyans into tech work: jobs you can take from Nairobi, a daily read on the industry, and projects with mentors.</p>
-                </div>
-                <div>
-                    <h4>Read</h4>
-                    <ul>
-                        <li><a href="/blog/daily/">Daily Savannah</a></li>
-                        <li><a href="/blog/">Blog</a></li>
-                        <li><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4>Find work</h4>
-                    <ul>
-                        <li><a href="/jobs/">Jobs board</a></li>
-                        <li><a href="/jobs/daily/">Daily job alert</a></li>
-                        <li><a href="/remote/">Remote-from-Kenya list</a></li>
-                        <li><a href="/cv-pack/">CV Pack</a></li>
-                        <li><a href="/early-access/">Early Access</a></li>
-                        <li><a href="/shop/">Everything we make</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4>Learn</h4>
-                    <ul>
-                        <li><a href="/apprenticeship/">Apprenticeship</a></li>
-                        <li><a href="/events/">Events</a></li>
-                        <li><a href="/communities/">Tech communities</a></li>
-                        <li><a href="/tools/">Tools</a></li>
-                        <li><a href="/prompt-marketplace/">Prompt marketplace</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4>Employers</h4>
-                    <ul>
-                        <li><a href="/advertise/">Advertise</a></li>
-                        <li><a href="/jobs-for-your-community/">A jobs board for your community</a></li>
-                        <li><a href="/recruiters/">Recruiters</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="sitefoot-base">
-                <span>&copy; 2026 The Tech Hut Community</span>
-                <a href="mailto:info@thetechhut.co">info@thetechhut.co</a>
-                <span>+254 115 017 058</span>
-                <a href="/data_privacy_policy/">Privacy</a>
-                <a href="https://linkedin.com/company/digital-transformation-partner/" rel="noopener">LinkedIn</a>
-                <a href="https://x.com/Ekiprop_kimutai" rel="noopener">X</a>
-            </div>
+        <div>
+          <h4>Find work</h4>
+          <ul>
+            <li><a href="/jobs/">Jobs board</a></li>
+            <li><a href="/jobs/daily/">Daily job alert</a></li>
+            <li><a href="/remote/">Remote-from-Kenya list</a></li>
+            <li><a href="/cv-pack/">CV Pack</a></li>
+            <li><a href="/early-access/">Early Access</a></li>
+            <li><a href="/shop/">Everything we make</a></li>
+          </ul>
         </div>
-    </footer>
-    <script src="./script.js"></script>
+        <div>
+          <h4>Learn</h4>
+          <ul>
+            <li><a href="/apprenticeship/">Apprenticeship</a></li>
+            <li><a href="/events/">Events</a></li>
+            <li><a href="/communities/">Tech communities</a></li>
+            <li><a href="/tools/">Tools</a></li>
+            <li><a href="/prompt-marketplace/">Prompt marketplace</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Employers</h4>
+          <ul>
+            <li><a href="/advertise/">Advertise</a></li>
+            <li><a href="/jobs-for-your-community/">A jobs board for your community</a></li>
+            <li><a href="/recruiters/">Recruiters</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="sitefoot-base">
+        <span>&copy; 2026 The Tech Hut Community</span>
+        <a href="mailto:info@thetechhut.co">info@thetechhut.co</a>
+        <span>+254 115 017 058</span>
+        <a href="/data_privacy_policy/">Privacy</a>
+        <a href="https://linkedin.com/company/digital-transformation-partner/" rel="noopener">LinkedIn</a>
+        <a href="https://x.com/Ekiprop_kimutai" rel="noopener">X</a>
+        <a href="#" id="adminLink">Organiser sign-in</a>
+      </div>
+    </div>
+  </footer>
+
+<script>
+(function () {
+  'use strict';
+  var API = 'https://thetechhut-pay.thetechhut.workers.dev/events/';
+  var $ = function (id) { return document.getElementById(id); };
+  var session = null, me = '';
+  try { var s = JSON.parse(localStorage.getItem('tthEventsSession') || 'null'); if (s && s.t) { session = s.t; me = s.e || ''; } } catch (e) {}
+
+  var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  function when(ev) {
+    var d = new Date(ev.start);
+    if (isNaN(d)) return '';
+    var t = d.toLocaleTimeString('en-KE', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'Africa/Nairobi' }).toLowerCase().replace(' ', '');
+    var day = d.toLocaleDateString('en-KE', { weekday: 'short', timeZone: 'Africa/Nairobi' });
+    var dm = d.toLocaleDateString('en-KE', { day: 'numeric', timeZone: 'Africa/Nairobi' });
+    var mo = MONTHS[Number(d.toLocaleDateString('en-KE', { month: 'numeric', timeZone: 'Africa/Nairobi' })) - 1];
+    return day + ' ' + dm + ' ' + mo + ' ' + d.getFullYear() + ' · ' + t + ' EAT';
+  }
+  function esc(s) { var d = document.createElement('i'); d.textContent = s == null ? '' : s; return d.innerHTML; }
+
+  // Held before we used Luma, so it is in neither feed.
+  var EARLIER = [{ id: 'masterclass-2024', source: 'page', title: 'The Entrepreneurial Masterclass', start: '2024-11-16T19:00:00+03:00',
+                   end: '2024-11-16T21:30:00+03:00', location: 'Online', url: 'https://thetechhut.co/entrepreneurial_challenge/' }];
+  var all = EARLIER.slice();
+  function render() {
+    var now = Date.now();
+    var up = all.filter(function (e) { return Date.parse(e.end || e.start) >= now - 36e5; }).sort(function (a, b) { return Date.parse(a.start) - Date.parse(b.start); });
+    var past = all.filter(function (e) { return Date.parse(e.end || e.start) < now - 36e5; });
+    var U = $('upcoming');
+    U.innerHTML = up.map(function (e) {
+      return '<article class="ev-card">' +
+        (e.cover ? '<div class="cover"><img src="' + esc(e.cover) + '" alt="" loading="lazy" onerror="this.parentNode.remove()"></div>'
+                 : '<div class="cover blank">THE TECH HUT</div>') +
+        '<span class="ev-when">' + esc(when(e)) + '</span>' +
+        '<h3>' + esc(e.title) + '</h3>' +
+        '<p class="ev-meta">' + esc(e.location) + (e.price ? ' · ' + esc(e.price) : '') + '</p>' +
+        (e.desc ? '<p class="ev-desc">' + esc(e.desc) + '</p>' : '') +
+        '<div class="act"><a class="btn mint" href="' + esc(e.url) + '" target="_blank" rel="noopener">Register</a>' +
+        (session && e.source === 'hut' ? '<a href="#" class="ev-admin" data-edit="' + esc(e.id) + '">Edit</a>' : '') + '</div></article>';
+    }).join('');
+    $('past').innerHTML = past.map(function (e) {
+      var d = new Date(e.start);
+      return '<li><span class="ev-when">' + (isNaN(d) ? '' : d.toLocaleDateString('en-KE', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Africa/Nairobi' })) + '</span>' +
+        '<span><a href="' + esc(e.url) + '" target="_blank" rel="noopener">' + esc(e.title) + '</a>' +
+        (session && e.source === 'hut' ? ' <a href="#" class="ev-admin" data-edit="' + esc(e.id) + '">Edit</a>' : '') + '</span>' +
+        '<span class="where">' + esc(e.location) + '</span></li>';
+    }).join('');
+    $('evState').textContent = up.length ? '' : 'Nothing on the calendar right now. Follow the WhatsApp channel and you’ll hear the moment the next one is up.';
+    if (session) {
+      $('evState').innerHTML = (up.length ? '' : $('evState').textContent + ' ') +
+        '<button class="btn ghost" id="addBtn" type="button" style="margin-top:10px">+ Add an event</button>';
+      var ab = $('addBtn'); if (ab) ab.onclick = function () { openEditor(null); };
+    }
+  }
+
+  function load() {
+    fetch(API + 'list').then(function (r) { return r.json(); }).then(function (d) {
+      all = (d.events || []).concat(EARLIER); render();
+    }).catch(function () {
+      render();
+      $('evState').innerHTML = 'Couldn’t load the list just now. See our events on <a href="https://luma.com/user/TheTechHut" rel="noopener">Luma</a> instead.';
+    });
+  }
+
+  /* ---------------- admin ---------------- */
+  function post(route, body) {
+    return fetch(API + route, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json(); });
+  }
+  var editing = null;
+  function openEditor(ev) {
+    editing = ev;
+    $('dlgEventTitle').textContent = ev ? 'Edit event' : 'Add an event';
+    $('evWho').textContent = 'Publishing as ' + me + '. It appears on this page within five minutes.';
+    $('evDelete').hidden = !ev;
+    var f = $('evForm');
+    ['title', 'location', 'url', 'cover', 'price', 'desc'].forEach(function (k) { f[k].value = ev ? (ev[k] || '') : ''; });
+    f.start.value = ev && ev.start ? local(ev.start) : '';
+    f.end.value = ev && ev.end ? local(ev.end) : '';
+    $('evMsg').textContent = '';
+    $('dlgEvent').showModal();
+  }
+  function local(iso) {   // ISO -> value for datetime-local, in Nairobi time
+    var d = new Date(iso); if (isNaN(d)) return '';
+    var p = new Intl.DateTimeFormat('en-CA', { timeZone: 'Africa/Nairobi', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(d), o = {};
+    p.forEach(function (x) { o[x.type] = x.value; });
+    return o.year + '-' + o.month + '-' + o.day + 'T' + o.hour + ':' + o.minute;
+  }
+  $('evForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = e.target;
+    var ev = { title: f.title.value, desc: f.desc.value, location: f.location.value, url: f.url.value,
+               cover: f.cover.value, price: f.price.value,
+               start: f.start.value ? f.start.value + ':00+03:00' : '', end: f.end.value ? f.end.value + ':00+03:00' : '' };
+    $('evMsg').textContent = 'Publishing…';
+    post('save', { session: session, id: editing && editing.id, event: ev }).then(function (d) {
+      if (d.error) { $('evMsg').textContent = d.error; return; }
+      var i = all.findIndex(function (x) { return x.id === d.event.id; });
+      if (i >= 0) all[i] = d.event; else all.push(d.event);
+      $('dlgEvent').close(); render();
+    });
+  });
+  $('evDelete').onclick = function () {
+    if (!editing || !confirm('Delete "' + editing.title + '" from the page?')) return;
+    post('delete', { session: session, id: editing.id }).then(function () {
+      all = all.filter(function (x) { return x.id !== editing.id; });
+      $('dlgEvent').close(); render();
+    });
+  };
+  document.addEventListener('click', function (e) {
+    var ed = e.target.closest('[data-edit]');
+    if (ed) { e.preventDefault(); openEditor(all.find(function (x) { return x.id === ed.getAttribute('data-edit'); })); }
+    if (e.target.closest('[data-close]')) e.target.closest('dialog').close();
+  });
+
+  $('adminLink').onclick = function (e) {
+    e.preventDefault();
+    if (session) { openEditor(null); } else { $('siMsg').textContent = ''; $('dlgSignin').showModal(); }
+  };
+  $('siForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = e.target;
+    $('siMsg').textContent = 'Sending…';
+    post('login', { email: f.email.value, website: f.website.value }).then(function (d) {
+      $('siMsg').textContent = d.error || 'Check your inbox for the sign-in link. It works once, for 20 minutes.';
+    });
+  });
+
+  function takeLogin() {
+    var m = /[#&]login=([^&]+)/.exec(location.hash);
+    if (!m) return;
+    history.replaceState(null, '', location.pathname);
+    post('session', { t: m[1] }).then(function (d) {
+      if (d.error) { $('siMsg').textContent = d.error; $('dlgSignin').showModal(); return; }
+      session = d.session; me = d.email;
+      if ($('dlgSignin').open) $('dlgSignin').close();   // link opened in the tab that asked for it
+      try { localStorage.setItem('tthEventsSession', JSON.stringify({ t: d.session, e: d.email })); } catch (e) {}
+      render();
+    });
+  }
+  window.addEventListener('hashchange', takeLogin);
+  takeLogin();
+  load();
+})();
+</script>
 </body>
-
 </html>
