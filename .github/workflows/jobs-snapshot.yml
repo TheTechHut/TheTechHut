@@ -67,6 +67,12 @@ jobs:
           REMOTE_LIST_KEY: ${{ secrets.REMOTE_LIST_KEY }}
         run: node scripts/encrypt_remote_list.mjs
 
+      # data/hackathons.json, the list /hackathons/ shows. Committed with the rest
+      # of data/ below. If the listings do not answer, yesterday's file stays.
+      - name: Read the hackathon listings
+        continue-on-error: true
+        run: node scripts/build_hackathons.js
+
       - name: Commit if anything changed
         id: commit
         run: |

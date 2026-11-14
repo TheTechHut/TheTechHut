@@ -133,6 +133,12 @@
     <priority>0.70</priority>
   </url>
   <url>
+    <loc>https://thetechhut.co/hackathons/</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
     <loc>https://thetechhut.co/communities/</loc>
     <lastmod>2026-11-14</lastmod>
     <changefreq>monthly</changefreq>
