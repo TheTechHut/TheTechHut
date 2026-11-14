@@ -7,18 +7,18 @@
     <title>Work from Kenya for a company abroad — the verified list | The Tech Hut</title>
     <link rel="canonical" href="https://thetechhut.co/remote/">
 
-    <meta name="description" content="We scanned 2,445 live openings at 22 employers. 300 of them will employ you while you sit in Nairobi. The verified list, with the apply link for each, updated every morning.">
+    <meta name="description" content="Every morning we scan more than 3,700 live openings. Nearly 500 of them will employ you while you sit in Nairobi. The verified list, with the apply link for each, updated every morning.">
     <meta name="keywords" content="remote jobs Kenya, work remotely from Kenya, international remote jobs Kenya, EMEA remote jobs, remote developer jobs Nairobi, The Tech Hut">
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="300 roles that will employ you from Nairobi">
-    <meta property="og:description" content="Most remote jobs are remote-if-you-live-in-France. We scanned 2,445 openings to find the 300 that are not.">
+    <meta property="og:title" content="Remote roles that will employ you from Nairobi">
+    <meta property="og:description" content="Most remote jobs are remote-if-you-live-in-France. We scan more than 3,700 openings every morning to find the ones that are not.">
     <meta property="og:url" content="https://thetechhut.co/remote/">
-    <meta property="og:image" content="https://thetechhut.co/assets/img/social/remote.jpg">
+    <meta property="og:image" content="https://thetechhut.co/assets/img/social/remote.jpg?v=2">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="The Remote-From-Kenya list: 300 roles that will employ you from Nairobi">
-    <meta name="twitter:image" content="https://thetechhut.co/assets/img/social/remote.jpg">
+    <meta property="og:image:alt" content="The Remote-From-Kenya list: remote roles that will employ you from Nairobi">
+    <meta name="twitter:image" content="https://thetechhut.co/assets/img/social/remote.jpg?v=2">
     <meta name="twitter:card" content="summary_large_image">
 
     <link rel="icon" type="image/png" sizes="32x32"
@@ -61,10 +61,10 @@
             </p>
 
             <div class="funnel">
-                <div class="fstep"><b id="nScanned">2,445</b><span>Live roles scanned</span></div>
-                <div class="fstep"><b id="nLocal">34</b><span>Kenya-based jobs</span></div>
-                <div class="fstep hero"><b id="nGlobal">300</b><span>Will employ you from Nairobi</span></div>
-                <div class="fstep"><b id="nCos">12</b><span>Companies, verified</span></div>
+                <div class="fstep"><b id="nScanned">3,771</b><span>Live roles scanned</span></div>
+                <div class="fstep"><b id="nLocal">230</b><span>Kenya-based jobs</span></div>
+                <div class="fstep hero"><b id="nGlobal">492</b><span>Will employ you from Nairobi</span></div>
+                <div class="fstep"><b id="nCos">55</b><span>Companies, verified</span></div>
             </div>
 
             <div class="cta-row" style="margin-top:28px">
@@ -77,7 +77,7 @@
     <section id="why">
         <div class="wrap">
             <span class="eyebrow">Why this is not another remote job board</span>
-            <h2>The 2,445 to 300 problem</h2>
+            <h2>The <span id="hScanned">3,771</span> to <span id="hGlobal">492</span> problem</h2>
             <p class="tight" style="max-width:66ch">
                 Here is the thing that costs Kenyan developers the most time, and it is not a lack of
                 remote jobs. It is that "remote" has two completely different meanings and the job
@@ -161,9 +161,9 @@
 
             <div class="callout tip">
                 <b>One company is doing most of the work.</b> We are not going to pretend otherwise:
-                on the day of writing, a single employer accounted for 234 of the 300 eligible roles —
+                on 13 November 2026, a single employer accounted for 239 of the 492 eligible roles —
                 across engineering, support, sales, design and operations, all "home based". The list
-                tells you which one, and which of its roles are open to you right now. The other eleven
+                tells you which one, and which of its roles are open to you right now. The other 54
                 are the ones you would never have found.
             </div>
         </div>
@@ -290,6 +290,8 @@
                 document.getElementById('nLocal').textContent = n(d.local_role_count);
                 document.getElementById('nGlobal').textContent = n(d.role_count);
                 document.getElementById('nCos').textContent = n(d.company_count);
+                document.getElementById('hScanned').textContent = n(d.roles_scanned);
+                document.getElementById('hGlobal').textContent = n(d.role_count);
 
                 var cos = d.companies || [];
                 var box = document.getElementById('live');
