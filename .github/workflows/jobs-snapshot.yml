@@ -73,12 +73,18 @@ jobs:
         continue-on-error: true
         run: node scripts/build_hackathons.js
 
+      # Blog articles queued in blog/_src/scheduled/ go live on their dates
+      # (scripts/publish_scheduled.py). Committed and deployed with the data.
+      - name: Release scheduled blog articles
+        continue-on-error: true
+        run: python3 scripts/publish_scheduled.py
+
       - name: Commit if anything changed
         id: commit
         run: |
           git config user.name  "The Daily Savannah"
           git config user.email "daily@thetechhut.co"
-          git add data/
+          git add data/ blog/ sitemap.xml
           if git diff --cached --quiet; then
             echo "nothing changed today"
             echo "changed=no" >> "$GITHUB_OUTPUT"
