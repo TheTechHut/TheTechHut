@@ -261,6 +261,7 @@ index += f'''
       <div class="picks">
         <h2>From the blog</h2>
         <ul>
+          <li><a href="/blog/tech-jobs-kenya/">Tech Jobs in Kenya: 5 Best Places to Find Them in 2026</a></li>
           <li><a href="/blog/remote-jobs-kenya/">8 Best Places to Find Legit Remote Jobs in Kenya in 2026</a></li>
           <li><a href="/blog/dangote-ipo-fintech/">Fintechs Powering the Dangote IPO</a></li>
           <li><a href="/blog/jobs/">Landing tech jobs in Kenya: the real talk</a></li>
@@ -369,6 +370,7 @@ STATIC_PAGES = [
     ('/advertise/',                  '0.70', 'monthly'),
     ('/blog/dangote-ipo-fintech/',   '0.70', 'monthly'),
     ('/blog/remote-jobs-kenya/',         '0.80', 'monthly'),
+    ('/blog/tech-jobs-kenya/',           '0.80', 'monthly'),
     ('/apprenticeship/',             '0.80', 'monthly'),
     ('/events/',                     '0.70', 'weekly'),
     ('/communities/',                '0.60', 'monthly'),
