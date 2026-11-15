@@ -31,7 +31,6 @@ jobs:
         continue-on-error: true
         run: node scripts/build_jobs_board.js
       - name: Install the image libraries for the share cards
-        if: steps.board.outcome == 'success'
         continue-on-error: true
         run: npm install --no-save --no-audit --no-fund sharp@0.33.5 opentype.js@1.3.4
 
@@ -39,6 +38,11 @@ jobs:
         if: steps.board.outcome == 'success'
         continue-on-error: true
         run: node scripts/build_job_pages.js
+
+      # hackathons/event/ is built, never committed, and /hackathons/ links to it.
+      - name: Write one page per hackathon (hackathons/event/)
+        continue-on-error: true
+        run: node scripts/build_hackathon_pages.js
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:

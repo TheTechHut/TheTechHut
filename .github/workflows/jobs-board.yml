@@ -50,6 +50,11 @@ jobs:
       - name: Write one page per role (jobs/role/)
         run: node scripts/build_job_pages.js
 
+      # hackathons/event/ is built, never committed, and /hackathons/ links to it.
+      - name: Write one page per hackathon (hackathons/event/)
+        continue-on-error: true
+        run: node scripts/build_hackathon_pages.js
+
       - name: Deploy
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:

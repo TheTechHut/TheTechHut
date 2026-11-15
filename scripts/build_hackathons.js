@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 /*
  * Build /data/hackathons.json: the hackathons /hackathons/ lists, read from
- * Devpost and Devfolio's public listings.
+ * Devpost and Devfolio's public listings, each with its prizes, plus the
+ * hackathons people posted on Reddit (r/hackathon) in the last three weeks.
+ * scripts/build_hackathon_pages.js then writes one page per hackathon from it.
  *
  * Kept: hackathons someone in Kenya can enter, which means online ones and
  * in-person ones in Africa. Invite-only ones are left out.
@@ -88,10 +90,78 @@ async function devfolio() {
       starts: h.starts_at.slice(0, 10), ends: h.ends_at.slice(0, 10),
       deadline: (set.reg_ends_at || h.starts_at).slice(0, 10),
       excerpt: F.clean(h.tagline || '', 190),
+      prizes: (h.prizes || []).slice(0, MAX_PRIZES).map(function (p) { return slim({ title: F.clean(p.name, 90), desc: F.clean(p.desc, 220) }); }),
       themes: (h.themes || []).map(function (t) { return t && (t.name || (t.theme && t.theme.name)); }).filter(Boolean),
       joined: h.participants_count || 0, source: 'Devfolio'
     };
   });
+}
+
+// Devpost's list gives only the total. Each prize (name, value, how many winners,
+// what it is) and the one-line pitch are on the hackathon's own page, so read
+// that page for every hackathon kept, a few at a time. One that does not answer
+// keeps its total and gets no prize list.
+var MAX_PRIZES = 30;
+function devpostPrizes(html) {
+  return html.split(/<div class="[^"]*\bprize" id="prize_\d+">/).slice(1, MAX_PRIZES + 1).map(function (b) {
+    b = b.split(/<\/article>|<\/section>|id="content-sidebar"/)[0];
+    var get = function (re, max) { var m = re.exec(b); return m ? F.clean(m[1], max) : ''; };
+    return slim({
+      title: get(/class="prize-title">([\s\S]*?)<\/h6>/, 90),
+      value: get(/class="prize-value">([\s\S]*?)<\/div>/, 60).replace(/^(\D+) (?=\d)/, '$1'),
+      winners: get(/class="prize-winners">([\s\S]*?)<\/div>/, 30),
+      desc: get(/class="prize-content">[\s\S]*?<p>([\s\S]*?)<\/p>/, 220)
+    });
+  }).filter(function (p) { return p.title; });
+}
+async function addDevpostDetails(all) {
+  var todo = all.filter(function (h) { return h.source === 'Devpost'; }), next = 0, got = 0;
+  async function worker() {
+    while (next < todo.length) {
+      var h = todo[next++];
+      try {
+        var r = await fetch(h.url, { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(20000) });
+        if (!r.ok) continue;
+        var html = await r.text();
+        var pitch = /<meta[^>]+property="og:description"[^>]+content="([^"]*)"/.exec(html);
+        if (pitch) h.excerpt = F.clean(pitch[1], 190);
+        h.prizes = devpostPrizes(html);
+        if (h.prizes.length) got++;
+      } catch (e) { /* keep the hackathon without its prize list */ }
+    }
+  }
+  await Promise.all([worker(), worker(), worker(), worker()]);
+  console.log('Devpost prize lists read: %d of %d', got, todo.length);
+}
+
+// Posts in r/hackathon (its public Atom feed) that announce a hackathon: they
+// name a hackathon in the title, link to a page outside Reddit and are not a
+// question, a team search, a results thread or someone's own entry. Reddit gives no dates or prizes, so these are shown as a
+// separate "posted on Reddit" list, not mixed into the dated one.
+var NOT_A_PAGE = /reddit\.com|redd\.it|reddit(static|media)\.com|youtu\.?be|forms\.|docs\.google|discord|t\.me\/|whatsapp|imgur|linkedin\.com|instagram\.com|github\.com|\.(png|jpe?g|gif|webp)(\?|$)/i;
+var NOT_NEWS = /\?|looking for|need(ed|s)?\b|team ?mates?|\bhelp\b|results?\b|\bideas?\b|\badvice\b|\bwon\b|winners?\b|\bwe built\b|status update|submission|\bvote\b|participated|\b(I|my)\b/i;
+var SHARED_DAYS = 21;
+async function reddit() {
+  var r = await fetch('https://www.reddit.com/r/hackathon/new/.rss?limit=100', { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(25000) });
+  if (!r.ok) throw new Error('Reddit answered ' + r.status);
+  var xml = await r.text();
+  return (xml.match(/<entry>[\s\S]*?<\/entry>/g) || []).map(function (e) {
+    var get = function (re) { var m = re.exec(e); return m ? m[1] : ''; };
+    var raw = get(/<content[^>]*>([\s\S]*?)<\/content>/);
+    var title = F.clean(get(/<title>([\s\S]*?)<\/title>/), 140);
+    var links = (raw.match(/href=(?:&quot;|")(https:\/\/[^"&<> ]+)/g) || [])
+      .map(function (l) { return l.replace(/^href=(?:&quot;|")/, ''); })
+      .filter(function (l) { return !NOT_A_PAGE.test(l); });
+    if (!links.length || NOT_NEWS.test(title) || !/hack|buildathon/i.test(title)) return null;
+    return { title: title, url: get(/<link href="(https:\/\/www\.reddit\.com\/[^"]+)"/), link: links[0],
+             date: get(/<(?:published|updated)>([^<]+)</).slice(0, 10), source: 'r/hackathon' };
+  }).filter(function (p) { return p && p.url && p.date; });
+}
+
+// "Kiroween 2026" + devpost-31667 -> "kiroween-2026-31667": the page's folder under hackathons/event/
+function slugOf(h) {
+  var s = String(h.title).toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60).replace(/-+$/, '');
+  return (s || 'hackathon') + '-' + h.id.replace(/^[a-z]+-/, '').slice(0, 8);
 }
 
 function slim(h) {
@@ -118,14 +188,33 @@ async function main() {
     var k = String(h.title || '').toLowerCase().replace(/[^a-z0-9]/g, '');
     if (!k || !/^https:\/\//.test(h.url || '') || h.deadline < today || seen[k]) return false;
     seen[k] = 1; return true;
-  }).map(slim);
+  });
+  await addDevpostDetails(all);
+  all.forEach(function (h) { h.page = slugOf(h); });
+  all = all.map(slim);
   all.sort(function (a, b) { return a.deadline < b.deadline ? -1 : a.deadline > b.deadline ? 1 : 0; });
   if (all.length < MIN) {
     console.error('only %d hackathons came back; not writing %s', all.length, OUT);
     process.exit(1);
   }
-  fs.writeFileSync(OUT, JSON.stringify({ updated: new Date().toISOString(), count: all.length, hackathons: all }, null, 1) + '\n');
-  console.log('wrote data/hackathons.json: %d hackathons', all.length);
+  // Reddit often turns away requests from data centres. When it does, keep the
+  // posts already in the file; either way drop the ones older than three weeks
+  // and the ones that point at a hackathon already listed above.
+  var shared = [];
+  try { shared = await reddit(); console.log('Reddit: %d posts announce a hackathon', shared.length); }
+  catch (e) {
+    console.error('Reddit did not answer: %s', e.message);
+    try { shared = JSON.parse(fs.readFileSync(OUT, 'utf8')).shared || []; } catch (e2) { /* no earlier file */ }
+  }
+  var cutoff = new Date(Date.now() - SHARED_DAYS * 864e5).toISOString().slice(0, 10), listed = {}, links = {};
+  var key = function (u) { return String(u).toLowerCase().replace(/^https:\/\/(www\.)?/, '').replace(/[/?#].*$/, ''); };
+  all.forEach(function (h) { listed[key(h.url)] = 1; });
+  shared = shared.filter(function (p) {
+    if (p.date < cutoff || listed[key(p.link)] || links[p.link]) return false;
+    links[p.link] = 1; return true;
+  });
+  fs.writeFileSync(OUT, JSON.stringify({ updated: new Date().toISOString(), count: all.length, hackathons: all, shared: shared }, null, 1) + '\n');
+  console.log('wrote data/hackathons.json: %d hackathons, %d from Reddit', all.length, shared.length);
 }
 
 main().catch(function (e) { console.error(e); process.exit(1); });

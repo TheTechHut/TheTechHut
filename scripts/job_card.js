@@ -144,8 +144,10 @@ function svg(card, logo) {
     '</svg>';
 }
 
-/** -> function(card) returning a Promise of a PNG Buffer, or null when sharp or opentype.js is missing. */
-function cardWriter() {
+/** -> function(card) returning a Promise of a PNG Buffer, or null when sharp or opentype.js is missing.
+ *  `draw` is the layout, (card, logo data URI) -> SVG text; the role card above unless another is given
+ *  (scripts/hackathon_card.js). */
+function cardWriter(draw) {
   var sharp, opentype;
   try { sharp = require('sharp'); opentype = require('opentype.js'); } catch (e) { return null; }
   var load = function (f) { return opentype.loadSync(path.join(FONTS, f)); };
@@ -160,9 +162,10 @@ function cardWriter() {
   });
   return function (card) {
     return logo.then(function (uri) {
-      return sharp(Buffer.from(svg(card, uri)), { density: 144 }).png({ compressionLevel: 9, palette: true }).toBuffer();
+      return sharp(Buffer.from((draw || svg)(card, uri)), { density: 144 }).png({ compressionLevel: 9, palette: true }).toBuffer();
     });
   };
 }
 
-module.exports = { cardWriter: cardWriter, svg: svg };
+// fonts (filled by cardWriter) and the drawing helpers are shared with scripts/hackathon_card.js
+module.exports = { cardWriter: cardWriter, svg: svg, fonts: F, measure: measure, text: text, wrap: wrap, blob: blob };

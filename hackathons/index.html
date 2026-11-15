@@ -14,8 +14,13 @@
   <meta property="og:title" content="Hackathons you can enter from Kenya">
   <meta property="og:description" content="Open and upcoming hackathons you can enter from Kenya, with deadlines and prizes. Updated daily.">
   <meta property="og:url" content="https://thetechhut.co/hackathons/">
+  <meta property="og:image" content="https://thetechhut.co/assets/img/social/hackathons.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The Tech Hut hackathons list: hackathons you can enter from Kenya, online and across Africa">
+  <meta name="twitter:image" content="https://thetechhut.co/assets/img/social/hackathons.jpg">
   <meta property="og:locale" content="en_KE">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Hackathons you can enter from Kenya">
   <meta name="twitter:description" content="Open and upcoming hackathons you can enter from Kenya, with deadlines and prizes. Updated daily.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -77,6 +82,8 @@
     .state h3 { font-size: 20px; margin: 0 0 6px; }
     .state p { margin: 0; font-size: 16px; }
     .morewrap { text-align: center; margin-top: 24px; }
+    #shared { margin-top: 56px; }
+    .sharednote { font-size: 15px; color: var(--muted); line-height: 1.5; margin: 14px 0 0; max-width: 70ch; }
     .pagefoot .credits { font-size: 14.5px; }
     .pagefoot .credits a { color: var(--green); }
 
@@ -140,13 +147,19 @@
       </div>
       <div id="list"></div>
       <div class="morewrap" id="morewrap" hidden><button type="button" class="btn" id="more">Show more</button></div>
+
+      <section id="shared" hidden>
+        <div class="listhead"><h2>Posted on Reddit<span id="nshared"></span></h2></div>
+        <p class="sharednote">Hackathons people announced in r/hackathon in the last three weeks. These are not checked: a post gives no dates or prizes, and some are in-person events outside Africa.</p>
+        <div id="sharedlist"></div>
+      </section>
     </div>
   </div>
 </main>
 
 <div class="pagefoot"><div class="wrap">
 <p class="credits">
-  Listings are read once a day from the public hackathon listings of
+  Listings and their prizes are read once a day from the public hackathon listings of
   <a href="https://devpost.com/hackathons" target="_blank" rel="noopener">Devpost</a> and
   <a href="https://devfolio.co/hackathons" target="_blank" rel="noopener">Devfolio</a>.
   Every link opens the organiser&rsquo;s own page — The Tech Hut does not run these hackathons or take entries.
@@ -240,7 +253,8 @@
   }
 
   function card(h) {
-    var link = function (label) { return '<a href="' + esc(h.url) + '" target="_blank" rel="noopener">' + label + '</a>'; };
+    // each hackathon has a page of its own (scripts/build_hackathon_pages.js) with its prizes
+    var link = function (label) { return '<a href="/hackathons/event/' + encodeURIComponent(h.page) + '/">' + label + '</a>'; };
     var tags = (h.prize ? [h.prize + ' in prizes'] : []).concat((h.themes || []).slice(0, 3));
     return '<article class="job"><div>' +
       '<h3>' + link(esc(h.title)) + '</h3>' +
@@ -251,7 +265,7 @@
       '<div class="tags"><span' + (daysTo(h.deadline) <= 7 && h.starts <= today ? ' class="soon"' : '') + '>' + esc(closes(h)) + '</span>' +
         tags.map(function (t) { return '<span>' + esc(t) + '</span>'; }).join('') +
         '<span class="src">via ' + esc(h.source) + '</span></div>' +
-      '</div><div class="apply">' + link('View hackathon') + '</div></article>';
+      '</div><div class="apply">' + link('View details') + '</div></article>';
   }
 
   function render() {
@@ -312,6 +326,17 @@
     $('count').textContent = all.length + ' hackathons open or coming up' +
       (isNaN(up) ? '' : ' · updated ' + up.getDate() + ' ' + MONTHS[up.getMonth()]);
     apply();
+    var shared = (d.shared || []).filter(function (p) { return /^https:\/\//.test(p.url) && /^https:\/\//.test(p.link); });
+    $('shared').hidden = !shared.length;
+    $('nshared').textContent = '(' + shared.length + ')';
+    $('sharedlist').innerHTML = shared.map(function (p) {
+      var host = p.link.replace(/^https:\/\/(www\.)?/, '').replace(/[/?#].*$/, '');
+      return '<article class="job"><div>' +
+        '<h3><a href="' + esc(p.link) + '" target="_blank" rel="noopener nofollow">' + esc(p.title) + '</a></h3>' +
+        '<div class="meta"><span>' + esc(host) + '</span><span>posted ' + esc(day(p.date, true)) + '</span></div>' +
+        '<div class="tags"><span class="src">via ' + esc(p.source) + '</span></div>' +
+        '</div><div class="apply"><a href="' + esc(p.url) + '" target="_blank" rel="noopener nofollow">Read the post</a></div></article>';
+    }).join('');
   }).catch(function () {
     $('count').textContent = '';
     $('list').innerHTML = '<div class="state"><h3>The list did not load</h3><p>Check your connection and reload the page.</p></div>';
