@@ -166,7 +166,7 @@ function page(j, slug, body, hasCard) {
     (ld ? '  <script type="application/ld+json">' + ld + '</script>\n' : '') +
     '</head>\n<body>\n<a class="skip" href="#main">Skip to content</a>\n' +
     '<header class="masthead"><div class="wrap masthead-main"><a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>' +
-    '<nav class="sitenav" aria-label="Site"><a href="/blog/daily/">Daily</a><a href="/jobs/" aria-current="page">Jobs</a><a href="/remote/">Remote</a><a href="/cv-pack/">CV Pack</a><a href="/blog/">Blog</a></nav></div></header>\n' +
+    '<nav class="sitenav" aria-label="Site"><a href="/blog/daily/">Daily</a><a href="/jobs/" aria-current="page">Jobs</a><a href="/hackathons/">Hackathons</a><a href="/remote/">Remote</a><a href="/cv-pack/">CV Pack</a><a href="/blog/">Blog</a></nav></div></header>\n' +
     '<main id="main"><div class="wrap" style="max-width:760px;padding:40px 0 64px">\n' +
     '  <p><a href="/jobs/">&larr; All jobs</a></p>\n' +
     '  <h1>' + esc(j.title) + '</h1>\n' +

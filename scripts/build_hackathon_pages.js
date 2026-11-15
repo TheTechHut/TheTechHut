@@ -75,7 +75,7 @@ function page(h, hasCard) {
     '  <meta name="twitter:card" content="summary_large_image">\n  <meta name="twitter:image" content="' + image + '">\n' +
     '  <link rel="stylesheet" href="/assets/css/thh.css">\n' +
     '  <style>.facts{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;margin:22px 0}.facts dt{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);padding-top:3px}.facts dd{margin:0}' +
-    '.prizes{padding-left:20px}.prizes li{margin:0 0 10px}.prizes span{color:var(--muted);font-size:15.5px}</style>\n' +
+    '.prizes{padding-left:20px}.prizes li{margin:0 0 10px}.prizes span{color:var(--muted);font-size:15.5px}.hero{display:block;width:100%;height:auto;border:1px solid var(--rule);border-radius:6px;margin:18px 0 22px}</style>\n' +
     '</head>\n<body>\n<a class="skip" href="#main">Skip to content</a>\n' +
     '<header class="masthead"><div class="wrap masthead-main"><a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>' +
     '<nav class="sitenav" aria-label="Site"><a href="/blog/daily/">Daily</a><a href="/jobs/">Jobs</a><a href="/hackathons/" aria-current="page">Hackathons</a><a href="/remote/">Remote</a><a href="/blog/">Blog</a></nav></div></header>\n' +
@@ -83,6 +83,7 @@ function page(h, hasCard) {
     '  <p><a href="/hackathons/">&larr; All hackathons</a></p>\n' +
     '  <h1>' + esc(h.title) + '</h1>\n' +
     (h.host ? '  <p class="lede">' + esc(h.host) + '</p>\n' : '') +
+    (hasCard ? '  <img class="hero" src="card.png" width="1200" height="630" alt="' + esc(h.title) + ': ' + esc(h.place) + ', ' + esc(period(h)) + '">\n' : '') +
     (h.excerpt ? '  <p>' + esc(h.excerpt) + '</p>\n' : '') +
     '  <dl class="facts">\n' + facts.map(function (f) { return '    <dt>' + f[0] + '</dt><dd>' + esc(f[1]) + '</dd>\n'; }).join('') + '  </dl>\n' +
     (prizes ? '  <h2>Prizes</h2>\n  <ul class="prizes">\n' + prizes + '  </ul>\n' : '') +

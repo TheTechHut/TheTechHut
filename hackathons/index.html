@@ -47,7 +47,7 @@
     .chips button:hover { text-decoration-color: var(--ink); }
     .chips button[aria-pressed="true"] { text-decoration-color: var(--ink); background: var(--paper-2); }
 
-    .results { max-width: 900px; margin: 0 auto; padding-bottom: 56px; }
+    .results { max-width: 1040px; margin: 0 auto; padding-bottom: 56px; }
     .listhead { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 16px;
       border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink); padding: 10px 0 12px; }
     .listhead h2 { font-size: 22px; margin: 0; }
@@ -61,6 +61,10 @@
     .job { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 28px; align-items: start;
       padding: 18px 0 17px; border-bottom: 1px solid var(--rule); }
     .job > div { min-width: 0; }
+    /* a hackathon's row leads with its share card (hackathons/event/<slug>/card.png) */
+    .job.has-img { grid-template-columns: 280px minmax(0, 1fr) auto; }
+    .job .thumb { display: block; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; }
+    .job .thumb img { display: block; width: 100%; height: auto; }
     .job h3 { font-size: 21px; line-height: 1.25; margin: 0 0 5px; overflow-wrap: anywhere; }
     .job h3 a { color: var(--ink); text-decoration: none; }
     .job h3 a:hover { text-decoration: underline; text-decoration-thickness: 1px; }
@@ -87,10 +91,10 @@
     .pagefoot .credits { font-size: 14.5px; }
     .pagefoot .credits a { color: var(--green); }
 
+    @media (max-width: 760px) { .job, .job.has-img { grid-template-columns: minmax(0, 1fr); } }
     @media (max-width: 600px) {
       .pagehead.hackhead { padding: 28px 0 22px; }
       .searchbar .btn { padding: 11px 16px; }
-      .job { grid-template-columns: minmax(0, 1fr); }
       .job h3 { font-size: 19.5px; }
       .apply { padding-top: 2px; }
       .apply a { border: 0; border-bottom: 1px solid var(--mint); border-radius: 0; padding: 0 0 1px; }
@@ -105,7 +109,7 @@
         <div class="masthead-top"><div class="wrap"><span>Kenya's tech careers, reported daily</span><span class="hide-sm"><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a> &middot; <a href="mailto:info@thetechhut.co">info@thetechhut.co</a></span></div></div>
         <div class="wrap masthead-main">
             <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
-            <nav class="sitenav" aria-label="Site"><a href="/blog/daily/">Daily</a><a href="/jobs/">Jobs</a><a href="/remote/">Remote</a><a href="/cv-pack/">CV Pack</a><a href="/shop/">Shop</a><a href="/events/">Events</a><a href="/games/">Games</a><a href="/apprenticeship/">Apprenticeship</a><a href="/blog/">Blog</a></nav>
+            <nav class="sitenav" aria-label="Site"><a href="/blog/daily/">Daily</a><a href="/jobs/">Jobs</a><a href="/hackathons/" aria-current="page">Hackathons</a><a href="/remote/">Remote</a><a href="/cv-pack/">CV Pack</a><a href="/shop/">Shop</a><a href="/events/">Events</a><a href="/games/">Games</a><a href="/apprenticeship/">Apprenticeship</a><a href="/blog/">Blog</a></nav>
         </div>
     </header>
 
@@ -256,7 +260,11 @@
     // each hackathon has a page of its own (scripts/build_hackathon_pages.js) with its prizes
     var link = function (label) { return '<a href="/hackathons/event/' + encodeURIComponent(h.page) + '/">' + label + '</a>'; };
     var tags = (h.prize ? [h.prize + ' in prizes'] : []).concat((h.themes || []).slice(0, 3));
-    return '<article class="job"><div>' +
+    // if the card is missing (a deploy that did not draw them) the row closes up without it
+    var img = '<a class="thumb" href="/hackathons/event/' + encodeURIComponent(h.page) + '/" tabindex="-1" aria-hidden="true">' +
+      '<img src="/hackathons/event/' + encodeURIComponent(h.page) + '/card.png" alt="" width="1200" height="630" loading="lazy" decoding="async"' +
+      ' onerror="var r=this.closest(\'.job\');this.parentNode.remove();r.classList.remove(\'has-img\')"></a>';
+    return '<article class="job has-img">' + img + '<div>' +
       '<h3>' + link(esc(h.title)) + '</h3>' +
       (h.host ? '<div class="co">' + esc(h.host) + '</div>' : '') +
       '<div class="meta"><span>' + esc(h.place) + '</span><span>' + esc(period(h)) + '</span>' +
