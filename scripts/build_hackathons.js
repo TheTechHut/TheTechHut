@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 /*
  * Build /data/hackathons.json: the hackathons /hackathons/ lists, read from
- * Devpost and Devfolio's public listings, each with its prizes, plus the
+ * the public listings of Devpost, Devfolio, lablab, Africa's Talking's community
+ * events and Luma's tech events around Nairobi, with prizes where the source
+ * gives them, plus the
  * hackathons people posted on Reddit (r/hackathon) in the last three weeks.
  * scripts/build_hackathon_pages.js then writes one page per hackathon from it.
  *
@@ -161,7 +163,80 @@ async function reddit() {
 // "Kiroween 2026" + devpost-31667 -> "kiroween-2026-31667": the page's folder under hackathons/event/
 function slugOf(h) {
   var s = String(h.title).toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60).replace(/-+$/, '');
-  return (s || 'hackathon') + '-' + h.id.replace(/^[a-z]+-/, '').slice(0, 8);
+  return (s || 'hackathon') + '-' + h.id.replace(/^[a-z]+-/, '').toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 8);
+}
+
+// Africa's Talking community events (a Bevy site with a public JSON API): the
+// ones that call themselves a hackathon. All are run by its chapters in Africa.
+var COUNTRY = new Intl.DisplayNames(['en'], { type: 'region' });
+function placeOf(city, code) {
+  var country = '';
+  try { country = code ? COUNTRY.of(code) : ''; } catch (e) { /* not a country code */ }
+  // "DAR ES SALAAM - Tanzania", "Nairobi kenya": keep the city, in ordinary capitals
+  city = String(city || '').split(/\s+-\s+|,/)[0].trim();
+  if (country && city.toLowerCase().endsWith(' ' + country.toLowerCase())) city = city.slice(0, -country.length).trim();
+  if (city === city.toUpperCase()) city = city.toLowerCase().replace(/\b[a-z]/g, function (c) { return c.toUpperCase(); });
+  return [city, country].filter(Boolean).join(', ');
+}
+var IS_HACKATHON = /hackathon|buildathon|hack ?day|hackfest/i;
+async function africasTalking() {
+  var d = await getJSON('https://community.africastalking.com/api/event/?status=Live&order_by=start_date&page_size=100' +
+    '&fields=id,title,start_date,end_date,url,event_type_title,venue_city,venue_country');
+  return (d.results || []).map(function (e) {
+    if (!IS_HACKATHON.test(e.title) || !e.start_date) return null;
+    var online = /virtual|online/i.test(e.event_type_title || '');
+    return {
+      id: 'at-' + e.id, title: F.clean(e.title, 140), host: 'Africa\u2019s Talking', url: e.url,
+      mode: online ? 'Online' : 'In person', place: online ? 'Online' : placeOf(e.venue_city, e.venue_country) || 'Africa',
+      starts: e.start_date.slice(0, 10), ends: (e.end_date || e.start_date).slice(0, 10), deadline: e.start_date.slice(0, 10),
+      source: 'Africa\u2019s Talking'
+    };
+  });
+}
+
+// lablab's hackathon list is inside the page's own data (a Next.js page): the
+// "sortedEvents" array. Kept: the ones still open for sign-up.
+async function lablab() {
+  var r = await fetch('https://lablab.build/ai-hackathons', { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(25000) });
+  if (!r.ok) throw new Error('lablab answered ' + r.status);
+  var html = await r.text(), data = '', m, re = /self\.__next_f\.push\(\[1,("(?:[^"\\]|\\.)*")\]\)/g;
+  while ((m = re.exec(html))) data += JSON.parse(m[1]);
+  var start = data.indexOf('"sortedEvents":[');
+  if (start === -1) throw new Error('lablab: no event list in the page');
+  start += 15;
+  for (var end = start, depth = 0, quoted = false; end < data.length; end++) {
+    var c = data[end];
+    if (quoted) { if (c === '\\') end++; else if (c === '"') quoted = false; }
+    else if (c === '"') quoted = true;
+    else if (c === '[') depth++;
+    else if (c === ']' && --depth === 0) break;
+  }
+  return JSON.parse(data.slice(start, end + 1)).map(function (e) {
+    if (e.type !== 'HACKATHON' || !e.signupActive || e.toBeAnnounced || !e.slug || !e.startAt || !e.endAt || e.eventType !== 'ONLINE') return null;
+    return {
+      id: 'lablab-' + e.id, title: F.clean(e.name, 140), host: 'lablab', url: 'https://lablab.build/ai-hackathons/' + e.slug,
+      mode: 'Online', place: 'Online', starts: e.startAt.slice(0, 10), ends: e.endAt.slice(0, 10), deadline: e.endAt.slice(0, 10),
+      excerpt: F.clean(e.description || '', 190), themes: ['Machine Learning/AI'], source: 'lablab'
+    };
+  });
+}
+
+// Luma's tech events near Nairobi (its discover list answers by place, so the
+// place is given, not left to wherever this runs): the ones named a hackathon.
+async function luma() {
+  var d = await getJSON('https://api.lu.ma/discover/get-paginated-events?slug=tech&latitude=-1.2864&longitude=36.8172&pagination_limit=50');
+  return (d.entries || []).map(function (x) {
+    var e = x.event || {}, geo = e.geo_address_info || {}, online = e.location_type === 'online';
+    var place = [geo.city, geo.country].filter(Boolean).join(', ');
+    if (!IS_HACKATHON.test(e.name || '') || !e.url || !e.start_at || !(online || inAfrica(place))) return null;
+    var local = function (t) { return new Date(t).toLocaleDateString('en-CA', { timeZone: e.timezone || 'Africa/Nairobi' }); };
+    return {
+      id: 'luma-' + e.api_id.replace(/^evt-/, ''), title: F.clean(e.name, 140), host: (x.calendar && x.calendar.name) || '', url: 'https://luma.com/' + e.url,
+      mode: online ? 'Online' : 'In person', place: online ? 'Online' : place,
+      starts: local(e.start_at), ends: local(e.end_at || e.start_at), deadline: local(e.start_at),
+      joined: x.guest_count || 0, source: 'Luma'
+    };
+  });
 }
 
 function slim(h) {
@@ -175,7 +250,7 @@ function slim(h) {
 }
 
 async function main() {
-  var sources = { Devpost: devpost, Devfolio: devfolio }, all = [];
+  var sources = { Devpost: devpost, Devfolio: devfolio, lablab: lablab, 'Africa\u2019s Talking': africasTalking, Luma: luma }, all = [];
   for (var name of Object.keys(sources)) {
     try {
       var got = (await sources[name]()).filter(Boolean);

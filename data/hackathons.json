@@ -1,6 +1,6 @@
 {
- "updated": "2026-11-15T02:44:51.097Z",
- "count": 80,
+ "updated": "2026-11-15T03:20:18.426Z",
+ "count": 88,
  "hackathons": [
   {
    "id": "devpost-30500",
@@ -140,7 +140,7 @@
     "Machine Learning/AI",
     "Social Good"
    ],
-   "joined": 394,
+   "joined": 395,
    "source": "Devpost",
    "excerpt": "A student hackathon and ideathon to build creative tech solutions for real community problems.",
    "prizes": [
@@ -364,7 +364,7 @@
    "themes": [
     "Beginner Friendly"
    ],
-   "joined": 34,
+   "joined": 35,
    "source": "Devpost",
    "excerpt": "DataJam is SFU's annual data science case competition. Work with real-world data, develop recommendations, and present to a 12-judge panel.",
    "prizes": [
@@ -402,7 +402,7 @@
     "Machine Learning/AI",
     "Productivity"
    ],
-   "joined": 2571,
+   "joined": 2572,
    "source": "Devpost",
    "excerpt": "Bring Your Skills to UGOS",
    "prizes": [
@@ -498,7 +498,7 @@
     "Machine Learning/AI",
     "Web"
    ],
-   "joined": 6266,
+   "joined": 6268,
    "source": "Devpost",
    "excerpt": "Accelerate your VR development journey with Meta VR Start and compete for $1M in cash prizes",
    "prizes": [
@@ -786,6 +786,19 @@
    "page": "bridge-the-gap-hacks-30456"
   },
   {
+   "id": "at-671",
+   "title": "Africa's Talking WIT Kampala November Hackathon: EdTech",
+   "host": "Africa’s Talking",
+   "url": "https://community.africastalking.com/events/details/africas-talking-africas-talking-women-in-tech-community-presents-africas-talking-wit-kampala-november-hackathon-edtech/",
+   "mode": "In person",
+   "place": "Mukono, Uganda",
+   "starts": "2026-11-21",
+   "ends": "2026-11-21",
+   "deadline": "2026-11-21",
+   "source": "Africa’s Talking",
+   "page": "africa-s-talking-wit-kampala-november-hackathon-edtech-671"
+  },
+  {
    "id": "devpost-31796",
    "title": "SafeSpace Hacks",
    "host": "SafeSpace",
@@ -871,7 +884,7 @@
     "Low/No Code",
     "Social Good"
    ],
-   "joined": 31,
+   "joined": 32,
    "source": "Devpost",
    "excerpt": "Join EvoHacks 2 to compete for great prizes, build connections with other hackers, and get valuable feedback for our top industry judges.",
    "prizes": [
@@ -1188,6 +1201,32 @@
    "page": "buildyourownwebsite-31683"
   },
   {
+   "id": "at-695",
+   "title": "Africa's Talking Women in Tech Hackathon: Edtech Solutions - Nairobi",
+   "host": "Africa’s Talking",
+   "url": "https://community.africastalking.com/events/details/africas-talking-africas-talking-women-in-tech-community-presents-africas-talking-women-in-tech-hackathon-edtech-solutions-nairobi/",
+   "mode": "In person",
+   "place": "Nairobi, Kenya",
+   "starts": "2026-11-25",
+   "ends": "2026-11-25",
+   "deadline": "2026-11-25",
+   "source": "Africa’s Talking",
+   "page": "africa-s-talking-women-in-tech-hackathon-edtech-solutions-na-695"
+  },
+  {
+   "id": "at-688",
+   "title": "Africa's Talking Open Hackathon: Hospitality & Tourism - Nairobi Kenya",
+   "host": "Africa’s Talking",
+   "url": "https://community.africastalking.com/events/details/africas-talking-africas-talking-open-community-east-africa-presents-africas-talking-open-hackathon-hospitality-amp-tourism-nairobi-kenya-1/",
+   "mode": "In person",
+   "place": "Nairobi, Kenya",
+   "starts": "2026-11-26",
+   "ends": "2026-11-26",
+   "deadline": "2026-11-26",
+   "source": "Africa’s Talking",
+   "page": "africa-s-talking-open-hackathon-hospitality-tourism-nairobi-688"
+  },
+  {
    "id": "devpost-31907",
    "title": "Build Your First AI App",
    "host": "Yasir Insights",
@@ -1202,7 +1241,7 @@
     "Machine Learning/AI",
     "Web"
    ],
-   "joined": 557,
+   "joined": 558,
    "source": "Devpost",
    "excerpt": "Build your first AI app in 30 days! Create chatbots, study and documents assistants. A tools, or productivity apps. Beginner-friendly, free to join, and open to creative ideas.",
    "prizes": [
@@ -1213,6 +1252,19 @@
     }
    ],
    "page": "build-your-first-ai-app-31907"
+  },
+  {
+   "id": "at-684",
+   "title": "Innovate Mombasa: Hospitality and Tourism Hackathon",
+   "host": "Africa’s Talking",
+   "url": "https://community.africastalking.com/events/details/africas-talking-africas-talking-open-community-east-africa-presents-innovate-mombasa-hospitality-and-tourism-hackathon/",
+   "mode": "In person",
+   "place": "Mombasa, Kenya",
+   "starts": "2026-11-27",
+   "ends": "2026-11-27",
+   "deadline": "2026-11-27",
+   "source": "Africa’s Talking",
+   "page": "innovate-mombasa-hospitality-and-tourism-hackathon-684"
   },
   {
    "id": "devpost-31826",
@@ -1385,6 +1437,32 @@
    "page": "global-ai-builder-s-challenge-31826"
   },
   {
+   "id": "at-708",
+   "title": "Africa's Talking Open Hackathon: Hospitality & Tourism - Dar es Salaam, Tanzania",
+   "host": "Africa’s Talking",
+   "url": "https://community.africastalking.com/events/details/africas-talking-africas-talking-open-community-east-africa-presents-africas-talking-open-hackathon-hospitality-amp-tourism-dar-es-salaam-tanzania/",
+   "mode": "In person",
+   "place": "Dar Es Salaam, Tanzania",
+   "starts": "2026-11-28",
+   "ends": "2026-11-28",
+   "deadline": "2026-11-28",
+   "source": "Africa’s Talking",
+   "page": "africa-s-talking-open-hackathon-hospitality-tourism-dar-es-s-708"
+  },
+  {
+   "id": "at-701",
+   "title": "AT Open Hackathon: Hospitality & Tourism Solutions - Kano, Nigeria",
+   "host": "Africa’s Talking",
+   "url": "https://community.africastalking.com/events/details/africas-talking-africas-talking-open-community-west-africa-hub-presents-at-open-hackathon-hospitality-amp-tourism-solutions-kano-nigeria/",
+   "mode": "In person",
+   "place": "Kano, Nigeria",
+   "starts": "2026-11-28",
+   "ends": "2026-11-28",
+   "deadline": "2026-11-28",
+   "source": "Africa’s Talking",
+   "page": "at-open-hackathon-hospitality-tourism-solutions-kano-nigeria-701"
+  },
+  {
    "id": "devpost-31808",
    "title": "#BuildHybridAI 2026",
    "host": "Google",
@@ -1400,7 +1478,7 @@
     "Mobile",
     "Web"
    ],
-   "joined": 2245,
+   "joined": 2247,
    "source": "Devpost",
    "excerpt": "Build AI apps that run on-device and in the cloud with Firebase AI Logic.",
    "prizes": [
@@ -1627,6 +1705,23 @@
    "page": "code-for-change-31794"
   },
   {
+   "id": "lablab-kfszsmh56xha2sjssxedgxze",
+   "title": "AMD AI League",
+   "host": "lablab",
+   "url": "https://lablab.build/ai-hackathons/amd-lablab-ai-academy-challenge",
+   "mode": "Online",
+   "place": "Online",
+   "starts": "2026-09-01",
+   "ends": "2026-12-01",
+   "deadline": "2026-12-01",
+   "excerpt": "Six Matches. One leaderboard. Build on AMD, earn points and compete for prizes.",
+   "themes": [
+    "Machine Learning/AI"
+   ],
+   "source": "lablab",
+   "page": "amd-ai-league-kfszsmh5"
+  },
+  {
    "id": "devpost-31960",
    "title": "ML Empowerment Build Challenge 4.0",
    "host": "ML Empowerment Foundation",
@@ -1674,7 +1769,7 @@
     "Machine Learning/AI",
     "Open Ended"
    ],
-   "joined": 13928,
+   "joined": 13935,
    "source": "Devpost",
    "excerpt": "Build something wicked and git commit to the darkness.",
    "prizes": [
@@ -1931,7 +2026,7 @@
     "Machine Learning/AI",
     "Low/No Code"
    ],
-   "joined": 621,
+   "joined": 622,
    "source": "Devpost",
    "excerpt": "A holiday design challenge with Nano Banana in Adobe Photoshop",
    "prizes": [
@@ -2076,7 +2171,7 @@
     "Beginner Friendly",
     "Gaming"
    ],
-   "joined": 1201,
+   "joined": 1202,
    "source": "Devpost",
    "excerpt": "Join Reddit to build incredible daily games!",
    "prizes": [
@@ -2343,7 +2438,7 @@
     "Machine Learning/AI",
     "Productivity"
    ],
-   "joined": 327,
+   "joined": 328,
    "source": "Devpost",
    "excerpt": "An open source, embedded database for AI agents",
    "prizes": [
@@ -2438,6 +2533,19 @@
    "page": "build-4-all-31297"
   },
   {
+   "id": "at-703",
+   "title": "Africa’s Talking Lagos: End-of-Year Hackathon",
+   "host": "Africa’s Talking",
+   "url": "https://community.africastalking.com/events/details/africas-talking-africas-talking-open-community-west-africa-hub-presents-africas-talking-lagos-end-of-year-hackathon/",
+   "mode": "In person",
+   "place": "Lagos, Nigeria",
+   "starts": "2026-12-12",
+   "ends": "2026-12-12",
+   "deadline": "2026-12-12",
+   "source": "Africa’s Talking",
+   "page": "africa-s-talking-lagos-end-of-year-hackathon-703"
+  },
+  {
    "id": "devpost-32072",
    "title": "InnovateHER Hackathon: Girls Who Code",
    "host": "Girls Who Code",
@@ -2495,7 +2603,7 @@
     "Machine Learning/AI",
     "Open Ended"
    ],
-   "joined": 1611,
+   "joined": 1612,
    "source": "Devpost",
    "excerpt": "The power to shape the world",
    "prizes": [
@@ -2699,7 +2807,7 @@
     "Machine Learning/AI",
     "Productivity"
    ],
-   "joined": 383,
+   "joined": 384,
    "source": "Devpost",
    "excerpt": "Create AI agents that give founders back their most valuable asset: time to think.",
    "prizes": [
@@ -2865,7 +2973,7 @@
     "Enterprise",
     "Productivity"
    ],
-   "joined": 3440,
+   "joined": 3446,
    "source": "Devpost",
    "excerpt": "Build on Forge, extend Atlassian products, and turn connected context into powerful new apps for teams — win your share of $120K.",
    "prizes": [
@@ -3317,7 +3425,7 @@
     "Web",
     "Social Good"
    ],
-   "joined": 612,
+   "joined": 614,
    "source": "Devpost",
    "excerpt": "Join the global initiative to help build the infrastructure and first pages of the open agentic web",
    "prizes": [
