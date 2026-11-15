@@ -1,9 +1,9 @@
 {
- "updated": "2026-11-14",
- "company_count": 52,
- "role_count": 486,
- "local_role_count": 229,
- "roles_scanned": 3728,
+ "updated": "2026-11-15",
+ "company_count": 51,
+ "role_count": 483,
+ "local_role_count": 232,
+ "roles_scanned": 3730,
  "sources": [
   "Himalayas",
   "Jobicy"
@@ -56,17 +56,8 @@
   {
    "company": "Xperteez Technology",
    "platform": "himalayas",
-   "eligible": 10,
-   "total": 10,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "G2i",
-   "platform": "himalayas",
-   "eligible": 9,
-   "total": 9,
+   "eligible": 11,
+   "total": 11,
    "locations": [
     "Worldwide"
    ]
@@ -119,6 +110,15 @@
   },
   {
    "company": "Health Hue Digital",
+   "platform": "himalayas",
+   "eligible": 7,
+   "total": 7,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "G2i",
    "platform": "himalayas",
    "eligible": 7,
    "total": 7,
@@ -183,15 +183,6 @@
    ]
   },
   {
-   "company": "Clera",
-   "platform": "himalayas",
-   "eligible": 2,
-   "total": 2,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
    "company": "ASG Company",
    "platform": "himalayas",
    "eligible": 2,
@@ -213,7 +204,7 @@
    "company": "RustLabs",
    "platform": "himalayas",
    "eligible": 2,
-   "total": 2,
+   "total": 3,
    "locations": [
     "Worldwide"
    ]
@@ -302,6 +293,15 @@
   },
   {
    "company": "Tugi Tark",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Clera",
    "platform": "himalayas",
    "eligible": 1,
    "total": 1,
@@ -440,15 +440,6 @@
    "platform": "himalayas",
    "eligible": 1,
    "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Invisible Technologies",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 2,
    "locations": [
     "Worldwide"
    ]
