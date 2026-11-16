@@ -180,6 +180,54 @@ function page(j, slug, body, hasCard) {
     '</div></main>\n</body>\n</html>\n';
 }
 
+// /jobs/role/: every role page, grouped by employer, as plain links. /jobs/ builds
+// its list in the browser, and links that only exist after JavaScript runs are
+// found late by search engines (Search Console: "Discovered - currently not
+// indexed"). This page gives every role page an ordinary link.
+var REGION_ORDER = { Kenya: 0, 'Rest of Africa': 1, Remote: 2 };
+function hub(rows, updated) {
+  var byCo = {};
+  rows.forEach(function (j) { (byCo[j.company] = byCo[j.company] || []).push(j); });
+  var cos = Object.keys(byCo).sort(function (a, b) { return a.toLowerCase() < b.toLowerCase() ? -1 : 1; });
+  var url = SITE + '/jobs/role/';
+  var title = 'Open tech roles by employer';
+  var desc = rows.length + ' open tech roles at ' + cos.length + ' employers in Kenya, across Africa and remote, read from the employers’ own hiring systems. Updated every few hours.';
+  var day = String(updated || '').slice(0, 10);
+  var sections = cos.map(function (c) {
+    var list = byCo[c].sort(function (a, b) { return (REGION_ORDER[a.region] - REGION_ORDER[b.region]) || (a.title < b.title ? -1 : 1); });
+    return '  <section class="hub-co"><h2>' + esc(c) + ' <span class="n">' + list.length + '</span></h2>\n  <ul>\n' + list.map(function (j) {
+      var where = j.region === 'Remote' ? 'Remote' : (j.location || j.region);
+      return '    <li><a href="/jobs/role/' + j.page + '/">' + esc(j.title) + '</a> <span class="where">' + esc(where) + '</span></li>';
+    }).join('\n') + '\n  </ul></section>';
+  }).join('\n');
+  var jump = cos.map(function (c, i) { return '<a href="#co-' + i + '">' + esc(c) + '</a>'; }).join(' ');
+  sections = sections.replace(/<section class="hub-co">/g, (function () { var i = 0; return function () { return '<section class="hub-co" id="co-' + (i++) + '">'; }; })());
+  return '<!DOCTYPE html>\n<html lang="en">\n<head>\n' +
+    '  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n' +
+    '  <title>' + esc(title) + ' | The Tech Hut</title>\n' +
+    '  <meta name="description" content="' + esc(desc) + '">\n' +
+    '  <meta name="robots" content="index, follow">\n' +
+    '  <link rel="canonical" href="' + url + '">\n' +
+    '  <meta property="og:type" content="website">\n  <meta property="og:site_name" content="The Tech Hut">\n' +
+    '  <meta property="og:title" content="' + esc(title) + '">\n  <meta property="og:description" content="' + esc(desc) + '">\n' +
+    '  <meta property="og:url" content="' + url + '">\n  <meta property="og:image" content="' + SITE + '/assets/img/social/jobs.jpg">\n' +
+    '  <link rel="stylesheet" href="/assets/css/thh.css">\n' +
+    '  <style>.hub-jump{font-size:14px;line-height:1.9;margin:0 0 28px}.hub-jump a{margin-right:12px;white-space:nowrap}' +
+    '.hub-co{border-top:2px solid var(--ink);padding-top:10px;margin-bottom:26px}.hub-co h2{font-size:22px;margin:0 0 8px}' +
+    '.hub-co .n{font-family:var(--mono);font-size:13px;color:var(--dim);font-weight:400}.hub-co ul{list-style:none;padding:0;margin:0}' +
+    '.hub-co li{padding:7px 0;border-bottom:1px solid var(--rule);font-size:16px}.hub-co .where{color:var(--dim);font-size:14px;margin-left:6px}</style>\n' +
+    '</head>\n<body>\n<a class="skip" href="#main">Skip to content</a>\n' +
+    '<header class="masthead"><div class="wrap masthead-main"><a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>' +
+    '<nav class="sitenav" aria-label="Site"><a href="/blog/daily/">Daily</a><a href="/jobs/" aria-current="page">Jobs</a><a href="/remote/">Remote</a><a href="/cv-pack/">CV Pack</a><a href="/blog/">Blog</a></nav></div></header>\n' +
+    '<main id="main"><div class="wrap" style="max-width:860px;padding:40px 0 64px">\n' +
+    '  <p><a href="/jobs/">&larr; Search and filter on the jobs board</a></p>\n' +
+    '  <h1>' + esc(title) + '</h1>\n' +
+    '  <p class="lede">' + esc(desc) + (day ? ' Last updated ' + esc(day) + '.' : '') + '</p>\n' +
+    '  <p class="hub-jump">' + jump + '</p>\n' + sections + '\n' +
+    '  <p style="font-size:14px">Each role links to the employer’s own posting to apply. The Tech Hut does not take applications, and no employer pays to be listed. Get new roles by email every morning with the <a href="/jobs/daily/">daily job alert</a>.</p>\n' +
+    '</div></main>\n</body>\n</html>\n';
+}
+
 async function main() {
   var board = JSON.parse(fs.readFileSync(BOARD, 'utf8'));
   var bodies = {};
@@ -218,6 +266,8 @@ async function main() {
     fs.writeFileSync(path.join(dir, 'index.html'), page(pageJob, slug, bodies[j.id] ? cleanBody(bodies[j.id], j.id) : '', hasCard));
     if (indexable) urls.push({ loc: SITE + '/jobs/role/' + slug + '/', lastmod: (postedOn(pageJob) || board.updated).slice(0, 10) });
   }
+  fs.writeFileSync(path.join(OUT, 'index.html'), hub(rows, board.updated));
+  urls.unshift({ loc: SITE + '/jobs/role/', lastmod: String(board.updated || '').slice(0, 10) });
   fs.writeFileSync(path.join(OUT, 'sitemap.xml'),
     '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     urls.map(function (u) { return '  <url><loc>' + u.loc + '</loc><lastmod>' + u.lastmod + '</lastmod></url>'; }).join('\n') +
