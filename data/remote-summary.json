@@ -1,9 +1,9 @@
 {
- "updated": "2026-11-15",
- "company_count": 51,
- "role_count": 483,
- "local_role_count": 232,
- "roles_scanned": 3730,
+ "updated": "2026-11-16",
+ "company_count": 52,
+ "role_count": 479,
+ "local_role_count": 237,
+ "roles_scanned": 3724,
  "sources": [
   "Himalayas",
   "Jobicy"
@@ -12,8 +12,8 @@
   {
    "company": "Canonical",
    "platform": "greenhouse",
-   "eligible": 239,
-   "total": 317,
+   "eligible": 238,
+   "total": 316,
    "locations": [
     "Home based - EMEA",
     "Home based - EMEA; Office Based - London, UK",
@@ -26,8 +26,8 @@
   {
    "company": "micro1",
    "platform": "himalayas",
-   "eligible": 66,
-   "total": 66,
+   "eligible": 52,
+   "total": 52,
    "locations": [
     "Worldwide"
    ]
@@ -45,19 +45,28 @@
    ]
   },
   {
-   "company": "Banco Plata, S.A., Instituci\u00f3n de Banca M\u00faltiple",
+   "company": "Xperteez Technology",
    "platform": "himalayas",
-   "eligible": 12,
-   "total": 15,
+   "eligible": 17,
+   "total": 17,
    "locations": [
     "Worldwide"
    ]
   },
   {
-   "company": "Xperteez Technology",
+   "company": "Clera",
    "platform": "himalayas",
-   "eligible": 11,
-   "total": 11,
+   "eligible": 13,
+   "total": 13,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Banco Plata, S.A., Instituci\u00f3n de Banca M\u00faltiple",
+   "platform": "himalayas",
+   "eligible": 12,
+   "total": 15,
    "locations": [
     "Worldwide"
    ]
@@ -100,25 +109,7 @@
    ]
   },
   {
-   "company": "Hivex",
-   "platform": "himalayas",
-   "eligible": 7,
-   "total": 7,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
    "company": "Health Hue Digital",
-   "platform": "himalayas",
-   "eligible": 7,
-   "total": 7,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "G2i",
    "platform": "himalayas",
    "eligible": 7,
    "total": 7,
@@ -164,10 +155,19 @@
    ]
   },
   {
+   "company": "G2i",
+   "platform": "himalayas",
+   "eligible": 3,
+   "total": 3,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
    "company": "Turing",
    "platform": "greenhouse",
    "eligible": 2,
-   "total": 48,
+   "total": 45,
    "locations": [
     "Global - Remote",
     "Global - Remote; United States"
@@ -177,9 +177,18 @@
    "company": "Sun King",
    "platform": "pinpoint",
    "eligible": 2,
-   "total": 186,
+   "total": 185,
    "locations": [
     "Global"
+   ]
+  },
+  {
+   "company": "Opinov8",
+   "platform": "himalayas",
+   "eligible": 2,
+   "total": 2,
+   "locations": [
+    "Worldwide"
    ]
   },
   {
@@ -193,6 +202,15 @@
   },
   {
    "company": "Keepgo",
+   "platform": "himalayas",
+   "eligible": 2,
+   "total": 2,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Hivex",
    "platform": "himalayas",
    "eligible": 2,
    "total": 2,
@@ -301,15 +319,6 @@
    ]
   },
   {
-   "company": "Clera",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
    "company": "EVB",
    "platform": "himalayas",
    "eligible": 1,
@@ -329,15 +338,6 @@
   },
   {
    "company": "Scopic",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Opinov8",
    "platform": "himalayas",
    "eligible": 1,
    "total": 1,
@@ -445,6 +445,24 @@
    ]
   },
   {
+   "company": "Documo Inc.",
+   "platform": "jobicy",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Anywhere"
+   ]
+  },
+  {
+   "company": "Nethermind",
+   "platform": "jobicy",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Anywhere"
+   ]
+  },
+  {
    "company": "Kayzen",
    "platform": "jobicy",
    "eligible": 1,
@@ -469,15 +487,6 @@
    "total": 1,
    "locations": [
     "Anywhere"
-   ]
-  },
-  {
-   "company": "TRM Labs",
-   "platform": "jobicy",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "EMEA,  USA"
    ]
   },
   {
