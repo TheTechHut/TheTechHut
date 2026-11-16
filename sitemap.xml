@@ -582,4 +582,10 @@
     <changefreq>never</changefreq>
     <priority>0.60</priority>
   </url>
+  <url>
+    <loc>https://thetechhut.co/blog/remote-jobs-africa/</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
 </urlset>
