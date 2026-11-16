@@ -16,6 +16,21 @@
         "source": "/blog/daily/index.html",
         "destination": "/blog/daily/",
         "type": 301
+      },
+      {
+        "source": "/content{,/**}",
+        "destination": "/shop/",
+        "type": 301
+      },
+      {
+        "source": "/entrepreneurial_challenge/projects{,/}",
+        "destination": "/entrepreneurial_challenge/",
+        "type": 301
+      },
+      {
+        "source": "/subscribe{,/}",
+        "destination": "/blog/daily/#subscribe",
+        "type": 301
       }
     ],
     "headers": [
@@ -91,6 +106,15 @@
           {
             "key": "Cache-Control",
             "value": "public, max-age=0, must-revalidate"
+          }
+        ]
+      },
+      {
+        "source": "/data/**",
+        "headers": [
+          {
+            "key": "X-Robots-Tag",
+            "value": "noindex"
           }
         ]
       }
