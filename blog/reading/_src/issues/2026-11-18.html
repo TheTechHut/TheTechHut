@@ -1,0 +1,40 @@
+<!-- date: Wednesday, 18 November 2026 -->
+<!-- number: Nº 3 -->
+<!-- image: https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop -->
+<!-- alt: A green Android robot figure beside a smartphone that shows the word android on a black screen -->
+<p class="lede">This week: getting your first Android app all the way onto Google Play, why library authors should tighten their R8 keep rules, how Netflix lets an AI agent hunt for performance bugs, Tailscale's case for a world with 100 times more programmers, and what Java 27 changes for code you already run.</p>
+
+<article class="pick">
+  <span class="kicker">Mobile</span>
+  <h3><a href="https://www.freecodecamp.org/news/build-publish-native-android-app-from-jetpack-compose-to-google-play-store-handbook" target="_blank" rel="noopener">How to Build and Publish a Native Android App in 2026: From Jetpack Compose to the Google Play Store</a></h3>
+  <p class="src">Nikheel Vishwas Savant &middot; freeCodeCamp &middot; 19 October 2026</p>
+  <p>Most Android tutorials stop once the app runs on the emulator. This long, free handbook keeps going until the app is live on Google Play. You build a small notes app with Jetpack Compose, Room and Navigation 3, then work through the parts that trip up first-time publishers: the upload key and signing, the app bundle, the privacy policy and Data safety form, the store listing and the review. It also spells out a rule many solo developers discover late: a personal Play account created after November 2023 must run a closed test with at least 12 testers for 14 days before it can apply for production. Budget for the 25 dollar registration fee, and read this before you promise a client a launch date.</p>
+</article>
+
+<article class="pick">
+  <span class="kicker">Android</span>
+  <h3><a href="https://developer.android.com/blog/posts/ship-smarter-keep-rules-unblock-dex-optimization" target="_blank" rel="noopener">Ship smarter keep rules: How library providers can unblock app-level DEX code optimization</a></h3>
+  <p class="src">Breana Tate &middot; Android Developers Blog &middot; 17 November 2026</p>
+  <p>R8 shrinks and optimises Android apps, but it can only remove what its keep rules allow, and many of those rules arrive inside the libraries an app depends on. One broad rule in an SDK, such as keeping every class in a package, leaves dead code in every app that uses it. With Google Play now setting DEX optimisation thresholds, Breana Tate asks library authors to tidy up: prefer code generation to reflection, keep only the entry points you really reflect on, write conditional rules for optional modules, and ship the rules inside the library rather than in a README. Essential if you maintain an SDK that other apps embed, such as a payments or analytics library, and a good guide for auditing your own app's rules too.</p>
+</article>
+
+<article class="pick">
+  <span class="kicker">AI</span>
+  <h3><a href="https://blog.bytebytego.com/p/how-netflix-uses-ai-agents-for-performance" target="_blank" rel="noopener">How Netflix Uses AI Agents for Performance Engineering</a></h3>
+  <p class="src">ByteByteGo &middot; 3 November 2026</p>
+  <p>A useful counterweight to agent hype: Netflix gives a language model a narrow job inside a fixed pipeline. The agent reads production profiling data, limited to the service's own code so that JVM and framework internals do not distract it, and proposes fixes. The bugs it found were ordinary ones, such as a regular expression run on every request that took 46% of a service's CPU, and a metric lookup repeated so often that it used 66%. Nothing ships on the model's say-so: existing tests, a canary measured against a baseline and a human-reviewed pull request decide. The write-up also describes a shared catalogue of known anti-patterns, kept as Markdown files in Git. The page carries two sponsor slots.</p>
+</article>
+
+<article class="pick">
+  <span class="kicker">Careers</span>
+  <h3><a href="https://tailscale.com/blog/100x-more-programmers" target="_blank" rel="noopener">100x more programmers</a></h3>
+  <p class="src">Avery Pennarun &middot; Tailscale &middot; 5 November 2026</p>
+  <p>Tailscale's co-founder predicts that AI coding agents will turn something like a billion people into programmers, most of whom will never call themselves that, building small tools for their own use. His starting point is a colleague who replaced an ad-filled coin-flip app with one she made herself, and found that setting up a machine, SSH and networking was harder than the code. The point worth taking away for your career is that writing code is becoming the easy part, while connecting, securing and running software is not. Read it as an opinion piece from a vendor: the big numbers are forecasts without sources, and the fixes it proposes are Tailscale's own products.</p>
+</article>
+
+<article class="pick">
+  <span class="kicker">Java</span>
+  <h3><a href="https://foojay.io/today/java-27-whats-new/" target="_blank" rel="noopener">Java 27: What’s New?</a></h3>
+  <p class="src">Loic Mathieu &middot; Foojay.io &middot; 12 November 2026</p>
+  <p>Java 27 is a quiet release, and this round-up is a quick way to see what changes for services you already run. Two new defaults matter most. G1 is now the garbage collector in every environment, including small containers where the JVM used to fall back to Serial, and compact object headers are switched on, which in the benchmark Mathieu cites cut heap use on SPECjbb2015 by 22%. TLS 1.3 gains hybrid post-quantum key exchange, and Flight Recorder now hides sensitive command-line arguments and environment variables by default. Nothing leaves preview this time, so structured concurrency and lazy constants stay experimental. A handy checklist before you move a backend up from an older JDK.</p>
+</article>
