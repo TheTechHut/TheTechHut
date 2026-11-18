@@ -1,9 +1,9 @@
 {
- "updated": "2026-11-16",
- "company_count": 52,
- "role_count": 479,
- "local_role_count": 237,
- "roles_scanned": 3724,
+ "updated": "2026-11-18",
+ "company_count": 50,
+ "role_count": 482,
+ "local_role_count": 233,
+ "roles_scanned": 3682,
  "sources": [
   "Himalayas",
   "Jobicy"
@@ -13,7 +13,7 @@
    "company": "Canonical",
    "platform": "greenhouse",
    "eligible": 238,
-   "total": 316,
+   "total": 317,
    "locations": [
     "Home based - EMEA",
     "Home based - EMEA; Office Based - London, UK",
@@ -26,8 +26,8 @@
   {
    "company": "micro1",
    "platform": "himalayas",
-   "eligible": 52,
-   "total": 52,
+   "eligible": 59,
+   "total": 59,
    "locations": [
     "Worldwide"
    ]
@@ -35,8 +35,8 @@
   {
    "company": "Supabase",
    "platform": "ashby",
-   "eligible": 49,
-   "total": 78,
+   "eligible": 50,
+   "total": 79,
    "locations": [
     "Remote, Global",
     "Remote, EMEA",
@@ -56,8 +56,8 @@
   {
    "company": "Clera",
    "platform": "himalayas",
-   "eligible": 13,
-   "total": 13,
+   "eligible": 15,
+   "total": 15,
    "locations": [
     "Worldwide"
    ]
@@ -65,8 +65,8 @@
   {
    "company": "Banco Plata, S.A., Instituci\u00f3n de Banca M\u00faltiple",
    "platform": "himalayas",
-   "eligible": 12,
-   "total": 15,
+   "eligible": 11,
+   "total": 13,
    "locations": [
     "Worldwide"
    ]
@@ -127,22 +127,24 @@
    ]
   },
   {
-   "company": "Zapier",
-   "platform": "ashby",
+   "company": "Turing",
+   "platform": "greenhouse",
    "eligible": 3,
-   "total": 10,
+   "total": 45,
    "locations": [
-    "NAMER; India; European Union; EMEA",
-    "NAMER; EMEA"
+    "Brazil; Colombia, Huila, Colombia; Global - Remote",
+    "Global - Remote",
+    "Global - Remote; United States"
    ]
   },
   {
-   "company": "G2i Inc.",
-   "platform": "himalayas",
+   "company": "Zapier",
+   "platform": "ashby",
    "eligible": 3,
-   "total": 3,
+   "total": 11,
    "locations": [
-    "Worldwide"
+    "NAMER; India; European Union; EMEA",
+    "NAMER; EMEA"
    ]
   },
   {
@@ -155,35 +157,16 @@
    ]
   },
   {
-   "company": "G2i",
-   "platform": "himalayas",
-   "eligible": 3,
-   "total": 3,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Turing",
-   "platform": "greenhouse",
-   "eligible": 2,
-   "total": 45,
-   "locations": [
-    "Global - Remote",
-    "Global - Remote; United States"
-   ]
-  },
-  {
    "company": "Sun King",
    "platform": "pinpoint",
    "eligible": 2,
-   "total": 185,
+   "total": 182,
    "locations": [
     "Global"
    ]
   },
   {
-   "company": "Opinov8",
+   "company": "VAme Ltd",
    "platform": "himalayas",
    "eligible": 2,
    "total": 2,
@@ -192,7 +175,7 @@
    ]
   },
   {
-   "company": "ASG Company",
+   "company": "Opinov8",
    "platform": "himalayas",
    "eligible": 2,
    "total": 2,
@@ -210,19 +193,10 @@
    ]
   },
   {
-   "company": "Hivex",
-   "platform": "himalayas",
-   "eligible": 2,
-   "total": 2,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
    "company": "RustLabs",
    "platform": "himalayas",
    "eligible": 2,
-   "total": 3,
+   "total": 6,
    "locations": [
     "Worldwide"
    ]
@@ -247,7 +221,7 @@
    ]
   },
   {
-   "company": "Babou AI",
+   "company": "G2i Inc.",
    "platform": "himalayas",
    "eligible": 2,
    "total": 2,
@@ -256,7 +230,7 @@
    ]
   },
   {
-   "company": "VAme Ltd",
+   "company": "Babou AI",
    "platform": "himalayas",
    "eligible": 2,
    "total": 2,
@@ -310,6 +284,42 @@
    ]
   },
   {
+   "company": "uPhone eSIM",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Boosta",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Featherless AI",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Welocalize",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
    "company": "Tugi Tark",
    "platform": "himalayas",
    "eligible": 1,
@@ -347,15 +357,6 @@
   },
   {
    "company": "Search Atlas",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "apricot",
    "platform": "himalayas",
    "eligible": 1,
    "total": 1,
@@ -445,7 +446,16 @@
    ]
   },
   {
-   "company": "Documo Inc.",
+   "company": "EDB",
+   "platform": "jobicy",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "EMEA"
+   ]
+  },
+  {
+   "company": "Phantom",
    "platform": "jobicy",
    "eligible": 1,
    "total": 1,
@@ -463,34 +473,7 @@
    ]
   },
   {
-   "company": "Kayzen",
-   "platform": "jobicy",
-   "eligible": 1,
-   "total": 3,
-   "locations": [
-    "EMEA"
-   ]
-  },
-  {
-   "company": "Spotify",
-   "platform": "jobicy",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "EMEA"
-   ]
-  },
-  {
    "company": "Softgic",
-   "platform": "jobicy",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Anywhere"
-   ]
-  },
-  {
-   "company": "Language Services Associates",
    "platform": "jobicy",
    "eligible": 1,
    "total": 1,
