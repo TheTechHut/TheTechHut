@@ -1,0 +1,40 @@
+<!-- date: Wednesday, 11 November 2026 -->
+<!-- number: Nº 4 -->
+<!-- image: https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop -->
+<!-- alt: Lines of colourful code on a dark editor screen -->
+<p class="lede">This week: how GitHub rebuilt Git storage so thousands of AI agents can push to one repository; keeping AI-written code honest with tests written as data; durable execution for agents that run for days; the unusual consensus algorithm Cloudflare picked over Raft; and what an attack using paid human CAPTCHA solvers looks like from the server's side.</p>
+
+<article class="pick">
+  <span class="kicker">Infrastructure</span>
+  <h3><a href="https://github.blog/engineering/architecture-optimization/inside-githubs-new-git-storage-architecture/" target="_blank" rel="noopener">Inside GitHub's new Git storage architecture</a></h3>
+  <p class="src">Karthik Raman and Brian Celenza &middot; The GitHub Blog &middot; 5 November 2026</p>
+  <p>Busy repositories used to see a few dozen writes a second in short bursts. With AI agents pushing around the clock, one repository's daily requests quadrupled in two months, so GitHub rebuilt how Git data is stored. Machines that serve a repository now keep only a cache on disk; Git objects live in cloud blob storage, and only the branch and tag pointers go through a small replicated log that commits each update by quorum. In testing it handled 5,000 agents on one repository and 7,200 pushes a second. It is a clean lesson in separating the small piece that needs agreement from the large piece that does not.</p>
+</article>
+
+<article class="pick">
+  <span class="kicker">Testing</span>
+  <h3><a href="https://martinfowler.com/articles/tests-as-data.html" target="_blank" rel="noopener">Tests as data: ensuring AI-generated code does what we want</a></h3>
+  <p class="src">Matteo Vaccari &middot; martinfowler.com &middot; 11 November 2026</p>
+  <p>When an AI agent writes both the code and its tests, it can quietly weaken the tests to make them pass. Vaccari's answer is to write the important tests as a plain table, in YAML or CSV, with the name, input and expected result on each row, and let one small generic runner execute them. A person can read the table in a minute, see which cases are missing, and notice if a row changes. He extends the idea to stateful features with a given-when-then text format whose failures show up as readable diffs. A practical technique you can try on your next project, with or without AI.</p>
+</article>
+
+<article class="pick">
+  <span class="kicker">AI</span>
+  <h3><a href="https://martinfowler.com/articles/durable-execution-agents.html" target="_blank" rel="noopener">Long-horizon agents and durable execution</a></h3>
+  <p class="src">Kiran Prakash &middot; martinfowler.com &middot; 10 November 2026</p>
+  <p>An agent that reorders stock or chases a supplier may run for days and will meet crashes, timeouts and odd replies. Durable execution runtimes such as Temporal, Restate, Inngest, DBOS and Cloudflare Workflows record the result of every call to the outside world, so a crashed workflow can replay and carry on where it stopped. Prakash's point is that this is necessary but not enough: you still need idempotency keys so retries do not place two orders, compensating steps to undo work, and checks that a decision made before a long wait is still valid. Read it before you build an agent that does more than chat.</p>
+</article>
+
+<article class="pick">
+  <span class="kicker">Distributed systems</span>
+  <h3><a href="https://blog.cloudflare.com/choosing-quepaxa/" target="_blank" rel="noopener">Choosing QuePaxa, an unusual consensus algorithm</a></h3>
+  <p class="src">João Pedro Leite, Bob Halley and James Larisch &middot; The Cloudflare Blog &middot; 11 November 2026</p>
+  <p>Raft and Paxos rely on one leader, and when that leader slows down the whole system can stall; Cloudflare once had a dashboard run 80 times slower for six hours because of a failing switch. This post explains QuePaxa, a less familiar algorithm in which any node can make progress if the leader fails, and why Cloudflare chose it for a new control-plane service. In their tests, decisions fell to about 65% of normal during a leader failure and recovered within a minute, without ever stopping. The authors are candid that it is less battle-tested than Raft. A rewarding read if you want to understand consensus beyond the textbook.</p>
+</article>
+
+<article class="pick">
+  <span class="kicker">Security</span>
+  <h3><a href="https://www.freecodecamp.org/news/captcha-farm-attack/" target="_blank" rel="noopener">What a CAPTCHA Farm Attack Actually Looks Like</a></h3>
+  <p class="src">Reetain Raina &middot; freeCodeCamp &middot; 4 November 2026</p>
+  <p>A CAPTCHA does not stop a bot that pays people to solve it: solving services charge roughly half a dollar to two dollars per thousand puzzles and answer in 10 to 25 seconds. This article shows the traces such an attack leaves, such as forms filled instantly followed by a pause, no natural mouse movement, data-centre network fingerprints and pages visited without loading their images, and the defences that work: watching the whole session rather than the puzzle, fingerprinting, proof-of-work rate limits and monitoring after login. Useful if you run sign-ups, ticketing or anything bots like to farm.</p>
+</article>

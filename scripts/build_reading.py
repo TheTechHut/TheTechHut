@@ -302,7 +302,7 @@ def main():
                 f'                    excerpt: {json.dumps(titles)},\n'
                 '                    author: "The Tech Hut",\n'
                 f'                    date: {json.dumps(d["date"].strftime("%B %-d, %Y"))},\n'
-                '                    image: %s,\n' % json.dumps(html.unescape(re.sub(r'w=\d+', 'w=800', d['img']))) +
+                f'                    image: {json.dumps(html.unescape(re.sub(r"w=[0-9]+", "w=800", d["img"])))},\n'
                 '                    likes: 0,\n'
                 f'                    url: "/blog/reading/{d["slug"]}/"\n'
                 '                },')

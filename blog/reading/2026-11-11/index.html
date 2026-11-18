@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Reading List, Wednesday, 11 November 2026 | The Tech Hut Blog</title>
+  <meta name="description" content="This week&#x27;s picks: Inside GitHub&#x27;s new Git storage architecture; Tests as data: ensuring AI-generated code does what we want; Long-horizon agents and durable execution; Choosing QuePaxa, an unusual consensus algorithm; What a CAPTCHA Farm Attack Actually Looks Like.">
+  <meta name="author" content="The Tech Hut">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#073B4C">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/assets/img/favicon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+  <link rel="canonical" href="https://thetechhut.co/blog/reading/2026-11-11/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="The Tech Hut">
+  <meta property="og:title" content="The Reading List, Wednesday, 11 November 2026 | The Tech Hut Blog">
+  <meta property="og:description" content="This week&#x27;s picks: Inside GitHub&#x27;s new Git storage architecture; Tests as data: ensuring AI-generated code does what we want; Long-horizon agents and durable execution; Choosing QuePaxa, an unusual consensus algorithm; What a CAPTCHA Farm Attack Actually Looks Like.">
+  <meta property="og:url" content="https://thetechhut.co/blog/reading/2026-11-11/">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop">
+  <meta property="og:image:alt" content="Lines of colourful code on a dark editor screen">
+  <meta property="og:locale" content="en_KE">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Reading List, Wednesday, 11 November 2026 | The Tech Hut Blog">
+  <meta name="twitter:description" content="This week&#x27;s picks: Inside GitHub&#x27;s new Git storage architecture; Tests as data: ensuring AI-generated code does what we want; Long-horizon agents and durable execution; Choosing QuePaxa, an unusual consensus algorithm; What a CAPTCHA Farm Attack Actually Looks Like.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/thh.css">
+  <script src="/assets/js/motion.js?v=1"></script>
+  <link rel="stylesheet" href="/assets/css/blog.css">
+</head>
+<body>
+<style>
+  .reading .lede { font-size: 19px; line-height: 1.6; color: var(--text); margin: 0 0 18px; }
+  article.pick { border-top: 2px solid var(--ink); padding: 14px 0 24px; }
+  article.pick .kicker { display: block; font-family: var(--mono); font-size: 12px; text-transform: uppercase;
+    letter-spacing: .08em; color: var(--green); margin-bottom: 8px; }
+  article.pick h3 { font-size: 26px; line-height: 1.15; margin: 0 0 6px; }
+  article.pick h3 a { color: var(--ink); text-decoration: none; }
+  article.pick h3 a:hover { text-decoration: underline; text-decoration-thickness: 1px; }
+  article.pick h3 a::after { content: " \2197"; font-size: .7em; color: var(--green); }
+  article.pick .src { font-family: var(--mono); font-size: 12.5px; color: var(--dim); margin: 0 0 10px; }
+  article.pick p { font-size: 17px; line-height: 1.65; margin: 0 0 10px; }
+  .how { border-top: 1px solid var(--rule); margin-top: 8px; padding-top: 14px; font-size: 15px; color: var(--muted); }
+  .ed-nav { display: flex; gap: 16px; border-top: 2px solid var(--ink); margin-top: 26px; padding-top: 14px; }
+  .ed-nav a { color: var(--ink); text-decoration: none; font-weight: 700; }
+  .ed-nav small { display: block; font-family: var(--mono); font-weight: 400; font-size: 11.5px; text-transform: uppercase; color: var(--dim); }
+  .ed-nav .next { text-align: right; margin-left: auto; }
+  @media (max-width: 600px) { article.pick h3 { font-size: 22px; } }
+</style>
+
+<a class="skip" href="#main">Skip to content</a>
+    <header class="masthead">
+        <div class="masthead-top"><div class="wrap"><span>Kenya's tech careers, reported daily</span><span class="hide-sm"><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a> &middot; <a href="mailto:info@thetechhut.co">info@thetechhut.co</a></span></div></div>
+        <div class="wrap masthead-main">
+            <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+            <nav class="sitenav" aria-label="Site"><a href="/blog/daily/">Daily</a><a href="/jobs/">Jobs</a><a href="/hackathons/">Hackathons</a><a href="/remote/">Remote</a><a href="/cv-pack/">CV Pack</a><a href="/shop/">Shop</a><a href="/events/">Events</a><a href="/games/">Games</a><a href="/apprenticeship/">Apprenticeship</a><a href="/blog/" aria-current="page">Blog</a></nav>
+        </div>
+    </header>
+<nav class="blogbar" aria-label="Blog sections"><div class="wrap"><a class="name" href="/blog/">The Tech Hut <em>Blog</em></a><a class="cat" href="/blog/#latest">Latest</a><a class="cat" href="/blog/daily/">Daily Savannah</a><a class="cat on" href="/blog/reading/" aria-current="page">Reading list</a><span class="sep" aria-hidden="true"></span><a class="cat" href="/blog/#c=ai">AI</a><a class="cat" href="/blog/#c=fintech">Fintech</a><a class="cat" href="/blog/#c=careers">Careers</a><a class="sub" href="#subscribe">Weekly email</a></div></nav>
+
+<main id="main">
+  <header class="art-hero">
+    <figure class="pic"><img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop" alt="Lines of colourful code on a dark editor screen" fetchpriority="high" decoding="async" onerror="this.remove()"></figure>
+    <div class="panel">
+      <a class="cat" href="/blog/reading/">The Reading List &middot; Nº 4</a>
+      <h1>5 things worth reading this week</h1>
+      <p class="by"><b>The Tech Hut</b> &middot; <time datetime="2026-11-11">Wednesday, 11 November 2026</time></p>
+    </div>
+  </header>
+
+  <div class="wrap art-body">
+    <section class="reading">
+      <p class="lede">This week: how GitHub rebuilt Git storage so thousands of AI agents can push to one repository; keeping AI-written code honest with tests written as data; durable execution for agents that run for days; the unusual consensus algorithm Cloudflare picked over Raft; and what an attack using paid human CAPTCHA solvers looks like from the server's side.</p>
+
+      <article class="pick">
+  <span class="kicker">Infrastructure</span>
+  <h3><a href="https://github.blog/engineering/architecture-optimization/inside-githubs-new-git-storage-architecture/" target="_blank" rel="noopener">Inside GitHub's new Git storage architecture</a></h3>
+  <p class="src">Karthik Raman and Brian Celenza &middot; The GitHub Blog &middot; 5 November 2026</p>
+  <p>Busy repositories used to see a few dozen writes a second in short bursts. With AI agents pushing around the clock, one repository's daily requests quadrupled in two months, so GitHub rebuilt how Git data is stored. Machines that serve a repository now keep only a cache on disk; Git objects live in cloud blob storage, and only the branch and tag pointers go through a small replicated log that commits each update by quorum. In testing it handled 5,000 agents on one repository and 7,200 pushes a second. It is a clean lesson in separating the small piece that needs agreement from the large piece that does not.</p>
+</article>
+
+<article class="pick">
+  <span class="kicker">Testing</span>
+  <h3><a href="https://martinfowler.com/articles/tests-as-data.html" target="_blank" rel="noopener">Tests as data: ensuring AI-generated code does what we want</a></h3>
+  <p class="src">Matteo Vaccari &middot; martinfowler.com &middot; 11 November 2026</p>
+  <p>When an AI agent writes both the code and its tests, it can quietly weaken the tests to make them pass. Vaccari's answer is to write the important tests as a plain table, in YAML or CSV, with the name, input and expected result on each row, and let one small generic runner execute them. A person can read the table in a minute, see which cases are missing, and notice if a row changes. He extends the idea to stateful features with a given-when-then text format whose failures show up as readable diffs. A practical technique you can try on your next project, with or without AI.</p>
+</article>
+
+<article class="pick">
+  <span class="kicker">AI</span>
+  <h3><a href="https://martinfowler.com/articles/durable-execution-agents.html" target="_blank" rel="noopener">Long-horizon agents and durable execution</a></h3>
+  <p class="src">Kiran Prakash &middot; martinfowler.com &middot; 10 November 2026</p>
+  <p>An agent that reorders stock or chases a supplier may run for days and will meet crashes, timeouts and odd replies. Durable execution runtimes such as Temporal, Restate, Inngest, DBOS and Cloudflare Workflows record the result of every call to the outside world, so a crashed workflow can replay and carry on where it stopped. Prakash's point is that this is necessary but not enough: you still need idempotency keys so retries do not place two orders, compensating steps to undo work, and checks that a decision made before a long wait is still valid. Read it before you build an agent that does more than chat.</p>
+</article>
+
+<article class="pick">
+  <span class="kicker">Distributed systems</span>
+  <h3><a href="https://blog.cloudflare.com/choosing-quepaxa/" target="_blank" rel="noopener">Choosing QuePaxa, an unusual consensus algorithm</a></h3>
+  <p class="src">João Pedro Leite, Bob Halley and James Larisch &middot; The Cloudflare Blog &middot; 11 November 2026</p>
+  <p>Raft and Paxos rely on one leader, and when that leader slows down the whole system can stall; Cloudflare once had a dashboard run 80 times slower for six hours because of a failing switch. This post explains QuePaxa, a less familiar algorithm in which any node can make progress if the leader fails, and why Cloudflare chose it for a new control-plane service. In their tests, decisions fell to about 65% of normal during a leader failure and recovered within a minute, without ever stopping. The authors are candid that it is less battle-tested than Raft. A rewarding read if you want to understand consensus beyond the textbook.</p>
+</article>
+
+<article class="pick">
+  <span class="kicker">Security</span>
+  <h3><a href="https://www.freecodecamp.org/news/captcha-farm-attack/" target="_blank" rel="noopener">What a CAPTCHA Farm Attack Actually Looks Like</a></h3>
+  <p class="src">Reetain Raina &middot; freeCodeCamp &middot; 4 November 2026</p>
+  <p>A CAPTCHA does not stop a bot that pays people to solve it: solving services charge roughly half a dollar to two dollars per thousand puzzles and answer in 10 to 25 seconds. This article shows the traces such an attack leaves, such as forms filled instantly followed by a pause, no natural mouse movement, data-centre network fingerprints and pages visited without loading their images, and the defences that work: watching the whole session rather than the puzzle, fingerprinting, proof-of-work rate limits and monitoring after login. Useful if you run sign-ups, ticketing or anything bots like to farm.</p>
+</article>
+
+      <p class="how">How we pick: each week we go through the developer feeds we follow, read the originals, and keep the few a developer in Kenya would want to know about. Every link goes to the author&rsquo;s own page.</p>
+
+      <div class="ed-nav"><a class="prev" href="/blog/reading/2026-11-04/"><small>Previous list</small>&larr; Wednesday, 4 November 2026</a><a class="next" href="/blog/reading/2026-11-18/"><small>Next list</small>Wednesday, 18 November 2026 &rarr;</a></div>
+    </section>
+
+    <aside class="side">
+      <div class="picks"><h2>Earlier lists</h2><ul><li><a href="/blog/reading/2026-11-04/">The Reading List</a><time>Wednesday, 4 November 2026</time></li><li><a href="/blog/reading/2026-10-29/">The Reading List</a><time>Thursday, 29 October 2026</time></li><li><a href="/blog/reading/2026-10-21/">The Reading List</a><time>Wednesday, 21 October 2026</time></li></ul></div>
+      <div class="promo">
+        <span class="label">Also from us</span>
+        <h3>The Daily Savannah</h3>
+        <p>Kenyan tech news every weekday evening, with every story linked to its source.</p>
+        <a class="link-arrow" href="/blog/daily/">Read the latest edition &rarr;</a>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="pagefoot"><div class="wrap">
+  <p>The Reading List is a weekly set of developer articles picked by The Tech Hut. Every link goes to the original author; the notes are ours.</p>
+</div></div>
+<footer class="sitefoot">
+        <div class="wrap">
+            <div class="sitefoot-grid">
+                <div>
+                    <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+                    <p>Helping Kenyans into tech work: jobs you can take from Nairobi, a daily read on the industry, and projects with mentors.</p>
+                </div>
+                <div>
+                    <h4>Read</h4>
+                    <ul>
+                        <li><a href="/blog/daily/">Daily Savannah</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Find work</h4>
+                    <ul>
+                        <li><a href="/jobs/">Jobs board</a></li>
+                        <li><a href="/jobs/daily/">Daily job alert</a></li>
+                        <li><a href="/remote/">Remote-from-Kenya list</a></li>
+                        <li><a href="/cv-pack/">CV Pack</a></li>
+                        <li><a href="/early-access/">Early Access</a></li>
+                        <li><a href="/shop/">Everything we make</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="/apprenticeship/">Apprenticeship</a></li>
+                        <li><a href="/events/">Events</a></li>
+                        <li><a href="/hackathons/">Hackathons</a></li>
+                        <li><a href="/communities/">Tech communities</a></li>
+                        <li><a href="/tools/">Tools</a></li>
+                        <li><a href="/prompt-marketplace/">Prompt marketplace</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Employers</h4>
+                    <ul>
+                        <li><a href="/advertise/">Advertise</a></li>
+                        <li><a href="/jobs-for-your-community/">A jobs board for your community</a></li>
+                        <li><a href="/recruiters/">Recruiters</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sitefoot-base">
+                <span>&copy; 2026 The Tech Hut Community</span>
+                <a href="mailto:info@thetechhut.co">info@thetechhut.co</a>
+                <span>+254 115 017 058</span>
+                <a href="/data_privacy_policy/">Privacy</a>
+                <a href="https://linkedin.com/company/digital-transformation-partner/" rel="noopener">LinkedIn</a>
+                <a href="https://x.com/Ekiprop_kimutai" rel="noopener">X</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

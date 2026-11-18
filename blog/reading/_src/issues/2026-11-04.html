@@ -1,0 +1,47 @@
+<!-- date: Wednesday, 4 November 2026 -->
+<!-- number: Nº 3 -->
+<!-- image: https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop -->
+<!-- alt: Two young developers looking at code on a monitor together -->
+<p class="lede">This week: what GitHub's Octoverse says about developers and AI agents, including how far Kenya has to go; why experienced developers are wary of letting agents run unattended; how Cloudflare cut memory use by 85% on one of its busiest systems; eight technical SEO problems you can find with curl; working with design studios as a freelance developer; and what took the internet offline last quarter.</p>
+
+<article class="pick">
+  <span class="kicker">Careers</span>
+  <h3><a href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener">Octoverse: Commits, pushes, reach new highs in 2026 as developers build with agents</a></h3>
+  <p class="src">GitHub Staff &middot; The GitHub Blog &middot; 28 October 2026</p>
+  <p>GitHub's yearly report is the best single picture of where developers and their tools are going. Over the 12 months to September, developers pushed 17.9 billion times, more than in 2024 and 2025 combined, and by September more than 40% of pull requests were started by an AI agent. TypeScript is now the most-used language, Python is second, and Rust doubled in a year. For Kenyan readers, the report names Kenya, Nigeria and South Africa among Africa's fast-growing developer communities, but also shows Kenya has covered only about a fifth of the distance to its 2030 projection, the least of the 14 countries charted. Read it for the trend lines; the forecasts are GitHub's own models.</p>
+</article>
+
+<article class="pick">
+  <span class="kicker">AI</span>
+  <h3><a href="https://martinfowler.com/rachels-ramblings/good-devs-wary.html" target="_blank" rel="noopener">Why are good developers so wary of agentic development?</a></h3>
+  <p class="src">Rachel Laycock &middot; martinfowler.com &middot; 29 October 2026</p>
+  <p>Thoughtworks' CTO argues that senior developers' caution about AI agents is about trust, not fear for their jobs: almost every system running in production today was built by people whose work is understood, while systems written mostly by agents have no track record yet. She describes a one-week experiment in which a team built an airline app with no human-written code, spending two-thirds of the time on design and a third on tests and checks, and still ended up with a build that was often red. A thoughtful read if you lead a team or are deciding how much to hand over to coding agents, and a good argument for why tests and design skills matter more, not less.</p>
+</article>
+
+<article class="pick">
+  <span class="kicker">Infrastructure</span>
+  <h3><a href="https://blog.cloudflare.com/dns-targeted-zone-builds/" target="_blank" rel="noopener">How we halved DNS build delay and cut memory use by 85%</a></h3>
+  <p class="src">Alex Fattouche &middot; The Cloudflare Blog &middot; 2 November 2026</p>
+  <p>Cloudflare used to rebuild a customer's whole DNS zone, sometimes more than 20 million records held in memory at once, every time a setting changed. This post explains how the team switched to building only the part of a zone that a change can affect, and how they proved the shortcut safe: byte-for-byte comparisons with full builds and a mirror system checking a fifth of production zones. Average memory fell from 49 GiB to 7 GiB, and the worst delays fell from 14.6 minutes to 1.2. A clear example of a pattern you can reuse at much smaller scale: work out the smallest safe change, verify it against the slow way, and roll it out gradually.</p>
+</article>
+
+<article class="pick">
+  <span class="kicker">Web</span>
+  <h3><a href="https://www.freecodecamp.org/news/fix-common-technical-seo-issues/" target="_blank" rel="noopener">How to Find and Fix Common Technical SEO Issues on Your Website</a></h3>
+  <p class="src">Saar Twito &middot; freeCodeCamp &middot; 3 November 2026</p>
+  <p>A practical tutorial that builds a small site with one technical SEO mistake on each page, then shows how to find and fix all eight: a missing page that returns 200 instead of 404, a chain of redirects, a robots.txt rule that blocks more than intended, a noindex hidden in an HTTP header, a canonical tag pointing at the home page, a vague title, a "link" that is really a span with a click handler, and content that only appears after JavaScript runs. Most of the checks need nothing more than curl and Google Search Console. Worth an hour if you build sites for clients, because these are the problems that quietly keep pages out of Google.</p>
+</article>
+
+<article class="pick">
+  <span class="kicker">Freelancing</span>
+  <h3><a href="https://www.freecodecamp.org/news/freelance-developer-design-studios/" target="_blank" rel="noopener">How to Partner with Design Studios on Client Builds: A Freelance Developer's Guide</a></h3>
+  <p class="src">Reetain Raina &middot; freeCodeCamp &middot; 3 November 2026</p>
+  <p>Many freelance developers in Nairobi get work through design and branding studios rather than directly from clients. This guide covers the parts of that relationship that go wrong: deciding up front whether you are just implementing or also advising on feasibility, asking who has the final say when design and engineering disagree, building the error and empty states designers often leave out, and agreeing what happens after launch, from bug-fix periods to who owns the code and the hosting. It does not cover pricing or contract terms, so pair it with your own rate card, but its handover checklist alone is worth keeping.</p>
+</article>
+
+<article class="pick">
+  <span class="kicker">Internet</span>
+  <h3><a href="https://blog.cloudflare.com/q3-2026-internet-disruption-summary/" target="_blank" rel="noopener">What took the Internet offline in Q3 2026</a></h3>
+  <p class="src">Lai Yi Ohlsen &middot; The Cloudflare Blog &middot; 27 October 2026</p>
+  <p>Cloudflare counted 49 internet disruptions between July and September: 19 ordered by governments, most of them exam shutdowns in Iraq; 14 caused by power failures; and the rest by storms, earthquakes, cable damage and a cyberattack. In Africa, renewed conflict in Tigray led to a 10-day shutdown that took the region's traffic to zero, and Kenya, Botswana and Gabon appear among countries with power-related outages. A useful reminder, if you run anything that serves users across the continent, to design for the internet going away for hours at a time.</p>
+</article>
