@@ -1,9 +1,9 @@
 {
- "updated": "2026-11-18",
- "company_count": 50,
- "role_count": 482,
- "local_role_count": 233,
- "roles_scanned": 3682,
+ "updated": "2026-11-21",
+ "company_count": 59,
+ "role_count": 486,
+ "local_role_count": 231,
+ "roles_scanned": 3727,
  "sources": [
   "Himalayas",
   "Jobicy"
@@ -12,8 +12,8 @@
   {
    "company": "Canonical",
    "platform": "greenhouse",
-   "eligible": 238,
-   "total": 317,
+   "eligible": 239,
+   "total": 319,
    "locations": [
     "Home based - EMEA",
     "Home based - EMEA; Office Based - London, UK",
@@ -24,19 +24,10 @@
    ]
   },
   {
-   "company": "micro1",
-   "platform": "himalayas",
-   "eligible": 59,
-   "total": 59,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
    "company": "Supabase",
    "platform": "ashby",
-   "eligible": 50,
-   "total": 79,
+   "eligible": 52,
+   "total": 81,
    "locations": [
     "Remote, Global",
     "Remote, EMEA",
@@ -45,10 +36,19 @@
    ]
   },
   {
+   "company": "micro1",
+   "platform": "himalayas",
+   "eligible": 44,
+   "total": 44,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
    "company": "Xperteez Technology",
    "platform": "himalayas",
-   "eligible": 17,
-   "total": 17,
+   "eligible": 27,
+   "total": 27,
    "locations": [
     "Worldwide"
    ]
@@ -56,8 +56,8 @@
   {
    "company": "Clera",
    "platform": "himalayas",
-   "eligible": 15,
-   "total": 15,
+   "eligible": 19,
+   "total": 19,
    "locations": [
     "Worldwide"
    ]
@@ -65,10 +65,24 @@
   {
    "company": "Banco Plata, S.A., Instituci\u00f3n de Banca M\u00faltiple",
    "platform": "himalayas",
-   "eligible": 11,
-   "total": 13,
+   "eligible": 14,
+   "total": 17,
    "locations": [
     "Worldwide"
+   ]
+  },
+  {
+   "company": "Oyster",
+   "platform": "ashby",
+   "eligible": 9,
+   "total": 20,
+   "locations": [
+    "EMEA; Romania; Bulgaria; Portugal; Canada; United Kingdom; Spain; Poland",
+    "EMEA; Romania; Hungary; Bulgaria; Ireland; Slovakia; United Kingdom; Poland; Estonia; South Africa; Greece",
+    "EMEA; Romania; Hungary; Netherlands; Portugal; Slovakia; Spain; Poland; South Africa; Greece",
+    "EMEA; Toronto; Ireland; Portugal; United Kingdom; Spain",
+    "Global; Portugal; Spain; Brazil; Colombia; Canada",
+    "EMEA; Romania; Portugal; Spain; Poland; South Africa"
    ]
   },
   {
@@ -81,40 +95,8 @@
     "UNITED STATES - Remote, EMEA - Remote, LATAM - Remote",
     "UNITED STATES - Remote, LATAM - Remote, EMEA - Remote",
     "United States - Remote, EMEA - Remote",
-    "EMEA - Remote",
-    "EMEA - Remote, UNITED STATES - Remote"
-   ]
-  },
-  {
-   "company": "Oyster",
-   "platform": "ashby",
-   "eligible": 8,
-   "total": 21,
-   "locations": [
-    "EMEA; Romania; Bulgaria; Portugal; Canada; United Kingdom; Spain; Poland",
-    "EMEA; Romania; Hungary; Bulgaria; Ireland; Slovakia; United Kingdom; Poland; Estonia; South Africa; Greece",
-    "EMEA; Romania; Hungary; Netherlands; Portugal; Slovakia; Spain; Poland; South Africa; Greece",
-    "EMEA; Ireland; Portugal; United Kingdom; Spain; Brazil; Canada",
-    "EMEA; Toronto; Ireland; Portugal; United Kingdom; Spain",
-    "Global; Portugal; Spain; Brazil; Colombia; Canada"
-   ]
-  },
-  {
-   "company": "TELUS Digital",
-   "platform": "himalayas",
-   "eligible": 8,
-   "total": 8,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Health Hue Digital",
-   "platform": "himalayas",
-   "eligible": 7,
-   "total": 7,
-   "locations": [
-    "Worldwide"
+    "UNITED STATES - Remote, EMEA - Remote",
+    "EMEA - Remote"
    ]
   },
   {
@@ -127,28 +109,35 @@
    ]
   },
   {
-   "company": "Turing",
-   "platform": "greenhouse",
-   "eligible": 3,
-   "total": 45,
+   "company": "Health Hue Digital",
+   "platform": "himalayas",
+   "eligible": 6,
+   "total": 6,
    "locations": [
-    "Brazil; Colombia, Huila, Colombia; Global - Remote",
-    "Global - Remote",
-    "Global - Remote; United States"
+    "Worldwide"
    ]
   },
   {
    "company": "Zapier",
    "platform": "ashby",
    "eligible": 3,
-   "total": 11,
+   "total": 9,
    "locations": [
     "NAMER; India; European Union; EMEA",
     "NAMER; EMEA"
    ]
   },
   {
-   "company": "Agentplace",
+   "company": "Welocalize",
+   "platform": "himalayas",
+   "eligible": 3,
+   "total": 3,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "VAme Ltd",
    "platform": "himalayas",
    "eligible": 3,
    "total": 3,
@@ -160,13 +149,31 @@
    "company": "Sun King",
    "platform": "pinpoint",
    "eligible": 2,
-   "total": 182,
+   "total": 203,
    "locations": [
     "Global"
    ]
   },
   {
-   "company": "VAme Ltd",
+   "company": "Invisible Technologies",
+   "platform": "himalayas",
+   "eligible": 2,
+   "total": 3,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "ASG Company",
+   "platform": "himalayas",
+   "eligible": 2,
+   "total": 2,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Nordic Investin Group",
    "platform": "himalayas",
    "eligible": 2,
    "total": 2,
@@ -184,62 +191,16 @@
    ]
   },
   {
+   "company": "EVB",
+   "platform": "himalayas",
+   "eligible": 2,
+   "total": 2,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
    "company": "Keepgo",
-   "platform": "himalayas",
-   "eligible": 2,
-   "total": 2,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "RustLabs",
-   "platform": "himalayas",
-   "eligible": 2,
-   "total": 6,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Flex",
-   "platform": "himalayas",
-   "eligible": 2,
-   "total": 2,
-   "locations": [
-    "Worldwide",
-    "Anywhere"
-   ]
-  },
-  {
-   "company": "Nordic Investin Group",
-   "platform": "himalayas",
-   "eligible": 2,
-   "total": 2,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "G2i Inc.",
-   "platform": "himalayas",
-   "eligible": 2,
-   "total": 2,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Babou AI",
-   "platform": "himalayas",
-   "eligible": 2,
-   "total": 2,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Motu Novu LLC",
    "platform": "himalayas",
    "eligible": 2,
    "total": 2,
@@ -251,9 +212,18 @@
    "company": "Cockroach Labs",
    "platform": "greenhouse",
    "eligible": 1,
-   "total": 13,
+   "total": 12,
    "locations": [
     "Global"
+   ]
+  },
+  {
+   "company": "Turing",
+   "platform": "greenhouse",
+   "eligible": 1,
+   "total": 31,
+   "locations": [
+    "Global - Remote"
    ]
   },
   {
@@ -269,7 +239,7 @@
    "company": "PostHog",
    "platform": "ashby",
    "eligible": 1,
-   "total": 10,
+   "total": 9,
    "locations": [
     "Remote (EMEA)"
    ]
@@ -278,13 +248,13 @@
    "company": "Taptap Send",
    "platform": "ashby",
    "eligible": 1,
-   "total": 27,
+   "total": 28,
    "locations": [
     "Global"
    ]
   },
   {
-   "company": "uPhone eSIM",
+   "company": "Secure Privacy",
    "platform": "himalayas",
    "eligible": 1,
    "total": 1,
@@ -293,7 +263,7 @@
    ]
   },
   {
-   "company": "Boosta",
+   "company": "LaunchBrightly",
    "platform": "himalayas",
    "eligible": 1,
    "total": 1,
@@ -302,7 +272,7 @@
    ]
   },
   {
-   "company": "Featherless AI",
+   "company": "Askable",
    "platform": "himalayas",
    "eligible": 1,
    "total": 1,
@@ -311,7 +281,7 @@
    ]
   },
   {
-   "company": "Welocalize",
+   "company": "Defuse Labs",
    "platform": "himalayas",
    "eligible": 1,
    "total": 1,
@@ -320,7 +290,7 @@
    ]
   },
   {
-   "company": "Tugi Tark",
+   "company": "Eastwood & Cleef, LLC",
    "platform": "himalayas",
    "eligible": 1,
    "total": 1,
@@ -329,7 +299,88 @@
    ]
   },
   {
-   "company": "EVB",
+   "company": "Logos",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Institute of Free Technology",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "CoinsPaid",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Fly",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Growe Talents",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "RecruitingDash",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Support Tech LLC",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Religiate Interactive Brand Consulting Pvt Ltd",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Solution Community",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Flex",
    "platform": "himalayas",
    "eligible": 1,
    "total": 1,
@@ -356,6 +407,51 @@
    ]
   },
   {
+   "company": "Tugi Tark",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Elvoro",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "EMCD",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "uPhone eSIM",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Featherless AI",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
    "company": "Search Atlas",
    "platform": "himalayas",
    "eligible": 1,
@@ -374,75 +470,66 @@
    ]
   },
   {
-   "company": "RecruitingDash",
-   "platform": "himalayas",
+   "company": "Spotify",
+   "platform": "jobicy",
    "eligible": 1,
    "total": 1,
    "locations": [
-    "Worldwide"
+    "EMEA"
    ]
   },
   {
-   "company": "Eastwood & Cleef, LLC",
-   "platform": "himalayas",
+   "company": "Welo Global",
+   "platform": "jobicy",
    "eligible": 1,
-   "total": 1,
+   "total": 3,
    "locations": [
-    "Worldwide"
+    "Anywhere"
    ]
   },
   {
-   "company": "Solution Community",
-   "platform": "himalayas",
+   "company": "RevenueCat",
+   "platform": "jobicy",
    "eligible": 1,
    "total": 1,
    "locations": [
-    "Worldwide"
+    "APAC,  EMEA,  LATAM,  Canada,  USA"
    ]
   },
   {
-   "company": "vCluster Labs",
-   "platform": "himalayas",
+   "company": "Elevenlabs",
+   "platform": "jobicy",
    "eligible": 1,
    "total": 1,
    "locations": [
-    "Worldwide"
+    "Anywhere"
    ]
   },
   {
-   "company": "MonetizeMore",
-   "platform": "himalayas",
+   "company": "TRM Labs",
+   "platform": "jobicy",
    "eligible": 1,
    "total": 1,
    "locations": [
-    "Worldwide"
+    "EMEA,  LATAM,  Canada,  USA"
    ]
   },
   {
-   "company": "Religiate Interactive Brand Consulting Pvt Ltd",
-   "platform": "himalayas",
+   "company": "Softgic",
+   "platform": "jobicy",
    "eligible": 1,
    "total": 1,
    "locations": [
-    "Worldwide"
+    "Anywhere"
    ]
   },
   {
-   "company": "Support Tech LLC",
-   "platform": "himalayas",
+   "company": "Consensys",
+   "platform": "jobicy",
    "eligible": 1,
    "total": 1,
    "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "CoinsPaid",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
+    "EMEA,  USA"
    ]
   },
   {
@@ -465,15 +552,6 @@
   },
   {
    "company": "Nethermind",
-   "platform": "jobicy",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Anywhere"
-   ]
-  },
-  {
-   "company": "Softgic",
    "platform": "jobicy",
    "eligible": 1,
    "total": 1,

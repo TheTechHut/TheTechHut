@@ -666,4 +666,22 @@
     <changefreq>never</changefreq>
     <priority>0.60</priority>
   </url>
+  <url>
+    <loc>https://thetechhut.co/blog/online-jobs-kenya/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://thetechhut.co/blog/cv-format-sample/</loc>
+    <lastmod>2026-11-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://thetechhut.co/blog/remote-customer-service-jobs-kenya/</loc>
+    <lastmod>2026-11-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
 </urlset>
