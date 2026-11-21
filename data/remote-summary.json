@@ -1,9 +1,9 @@
 {
- "updated": "2026-11-20",
- "company_count": 55,
- "role_count": 483,
- "local_role_count": 232,
- "roles_scanned": 3566,
+ "updated": "2026-11-21",
+ "company_count": 59,
+ "role_count": 486,
+ "local_role_count": 231,
+ "roles_scanned": 3727,
  "sources": [
   "Himalayas",
   "Jobicy"
@@ -12,8 +12,8 @@
   {
    "company": "Canonical",
    "platform": "greenhouse",
-   "eligible": 238,
-   "total": 318,
+   "eligible": 239,
+   "total": 319,
    "locations": [
     "Home based - EMEA",
     "Home based - EMEA; Office Based - London, UK",
@@ -26,8 +26,8 @@
   {
    "company": "Supabase",
    "platform": "ashby",
-   "eligible": 51,
-   "total": 80,
+   "eligible": 52,
+   "total": 81,
    "locations": [
     "Remote, Global",
     "Remote, EMEA",
@@ -38,8 +38,8 @@
   {
    "company": "micro1",
    "platform": "himalayas",
-   "eligible": 41,
-   "total": 41,
+   "eligible": 44,
+   "total": 44,
    "locations": [
     "Worldwide"
    ]
@@ -47,8 +47,8 @@
   {
    "company": "Xperteez Technology",
    "platform": "himalayas",
-   "eligible": 29,
-   "total": 29,
+   "eligible": 27,
+   "total": 27,
    "locations": [
     "Worldwide"
    ]
@@ -56,8 +56,8 @@
   {
    "company": "Clera",
    "platform": "himalayas",
-   "eligible": 21,
-   "total": 21,
+   "eligible": 19,
+   "total": 19,
    "locations": [
     "Worldwide"
    ]
@@ -69,6 +69,20 @@
    "total": 17,
    "locations": [
     "Worldwide"
+   ]
+  },
+  {
+   "company": "Oyster",
+   "platform": "ashby",
+   "eligible": 9,
+   "total": 20,
+   "locations": [
+    "EMEA; Romania; Bulgaria; Portugal; Canada; United Kingdom; Spain; Poland",
+    "EMEA; Romania; Hungary; Bulgaria; Ireland; Slovakia; United Kingdom; Poland; Estonia; South Africa; Greece",
+    "EMEA; Romania; Hungary; Netherlands; Portugal; Slovakia; Spain; Poland; South Africa; Greece",
+    "EMEA; Toronto; Ireland; Portugal; United Kingdom; Spain",
+    "Global; Portugal; Spain; Brazil; Colombia; Canada",
+    "EMEA; Romania; Portugal; Spain; Poland; South Africa"
    ]
   },
   {
@@ -86,29 +100,6 @@
    ]
   },
   {
-   "company": "Oyster",
-   "platform": "ashby",
-   "eligible": 8,
-   "total": 20,
-   "locations": [
-    "EMEA; Romania; Bulgaria; Portugal; Canada; United Kingdom; Spain; Poland",
-    "EMEA; Romania; Hungary; Bulgaria; Ireland; Slovakia; United Kingdom; Poland; Estonia; South Africa; Greece",
-    "EMEA; Romania; Hungary; Netherlands; Portugal; Slovakia; Spain; Poland; South Africa; Greece",
-    "EMEA; Toronto; Ireland; Portugal; United Kingdom; Spain",
-    "Global; Portugal; Spain; Brazil; Colombia; Canada",
-    "EMEA; Romania; Portugal; Spain; Poland; South Africa"
-   ]
-  },
-  {
-   "company": "Health Hue Digital",
-   "platform": "himalayas",
-   "eligible": 7,
-   "total": 7,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
    "company": "Railway",
    "platform": "ashby",
    "eligible": 6,
@@ -118,10 +109,19 @@
    ]
   },
   {
+   "company": "Health Hue Digital",
+   "platform": "himalayas",
+   "eligible": 6,
+   "total": 6,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
    "company": "Zapier",
    "platform": "ashby",
    "eligible": 3,
-   "total": 10,
+   "total": 9,
    "locations": [
     "NAMER; India; European Union; EMEA",
     "NAMER; EMEA"
@@ -137,16 +137,6 @@
    ]
   },
   {
-   "company": "Flex",
-   "platform": "himalayas",
-   "eligible": 3,
-   "total": 3,
-   "locations": [
-    "Worldwide",
-    "Anywhere"
-   ]
-  },
-  {
    "company": "VAme Ltd",
    "platform": "himalayas",
    "eligible": 3,
@@ -156,22 +146,21 @@
    ]
   },
   {
-   "company": "Turing",
-   "platform": "greenhouse",
-   "eligible": 2,
-   "total": 35,
-   "locations": [
-    "Brazil; Colombia, Huila, Colombia; Global - Remote",
-    "Global - Remote"
-   ]
-  },
-  {
    "company": "Sun King",
    "platform": "pinpoint",
    "eligible": 2,
-   "total": 187,
+   "total": 203,
    "locations": [
     "Global"
+   ]
+  },
+  {
+   "company": "Invisible Technologies",
+   "platform": "himalayas",
+   "eligible": 2,
+   "total": 3,
+   "locations": [
+    "Worldwide"
    ]
   },
   {
@@ -229,6 +218,15 @@
    ]
   },
   {
+   "company": "Turing",
+   "platform": "greenhouse",
+   "eligible": 1,
+   "total": 31,
+   "locations": [
+    "Global - Remote"
+   ]
+  },
+  {
    "company": "Apollo Agriculture",
    "platform": "lever",
    "eligible": 1,
@@ -250,9 +248,36 @@
    "company": "Taptap Send",
    "platform": "ashby",
    "eligible": 1,
-   "total": 27,
+   "total": 28,
    "locations": [
     "Global"
+   ]
+  },
+  {
+   "company": "Secure Privacy",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "LaunchBrightly",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Askable",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
    ]
   },
   {
@@ -319,15 +344,6 @@
    ]
   },
   {
-   "company": "Invisible Technologies",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 2,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
    "company": "RecruitingDash",
    "platform": "himalayas",
    "eligible": 1,
@@ -356,6 +372,15 @@
   },
   {
    "company": "Solution Community",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Flex",
    "platform": "himalayas",
    "eligible": 1,
    "total": 1,
@@ -445,12 +470,21 @@
    ]
   },
   {
-   "company": "RustLabs",
-   "platform": "himalayas",
+   "company": "Spotify",
+   "platform": "jobicy",
    "eligible": 1,
-   "total": 4,
+   "total": 1,
    "locations": [
-    "Worldwide"
+    "EMEA"
+   ]
+  },
+  {
+   "company": "Welo Global",
+   "platform": "jobicy",
+   "eligible": 1,
+   "total": 3,
+   "locations": [
+    "Anywhere"
    ]
   },
   {
