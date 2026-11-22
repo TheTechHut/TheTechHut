@@ -525,3 +525,33 @@ export the Notion page as Markdown to `private/communities-export.md` and run
 - Times are entered and shown in Nairobi time.
 - The public list is cached for 5 minutes, so visitors may see a new event a
   few minutes after it is published.
+
+## The site dashboard (/admin/)
+
+A private page for running the whole site. Code: `src/admin.js` and `admin/index.html`.
+
+- **Sign-in:** an email link, only sent to addresses in `SITE_ADMINS` (comma-separated;
+  falls back to `EVENTS_ADMINS`, then info@thetechhut.co). Anyone else gets the same
+  answer and no email. The link works once, for 20 minutes; the session lasts 7 days
+  and is checked against the list on every request, so removing an address locks it
+  out at once. Admin tokens have their own kinds, so a marketplace or events session
+  never opens the dashboard.
+- **What it shows:**
+  - *Summary* tiles across the site.
+  - *Site health:* freshness of the daily snapshot, jobs board, hackathons, Daily
+    Savannah and reading list, the Worker's /health, the last run of every GitHub
+    workflow, and the scheduled blog articles. The page reads these itself from
+    public URLs (the site's /data files and sitemap, the GitHub API, raw.githubusercontent).
+  - *Payments* from Paystack (all time, 30 days by product, latest payments, test or live).
+  - *Prompt marketplace:* members (with a CSV download), prompts, sales, top sellers, and
+    a "needs attention" list. Actions: hide, restore or clear reports on any prompt, and
+    resend a purchase's buyer or seller email.
+  - *Email lists* (Brevo subscriber counts), *Events* (with remove for events posted on
+    the site), *Games* (live players, visits, top games) and *Setup* (which settings are
+    on, never their values).
+- **Setup:** `SITE_ADMINS` under `[vars]` in wrangler.toml (or leave it and use the events
+  admins), then deploy. Needs `MARKET_SECRET` and the `EVENTS` object, which are already used
+  by the marketplace and events. The page is kept out of search by robots.txt and an
+  `X-Robots-Tag` header.
+
+Tests: `node test/admin.test.mjs` (part of `npm test`).

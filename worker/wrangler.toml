@@ -18,6 +18,9 @@ compatibility_date = "2026-10-01"
 # The prompt marketplace adds:
 #   wrangler secret put MARKET_SECRET          # any long random string; signs sign-in links and sessions
 #   MARKET_ADMINS (optional var)              # comma-separated emails allowed to remove any prompt
+#
+# The site dashboard (thetechhut.co/admin/) adds:
+#   SITE_ADMINS (optional var)                # comma-separated emails that can open it; defaults to EVENTS_ADMINS, then info@thetechhut.co
 #   BREVO_SENDER_EMAIL, SUBSCRIBE_SECRET
 #
 # Deploying without a custom domain gives you

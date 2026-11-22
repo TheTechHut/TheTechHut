@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
-    "test": "node test/worker.test.mjs && node test/newsletter.test.mjs && node test/games.test.mjs && node test/payguard.test.mjs && node test/market.test.mjs && node test/events.test.mjs",
+    "test": "node test/worker.test.mjs && node test/newsletter.test.mjs && node test/games.test.mjs && node test/payguard.test.mjs && node test/market.test.mjs && node test/events.test.mjs && node test/admin.test.mjs",
     "tail": "wrangler tail"
   },
   "devDependencies": {

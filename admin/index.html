@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | The Tech Hut</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="referrer" content="no-referrer">
+    <meta name="theme-color" content="#073B4C">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,600;6..72,700&amp;family=Source+Sans+3:wght@400;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/thh.css">
+    <style>
+        /* The private site dashboard. Built on thh.css; dense, ruled, no decoration. */
+        [hidden] { display: none !important; }
+        body { background: var(--paper-2); }
+        .ad-top { background: var(--ink); color: #fff; }
+        .ad-top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 12px; padding-bottom: 12px; flex-wrap: wrap; }
+        .ad-top .wordmark { color: #fff; font-size: 22px; }
+        .ad-top .wordmark small { font: 500 12px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--mint); margin-left: 10px; }
+        .ad-who { font-size: 14px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+        .ad-who button { background: none; border: 1px solid rgba(255,255,255,.5); color: #fff; padding: 5px 10px; font: 600 13px var(--sans); cursor: pointer; border-radius: 2px; }
+        .ad-who button:hover { border-color: var(--mint); color: var(--mint); }
+        .ad-nav { position: sticky; top: 0; z-index: 5; background: var(--paper); border-bottom: 1px solid var(--rule); }
+        .ad-nav .wrap { display: flex; gap: 4px 20px; overflow-x: auto; padding-top: 0; padding-bottom: 0; }
+        .ad-nav a { font: 600 14px var(--sans); color: var(--dim); padding: 11px 0; white-space: nowrap; border-bottom: 2px solid transparent; text-decoration: none; }
+        .ad-nav a:hover { color: var(--ink); border-bottom-color: var(--mint); }
+        main.ad { padding: 22px 0 70px; }
+        .ad-sec { background: var(--paper); border-top: 3px solid var(--ink); padding: 18px 22px 22px; margin: 0 0 22px; scroll-margin-top: 54px; }
+        .ad-sec > h2 { font-size: 24px; margin: 0 0 4px; display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+        .ad-sec > h2 small { font: 500 12px var(--mono); color: var(--dim); text-transform: uppercase; letter-spacing: .06em; }
+        .ad-sec h3 { font-size: 17px; margin: 22px 0 8px; font-family: var(--sans); font-weight: 700; color: var(--ink); }
+        .ad-sub { color: var(--dim); font-size: 14.5px; margin: 0 0 14px; }
+        .kpis { display: grid; grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); gap: 8px; margin: 12px 0 4px; }
+        .kpi { background: var(--paper); padding: 12px 14px; border: 1px solid var(--rule); border-top: 2px solid var(--mint); }
+        .kpi b { display: block; font: 600 26px/1.15 var(--serif); color: var(--ink); }
+        .kpi span { display: block; font: 500 11.5px var(--mono); text-transform: uppercase; letter-spacing: .05em; color: var(--dim); margin-top: 4px; }
+        .kpi em { font-style: normal; color: var(--green); font: 600 12.5px var(--sans); }
+        .ad-tw { overflow-x: auto; border-top: 2px solid var(--ink); }
+        .ad-t { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 560px; }
+        .ad-t th { text-align: left; font: 500 11.5px var(--mono); text-transform: uppercase; letter-spacing: .05em; color: var(--dim); padding: 8px 10px 8px 0; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+        .ad-t td { padding: 8px 10px 8px 0; border-bottom: 1px solid var(--rule-2); vertical-align: top; }
+        .ad-t td.n, .ad-t th.n { text-align: right; font-variant-numeric: tabular-nums; }
+        .ad-t td.w { max-width: 340px; }
+        .ad-t a { color: var(--ink); }
+        .ad-t .dim { color: var(--dim); font-size: 13px; }
+        .st { display: inline-block; font: 600 11.5px var(--mono); text-transform: uppercase; letter-spacing: .04em; padding: 2px 7px; border-radius: 2px; white-space: nowrap; }
+        .st.ok { background: #DDF7EE; color: var(--green); }
+        .st.warn { background: #FFF4CC; color: #7A5B00; }
+        .st.bad { background: #FBE3E3; color: var(--red); }
+        .st.off { background: var(--paper-3); color: var(--dim); }
+        .ab { background: none; border: 1px solid var(--rule); color: var(--ink); font: 600 12.5px var(--sans); padding: 3px 8px; cursor: pointer; border-radius: 2px; margin: 0 4px 4px 0; }
+        .ab:hover { border-color: var(--ink); }
+        .ab.danger { color: var(--red); }
+        .ab[disabled] { opacity: .5; cursor: wait; }
+        .ad-tools { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin: 6px 0 10px; }
+        .ad-tools input[type=search] { flex: 1 1 240px; font-size: 15px; padding: 8px 10px; }
+        .ad-err { color: var(--red); font-weight: 600; font-size: 14.5px; }
+        .ad-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 8px 32px; }
+        .ad-signin { max-width: 460px; margin: 60px auto; background: var(--paper); border-top: 3px solid var(--ink); padding: 26px 28px; }
+        .ad-signin h1 { font-size: 30px; margin: 0 0 8px; }
+        .ad-signin input { width: 100%; box-sizing: border-box; font-size: 16px; padding: 11px 12px; margin: 6px 0 14px; }
+        .ad-more { background: none; border: 0; color: var(--green); font: 600 14px var(--sans); cursor: pointer; padding: 8px 0 0; text-decoration: underline; }
+        .ad-toast { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); background: var(--ink); color: #fff; padding: 11px 16px; border-left: 3px solid var(--mint); font-size: 14.5px; z-index: 20; max-width: calc(100vw - 32px); box-sizing: border-box; }
+        .ad-load { color: var(--dim); font: 500 13px var(--mono); }
+        @media (max-width: 640px) { .ad-sec { padding: 16px 14px 18px; } .kpis { grid-template-columns: 1fr 1fr; } .kpi { padding: 10px; } .kpi b { font-size: 20px; } }
+    </style>
+</head>
+<body>
+<header class="ad-top">
+    <div class="wrap">
+        <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span><small>Dashboard</small></a>
+        <div class="ad-who" id="who" hidden><span id="whoEmail"></span><span id="whoAt" class="ad-load" style="color:#cfe"></span><button type="button" id="refresh">Refresh</button><button type="button" id="signout">Sign out</button></div>
+    </div>
+</header>
+
+<section class="ad-signin" id="signin" hidden>
+    <span class="eyebrow">Private</span>
+    <h1>Site dashboard</h1>
+    <p class="ad-sub">Enter your admin email and we will send you a sign-in link. Only admin addresses receive one.</p>
+    <form id="siForm" novalidate>
+        <label class="label" for="siEmail">Email</label>
+        <input type="email" id="siEmail" autocomplete="email" required placeholder="you@thetechhut.co">
+        <button class="btn" type="submit" id="siBtn">Email me a link</button>
+    </form>
+    <p class="formmsg" id="siMsg" role="status"></p>
+</section>
+
+<nav class="ad-nav" id="nav" hidden aria-label="Dashboard sections"><div class="wrap">
+    <a href="#summary">Summary</a><a href="#health">Site health</a><a href="#payments">Payments</a><a href="#market">Marketplace</a>
+    <a href="#lists">Email lists</a><a href="#events">Events</a><a href="#games">Games</a><a href="#config">Setup</a>
+</div></nav>
+
+<main class="ad" id="dash" hidden><div class="wrap">
+    <section class="ad-sec" id="summary"><h2>Summary <small id="sumAt"></small></h2><div class="kpis" id="sumK"></div></section>
+
+    <section class="ad-sec" id="health">
+        <h2>Site health <small>data files, scheduled jobs and articles</small></h2>
+        <p class="ad-sub">What the daily and three-hourly jobs last produced, and how each GitHub workflow last ran. A warning means something is older than it should be.</p>
+        <div class="ad-tw"><table class="ad-t" id="healthT"><thead><tr><th>What</th><th>Last updated</th><th>Status</th><th>Detail</th></tr></thead><tbody></tbody></table></div>
+        <h3>GitHub workflows</h3>
+        <div class="ad-tw"><table class="ad-t" id="wfT"><thead><tr><th>Workflow</th><th>Last run</th><th>Result</th><th>Trigger</th><th></th></tr></thead><tbody></tbody></table></div>
+        <h3>Scheduled blog articles</h3>
+        <div class="ad-tw"><table class="ad-t" id="schedT"><thead><tr><th>Release date</th><th>Article</th><th>Status</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section class="ad-sec" id="payments">
+        <h2>Payments <small id="payMode"></small></h2>
+        <p class="ad-sub">From Paystack: every product on the site, including prompt sales (the full price; sellers' 90% is settled to them by Paystack).</p>
+        <div class="kpis" id="payK"></div>
+        <div class="ad-cols">
+            <div><h3>Last 30 days by product</h3><div class="ad-tw"><table class="ad-t" id="payP" style="min-width:0"><thead><tr><th>Product</th><th class="n">Sales</th><th class="n">KES</th></tr></thead><tbody></tbody></table></div></div>
+            <div><h3>Latest payments</h3><div class="ad-tw"><table class="ad-t" id="payR"><thead><tr><th>When</th><th>Product</th><th>Customer</th><th class="n">KES</th><th>Via</th></tr></thead><tbody></tbody></table></div></div>
+        </div>
+    </section>
+
+    <section class="ad-sec" id="market">
+        <h2>Prompt marketplace <small><a href="/prompt-marketplace/">open</a></small></h2>
+        <div class="kpis" id="mkK"></div>
+        <h3>Needs attention</h3>
+        <p class="ad-sub">Reported or hidden prompts, and sales whose emails did not go out. A prompt reported 5 times hides itself.</p>
+        <div class="ad-tw"><table class="ad-t" id="mkAttn"><thead><tr><th>Prompt</th><th>Seller</th><th class="n">Reports</th><th>State</th><th>Actions</th></tr></thead><tbody></tbody></table></div>
+        <h3>Sales</h3>
+        <div class="ad-tw"><table class="ad-t" id="mkSales"><thead><tr><th>When</th><th>Prompt</th><th>Buyer</th><th>Seller</th><th class="n">KES</th><th>Buyer email</th><th>Seller email</th></tr></thead><tbody></tbody></table></div>
+        <div class="ad-cols">
+            <div><h3>Top sellers</h3><div class="ad-tw"><table class="ad-t" id="mkTop" style="min-width:0"><thead><tr><th>Seller</th><th class="n">Prompts</th><th class="n">Sales</th><th class="n">KES</th></tr></thead><tbody></tbody></table></div></div>
+        </div>
+        <h3>All prompts</h3>
+        <div class="ad-tools"><input type="search" id="mkPq" placeholder="Search prompts or sellers"></div>
+        <div class="ad-tw"><table class="ad-t" id="mkPrompts"><thead><tr><th>Prompt</th><th>Seller</th><th class="n">Price</th><th class="n">Sales</th><th class="n">Reports</th><th>Listed</th><th>Actions</th></tr></thead><tbody></tbody></table></div>
+        <h3>Members</h3>
+        <div class="ad-tools"><input type="search" id="mkMq" placeholder="Search name or email"><button class="ab" type="button" id="mkCsv">Download members (CSV)</button></div>
+        <div class="ad-tw"><table class="ad-t" id="mkMembers"><thead><tr><th>Joined</th><th>Name</th><th>Email</th><th class="n">Posted</th><th class="n">Bought</th><th>Payout</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section class="ad-sec" id="lists">
+        <h2>Email lists <small>Brevo</small></h2>
+        <div class="kpis" id="nlK"></div>
+    </section>
+
+    <section class="ad-sec" id="events">
+        <h2>Events <small><a href="/events/">post or edit on /events/</a></small></h2>
+        <div class="kpis" id="evK"></div>
+        <div class="ad-cols">
+            <div><h3>Coming up</h3><div class="ad-tw"><table class="ad-t" id="evNext" style="min-width:0"><thead><tr><th>When</th><th>Event</th><th>From</th></tr></thead><tbody></tbody></table></div></div>
+            <div><h3>Posted on the site</h3><div class="ad-tw"><table class="ad-t" id="evPosted" style="min-width:0"><thead><tr><th>When</th><th>Event</th><th></th></tr></thead><tbody></tbody></table></div></div>
+        </div>
+    </section>
+
+    <section class="ad-sec" id="games">
+        <h2>Games arcade <small><a href="/games/">open</a></small></h2>
+        <div class="kpis" id="gmK"></div>
+        <div class="ad-cols">
+            <div><h3>This week</h3><div class="ad-tw"><table class="ad-t" id="gmWeek" style="min-width:0"><thead><tr><th>Game</th><th class="n">Plays</th><th class="n">Minutes</th><th class="n">Live</th></tr></thead><tbody></tbody></table></div></div>
+            <div><h3>All time</h3><div class="ad-tw"><table class="ad-t" id="gmAll" style="min-width:0"><thead><tr><th>Game</th><th class="n">Plays</th><th class="n">Minutes</th></tr></thead><tbody></tbody></table></div></div>
+        </div>
+    </section>
+
+    <section class="ad-sec" id="config">
+        <h2>Setup <small>Worker settings, never their values</small></h2>
+        <div class="ad-tw"><table class="ad-t" id="cfgT"><thead><tr><th>Setting</th><th>State</th><th>What it switches on</th></tr></thead><tbody></tbody></table></div>
+    </section>
+</div></main>
+
+<div class="ad-toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script>
+(function () {
+  var API = 'https://thetechhut-pay.thetechhut.workers.dev/';
+  var REPO = 'TheTechHut/TheTechHut', BRANCH = 'chore/redesign';
+  var KEY = 'tthAdminSession';
+  var HOUR = 3600e3, DAY = 24 * HOUR;
+  var PRODUCTS = { 'remote-list': 'Remote-From-Kenya List', 'ats-pass': 'ATS Pass', bundle: 'Job Hunt Bundle', 'early-monthly': 'Early Access (1 month)',
+    'early-quarter': 'Early Access (3 months)', 'early-annual': 'Early Access (1 year)', 'cv-blueprint': 'CV Blueprint', communities: 'Community Database' };
+  var $ = function (id) { return document.getElementById(id); };
+  var data = null;
+
+  /* ---------- helpers ---------- */
+  function sess() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function setSess(v) { try { if (v) localStorage.setItem(KEY, v); else localStorage.removeItem(KEY); } catch (e) {} }
+  function post(path, body) {
+    return fetch(API + path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body || {}) })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { j._status = r.status; return j; }); });
+  }
+  function authed(path, body) {
+    body = body || {}; body.session = sess();
+    return post('admin/' + path, body).then(function (j) { if (j._status === 401) signedOut('Your session ended. Sign in again.'); return j; });
+  }
+  function getJSON(url) { return fetch(url, { cache: 'no-store' }).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }); }
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function td(row, v, cls) { var c = el('td', cls || null); if (v instanceof Node) c.appendChild(v); else c.textContent = v == null ? '' : v; row.appendChild(c); return c; }
+  function fill(id, rows, empty, cols) {
+    var tb = $(id).tBodies[0]; tb.innerHTML = '';
+    if (!rows.length) { var tr = el('tr'); var c = td(tr, empty || 'Nothing here.', 'dim'); c.colSpan = cols || 8; tb.appendChild(tr); return tb; }
+    rows.forEach(function (r) { tb.appendChild(r); }); return tb;
+  }
+  function err(id, e) { var tb = $(id).tBodies[0]; tb.innerHTML = ''; var tr = el('tr'); var c = td(tr, 'Could not load: ' + (e && e.message || e), 'ad-err'); c.colSpan = 8; tb.appendChild(tr); }
+  function kes(n) { return 'KES ' + Math.round(n || 0).toLocaleString('en-KE'); }
+  function num(n) { return (n || 0).toLocaleString('en-KE'); }
+  function when(t) {
+    if (!t) return '–'; var d = new Date(typeof t === 'number' ? t : Date.parse(t)); if (isNaN(d)) return String(t);
+    return d.toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Africa/Nairobi' });
+  }
+  function dayOnly(t) { var d = new Date(typeof t === 'number' ? t : Date.parse(t)); return isNaN(d) ? '–' : d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }); }
+  function ago(t) {
+    var ms = Date.now() - (typeof t === 'number' ? t : Date.parse(t)); if (isNaN(ms)) return '';
+    if (ms < HOUR) return Math.max(1, Math.round(ms / 60000)) + ' min ago';
+    if (ms < 2 * DAY) return Math.round(ms / HOUR) + ' h ago';
+    return Math.round(ms / DAY) + ' days ago';
+  }
+  function badge(kind, text) { return el('span', 'st ' + kind, text); }
+  function kpis(id, items) {
+    var k = $(id); k.innerHTML = '';
+    items.forEach(function (i) {
+      var d = el('div', 'kpi'); d.appendChild(el('b', null, i[0]));
+      var s = el('span', null, i[1]); d.appendChild(s);
+      if (i[2]) { d.appendChild(el('em', null, i[2])); }
+      k.appendChild(d);
+    });
+  }
+  function link(href, text, blank) { var a = el('a', null, text); a.href = href; if (blank) { a.target = '_blank'; a.rel = 'noopener'; } return a; }
+  function toast(t) { var n = $('toast'); n.textContent = t; n.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(function () { n.hidden = true; }, 4000); }
+  function btn(text, fn, cls) {
+    var b = el('button', 'ab' + (cls ? ' ' + cls : ''), text); b.type = 'button';
+    b.addEventListener('click', function () { b.disabled = true; Promise.resolve(fn()).then(function () { b.disabled = false; }, function () { b.disabled = false; }); });
+    return b;
+  }
+  function errorBox(sectionId, e) {
+    var s = $(sectionId), p = s.querySelector('.ad-err.box');
+    if (!p) { p = el('p', 'ad-err box'); s.insertBefore(p, s.children[1]); }
+    p.textContent = 'Could not load this part: ' + e;
+  }
+
+  /* ---------- sign in ---------- */
+  function signedOut(why) {
+    setSess(null); $('dash').hidden = true; $('nav').hidden = true; $('who').hidden = true; $('signin').hidden = false;
+    if (why) { $('siMsg').textContent = why; $('siMsg').className = 'formmsg bad'; }
+  }
+  $('siForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = $('siEmail').value.trim(), m = $('siMsg');
+    if (!email || email.indexOf('@') < 1) { m.textContent = 'Enter your email address.'; m.className = 'formmsg bad'; return; }
+    $('siBtn').disabled = true;
+    post('admin/login', { email: email }).then(function (j) {
+      $('siBtn').disabled = false;
+      if (j._status === 200) { m.textContent = 'If that address is an admin, a sign-in link is on its way. It works once, for 20 minutes.'; m.className = 'formmsg ok'; }
+      else { m.textContent = j.error || 'Could not send the link.'; m.className = 'formmsg bad'; }
+    }).catch(function () { $('siBtn').disabled = false; m.textContent = 'Could not reach the Worker.'; m.className = 'formmsg bad'; });
+  });
+  $('signout').addEventListener('click', function () { signedOut(); toast('Signed out on this browser.'); });
+  $('refresh').addEventListener('click', function () { load(); });
+
+  /* ---------- the overview (from the Worker) ---------- */
+  function load() {
+    $('whoAt').textContent = 'loading…';
+    var site = loadHealth();
+    return authed('overview').then(function (j) {
+      if (j._status !== 200) { if (j._status !== 401) toast(j.error || 'Could not load the dashboard.'); return; }
+      data = j;
+      $('who').hidden = false; $('whoEmail').textContent = j.admin;
+      $('whoAt').textContent = 'updated ' + when(j.at);
+      $('sumAt').textContent = 'as of ' + when(j.at);
+      drawPayments(j.payments); drawMarket(j.market); drawLists(j.newsletter); drawEvents(j.events); drawGames(j.games); drawConfig(j.config);
+      return site.then(function (h) { drawSummary(j, h); });
+    }).catch(function (e) { toast('Could not reach the Worker: ' + e.message); });
+  }
+
+  function drawSummary(j, h) {
+    var m = j.market && !j.market.error ? j.market.totals : null, p = j.payments && !j.payments.error ? j.payments : null;
+    var problems = (h && h.problems) || 0;
+    kpis('sumK', [
+      [p ? kes(p.last30.kes) : '–', 'Revenue, 30 days', p ? (p.mode === 'test' ? 'Paystack test mode' : num(p.last30.count) + ' payments') : 'Paystack unavailable'],
+      [m ? num(m.members) : '–', 'Marketplace members', m ? '+' + num(m.members7) + ' this week' : ''],
+      [m ? num(m.sales30) : '–', 'Prompt sales, 30 days', m ? kes(m.revenue30) : ''],
+      [j.newsletter && !j.newsletter.error ? num(j.newsletter.total) : '–', 'Email subscribers', 'all lists'],
+      [j.games && !j.games.error ? num(j.games.live) : '–', 'Playing games now', j.games && !j.games.error ? num(j.games.visits) + ' visits this week' : ''],
+      [j.events && !j.events.error ? num(j.events.upcoming) : '–', 'Upcoming events', ''],
+      [problems ? String(problems) : 'OK', 'Site health', problems ? 'see Site health' : 'all fresh'],
+      [m ? String(m.reported + m.unmailed) : '–', 'Marketplace to check', m ? m.reported + ' reported, ' + m.unmailed + ' emails pending' : ''],
+    ]);
+  }
+
+  function drawPayments(p) {
+    if (!p || p.error) { errorBox('payments', p ? p.error : 'no data'); $('payK').innerHTML = ''; return; }
+    $('payMode').textContent = p.mode === 'live' ? 'live mode' : 'TEST MODE: no real money';
+    kpis('payK', [[kes(p.allTime.kes), 'All time', num(p.allTime.transactions) + ' transactions'], [kes(p.last30.kes), 'Last 30 days', num(p.last30.count) + ' payments' + (p.last30.capped ? ' (first 100)' : '')]]);
+    fill('payP', p.byProduct.map(function (x) { var r = el('tr'); td(r, PRODUCTS[x.product] || x.product); td(r, num(x.count), 'n'); td(r, num(x.kes), 'n'); return r; }), 'No payments in the last 30 days.');
+    fill('payR', p.recent.map(function (x) { var r = el('tr'); td(r, when(x.at)); td(r, PRODUCTS[x.product] || x.product); td(r, x.email || ''); td(r, num(x.kes), 'n'); td(r, x.channel || '', 'dim'); return r; }), 'No payments yet.');
+  }
+
+  function drawMarket(m) {
+    if (!m || m.error) { errorBox('market', m ? m.error : 'no data'); return; }
+    var t = m.totals;
+    kpis('mkK', [[num(t.members), 'Members', '+' + t.members7 + ' in 7 days, +' + t.members30 + ' in 30'], [num(t.sellers), 'Sellers with payouts'],
+      [num(t.prompts), 'Live prompts', t.paidPrompts + ' paid'], [num(t.sales), 'Sales', t.sales30 + ' in 30 days'],
+      [kes(t.revenue), 'Sales value', kes(t.revenue30) + ' in 30 days'], [kes(t.commission), 'Our 10%'], [num(t.hidden), 'Hidden prompts'], [num(t.unmailed), 'Emails pending']]);
+    // needs attention
+    var attn = m.prompts.filter(function (p) { return p.reports > 0 || p.hidden; }).map(function (p) { return promptRow(p, true); });
+    m.sales.filter(function (s) { return !s.mailed || !s.sellerMailed; }).forEach(function (s) {
+      var r = el('tr'); td(r, s.title); td(r, s.seller || ''); td(r, '', 'n');
+      td(r, badge('warn', 'email not sent'));
+      var c = td(r, '');
+      if (!s.mailed) c.appendChild(resendBtn(s, 'buyer'));
+      if (!s.sellerMailed) c.appendChild(resendBtn(s, 'seller'));
+      attn.push(r);
+    });
+    fill('mkAttn', attn, 'Nothing needs attention.');
+    fill('mkSales', m.sales.map(function (s) {
+      var r = el('tr'); td(r, when(s.at)); td(r, s.title, 'w'); td(r, s.buyer || ''); td(r, s.seller || ''); td(r, num(s.amount), 'n');
+      td(r, s.mailed ? badge('ok', 'sent') : resendBtn(s, 'buyer')); td(r, s.sellerMailed ? badge('ok', 'sent') : resendBtn(s, 'seller'));
+      return r;
+    }), 'No sales yet.');
+    fill('mkTop', m.topSellers.map(function (s) { var r = el('tr'); td(r, (s.name || '') + ' ').appendChild(el('span', 'dim', s.email || '')); td(r, num(s.prompts), 'n'); td(r, num(s.sales), 'n'); td(r, num(s.revenue), 'n'); return r; }), 'No sales yet.');
+    drawPrompts(); drawMembers();
+  }
+  function promptRow(p, attention) {
+    var r = el('tr'); var c = td(r, '', 'w'); c.appendChild(link(p.path, p.title, true));
+    td(r, (p.sellerName || '') + ' ').appendChild(el('span', 'dim', p.seller || ''));
+    if (attention) { td(r, num(p.reports), 'n'); td(r, p.hidden ? badge('bad', 'hidden') : badge('warn', 'reported')); }
+    else { td(r, p.price > 0 ? num(p.price) : 'free', 'n'); td(r, num(p.sales), 'n'); td(r, num(p.reports), 'n'); td(r, dayOnly(p.created)); }
+    var a = td(r, '');
+    if (p.hidden) a.appendChild(btn('Restore', function () { return act(p, 'restore'); }));
+    else a.appendChild(btn('Hide', function () { if (confirm('Hide "' + p.title + '" from the marketplace? Buyers keep their copies.')) return act(p, 'hide'); }, 'danger'));
+    if (p.reports > 0 && !p.hidden) a.appendChild(btn('Clear reports', function () { return act(p, 'clear'); }));
+    return r;
+  }
+  function act(p, action) {
+    return authed('prompt', { id: p.id, action: action }).then(function (j) {
+      if (j._status !== 200) { toast(j.error || 'Could not do that.'); return; }
+      toast(action === 'hide' ? 'Hidden.' : action === 'restore' ? 'Restored.' : 'Reports cleared.'); return load();
+    });
+  }
+  function resendBtn(s, who) {
+    return btn(who === 'buyer' ? 'Resend to buyer' : 'Resend to seller', function () {
+      return authed('resend', { uid: s.uid, pid: s.pid, who: who }).then(function (j) { toast(j._status === 200 ? 'Sent.' : (j.error || 'Could not send.')); if (j._status === 200) return load(); });
+    });
+  }
+  function drawPrompts() {
+    if (!data || !data.market || data.market.error) return;
+    var q = $('mkPq').value.trim().toLowerCase();
+    var list = data.market.prompts.filter(function (p) { return !q || (p.title + ' ' + (p.seller || '') + ' ' + (p.sellerName || '')).toLowerCase().indexOf(q) >= 0; });
+    fill('mkPrompts', list.slice(0, 300).map(function (p) { return promptRow(p, false); }), q ? 'No prompts match.' : 'No prompts yet.');
+  }
+  var membersShown = 50;
+  function drawMembers() {
+    if (!data || !data.market || data.market.error) return;
+    var q = $('mkMq').value.trim().toLowerCase();
+    var list = data.market.members.filter(function (u) { return !q || ((u.name || '') + ' ' + u.email).toLowerCase().indexOf(q) >= 0; });
+    var tb = fill('mkMembers', list.slice(0, membersShown).map(function (u) {
+      var r = el('tr'); td(r, dayOnly(u.created)); td(r, u.name || ''); td(r, u.email); td(r, num(u.prompts), 'n'); td(r, num(u.bought), 'n');
+      td(r, u.payout ? badge('ok', 'set') : badge('off', 'none')); return r;
+    }), q ? 'No members match.' : 'No members yet.');
+    if (list.length > membersShown) {
+      var tr = el('tr'), c = td(tr, ''); c.colSpan = 6;
+      var more = el('button', 'ad-more', 'Show ' + Math.min(50, list.length - membersShown) + ' more of ' + list.length); more.type = 'button';
+      more.addEventListener('click', function () { membersShown += 50; drawMembers(); }); c.appendChild(more); tb.appendChild(tr);
+    }
+  }
+  $('mkPq').addEventListener('input', drawPrompts);
+  $('mkMq').addEventListener('input', function () { membersShown = 50; drawMembers(); });
+  $('mkCsv').addEventListener('click', function () {
+    if (!data || !data.market || data.market.error) return;
+    var q = function (v) { v = v == null ? '' : String(v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
+    var rows = [['joined', 'name', 'email', 'prompts_posted', 'prompts_bought', 'payout_set']].concat(data.market.members.map(function (u) {
+      return [new Date(u.created).toISOString().slice(0, 10), u.name, u.email, u.prompts, u.bought, u.payout ? 'yes' : 'no'];
+    }));
+    var blob = new Blob([rows.map(function (r) { return r.map(q).join(','); }).join('\n') + '\n'], { type: 'text/csv' });
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'marketplace-members-' + new Date().toISOString().slice(0, 10) + '.csv';
+    document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  });
+
+  function drawLists(n) {
+    if (!n || n.error) { errorBox('lists', n ? n.error : 'no data'); return; }
+    kpis('nlK', n.lists.map(function (l) { return [l.error ? '–' : num(l.subscribers), l.name, l.error ? l.error : (l.blacklisted ? l.blacklisted + ' unsubscribed or blocked' : '')]; })
+      .concat([[num(n.total), 'All lists', 'one person can be on several']]));
+  }
+
+  function drawEvents(e) {
+    if (!e || e.error) { errorBox('events', e ? e.error : 'no data'); return; }
+    kpis('evK', [[num(e.upcoming), 'Upcoming'], [num(e.past), 'Past'], [num(e.posted.length), 'Posted on the site'], [e.lumaUpdated ? ago(e.lumaUpdated) : '–', 'Luma last read']]);
+    fill('evNext', e.next.map(function (x) { var r = el('tr'); td(r, when(x.start)); td(r, '').appendChild(link(x.url || '/events/', x.title, true)); td(r, x.source === 'hut' ? 'Site' : 'Luma', 'dim'); return r; }), 'No upcoming events.');
+    fill('evPosted', e.posted.map(function (x) {
+      var r = el('tr'); td(r, dayOnly(x.start)); td(r, x.title);
+      td(r, btn('Remove', function () {
+        if (!confirm('Remove "' + x.title + '" from /events/?')) return;
+        return authed('event-delete', { id: x.id }).then(function (j) { toast(j._status === 200 ? 'Removed.' : (j.error || 'Could not remove it.')); if (j._status === 200) return load(); });
+      }, 'danger'));
+      return r;
+    }), 'None. Post one on /events/ with Organiser sign-in.');
+  }
+
+  function drawGames(g) {
+    if (!g || g.error) { errorBox('games', g ? g.error : 'no data'); return; }
+    kpis('gmK', [[num(g.live), 'Playing now'], [num(g.visits), 'Visits', 'week ' + (g.week || '')], [num(g.players), 'Named players this week'],
+      [g.topPlayers && g.topPlayers[0] ? g.topPlayers[0].name : '–', 'Top player', g.topPlayers && g.topPlayers[0] ? g.topPlayers[0].minutes + ' min' : '']]);
+    fill('gmWeek', g.games.map(function (x) { var r = el('tr'); td(r, x.slug); td(r, num(x.plays), 'n'); td(r, num(x.minutes), 'n'); td(r, num(x.live), 'n'); return r; }), 'No plays this week.');
+    fill('gmAll', g.allTime.map(function (x) { var r = el('tr'); td(r, x.slug); td(r, num(x.plays), 'n'); td(r, num(x.minutes), 'n'); return r; }), 'No plays yet.');
+  }
+
+  function drawConfig(c) {
+    var rows = [['paystack', 'Paystack', 'All payments and the marketplace'], ['market', 'Marketplace', 'Accounts, prompts and the dashboard sign-in'],
+      ['events', 'Events', 'Posting events on /events/'], ['brevo', 'Brevo email', 'Sign-in links, receipts, newsletters, marketplace emails'],
+      ['turnstile', 'Turnstile', 'Bot check at checkout'], ['remoteList', 'Remote list key', 'Delivering the Remote-From-Kenya List'],
+      ['communities', 'Communities link', 'Delivering the Community Database'], ['earlyAccess', 'Early Access invite', 'The paid WhatsApp group link'],
+      ['gamesSignIn', 'Games sign-in', 'Google sign-in on the arcade']];
+    fill('cfgT', rows.map(function (x) { var r = el('tr'); td(r, x[1]); td(r, c && c[x[0]] ? badge('ok', 'on') : badge('bad', 'off')); td(r, x[2], 'dim'); return r; }));
+    var r = el('tr'); td(r, 'Admins'); td(r, badge('ok', String(c ? c.admins : 0))); td(r, 'Addresses in SITE_ADMINS that can open this dashboard', 'dim'); $('cfgT').tBodies[0].appendChild(r);
+  }
+
+  /* ---------- site health: read straight from the site and GitHub ---------- */
+  function loadHealth() {
+    var problems = 0, rows = [];
+    function row(what, at, state, detail) {
+      if (state[0] !== 'ok') problems++;
+      var r = el('tr'); td(r, what); td(r, at ? when(at) + ' · ' + ago(at) : '–'); td(r, badge(state[0], state[1])); td(r, detail || '', 'dim'); rows.push(r);
+    }
+    function fresh(at, maxH) { var age = Date.now() - (typeof at === 'number' ? at : Date.parse(at)); return isNaN(age) ? ['bad', 'unknown'] : age > maxH * HOUR ? ['warn', 'stale'] : ['ok', 'fresh']; }
+    var today = new Date(Date.now() + 3 * HOUR).toISOString().slice(0, 10);   // Nairobi date
+    var jobs = [
+      getJSON('/data/remote-summary.json').then(function (d) {
+        // updated is a date; the job runs at 06:20 Nairobi, so allow 30 hours from that day's run.
+        var at = Date.parse(d.updated + 'T03:20:00Z');
+        row('Daily hiring snapshot', at, fresh(at, 30), num(d.role_count) + ' remote roles, ' + num(d.local_role_count) + ' local, from ' + num(d.company_count) + ' companies (' + num(d.roles_scanned) + ' scanned)');
+      }, function (e) { row('Daily hiring snapshot', null, ['bad', 'missing'], e.message); }),
+      getJSON('/data/jobs-board.json').then(function (d) { row('Jobs board', d.updated, fresh(d.updated, 7), num(d.count) + ' jobs; rebuilt every 3 hours'); },
+        function (e) { row('Jobs board', null, ['bad', 'missing'], e.message); }),
+      getJSON('/data/hackathons.json').then(function (d) { row('Hackathons list', d.updated, fresh(d.updated, 30), num(d.count) + ' open hackathons'); },
+        function (e) { row('Hackathons list', null, ['bad', 'missing'], e.message); }),
+      fetch('/sitemap.xml', { cache: 'no-store' }).then(function (r) { return r.text(); }).then(function (x) {
+        var eds = (x.match(/\/blog\/daily\/(\d{4}-\d{2}-\d{2})\//g) || []).map(function (s) { return s.slice(12, 22); }).sort();
+        var last = eds[eds.length - 1];
+        var gap = last ? Math.round((Date.parse(today) - Date.parse(last)) / DAY) : 99;
+        row('Daily Savannah', last ? Date.parse(last + 'T18:00:00Z') : null, gap <= 1 ? ['ok', 'on time'] : ['warn', gap + ' days behind'], 'latest edition ' + (last || 'none') + ', ' + eds.length + ' in the sitemap');
+        var rd = (x.match(/\/blog\/reading\/(\d{4}-\d{2}-\d{2})\//g) || []).map(function (s) { return s.slice(14, 24); }).sort();
+        var lr = rd[rd.length - 1], rgap = lr ? Math.round((Date.parse(today) - Date.parse(lr)) / DAY) : 99;
+        row('Reading list', lr ? Date.parse(lr + 'T06:00:00Z') : null, rgap <= 8 ? ['ok', 'on time'] : ['warn', rgap + ' days since'], 'weekly; latest issue ' + (lr || 'none'));
+        return eds;
+      }, function (e) { row('Sitemap', null, ['bad', 'missing'], e.message); }),
+      fetch(API + 'health').then(function (r) { return r.json(); }).then(function (h) { row('Payments Worker', Date.now(), h.ok ? ['ok', 'up'] : ['bad', 'down'], 'products: ' + (h.products || []).length); },
+        function (e) { row('Payments Worker', null, ['bad', 'unreachable'], e.message); }),
+    ];
+    var wf = getJSON('https://api.github.com/repos/' + REPO + '/actions/runs?branch=' + encodeURIComponent(BRANCH) + '&per_page=60').then(function (d) {
+      var seen = {}, list = [];
+      (d.workflow_runs || []).forEach(function (r) { if (!seen[r.name]) { seen[r.name] = 1; list.push(r); } });
+      list.forEach(function (r) { if (r.conclusion && r.conclusion !== 'success' && r.conclusion !== 'skipped') problems++; });
+      fill('wfT', list.map(function (r) {
+        var tr = el('tr'); td(tr, r.name); td(tr, when(r.run_started_at || r.created_at) + ' · ' + ago(r.run_started_at || r.created_at));
+        td(tr, r.status !== 'completed' ? badge('warn', r.status) : r.conclusion === 'success' ? badge('ok', 'passed') : badge('bad', r.conclusion || 'failed'));
+        td(tr, r.event, 'dim'); td(tr, '').appendChild(link(r.html_url, 'Open', true)); return tr;
+      }), 'No runs found.');
+    }).catch(function (e) {
+      fill('wfT', [], 'GitHub did not answer (' + e.message + '). The repository may be private or the hourly limit reached; open github.com/' + REPO + '/actions.', 5);
+    });
+    var sched = Promise.all([getJSON('https://raw.githubusercontent.com/' + REPO + '/' + BRANCH + '/blog/_src/scheduled/schedule.json'), jobs[3]]).then(function (v) {
+      var s = v[0], eds = v[1];
+      var items = (Array.isArray(s) ? s : s.articles || s.items || []).slice().sort(function (a, b) { return a.date < b.date ? -1 : 1; });
+      fill('schedT', items.map(function (a) {
+        var r = el('tr'); td(r, dayOnly(a.date + 'T12:00:00Z')); td(r, '').appendChild(link('/blog/' + a.slug + '/', (a.card && a.card.title) || a.slug, true));
+        td(r, a.date <= today ? badge('ok', 'released') : badge('off', 'waiting')); return r;
+      }), 'No scheduled articles.');
+    }).catch(function (e) { fill('schedT', [], 'Could not read the schedule (' + e.message + ').', 3); });
+    return Promise.all(jobs.concat([wf, sched])).then(function () { fill('healthT', rows); return { problems: problems }; });
+  }
+
+  /* ---------- start ---------- */
+  function start() {
+    var m = /[#&]login=([A-Za-z0-9._-]+)/.exec(location.hash || '');
+    var first = Promise.resolve();
+    if (m) {
+      history.replaceState(null, '', location.pathname);
+      first = post('admin/session', { t: m[1] }).then(function (j) { if (j.session) setSess(j.session); else signedOut(j.error || 'That link did not work. Ask for a new one.'); });
+    }
+    first.then(function () {
+      if (!sess()) { signedOut(); return; }
+      $('signin').hidden = true; $('dash').hidden = false; $('nav').hidden = false;
+      return load();
+    });
+  }
+  start();
+})();
+</script>
+</body>
+</html>

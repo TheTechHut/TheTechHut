@@ -27,6 +27,7 @@
  *   GET  /games/board                            -> this week's arcade leaderboards (games.js)
  *   POST /games/login { credential }             -> { pid, sig, name }  Sign in with Google (games.js)
  *   POST /games/forget { pid, sig? }             -> { ok }              leave the leaderboards (games.js)
+ *   POST /admin/*                                -> the private site dashboard   (admin.js)
  *   GET  /health
  *
  * Secrets (wrangler secret put <NAME> — never commit these)
@@ -59,6 +60,7 @@
 import { handleNewsletter, newsletterConfigured } from './newsletter.js';
 import { handleGames } from './games.js';
 import { handleMarket, settle as settleMarket } from './market.js';
+import { handleAdmin } from './admin.js';
 import { handleEvents } from './events.js';
 import { LIMITS, guard, turnstileOk, emailDomainOk, sha256Hex } from './payguard.js';
 
@@ -470,6 +472,14 @@ export default {
     if (url.pathname.startsWith('/events/')) {
       try {
         return await handleEvents(req, env, url, origin, { json, cors, allowedOrigins: ALLOWED_ORIGINS });
+      } catch (e) {
+        return json({ error: 'server error' }, 500, origin);
+      }
+    }
+    // The private site dashboard, thetechhut.co/admin/. See admin.js.
+    if (url.pathname.startsWith('/admin/')) {
+      try {
+        return await handleAdmin(req, env, url, origin, { json, cors, allowedOrigins: ALLOWED_ORIGINS });
       } catch (e) {
         return json({ error: 'server error' }, 500, origin);
       }

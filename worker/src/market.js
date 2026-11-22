@@ -227,6 +227,38 @@ export class Market {
         const owned = !!(b.uid && (p.uid === b.uid || (await st.get('b:' + b.uid + ':' + p.id))));
         return ok({ prompt: p, seller: seller ? { name: seller.name, payout: seller.payout || null } : null, owned });
       }
+      case 'admin': {           // everything, for the site dashboard (admin.js). Includes emails: admins only.
+        const users = [...(await st.list({ prefix: 'u:' })).values()];
+        const byId = Object.fromEntries(users.map((u) => [u.id, u]));
+        const prompts = [...(await st.list({ prefix: 'p:' })).values()];
+        const pById = Object.fromEntries(prompts.map((x) => [x.id, x]));
+        const purchases = [];
+        for (const [k, rec] of await st.list({ prefix: 'b:' })) {
+          const [, uid, pid] = k.split(':'); const p = pById[pid];
+          purchases.push({ uid, pid, title: p ? p.title : '(removed)', buyer: byId[uid] ? byId[uid].email : null,
+            seller: p && byId[p.uid] ? byId[p.uid].email : null, sellerName: p && byId[p.uid] ? byId[p.uid].name : null,
+            amount: rec.amount || 0, at: rec.at, ref: rec.ref, mailed: !!rec.mailed, sellerMailed: !!rec.sellerMailed });
+        }
+        const counts = {};
+        for (const pu of purchases) counts[pu.uid] = (counts[pu.uid] || 0) + 1;
+        return ok({
+          members: users.map((u) => ({ id: u.id, email: u.email, name: u.name, created: u.created, payout: !!u.payout,
+            prompts: prompts.filter((x) => x.uid === u.id).length, bought: counts[u.id] || 0, welcomed: typeof u.welcome === 'number' })),
+          prompts: prompts.map((x) => ({ id: x.id, title: x.title, cat: x.cat, price: x.price, sales: x.sales || 0, reports: x.reports || 0,
+            hidden: !!x.hidden, created: x.created, updated: x.updated, seller: byId[x.uid] ? byId[x.uid].email : null,
+            sellerName: byId[x.uid] ? byId[x.uid].name : null, path: promptPath(x) })),
+          purchases,
+        });
+      }
+      case 'adminPrompt': {     // hide, restore, or clear the reports on any prompt
+        const p = await st.get('p:' + b.id); if (!p) return ok({ error: 'no prompt' });
+        if (b.action === 'hide') p.hidden = true;
+        else if (b.action === 'restore') { p.hidden = false; p.reports = 0; }
+        else if (b.action === 'clear') p.reports = 0;
+        else return ok({ error: 'bad action' });
+        await st.put('p:' + p.id, p);
+        return ok({ ok: true, hidden: p.hidden, reports: p.reports });
+      }
       case 'report': {
         const p = await st.get('p:' + b.id); if (!p) return ok({ ok: true });
         p.reports = (p.reports || 0) + 1;
@@ -552,6 +584,24 @@ export async function settle(env, d) {
   if (!mailed) mailed = await mailPrompt(env, g.prompt, uid, { amount, reference: String(d.reference) });
   if (!rec.sellerMailed) await mailSeller(env, g.prompt, uid, { amount, sales: rec.sales || 1 });
   return { paid: true, pid, uid, mailed };
+}
+
+/* ------------------------------------------------- for the site dashboard */
+
+export async function adminMarket(env) { return call(env, { op: 'admin' }); }
+export async function adminPromptAction(env, id, action) { return call(env, { op: 'adminPrompt', id, action }); }
+/** Sends a purchase's buyer or seller email again (the dashboard's Resend). -> true if sent */
+export async function resendPurchaseEmail(env, uid, pid, who) {
+  const g = await call(env, { op: 'get', id: pid, uid });
+  if (!g.prompt || !g.owned) return false;
+  const all = await call(env, { op: 'admin' });
+  const pu = (all.purchases || []).find((x) => x.uid === uid && x.pid === pid);
+  if (!pu) return false;
+  if (who === 'seller') {
+    const sales = (all.prompts.find((x) => x.id === pid) || {}).sales || 1;
+    return mailSeller(env, g.prompt, uid, { amount: pu.amount, sales });
+  }
+  return mailPrompt(env, g.prompt, uid, { amount: pu.amount, reference: pu.ref });
 }
 
 async function brevo(env, to, mail, tag) {

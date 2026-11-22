@@ -62,6 +62,19 @@
         ]
       },
       {
+        "source": "/admin{,/**}",
+        "headers": [
+          {
+            "key": "X-Robots-Tag",
+            "value": "noindex, nofollow"
+          },
+          {
+            "key": "Cache-Control",
+            "value": "no-store"
+          }
+        ]
+      },
+      {
         "source": "**/*.@(jpg|jpeg|png|gif|webp|svg|ico|woff|woff2|ttf|otf)",
         "headers": [
           {
