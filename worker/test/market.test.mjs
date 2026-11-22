@@ -222,15 +222,37 @@ await t('a sale emails the full prompt to the buyer, exactly once', async () => 
   mails = [];
   const v = await call(e, '/market/verify', { reference: 'ref_mail' });   // even with no session, e.g. the webhook or a closed tab
   assert.equal(v.body.mailed, true);
+  mails = mails.filter((m) => m.to[0].email === 'buyer@example.com');
   assert.equal(mails.length, 1);
-  assert.deepEqual(mails[0].to, [{ email: 'buyer@example.com' }]);
   assert.ok(mails[0].subject.includes(PROMPT.title));
   assert.ok(mails[0].textContent.includes(PROMPT.body), 'the whole prompt is in the email');
   assert.ok(mails[0].htmlContent.includes('{company}'), 'escaped but intact');
   assert.ok(mails[0].htmlContent.includes('ref_mail'));
   await call(e, '/market/verify', { reference: 'ref_mail', session: buyer.session });
   await call(e, '/market/verify', { reference: 'ref_mail' });
-  assert.equal(mails.length, 1, 'verify and the webhook again do not resend it');
+  assert.equal(mails.filter((m) => m.to[0].email === 'buyer@example.com').length, 1, 'verify and the webhook again do not resend it');
+});
+await t('the seller is congratulated on each sale, once, without learning who bought', async () => {
+  const e = env(); const { id } = await sellerWithPaidPrompt(e);
+  const buyer = await signIn(e, 'buyer@example.com');
+  paid.verify = { status: 'success', currency: 'KES', amount: 30000, reference: 'ref_sale', metadata: { kind: 'market', pid: id, uid: buyer.user.id } };
+  mails = [];
+  await call(e, '/market/verify', { reference: 'ref_sale' });
+  const toSeller = mails.filter((m) => m.to[0].email === 'seller@example.com');
+  assert.equal(toSeller.length, 1);
+  assert.ok(toSeller[0].subject.startsWith('You made a sale'));
+  assert.ok(toSeller[0].htmlContent.includes('Congratulations'));
+  assert.ok(toSeller[0].htmlContent.includes('KES 270'), '90% of KES 300');
+  assert.ok(toSeller[0].htmlContent.includes('your first sale'));
+  assert.ok(toSeller[0].htmlContent.includes('ending 6789'));
+  assert.ok(!toSeller[0].htmlContent.includes('buyer@example.com') && !toSeller[0].textContent.includes(PROMPT.body), 'no buyer identity, no prompt text');
+  await call(e, '/market/verify', { reference: 'ref_sale', session: buyer.session });
+  assert.equal(mails.filter((m) => m.to[0].email === 'seller@example.com').length, 1, 'not sent twice');
+  const buyer2 = await signIn(e, 'buyer2@example.com'); mails = [];
+  paid.verify = { status: 'success', currency: 'KES', amount: 30000, reference: 'ref_sale2', metadata: { kind: 'market', pid: id, uid: buyer2.user.id } };
+  await call(e, '/market/verify', { reference: 'ref_sale2' });
+  const second = mails.find((m) => m.to[0].email === 'seller@example.com');
+  assert.ok(second.htmlContent.includes('sale number 2'));
 });
 await t('if the email fails, the next settle tries again', async () => {
   const e = env(); const { id } = await sellerWithPaidPrompt(e);
@@ -241,10 +263,12 @@ await t('if the email fails, the next settle tries again', async () => {
   brevoDown = false;
   assert.equal(v.body.paid, true); assert.equal(v.body.mailed, false);
   assert.ok(v.body.body, 'the buyer still sees the prompt on the page');
+  const buyerMails = () => mails.filter((m) => m.to[0].email === 'buyer@example.com').length;
+  const sellerMails = () => mails.filter((m) => m.to[0].email === 'seller@example.com').length;
   await call(e, '/market/verify', { reference: 'ref_retry' });
-  assert.equal(mails.length, 1);
+  assert.equal(buyerMails(), 1); assert.equal(sellerMails(), 1, 'the seller email is retried too');
   await call(e, '/market/verify', { reference: 'ref_retry' });
-  assert.equal(mails.length, 1);
+  assert.equal(buyerMails(), 1); assert.equal(sellerMails(), 1);
 });
 await t('prompt text with HTML is escaped in the email', async () => {
   const e = env();
@@ -255,7 +279,8 @@ await t('prompt text with HTML is escaped in the email', async () => {
   paid.verify = { status: 'success', currency: 'KES', amount: 10000, reference: 'ref_esc', metadata: { kind: 'market', pid: s.body.prompt.id, uid: buyer.user.id } };
   mails = [];
   await call(e, '/market/verify', { reference: 'ref_esc' });
-  assert.ok(!mails[0].htmlContent.includes('<img src=x'));
+  assert.equal(mails.length, 2);
+  for (const m of mails) assert.ok(!m.htmlContent.includes('<img src=x') && !m.htmlContent.includes('<b>bold'), 'escaped for ' + m.to[0].email);
   assert.ok(mails[0].htmlContent.includes('&lt;img src=x'));
 });
 

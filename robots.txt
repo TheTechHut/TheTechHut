@@ -18,3 +18,4 @@ Disallow: /remote/list/
 Sitemap: https://thetechhut.co/sitemap.xml
 Sitemap: https://thetechhut.co/jobs/role/sitemap.xml
 Sitemap: https://thetechhut.co/hackathons/event/sitemap.xml
+Sitemap: https://thetechhut.co/prompt-marketplace/sitemap.xml

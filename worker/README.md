@@ -343,10 +343,15 @@ Community members post AI prompts, free or paid, and buy each other's. Code:
   `GET /market/prompt?id=` (never the prompt text) and sets its own title, canonical
   and Product JSON-LD. Paystack returns buyers there, and sign-in links started on a
   prompt page bring the member back to it (`next` on `/market/login`).
-- **Delivery by email:** when a sale settles (the buyer's return or the webhook,
-  whichever comes first) the buyer is emailed the full prompt with a receipt, through
-  Brevo. The purchase is marked `mailed` so it is sent once; if Brevo fails, the next
+- **Emails on a sale:** when a sale settles (the buyer's return or the webhook,
+  whichever comes first) the buyer is emailed the full prompt with a receipt, and the
+  seller gets a congratulations email with the price, their 90% share and a link to
+  the prompt's page (never who bought). Both go through Brevo and are flagged on the
+  purchase (`mailed`, `sellerMailed`) so each is sent once; if Brevo fails, the next
   settle for that payment tries again.
+- **Sitemap:** `scripts/build_prompt_sitemap.js` writes `prompt-marketplace/sitemap.xml`
+  (listed in robots.txt) from `GET /market/prompts` before every deploy; it is not
+  committed. New prompts reach it with the next deploy, at most about 3 hours later.
 
 ### Setup
 

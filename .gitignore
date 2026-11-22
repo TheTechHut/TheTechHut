@@ -25,3 +25,6 @@ jobs/role/
 
 # one page per hackathon, built on GitHub Actions and deployed, never committed (scripts/build_hackathon_pages.js)
 hackathons/event/
+
+# the prompt marketplace sitemap, built on GitHub Actions before every deploy (scripts/build_prompt_sitemap.js)
+prompt-marketplace/sitemap.xml

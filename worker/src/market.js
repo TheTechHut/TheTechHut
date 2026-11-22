@@ -18,7 +18,8 @@
  *   u:<uid>          { id, email, name, created, payout? }
  *   e:<email-hash>   uid
  *   p:<pid>          { id, uid, title, desc, cat, model, preview, body, price, created, updated, sales, reports, hidden }
- *   b:<uid>:<pid>    { ref, at, amount, mailed? }   a purchase; mailed once the prompt is emailed to the buyer
+ *   b:<uid>:<pid>    { ref, at, amount, mailed?, sellerMailed? }   a purchase; the flags are set once the
+ *                    buyer has been emailed the prompt and the seller congratulated
  *   r:<reference>    { uid, pid }              a Paystack payment already counted
  *   n:<nonce>        expiry                    a sign-in link already used
  *
@@ -40,7 +41,8 @@
  *
  * Each prompt has its own page, /prompt-marketplace/p/<pid>/<slug>/ (one static
  * shell, rewritten by Firebase, that reads GET /market/prompt). When a sale
- * settles, the buyer is emailed the full prompt, once, from settle().
+ * settles, settle() emails the buyer the full prompt and congratulates the
+ * seller, once each.
  *
  * Secrets: MARKET_SECRET (signs links and sessions), plus the existing
  * PAYSTACK_SECRET_KEY, BREVO_API_KEY and BREVO_SENDER_EMAIL.
@@ -116,7 +118,7 @@ export function cleanPrompt(b) {
 }
 const publicPrompt = (p, sellers) => ({
   id: p.id, title: p.title, desc: p.desc, cat: p.cat, model: p.model, preview: p.preview, price: p.price,
-  sales: p.sales || 0, created: p.created, seller: (sellers[p.uid] && sellers[p.uid].name) || 'Member', mine: false, path: promptPath(p),
+  sales: p.sales || 0, created: p.created, updated: p.updated || p.created, seller: (sellers[p.uid] && sellers[p.uid].name) || 'Member', mine: false, path: promptPath(p),
 });
 const ownPrompt = (p) => ({ ...p, reports: undefined, path: promptPath(p) });
 const meView = (u) => ({ id: u.id, name: u.name, email: u.email, payout: u.payout ? { bank: u.payout.bank, last4: u.payout.last4, holder: u.payout.holder } : null });
@@ -225,18 +227,19 @@ export class Market {
       case 'purchase': {        // idempotent: the page, a reload and the webhook all land here
         if (await st.get('r:' + b.ref)) {
           const rec = await st.get('b:' + b.uid + ':' + b.pid);
-          return ok({ ok: true, first: false, mailed: !!(rec && rec.mailed) });
+          const p0 = await st.get('p:' + b.pid);
+          return ok({ ok: true, first: false, mailed: !!(rec && rec.mailed), sellerMailed: !!(rec && rec.sellerMailed), sales: p0 ? p0.sales || 0 : 0 });
         }
         const p = await st.get('p:' + b.pid);
         if (!p) return ok({ error: 'no prompt' });
         await st.put({ ['r:' + b.ref]: { uid: b.uid, pid: b.pid, at: now }, ['b:' + b.uid + ':' + b.pid]: { ref: b.ref, at: now, amount: b.amount } });
         p.sales = (p.sales || 0) + 1; await st.put('p:' + p.id, p);
-        return ok({ ok: true, first: true, mailed: false });
+        return ok({ ok: true, first: true, mailed: false, sellerMailed: false, sales: p.sales });
       }
-      case 'mailed': {          // the prompt reached the buyer's inbox; don't send it again
+      case 'mailed': {          // an email about this purchase went out; don't send it again
         const k = 'b:' + b.uid + ':' + b.pid;
         const rec = await st.get(k);
-        if (rec) { rec.mailed = now; await st.put(k, rec); }
+        if (rec) { rec[b.who === 'seller' ? 'sellerMailed' : 'mailed'] = now; await st.put(k, rec); }
         return ok({ ok: true });
       }
     }
@@ -289,6 +292,26 @@ export function purchaseEmail(p, { amount, reference }) {
     + '\n\nOpen it on the marketplace: ' + url + '\nPaid: KES ' + Number(amount).toLocaleString('en') + ' | Reference: ' + reference
     + '\nQuestions? Write to info@thetechhut.co.\n';
   return { subject: 'Your prompt: ' + p.title, html, text };
+}
+/** The email a seller gets on each sale. It never says who bought. */
+export function saleEmail(p, { amount, sales, seller }) {
+  const url = SITE + promptPath(p);
+  const share = Math.floor(amount * (100 - COMMISSION_PERCENT)) / 100;
+  const bank = seller && seller.payout ? (seller.payout.bank || 'your bank') + (seller.payout.last4 ? ', account ending ' + seller.payout.last4 : '') : 'your bank account';
+  const nth = sales === 1 ? 'your first sale of this prompt' : 'sale number ' + sales + ' of this prompt';
+  const html = '<div style="font-family:\'Source Sans 3\',Arial,sans-serif;max-width:560px;margin:0 auto;padding:24px;color:#073B4C;line-height:1.55">'
+    + '<p style="font-family:Georgia,serif;font-weight:700;font-size:22px;margin:0 0 18px">The Tech Hut<span style="color:#06D6A0">.</span></p>'
+    + '<p style="margin:0 0 6px;font-family:Menlo,monospace;font-size:12px;letter-spacing:1px;color:#046B52">PROMPT MARKETPLACE &middot; YOU MADE A SALE</p>'
+    + '<p style="font-family:Georgia,serif;font-size:26px;font-weight:700;margin:6px 0 12px">Congratulations' + (seller && seller.name ? ', ' + esc(seller.name) : '') + '!</p>'
+    + '<p style="font-size:17px">Someone just bought <b>' + esc(p.title) + '</b> for KES ' + Number(amount).toLocaleString('en') + '. That is ' + nth + '.</p>'
+    + '<p style="font-size:17px">Your ' + (100 - COMMISSION_PERCENT) + '%, about <b>KES ' + share.toLocaleString('en') + '</b> before Paystack\'s fee, is paid to ' + esc(bank) + ' on Paystack\'s normal settlement schedule. You do not need to do anything.</p>'
+    + '<p style="margin:24px 0"><a href="' + url + '" style="background:#073B4C;color:#fff;padding:13px 22px;border-radius:3px;text-decoration:none;font-weight:700">See your prompt\'s page</a></p>'
+    + '<p style="font-size:15px">Want more sales? Share that link on WhatsApp, LinkedIn or X, and post another prompt you rely on.</p>'
+    + '<p style="font-size:13px;color:#5B6B7B">You get this email for every sale. Questions about a payout? Write to info@thetechhut.co.</p></div>';
+  const text = 'Congratulations' + (seller && seller.name ? ', ' + seller.name : '') + '! Someone just bought "' + p.title + '" for KES ' + Number(amount).toLocaleString('en') + ' (' + nth + ').\n\n'
+    + 'Your ' + (100 - COMMISSION_PERCENT) + '%, about KES ' + share.toLocaleString('en') + ' before Paystack\'s fee, is paid to ' + bank + ' on Paystack\'s normal settlement schedule.\n\n'
+    + 'Your prompt\'s page: ' + url + '\nShare it to sell more. Questions? info@thetechhut.co\n';
+  return { subject: 'You made a sale: ' + p.title, html, text };
 }
 const MODEL_NAMES = { chatgpt: 'ChatGPT', claude: 'Claude', gemini: 'Gemini', copilot: 'Copilot', midjourney: 'Midjourney' };
 
@@ -464,7 +487,29 @@ export async function settle(env, d) {
   const rec = await call(env, { op: 'purchase', ref: String(d.reference), pid, uid, amount });
   let mailed = !!rec.mailed;
   if (!mailed) mailed = await mailPrompt(env, g.prompt, uid, { amount, reference: String(d.reference) });
+  if (!rec.sellerMailed) await mailSeller(env, g.prompt, uid, { amount, sales: rec.sales || 1 });
   return { paid: true, pid, uid, mailed };
+}
+
+async function brevo(env, to, mail, tag) {
+  if (!env.BREVO_API_KEY || !env.BREVO_SENDER_EMAIL) return false;
+  try {
+    const r = await fetch(BREVO + '/smtp/email', {
+      method: 'POST', headers: { 'api-key': env.BREVO_API_KEY, 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({ sender: { name: env.BREVO_SENDER_NAME || 'The Tech Hut', email: env.BREVO_SENDER_EMAIL }, to: [{ email: to }],
+        replyTo: { email: 'info@thetechhut.co' }, subject: mail.subject, htmlContent: mail.html, textContent: mail.text, tags: [tag] }),
+    });
+    return r.ok;
+  } catch (e) { return false; }
+}
+
+/** Congratulates the seller on a sale; like mailPrompt, once per purchase, retried until it works. */
+async function mailSeller(env, prompt, buyerUid, sale) {
+  const { user: seller } = await call(env, { op: 'user', uid: prompt.uid });
+  if (!seller || !seller.email) return false;
+  if (!(await brevo(env, seller.email, saleEmail(prompt, { ...sale, seller }), 'market-sale'))) return false;
+  await call(env, { op: 'mailed', who: 'seller', uid: buyerUid, pid: prompt.id });
+  return true;
 }
 
 /**
@@ -473,18 +518,9 @@ export async function settle(env, d) {
  * the purchase is marked mailed so it is never sent twice. -> true if sent
  */
 async function mailPrompt(env, prompt, uid, receipt) {
-  if (!env.BREVO_API_KEY || !env.BREVO_SENDER_EMAIL) return false;
   const { user } = await call(env, { op: 'user', uid });
   if (!user || !user.email) return false;
-  const mail = purchaseEmail(prompt, receipt);
-  try {
-    const r = await fetch(BREVO + '/smtp/email', {
-      method: 'POST', headers: { 'api-key': env.BREVO_API_KEY, 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify({ sender: { name: env.BREVO_SENDER_NAME || 'The Tech Hut', email: env.BREVO_SENDER_EMAIL }, to: [{ email: user.email }],
-        replyTo: { email: 'info@thetechhut.co' }, subject: mail.subject, htmlContent: mail.html, textContent: mail.text, tags: ['market-purchase'] }),
-    });
-    if (!r.ok) return false;
-  } catch (e) { return false; }
-  await call(env, { op: 'mailed', uid, pid: prompt.id });
+  if (!(await brevo(env, user.email, purchaseEmail(prompt, receipt), 'market-purchase'))) return false;
+  await call(env, { op: 'mailed', who: 'buyer', uid, pid: prompt.id });
   return true;
 }
