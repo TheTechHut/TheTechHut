@@ -16,36 +16,36 @@
         /* The private site dashboard. Built on thh.css; dense, ruled, no decoration. */
         [hidden] { display: none !important; }
         body { background: var(--paper-2); }
-        .ad-top { background: var(--ink); color: #fff; }
-        .ad-top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 12px; padding-bottom: 12px; flex-wrap: wrap; }
-        .ad-top .wordmark { color: #fff; font-size: 22px; }
-        .ad-top .wordmark small { font: 500 12px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--mint); margin-left: 10px; }
-        .ad-who { font-size: 14px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
-        .ad-who button { background: none; border: 1px solid rgba(255,255,255,.5); color: #fff; padding: 5px 10px; font: 600 13px var(--sans); cursor: pointer; border-radius: 2px; }
-        .ad-who button:hover { border-color: var(--mint); color: var(--mint); }
-        .ad-nav { position: sticky; top: 0; z-index: 5; background: var(--paper); border-bottom: 1px solid var(--rule); }
-        .ad-nav .wrap { display: flex; gap: 4px 20px; overflow-x: auto; padding-top: 0; padding-bottom: 0; }
-        .ad-nav a { font: 600 14px var(--sans); color: var(--dim); padding: 11px 0; white-space: nowrap; border-bottom: 2px solid transparent; text-decoration: none; }
-        .ad-nav a:hover { color: var(--ink); border-bottom-color: var(--mint); }
-        main.ad { padding: 22px 0 70px; }
-        .ad-sec { background: var(--paper); border-top: 3px solid var(--ink); padding: 18px 22px 22px; margin: 0 0 22px; scroll-margin-top: 54px; }
-        .ad-sec > h2 { font-size: 24px; margin: 0 0 4px; display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
-        .ad-sec > h2 small { font: 500 12px var(--mono); color: var(--dim); text-transform: uppercase; letter-spacing: .06em; }
-        .ad-sec h3 { font-size: 17px; margin: 22px 0 8px; font-family: var(--sans); font-weight: 700; color: var(--ink); }
-        .ad-sub { color: var(--dim); font-size: 14.5px; margin: 0 0 14px; }
+        .db-top { background: var(--ink); color: #fff; }
+        .db-top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 12px; padding-bottom: 12px; flex-wrap: wrap; }
+        .db-top .wordmark { color: #fff; font-size: 22px; }
+        .db-top .wordmark small { font: 500 12px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--mint); margin-left: 10px; }
+        .db-who { font-size: 14px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+        .db-who button { background: none; border: 1px solid rgba(255,255,255,.5); color: #fff; padding: 5px 10px; font: 600 13px var(--sans); cursor: pointer; border-radius: 2px; }
+        .db-who button:hover { border-color: var(--mint); color: var(--mint); }
+        .db-nav { position: sticky; top: 0; z-index: 5; background: var(--paper); border-bottom: 1px solid var(--rule); }
+        .db-nav .wrap { display: flex; gap: 4px 20px; overflow-x: auto; padding-top: 0; padding-bottom: 0; }
+        .db-nav a { font: 600 14px var(--sans); color: var(--dim); padding: 11px 0; white-space: nowrap; border-bottom: 2px solid transparent; text-decoration: none; }
+        .db-nav a:hover { color: var(--ink); border-bottom-color: var(--mint); }
+        main.dash { padding: 22px 0 70px; }
+        .db-sec { background: var(--paper); border-top: 3px solid var(--ink); padding: 18px 22px 22px; margin: 0 0 22px; scroll-margin-top: 54px; }
+        .db-sec > h2 { font-size: 24px; margin: 0 0 4px; display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+        .db-sec > h2 small { font: 500 12px var(--mono); color: var(--dim); text-transform: uppercase; letter-spacing: .06em; }
+        .db-sec h3 { font-size: 17px; margin: 22px 0 8px; font-family: var(--sans); font-weight: 700; color: var(--ink); }
+        .db-sub { color: var(--dim); font-size: 14.5px; margin: 0 0 14px; }
         .kpis { display: grid; grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); gap: 8px; margin: 12px 0 4px; }
         .kpi { background: var(--paper); padding: 12px 14px; border: 1px solid var(--rule); border-top: 2px solid var(--mint); }
         .kpi b { display: block; font: 600 26px/1.15 var(--serif); color: var(--ink); }
         .kpi span { display: block; font: 500 11.5px var(--mono); text-transform: uppercase; letter-spacing: .05em; color: var(--dim); margin-top: 4px; }
         .kpi em { font-style: normal; color: var(--green); font: 600 12.5px var(--sans); }
-        .ad-tw { overflow-x: auto; border-top: 2px solid var(--ink); }
-        .ad-t { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 560px; }
-        .ad-t th { text-align: left; font: 500 11.5px var(--mono); text-transform: uppercase; letter-spacing: .05em; color: var(--dim); padding: 8px 10px 8px 0; border-bottom: 1px solid var(--rule); white-space: nowrap; }
-        .ad-t td { padding: 8px 10px 8px 0; border-bottom: 1px solid var(--rule-2); vertical-align: top; }
-        .ad-t td.n, .ad-t th.n { text-align: right; font-variant-numeric: tabular-nums; }
-        .ad-t td.w { max-width: 340px; }
-        .ad-t a { color: var(--ink); }
-        .ad-t .dim { color: var(--dim); font-size: 13px; }
+        .db-tw { overflow-x: auto; border-top: 2px solid var(--ink); }
+        .db-t { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 560px; }
+        .db-t th { text-align: left; font: 500 11.5px var(--mono); text-transform: uppercase; letter-spacing: .05em; color: var(--dim); padding: 8px 10px 8px 0; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+        .db-t td { padding: 8px 10px 8px 0; border-bottom: 1px solid var(--rule-2); vertical-align: top; }
+        .db-t td.n, .db-t th.n { text-align: right; font-variant-numeric: tabular-nums; }
+        .db-t td.w { max-width: 340px; }
+        .db-t a { color: var(--ink); }
+        .db-t .dim { color: var(--dim); font-size: 13px; }
         .st { display: inline-block; font: 600 11.5px var(--mono); text-transform: uppercase; letter-spacing: .04em; padding: 2px 7px; border-radius: 2px; white-space: nowrap; }
         .st.ok { background: #DDF7EE; color: var(--green); }
         .st.warn { background: #FFF4CC; color: #7A5B00; }
@@ -55,31 +55,31 @@
         .ab:hover { border-color: var(--ink); }
         .ab.danger { color: var(--red); }
         .ab[disabled] { opacity: .5; cursor: wait; }
-        .ad-tools { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin: 6px 0 10px; }
-        .ad-tools input[type=search] { flex: 1 1 240px; font-size: 15px; padding: 8px 10px; }
-        .ad-err { color: var(--red); font-weight: 600; font-size: 14.5px; }
-        .ad-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 8px 32px; }
-        .ad-signin { max-width: 460px; margin: 60px auto; background: var(--paper); border-top: 3px solid var(--ink); padding: 26px 28px; }
-        .ad-signin h1 { font-size: 30px; margin: 0 0 8px; }
-        .ad-signin input { width: 100%; box-sizing: border-box; font-size: 16px; padding: 11px 12px; margin: 6px 0 14px; }
-        .ad-more { background: none; border: 0; color: var(--green); font: 600 14px var(--sans); cursor: pointer; padding: 8px 0 0; text-decoration: underline; }
-        .ad-toast { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); background: var(--ink); color: #fff; padding: 11px 16px; border-left: 3px solid var(--mint); font-size: 14.5px; z-index: 20; max-width: calc(100vw - 32px); box-sizing: border-box; }
-        .ad-load { color: var(--dim); font: 500 13px var(--mono); }
-        @media (max-width: 640px) { .ad-sec { padding: 16px 14px 18px; } .kpis { grid-template-columns: 1fr 1fr; } .kpi { padding: 10px; } .kpi b { font-size: 20px; } }
+        .db-tools { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin: 6px 0 10px; }
+        .db-tools input[type=search] { flex: 1 1 240px; font-size: 15px; padding: 8px 10px; }
+        .db-err { color: var(--red); font-weight: 600; font-size: 14.5px; }
+        .db-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 8px 32px; }
+        .db-signin { max-width: 460px; margin: 60px auto; background: var(--paper); border-top: 3px solid var(--ink); padding: 26px 28px; }
+        .db-signin h1 { font-size: 30px; margin: 0 0 8px; }
+        .db-signin input { width: 100%; box-sizing: border-box; font-size: 16px; padding: 11px 12px; margin: 6px 0 14px; }
+        .db-more { background: none; border: 0; color: var(--green); font: 600 14px var(--sans); cursor: pointer; padding: 8px 0 0; text-decoration: underline; }
+        .db-toast { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); background: var(--ink); color: #fff; padding: 11px 16px; border-left: 3px solid var(--mint); font-size: 14.5px; z-index: 20; max-width: calc(100vw - 32px); box-sizing: border-box; }
+        .db-load { color: var(--dim); font: 500 13px var(--mono); }
+        @media (max-width: 640px) { .db-sec { padding: 16px 14px 18px; } .kpis { grid-template-columns: 1fr 1fr; } .kpi { padding: 10px; } .kpi b { font-size: 20px; } }
     </style>
 </head>
 <body>
-<header class="ad-top">
+<header class="db-top">
     <div class="wrap">
         <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span><small>Dashboard</small></a>
-        <div class="ad-who" id="who" hidden><span id="whoEmail"></span><span id="whoAt" class="ad-load" style="color:#cfe"></span><button type="button" id="refresh">Refresh</button><button type="button" id="signout">Sign out</button></div>
+        <div class="db-who" id="who" hidden><span id="whoEmail"></span><span id="whoAt" class="db-load" style="color:#cfe"></span><button type="button" id="refresh">Refresh</button><button type="button" id="signout">Sign out</button></div>
     </div>
 </header>
 
-<section class="ad-signin" id="signin" hidden>
+<section class="db-signin" id="signin" hidden>
     <span class="eyebrow">Private</span>
     <h1>Site dashboard</h1>
-    <p class="ad-sub">Enter your admin email and we will send you a sign-in link. Only admin addresses receive one.</p>
+    <p class="db-sub">Enter your admin email and we will send you a sign-in link. Only admin addresses receive one.</p>
     <form id="siForm" novalidate>
         <label class="label" for="siEmail">Email</label>
         <input type="email" id="siEmail" autocomplete="email" required placeholder="you@thetechhut.co">
@@ -88,83 +88,83 @@
     <p class="formmsg" id="siMsg" role="status"></p>
 </section>
 
-<nav class="ad-nav" id="nav" hidden aria-label="Dashboard sections"><div class="wrap">
+<nav class="db-nav" id="nav" hidden aria-label="Dashboard sections"><div class="wrap">
     <a href="#summary">Summary</a><a href="#health">Site health</a><a href="#payments">Payments</a><a href="#market">Marketplace</a>
     <a href="#lists">Email lists</a><a href="#events">Events</a><a href="#games">Games</a><a href="#config">Setup</a>
 </div></nav>
 
-<main class="ad" id="dash" hidden><div class="wrap">
-    <section class="ad-sec" id="summary"><h2>Summary <small id="sumAt"></small></h2><div class="kpis" id="sumK"></div></section>
+<main class="dash" id="dash" hidden><div class="wrap">
+    <section class="db-sec" id="summary"><h2>Summary <small id="sumAt"></small></h2><div class="kpis" id="sumK"></div></section>
 
-    <section class="ad-sec" id="health">
+    <section class="db-sec" id="health">
         <h2>Site health <small>data files, scheduled jobs and articles</small></h2>
-        <p class="ad-sub">What the daily and three-hourly jobs last produced, and how each GitHub workflow last ran. A warning means something is older than it should be.</p>
-        <div class="ad-tw"><table class="ad-t" id="healthT"><thead><tr><th>What</th><th>Last updated</th><th>Status</th><th>Detail</th></tr></thead><tbody></tbody></table></div>
+        <p class="db-sub">What the daily and three-hourly jobs last produced, and how each GitHub workflow last ran. A warning means something is older than it should be.</p>
+        <div class="db-tw"><table class="db-t" id="healthT"><thead><tr><th>What</th><th>Last updated</th><th>Status</th><th>Detail</th></tr></thead><tbody></tbody></table></div>
         <h3>GitHub workflows</h3>
-        <div class="ad-tw"><table class="ad-t" id="wfT"><thead><tr><th>Workflow</th><th>Last run</th><th>Result</th><th>Trigger</th><th></th></tr></thead><tbody></tbody></table></div>
+        <div class="db-tw"><table class="db-t" id="wfT"><thead><tr><th>Workflow</th><th>Last run</th><th>Result</th><th>Trigger</th><th></th></tr></thead><tbody></tbody></table></div>
         <h3>Scheduled blog articles</h3>
-        <div class="ad-tw"><table class="ad-t" id="schedT"><thead><tr><th>Release date</th><th>Article</th><th>Status</th></tr></thead><tbody></tbody></table></div>
+        <div class="db-tw"><table class="db-t" id="schedT"><thead><tr><th>Release date</th><th>Article</th><th>Status</th></tr></thead><tbody></tbody></table></div>
     </section>
 
-    <section class="ad-sec" id="payments">
+    <section class="db-sec" id="payments">
         <h2>Payments <small id="payMode"></small></h2>
-        <p class="ad-sub">From Paystack: every product on the site, including prompt sales (the full price; sellers' 90% is settled to them by Paystack).</p>
+        <p class="db-sub">From Paystack: every product on the site, including prompt sales (the full price; sellers' 90% is settled to them by Paystack).</p>
         <div class="kpis" id="payK"></div>
-        <div class="ad-cols">
-            <div><h3>Last 30 days by product</h3><div class="ad-tw"><table class="ad-t" id="payP" style="min-width:0"><thead><tr><th>Product</th><th class="n">Sales</th><th class="n">KES</th></tr></thead><tbody></tbody></table></div></div>
-            <div><h3>Latest payments</h3><div class="ad-tw"><table class="ad-t" id="payR"><thead><tr><th>When</th><th>Product</th><th>Customer</th><th class="n">KES</th><th>Via</th></tr></thead><tbody></tbody></table></div></div>
+        <div class="db-cols">
+            <div><h3>Last 30 days by product</h3><div class="db-tw"><table class="db-t" id="payP" style="min-width:0"><thead><tr><th>Product</th><th class="n">Sales</th><th class="n">KES</th></tr></thead><tbody></tbody></table></div></div>
+            <div><h3>Latest payments</h3><div class="db-tw"><table class="db-t" id="payR"><thead><tr><th>When</th><th>Product</th><th>Customer</th><th class="n">KES</th><th>Via</th></tr></thead><tbody></tbody></table></div></div>
         </div>
     </section>
 
-    <section class="ad-sec" id="market">
+    <section class="db-sec" id="market">
         <h2>Prompt marketplace <small><a href="/prompt-marketplace/">open</a></small></h2>
         <div class="kpis" id="mkK"></div>
         <h3>Needs attention</h3>
-        <p class="ad-sub">Reported or hidden prompts, and sales whose emails did not go out. A prompt reported 5 times hides itself.</p>
-        <div class="ad-tw"><table class="ad-t" id="mkAttn"><thead><tr><th>Prompt</th><th>Seller</th><th class="n">Reports</th><th>State</th><th>Actions</th></tr></thead><tbody></tbody></table></div>
+        <p class="db-sub">Reported or hidden prompts, and sales whose emails did not go out. A prompt reported 5 times hides itself.</p>
+        <div class="db-tw"><table class="db-t" id="mkAttn"><thead><tr><th>Prompt</th><th>Seller</th><th class="n">Reports</th><th>State</th><th>Actions</th></tr></thead><tbody></tbody></table></div>
         <h3>Sales</h3>
-        <div class="ad-tw"><table class="ad-t" id="mkSales"><thead><tr><th>When</th><th>Prompt</th><th>Buyer</th><th>Seller</th><th class="n">KES</th><th>Buyer email</th><th>Seller email</th></tr></thead><tbody></tbody></table></div>
-        <div class="ad-cols">
-            <div><h3>Top sellers</h3><div class="ad-tw"><table class="ad-t" id="mkTop" style="min-width:0"><thead><tr><th>Seller</th><th class="n">Prompts</th><th class="n">Sales</th><th class="n">KES</th></tr></thead><tbody></tbody></table></div></div>
+        <div class="db-tw"><table class="db-t" id="mkSales"><thead><tr><th>When</th><th>Prompt</th><th>Buyer</th><th>Seller</th><th class="n">KES</th><th>Buyer email</th><th>Seller email</th></tr></thead><tbody></tbody></table></div>
+        <div class="db-cols">
+            <div><h3>Top sellers</h3><div class="db-tw"><table class="db-t" id="mkTop" style="min-width:0"><thead><tr><th>Seller</th><th class="n">Prompts</th><th class="n">Sales</th><th class="n">KES</th></tr></thead><tbody></tbody></table></div></div>
         </div>
         <h3>All prompts</h3>
-        <div class="ad-tools"><input type="search" id="mkPq" placeholder="Search prompts or sellers"></div>
-        <div class="ad-tw"><table class="ad-t" id="mkPrompts"><thead><tr><th>Prompt</th><th>Seller</th><th class="n">Price</th><th class="n">Sales</th><th class="n">Reports</th><th>Listed</th><th>Actions</th></tr></thead><tbody></tbody></table></div>
+        <div class="db-tools"><input type="search" id="mkPq" placeholder="Search prompts or sellers"></div>
+        <div class="db-tw"><table class="db-t" id="mkPrompts"><thead><tr><th>Prompt</th><th>Seller</th><th class="n">Price</th><th class="n">Sales</th><th class="n">Reports</th><th>Listed</th><th>Actions</th></tr></thead><tbody></tbody></table></div>
         <h3>Members</h3>
-        <div class="ad-tools"><input type="search" id="mkMq" placeholder="Search name or email"><button class="ab" type="button" id="mkCsv">Download members (CSV)</button></div>
-        <div class="ad-tw"><table class="ad-t" id="mkMembers"><thead><tr><th>Joined</th><th>Name</th><th>Email</th><th class="n">Posted</th><th class="n">Bought</th><th>Payout</th></tr></thead><tbody></tbody></table></div>
+        <div class="db-tools"><input type="search" id="mkMq" placeholder="Search name or email"><button class="ab" type="button" id="mkCsv">Download members (CSV)</button></div>
+        <div class="db-tw"><table class="db-t" id="mkMembers"><thead><tr><th>Joined</th><th>Name</th><th>Email</th><th class="n">Posted</th><th class="n">Bought</th><th>Payout</th></tr></thead><tbody></tbody></table></div>
     </section>
 
-    <section class="ad-sec" id="lists">
+    <section class="db-sec" id="lists">
         <h2>Email lists <small>Brevo</small></h2>
         <div class="kpis" id="nlK"></div>
     </section>
 
-    <section class="ad-sec" id="events">
+    <section class="db-sec" id="events">
         <h2>Events <small><a href="/events/">post or edit on /events/</a></small></h2>
         <div class="kpis" id="evK"></div>
-        <div class="ad-cols">
-            <div><h3>Coming up</h3><div class="ad-tw"><table class="ad-t" id="evNext" style="min-width:0"><thead><tr><th>When</th><th>Event</th><th>From</th></tr></thead><tbody></tbody></table></div></div>
-            <div><h3>Posted on the site</h3><div class="ad-tw"><table class="ad-t" id="evPosted" style="min-width:0"><thead><tr><th>When</th><th>Event</th><th></th></tr></thead><tbody></tbody></table></div></div>
+        <div class="db-cols">
+            <div><h3>Coming up</h3><div class="db-tw"><table class="db-t" id="evNext" style="min-width:0"><thead><tr><th>When</th><th>Event</th><th>From</th></tr></thead><tbody></tbody></table></div></div>
+            <div><h3>Posted on the site</h3><div class="db-tw"><table class="db-t" id="evPosted" style="min-width:0"><thead><tr><th>When</th><th>Event</th><th></th></tr></thead><tbody></tbody></table></div></div>
         </div>
     </section>
 
-    <section class="ad-sec" id="games">
+    <section class="db-sec" id="games">
         <h2>Games arcade <small><a href="/games/">open</a></small></h2>
         <div class="kpis" id="gmK"></div>
-        <div class="ad-cols">
-            <div><h3>This week</h3><div class="ad-tw"><table class="ad-t" id="gmWeek" style="min-width:0"><thead><tr><th>Game</th><th class="n">Plays</th><th class="n">Minutes</th><th class="n">Live</th></tr></thead><tbody></tbody></table></div></div>
-            <div><h3>All time</h3><div class="ad-tw"><table class="ad-t" id="gmAll" style="min-width:0"><thead><tr><th>Game</th><th class="n">Plays</th><th class="n">Minutes</th></tr></thead><tbody></tbody></table></div></div>
+        <div class="db-cols">
+            <div><h3>This week</h3><div class="db-tw"><table class="db-t" id="gmWeek" style="min-width:0"><thead><tr><th>Game</th><th class="n">Plays</th><th class="n">Minutes</th><th class="n">Live</th></tr></thead><tbody></tbody></table></div></div>
+            <div><h3>All time</h3><div class="db-tw"><table class="db-t" id="gmAll" style="min-width:0"><thead><tr><th>Game</th><th class="n">Plays</th><th class="n">Minutes</th></tr></thead><tbody></tbody></table></div></div>
         </div>
     </section>
 
-    <section class="ad-sec" id="config">
+    <section class="db-sec" id="config">
         <h2>Setup <small>Worker settings, never their values</small></h2>
-        <div class="ad-tw"><table class="ad-t" id="cfgT"><thead><tr><th>Setting</th><th>State</th><th>What it switches on</th></tr></thead><tbody></tbody></table></div>
+        <div class="db-tw"><table class="db-t" id="cfgT"><thead><tr><th>Setting</th><th>State</th><th>What it switches on</th></tr></thead><tbody></tbody></table></div>
     </section>
 </div></main>
 
-<div class="ad-toast" id="toast" role="status" aria-live="polite" hidden></div>
+<div class="db-toast" id="toast" role="status" aria-live="polite" hidden></div>
 
 <script>
 (function () {
@@ -196,7 +196,7 @@
     if (!rows.length) { var tr = el('tr'); var c = td(tr, empty || 'Nothing here.', 'dim'); c.colSpan = cols || 8; tb.appendChild(tr); return tb; }
     rows.forEach(function (r) { tb.appendChild(r); }); return tb;
   }
-  function err(id, e) { var tb = $(id).tBodies[0]; tb.innerHTML = ''; var tr = el('tr'); var c = td(tr, 'Could not load: ' + (e && e.message || e), 'ad-err'); c.colSpan = 8; tb.appendChild(tr); }
+  function err(id, e) { var tb = $(id).tBodies[0]; tb.innerHTML = ''; var tr = el('tr'); var c = td(tr, 'Could not load: ' + (e && e.message || e), 'db-err'); c.colSpan = 8; tb.appendChild(tr); }
   function kes(n) { return 'KES ' + Math.round(n || 0).toLocaleString('en-KE'); }
   function num(n) { return (n || 0).toLocaleString('en-KE'); }
   function when(t) {
@@ -228,8 +228,8 @@
     return b;
   }
   function errorBox(sectionId, e) {
-    var s = $(sectionId), p = s.querySelector('.ad-err.box');
-    if (!p) { p = el('p', 'ad-err box'); s.insertBefore(p, s.children[1]); }
+    var s = $(sectionId), p = s.querySelector('.db-err.box');
+    if (!p) { p = el('p', 'db-err box'); s.insertBefore(p, s.children[1]); }
     p.textContent = 'Could not load this part: ' + e;
   }
 
@@ -354,7 +354,7 @@
     }), q ? 'No members match.' : 'No members yet.');
     if (list.length > membersShown) {
       var tr = el('tr'), c = td(tr, ''); c.colSpan = 6;
-      var more = el('button', 'ad-more', 'Show ' + Math.min(50, list.length - membersShown) + ' more of ' + list.length); more.type = 'button';
+      var more = el('button', 'db-more', 'Show ' + Math.min(50, list.length - membersShown) + ' more of ' + list.length); more.type = 'button';
       more.addEventListener('click', function () { membersShown += 50; drawMembers(); }); c.appendChild(more); tb.appendChild(tr);
     }
   }
