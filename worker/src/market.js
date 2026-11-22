@@ -15,7 +15,7 @@
  * share (bearer: subaccount). We never hold sellers' money.
  *
  * Data: one Durable Object (Market, named "market") with these keys:
- *   u:<uid>          { id, email, name, created, payout? }
+ *   u:<uid>          { id, email, name, created, payout?, welcome? }   welcome: 'pending' until the welcome email is sent
  *   e:<email-hash>   uid
  *   p:<pid>          { id, uid, title, desc, cat, model, preview, body, price, created, updated, sales, reports, hidden }
  *   b:<uid>:<pid>    { ref, at, amount, mailed?, sellerMailed? }   a purchase; the flags are set once the
@@ -42,7 +42,9 @@
  * Each prompt has its own page, /prompt-marketplace/p/<pid>/<slug>/ (one static
  * shell, rewritten by Firebase, that reads GET /market/prompt). When a sale
  * settles, settle() emails the buyer the full prompt and congratulates the
- * seller, once each.
+ * seller, once each. New members get a welcome email after their first
+ * sign-in, and a member who posts a new prompt gets an email with its link
+ * and share buttons.
  *
  * Secrets: MARKET_SECRET (signs links and sessions), plus the existing
  * PAYSTACK_SECRET_KEY, BREVO_API_KEY and BREVO_SENDER_EMAIL.
@@ -150,10 +152,15 @@ export class Market {
         let u = uid && (await st.get('u:' + uid));
         if (!u) {
           uid = rid();
-          u = { id: uid, email: b.email, name: nameFromEmail(b.email), created: now };
+          u = { id: uid, email: b.email, name: nameFromEmail(b.email), created: now, welcome: 'pending' };
           await st.put({ ['u:' + uid]: u, ['e:' + eh]: uid });
         }
-        return ok({ user: meView(u) });
+        // Members who joined before welcome emails existed have no flag, so they never get one.
+        return ok({ user: meView(u), welcome: u.welcome === 'pending' });
+      }
+      case 'welcomed': {
+        const u = await user(b.uid); if (!u) return ok({ ok: true });
+        u.welcome = now; await st.put('u:' + u.id, u); return ok({ ok: true });
       }
       case 'user': { const u = await user(b.uid); return ok({ user: u || null }); }
       case 'profile': {
@@ -187,14 +194,16 @@ export class Market {
         if (b.prompt.price > 0 && !u.payout) return ok({ error: 'payout' });
         let p = b.id ? await st.get('p:' + b.id) : null;
         if (b.id && (!p || p.uid !== u.id)) return ok({ error: 'not yours' });
+        let created = false, first = false;
         if (!p) {
-          const count = [...(await st.list({ prefix: 'p:' })).values()].filter((x) => x.uid === u.id && x.created > now - DAY).length;
-          if (count >= 20) return ok({ error: 'limit' });
+          const theirs = [...(await st.list({ prefix: 'p:' })).values()].filter((x) => x.uid === u.id);
+          if (theirs.filter((x) => x.created > now - DAY).length >= 20) return ok({ error: 'limit' });
           p = { id: rid(10), uid: u.id, created: now, sales: 0, reports: 0, hidden: false };
+          created = true; first = theirs.length === 0;
         }
         Object.assign(p, b.prompt, { updated: now });
         await st.put('p:' + p.id, p);
-        return ok({ prompt: ownPrompt(p) });
+        return ok({ prompt: ownPrompt(p), created, first, seller: created ? { name: u.name, email: u.email } : undefined });
       }
       case 'delete': {
         const p = await st.get('p:' + b.id);
@@ -293,6 +302,57 @@ export function purchaseEmail(p, { amount, reference }) {
     + '\nQuestions? Write to info@thetechhut.co.\n';
   return { subject: 'Your prompt: ' + p.title, html, text };
 }
+const MAIL_TOP = '<div style="font-family:\'Source Sans 3\',Arial,sans-serif;max-width:560px;margin:0 auto;padding:24px;color:#073B4C;line-height:1.55">'
+  + '<p style="font-family:Georgia,serif;font-weight:700;font-size:22px;margin:0 0 18px">The Tech Hut<span style="color:#06D6A0">.</span></p>';
+const button = (href, label, mint) => '<a href="' + href + '" style="display:inline-block;background:' + (mint ? '#06D6A0;color:#073B4C' : '#073B4C;color:#fff') + ';padding:12px 20px;border-radius:3px;text-decoration:none;font-weight:700;margin:0 8px 8px 0">' + label + '</a>';
+
+/** Sent once, after a new member's first sign-in. */
+export function welcomeEmail(u) {
+  const name = u && u.name ? ', ' + esc(u.name) : '';
+  const html = MAIL_TOP
+    + '<p style="margin:0 0 6px;font-family:Menlo,monospace;font-size:12px;letter-spacing:1px;color:#046B52">PROMPT MARKETPLACE &middot; WELCOME</p>'
+    + '<p style="font-family:Georgia,serif;font-size:26px;font-weight:700;margin:6px 0 12px">Welcome to the marketplace' + name + '!</p>'
+    + '<p style="font-size:17px">You are now part of a community of people in Kenya and beyond who share the AI prompts that actually work for them. Here are three ways to take part this week:</p>'
+    + '<ol style="font-size:16.5px;padding-left:20px;margin:0 0 18px">'
+    + '<li style="margin-bottom:10px"><b>Try a free prompt.</b> Browse by category (CVs, coding, marketing, data and more) and copy one into ChatGPT, Claude or Gemini.</li>'
+    + '<li style="margin-bottom:10px"><b>Share one you rely on.</b> That cover-letter or SQL prompt you keep reusing could save someone else an hour. Posting takes two minutes.</li>'
+    + '<li style="margin-bottom:10px"><b>Earn from your best ones.</b> Set a price from KES 50 and keep ' + (100 - COMMISSION_PERCENT) + '% of every sale, paid by Paystack straight to your bank account.</li></ol>'
+    + '<p style="margin:22px 0 10px">' + button(SITE + '/prompt-marketplace/#sell', 'Post your first prompt', true) + button(SITE + '/prompt-marketplace/', 'Browse prompts') + '</p>'
+    + '<p style="font-size:13px;color:#5B6B7B">No password to remember: whenever you want to sign in, ask for a link on the marketplace. Questions? Reply to this email.</p></div>';
+  const text = 'Welcome to The Tech Hut prompt marketplace' + (u && u.name ? ', ' + u.name : '') + '!\n\n'
+    + '1. Try a free prompt: browse by category and copy one into your AI tool.\n'
+    + '2. Share one you rely on: posting takes two minutes.\n'
+    + '3. Earn from your best ones: set a price from KES 50 and keep ' + (100 - COMMISSION_PERCENT) + '% of every sale.\n\n'
+    + 'Post your first prompt: ' + SITE + '/prompt-marketplace/#sell\nBrowse: ' + SITE + '/prompt-marketplace/\n';
+  return { subject: 'Welcome to The Tech Hut prompt marketplace', html, text };
+}
+
+/** Sent when a member posts a new prompt: its link, and buttons to share it. */
+export function listedEmail(p, { name, first }) {
+  const url = SITE + promptPath(p);
+  const pitch = p.title + (p.price > 0 ? '' : ' (free)') + ': an AI prompt on The Tech Hut marketplace';
+  const wa = 'https://wa.me/?text=' + encodeURIComponent(pitch + ' ' + url);
+  const li = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url);
+  const x = 'https://x.com/intent/post?text=' + encodeURIComponent(pitch) + '&url=' + encodeURIComponent(url);
+  const lead = first
+    ? 'Welcome to the marketplace\'s sellers' + (name ? ', ' + esc(name) : '') + '! Your first prompt is live.'
+    : 'Your new prompt is live' + (name ? ', ' + esc(name) : '') + '.';
+  const why = p.price > 0
+    ? 'Most sales start with a share. Post the link where people already ask you for help: your WhatsApp status, a class or work group, LinkedIn. You keep ' + (100 - COMMISSION_PERCENT) + '% of every sale.'
+    : 'Free prompts are how people find you. Post the link where people already ask you for help: your WhatsApp status, a class or work group, LinkedIn.';
+  const html = MAIL_TOP
+    + '<p style="margin:0 0 6px;font-family:Menlo,monospace;font-size:12px;letter-spacing:1px;color:#046B52">PROMPT MARKETPLACE &middot; ' + (first ? 'WELCOME, SELLER' : 'NOW LIVE') + '</p>'
+    + '<p style="font-family:Georgia,serif;font-size:26px;font-weight:700;margin:6px 0 12px">' + lead + '</p>'
+    + '<p style="font-size:17px"><b>' + esc(p.title) + '</b> &middot; ' + (p.price > 0 ? 'KES ' + Number(p.price).toLocaleString('en') : 'Free') + '<br><a href="' + url + '" style="color:#046B52">' + esc(url) + '</a></p>'
+    + '<p style="font-size:17px">' + why + '</p>'
+    + '<p style="margin:20px 0 10px">' + button(wa, 'Share on WhatsApp', true) + button(li, 'Share on LinkedIn') + button(x, 'Share on X') + '</p>'
+    + '<p style="font-size:15px">Tip: a clear title and a preview that shows the result sell best. You can edit the prompt any time from My account.</p>'
+    + '<p style="font-size:13px;color:#5B6B7B">You get this email when you post a new prompt' + (p.price > 0 ? ', and another every time it sells' : '') + '.</p></div>';
+  const text = (first ? 'Welcome to the marketplace\'s sellers! Your first prompt is live.' : 'Your new prompt is live.') + '\n\n'
+    + p.title + '\n' + url + '\n\n' + why.replace(/&amp;/g, '&') + '\n\nShare on WhatsApp: ' + wa + '\nShare on LinkedIn: ' + li + '\nShare on X: ' + x + '\n';
+  return { subject: (first ? 'Welcome, seller: ' : 'Your prompt is live: ') + p.title, html, text };
+}
+
 /** The email a seller gets on each sale. It never says who bought. */
 export function saleEmail(p, { amount, sales, seller }) {
   const url = SITE + promptPath(p);
@@ -373,6 +433,7 @@ export async function handleMarket(req, env, url, origin, deps) {
     if (!p) return json({ error: 'That sign-in link has expired or is not valid. Ask for a new one.' }, 400, origin);
     const r = await call(env, { op: 'login', email: p.e, nonce: p.n });
     if (r.error) return json({ error: 'That sign-in link was already used. Ask for a new one.' }, 400, origin);
+    if (r.welcome && (await brevo(env, r.user.email, welcomeEmail(r.user), 'market-welcome'))) await call(env, { op: 'welcomed', uid: r.user.id });
     return json({ session: await sign({ k: 's', u: r.user.id, x: now + SESSION_TTL }, env.MARKET_SECRET), user: r.user }, 200, origin);
   }
 
@@ -424,7 +485,9 @@ export async function handleMarket(req, env, url, origin, deps) {
     if (r.error === 'payout') return json({ error: 'payout', message: 'Add the bank account your earnings go to before you sell a paid prompt.' }, 400, origin);
     if (r.error === 'limit') return json({ error: 'You can post 20 prompts a day. Try again tomorrow.' }, 429, origin);
     if (r.error) return json({ error: 'You can only edit your own prompts.' }, 403, origin);
-    return json(r, 200, origin);
+    // A new prompt (not an edit): send its link and share buttons. Best effort; the post is live either way.
+    if (r.created && r.seller) await brevo(env, r.seller.email, listedEmail(r.prompt, { name: r.seller.name, first: r.first }), 'market-listed');
+    return json({ prompt: r.prompt }, 200, origin);
   }
 
   if (route === 'delete') {

@@ -284,6 +284,63 @@ await t('prompt text with HTML is escaped in the email', async () => {
   assert.ok(mails[0].htmlContent.includes('&lt;img src=x'));
 });
 
+console.log('\nwelcome and listing emails');
+await t('a new member gets one welcome email after their first sign-in, never again', async () => {
+  const e = env();
+  const a = await signIn(e, 'new@example.com');
+  const welcome = mails.filter((m) => m.tags[0] === 'market-welcome');
+  assert.equal(welcome.length, 1);
+  assert.deepEqual(welcome[0].to, [{ email: 'new@example.com' }]);
+  assert.ok(welcome[0].htmlContent.includes('Welcome to the marketplace, New!'));
+  assert.ok(welcome[0].htmlContent.includes('/prompt-marketplace/#sell'));
+  await signIn(e, 'new@example.com');
+  assert.equal(mails.filter((m) => m.tags[0] === 'market-welcome').length, 0, 'not on the second sign-in');
+  assert.ok(a.session);
+});
+await t('if the welcome email fails, the next sign-in sends it', async () => {
+  const e = env();
+  mails = [];
+  const r = await call(e, '/market/login', { email: 'late@example.com' });
+  const link = mails[0].htmlContent.match(/#login=([A-Za-z0-9._-]+)/)[1];
+  brevoDown = true;
+  assert.equal((await call(e, '/market/session', { t: link })).status, 200, 'sign-in still works');
+  brevoDown = false;
+  await signIn(e, 'late@example.com');
+  assert.equal(mails.filter((m) => m.tags[0] === 'market-welcome').length, 1);
+  assert.equal(r.status, 200);
+});
+await t('posting a new prompt emails its link with share buttons; edits do not', async () => {
+  const e = env();
+  const { session } = await signIn(e, 'poster@example.com');
+  mails = [];
+  const s = await call(e, '/market/save', { session, ...PROMPT, price: 0 });
+  assert.equal(s.status, 200);
+  assert.equal(s.body.created, undefined, 'internal fields stay server-side');
+  const url = 'https://thetechhut.co' + s.body.prompt.path;
+  assert.equal(mails.length, 1);
+  const m = mails[0];
+  assert.equal(m.tags[0], 'market-listed');
+  assert.deepEqual(m.to, [{ email: 'poster@example.com' }]);
+  assert.ok(m.subject.startsWith('Welcome, seller'), 'the first prompt gets the welcome');
+  assert.ok(m.htmlContent.includes(url));
+  assert.ok(m.htmlContent.includes('https://wa.me/?text=' + encodeURIComponent(PROMPT.title + ' (free): an AI prompt on The Tech Hut marketplace ' + url)));
+  assert.ok(m.htmlContent.includes('linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url)));
+  assert.ok(m.htmlContent.includes('x.com/intent/post?'));
+  mails = [];
+  await call(e, '/market/save', { session, id: s.body.prompt.id, ...PROMPT, title: 'Cover letter, edited', price: 0 });
+  assert.equal(mails.length, 0, 'an edit sends nothing');
+  await call(e, '/market/save', { session, ...PROMPT, title: 'A second prompt for interviews', price: 0 });
+  assert.equal(mails.length, 1);
+  assert.ok(mails[0].subject.startsWith('Your prompt is live'), 'later prompts get the shorter email');
+});
+await t('a prompt title with HTML is escaped in the listing email', async () => {
+  const e = env();
+  const { session } = await signIn(e, 'poster@example.com');
+  mails = [];
+  await call(e, '/market/save', { session, ...PROMPT, title: 'Prompt <script>x</script> here', price: 0 });
+  assert.ok(!mails[0].htmlContent.includes('<script>'));
+});
+
 console.log('\nswitches');
 await t('without MARKET_SECRET the marketplace answers 503, and other routes are untouched', async () => {
   const e = env(); delete e.MARKET_SECRET;

@@ -349,6 +349,12 @@ Community members post AI prompts, free or paid, and buy each other's. Code:
   the prompt's page (never who bought). Both go through Brevo and are flagged on the
   purchase (`mailed`, `sellerMailed`) so each is sent once; if Brevo fails, the next
   settle for that payment tries again.
+- **Welcome emails:** a new member is emailed a welcome (three ways to take part,
+  with buttons to post or browse) after their first sign-in; the account is flagged
+  `welcome: 'pending'` until it is sent, so a failed send is retried at the next
+  sign-in, and members from before this feature never get one. Posting a new prompt
+  (not editing one) emails the member its link with WhatsApp, LinkedIn and X share
+  buttons; their first prompt gets a "welcome, seller" version.
 - **Sitemap:** `scripts/build_prompt_sitemap.js` writes `prompt-marketplace/sitemap.xml`
   (listed in robots.txt) from `GET /market/prompts` before every deploy; it is not
   committed. New prompts reach it with the next deploy, at most about 3 hours later.

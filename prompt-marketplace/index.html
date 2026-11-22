@@ -518,7 +518,7 @@
     $('sellBtn').disabled = true; msg($('sellMsg'), '');
     authed('save', data).then(function (j) {
       $('sellBtn').disabled = false;
-      if (j.prompt) { msg($('sellMsg'), data.id ? 'Saved.' : 'Published. It is live in the marketplace now.', true); resetSell(); refreshMe(); load(); return; }
+      if (j.prompt) { msg($('sellMsg'), data.id ? 'Saved.' : 'Published. It is live in the marketplace now, and we have emailed you its link so you can share it.', true); resetSell(); refreshMe(); load(); return; }
       if (j.error === 'payout') { msg($('sellMsg'), j.message); setTimeout(function () { tab('payout'); }, 1400); return; }
       msg($('sellMsg'), j.error === 'signin' ? 'Your session ended. Sign in again.' : (j.error || 'Could not save. Try again.'));
     });
