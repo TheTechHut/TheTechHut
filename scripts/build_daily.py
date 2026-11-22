@@ -374,6 +374,7 @@ STATIC_PAGES = [
     ('/blog/tech-jobs-kenya/',           '0.80', 'monthly'),
     ('/blog/how-to-write-a-cv/',         '0.80', 'monthly'),
     ('/blog/hackathons-kenya/',          '0.80', 'monthly'),
+    ('/blog/gta-6-kenya/',               '0.80', 'monthly'),
     ('/blog/remote-jobs-africa/', '0.75', 'monthly'),
     ('/blog/it-internships-nairobi/', '0.75', 'monthly'),
     ('/blog/apprenticeship-kenya/', '0.75', 'monthly'),
