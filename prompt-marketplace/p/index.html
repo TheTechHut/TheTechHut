@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI prompt | The Tech Hut prompt marketplace</title>
+    <meta name="description" content="An AI prompt from The Tech Hut community marketplace. Buy, sell and share prompts that work.">
+    <link rel="canonical" id="canon" href="https://thetechhut.co/prompt-marketplace/">
+    <meta property="og:type" content="product">
+    <meta property="og:site_name" content="The Tech Hut">
+    <meta property="og:title" content="Prompt marketplace: prompts that work, from people who use them">
+    <meta property="og:description" content="Buy, sell and share AI prompts. Sign in with your email. Sellers keep 90%.">
+    <meta property="og:url" content="https://thetechhut.co/prompt-marketplace/">
+    <meta property="og:image" content="https://thetechhut.co/assets/img/social/prompts.jpg?v=3">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="The Tech Hut prompt marketplace: earn from your prompts. Sellers keep 90% of every sale.">
+    <meta property="og:locale" content="en_KE">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Prompt marketplace: prompts that work, from people who use them">
+    <meta name="twitter:description" content="Buy, sell and share AI prompts. Sign in with your email. Sellers keep 90%.">
+    <meta name="twitter:image" content="https://thetechhut.co/assets/img/social/prompts.jpg?v=3">
+    <meta name="theme-color" content="#073B4C">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/assets/img/favicon-192.png" type="image/png" sizes="192x192">
+    <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/thh.css">
+    <script src="/assets/js/motion.js?v=1"></script>
+    <style>
+        /* A prompt's own page, styled like the prompt marketplace. Built on thh.css: ink, mint, green; Newsreader headlines,
+           Plex Mono labels, ruled columns, square corners. */
+        [hidden] { display: none !important; }
+        .pm-head { padding-bottom: 44px; }
+        .pm-head-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 44px; align-items: center; }
+        .pm-head h1 { max-width: 18ch; }
+        /* Rounded, unlike the square editorial images elsewhere: the marketplace is the community's space. */
+        .pm-hero-img { margin: 0 0 14px 14px; position: relative; isolation: isolate; }
+        .pm-hero-img::after { content: ''; position: absolute; left: -14px; bottom: -14px; width: 46%; height: 42%; border-radius: 28px; background: var(--mint); z-index: -1; }
+        .pm-hero-img img { display: block; width: 100%; height: auto; aspect-ratio: 50 / 38; object-fit: cover; background: var(--paper-3); border-radius: 28px; }
+        .pm-acct { margin-top: 18px; font-size: 15.5px; color: var(--text); }
+        .pm-acct p { margin: 0; }
+        .pm-link.pm-strong { color: var(--ink); font-weight: 700; font-size: 15.5px; text-decoration-color: var(--mint); text-underline-offset: 3px; }
+        .pm-dim { color: var(--dim); font-size: 14.5px; }
+
+        .pm-browse { padding-top: 28px; }
+        .pm-tools { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+        .pm-search { flex: 1 1 320px; }
+        .pm-search input { width: 100%; box-sizing: border-box; font-size: 16px; padding: 12px 14px; }
+        .pm-free { display: inline-flex; gap: 8px; align-items: center; font-weight: 600; color: var(--ink); white-space: nowrap; }
+        .pm-cats { display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0 6px; }
+        .pm-cats button { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--ink);
+            background: var(--paper); border: 1px solid var(--rule); border-radius: 2px; padding: 6px 10px; cursor: pointer; }
+        .pm-cats button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+        .pm-count { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--dim); margin: 10px 0 0; min-height: 1.4em; }
+        .pm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 30px 32px; margin-top: 18px; }
+        .pm-card { display: block; color: inherit; text-decoration: none; border-top: 2px solid var(--ink); padding: 12px 0 4px; outline: none; }
+        .pm-card:hover h3, .pm-card:focus-visible h3 { color: var(--green); }
+        .pm-card:focus-visible { box-shadow: 0 -2px 0 var(--mint); }
+        .pm-card-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+        .pm-cat { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--green); }
+        .pm-card h3 { font-size: 21px; line-height: 1.22; margin: 10px 0 6px; }
+        .pm-card-desc { font-size: 15.5px; color: var(--text); margin: 0 0 8px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        .pm-card-meta { font-size: 13.5px; color: var(--dim); margin: 0; }
+        .pm-empty { grid-column: 1 / -1; border-top: 2px solid var(--ink); padding: 18px 0; max-width: 60ch; }
+        .pm-empty h3 { font-size: 24px; margin: 0 0 8px; }
+
+        .pm-dlg { border: 0; border-top: 3px solid var(--ink); border-radius: 0; padding: 26px 28px 24px; width: min(680px, calc(100vw - 32px));
+            max-height: calc(100vh - 40px); box-sizing: border-box; color: var(--text); background: var(--paper); }
+        .pm-dlg::backdrop { background: rgba(7, 59, 76, .55); }
+        .pm-narrow { width: min(460px, calc(100vw - 32px)); }
+        .pm-wide { width: min(820px, calc(100vw - 32px)); }
+        .pm-dlg h2 { font-size: clamp(24px, 3.4vw, 32px); margin: 0 0 6px; padding-right: 30px; }
+        .pm-x { position: absolute; top: 10px; right: 12px; margin: 0; }
+        .pm-x button { background: none; border: 0; font-size: 28px; line-height: 1; color: var(--ink); cursor: pointer; padding: 4px 8px; }
+        .pm-desc { font-size: 17px; margin: 14px 0; }
+        .pm-preview { background: var(--paper-2); border-left: 3px solid var(--mint); padding: 12px 14px; margin: 0 0 16px; }
+        .pm-preview pre, .pm-body { white-space: pre-wrap; word-wrap: break-word; font: 14px/1.55 var(--mono); color: var(--ink); margin: 6px 0 0; }
+        .pm-preview pre { background: none; padding: 0; overflow: visible; }
+        .pm-body { background: var(--paper-2); border-left: 3px solid var(--ink); padding: 14px 16px; max-height: 46vh; overflow: auto; }
+        .pm-body-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+        .pm-small { padding: 6px 12px; font-size: 13.5px; }
+        .pm-fine { margin: 18px 0 0; }
+        .pm-link { background: none; border: 0; padding: 0; color: var(--dim); text-decoration: underline; cursor: pointer; font: inherit; font-size: 14px; }
+        .pm-link:hover { color: var(--ink); }
+        #dpActions { margin-top: 6px; }
+
+        .pm-field { display: grid; gap: 6px; font-weight: 700; font-size: 14.5px; color: var(--ink); margin: 0 0 14px; }
+        .pm-field input, .pm-field select, .pm-field textarea { width: 100%; box-sizing: border-box; font: 16px var(--sans); font-weight: 400; }
+        .pm-mono { font-family: var(--mono) !important; font-size: 14px !important; }
+        .pm-opt, .pm-hint { font-weight: 400; color: var(--dim); font-size: 13.5px; }
+        .pm-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0 16px; }
+        .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+        .pm-tabs { display: flex; gap: 2px 18px; flex-wrap: wrap; border-bottom: 1px solid var(--rule); margin: 14px 0 20px; }
+        .pm-tabs button { background: none; border: 0; border-bottom: 2px solid transparent; padding: 8px 0; font: 700 15px var(--sans); color: var(--dim); cursor: pointer; margin-bottom: -1px; }
+        .pm-tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--mint); }
+        .pm-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+        .pm-list li { display: flex; justify-content: space-between; gap: 14px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+        .pm-li-main { display: grid; gap: 2px; }
+        .pm-li-main b { color: var(--ink); }
+        .pm-li-act { display: flex; gap: 14px; flex: none; }
+
+        .pm-how { border-bottom: 0; }
+        .pm-toast { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); background: var(--ink); color: #fff; padding: 12px 18px;
+            border-left: 3px solid var(--mint); font-size: 15px; max-width: calc(100vw - 40px); z-index: 1000; box-sizing: border-box; }
+        @media (max-width: 760px) {
+            .pm-head-grid { grid-template-columns: 1fr; gap: 26px; }
+            .pm-dlg { padding: 22px 18px 20px; }
+            .pm-list li { flex-direction: column; align-items: flex-start; }
+        }
+
+        /* A prompt's own page */
+        .pp-wrap { padding-top: 26px; padding-bottom: 56px; }
+        .pp-crumbs { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--dim); margin: 0 0 22px; }
+        .pp-crumbs a { color: var(--green); }
+        .pp { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 44px; align-items: start; border-top: 3px solid var(--ink); padding-top: 22px; }
+        .pp-title { font-size: clamp(30px, 4.6vw, 48px); line-height: 1.08; margin: 10px 0 10px; max-width: 22ch; }
+        .pp-by { color: var(--dim); font-size: 15px; margin: 0 0 18px; }
+        .pp-desc { font-size: 18.5px; line-height: 1.6; margin: 0 0 22px; white-space: pre-line; max-width: 62ch; }
+        .pp-body { max-height: none; }
+        .pp-buy { position: sticky; top: 18px; border-top: 2px solid var(--ink); padding-top: 14px; }
+        .pp-price { font: 600 34px/1.1 var(--serif); color: var(--ink); margin: 0 0 6px; }
+        .pp-note { color: var(--dim); font-size: 14.5px; margin: 0 0 14px; }
+        .pp-acts { display: grid; gap: 10px; }
+        .pp-acts .btn { width: 100%; text-align: center; box-sizing: border-box; }
+        .pp-facts { list-style: none; margin: 18px 0 0; padding: 0; border-top: 1px solid var(--rule); font-size: 14.5px; }
+        .pp-facts li { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--rule); }
+        .pp-facts b { color: var(--ink); text-align: right; }
+        .pp-foot { margin-top: 36px; border-top: 1px solid var(--rule); padding-top: 16px; }
+        .pp-foot .pm-fine a, .pp-foot .pm-fine button { margin-right: 2px; }
+        .pp-missing { border-top: 3px solid var(--ink); padding-top: 22px; max-width: 60ch; }
+        @media (max-width: 860px) {
+            .pp { grid-template-columns: 1fr; gap: 26px; }
+            .pp-buy { position: static; }
+        }
+    </style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+    <header class="masthead">
+        <div class="masthead-top"><div class="wrap"><span>Kenya's tech careers, reported daily</span><span class="hide-sm"><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a> &middot; <a href="mailto:info@thetechhut.co">info@thetechhut.co</a></span></div></div>
+        <div class="wrap masthead-main">
+            <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+            <nav class="sitenav" aria-label="Site"><a href="/blog/daily/">Daily</a><a href="/jobs/">Jobs</a><a href="/hackathons/">Hackathons</a><a href="/remote/">Remote</a><a href="/cv-pack/">CV Pack</a><a href="/shop/">Shop</a><a href="/events/">Events</a><a href="/games/">Games</a><a href="/apprenticeship/">Apprenticeship</a><a href="/blog/">Blog</a></nav>
+        </div>
+    </header>
+<main id="main">
+<div class="wrap pp-wrap">
+  <nav class="pp-crumbs" aria-label="Breadcrumb"><a href="/prompt-marketplace/">Prompt marketplace</a> <span aria-hidden="true">/</span> <span id="ppCrumb">Prompt</span></nav>
+
+  <article class="pp" id="pp" aria-busy="true">
+    <div class="pp-main">
+      <span class="eyebrow" id="ppCat">Loading…</span>
+      <h1 id="ppTitle" class="pp-title">Loading the prompt…</h1>
+      <p class="pp-by" id="ppBy"></p>
+      <p class="pp-desc" id="ppDesc"></p>
+      <div class="pm-preview" id="ppPreviewWrap" hidden><span class="label">Preview</span><pre id="ppPreview"></pre></div>
+      <div id="ppBodyWrap" hidden>
+        <div class="pm-body-head"><span class="label">The prompt</span><button class="btn ghost pm-small" type="button" id="ppCopy">Copy</button></div>
+        <pre id="ppBody" class="pm-body pp-body"></pre>
+      </div>
+    </div>
+
+    <aside class="pp-buy" id="ppBuy" hidden>
+      <p class="pp-price" id="ppPrice"></p>
+      <p class="pp-note" id="ppNote"></p>
+      <div class="pp-acts" id="ppActions"></div>
+      <p class="formmsg" id="ppMsg" role="status"></p>
+      <ul class="pp-facts" id="ppFacts"></ul>
+    </aside>
+  </article>
+
+  <div class="pp-missing" id="ppMissing" hidden>
+    <h1 class="pp-title">That prompt is no longer here.</h1>
+    <p>The seller may have removed it, or the link is wrong. If you bought it, it is still in <a href="/prompt-marketplace/#account">My account</a> and in the email we sent you.</p>
+    <p><a class="btn" href="/prompt-marketplace/">Browse the marketplace</a></p>
+  </div>
+
+  <div class="pp-foot" id="ppFoot" hidden>
+    <p class="pm-acct" id="acctOut">No password needed. <button class="pm-link pm-strong" type="button" data-act="signin">Sign in or join with your email</button></p>
+    <p class="pm-acct" id="acctIn" hidden>Signed in as <b id="acctName"></b> &middot; <a class="pm-link pm-strong" href="/prompt-marketplace/#account">My account</a></p>
+    <p class="pm-fine"><a class="pm-link" href="/prompt-marketplace/">&larr; All prompts</a> &middot; <a class="pm-link" href="/prompt-marketplace/#sell">Sell your own prompt</a> &middot; <button type="button" class="pm-link" id="ppReport">Report this prompt</button></p>
+  </div>
+</div>
+</main>
+
+<!-- Sign in -->
+<dialog class="pm-dlg pm-narrow" id="dlgSignin" aria-labelledby="siTitle">
+  <form method="dialog" class="pm-x"><button aria-label="Close">&times;</button></form>
+  <span class="eyebrow">Sign in or join</span>
+  <h2 id="siTitle">Just your email</h2>
+  <p id="siWhy" class="pm-dim">We'll email you a link. Click it and you're signed in. New here? The same link creates your account.</p>
+  <form id="siForm" novalidate>
+    <label class="pm-field">Email<input type="email" name="email" autocomplete="email" placeholder="you@email.com" required></label>
+    <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <button class="btn" type="submit" id="siBtn">Email me a sign-in link</button>
+  </form>
+  <p class="formmsg" id="siMsg" role="status"></p>
+</dialog>
+
+<div class="pm-toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<footer class="sitefoot">
+        <div class="wrap">
+            <div class="sitefoot-grid">
+                <div>
+                    <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+                    <p>Helping Kenyans into tech work: jobs you can take from Nairobi, a daily read on the industry, and projects with mentors.</p>
+                </div>
+                <div>
+                    <h4>Read</h4>
+                    <ul>
+                        <li><a href="/blog/daily/">Daily Savannah</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Find work</h4>
+                    <ul>
+                        <li><a href="/jobs/">Jobs board</a></li>
+                        <li><a href="/jobs/daily/">Daily job alert</a></li>
+                        <li><a href="/remote/">Remote-from-Kenya list</a></li>
+                        <li><a href="/cv-pack/">CV Pack</a></li>
+                        <li><a href="/early-access/">Early Access</a></li>
+                        <li><a href="/shop/">Everything we make</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="/apprenticeship/">Apprenticeship</a></li>
+                        <li><a href="/events/">Events</a></li>
+                        <li><a href="/hackathons/">Hackathons</a></li>
+                        <li><a href="/communities/">Tech communities</a></li>
+                        <li><a href="/tools/">Tools</a></li>
+                        <li><a href="/prompt-marketplace/">Prompt marketplace</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Employers</h4>
+                    <ul>
+                        <li><a href="/advertise/">Advertise</a></li>
+                        <li><a href="/jobs-for-your-community/">A jobs board for your community</a></li>
+                        <li><a href="/recruiters/">Recruiters</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sitefoot-base">
+                <span>&copy; 2026 The Tech Hut Community</span>
+                <a href="mailto:info@thetechhut.co">info@thetechhut.co</a>
+                <span>+254 115 017 058</span>
+                <a href="/data_privacy_policy/">Privacy</a>
+                <a href="https://linkedin.com/company/digital-transformation-partner/" rel="noopener">LinkedIn</a>
+                <a href="https://x.com/Ekiprop_kimutai" rel="noopener">X</a>
+            </div>
+        </div>
+    </footer>
+<script>
+(function () {
+  /* One prompt's page. Firebase serves this same file for every /prompt-marketplace/p/<id>/<slug>/,
+     and the page reads the prompt from the marketplace API. Shares the browser session with the
+     marketplace page (localStorage tthMarketSession). */
+  var API = 'https://thetechhut-pay.thetechhut.workers.dev/market/';
+  var SITE = 'https://thetechhut.co';
+  var CAT = { writing: 'Writing', coding: 'Coding', career: 'Career & CVs', marketing: 'Marketing', data: 'Data & analysis',
+              images: 'Images', business: 'Business', learning: 'Learning', other: 'Other' };
+  var MODEL = { any: 'Any AI', chatgpt: 'ChatGPT', claude: 'Claude', gemini: 'Gemini', copilot: 'Copilot', midjourney: 'Midjourney', other: 'Other' };
+  var $ = function (id) { return document.getElementById(id); };
+  var mId = /^\/prompt-marketplace\/p\/([a-z0-9]{6,20})(\/|$)/.exec(location.pathname);
+  var id = mId ? mId[1] : null;
+  var prompt = null, me = null;
+
+  var KEY = 'tthMarketSession';
+  function sess() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function setSess(v) { try { if (v) localStorage.setItem(KEY, v); else localStorage.removeItem(KEY); } catch (e) {} }
+  function api(path, body) {
+    var opts = body ? { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) } : {};
+    return fetch(API + path, opts).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) { j._status = r.status; return j; });
+    });
+  }
+  function authed(path, body) {
+    body = body || {}; body.session = sess();
+    return api(path, body).then(function (j) { if (j._status === 401) { setSess(null); me = null; drawAcct(); } return j; });
+  }
+  function toast(text, long) {
+    var t = $('toast'); t.textContent = text; t.hidden = false;
+    clearTimeout(toast.t); toast.t = setTimeout(function () { t.hidden = true; }, long ? 9000 : 4500);
+  }
+  function msg(text, ok) { var n = $('ppMsg'); n.textContent = text || ''; n.className = 'formmsg' + (text ? (ok ? ' ok' : ' bad') : ''); }
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function price(p) { return p > 0 ? 'KES ' + Number(p).toLocaleString('en-KE') : 'Free'; }
+  function openDlg(d) { if (d.showModal) { if (!d.open) d.showModal(); } else d.setAttribute('open', ''); }
+  function closeDlg(d) { if (d.close) d.close(); else d.removeAttribute('open'); }
+
+  /* ---------- head tags, so a shared link and search engines see this prompt ---------- */
+  function meta(attr, key, val) {
+    var m = document.head.querySelector('meta[' + attr + '="' + key + '"]');
+    if (!m) { m = document.createElement('meta'); m.setAttribute(attr, key); document.head.appendChild(m); }
+    m.setAttribute('content', val);
+  }
+  function setHead(p) {
+    var url = SITE + p.path, d = (p.desc || '').replace(/\s+/g, ' ').slice(0, 155);
+    document.title = p.title + ' | AI prompt | The Tech Hut';
+    meta('name', 'description', d);
+    meta('property', 'og:title', p.title); meta('property', 'og:description', d); meta('property', 'og:url', url);
+    meta('name', 'twitter:title', p.title); meta('name', 'twitter:description', d);
+    $('canon').setAttribute('href', url);
+    var ld = { '@context': 'https://schema.org', '@type': 'Product', name: p.title, description: p.desc, category: (CAT[p.cat] || 'Other') + ' prompt',
+      url: url, brand: { '@type': 'Brand', name: 'The Tech Hut prompt marketplace' },
+      offers: { '@type': 'Offer', price: String(p.price || 0), priceCurrency: 'KES', availability: 'https://schema.org/InStock', url: url } };
+    var s = document.createElement('script'); s.type = 'application/ld+json'; s.textContent = JSON.stringify(ld); document.head.appendChild(s);
+  }
+  function missing() {
+    meta('name', 'robots', 'noindex');
+    document.title = 'Prompt not found | The Tech Hut';
+    $('pp').hidden = true; $('ppMissing').hidden = false; $('ppFoot').hidden = true;
+    $('ppCrumb').textContent = 'Not found';
+  }
+
+  /* ---------- the prompt ---------- */
+  function draw(p) {
+    prompt = p;
+    $('pp').removeAttribute('aria-busy');
+    $('ppCat').textContent = (CAT[p.cat] || 'Prompt') + ' · ' + (MODEL[p.model] || 'Any AI');
+    $('ppTitle').textContent = p.title; $('ppCrumb').textContent = p.title;
+    $('ppBy').textContent = 'by ' + (p.seller || 'Member') + (p.sales ? ' · ' + p.sales + (p.price > 0 ? ' sold' : ' opened') : '');
+    $('ppDesc').textContent = p.desc || '';
+    $('ppPreview').textContent = p.preview || ''; $('ppPreviewWrap').hidden = !p.preview;
+    $('ppPrice').textContent = price(p.price);
+    var facts = $('ppFacts'); facts.innerHTML = '';
+    [['Works with', MODEL[p.model] || 'Any AI'], ['Category', CAT[p.cat] || 'Other'], ['Seller', p.seller || 'Member'],
+     ['Listed', new Date(p.created).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })]].forEach(function (f) {
+      var li = el('li'); li.appendChild(el('span', null, f[0])); li.appendChild(el('b', null, f[1])); facts.appendChild(li);
+    });
+    $('ppBuy').hidden = false; $('ppFoot').hidden = false;
+  }
+  function showBody(text, note) {
+    $('ppBody').textContent = text; $('ppBodyWrap').hidden = false;
+    var acts = $('ppActions'); acts.innerHTML = '';
+    var c = el('button', 'btn', 'Copy the prompt'); c.type = 'button'; c.addEventListener('click', copy); acts.appendChild(c);
+    $('ppNote').textContent = note || '';
+  }
+  function actions() {
+    var p = prompt, acts = $('ppActions'); acts.innerHTML = '';
+    if (!(p.price > 0)) {
+      $('ppNote').textContent = 'Free to use. No account needed.';
+      var show = el('button', 'btn mint', 'Show the full prompt'); show.type = 'button';
+      show.addEventListener('click', function () {
+        show.disabled = true;
+        authed('open', { id: p.id }).then(function (j) {
+          if (j.body) showBody(j.body, 'Free to use. Copy it into ' + (MODEL[p.model] && p.model !== 'any' && p.model !== 'other' ? MODEL[p.model] : 'your AI tool') + '.');
+          else { show.disabled = false; msg(j.error || 'Could not open it. Try again.'); }
+        });
+      });
+      acts.appendChild(show);
+      return Promise.resolve();
+    }
+    // Paid: if signed in, ask whether it is already theirs (bought, or their own).
+    var check = sess() ? authed('open', { id: p.id }) : Promise.resolve({ _status: 402 });
+    return check.then(function (j) {
+      if (j.body) { showBody(j.body, me && p.seller === me.name ? 'This is your prompt. Buyers see the title, description and preview until they pay.' : 'You own this prompt. A copy is also in your email.'); return; }
+      $('ppNote').textContent = 'Pay by M-PESA or card through Paystack. The full prompt opens here straight away, and we email you a copy.';
+      var buy = el('button', 'btn mint', 'Buy for ' + price(p.price)); buy.type = 'button';
+      buy.addEventListener('click', function () { startBuy(buy); });
+      acts.appendChild(buy);
+    });
+  }
+  function startBuy(btn) {
+    var p = prompt;
+    if (!sess()) { askSignin('Sign in to buy. It takes one email and one click, and the prompt is emailed to the same address.'); return; }
+    btn.disabled = true; btn.textContent = 'Opening Paystack…'; msg('');
+    authed('buy', { id: p.id, website: '' }).then(function (j) {
+      if (j.url) { location.href = j.url; return; }
+      btn.disabled = false; btn.textContent = 'Buy for ' + price(p.price);
+      if (j.error === 'owned') { msg('You already own this prompt.', true); actions(); return; }
+      if (j.error === 'signin') { askSignin('Your session ended. Sign in again to buy.'); return; }
+      msg(j.error || 'Could not start the payment. Try again.');
+    }).catch(function () { btn.disabled = false; btn.textContent = 'Buy for ' + price(p.price); msg('Could not reach the server. Check your connection.'); });
+  }
+  function copy() {
+    var t = $('ppBody').textContent;
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { toast('Prompt copied.'); }, function () { toast('Select the text and copy it.'); });
+  }
+  $('ppCopy').addEventListener('click', copy);
+  $('ppReport').addEventListener('click', function () {
+    if (!prompt || !window.confirm('Report this prompt as spam, copied or harmful?')) return;
+    api('report', { id: prompt.id }).then(function () { toast('Thanks. We will take a look.'); });
+  });
+
+  /* ---------- sign in (the email link brings you back to this page) ---------- */
+  var DEFAULT_WHY = "We'll email you a link. Click it and you're signed in. New here? The same link creates your account.";
+  function askSignin(why) {
+    $('siWhy').textContent = why || DEFAULT_WHY;
+    $('siMsg').textContent = ''; $('siMsg').className = 'formmsg'; $('siBtn').disabled = false; $('siBtn').textContent = 'Email me a sign-in link';
+    openDlg($('dlgSignin'));
+    setTimeout(function () { $('siForm').email.focus(); }, 50);
+  }
+  $('siForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = e.target, email = f.email.value.trim(), m = $('siMsg');
+    var say = function (t, ok) { m.textContent = t; m.className = 'formmsg ' + (ok ? 'ok' : 'bad'); };
+    var reset = function () { $('siBtn').disabled = false; $('siBtn').textContent = 'Email me a sign-in link'; };
+    if (!email || email.indexOf('@') < 1) { say('Enter your email address.'); return; }
+    $('siBtn').disabled = true; $('siBtn').textContent = 'Sending…';
+    api('login', { email: email, website: f.website.value, next: prompt ? prompt.path : '/prompt-marketplace/' }).then(function (j) {
+      if (j._status === 200) { say('Check your inbox: we sent a sign-in link to ' + email + '. It brings you back to this prompt. Check spam if you do not see it.', true); $('siBtn').textContent = 'Link sent'; }
+      else { say(j.error || 'Could not send the link. Try again.'); reset(); }
+    }).catch(function () { say('Could not reach the server. Check your connection.'); reset(); });
+  });
+  document.addEventListener('click', function (e) { var b = e.target.closest('[data-act="signin"]'); if (b) askSignin(); });
+
+  function drawAcct() {
+    $('acctOut').hidden = !!me; $('acctIn').hidden = !me;
+    if (me) $('acctName').textContent = me.name;
+  }
+  function refreshMe() {
+    if (!sess()) { me = null; drawAcct(); return Promise.resolve(); }
+    return authed('me').then(function (j) { me = j.user || null; drawAcct(); }).catch(function () {});
+  }
+  function swapLink(token) {
+    return api('session', { t: token }).then(function (j) {
+      if (j.session) { setSess(j.session); toast('You are signed in. Welcome, ' + j.user.name + '.'); }
+      else toast(j.error || 'That sign-in link did not work. Ask for a new one.');
+    });
+  }
+
+  /* ---------- back from Paystack ---------- */
+  function verify(ref) {
+    msg('Checking your payment…', true);
+    return authed('verify', { reference: ref }).then(function (j) {
+      msg('');
+      if (!id && j.id) id = j.id;
+      if (j.paid && j.body) {
+        toast(j.mailed ? 'Payment received. The prompt is yours, and a copy is on its way to your email.' : 'Payment received. The prompt is yours.', true);
+        return { body: j.body, mailed: j.mailed };
+      }
+      if (j.paid) { toast('Payment received. We have emailed the prompt to the address you paid with.', true); return { paidNoSession: true }; }
+      toast('That payment did not complete' + (j.reason ? ' (' + j.reason + ')' : '') + '. If money left your account, email info@thetechhut.co with reference ' + ref + '.', true);
+      return null;
+    }).catch(function () { msg(''); return null; });
+  }
+
+  function start() {
+    var m = /[#&]login=([A-Za-z0-9._-]+)/.exec(location.hash || '');
+    var q = new URLSearchParams(location.search), ref = q.get('reference') || q.get('trxref');
+    if (m || ref) history.replaceState(null, '', location.pathname);   // never leave a sign-in link or reference in the address bar
+    var first = m ? swapLink(m[1]) : Promise.resolve();
+    var paid = null;
+    first.then(refreshMe).then(function () { return ref ? verify(ref).then(function (r) { paid = r; }) : null; }).then(function () {
+      if (!id) { missing(); return; }
+      return api('prompt?id=' + encodeURIComponent(id)).then(function (j) {
+        if (!j.prompt) {
+          if (paid && paid.body) {   // bought, then removed by its seller: buyers keep it
+            draw({ id: id, title: 'Your prompt', desc: '', price: 0, path: location.pathname, created: Date.now() });
+            showBody(paid.body, 'You own this prompt.'); return;
+          }
+          missing(); return;
+        }
+        var p = j.prompt;
+        if (location.pathname !== p.path) history.replaceState(null, '', p.path);   // tidy the slug
+        setHead(p); draw(p);
+        if (paid && paid.body) { showBody(paid.body, paid.mailed ? 'Paid. A copy is also in your email.' : 'Paid. It is saved in My account too.'); return; }
+        return actions().then(function () {
+          if (paid && paid.paidNoSession) msg('Paid. Check your email for the prompt, or sign in with the email you paid with to open it here.', true);
+          else if (m && sess() && p.price > 0 && $('ppBodyWrap').hidden) msg('You are signed in. Press Buy to continue.', true);
+        });
+      });
+    }).catch(function () { $('ppTitle').textContent = 'Could not load this prompt.'; $('ppCat').textContent = 'Check your connection and reload'; });
+  }
+  // The sign-in link opened in a tab that already had this page.
+  window.addEventListener('hashchange', function () {
+    var m = /[#&]login=([A-Za-z0-9._-]+)/.exec(location.hash || '');
+    if (!m) return;
+    history.replaceState(null, '', location.pathname);
+    swapLink(m[1]).then(function () { if ($('dlgSignin').open) closeDlg($('dlgSignin')); return refreshMe(); }).then(function () { if (prompt) actions(); });
+  });
+  start();
+})();
+</script>
+</body>
+</html>

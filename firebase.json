@@ -33,6 +33,12 @@
         "type": 301
       }
     ],
+    "rewrites": [
+      {
+        "source": "/prompt-marketplace/p/**",
+        "destination": "/prompt-marketplace/p/index.html"
+      }
+    ],
     "headers": [
       {
         "source": "**",

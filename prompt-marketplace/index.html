@@ -56,7 +56,7 @@
         .pm-cats button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
         .pm-count { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--dim); margin: 10px 0 0; min-height: 1.4em; }
         .pm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 30px 32px; margin-top: 18px; }
-        .pm-card { border-top: 2px solid var(--ink); padding: 12px 0 4px; cursor: pointer; outline: none; }
+        .pm-card { display: block; color: inherit; text-decoration: none; border-top: 2px solid var(--ink); padding: 12px 0 4px; outline: none; }
         .pm-card:hover h3, .pm-card:focus-visible h3 { color: var(--green); }
         .pm-card:focus-visible { box-shadow: 0 -2px 0 var(--mint); }
         .pm-card-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
@@ -167,23 +167,6 @@
   </div>
 </section>
 </main>
-
-<!-- Prompt details -->
-<dialog class="pm-dlg" id="dlgPrompt" aria-labelledby="dpTitle">
-  <form method="dialog" class="pm-x"><button aria-label="Close">&times;</button></form>
-  <span class="eyebrow" id="dpCat"></span>
-  <h2 id="dpTitle"></h2>
-  <p class="pm-dim" id="dpBy"></p>
-  <p id="dpDesc" class="pm-desc"></p>
-  <div class="pm-preview"><span class="label">Preview</span><pre id="dpPreview"></pre></div>
-  <div id="dpBodyWrap" hidden>
-    <div class="pm-body-head"><span class="label">The prompt</span><button class="btn ghost pm-small" type="button" id="dpCopy">Copy</button></div>
-    <pre id="dpBody" class="pm-body"></pre>
-  </div>
-  <p class="formmsg" id="dpMsg" role="status"></p>
-  <div class="cta-row" id="dpActions"></div>
-  <p class="pm-fine"><button type="button" class="pm-link" id="dpReport">Report this prompt</button></p>
-</dialog>
 
 <!-- Sign in -->
 <dialog class="pm-dlg pm-narrow" id="dlgSignin" aria-labelledby="siTitle">
@@ -381,8 +364,8 @@
     }
     if (!list.length) { g.appendChild(el('p', 'pm-dim', 'No prompts match that. Try another word or category.')); return; }
     list.forEach(function (p) {
-      var a = el('article', 'pm-card'); a.tabIndex = 0; a.setAttribute('role', 'button');
-      a.setAttribute('aria-label', p.title + ', ' + price(p.price));
+      // Each prompt has its own page: a real link, so it can be opened in a new tab, shared and found by search engines.
+      var a = el('a', 'pm-card'); a.href = p.path || ('/prompt-marketplace/p/' + p.id + '/');
       var top = el('div', 'pm-card-top');
       top.appendChild(el('span', 'pm-cat', catName[p.cat] || 'Other'));
       top.appendChild(el('span', 'tag' + (p.price > 0 ? '' : ' mint'), price(p.price)));
@@ -390,9 +373,6 @@
       a.appendChild(el('h3', null, p.title));
       a.appendChild(el('p', 'pm-card-desc', p.desc));
       a.appendChild(el('p', 'pm-card-meta', 'by ' + p.seller + ' · ' + (modelName[p.model] || 'Any AI') + (p.sales ? ' · ' + p.sales + ' sold' : '')));
-      var go = function () { showPrompt(p.id); };
-      a.addEventListener('click', go);
-      a.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
       g.appendChild(a);
     });
   }
@@ -403,64 +383,7 @@
     }).catch(function () { $('count').textContent = 'Could not load prompts. Check your connection and reload.'; });
   }
 
-  /* ---------- one prompt ---------- */
-  var current = null;
-  function findPrompt(id) {
-    var i;
-    for (i = 0; i < state.prompts.length; i++) if (state.prompts[i].id === id) return state.prompts[i];
-    for (i = 0; i < state.mine.length; i++) if (state.mine[i].id === id) return state.mine[i];
-    return null;
-  }
-  function showBody(text) { $('dpBody').textContent = text; $('dpBodyWrap').hidden = false; $('dpActions').innerHTML = ''; }
-  function showPrompt(id, preset) {
-    var p = findPrompt(id) || preset; if (!p) return;
-    current = p;
-    $('dpCat').textContent = (catName[p.cat] || 'Prompt') + ' · ' + (modelName[p.model] || 'Any AI');
-    $('dpTitle').textContent = p.title;
-    $('dpBy').textContent = 'by ' + (p.seller || (state.me && state.me.name) || 'Member') + (p.sales ? ' · ' + p.sales + ' sold' : '');
-    $('dpDesc').textContent = p.desc || '';
-    $('dpPreview').textContent = p.preview || '';
-    $('dpPreview').parentNode.hidden = !p.preview;
-    $('dpBodyWrap').hidden = true; msg($('dpMsg'), '');
-    var acts = $('dpActions'); acts.innerHTML = '';
-    var owned = state.mine.some(function (x) { return x.id === p.id; }) || state.bought.some(function (x) { return x.id === p.id; });
-    if (p.price > 0 && !owned) {
-      var buy = el('button', 'btn mint', 'Buy for ' + price(p.price)); buy.type = 'button';
-      buy.addEventListener('click', function () { startBuy(p, buy); });
-      acts.appendChild(buy);
-      acts.appendChild(el('span', 'pm-dim', 'M-PESA or card, via Paystack'));
-    } else {
-      var show = el('button', 'btn', 'Show the full prompt'); show.type = 'button';
-      show.addEventListener('click', function () {
-        show.disabled = true;
-        authed('open', { id: p.id }).then(function (j) {
-          if (j.body) showBody(j.body); else { show.disabled = false; msg($('dpMsg'), j.error || 'Could not open it. Try again.'); }
-        });
-      });
-      acts.appendChild(show);
-    }
-    open($('dlgPrompt'));
-  }
-  function startBuy(p, btn) {
-    if (!sess()) { close($('dlgPrompt')); askSignin('Sign in to buy. It takes one email and one click.', { buy: p.id }); return; }
-    btn.disabled = true; btn.textContent = 'Opening Paystack…'; msg($('dpMsg'), '');
-    authed('buy', { id: p.id, website: '' }).then(function (j) {
-      if (j.url) { location.href = j.url; return; }
-      btn.disabled = false; btn.textContent = 'Buy for ' + price(p.price);
-      if (j.error === 'owned') { msg($('dpMsg'), 'You already own this prompt.', true); refreshMe().then(function () { showPrompt(p.id); }); return; }
-      if (j.error === 'signin') { close($('dlgPrompt')); askSignin('Your session ended. Sign in again to buy.', { buy: p.id }); return; }
-      msg($('dpMsg'), j.error || 'Could not start the payment. Try again.');
-    });
-  }
-  $('dpCopy').addEventListener('click', function () {
-    var t = $('dpBody').textContent;
-    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { toast('Prompt copied.'); }, function () { toast('Select the text and copy it.'); });
-  });
-  $('dpReport').addEventListener('click', function () {
-    if (!current) return;
-    if (!window.confirm('Report this prompt as spam, copied or harmful?')) return;
-    api('report', { id: current.id }).then(function () { toast('Thanks. We will take a look.'); });
-  });
+  function pagePath(p) { return p.path || ('/prompt-marketplace/p/' + p.id + '/'); }
 
   /* ---------- sign in ---------- */
   var DEFAULT_WHY = "We'll email you a link. Click it and you're signed in. New here? The same link creates your account.";
@@ -519,6 +442,7 @@
       h.appendChild(el('span', 'pm-dim', price(p.price) + ' · ' + (p.sales || 0) + ' sold' + (p.hidden ? ' · hidden' : '')));
       li.appendChild(h);
       var act = el('div', 'pm-li-act');
+      if (!p.hidden) { var view = el('a', 'pm-link', 'View'); view.href = pagePath(p); act.appendChild(view); }
       var ed = el('button', 'pm-link', 'Edit'); ed.type = 'button'; ed.addEventListener('click', function () { editPrompt(p); });
       var del = el('button', 'pm-link', 'Remove'); del.type = 'button';
       del.addEventListener('click', function () {
@@ -536,8 +460,7 @@
       var h = el('div', 'pm-li-main'); h.appendChild(el('b', null, p.title));
       h.appendChild(el('span', 'pm-dim', (modelName[p.model] || 'Any AI') + (p.amount ? ' · paid KES ' + p.amount : '')));
       li.appendChild(h);
-      var act = el('div', 'pm-li-act'); var v = el('button', 'pm-link', 'Open'); v.type = 'button';
-      v.addEventListener('click', function () { close($('dlgAccount')); showPrompt(p.id, p); showBody(p.body); });
+      var act = el('div', 'pm-li-act'); var v = el('a', 'pm-link', 'Open'); v.href = pagePath(p);
       act.appendChild(v); li.appendChild(act); ul.appendChild(li);
     });
   }
@@ -618,13 +541,19 @@
     try { then = JSON.parse(sessionStorage.getItem('tthMarketAfter') || 'null'); sessionStorage.removeItem('tthMarketAfter'); } catch (e) {}
     if (!then) return;
     if (then.account) openAccount(then.account);
-    if (then.buy && findPrompt(then.buy)) showPrompt(then.buy);
+    if (then.buy) location.href = '/prompt-marketplace/p/' + encodeURIComponent(then.buy) + '/';
   }
   function start() {
+    // Payments now return to the prompt's own page. Older links (and payments
+    // started before this change) still land here: send them on.
+    var q0 = new URLSearchParams(location.search);
+    if (q0.get('prompt') || q0.get('reference') || q0.get('trxref')) {
+      var pid = q0.get('prompt'); q0.delete('prompt');
+      location.replace('/prompt-marketplace/p/' + (pid && /^[a-z0-9]{6,20}$/.test(pid) ? pid + '/' : '') + (q0.toString() ? '?' + q0 : '') + location.hash);
+      return;
+    }
     drawCats();
     var m = /[#&]login=([A-Za-z0-9._-]+)/.exec(location.hash || '');
-    var params = new URLSearchParams(location.search);
-    var ref = params.get('reference') || params.get('trxref');
     var first = Promise.resolve();
     if (m) {
       history.replaceState(null, '', location.pathname + location.search);   // never leave the link in the address bar
@@ -634,18 +563,12 @@
       });
     }
     first.then(function () { return Promise.all([load(), refreshMe()]); }).then(function () {
-      if (ref) {
-        history.replaceState(null, '', location.pathname);
-        return authed('verify', { reference: ref }).then(function (j) {
-          if (j.paid && j.body) {
-            refreshMe(); load();
-            showPrompt(j.id, findPrompt(j.id) || { id: j.id, title: j.title, price: 0 }); showBody(j.body);
-            toast('Payment received. The prompt is yours.');
-          } else if (j.paid) toast('Payment received. Sign in with the email you paid with to open it.');
-          else toast('That payment did not complete' + (j.reason ? ' (' + j.reason + ')' : '') + '. If money left your account, email info@thetechhut.co with reference ' + ref + '.');
-        });
-      }
       if (m) resume();
+      else if (/^#(account|sell)$/.test(location.hash)) {   // links from a prompt's page
+        var which = location.hash === '#sell' ? 'sell' : 'mine';
+        history.replaceState(null, '', location.pathname);
+        openAccount(which);
+      }
     });
   }
   // The sign-in link opened in a tab that already had the page: swap it without a reload.

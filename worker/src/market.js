@@ -18,14 +18,15 @@
  *   u:<uid>          { id, email, name, created, payout? }
  *   e:<email-hash>   uid
  *   p:<pid>          { id, uid, title, desc, cat, model, preview, body, price, created, updated, sales, reports, hidden }
- *   b:<uid>:<pid>    { ref, at, amount }       a purchase
+ *   b:<uid>:<pid>    { ref, at, amount, mailed? }   a purchase; mailed once the prompt is emailed to the buyer
  *   r:<reference>    { uid, pid }              a Paystack payment already counted
  *   n:<nonce>        expiry                    a sign-in link already used
  *
  * Routes (all JSON, POST unless noted; `session` goes in the body):
- *   POST /market/login    { email, website }           -> { ok }            emails the sign-in link
+ *   POST /market/login    { email, website, next? }    -> { ok }            emails the sign-in link (back to `next`)
  *   POST /market/session  { t }                        -> { session, user } swaps the link for a session
  *   GET  /market/prompts                               -> { prompts }       public list, no prompt bodies
+ *   GET  /market/prompt?id=<pid>                       -> { prompt }        one prompt for its own page, no body
  *   POST /market/me       { session }                  -> { user, mine, bought }
  *   POST /market/profile  { session, name }            -> { user }
  *   POST /market/save     { session, id?, title, desc, cat, model, preview, body, price } -> { prompt }
@@ -37,6 +38,10 @@
  *   POST /market/buy      { session, id, website }     -> { url, reference }
  *   POST /market/verify   { reference, session }       -> { paid, id, body? }  body only for the buyer
  *
+ * Each prompt has its own page, /prompt-marketplace/p/<pid>/<slug>/ (one static
+ * shell, rewritten by Firebase, that reads GET /market/prompt). When a sale
+ * settles, the buyer is emailed the full prompt, once, from settle().
+ *
  * Secrets: MARKET_SECRET (signs links and sessions), plus the existing
  * PAYSTACK_SECRET_KEY, BREVO_API_KEY and BREVO_SENDER_EMAIL.
  * Optional var: MARKET_ADMINS, comma-separated emails that may hide any prompt.
@@ -44,7 +49,12 @@
 import { LIMITS, guard, emailDomainOk, sha256Hex } from './payguard.js';
 
 const SITE = 'https://thetechhut.co';
-const PAGE = SITE + '/prompt-marketplace/';
+/** The prompt's own page. The slug is only for people and search engines; the page reads the id. */
+export function promptPath(p) {
+  const slug = String(p.title || '').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60).replace(/-+$/, '');
+  return '/prompt-marketplace/p/' + p.id + '/' + (slug ? slug + '/' : '');
+}
+const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const PAYSTACK = 'https://api.paystack.co';
 const BREVO = 'https://api.brevo.com/v3';
 const MIN = 60 * 1000, DAY = 24 * 60 * MIN;
@@ -106,9 +116,9 @@ export function cleanPrompt(b) {
 }
 const publicPrompt = (p, sellers) => ({
   id: p.id, title: p.title, desc: p.desc, cat: p.cat, model: p.model, preview: p.preview, price: p.price,
-  sales: p.sales || 0, created: p.created, seller: (sellers[p.uid] && sellers[p.uid].name) || 'Member', mine: false,
+  sales: p.sales || 0, created: p.created, seller: (sellers[p.uid] && sellers[p.uid].name) || 'Member', mine: false, path: promptPath(p),
 });
-const ownPrompt = (p) => ({ ...p, reports: undefined });
+const ownPrompt = (p) => ({ ...p, reports: undefined, path: promptPath(p) });
 const meView = (u) => ({ id: u.id, name: u.name, email: u.email, payout: u.payout ? { bank: u.payout.bank, last4: u.payout.last4, holder: u.payout.holder } : null });
 function nameFromEmail(email) {
   const local = email.split('@')[0].replace(/[^a-zA-Z0-9]+/g, ' ').trim();
@@ -166,7 +176,7 @@ export class Market {
         const bought = [];
         for (const [k, rec] of buys) {
           const p = await st.get('p:' + k.split(':')[2]);
-          if (p) bought.push({ id: p.id, title: p.title, body: p.body, model: p.model, at: rec.at, amount: rec.amount });
+          if (p) bought.push({ id: p.id, title: p.title, body: p.body, model: p.model, at: rec.at, amount: rec.amount, path: promptPath(p) });
         }
         return ok({ user: meView(u), mine, bought });
       }
@@ -193,6 +203,12 @@ export class Market {
         if (p.sales > 0) { p.hidden = true; await st.put('p:' + p.id, p); } else await st.delete('p:' + p.id);
         return ok({ ok: true });
       }
+      case 'one': {             // the public view, for the prompt's own page
+        const p = await st.get('p:' + b.id);
+        if (!p || p.hidden) return ok({ prompt: null });
+        const seller = await user(p.uid);
+        return ok({ prompt: publicPrompt(p, seller ? { [seller.id]: seller } : {}) });
+      }
       case 'get': {
         const p = await st.get('p:' + b.id);
         if (!p) return ok({ prompt: null });
@@ -207,12 +223,21 @@ export class Market {
         await st.put('p:' + p.id, p); return ok({ ok: true });
       }
       case 'purchase': {        // idempotent: the page, a reload and the webhook all land here
-        if (await st.get('r:' + b.ref)) return ok({ ok: true, first: false });
+        if (await st.get('r:' + b.ref)) {
+          const rec = await st.get('b:' + b.uid + ':' + b.pid);
+          return ok({ ok: true, first: false, mailed: !!(rec && rec.mailed) });
+        }
         const p = await st.get('p:' + b.pid);
         if (!p) return ok({ error: 'no prompt' });
         await st.put({ ['r:' + b.ref]: { uid: b.uid, pid: b.pid, at: now }, ['b:' + b.uid + ':' + b.pid]: { ref: b.ref, at: now, amount: b.amount } });
         p.sales = (p.sales || 0) + 1; await st.put('p:' + p.id, p);
-        return ok({ ok: true, first: true });
+        return ok({ ok: true, first: true, mailed: false });
+      }
+      case 'mailed': {          // the prompt reached the buyer's inbox; don't send it again
+        const k = 'b:' + b.uid + ':' + b.pid;
+        const rec = await st.get(k);
+        if (rec) { rec.mailed = now; await st.put(k, rec); }
+        return ok({ ok: true });
       }
     }
     return ok({ error: 'unknown op' });
@@ -249,6 +274,24 @@ export function loginEmail(link) {
   return { subject: 'Your sign-in link for the prompt marketplace', html, text };
 }
 
+/** The email a buyer gets: the whole prompt, so it is theirs even without signing in again. */
+export function purchaseEmail(p, { amount, reference }) {
+  const url = SITE + promptPath(p);
+  const html = '<div style="font-family:\'Source Sans 3\',Arial,sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#073B4C;line-height:1.55">'
+    + '<p style="font-family:Georgia,serif;font-weight:700;font-size:22px;margin:0 0 18px">The Tech Hut<span style="color:#06D6A0">.</span></p>'
+    + '<p style="margin:0 0 6px;font-family:Menlo,monospace;font-size:12px;letter-spacing:1px;color:#046B52">PROMPT MARKETPLACE &middot; RECEIPT</p>'
+    + '<p style="font-size:17px">Thanks for your purchase. Here is your prompt, <b>' + esc(p.title) + '</b>. Copy it into ' + (p.model && p.model !== 'any' && p.model !== 'other' ? esc(MODEL_NAMES[p.model] || 'your AI tool') : 'your AI tool') + ' and fill in anything in brackets.</p>'
+    + '<pre style="white-space:pre-wrap;word-wrap:break-word;font:14px/1.55 Menlo,Consolas,monospace;background:#F4F1EA;border-left:3px solid #073B4C;padding:14px 16px;margin:18px 0">' + esc(p.body) + '</pre>'
+    + '<p style="margin:22px 0"><a href="' + url + '" style="background:#073B4C;color:#fff;padding:13px 22px;border-radius:3px;text-decoration:none;font-weight:700">Open it on the marketplace</a></p>'
+    + '<p style="font-size:13px;color:#5B6B7B">Paid: KES ' + Number(amount).toLocaleString('en') + ' &middot; Reference: ' + esc(reference) + '<br>'
+    + 'It is also saved under My account &rarr; Bought when you sign in with this email. Questions or a problem with the prompt? Reply to this email or write to info@thetechhut.co.</p></div>';
+  const text = 'Thanks for your purchase on The Tech Hut prompt marketplace.\n\n' + p.title + '\n' + '-'.repeat(Math.min(60, p.title.length)) + '\n\n' + p.body
+    + '\n\nOpen it on the marketplace: ' + url + '\nPaid: KES ' + Number(amount).toLocaleString('en') + ' | Reference: ' + reference
+    + '\nQuestions? Write to info@thetechhut.co.\n';
+  return { subject: 'Your prompt: ' + p.title, html, text };
+}
+const MODEL_NAMES = { chatgpt: 'ChatGPT', claude: 'Claude', gemini: 'Gemini', copilot: 'Copilot', midjourney: 'Midjourney' };
+
 /** Returns a Response for /market/*, or null. */
 export async function handleMarket(req, env, url, origin, deps) {
   const { json, allowedOrigins } = deps;
@@ -260,6 +303,13 @@ export async function handleMarket(req, env, url, origin, deps) {
   if (req.method === 'GET' && route === 'prompts') {
     const r = await call(env, { op: 'list' });
     return new Response(JSON.stringify(r), { status: 200, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=30', ...deps.cors(origin) } });
+  }
+  if (req.method === 'GET' && route === 'prompt') {
+    const id = url.searchParams.get('id') || '';
+    if (!/^[a-z0-9]{6,20}$/.test(id)) return json({ error: 'That prompt is no longer available.' }, 404, origin);
+    const r = await call(env, { op: 'one', id });
+    if (!r.prompt) return json({ error: 'That prompt is no longer available.' }, 404, origin);
+    return new Response(JSON.stringify({ prompt: r.prompt }), { status: 200, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=30', ...deps.cors(origin) } });
   }
   if (req.method === 'GET' && route === 'banks') {
     const r = await paystack(env, '/bank?country=kenya&currency=KES&perPage=200');
@@ -283,7 +333,9 @@ export async function handleMarket(req, env, url, origin, deps) {
     if (g && g.ok === false) return json({ error: 'Too many sign-in emails. Wait a few minutes and try again.' }, 429, origin);
     if (!(await emailDomainOk(email))) return json({ error: 'That email address cannot receive mail. Check the part after the @.' }, 400, origin);
     const t = await sign({ k: 'l', e: email, n: rid(16), x: now + LINK_TTL }, env.MARKET_SECRET);
-    const mail = loginEmail(PAGE + '#login=' + t);
+    // Send them back to the page they signed in from (a prompt's own page), never off the marketplace.
+    const next = typeof b.next === 'string' && /^\/prompt-marketplace\/(p\/[a-z0-9]{6,20}\/([a-z0-9-]{1,60}\/)?)?$/.test(b.next) ? b.next : '/prompt-marketplace/';
+    const mail = loginEmail(SITE + next + '#login=' + t);
     const r = await fetch(BREVO + '/smtp/email', {
       method: 'POST', headers: { 'api-key': env.BREVO_API_KEY, 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({ sender: { name: env.BREVO_SENDER_NAME || 'The Tech Hut', email: env.BREVO_SENDER_EMAIL }, to: [{ email }],
@@ -317,9 +369,9 @@ export async function handleMarket(req, env, url, origin, deps) {
     if (!res.paid) return json({ paid: false, reason: res.reason }, 200, origin);
     // The prompt itself only goes to the signed-in buyer; anyone else just learns it was paid.
     const me = b.session ? await session(env, b.session, now) : null;
-    if (!me || me.id !== res.uid) return json({ paid: true, id: res.pid }, 200, origin);
+    if (!me || me.id !== res.uid) return json({ paid: true, id: res.pid, mailed: res.mailed }, 200, origin);
     const g = await call(env, { op: 'get', id: res.pid, uid: res.uid });
-    return json({ paid: true, id: res.pid, title: g.prompt && g.prompt.title, body: g.prompt && g.prompt.body }, 200, origin);
+    return json({ paid: true, id: res.pid, mailed: res.mailed, title: g.prompt && g.prompt.title, body: g.prompt && g.prompt.body, path: g.prompt ? promptPath(g.prompt) : null }, 200, origin);
   }
 
   if (route === 'open') {
@@ -385,7 +437,7 @@ export async function handleMarket(req, env, url, origin, deps) {
     const r = await paystack(env, '/transaction/initialize', { method: 'POST', body: JSON.stringify({
       email: u.email, amount: p.price * 100, currency: 'KES', channels: ['card', 'mobile_money', 'bank_transfer'],
       subaccount: g.seller.payout.code, bearer: 'subaccount',
-      callback_url: PAGE + '?prompt=' + encodeURIComponent(p.id),
+      callback_url: SITE + promptPath(p),
       metadata: { kind: 'market', pid: p.id, uid: u.id, price: p.price,
         custom_fields: [{ display_name: 'Prompt', variable_name: 'prompt', value: p.title.slice(0, 80) }] },
     }) });
@@ -408,6 +460,31 @@ export async function settle(env, d) {
   const g = await call(env, { op: 'get', id: String(m.pid) });
   if (!g.prompt) return { paid: false, reason: 'no prompt' };
   if (d.currency !== 'KES' || Number(d.amount) < g.prompt.price * 100) return { paid: false, reason: 'underpaid' };
-  await call(env, { op: 'purchase', ref: String(d.reference), pid: String(m.pid), uid: String(m.uid), amount: Number(d.amount) / 100 });
-  return { paid: true, pid: String(m.pid), uid: String(m.uid) };
+  const pid = String(m.pid), uid = String(m.uid), amount = Number(d.amount) / 100;
+  const rec = await call(env, { op: 'purchase', ref: String(d.reference), pid, uid, amount });
+  let mailed = !!rec.mailed;
+  if (!mailed) mailed = await mailPrompt(env, g.prompt, uid, { amount, reference: String(d.reference) });
+  return { paid: true, pid, uid, mailed };
+}
+
+/**
+ * Emails the buyer the prompt they paid for. Runs on every settle() until it
+ * works once (the webhook and the buyer's return usually both call it), then
+ * the purchase is marked mailed so it is never sent twice. -> true if sent
+ */
+async function mailPrompt(env, prompt, uid, receipt) {
+  if (!env.BREVO_API_KEY || !env.BREVO_SENDER_EMAIL) return false;
+  const { user } = await call(env, { op: 'user', uid });
+  if (!user || !user.email) return false;
+  const mail = purchaseEmail(prompt, receipt);
+  try {
+    const r = await fetch(BREVO + '/smtp/email', {
+      method: 'POST', headers: { 'api-key': env.BREVO_API_KEY, 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({ sender: { name: env.BREVO_SENDER_NAME || 'The Tech Hut', email: env.BREVO_SENDER_EMAIL }, to: [{ email: user.email }],
+        replyTo: { email: 'info@thetechhut.co' }, subject: mail.subject, htmlContent: mail.html, textContent: mail.text, tags: ['market-purchase'] }),
+    });
+    if (!r.ok) return false;
+  } catch (e) { return false; }
+  await call(env, { op: 'mailed', uid, pid: prompt.id });
+  return true;
 }

@@ -337,6 +337,16 @@ Community members post AI prompts, free or paid, and buy each other's. Code:
 - **Rules:** free prompts need no payout account; paid ones cost KES 50–20,000; 20
   new prompts per member per day; a prompt reported 5 times is hidden; a sold prompt
   that its seller removes stays with its buyers.
+- **Prompt pages:** every prompt has its own page, `/prompt-marketplace/p/<id>/<slug>/`.
+  It is one static shell (`prompt-marketplace/p/index.html`) that Firebase serves for
+  every such URL (a `rewrites` rule in `firebase.json`); it reads the public view from
+  `GET /market/prompt?id=` (never the prompt text) and sets its own title, canonical
+  and Product JSON-LD. Paystack returns buyers there, and sign-in links started on a
+  prompt page bring the member back to it (`next` on `/market/login`).
+- **Delivery by email:** when a sale settles (the buyer's return or the webhook,
+  whichever comes first) the buyer is emailed the full prompt with a receipt, through
+  Brevo. The purchase is marked `mailed` so it is sent once; if Brevo fails, the next
+  settle for that payment tries again.
 
 ### Setup
 

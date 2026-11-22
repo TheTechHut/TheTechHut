@@ -4,7 +4,7 @@
  * rules that keep paid prompts paid.   npm test
  */
 import worker, { Market } from '../src/index.js';
-import { sign, unsign, cleanPrompt, COMMISSION_PERCENT } from '../src/market.js';
+import { sign, unsign, cleanPrompt, COMMISSION_PERCENT, promptPath } from '../src/market.js';
 import assert from 'node:assert';
 
 let pass = 0, fail = 0;
@@ -26,10 +26,10 @@ function ns() {
 }
 const SITE = 'https://thetechhut.co';
 const realFetch = globalThis.fetch;
-let mails = [], paystackCalls = [], paid = {};
+let mails = [], paystackCalls = [], paid = {}, brevoDown = false;
 globalThis.fetch = async (u, init = {}) => {
   u = String(u);
-  if (u.startsWith('https://api.brevo.com')) { mails.push(JSON.parse(init.body)); return new Response('{"messageId":"x"}', { status: 201 }); }
+  if (u.startsWith('https://api.brevo.com')) { if (brevoDown) return new Response('{}', { status: 500 }); mails.push(JSON.parse(init.body)); return new Response('{"messageId":"x"}', { status: 201 }); }
   if (u.startsWith('https://cloudflare-dns.com')) return new Response(JSON.stringify({ Status: 0, Answer: [{ type: 15, data: '10 mx.example.com.' }] }));
   if (u.startsWith('https://api.paystack.co')) {
     const path = u.slice('https://api.paystack.co'.length);
@@ -174,6 +174,89 @@ await t('verify unlocks for the buyer only, once, and refuses underpayment', asy
 await t('you cannot buy your own prompt or a free one', async () => {
   const e = env(); const { id, seller } = await sellerWithPaidPrompt(e);
   assert.equal((await call(e, '/market/buy', { session: seller.session, id })).status, 409);
+});
+
+console.log('\nprompt pages');
+const get = async (e, path) => { const r = await worker.fetch(new Request('https://api.test' + path, { headers: { Origin: SITE } }), e); return { status: r.status, body: await r.json() }; };
+await t('each prompt has its own page and a public view without the prompt text', async () => {
+  const e = env();
+  const { session } = await signIn(e, 'free@example.com');
+  const s = await call(e, '/market/save', { session, ...PROMPT, price: 0 });
+  const id = s.body.prompt.id;
+  assert.equal(s.body.prompt.path, '/prompt-marketplace/p/' + id + '/cover-letter-that-sounds-like-you/');
+  const r = await get(e, '/market/prompt?id=' + id);
+  assert.equal(r.status, 200, JSON.stringify(r.body));
+  assert.equal(r.body.prompt.title, PROMPT.title);
+  assert.equal(r.body.prompt.body, undefined, 'the page never gets the prompt text from this route');
+  assert.equal(r.body.prompt.uid, undefined);
+  assert.equal(r.body.prompt.path, promptPath({ id, title: PROMPT.title }));
+  assert.equal((await get(e, '/market/prompt?id=nosuchprompt')).status, 404);
+  assert.equal((await get(e, '/market/prompt?id=../x')).status, 404);
+  await call(e, '/market/delete', { session, id });
+  assert.equal((await get(e, '/market/prompt?id=' + id)).status, 404, 'a removed prompt has no page');
+});
+await t('slugs are safe for any title', async () => {
+  assert.equal(promptPath({ id: 'abc234defg', title: 'Écrire un CV: <script> & 100% "better"!' }), '/prompt-marketplace/p/abc234defg/ecrire-un-cv-script-100-better/');
+  assert.equal(promptPath({ id: 'abc234defg', title: '!!!' }), '/prompt-marketplace/p/abc234defg/');
+});
+await t('the sign-in link returns to the prompt page it was asked from, and only to the marketplace', async () => {
+  const e = env(); mails = [];
+  await call(e, '/market/login', { email: 'n@example.com', next: '/prompt-marketplace/p/abc234defg/cover-letter/' });
+  assert.ok(mails[0].htmlContent.includes('https://thetechhut.co/prompt-marketplace/p/abc234defg/cover-letter/#login='));
+  mails = [];
+  await call(e, '/market/login', { email: 'n2@example.com', next: '//evil.example/' });
+  assert.ok(mails[0].htmlContent.includes('https://thetechhut.co/prompt-marketplace/#login='));
+});
+
+console.log('\nemailing the prompt');
+await t('Paystack returns the buyer to the prompt\'s own page', async () => {
+  const e = env(); const { id } = await sellerWithPaidPrompt(e);
+  const buyer = await signIn(e, 'buyer@example.com');
+  await call(e, '/market/buy', { session: buyer.session, id });
+  assert.equal(paid.last.callback_url, 'https://thetechhut.co/prompt-marketplace/p/' + id + '/cover-letter-that-sounds-like-you/');
+});
+await t('a sale emails the full prompt to the buyer, exactly once', async () => {
+  const e = env(); const { id } = await sellerWithPaidPrompt(e);
+  const buyer = await signIn(e, 'buyer@example.com');
+  paid.verify = { status: 'success', currency: 'KES', amount: 30000, reference: 'ref_mail', metadata: { kind: 'market', pid: id, uid: buyer.user.id } };
+  mails = [];
+  const v = await call(e, '/market/verify', { reference: 'ref_mail' });   // even with no session, e.g. the webhook or a closed tab
+  assert.equal(v.body.mailed, true);
+  assert.equal(mails.length, 1);
+  assert.deepEqual(mails[0].to, [{ email: 'buyer@example.com' }]);
+  assert.ok(mails[0].subject.includes(PROMPT.title));
+  assert.ok(mails[0].textContent.includes(PROMPT.body), 'the whole prompt is in the email');
+  assert.ok(mails[0].htmlContent.includes('{company}'), 'escaped but intact');
+  assert.ok(mails[0].htmlContent.includes('ref_mail'));
+  await call(e, '/market/verify', { reference: 'ref_mail', session: buyer.session });
+  await call(e, '/market/verify', { reference: 'ref_mail' });
+  assert.equal(mails.length, 1, 'verify and the webhook again do not resend it');
+});
+await t('if the email fails, the next settle tries again', async () => {
+  const e = env(); const { id } = await sellerWithPaidPrompt(e);
+  const buyer = await signIn(e, 'buyer@example.com');
+  paid.verify = { status: 'success', currency: 'KES', amount: 30000, reference: 'ref_retry', metadata: { kind: 'market', pid: id, uid: buyer.user.id } };
+  mails = []; brevoDown = true;
+  const v = await call(e, '/market/verify', { reference: 'ref_retry', session: buyer.session });
+  brevoDown = false;
+  assert.equal(v.body.paid, true); assert.equal(v.body.mailed, false);
+  assert.ok(v.body.body, 'the buyer still sees the prompt on the page');
+  await call(e, '/market/verify', { reference: 'ref_retry' });
+  assert.equal(mails.length, 1);
+  await call(e, '/market/verify', { reference: 'ref_retry' });
+  assert.equal(mails.length, 1);
+});
+await t('prompt text with HTML is escaped in the email', async () => {
+  const e = env();
+  const seller = await signIn(e, 'seller@example.com');
+  await call(e, '/market/payout', { session: seller.session, bank: '01', account: '0123456789' });
+  const s = await call(e, '/market/save', { session: seller.session, ...PROMPT, title: 'Tags <b>bold</b> test', body: 'Write <img src=x onerror=alert(1)> as plain text, please, for my page.', price: 100 });
+  const buyer = await signIn(e, 'buyer@example.com');
+  paid.verify = { status: 'success', currency: 'KES', amount: 10000, reference: 'ref_esc', metadata: { kind: 'market', pid: s.body.prompt.id, uid: buyer.user.id } };
+  mails = [];
+  await call(e, '/market/verify', { reference: 'ref_esc' });
+  assert.ok(!mails[0].htmlContent.includes('<img src=x'));
+  assert.ok(mails[0].htmlContent.includes('&lt;img src=x'));
 });
 
 console.log('\nswitches');
