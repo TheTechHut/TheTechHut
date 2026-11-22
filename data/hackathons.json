@@ -1,194 +1,7 @@
 {
- "updated": "2026-11-21T11:14:33.286Z",
- "count": 88,
+ "updated": "2026-11-22T11:33:11.141Z",
+ "count": 90,
  "hackathons": [
-  {
-   "id": "devpost-32133",
-   "title": "Creators AI Winter Challenge ",
-   "host": "Creators AI ",
-   "url": "https://creators-ai-winter-challenge.devpost.com/",
-   "mode": "Online",
-   "place": "Online",
-   "starts": "2026-11-19",
-   "ends": "2026-11-21",
-   "deadline": "2026-11-21",
-   "themes": [
-    "Enterprise",
-    "Fintech",
-    "Productivity"
-   ],
-   "joined": 43,
-   "source": "Devpost",
-   "excerpt": "Create , Build , Inspire !!",
-   "prizes": [
-    {
-     "title": "1st Place – Overall Champion",
-     "winners": "1 winner",
-     "desc": "The highest-ranked project will receive the Overall Champion recognition."
-    },
-    {
-     "title": "2nd Place – Outstanding Innovation",
-     "winners": "1 winner",
-     "desc": "The second-ranked project will be recognised for its quality, creativity, and execution."
-    },
-    {
-     "title": "3rd Place – Excellence in Execution",
-     "winners": "1 winner",
-     "desc": "The third-ranked project will be acknowledged for its overall performance and contribution."
-    },
-    {
-     "title": "4th–10th Place – Top 10 Finalists",
-     "winners": "10 winners"
-    },
-    {
-     "title": "Theme-Based Special Recognition",
-     "winners": "10 winners"
-    },
-    {
-     "title": "Referral Rewards – Community Contributor Recognition",
-     "winners": "100 winners"
-    },
-    {
-     "title": "Participation Rewards – Everyone Deserves Recognition",
-     "winners": "100 winners"
-    }
-   ],
-   "page": "creators-ai-winter-challenge-32133"
-  },
-  {
-   "id": "devpost-32137",
-   "title": "Game On Night – Imagine the Impossible",
-   "host": "Google Student Ambassador",
-   "url": "https://game-on-night.devpost.com/",
-   "mode": "Online",
-   "place": "Online",
-   "starts": "2026-11-21",
-   "ends": "2026-11-21",
-   "deadline": "2026-11-21",
-   "themes": [
-    "Design"
-   ],
-   "joined": 16,
-   "source": "Devpost",
-   "excerpt": "Build a game world that people would actually want to play!",
-   "prizes": [
-    {
-     "title": "Best Game Concept – Campus Winner",
-     "winners": "1 winner",
-     "desc": "The winning project will receive a certificate endorsed by the Google Student Ambassador Programme and recognition as the campus's Best Entry."
-    }
-   ],
-   "page": "game-on-night-imagine-the-impossible-32137"
-  },
-  {
-   "id": "at-671",
-   "title": "Africa's Talking WIT Kampala November Hackathon: EdTech",
-   "host": "Africa’s Talking",
-   "url": "https://community.africastalking.com/events/details/africas-talking-africas-talking-women-in-tech-community-presents-africas-talking-wit-kampala-november-hackathon-edtech/",
-   "mode": "In person",
-   "place": "Mukono, Uganda",
-   "starts": "2026-11-21",
-   "ends": "2026-11-21",
-   "deadline": "2026-11-21",
-   "source": "Africa’s Talking",
-   "page": "africa-s-talking-wit-kampala-november-hackathon-edtech-671"
-  },
-  {
-   "id": "devpost-31620",
-   "title": "CrossPointX 2026",
-   "host": "Science Innovation Association of XJTLU",
-   "url": "https://cpx2026.devpost.com/",
-   "mode": "Online",
-   "place": "Online",
-   "starts": "2026-11-20",
-   "ends": "2026-11-22",
-   "deadline": "2026-11-22",
-   "themes": [
-    "Beginner Friendly",
-    "Design",
-    "Education"
-   ],
-   "joined": 206,
-   "source": "Devpost",
-   "excerpt": "Where Ideas Cross, X Marks the Future.",
-   "prizes": [
-    {
-     "title": "Details of this prize will be announced on-site.",
-     "winners": "1 winner",
-     "desc": "Details of this prize will be announced on-site."
-    }
-   ],
-   "page": "crosspointx-2026-31620"
-  },
-  {
-   "id": "devpost-31549",
-   "title": "KUK VIRTUAL HACKATHON",
-   "host": "Kelab UMNO Korea",
-   "url": "https://kuk-virtual-hackathon.devpost.com/",
-   "mode": "Online",
-   "place": "Online",
-   "starts": "2026-11-15",
-   "ends": "2026-11-22",
-   "deadline": "2026-11-22",
-   "prize": "$800",
-   "themes": [
-    "Databases",
-    "Machine Learning/AI",
-    "Productivity"
-   ],
-   "joined": 71,
-   "source": "Devpost",
-   "excerpt": "Empowering Malaysian Student Innovators in Korea",
-   "prizes": [
-    {
-     "title": "CHAMPION",
-     "value": "$400 in cash",
-     "winners": "1 winner"
-    },
-    {
-     "title": "FIRST RUNNER-UP",
-     "value": "$200 in cash",
-     "winners": "1 winner"
-    },
-    {
-     "title": "SECOND RUNNER-UP",
-     "value": "$100 in cash",
-     "winners": "1 winner"
-    },
-    {
-     "title": "BEST INNOVATION / SPECIAL AWARD",
-     "value": "$100 in cash",
-     "winners": "1 winner"
-    }
-   ],
-   "page": "kuk-virtual-hackathon-31549"
-  },
-  {
-   "id": "devpost-32183",
-   "title": "The Upside Hack 2.0",
-   "host": "Nerdata ENSIT Club",
-   "url": "https://the-upside-hack-2-0.devpost.com/",
-   "mode": "In person",
-   "place": "Tunis, Tunisia",
-   "starts": "2026-11-19",
-   "ends": "2026-11-22",
-   "deadline": "2026-11-22",
-   "prize": "$582",
-   "themes": [
-    "Machine Learning/AI"
-   ],
-   "joined": 5,
-   "source": "Devpost",
-   "excerpt": "Think Beyond. Build What's Next.",
-   "prizes": [
-    {
-     "title": "l",
-     "value": "$582 in cash",
-     "winners": "1 winner"
-    }
-   ],
-   "page": "the-upside-hack-2-0-32183"
-  },
   {
    "id": "devpost-31721",
    "title": "EvoHacks 2",
@@ -205,7 +18,7 @@
     "Low/No Code",
     "Social Good"
    ],
-   "joined": 169,
+   "joined": 258,
    "source": "Devpost",
    "excerpt": "Join EvoHacks 2 to compete for great prizes, build connections with other hackers, and get valuable feedback for our top industry judges.",
    "prizes": [
@@ -260,6 +73,134 @@
    "page": "evohacks-2-31721"
   },
   {
+   "id": "devpost-31549",
+   "title": "KUK VIRTUAL HACKATHON",
+   "host": "Kelab UMNO Korea",
+   "url": "https://kuk-virtual-hackathon.devpost.com/",
+   "mode": "Online",
+   "place": "Online",
+   "starts": "2026-11-15",
+   "ends": "2026-11-22",
+   "deadline": "2026-11-22",
+   "prize": "$800",
+   "themes": [
+    "Databases",
+    "Machine Learning/AI",
+    "Productivity"
+   ],
+   "joined": 82,
+   "source": "Devpost",
+   "excerpt": "Empowering Malaysian Student Innovators in Korea",
+   "prizes": [
+    {
+     "title": "CHAMPION",
+     "value": "$400 in cash",
+     "winners": "1 winner"
+    },
+    {
+     "title": "FIRST RUNNER-UP",
+     "value": "$200 in cash",
+     "winners": "1 winner"
+    },
+    {
+     "title": "SECOND RUNNER-UP",
+     "value": "$100 in cash",
+     "winners": "1 winner"
+    },
+    {
+     "title": "BEST INNOVATION / SPECIAL AWARD",
+     "value": "$100 in cash",
+     "winners": "1 winner"
+    }
+   ],
+   "page": "kuk-virtual-hackathon-31549"
+  },
+  {
+   "id": "devpost-32133",
+   "title": "Creators AI Winter Challenge ",
+   "host": "Creators AI ",
+   "url": "https://creators-ai-winter-challenge.devpost.com/",
+   "mode": "Online",
+   "place": "Online",
+   "starts": "2026-11-19",
+   "ends": "2026-11-22",
+   "deadline": "2026-11-22",
+   "themes": [
+    "Enterprise",
+    "Fintech",
+    "Productivity"
+   ],
+   "joined": 61,
+   "source": "Devpost",
+   "excerpt": "Create , Build , Inspire !!",
+   "prizes": [
+    {
+     "title": "1st Place – Overall Champion",
+     "winners": "1 winner",
+     "desc": "The highest-ranked project will receive the Overall Champion recognition."
+    },
+    {
+     "title": "2nd Place – Outstanding Innovation",
+     "winners": "1 winner",
+     "desc": "The second-ranked project will be recognised for its quality, creativity, and execution."
+    },
+    {
+     "title": "3rd Place – Excellence in Execution",
+     "winners": "1 winner",
+     "desc": "The third-ranked project will be acknowledged for its overall performance and contribution."
+    },
+    {
+     "title": "4th–10th Place – Top 10 Finalists",
+     "winners": "10 winners"
+    },
+    {
+     "title": "Theme-Based Special Recognition",
+     "winners": "10 winners"
+    },
+    {
+     "title": "Referral Rewards – Community Contributor Recognition",
+     "winners": "100 winners"
+    },
+    {
+     "title": "Participation Rewards – Everyone Deserves Recognition",
+     "winners": "100 winners"
+    }
+   ],
+   "page": "creators-ai-winter-challenge-32133"
+  },
+  {
+   "id": "devpost-32210",
+   "title": "Glushkov 2026 GameDev Contest",
+   "host": "GlushkovCompany",
+   "url": "https://glushkov-2026-gamedev-contest.devpost.com/",
+   "mode": "Online",
+   "place": "Online",
+   "starts": "2026-11-21",
+   "ends": "2026-11-23",
+   "deadline": "2026-11-23",
+   "themes": [
+    "Beginner Friendly",
+    "COVID-19",
+    "Gaming"
+   ],
+   "joined": 4,
+   "source": "Devpost",
+   "excerpt": "Create a game about Kibarashka :3",
+   "prizes": [
+    {
+     "title": "Case Dreams & Nightmares Case in CS2",
+     "winners": "1 winner",
+     "desc": "By Trade in Steam"
+    },
+    {
+     "title": "P90 | Mustard Gas",
+     "winners": "1 winner",
+     "desc": "P90 | Mustard Gas by trade in steam"
+    }
+   ],
+   "page": "glushkov-2026-gamedev-contest-32210"
+  },
+  {
    "id": "devpost-31798",
    "title": "Taskforge",
    "host": "HackathonForEveryone",
@@ -273,7 +214,7 @@
     "Beginner Friendly",
     "Quantum"
    ],
-   "joined": 248,
+   "joined": 251,
    "source": "Devpost",
    "excerpt": "Build accessible tools that help people focus, organize, and get more done.",
    "prizes": [
@@ -311,7 +252,7 @@
     "Machine Learning/AI",
     "Social Good"
    ],
-   "joined": 133,
+   "joined": 142,
    "source": "Devpost",
    "excerpt": "Observing Blocked Satellite Columns Using Remote-sensing and Auxiliary data",
    "prizes": [
@@ -339,6 +280,43 @@
    "page": "obscura-satellite-ai-research-challenge-31775"
   },
   {
+   "id": "devpost-32211",
+   "title": "Engineering Without Limits",
+   "host": "Engineering Without Limits",
+   "url": "https://engineering-without-limits.devpost.com/",
+   "mode": "Online",
+   "place": "Online",
+   "starts": "2026-11-22",
+   "ends": "2026-11-24",
+   "deadline": "2026-11-24",
+   "themes": [
+    "Beginner Friendly",
+    "Education",
+    "Open Ended"
+   ],
+   "joined": 78,
+   "source": "Devpost",
+   "excerpt": "Design, simulate, and build innovative engineering solutions to real-world challenges. Turn your ideas into impact.",
+   "prizes": [
+    {
+     "title": "Engineering Innovation Champion (1st Place)",
+     "value": "$0 in cash",
+     "winners": "1 winner"
+    },
+    {
+     "title": "Engineering Excellence Award (2nd Place)",
+     "value": "$0 in cash",
+     "winners": "1 winner"
+    },
+    {
+     "title": "Distinguished Engineering Award (3rd Place)",
+     "value": "$0 in cash",
+     "winners": "1 winner"
+    }
+   ],
+   "page": "engineering-without-limits-32211"
+  },
+  {
    "id": "devpost-31737",
    "title": "HackWithAditya",
    "host": "Aditya University",
@@ -354,7 +332,7 @@
     "Health",
     "Machine Learning/AI"
    ],
-   "joined": 237,
+   "joined": 241,
    "source": "Devpost",
    "excerpt": "Great builds start before the hackathon",
    "prizes": [
@@ -382,7 +360,7 @@
     "Education",
     "Web"
    ],
-   "joined": 163,
+   "joined": 179,
    "source": "Devpost",
    "excerpt": "Attend the workshop, Participate in the Hackathon , Win exciting rewards",
    "prizes": [
@@ -415,7 +393,7 @@
     "Open Ended",
     "Social Good"
    ],
-   "joined": 107,
+   "joined": 155,
    "source": "Devpost",
    "excerpt": "Empowering students worldwide to develop innovative STEM solutions to real-world challenges.",
    "prizes": [
@@ -488,7 +466,7 @@
     "Machine Learning/AI",
     "Web"
    ],
-   "joined": 699,
+   "joined": 723,
    "source": "Devpost",
    "excerpt": "Build your first AI app in 30 days! Create chatbots, study and documents assistants. A tools, or productivity apps. Beginner-friendly, free to join, and open to creative ideas.",
    "prizes": [
@@ -515,7 +493,7 @@
     "Fintech",
     "Open Ended"
    ],
-   "joined": 32,
+   "joined": 34,
    "source": "Devpost",
    "excerpt": "截止延期至 11 月 28 日上午 10:00（香港時間）｜同日 Zoom 簡報。Deadline extended to 28 November, 10:00 AM HKT. Pitch Day moves to Zoom.",
    "prizes": [
@@ -583,7 +561,7 @@
    "themes": [
     "Machine Learning/AI"
    ],
-   "joined": 374,
+   "joined": 419,
    "source": "Devpost",
    "excerpt": "Build something that uses AI to help people learn, create, or make an everyday task easier.",
    "prizes": [
@@ -781,7 +759,7 @@
     "Education",
     "Web"
    ],
-   "joined": 689,
+   "joined": 720,
    "source": "Devpost",
    "excerpt": "Build AI-powered solutions to real-world challenges in education, healthcare, sustainability, scientific research, and community impact.",
    "prizes": [
@@ -824,7 +802,7 @@
     "Mobile",
     "Web"
    ],
-   "joined": 3878,
+   "joined": 4146,
    "source": "Devpost",
    "excerpt": "Build AI apps that run on-device and in the cloud with Firebase AI Logic.",
    "prizes": [
@@ -883,7 +861,7 @@
     "Open Ended",
     "Social Good"
    ],
-   "joined": 264,
+   "joined": 273,
    "source": "Devpost",
    "excerpt": "Build technology that brings people together or helps people support one another",
    "prizes": [
@@ -928,7 +906,7 @@
     "Design",
     "Open Ended"
    ],
-   "joined": 95,
+   "joined": 100,
    "source": "Devpost",
    "excerpt": "A place for your next what-if. Build any idea into an app, game, tool, or creative prototype.",
    "prizes": [
@@ -970,7 +948,7 @@
     "Cybersecurity",
     "Education"
    ],
-   "joined": 57,
+   "joined": 60,
    "source": "Devpost",
    "excerpt": "305 Veterans Hackathon Edition November 2026",
    "prizes": [
@@ -1022,7 +1000,7 @@
     "Social Good",
     "Beginner Friendly"
    ],
-   "joined": 36,
+   "joined": 37,
    "source": "Devpost",
    "excerpt": "A week long hackathon requiring students to build innovative software solutions to challenges faced by local businesses in the Dallas Fort Worth area.",
    "prizes": [
@@ -1033,6 +1011,44 @@
     }
    ],
    "page": "code-for-dfw-31504"
+  },
+  {
+   "id": "devpost-32215",
+   "title": "Acodemic X KeebsforWater Global SDG Hackathon",
+   "host": "Hack Club",
+   "url": "https://hackathon-draft-32215.devpost.com/",
+   "mode": "Online",
+   "place": "Online",
+   "starts": "2026-11-23",
+   "ends": "2026-11-30",
+   "deadline": "2026-11-30",
+   "prize": "$35",
+   "themes": [
+    "Beginner Friendly",
+    "Education",
+    "Social Good"
+   ],
+   "joined": 3,
+   "source": "Devpost",
+   "excerpt": "Create a project aligned to any SDG. Be creative and make it count!",
+   "prizes": [
+    {
+     "title": "1st Place",
+     "value": "$20 in cash",
+     "winners": "1 winner"
+    },
+    {
+     "title": "2nd Place",
+     "value": "$10 in cash",
+     "winners": "1 winner"
+    },
+    {
+     "title": "3rd Place",
+     "value": "$5 in cash",
+     "winners": "1 winner"
+    }
+   ],
+   "page": "acodemic-x-keebsforwater-global-sdg-hackathon-32215"
   },
   {
    "id": "devpost-31794",
@@ -1050,7 +1066,7 @@
     "Open Ended",
     "Social Good"
    ],
-   "joined": 196,
+   "joined": 214,
    "source": "Devpost",
    "excerpt": "Build practical technology that creates positive change in communities.",
    "prizes": [
@@ -1078,6 +1094,43 @@
    "page": "code-for-change-31794"
   },
   {
+   "id": "devpost-32208",
+   "title": "Agents that act. Systems that answer.",
+   "host": "studentchakra",
+   "url": "https://accountable-agents.devpost.com/",
+   "mode": "Online",
+   "place": "Online",
+   "starts": "2026-11-28",
+   "ends": "2026-12-01",
+   "deadline": "2026-12-01",
+   "themes": [
+    "Education",
+    "Machine Learning/AI",
+    "Open Ended"
+   ],
+   "joined": 1,
+   "source": "Devpost",
+   "excerpt": "Action is easy. Accountability is the build. Build dependable AI agents that act, explain and know when to escalate.",
+   "prizes": [
+    {
+     "title": "1st Prize",
+     "winners": "1 winner",
+     "desc": "$500 worth of Apify Credits"
+    },
+    {
+     "title": "2nd Prize",
+     "winners": "1 winner",
+     "desc": "Cursor 3-month plan for 2 accounts"
+    },
+    {
+     "title": "3rd Prize",
+     "winners": "1 winner",
+     "desc": "Cursor 3-month plan for 1 account"
+    }
+   ],
+   "page": "agents-that-act-systems-that-answer-32208"
+  },
+  {
    "id": "devpost-31960",
    "title": "ML Empowerment Build Challenge 4.0 - Prizes and Certificates for EVERYONE",
    "host": "ML Empowerment Foundation",
@@ -1092,7 +1145,7 @@
     "Machine Learning/AI",
     "Social Good"
    ],
-   "joined": 220,
+   "joined": 228,
    "source": "Devpost",
    "excerpt": "Learn AI, build real-world projects, and create impact through guided resources, mentorship, and a global community of student innovators.",
    "prizes": [
@@ -1130,7 +1183,7 @@
     "Machine Learning/AI",
     "Open Ended"
    ],
-   "joined": 17986,
+   "joined": 18301,
    "source": "Devpost",
    "excerpt": "Build something wicked and git commit to the darkness.",
    "prizes": [
@@ -1241,7 +1294,7 @@
     "Beginner Friendly",
     "Open Ended"
    ],
-   "joined": 668,
+   "joined": 683,
    "source": "Devpost",
    "excerpt": "Build something worth launching. A beginner-friendly online student hackathon for bold ideas, and creative problem-solvers. JUDGES Fill Out: https://forms.gle/n3Wr7rdSdeJhwpKF7",
    "prizes": [
@@ -1283,7 +1336,7 @@
     "Health",
     "Machine Learning/AI"
    ],
-   "joined": 217,
+   "joined": 230,
    "source": "Devpost",
    "excerpt": "Build the thing that makes care cheaper, faster, or possible at all. Diagnosis, triage, monitoring, access; pick a real problem and show your work.",
    "prizes": [
@@ -1336,7 +1389,7 @@
     "Machine Learning/AI",
     "Low/No Code"
    ],
-   "joined": 1372,
+   "joined": 1495,
    "source": "Devpost",
    "excerpt": "A holiday design challenge with Nano Banana in Adobe Photoshop",
    "prizes": [
@@ -1389,7 +1442,7 @@
     "Design",
     "Machine Learning/AI"
    ],
-   "joined": 425,
+   "joined": 462,
    "source": "Devpost",
    "excerpt": "Learn to design for glasses. Your coding agent builds the Lens, no SPECS required.",
    "prizes": [
@@ -1430,7 +1483,7 @@
     "Open Ended",
     "Machine Learning/AI"
    ],
-   "joined": 489,
+   "joined": 522,
    "source": "Devpost",
    "excerpt": "Build bold. Code creatively. Slay real-world challenges. A hackathon for curious beginners and passionate builders to turn fresh ideas into working projects.",
    "prizes": [
@@ -1481,7 +1534,7 @@
     "Beginner Friendly",
     "Gaming"
    ],
-   "joined": 2026,
+   "joined": 2185,
    "source": "Devpost",
    "excerpt": "Join Reddit to build incredible daily games!",
    "prizes": [
@@ -1514,6 +1567,29 @@
    "page": "reddit-s-game-of-the-day-hackathon-31644"
   },
   {
+   "id": "devfolio-65d42f71b14f4e4b810d3eac1e14ac5a",
+   "title": "promptwaves",
+   "url": "https://promptwaves.devfolio.co/",
+   "mode": "Online",
+   "place": "Online",
+   "starts": "2026-12-09",
+   "ends": "2026-12-10",
+   "deadline": "2026-12-08",
+   "excerpt": "24 hours. one challenge!",
+   "prizes": [
+    {
+     "title": "promptwaves",
+     "desc": "Cash Prize"
+    }
+   ],
+   "themes": [
+    "No Restrictions"
+   ],
+   "joined": 25,
+   "source": "Devfolio",
+   "page": "promptwaves-65d42f71"
+  },
+  {
    "id": "devpost-31796",
    "title": "SafeSpace Hacks - Judges Needed",
    "host": "SafeSpace",
@@ -1529,7 +1605,7 @@
     "Cybersecurity",
     "Social Good"
    ],
-   "joined": 519,
+   "joined": 526,
    "source": "Devpost",
    "excerpt": "Build a little more peace of mind. Create anything that helps people, communities, or systems stay safer.",
    "prizes": [
@@ -1571,7 +1647,7 @@
     "Beginner Friendly",
     "Social Good"
    ],
-   "joined": 256,
+   "joined": 260,
    "source": "Devpost",
    "excerpt": "Build practical technology for a more sustainable future.",
    "prizes": [
@@ -1599,7 +1675,7 @@
     "Machine Learning/AI",
     "Open Ended"
    ],
-   "joined": 196,
+   "joined": 206,
    "source": "Devpost",
    "excerpt": "Build anything with AI. Turn models, data, and bold ideas into working experiences.",
    "prizes": [
@@ -1630,7 +1706,7 @@
     "Beginner Friendly",
     "Open Ended"
    ],
-   "joined": 22,
+   "joined": 24,
    "source": "Devpost",
    "excerpt": "Inspired by the Bay Area Peninsula. Build from anywhere and turn an idea from your everyday life into something people can try.",
    "prizes": [
@@ -1690,7 +1766,7 @@
      "desc": "Awarded to the top performing teams of HackOdisha."
     }
    ],
-   "joined": 1993,
+   "joined": 2013,
    "source": "Devfolio",
    "page": "hackodisha-6-0-c84b90d6"
   },
@@ -1710,7 +1786,7 @@
     "Productivity",
     "Web"
    ],
-   "joined": 494,
+   "joined": 503,
    "source": "Devpost",
    "excerpt": "Build the AI-First MSP: Run smarter, Deliver more",
    "prizes": [
@@ -1818,7 +1894,7 @@
     "Machine Learning/AI",
     "Productivity"
    ],
-   "joined": 656,
+   "joined": 697,
    "source": "Devpost",
    "excerpt": "An open source, embedded database for AI agents",
    "prizes": [
@@ -1855,7 +1931,7 @@
     "Beginner Friendly",
     "Low/No Code"
    ],
-   "joined": 39,
+   "joined": 43,
    "source": "Devpost",
    "excerpt": "Think Beyond. Build What Matters.",
    "prizes": [
@@ -1887,7 +1963,7 @@
     "Education",
     "Machine Learning/AI"
    ],
-   "joined": 71,
+   "joined": 79,
    "source": "Devpost",
    "excerpt": "CS4ALL is hosting BUILD 4 ALL, an online hackathon for students to compete and win prizes.",
    "prizes": [
@@ -1942,7 +2018,7 @@
     "Open Ended",
     "Social Good"
    ],
-   "joined": 112,
+   "joined": 128,
    "source": "Devpost",
    "excerpt": "Breaking barriers and empowering women and girls through technology, creativity, and innovation.",
    "prizes": [
@@ -2007,7 +2083,7 @@
     "Machine Learning/AI",
     "Open Ended"
    ],
-   "joined": 2204,
+   "joined": 2282,
    "source": "Devpost",
    "excerpt": "The power to shape the world",
    "prizes": [
@@ -2111,7 +2187,7 @@
     "Beginner Friendly",
     "Low/No Code"
    ],
-   "joined": 207,
+   "joined": 220,
    "source": "Devpost",
    "excerpt": "Take a rough idea off the workbench, turn it into a working prototype, and show what it can do at Silicon Valley Buildathon.",
    "prizes": [
@@ -2211,7 +2287,7 @@
     "Machine Learning/AI",
     "Productivity"
    ],
-   "joined": 500,
+   "joined": 511,
    "source": "Devpost",
    "excerpt": "Create AI agents that give founders back their most valuable asset: time to think.",
    "prizes": [
@@ -2247,7 +2323,7 @@
    "themes": [
     "Education"
    ],
-   "joined": 55,
+   "joined": 62,
    "source": "Devpost",
    "excerpt": "Ideas into Impact.",
    "prizes": [
@@ -2328,7 +2404,7 @@
     "Education",
     "Social Good"
    ],
-   "joined": 309,
+   "joined": 314,
    "source": "Devpost",
    "excerpt": "Learning has no single doorway. Build tools that open more of them—across language, ability, connectivity, and cost.",
    "prizes": [
@@ -2370,7 +2446,7 @@
     "Machine Learning/AI",
     "Productivity"
    ],
-   "joined": 9,
+   "joined": 12,
    "source": "Devpost",
    "excerpt": "One weekend, 36 hours, to build the AI teammate for the creator economy. Top 10 people get an interview at OVO Talent.",
    "prizes": [
@@ -2422,7 +2498,7 @@
     "Beginner Friendly",
     "Web"
    ],
-   "joined": 1,
+   "joined": 4,
    "source": "Devpost",
    "excerpt": "Start your winter arc with Hackstead: Winterfest",
    "prizes": [
@@ -2473,7 +2549,7 @@
     "Machine Learning/AI",
     "Open Ended"
    ],
-   "joined": 1312,
+   "joined": 1354,
    "source": "Devpost",
    "excerpt": "Open innovation for all, submit projects that have potential impact and usability!",
    "prizes": [
@@ -2526,7 +2602,7 @@
     "Enterprise",
     "Productivity"
    ],
-   "joined": 4658,
+   "joined": 4811,
    "source": "Devpost",
    "excerpt": "Build on Forge, extend Atlassian products, and turn connected context into powerful new apps for teams — win your share of $120K.",
    "prizes": [
@@ -2591,7 +2667,7 @@
     "Education",
     "Web"
    ],
-   "joined": 69,
+   "joined": 70,
    "source": "Devpost",
    "excerpt": "Intelligence Unbound - Beyond Every Boundary",
    "prizes": [
@@ -2619,7 +2695,7 @@
     "IoT",
     "Machine Learning/AI"
    ],
-   "joined": 579,
+   "joined": 613,
    "source": "Devpost",
    "excerpt": "Welcome to GenHacks! The greatest virtual hackathon you have ever seen. Once in a generation.",
    "prizes": [
@@ -2688,7 +2764,7 @@
     "Communication",
     "Databases"
    ],
-   "joined": 142,
+   "joined": 143,
    "source": "Devpost",
    "excerpt": "#ECOLANUM#ECOPAY#VIRTUALANUM#ECCLESIA",
    "prizes": [
@@ -2715,7 +2791,7 @@
     "Cybersecurity",
     "Education"
    ],
-   "joined": 14,
+   "joined": 16,
    "source": "Devpost",
    "excerpt": "305 CodeFest Edition December 2026",
    "prizes": [
@@ -2757,7 +2833,7 @@
     "Beginner Friendly",
     "Open Ended"
    ],
-   "joined": 367,
+   "joined": 369,
    "source": "Devpost",
    "excerpt": "Hack your artistic intelligence! Demonstrate your talent and showcase your hack for the arts",
    "prizes": [
@@ -2825,6 +2901,11 @@
      "title": "Adaption AI Application Award",
      "winners": "1 winner",
      "desc": "- $1,000 in Adaption credits for each team member - Adaption swag"
+    },
+    {
+     "title": "DevSwarm Award",
+     "winners": "2 winners",
+     "desc": "- One-year DevSwarm Pro subscription (worth $100)"
     }
    ],
    "page": "innovart-2027-art-and-technology-hack-day-31108"
@@ -2844,7 +2925,7 @@
     "Health",
     "Social Good"
    ],
-   "joined": 3,
+   "joined": 5,
    "source": "Devpost",
    "excerpt": "Bright and young innovators developing new ways to help cancer patients face everyday challenges with greater safety and comfort.",
    "prizes": [
@@ -2912,7 +2993,7 @@
     "Design",
     "Education"
    ],
-   "joined": 506,
+   "joined": 527,
    "source": "Devpost",
    "excerpt": "Showcase both your technical and presenting abilities and collaborate with like minded individuals to make and pitch a project during United Hacks V8.",
    "prizes": [
@@ -2980,7 +3061,7 @@
     "Machine Learning/AI",
     "Social Good"
    ],
-   "joined": 125,
+   "joined": 135,
    "source": "Devpost",
    "excerpt": "A free 48-hour AI-native online hackathon where builders aged 13–18 make games that do good in the world.",
    "prizes": [
@@ -3045,7 +3126,7 @@
     "Web",
     "Social Good"
    ],
-   "joined": 1504,
+   "joined": 1600,
    "source": "Devpost",
    "excerpt": "Join the global initiative to help build the infrastructure and first pages of the open agentic web",
    "prizes": [
@@ -3090,7 +3171,7 @@
     "Machine Learning/AI",
     "Social Good"
    ],
-   "joined": 31,
+   "joined": 32,
    "source": "Devpost",
    "excerpt": "Develop AI/ML solutions for applications across society, education, and environment",
    "prizes": [
@@ -3143,7 +3224,7 @@
     "Gaming",
     "Machine Learning/AI"
    ],
-   "joined": 717,
+   "joined": 817,
    "source": "Devpost",
    "excerpt": "Scout smarter. Draft sharper. Build with JetBrains.",
    "prizes": [
@@ -3207,7 +3288,7 @@
     "Machine Learning/AI",
     "Robotic Process Automation"
    ],
-   "joined": 454,
+   "joined": 455,
    "source": "Devpost",
    "excerpt": "Invent. Compile. Inspire.",
    "prizes": [
@@ -3259,7 +3340,7 @@
     "Machine Learning/AI",
     "Web"
    ],
-   "joined": 968,
+   "joined": 976,
    "source": "Devpost",
    "excerpt": "Build technology that reaches the people who need it the most.",
    "prizes": [
@@ -3304,7 +3385,7 @@
    "themes": [
     "Open Ended"
    ],
-   "joined": 38,
+   "joined": 39,
    "source": "Devpost",
    "excerpt": "Got an idea? Perfect. Got nothing? Even better. Build anything, ship the link, and win prizes!",
    "prizes": [
@@ -3342,7 +3423,7 @@
     "Open Ended",
     "Education"
    ],
-   "joined": 1267,
+   "joined": 1324,
    "source": "Devpost",
    "excerpt": "A free online student hackathon. Build around Tech for Student or Community Life from December 19, 2026 to January 18, 2027. Beginners welcome!",
    "prizes": [
@@ -3527,7 +3608,7 @@
     "Education",
     "Social Good"
    ],
-   "joined": 12,
+   "joined": 17,
    "source": "Devpost",
    "excerpt": "Build tools that expand access to education for girls, help communities adapt to climate change, and tackle air pollution and waste.",
    "prizes": [
@@ -3599,7 +3680,7 @@
     "Machine Learning/AI",
     "Web"
    ],
-   "joined": 188,
+   "joined": 224,
    "source": "Devpost",
    "excerpt": "Frontier AI can now do spatial design and development. Build with your favorite agents and the PICO CLI. 30+ ways to win. No Headset Needed.",
    "prizes": [
@@ -3697,7 +3778,7 @@
     "Beginner Friendly",
     "Social Good"
    ],
-   "joined": 88,
+   "joined": 97,
    "source": "Devpost",
    "excerpt": "Technology for Good",
    "prizes": [
@@ -3740,6 +3821,73 @@
    "page": "hackout-2027-31873"
   },
   {
+   "id": "devpost-32213",
+   "title": "SunnyHacks Jan 2027",
+   "host": "SunnyHacks",
+   "url": "https://sunnyhacks-jan-2027.devpost.com/",
+   "mode": "Online",
+   "place": "Online",
+   "starts": "2027-01-25",
+   "ends": "2027-02-01",
+   "deadline": "2027-02-01",
+   "themes": [
+    "Beginner Friendly",
+    "Machine Learning/AI",
+    "Productivity"
+   ],
+   "joined": 1,
+   "source": "Devpost",
+   "excerpt": "A free online student hackathon. Build something that helps people start fresh in 2027.",
+   "prizes": [
+    {
+     "title": "1st Place Overall",
+     "winners": "1 winner",
+     "desc": "The best project across every category. • 2-year CodeCrafters VIP membership for every team member • $500 in Formaloo credits for the team • SunnyHacks winner certificate • More sponsor prizes coming before Jan 15"
+    },
+    {
+     "title": "2nd Place Overall",
+     "winners": "1 winner",
+     "desc": "Runner-up across every category. • 1-year CodeCrafters VIP membership for every team member • $500 in Formaloo credits for the team • SunnyHacks winner certificate • More sponsor prizes coming before Jan 15"
+    },
+    {
+     "title": "3rd Place Overall",
+     "winners": "1 winner",
+     "desc": "Third place across every category. • 6-month CodeCrafters VIP membership for every team member • $500 in Formaloo credits for the team • SunnyHacks winner certificate • More sponsor prizes coming before Jan 15"
+    },
+    {
+     "title": "Best AI Agent",
+     "winners": "1 winner",
+     "desc": "The best AI agent that takes real actions for its user. • Sponsor prize, announced before Jan 15 • SunnyHacks winner certificate"
+    },
+    {
+     "title": "Best Learning & Education Hack",
+     "winners": "1 winner",
+     "desc": "The project that best helps people learn something new. • Sponsor prize, announced before Jan 15 • SunnyHacks winner certificate"
+    },
+    {
+     "title": "Best Health & Habits Hack",
+     "winners": "1 winner",
+     "desc": "The project that best helps people build better habits or health. • Sponsor prize, announced before Jan 15 • SunnyHacks winner certificate"
+    },
+    {
+     "title": "Best Beginner Hack",
+     "winners": "1 winner",
+     "desc": "The best project from a team where everyone is at their first hackathon. • Sponsor prize, announced before Jan 15 • SunnyHacks winner certificate"
+    },
+    {
+     "title": "Most Creative",
+     "winners": "1 winner",
+     "desc": "The most unexpected, original idea. • Sponsor prize, announced before Jan 15 • SunnyHacks winner certificate"
+    },
+    {
+     "title": "Best Use of Formaloo",
+     "winners": "1 winner",
+     "desc": "The best project built with Formaloo (formaloo.com), the no-code platform for forms, databases and apps. • Spot in a group mentoring call with Formaloo's CEO"
+    }
+   ],
+   "page": "sunnyhacks-jan-2027-32213"
+  },
+  {
    "id": "devpost-30340",
    "title": "HackTitan",
    "host": "IWU",
@@ -3755,7 +3903,7 @@
     "Databases",
     "DevOps"
    ],
-   "joined": 241,
+   "joined": 244,
    "source": "Devpost",
    "excerpt": "IWU Hackathon",
    "prizes": [
@@ -3784,7 +3932,7 @@
     "Machine Learning/AI",
     "Social Good"
    ],
-   "joined": 17,
+   "joined": 26,
    "source": "Devpost",
    "excerpt": "Build AI tools that tackle real challenges in health, education, accessibility, and sustainability. High school students from BASIS and beyond are welcome.",
    "prizes": [
@@ -3886,7 +4034,7 @@
     "Web",
     "Beginner Friendly"
    ],
-   "joined": 70,
+   "joined": 75,
    "source": "Devpost",
    "excerpt": "Build intelligent solutions for real-world problems. Shape the future using AI.",
    "prizes": [
@@ -3986,7 +4134,7 @@
     "Open Ended",
     "Social Good"
    ],
-   "joined": 5,
+   "joined": 7,
    "source": "Devpost",
    "excerpt": "Real world initiatives, now open-sourced.",
    "prizes": [
@@ -4074,7 +4222,7 @@
     "Education",
     "Social Good"
    ],
-   "joined": 61,
+   "joined": 62,
    "source": "Devpost",
    "excerpt": "Create projects benefiting UNSDGs for a chance to work along UN affiliated NGOs!",
    "prizes": [
@@ -4180,7 +4328,7 @@
     "Health",
     "Open Ended"
    ],
-   "joined": 23,
+   "joined": 24,
    "source": "Devpost",
    "excerpt": "Move, Inspire and Innovate! Demonstrate your talent and showcase your hack for physical activity.",
    "prizes": [
@@ -4263,7 +4411,7 @@
     "Machine Learning/AI",
     "Web"
    ],
-   "joined": 94,
+   "joined": 97,
    "source": "Devpost",
    "excerpt": "\"Brewing Codes 4.0- Where Innovation Meets Code!\"",
    "prizes": [

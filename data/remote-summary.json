@@ -1,8 +1,8 @@
 {
- "updated": "2026-11-21",
+ "updated": "2026-11-22",
  "company_count": 59,
- "role_count": 486,
- "local_role_count": 231,
+ "role_count": 483,
+ "local_role_count": 235,
  "roles_scanned": 3727,
  "sources": [
   "Himalayas",
@@ -38,8 +38,8 @@
   {
    "company": "micro1",
    "platform": "himalayas",
-   "eligible": 44,
-   "total": 44,
+   "eligible": 41,
+   "total": 41,
    "locations": [
     "Worldwide"
    ]
@@ -47,8 +47,8 @@
   {
    "company": "Xperteez Technology",
    "platform": "himalayas",
-   "eligible": 27,
-   "total": 27,
+   "eligible": 28,
+   "total": 28,
    "locations": [
     "Worldwide"
    ]
@@ -56,8 +56,8 @@
   {
    "company": "Clera",
    "platform": "himalayas",
-   "eligible": 19,
-   "total": 19,
+   "eligible": 21,
+   "total": 21,
    "locations": [
     "Worldwide"
    ]
@@ -109,15 +109,6 @@
    ]
   },
   {
-   "company": "Health Hue Digital",
-   "platform": "himalayas",
-   "eligible": 6,
-   "total": 6,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
    "company": "Zapier",
    "platform": "ashby",
    "eligible": 3,
@@ -128,7 +119,7 @@
    ]
   },
   {
-   "company": "Welocalize",
+   "company": "VAme Ltd",
    "platform": "himalayas",
    "eligible": 3,
    "total": 3,
@@ -137,7 +128,7 @@
    ]
   },
   {
-   "company": "VAme Ltd",
+   "company": "Welocalize",
    "platform": "himalayas",
    "eligible": 3,
    "total": 3,
@@ -152,6 +143,15 @@
    "total": 203,
    "locations": [
     "Global"
+   ]
+  },
+  {
+   "company": "Elvoro",
+   "platform": "himalayas",
+   "eligible": 2,
+   "total": 2,
+   "locations": [
+    "Worldwide"
    ]
   },
   {
@@ -209,6 +209,16 @@
    ]
   },
   {
+   "company": "TRM Labs",
+   "platform": "jobicy",
+   "eligible": 2,
+   "total": 2,
+   "locations": [
+    "EMEA,  Singapore",
+    "EMEA,  LATAM,  Canada,  USA"
+   ]
+  },
+  {
    "company": "Cockroach Labs",
    "platform": "greenhouse",
    "eligible": 1,
@@ -254,6 +264,24 @@
    ]
   },
   {
+   "company": "molecule.xyz",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "JustPlay GmbH",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
    "company": "Secure Privacy",
    "platform": "himalayas",
    "eligible": 1,
@@ -273,24 +301,6 @@
   },
   {
    "company": "Askable",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Defuse Labs",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Eastwood & Cleef, LLC",
    "platform": "himalayas",
    "eligible": 1,
    "total": 1,
@@ -416,15 +426,6 @@
    ]
   },
   {
-   "company": "Elvoro",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
    "company": "EMCD",
    "platform": "himalayas",
    "eligible": 1,
@@ -461,12 +462,30 @@
    ]
   },
   {
-   "company": "Kreative Media",
-   "platform": "himalayas",
+   "company": "Chainguard",
+   "platform": "jobicy",
    "eligible": 1,
    "total": 1,
    "locations": [
-    "Worldwide"
+    "EMEA"
+   ]
+  },
+  {
+   "company": "saas.group",
+   "platform": "jobicy",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "EMEA"
+   ]
+  },
+  {
+   "company": "Spirax Group",
+   "platform": "jobicy",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "EMEA"
    ]
   },
   {
@@ -482,7 +501,7 @@
    "company": "Welo Global",
    "platform": "jobicy",
    "eligible": 1,
-   "total": 3,
+   "total": 4,
    "locations": [
     "Anywhere"
    ]
@@ -503,15 +522,6 @@
    "total": 1,
    "locations": [
     "Anywhere"
-   ]
-  },
-  {
-   "company": "TRM Labs",
-   "platform": "jobicy",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "EMEA,  LATAM,  Canada,  USA"
    ]
   },
   {
@@ -543,15 +553,6 @@
   },
   {
    "company": "Phantom",
-   "platform": "jobicy",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Anywhere"
-   ]
-  },
-  {
-   "company": "Nethermind",
    "platform": "jobicy",
    "eligible": 1,
    "total": 1,
