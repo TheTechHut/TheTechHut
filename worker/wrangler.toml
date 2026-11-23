@@ -76,4 +76,4 @@ new_sqlite_classes = ["Events"]
 # client id here, put the same id in GOOGLE_CLIENT_ID at the top of
 # assets/js/games-arcade.js, and set the secret: wrangler secret put GAMES_SECRET
 [vars]
-GOOGLE_CLIENT_ID = ""
+GOOGLE_CLIENT_ID = "789355539846-91igvf3r339pv2k7acvvj0au6r4gtfc4.apps.googleusercontent.com"

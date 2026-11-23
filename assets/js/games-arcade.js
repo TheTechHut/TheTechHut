@@ -6,7 +6,7 @@
  * and the same id and GAMES_SECRET are set on the Worker (worker/README.md).
  */
 (function () {
-  var GOOGLE_CLIENT_ID = '';   // e.g. '1234-abc.apps.googleusercontent.com'
+  var GOOGLE_CLIENT_ID = '789355539846-91igvf3r339pv2k7acvvj0au6r4gtfc4.apps.googleusercontent.com';   // e.g. '1234-abc.apps.googleusercontent.com'
 
   var A = window.TTHArcade, D = window.TTHGames;
   var root = document.getElementById('arcade');
