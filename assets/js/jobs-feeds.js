@@ -54,9 +54,9 @@
   // Remote OK's tags are unreliable (a retail role comes tagged "dev"), so roles are
   // classified on the job TITLE only, in three tiers: strong tech wins outright,
   // an explicit non-tech word rules a role out, otherwise a looser tech match decides.
-  var STRONG = /(developer|engineer|engineering|software|programmer|devops|\bsre\b|full.?stack|front.?end|back.?end|data scien|data analyst|data engineer|machine learning|\bml\b|\bai\b|cyber ?security|infosec|\bqa\b|\bux\b|\bui\b|product design|product manager|web design|technical writer|solutions architect|cloud|database|sysadmin|system administrator|network admin|it support|help ?desk|scrum|technical support)/i;
+  var STRONG = /(developer|engineer|engineering|software|programmer|devops|\bsre\b|full.?stack|front.?end|back.?end|data scien|data analyst|data engineer|machine learning|\bml\b|\bai\b|cyber ?security|infosec|\bqa\b|\bux\b|\bui\b|product design|product manager|web design|technical writer|solutions architect|cloud|database|sysadmin|systems? administrator|network admin|it support|help ?desk|scrum|technical support)/i;
   var NONTECH = /(maintenance|janitor|cleaner|housekeep|store manager|retail|cashier|barista|waiter|waitress|chef|cook|nurse|caregiver|therapist|driver|delivery|warehouse|forklift|teacher|tutor|babysit|nanny|landscap|plumb|electrician|carpent|welder|mechanic|security guard|receptionist|dog |groom|business development|relationship manager)/i;
-  var TECH = /(develop|engineer|software|front.?end|back.?end|full.?stack|data|devops|cloud|security|mobile|\bios\b|android|python|javascript|typescript|react|node|\bjava\b|golang|\brust\b|\bruby\b|php|design|\bui\b|\bux\b|product|\bqa\b|machine.?learning|\bai\b|\bml\b|analyst|architect|sre|platform|\bapi\b|database|sql|\bit\b|cyber|scrum|webflow|wordpress)/i;
+  var TECH = /(develop|engineer|software|front.?end|back.?end|full.?stack|data|devops|cloud|security|mobile|\bios\b|android|python|javascript|typescript|react|node|\bjava\b|golang|\brust\b|\bruby\b|php|design|\bui\b|\bux\b|product|\bqa\b|machine.?learning|\bai\b|\bml\b|analyst|architect|sre|platform|\bapi\b|database|sql|\bit\b|\bict\b|cyber|scrum|webflow|wordpress)/i;
   function isTechRole(title) {
     if (STRONG.test(title)) return true;
     if (NONTECH.test(title)) return false;
@@ -96,6 +96,10 @@
     return '';
   }
   // A whole programme ("Graduate Programme 2027") is let through even without a tech word in it.
+  // Universities (academic: true): teaching and research posts count when their subject is tech.
+  var ACADEMIC = /(lecturer|faculty|professor|tutorial fellow|tutor|instructor|teaching|post.?doc|research (fellow|assistant|associate)|researcher|chair in)/i;
+  var ACADEMIC_TOPIC = /(comput|software|information (systems|technology|science)|\bict\b|\bit\b|data|statistic|math|artificial intelligence|\bai\b|machine learning|cyber|network|electrical|electronic|engineering|informatics|digital|actuarial)/i;
+  function isAcademicTech(title) { return ACADEMIC.test(title) && ACADEMIC_TOPIC.test(title); }
   var PROGRAMME = /(graduate|trainee|internship|apprenticeship|attachment)\s+(programme|program|scheme)|management trainee|graduate trainee/i;
   function regionOf(loc) {
     var l = loc || '';
@@ -299,7 +303,26 @@
       link: '/Jobpostings/DetailsJobPosting/\\d+', title: '<tr[^>]*>\\s*<td[^>]*>([\\s\\S]*?)</td>',
       closes: '(\\d{1,2}/\\d{1,2}/\\d{4})', server: true },
     { name: 'Zetech University', ats: 'html', url: 'https://careers.zetech.ac.ke/index.php?mod=vacancies', side: 'after',
-      link: 'mod=vacancies&(amp;)?do=details&(amp;)?vacid=', strip: '\\s*\\[\\s*Ref\\b[^\\]]*\\]\\s*$', server: true },
+      link: 'mod=vacancies&(amp;)?do=details&(amp;)?vacid=', strip: '\\s*\\[\\s*Ref\\b[^\\]]*\\]\\s*$', server: true, academic: true },
+    // Universities across Africa. academic: true also keeps lecturer, faculty and research
+    // roles in computing, IT, data, engineering and maths (see ACADEMIC/ACADEMIC_TOPIC);
+    // their other vacancies (nursing, finance, chaplaincy...) are left out like any employer's.
+    // `country` is added to a location that does not name it (Ashesi lists only the town).
+    { name: 'African Leadership University', ats: 'greenhouse', slug: 'alu', academic: true },
+    { name: 'Ashesi University',  ats: 'bamboohr',   slug: 'ashesi', country: 'Ghana', academic: true, server: true },
+    { name: 'AIMS (African Institute for Mathematical Sciences)', ats: 'workable', slug: 'aims', academic: true },
+    { name: 'USIU-Africa',        ats: 'html', url: 'https://www.usiu.ac.ke/job-vacancies/', side: 'after',
+      link: '/vacancies/[^/"]+/?$', closes: '(\\d{2}/\\d{2}/\\d{4})', location: 'Nairobi, Kenya', academic: true, server: true },
+    { name: 'Aga Khan University', ats: 'html', url: 'https://www.aku.edu/vacancies/pages/search-jobs.aspx?loc=Kenya', side: 'after',
+      link: 'job-detail\\.aspx\\?JobID=\\d+', hrefTitle: '[?&]Title=(.+)$', place: 'joblocation[^>]*>(?:\\s|<br\\s*/?>)*([^<]+?)\\s*<',
+      location: 'Nairobi, Kenya', academic: true, server: true },
+    { name: 'KCA University',     ats: 'rss', url: 'https://www.kcau.ac.ke/careers/feed/', location: 'Nairobi, Kenya', academic: true, server: true },
+    { name: 'University of the Witwatersrand', ats: 'html', url: 'https://www.wits.ac.za/vacancies/',
+      link: 'VisVacDispPG[^"]*p_svid=\\d+', closes: '<td>\\s*(\\d{1,2} [A-Za-z]{3,9} \\d{4})\\s*</td>', closesAfter: true, strip: '\\s*\\([A-Z]{2}\\.\\d{2}\\.\\d\\)\\s*$', location: 'Johannesburg, South Africa', academic: true, server: true },
+    // UCT: the title sits before the advert link and the closing date after it.
+    { name: 'University of Cape Town', ats: 'html', url: 'https://uct.ac.za/staff/general-vacancies',
+      link: '/sites/default/files/[^"]*-id\\d+-[a-z0-9_-]+(?<!-jd)\\.pdf$', title: 'vacancy--title">\\s*([^<]+?)\\s*<',
+      closes: 'class="datetime">\\s*([^<]+?)\\s*<', closesAfter: true, location: 'Cape Town, South Africa', academic: true, server: true },
     { name: 'CIC Insurance Group', ats: 'rss', url: 'https://careers.cicinsurancegroup.com/?feed=job_feed', server: true },
     { name: 'Craft Silicon',     ats: 'rss', url: 'https://www.craftsilicon.com/careers/feed/', maxAge: 75, server: true },
     { name: "Africa's Talking",  ats: 'bamboohr', slug: 'africastalking', server: true },
@@ -770,18 +793,22 @@
         var me = occ[g.at], prev = occ[g.at - 1], next = occ[g.at + 1], after = co.side === 'after';
         var win = after ? html.slice(me.end, next ? next.start : me.end + 5000)
                         : html.slice(prev ? prev.end : Math.max(0, me.start - 5000), me.start);
-        var title = find(win, co.title, !after) ||
+        var hrefT = co.hrefTitle ? (new RegExp(co.hrefTitle, 'i').exec(g.href) || [])[1] : '';
+        if (hrefT) { try { hrefT = clean(decodeURIComponent(hrefT.replace(/\+/g, ' '))); } catch (e) { hrefT = clean(hrefT); } }
+        var title = hrefT || find(win, co.title, !after) ||
           g.texts.filter(function (t) { return t && t.length < 260 && !CTA.test(t); })[0] || '';
         if (co.strip) title = title.replace(new RegExp(co.strip, 'i'), '');
         // \uFFFD: a dash the site saved in the wrong encoding
         title = capsTitle(title.replace(/\s*\uFFFD\s*/g, ' – ').replace(/\s+/g, ' ').trim());
         if (!title) return null;
-        var closes = dayOf(find(win, co.closes || CLOSES, !after), co.mdy);
+        // closesAfter: the closing date follows the link even though the title comes before it
+        var cwin = co.closesAfter && !after ? html.slice(me.end, next ? next.start : me.end + 5000) : win;
+        var closes = dayOf(find(cwin, co.closes || CLOSES, !after && !co.closesAfter), co.mdy);
         if (closes && closes < today) return null;
         var posted = dayOf(find(win, co.posted || POSTED, !after), co.mdy);
         var url;
         try { url = new URL(g.href, co.url).href; } catch (e) { return null; }
-        var qid = (/[?&](?:jobId|vacid|id)=([^&#]+)/i.exec(g.href) || [])[1];
+        var qid = (/[?&](?:jobId|vacid|id|p_svid)=([^&#]+)/i.exec(g.href) || [])[1];
         var o = job('pg', co, qid ? qid.slice(0, 32) : g.href.replace(/[?#].*$/, '').replace(/\/$/, '').split('/').pop().slice(-60),
           title, find(win, co.place, !after) || co.location || 'Kenya', posted && posted <= today ? posted : '', url);
         o.deadline = closes;
@@ -847,7 +874,7 @@
                 : co.ats === 'successfactors' && co.mode === 'search' ? loadSFSearch : null;
     if (special) return special(co).then(function (j) { return finish(j, co); }).catch(function () { return []; });
     if (!co.slug) co.slug = String(co.site || co.name).replace(/[^a-z0-9]+/gi, '-').toLowerCase();
-    if (co.ats === 'workday') return loadWorkday(co).then(finish).catch(function () { return []; });
+    if (co.ats === 'workday') return loadWorkday(co).then(function (j) { return finish(j, co); }).catch(function () { return []; });
     var asText = co.ats === 'successfactors' || co.ats === 'zoho' || co.ats === 'rss';
     var url = co.ats === 'oracle' ? 'https://' + co.host + '/hcmRestApi/resources/latest/recruitingCEJobRequisitions' +
                                     '?onlyData=true&expand=requisitionList.secondaryLocations&finder=findReqs;siteNumber=' +
@@ -880,12 +907,18 @@
                : co.ats === 'breezy'     ? fromBreezy(d, co)
                : co.ats === 'wordpress'  ? fromWordPress(d, co)
                :                           fromAshby(d, co);
-    }).then(finish).catch(function () { return []; });
+    }).then(function (j) { return finish(j, co); }).catch(function () { return []; });
   }
   function finish(jobs, co) {
-      var all = !!(co && co.all);
-      jobs = (jobs || []).filter(function (j) { return j.title && j.url && (all || isTechRole(j.title) || PROGRAMME.test(j.title)); });
-      jobs.forEach(function (j) { j.region = regionOf(j.where || j.location); });
+      var all = !!(co && co.all), academic = !!(co && co.academic);
+      jobs = (jobs || []).filter(function (j) {
+        return j.title && j.url && (all || isTechRole(j.title) || PROGRAMME.test(j.title) || (academic && isAcademicTech(j.title)));
+      });
+      jobs.forEach(function (j) {
+        if (co && co.country && j.location.toLowerCase().indexOf(co.country.toLowerCase()) < 0)
+          j.location = (j.location && j.location !== 'Not stated' ? j.location + ', ' : '') + co.country;
+        j.region = regionOf(j.where || j.location);
+      });
       jobs.sort(function (a, b) { return REGION_RANK[a.region] - REGION_RANK[b.region]; });
       return jobs.slice(0, PER_COMPANY);
   }
