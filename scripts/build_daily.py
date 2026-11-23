@@ -395,6 +395,7 @@ STATIC_PAGES = [
     ('/afro-ip/',                    '0.50', 'monthly'),
     ('/entrepreneurial_challenge/',  '0.50', 'monthly'),
     ('/data_privacy_policy/',        '0.30', 'yearly'),
+    ('/terms/',                      '0.30', 'yearly'),
 ]
 today = datetime.date.today().isoformat()
 rows = []
