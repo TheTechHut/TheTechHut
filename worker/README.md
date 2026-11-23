@@ -320,10 +320,10 @@ list and are never included; Kenya-based roles are listed first in each field.
 
 ---
 
-## The prompt marketplace (/prompt-marketplace/)
+## The prompt marketplace (/prompts/)
 
 Community members post AI prompts, free or paid, and buy each other's. Code:
-`src/market.js` (one Durable Object, `Market`) and `prompt-marketplace/index.html`.
+`src/market.js` (one Durable Object, `Market`) and `prompts/index.html`.
 
 - **Accounts:** email only. `POST /market/login` emails a sign-in link (Brevo) that
   works once, for 20 minutes; the page swaps it for a signed 60-day session kept in
@@ -337,8 +337,8 @@ Community members post AI prompts, free or paid, and buy each other's. Code:
 - **Rules:** free prompts need no payout account; paid ones cost KES 50–20,000; 20
   new prompts per member per day; a prompt reported 5 times is hidden; a sold prompt
   that its seller removes stays with its buyers.
-- **Prompt pages:** every prompt has its own page, `/prompt-marketplace/p/<id>/<slug>/`.
-  It is one static shell (`prompt-marketplace/p/index.html`) that Firebase serves for
+- **Prompt pages:** every prompt has its own page, `/prompts/p/<id>/<slug>/`.
+  It is one static shell (`prompts/p/index.html`) that Firebase serves for
   every such URL (a `rewrites` rule in `firebase.json`); it reads the public view from
   `GET /market/prompt?id=` (never the prompt text) and sets its own title, canonical
   and Product JSON-LD. Paystack returns buyers there, and sign-in links started on a
@@ -356,12 +356,12 @@ Community members post AI prompts, free or paid, and buy each other's. Code:
   (not editing one) emails the member its link with WhatsApp, LinkedIn and X share
   buttons; their first prompt gets a "welcome, seller" version.
 - **Share previews:** `scripts/build_prompt_pages.js` writes, before every deploy, a static
-  copy of the page for each prompt (`/prompt-marketplace/p/<id>/<slug>/index.html`) with its
+  copy of the page for each prompt (`/prompts/p/<id>/<slug>/index.html`) with its
   own title, description and `og:image`, plus a 1200x630 share card (`p/<id>/card.png`, drawn
   by `scripts/prompt_card.js` in the jobs-card design). Link previews on WhatsApp, LinkedIn
   and X need these, because they never run the page's JavaScript. A prompt posted since the
   last build uses the generic preview until the next one. It also writes the sitemap below.
-- **Sitemap:** `scripts/build_prompt_sitemap.js` writes `prompt-marketplace/sitemap.xml`
+- **Sitemap:** `scripts/build_prompt_sitemap.js` writes `prompts/sitemap.xml`
   (listed in robots.txt) from `GET /market/prompts` before every deploy; it is not
   committed. New prompts reach it with the next deploy, at most about 3 hours later.
 
@@ -379,7 +379,7 @@ Community members post AI prompts, free or paid, and buy each other's. Code:
 
    Optional: set `MARKET_ADMINS` (comma-separated emails) under `[vars]` to let those
    accounts remove any prompt.
-3. **Check:** `/health` shows `"market": true`. Sign in on /prompt-marketplace/ with
+3. **Check:** `/health` shows `"market": true`. Sign in on /prompts/ with
    your own email.
 
 Tests: `node test/market.test.mjs` (part of `npm test`).

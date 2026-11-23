@@ -64,7 +64,7 @@ await t('one email link both creates the account and signs in, and works only on
   const a = await signIn(e, 'Jane@Example.com');
   assert.equal(a.user.email, 'jane@example.com');
   assert.ok(a.session);
-  assert.ok(mails[0].htmlContent.includes('https://thetechhut.co/prompt-marketplace/#login='));
+  assert.ok(mails[0].htmlContent.includes('https://thetechhut.co/prompts/#login='));
   const again = await call(e, '/market/session', { t: a.link });
   assert.equal(again.status, 400, 'a used link is refused');
   const b = await signIn(e, 'jane@example.com');
@@ -183,7 +183,7 @@ await t('each prompt has its own page and a public view without the prompt text'
   const { session } = await signIn(e, 'free@example.com');
   const s = await call(e, '/market/save', { session, ...PROMPT, price: 0 });
   const id = s.body.prompt.id;
-  assert.equal(s.body.prompt.path, '/prompt-marketplace/p/' + id + '/cover-letter-that-sounds-like-you/');
+  assert.equal(s.body.prompt.path, '/prompts/p/' + id + '/cover-letter-that-sounds-like-you/');
   const r = await get(e, '/market/prompt?id=' + id);
   assert.equal(r.status, 200, JSON.stringify(r.body));
   assert.equal(r.body.prompt.title, PROMPT.title);
@@ -196,16 +196,16 @@ await t('each prompt has its own page and a public view without the prompt text'
   assert.equal((await get(e, '/market/prompt?id=' + id)).status, 404, 'a removed prompt has no page');
 });
 await t('slugs are safe for any title', async () => {
-  assert.equal(promptPath({ id: 'abc234defg', title: 'Écrire un CV: <script> & 100% "better"!' }), '/prompt-marketplace/p/abc234defg/ecrire-un-cv-script-100-better/');
-  assert.equal(promptPath({ id: 'abc234defg', title: '!!!' }), '/prompt-marketplace/p/abc234defg/');
+  assert.equal(promptPath({ id: 'abc234defg', title: 'Écrire un CV: <script> & 100% "better"!' }), '/prompts/p/abc234defg/ecrire-un-cv-script-100-better/');
+  assert.equal(promptPath({ id: 'abc234defg', title: '!!!' }), '/prompts/p/abc234defg/');
 });
 await t('the sign-in link returns to the prompt page it was asked from, and only to the marketplace', async () => {
   const e = env(); mails = [];
-  await call(e, '/market/login', { email: 'n@example.com', next: '/prompt-marketplace/p/abc234defg/cover-letter/' });
-  assert.ok(mails[0].htmlContent.includes('https://thetechhut.co/prompt-marketplace/p/abc234defg/cover-letter/#login='));
+  await call(e, '/market/login', { email: 'n@example.com', next: '/prompts/p/abc234defg/cover-letter/' });
+  assert.ok(mails[0].htmlContent.includes('https://thetechhut.co/prompts/p/abc234defg/cover-letter/#login='));
   mails = [];
   await call(e, '/market/login', { email: 'n2@example.com', next: '//evil.example/' });
-  assert.ok(mails[0].htmlContent.includes('https://thetechhut.co/prompt-marketplace/#login='));
+  assert.ok(mails[0].htmlContent.includes('https://thetechhut.co/prompts/#login='));
 });
 
 console.log('\nemailing the prompt');
@@ -213,7 +213,7 @@ await t('Paystack returns the buyer to the prompt\'s own page', async () => {
   const e = env(); const { id } = await sellerWithPaidPrompt(e);
   const buyer = await signIn(e, 'buyer@example.com');
   await call(e, '/market/buy', { session: buyer.session, id });
-  assert.equal(paid.last.callback_url, 'https://thetechhut.co/prompt-marketplace/p/' + id + '/cover-letter-that-sounds-like-you/');
+  assert.equal(paid.last.callback_url, 'https://thetechhut.co/prompts/p/' + id + '/cover-letter-that-sounds-like-you/');
 });
 await t('a sale emails the full prompt to the buyer, exactly once', async () => {
   const e = env(); const { id } = await sellerWithPaidPrompt(e);
@@ -292,7 +292,7 @@ await t('a new member gets one welcome email after their first sign-in, never ag
   assert.equal(welcome.length, 1);
   assert.deepEqual(welcome[0].to, [{ email: 'new@example.com' }]);
   assert.ok(welcome[0].htmlContent.includes('Welcome to the marketplace, New!'));
-  assert.ok(welcome[0].htmlContent.includes('/prompt-marketplace/#sell'));
+  assert.ok(welcome[0].htmlContent.includes('/prompts/#sell'));
   await signIn(e, 'new@example.com');
   assert.equal(mails.filter((m) => m.tags[0] === 'market-welcome').length, 0, 'not on the second sign-in');
   assert.ok(a.session);

@@ -55,7 +55,7 @@ jobs:
         continue-on-error: true
         run: node scripts/build_hackathon_pages.js
 
-      # One page and share card per prompt, plus prompt-marketplace/sitemap.xml: built, never committed.
+      # One page and share card per prompt, plus prompts/sitemap.xml: built, never committed.
       - name: Write the prompt pages, share cards and sitemap
         continue-on-error: true
         run: node scripts/build_prompt_pages.js

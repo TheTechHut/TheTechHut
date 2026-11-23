@@ -1,5 +1,5 @@
 /**
- * The prompt marketplace: thetechhut.co/prompt-marketplace/
+ * The prompt marketplace: thetechhut.co/prompts/
  *
  * Community members post AI prompts, free or paid, and buy each other's.
  *
@@ -39,7 +39,7 @@
  *   POST /market/buy      { session, id, website }     -> { url, reference }
  *   POST /market/verify   { reference, session }       -> { paid, id, body? }  body only for the buyer
  *
- * Each prompt has its own page, /prompt-marketplace/p/<pid>/<slug>/ (one static
+ * Each prompt has its own page, /prompts/p/<pid>/<slug>/ (one static
  * shell, rewritten by Firebase, that reads GET /market/prompt). When a sale
  * settles, settle() emails the buyer the full prompt and congratulates the
  * seller, once each. New members get a welcome email after their first
@@ -56,7 +56,7 @@ const SITE = 'https://thetechhut.co';
 /** The prompt's own page. The slug is only for people and search engines; the page reads the id. */
 export function promptPath(p) {
   const slug = String(p.title || '').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60).replace(/-+$/, '');
-  return '/prompt-marketplace/p/' + p.id + '/' + (slug ? slug + '/' : '');
+  return '/prompts/p/' + p.id + '/' + (slug ? slug + '/' : '');
 }
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const PAYSTACK = 'https://api.paystack.co';
@@ -349,13 +349,13 @@ export function welcomeEmail(u) {
     + '<li style="margin-bottom:10px"><b>Try a free prompt.</b> Browse by category (CVs, coding, marketing, data and more) and copy one into ChatGPT, Claude or Gemini.</li>'
     + '<li style="margin-bottom:10px"><b>Share one you rely on.</b> That cover-letter or SQL prompt you keep reusing could save someone else an hour. Posting takes two minutes.</li>'
     + '<li style="margin-bottom:10px"><b>Earn from your best ones.</b> Set a price from KES 50 and keep ' + (100 - COMMISSION_PERCENT) + '% of every sale, paid by Paystack straight to your bank account.</li></ol>'
-    + '<p style="margin:22px 0 10px">' + button(SITE + '/prompt-marketplace/#sell', 'Post your first prompt', true) + button(SITE + '/prompt-marketplace/', 'Browse prompts') + '</p>'
+    + '<p style="margin:22px 0 10px">' + button(SITE + '/prompts/#sell', 'Post your first prompt', true) + button(SITE + '/prompts/', 'Browse prompts') + '</p>'
     + '<p style="font-size:13px;color:#5B6B7B">No password to remember: whenever you want to sign in, ask for a link on the marketplace. Questions? Reply to this email.</p></div>';
   const text = 'Welcome to The Tech Hut prompt marketplace' + (u && u.name ? ', ' + u.name : '') + '!\n\n'
     + '1. Try a free prompt: browse by category and copy one into your AI tool.\n'
     + '2. Share one you rely on: posting takes two minutes.\n'
     + '3. Earn from your best ones: set a price from KES 50 and keep ' + (100 - COMMISSION_PERCENT) + '% of every sale.\n\n'
-    + 'Post your first prompt: ' + SITE + '/prompt-marketplace/#sell\nBrowse: ' + SITE + '/prompt-marketplace/\n';
+    + 'Post your first prompt: ' + SITE + '/prompts/#sell\nBrowse: ' + SITE + '/prompts/\n';
   return { subject: 'Welcome to The Tech Hut prompt marketplace', html, text };
 }
 
@@ -449,7 +449,7 @@ export async function handleMarket(req, env, url, origin, deps) {
     if (!(await emailDomainOk(email))) return json({ error: 'That email address cannot receive mail. Check the part after the @.' }, 400, origin);
     const t = await sign({ k: 'l', e: email, n: rid(16), x: now + LINK_TTL }, env.MARKET_SECRET);
     // Send them back to the page they signed in from (a prompt's own page), never off the marketplace.
-    const next = typeof b.next === 'string' && /^\/prompt-marketplace\/(p\/[a-z0-9]{6,20}\/([a-z0-9-]{1,60}\/)?)?$/.test(b.next) ? b.next : '/prompt-marketplace/';
+    const next = typeof b.next === 'string' && /^\/prompts\/(p\/[a-z0-9]{6,20}\/([a-z0-9-]{1,60}\/)?)?$/.test(b.next) ? b.next : '/prompts/';
     const mail = loginEmail(SITE + next + '#login=' + t);
     const r = await fetch(BREVO + '/smtp/email', {
       method: 'POST', headers: { 'api-key': env.BREVO_API_KEY, 'Content-Type': 'application/json', Accept: 'application/json' },

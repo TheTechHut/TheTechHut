@@ -27,8 +27,8 @@ jobs/role/
 hackathons/event/
 
 # the prompt marketplace sitemap, built on GitHub Actions before every deploy (scripts/build_prompt_sitemap.js)
-prompt-marketplace/sitemap.xml
+prompts/sitemap.xml
 
 # one page and share card per prompt, built on GitHub Actions before every deploy (scripts/build_prompt_pages.js).
-# Only the folders: prompt-marketplace/p/index.html, the shell, is committed.
-prompt-marketplace/p/*/
+# Only the folders: prompts/p/index.html, the shell, is committed.
+prompts/p/*/

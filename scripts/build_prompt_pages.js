@@ -2,15 +2,15 @@
 /*
  * One static page and one share image per prompt on the prompt marketplace:
  *
- *   prompt-marketplace/p/<id>/<slug>/index.html   the page shell with this prompt's
+ *   prompts/p/<id>/<slug>/index.html   the page shell with this prompt's
  *                                                 title, description and og:image in it
- *   prompt-marketplace/p/<id>/card.png            the 1200x630 share card (2x), drawn by
+ *   prompts/p/<id>/card.png            the 1200x630 share card (2x), drawn by
  *                                                 scripts/prompt_card.js
- *   prompt-marketplace/sitemap.xml                (scripts/build_prompt_sitemap.js)
+ *   prompts/sitemap.xml                (scripts/build_prompt_sitemap.js)
  *
  * Why static pages: WhatsApp, LinkedIn, X and Facebook read a link's preview from
  * the HTML the server sends and never run the page's JavaScript, so the single
- * shell that Firebase serves for every /prompt-marketplace/p/... address would show
+ * shell that Firebase serves for every /prompts/p/... address would show
  * the same preview for every prompt. Firebase serves a file that exists before it
  * falls back to the rewrite, so built prompts get their own preview, and a prompt
  * posted since the last build still opens (with the generic preview) until the
@@ -30,13 +30,13 @@ var sitemap = require('./build_prompt_sitemap.js');
 var cards = require('./prompt_card.js');
 
 var ROOT = path.join(__dirname, '..');
-var SHELL = path.join(ROOT, 'prompt-marketplace', 'p', 'index.html');
+var SHELL = path.join(ROOT, 'prompts', 'p', 'index.html');
 var API = process.env.MARKET_API || 'https://thetechhut-pay.thetechhut.workers.dev/market/prompts';
 var SITE = 'https://thetechhut.co';
 var CAT = { writing: 'Writing', coding: 'Coding', career: 'Career & CVs', marketing: 'Marketing', data: 'Data & analysis',
             images: 'Images', business: 'Business', learning: 'Learning', other: 'Other' };
 var MODEL = { any: 'Any AI', chatgpt: 'ChatGPT', claude: 'Claude', gemini: 'Gemini', copilot: 'Copilot', midjourney: 'Midjourney', other: 'Other' };
-var ID = /^[a-z0-9]{6,20}$/, PATH = /^\/prompt-marketplace\/p\/[a-z0-9]{6,20}\/([a-z0-9-]{1,60}\/)?$/;
+var ID = /^[a-z0-9]{6,20}$/, PATH = /^\/prompts\/p\/[a-z0-9]{6,20}\/([a-z0-9-]{1,60}\/)?$/;
 
 function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
 function oneLine(s, max) { s = String(s || '').replace(/\s+/g, ' ').trim(); return s.length > max ? s.slice(0, max - 1).replace(/\s+\S*$/, '') + '…' : s; }
@@ -78,7 +78,7 @@ async function main() {
     prompts = null;
   }
   // The sitemap always gets written, as build_prompt_sitemap.js does on its own.
-  var mapFile = path.join(ROOT, 'prompt-marketplace', 'sitemap.xml');
+  var mapFile = path.join(ROOT, 'prompts', 'sitemap.xml');
   fs.writeFileSync(mapFile, sitemap.build(prompts, Date.now()));
   if (!prompts) return;
 
@@ -87,8 +87,8 @@ async function main() {
   var made = 0, drawn = 0;
   for (var i = 0; i < prompts.length; i++) {
     var p = prompts[i];
-    if (!p || !ID.test(p.id || '') || !PATH.test(p.path || '') || p.path === '/prompt-marketplace/p/' + p.id + '/') continue;
-    var idDir = path.join(ROOT, 'prompt-marketplace', 'p', p.id);
+    if (!p || !ID.test(p.id || '') || !PATH.test(p.path || '') || p.path === '/prompts/p/' + p.id + '/') continue;
+    var idDir = path.join(ROOT, 'prompts', 'p', p.id);
     var image = null;
     if (draw) {
       try {
@@ -97,7 +97,7 @@ async function main() {
           title: p.title, seller: p.seller, price: p.price, model: MODEL[p.model] || 'Any AI', cat: CAT[p.cat] || ''
         }));
         // Images are cached for a year (firebase.json), so an edited prompt needs a new address.
-        image = SITE + '/prompt-marketplace/p/' + p.id + '/card.png?v=' + (Number(p.updated || p.created) || 0).toString(36);
+        image = SITE + '/prompts/p/' + p.id + '/card.png?v=' + (Number(p.updated || p.created) || 0).toString(36);
         drawn++;
       } catch (e) { console.error('prompt pages: no card for %s: %s', p.id, e.message); }
     }

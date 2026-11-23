@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI prompt | The Tech Hut prompt marketplace</title>
     <meta name="description" content="An AI prompt from The Tech Hut community marketplace. Buy, sell and share prompts that work.">
-    <link rel="canonical" id="canon" href="https://thetechhut.co/prompt-marketplace/">
+    <link rel="canonical" id="canon" href="https://thetechhut.co/prompts/">
     <meta property="og:type" content="product">
     <meta property="og:site_name" content="The Tech Hut">
     <meta property="og:title" content="Prompt marketplace: prompts that work, from people who use them">
     <meta property="og:description" content="Buy, sell and share AI prompts. Sign in with your email. Sellers keep 90%.">
-    <meta property="og:url" content="https://thetechhut.co/prompt-marketplace/">
+    <meta property="og:url" content="https://thetechhut.co/prompts/">
     <meta property="og:image" content="https://thetechhut.co/assets/img/social/prompts.jpg?v=3">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -148,7 +148,7 @@
     </header>
 <main id="main">
 <div class="wrap pp-wrap">
-  <nav class="pp-crumbs" aria-label="Breadcrumb"><a href="/prompt-marketplace/">Prompt marketplace</a> <span aria-hidden="true">/</span> <span id="ppCrumb">Prompt</span></nav>
+  <nav class="pp-crumbs" aria-label="Breadcrumb"><a href="/prompts/">Prompt marketplace</a> <span aria-hidden="true">/</span> <span id="ppCrumb">Prompt</span></nav>
 
   <article class="pp" id="pp" aria-busy="true">
     <div class="pp-main">
@@ -174,14 +174,14 @@
 
   <div class="pp-missing" id="ppMissing" hidden>
     <h1 class="pp-title">That prompt is no longer here.</h1>
-    <p>The seller may have removed it, or the link is wrong. If you bought it, it is still in <a href="/prompt-marketplace/#account">My account</a> and in the email we sent you.</p>
-    <p><a class="btn" href="/prompt-marketplace/">Browse the marketplace</a></p>
+    <p>The seller may have removed it, or the link is wrong. If you bought it, it is still in <a href="/prompts/#account">My account</a> and in the email we sent you.</p>
+    <p><a class="btn" href="/prompts/">Browse the marketplace</a></p>
   </div>
 
   <div class="pp-foot" id="ppFoot" hidden>
     <p class="pm-acct" id="acctOut">No password needed. <button class="pm-link pm-strong" type="button" data-act="signin">Sign in or join with your email</button></p>
-    <p class="pm-acct" id="acctIn" hidden>Signed in as <b id="acctName"></b> &middot; <a class="pm-link pm-strong" href="/prompt-marketplace/#account">My account</a></p>
-    <p class="pm-fine"><a class="pm-link" href="/prompt-marketplace/">&larr; All prompts</a> &middot; <a class="pm-link" href="/prompt-marketplace/#sell">Sell your own prompt</a> &middot; <button type="button" class="pm-link" id="ppReport">Report this prompt</button></p>
+    <p class="pm-acct" id="acctIn" hidden>Signed in as <b id="acctName"></b> &middot; <a class="pm-link pm-strong" href="/prompts/#account">My account</a></p>
+    <p class="pm-fine"><a class="pm-link" href="/prompts/">&larr; All prompts</a> &middot; <a class="pm-link" href="/prompts/#sell">Sell your own prompt</a> &middot; <button type="button" class="pm-link" id="ppReport">Report this prompt</button></p>
   </div>
 </div>
 </main>
@@ -236,7 +236,7 @@
                         <li><a href="/hackathons/">Hackathons</a></li>
                         <li><a href="/communities/">Tech communities</a></li>
                         <li><a href="/tools/">Tools</a></li>
-                        <li><a href="/prompt-marketplace/">Prompt marketplace</a></li>
+                        <li><a href="/prompts/">Prompt marketplace</a></li>
                     </ul>
                 </div>
                 <div>
@@ -260,7 +260,7 @@
     </footer>
 <script>
 (function () {
-  /* One prompt's page. Firebase serves this same file for every /prompt-marketplace/p/<id>/<slug>/,
+  /* One prompt's page. Firebase serves this same file for every /prompts/p/<id>/<slug>/,
      and the page reads the prompt from the marketplace API. Shares the browser session with the
      marketplace page (localStorage tthMarketSession). */
   var API = 'https://thetechhut-pay.thetechhut.workers.dev/market/';
@@ -269,7 +269,7 @@
               images: 'Images', business: 'Business', learning: 'Learning', other: 'Other' };
   var MODEL = { any: 'Any AI', chatgpt: 'ChatGPT', claude: 'Claude', gemini: 'Gemini', copilot: 'Copilot', midjourney: 'Midjourney', other: 'Other' };
   var $ = function (id) { return document.getElementById(id); };
-  var mId = /^\/prompt-marketplace\/p\/([a-z0-9]{6,20})(\/|$)/.exec(location.pathname);
+  var mId = /^\/prompts\/p\/([a-z0-9]{6,20})(\/|$)/.exec(location.pathname);
   var id = mId ? mId[1] : null;
   var prompt = null, me = null;
 
@@ -406,7 +406,7 @@
     var reset = function () { $('siBtn').disabled = false; $('siBtn').textContent = 'Email me a sign-in link'; };
     if (!email || email.indexOf('@') < 1) { say('Enter your email address.'); return; }
     $('siBtn').disabled = true; $('siBtn').textContent = 'Sending…';
-    api('login', { email: email, website: f.website.value, next: prompt ? prompt.path : '/prompt-marketplace/' }).then(function (j) {
+    api('login', { email: email, website: f.website.value, next: prompt ? prompt.path : '/prompts/' }).then(function (j) {
       if (j._status === 200) { say('Check your inbox: we sent a sign-in link to ' + email + '. It brings you back to this prompt. Check spam if you do not see it.', true); $('siBtn').textContent = 'Link sent'; }
       else { say(j.error || 'Could not send the link. Try again.'); reset(); }
     }).catch(function () { say('Could not reach the server. Check your connection.'); reset(); });

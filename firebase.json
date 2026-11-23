@@ -28,8 +28,13 @@
         "type": 301
       },
       {
-        "source": "/prompts{,/}",
-        "destination": "/prompt-marketplace/",
+        "source": "/prompt-marketplace{,/}",
+        "destination": "/prompts/",
+        "type": 301
+      },
+      {
+        "source": "/prompt-marketplace/:rest*",
+        "destination": "/prompts/:rest*",
         "type": 301
       },
       {
@@ -40,8 +45,8 @@
     ],
     "rewrites": [
       {
-        "source": "/prompt-marketplace/p/**",
-        "destination": "/prompt-marketplace/p/index.html"
+        "source": "/prompts/p/**",
+        "destination": "/prompts/p/index.html"
       }
     ],
     "headers": [

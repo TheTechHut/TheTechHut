@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prompt marketplace: buy, sell and share AI prompts | The Tech Hut</title>
     <meta name="description" content="Buy, sell and share AI prompts with The Tech Hut community. Sign in with just your email. Sellers keep 90% of every sale, paid to their bank account through Paystack.">
-    <link rel="canonical" href="https://thetechhut.co/prompt-marketplace/">
+    <link rel="canonical" href="https://thetechhut.co/prompts/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="The Tech Hut">
     <meta property="og:title" content="Prompt marketplace: prompts that work, from people who use them">
     <meta property="og:description" content="Buy, sell and share AI prompts. Sign in with your email. Sellers keep 90%.">
-    <meta property="og:url" content="https://thetechhut.co/prompt-marketplace/">
+    <meta property="og:url" content="https://thetechhut.co/prompts/">
     <meta property="og:image" content="https://thetechhut.co/assets/img/social/prompts.jpg?v=3">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -275,7 +275,7 @@
                         <li><a href="/hackathons/">Hackathons</a></li>
                         <li><a href="/communities/">Tech communities</a></li>
                         <li><a href="/tools/">Tools</a></li>
-                        <li><a href="/prompt-marketplace/">Prompt marketplace</a></li>
+                        <li><a href="/prompts/">Prompt marketplace</a></li>
                     </ul>
                 </div>
                 <div>
@@ -365,7 +365,7 @@
     if (!list.length) { g.appendChild(el('p', 'pm-dim', 'No prompts match that. Try another word or category.')); return; }
     list.forEach(function (p) {
       // Each prompt has its own page: a real link, so it can be opened in a new tab, shared and found by search engines.
-      var a = el('a', 'pm-card'); a.href = p.path || ('/prompt-marketplace/p/' + p.id + '/');
+      var a = el('a', 'pm-card'); a.href = p.path || ('/prompts/p/' + p.id + '/');
       var top = el('div', 'pm-card-top');
       top.appendChild(el('span', 'pm-cat', catName[p.cat] || 'Other'));
       top.appendChild(el('span', 'tag' + (p.price > 0 ? '' : ' mint'), price(p.price)));
@@ -383,7 +383,7 @@
     }).catch(function () { $('count').textContent = 'Could not load prompts. Check your connection and reload.'; });
   }
 
-  function pagePath(p) { return p.path || ('/prompt-marketplace/p/' + p.id + '/'); }
+  function pagePath(p) { return p.path || ('/prompts/p/' + p.id + '/'); }
 
   /* ---------- sign in ---------- */
   var DEFAULT_WHY = "We'll email you a link. Click it and you're signed in. New here? The same link creates your account.";
@@ -541,7 +541,7 @@
     try { then = JSON.parse(sessionStorage.getItem('tthMarketAfter') || 'null'); sessionStorage.removeItem('tthMarketAfter'); } catch (e) {}
     if (!then) return;
     if (then.account) openAccount(then.account);
-    if (then.buy) location.href = '/prompt-marketplace/p/' + encodeURIComponent(then.buy) + '/';
+    if (then.buy) location.href = '/prompts/p/' + encodeURIComponent(then.buy) + '/';
   }
   function start() {
     // Payments now return to the prompt's own page. Older links (and payments
@@ -549,7 +549,7 @@
     var q0 = new URLSearchParams(location.search);
     if (q0.get('prompt') || q0.get('reference') || q0.get('trxref')) {
       var pid = q0.get('prompt'); q0.delete('prompt');
-      location.replace('/prompt-marketplace/p/' + (pid && /^[a-z0-9]{6,20}$/.test(pid) ? pid + '/' : '') + (q0.toString() ? '?' + q0 : '') + location.hash);
+      location.replace('/prompts/p/' + (pid && /^[a-z0-9]{6,20}$/.test(pid) ? pid + '/' : '') + (q0.toString() ? '?' + q0 : '') + location.hash);
       return;
     }
     drawCats();

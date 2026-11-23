@@ -425,7 +425,7 @@ async function webhook(req, env) {
   try { event = JSON.parse(raw); } catch (e) { return new Response('bad json', { status: 400 }); }
 
   if (event.event === 'charge.success' && event.data && event.data.metadata && event.data.metadata.kind === 'market') {
-    await settleMarket(env, event.data);   // a prompt-marketplace sale: unlock it for the buyer
+    await settleMarket(env, event.data);   // a prompts sale: unlock it for the buyer
   } else if (event.event === 'charge.success') {
     const d = event.data || {};
     const product = (d.metadata && d.metadata.product) || null;

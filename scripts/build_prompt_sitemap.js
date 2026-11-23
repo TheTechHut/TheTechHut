@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /*
- * /prompt-marketplace/sitemap.xml: the marketplace page and one URL per
- * prompt page (/prompt-marketplace/p/<id>/<slug>/), so search engines find
+ * /prompts/sitemap.xml: the marketplace page and one URL per
+ * prompt page (/prompts/p/<id>/<slug>/), so search engines find
  * prompts without having to run the marketplace's JavaScript.
  *
  * Reads the public list from the Worker (GET /market/prompts: titles and ids,
@@ -17,7 +17,7 @@ var fs = require('fs');
 var path = require('path');
 
 var ROOT = path.join(__dirname, '..');
-var OUT = path.join(ROOT, 'prompt-marketplace', 'sitemap.xml');
+var OUT = path.join(ROOT, 'prompts', 'sitemap.xml');
 var API = process.env.MARKET_API || 'https://thetechhut-pay.thetechhut.workers.dev/market/prompts';
 var SITE = 'https://thetechhut.co';
 
@@ -26,12 +26,12 @@ function day(ms) { var d = new Date(Number(ms) || Date.now()); return isNaN(d) ?
 
 /** prompts (the public list) -> sitemap XML */
 function build(prompts, now) {
-  var rows = [{ loc: SITE + '/prompt-marketplace/', lastmod: day(now), freq: 'daily', pri: '0.8' }];
+  var rows = [{ loc: SITE + '/prompts/', lastmod: day(now), freq: 'daily', pri: '0.8' }];
   var newest = 0;
   (prompts || []).forEach(function (p) {
     // Only well-formed ids and paths from the Worker; anything else is skipped.
     if (!p || !/^[a-z0-9]{6,20}$/.test(p.id || '')) return;
-    var loc = p.path && /^\/prompt-marketplace\/p\/[a-z0-9]{6,20}\/([a-z0-9-]{1,60}\/)?$/.test(p.path) ? p.path : '/prompt-marketplace/p/' + p.id + '/';
+    var loc = p.path && /^\/prompts\/p\/[a-z0-9]{6,20}\/([a-z0-9-]{1,60}\/)?$/.test(p.path) ? p.path : '/prompts/p/' + p.id + '/';
     var t = Number(p.updated || p.created) || 0; if (t > newest) newest = t;
     rows.push({ loc: SITE + loc, lastmod: day(t), freq: 'weekly', pri: '0.6' });
   });
@@ -53,7 +53,7 @@ async function main() {
   }
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
   fs.writeFileSync(OUT, build(prompts, Date.now()));
-  console.log('prompt-marketplace/sitemap.xml: ' + (prompts ? prompts.length : 0) + ' prompts');
+  console.log('prompts/sitemap.xml: ' + (prompts ? prompts.length : 0) + ' prompts');
 }
 
 if (require.main === module) main();
