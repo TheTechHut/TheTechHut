@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt marketplace: buy, sell and share AI prompts | The Tech Hut</title>
+    <meta name="description" content="Buy, sell and share AI prompts with The Tech Hut community. Sign in with just your email. Sellers keep 90% of every sale, paid to their bank account through Paystack.">
+    <link rel="canonical" href="https://thetechhut.co/prompts/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="The Tech Hut">
+    <meta property="og:title" content="Prompt marketplace: prompts that work, from people who use them">
+    <meta property="og:description" content="Buy, sell and share AI prompts. Sign in with your email. Sellers keep 90%.">
+    <meta property="og:url" content="https://thetechhut.co/prompts/">
+    <meta property="og:image" content="https://thetechhut.co/assets/img/social/prompts.jpg?v=3">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="The Tech Hut prompt marketplace: earn from your prompts. Sellers keep 90% of every sale.">
+    <meta property="og:locale" content="en_KE">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Prompt marketplace: prompts that work, from people who use them">
+    <meta name="twitter:description" content="Buy, sell and share AI prompts. Sign in with your email. Sellers keep 90%.">
+    <meta name="twitter:image" content="https://thetechhut.co/assets/img/social/prompts.jpg?v=3">
+    <meta name="theme-color" content="#f7f5ef">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/assets/img/favicon-192.png" type="image/png" sizes="192x192">
+    <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/thh.css">
+    <script src="/assets/js/motion.js?v=1"></script>
+    <style>
+        /* Prompt marketplace. Built on thh.css: ink, mint, green; Newsreader headlines,
+           Plex Mono labels, ruled columns, square corners. */
+        [hidden] { display: none !important; }
+        .pm-head { padding-bottom: 44px; }
+        .pm-head-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 44px; align-items: center; }
+        .pm-head h1 { max-width: 18ch; }
+        /* Rounded, unlike the square editorial images elsewhere: the marketplace is the community's space. */
+        .pm-hero-img { margin: 0 0 14px 14px; position: relative; isolation: isolate; }
+        .pm-hero-img::after { content: ''; position: absolute; left: -14px; bottom: -14px; width: 46%; height: 42%; border-radius: 28px; background: var(--mint); z-index: -1; }
+        .pm-hero-img img { display: block; width: 100%; height: auto; aspect-ratio: 50 / 38; object-fit: cover; background: var(--paper-3); border-radius: 28px; }
+        .pm-acct { margin-top: 18px; font-size: 15.5px; color: var(--text); }
+        .pm-acct p { margin: 0; }
+        .pm-link.pm-strong { color: var(--ink); font-weight: 700; font-size: 15.5px; text-decoration-color: var(--mint); text-underline-offset: 3px; }
+        .pm-dim { color: var(--dim); font-size: 14.5px; }
+
+        .pm-browse { padding-top: 28px; }
+        .pm-tools { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+        .pm-search { flex: 1 1 320px; }
+        .pm-search input { width: 100%; box-sizing: border-box; font-size: 16px; padding: 12px 14px; }
+        .pm-free { display: inline-flex; gap: 8px; align-items: center; font-weight: 600; color: var(--ink); white-space: nowrap; }
+        .pm-cats { display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0 6px; }
+        .pm-cats button { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--ink);
+            background: var(--paper); border: 1px solid var(--rule); border-radius: 2px; padding: 6px 10px; cursor: pointer; }
+        .pm-cats button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+        .pm-count { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--dim); margin: 10px 0 0; min-height: 1.4em; }
+        .pm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 30px 32px; margin-top: 18px; }
+        .pm-card { display: block; color: inherit; text-decoration: none; border-top: 2px solid var(--ink); padding: 12px 0 4px; outline: none; }
+        .pm-card:hover h3, .pm-card:focus-visible h3 { color: var(--green); }
+        .pm-card:focus-visible { box-shadow: 0 -2px 0 var(--mint); }
+        .pm-card-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+        .pm-cat { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--green); }
+        .pm-card h3 { font-size: 21px; line-height: 1.22; margin: 10px 0 6px; }
+        .pm-card-desc { font-size: 15.5px; color: var(--text); margin: 0 0 8px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        .pm-card-meta { font-size: 13.5px; color: var(--dim); margin: 0; }
+        .pm-empty { grid-column: 1 / -1; border-top: 2px solid var(--ink); padding: 18px 0; max-width: 60ch; }
+        .pm-empty h3 { font-size: 24px; margin: 0 0 8px; }
+
+        .pm-dlg { border: 0; border-top: 3px solid var(--ink); border-radius: 0; padding: 26px 28px 24px; width: min(680px, calc(100vw - 32px));
+            max-height: calc(100vh - 40px); box-sizing: border-box; color: var(--text); background: var(--paper); }
+        .pm-dlg::backdrop { background: rgba(7, 59, 76, .55); }
+        .pm-narrow { width: min(460px, calc(100vw - 32px)); }
+        .pm-wide { width: min(820px, calc(100vw - 32px)); }
+        .pm-dlg h2 { font-size: clamp(24px, 3.4vw, 32px); margin: 0 0 6px; padding-right: 30px; }
+        .pm-x { position: absolute; top: 10px; right: 12px; margin: 0; }
+        .pm-x button { background: none; border: 0; font-size: 28px; line-height: 1; color: var(--ink); cursor: pointer; padding: 4px 8px; }
+        .pm-desc { font-size: 17px; margin: 14px 0; }
+        .pm-preview { background: var(--paper-2); border-left: 3px solid var(--mint); padding: 12px 14px; margin: 0 0 16px; }
+        .pm-preview pre, .pm-body { white-space: pre-wrap; word-wrap: break-word; font: 14px/1.55 var(--mono); color: var(--ink); margin: 6px 0 0; }
+        .pm-preview pre { background: none; padding: 0; overflow: visible; }
+        .pm-body { background: var(--paper-2); border-left: 3px solid var(--ink); padding: 14px 16px; max-height: 46vh; overflow: auto; }
+        .pm-body-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+        .pm-small { padding: 6px 12px; font-size: 13.5px; }
+        .pm-fine { margin: 18px 0 0; }
+        .pm-link { background: none; border: 0; padding: 0; color: var(--dim); text-decoration: underline; cursor: pointer; font: inherit; font-size: 14px; }
+        .pm-link:hover { color: var(--ink); }
+        #dpActions { margin-top: 6px; }
+
+        .pm-field { display: grid; gap: 6px; font-weight: 700; font-size: 14.5px; color: var(--ink); margin: 0 0 14px; }
+        .pm-field input, .pm-field select, .pm-field textarea { width: 100%; box-sizing: border-box; font: 16px var(--sans); font-weight: 400; }
+        .pm-mono { font-family: var(--mono) !important; font-size: 14px !important; }
+        .pm-opt, .pm-hint { font-weight: 400; color: var(--dim); font-size: 13.5px; }
+        .pm-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0 16px; }
+        .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+        .pm-tabs { display: flex; gap: 2px 18px; flex-wrap: wrap; border-bottom: 1px solid var(--rule); margin: 14px 0 20px; }
+        .pm-tabs button { background: none; border: 0; border-bottom: 2px solid transparent; padding: 8px 0; font: 700 15px var(--sans); color: var(--dim); cursor: pointer; margin-bottom: -1px; }
+        .pm-tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--mint); }
+        .pm-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+        .pm-list li { display: flex; justify-content: space-between; gap: 14px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+        .pm-li-main { display: grid; gap: 2px; }
+        .pm-li-main b { color: var(--ink); }
+        .pm-li-act { display: flex; gap: 14px; flex: none; }
+
+        .pm-how { border-bottom: 0; }
+        .pm-toast { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); background: var(--ink); color: #fff; padding: 12px 18px;
+            border-left: 3px solid var(--mint); font-size: 15px; max-width: calc(100vw - 40px); z-index: 1000; box-sizing: border-box; }
+        @media (max-width: 760px) {
+            .pm-head-grid { grid-template-columns: 1fr; gap: 26px; }
+            .pm-dlg { padding: 22px 18px 20px; }
+            .pm-list li { flex-direction: column; align-items: flex-start; }
+        }
+
+/* The Tech Hut 2026 redesign system: matches /test.html without changing marketplace JS. */
+:root{--navy:#142f52;--deep:#0d2748;--green:#27ad8b;--gold:#f4c354;--cream:#f7f5ef;--ink:#142f52;--muted:#60718a;--line:#e9e6de;--shadow:0 12px 32px #18304c12;--paper:#fff;--paper-2:#f8f9f6;--paper-3:#e9f3fb;--text:#263b55;--dim:#60718a;--rule:#e9e6de;--mint:#27ad8b;--sans:Inter,Arial,sans-serif;--mono:Inter,Arial,sans-serif}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--cream);color:var(--navy);font:15px/1.65 Inter,Arial,sans-serif}
+body h1,body h2,body h3{font-family:'Plus Jakarta Sans',Inter,sans-serif;letter-spacing:-.035em}
+body .wrap{width:min(1320px,calc(100% - 64px));max-width:1320px;margin-inline:auto}
+.pm-site-header{height:74px;background:rgba(251,250,246,.96);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:80;backdrop-filter:blur(14px)}
+.pm-nav{height:100%;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.pm-brand{display:flex;align-items:center;gap:10px;color:var(--navy);font:800 16px 'Plus Jakarta Sans',sans-serif;text-decoration:none;white-space:nowrap}
+.pm-brand-logo{width:44px;height:44px;object-fit:contain;border-radius:11px;flex:none}
+.pm-brand small{display:block;color:var(--muted);font:500 10px Inter,sans-serif;letter-spacing:0}
+.pm-nav-links{display:flex;align-items:center;justify-content:center;gap:clamp(12px,2vw,29px);font-size:13px;font-weight:700}
+.pm-nav-links a{color:var(--navy);text-decoration:none;white-space:nowrap}
+.pm-nav-links a:hover,.pm-nav-links a:focus-visible{color:#159677}
+.pm-nav-actions{display:flex;align-items:center;gap:10px;flex:none}
+.pm-nav-join{background:var(--green);padding:11px 16px;border-radius:11px;color:#fff;text-decoration:none;font-size:12px;font-weight:800;white-space:nowrap}
+.pm-nav-join:hover{background:#159677;color:#fff}
+.pm-menu-toggle{display:none;border:0;background:transparent;font-size:27px;color:var(--navy);cursor:pointer;line-height:1}
+.pagehead.pm-head{padding:62px 0 76px;background:var(--cream);border:0}
+.pm-head-grid{grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,84px);align-items:center}
+.pm-pill{display:inline-flex;background:var(--green);color:#fff;padding:7px 14px;border-radius:99px;font:800 11px Inter,sans-serif;letter-spacing:.065em}
+.pm-head h1{max-width:14ch;margin:21px 0 20px;font:800 clamp(39px,4.6vw,65px)/1.09 'Plus Jakarta Sans',sans-serif;letter-spacing:-.06em;color:var(--navy)}
+.pm-head h1 em{color:var(--green);font-style:normal}
+.pm-head .lede{max-width:600px;font:400 16px/1.8 Inter,sans-serif;color:var(--text);margin:0 0 25px}
+.pm-head .cta-row{display:flex;gap:12px;flex-wrap:wrap}
+body .btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--navy);border-radius:28px;padding:12px 22px;background:var(--navy);color:white;font:700 13px Inter,sans-serif;text-decoration:none;cursor:pointer;transition:transform .2s,box-shadow .2s}
+body .btn:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+body .btn.mint{background:var(--green);border-color:var(--green);color:#fff}
+body .btn.ghost{background:transparent;border-color:var(--navy);color:var(--navy)}
+.pm-acct{margin-top:24px;font-size:13px;color:var(--muted)}
+.pm-link.pm-strong{color:var(--navy);font-size:13px;font-weight:800}
+.pm-hero-img{margin:4px 12px 14px 0}
+.pm-hero-img:after{border-radius:25px;background:var(--gold);left:auto;right:-16px;bottom:-16px;width:53%;height:48%}
+.pm-hero-img img{border-radius:24px;aspect-ratio:1.12;box-shadow:var(--shadow)}
+.pm-browse{background:#fff;padding:64px 0 78px}
+.pm-browse-heading{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:24px}
+.pm-section-kicker{color:#139c7d;font:800 11px Inter,sans-serif;letter-spacing:.09em}
+.pm-browse-heading h2{margin:7px 0 6px;color:var(--navy);font:800 clamp(26px,3vw,37px)/1.2 'Plus Jakarta Sans',sans-serif}
+.pm-browse-heading p{margin:0;color:var(--muted);font-size:14px}
+.pm-browse-post{background:var(--navy);color:#fff;border:0;border-radius:24px;padding:12px 18px;font:700 13px Inter,sans-serif;white-space:nowrap;cursor:pointer}
+.pm-tools{gap:13px;align-items:center}
+.pm-search{flex:1 1 360px}
+.pm-search input{background:#f7f8f8;border:1px solid var(--line);border-radius:12px;min-height:48px;padding:12px 17px;color:var(--navy);font:500 14px Inter,sans-serif}
+.pm-search input:focus-visible,.pm-field input:focus-visible,.pm-field textarea:focus-visible,.pm-field select:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.pm-free{font-size:13px;color:var(--navy);gap:8px}
+.pm-free input{accent-color:var(--green)}
+.pm-cats{gap:8px;margin:20px 0 10px}
+.pm-cats button{border:1px solid var(--line);background:#f7f5ef;border-radius:99px;color:var(--navy);padding:9px 14px;font:700 12px Inter,sans-serif;letter-spacing:0;text-transform:none;transition:.2s}
+.pm-cats button:hover{border-color:var(--green)}
+.pm-cats button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:white}
+.pm-count{font:700 11px Inter,sans-serif;letter-spacing:.04em;color:var(--muted);margin:18px 0}
+.pm-grid{grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px;margin-top:12px}
+.pm-card{border:1px solid var(--line);border-radius:15px;background:#fff;padding:22px;box-shadow:0 5px 18px #142f5209;transition:transform .2s,box-shadow .2s,border-color .2s}
+.pm-card:hover,.pm-card:focus-visible{transform:translateY(-3px);box-shadow:var(--shadow);border-color:#9bddc9}
+.pm-card-top{gap:12px}
+.pm-cat{color:#11866e;font:800 11px Inter,sans-serif;letter-spacing:.045em}
+.pm-card .tag{position:static;padding:5px 10px;font:800 11px Inter,sans-serif;border-radius:99px;background:#e5f4ed;color:#0b7e62}
+.pm-card .tag.mint{background:#fff1d7;color:#8b6009}
+.pm-card h3{font:800 20px/1.32 'Plus Jakarta Sans',sans-serif;margin:17px 0 9px;color:var(--navy)}
+.pm-card-desc{font-size:14px;line-height:1.7;color:var(--text)}
+.pm-card-meta{font-size:12px;color:var(--muted)}
+.pm-empty{border:1px dashed var(--line);border-radius:14px;padding:28px}
+.pm-how{padding:62px 0 76px;background:var(--cream)}
+.pm-how .section-head h2{font:800 clamp(27px,3vw,36px) 'Plus Jakarta Sans',sans-serif;color:var(--navy)}
+.pm-how .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.pm-how .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:25px;box-shadow:0 5px 18px #142f5209;min-height:unset}
+.pm-how .card .n{color:#11866e;font:800 12px Inter,sans-serif}
+.pm-how .card h3{font:800 21px 'Plus Jakarta Sans',sans-serif;color:var(--navy);margin:14px 0 8px}
+.pm-how .card p{font-size:14px;line-height:1.75;color:var(--muted);margin:0}
+.pm-dlg{border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:0 24px 70px #102b4850}
+.pm-dlg::backdrop{background:rgba(13,39,72,.65)}
+.pm-dlg h2{color:var(--navy);font:800 clamp(23px,3vw,32px) 'Plus Jakarta Sans',sans-serif}
+.pm-dlg .eyebrow{font:800 11px Inter,sans-serif;color:#139c7d}
+.pm-dlg .pm-preview,.pm-dlg .pm-body{border-left:3px solid var(--green);border-radius:7px;background:#f5f8f6}
+.pm-field input,.pm-field select,.pm-field textarea{border:1px solid #dce2e6;border-radius:9px;padding:11px 12px}
+.pm-tabs button[aria-selected="true"]{border-bottom-color:var(--green)}
+.pm-toast{border-left-color:var(--gold);border-radius:10px;background:var(--navy)}
+.sitefoot{background:var(--deep);color:#fff}
+.sitefoot .wordmark,.sitefoot h4{color:#fff}
+.sitefoot a{color:#e6edf5}
+.sitefoot a:hover{color:#a7ebd5}
+@media(max-width:1130px){.pm-nav-links{gap:12px;font-size:12px}.pm-brand{font-size:14px}.pm-nav-join{font-size:11px;padding:10px 12px}}
+@media(max-width:940px){.pm-menu-toggle{display:block}.pm-nav-links{display:none;position:absolute;top:74px;left:0;right:0;padding:20px max(20px,calc((100% - 1320px)/2));background:#fbfaf6;box-shadow:var(--shadow);border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:0}.pm-nav-links.open{display:flex}.pm-nav-links a{padding:10px 0;font-size:15px}.pm-head-grid{gap:28px}}
+@media(max-width:760px){body .wrap{width:calc(100% - 36px)}.pagehead.pm-head{padding:36px 0 52px}.pm-head-grid{grid-template-columns:1fr;gap:28px}.pm-head h1{font-size:clamp(37px,8vw,54px);max-width:16ch}.pm-hero-img{max-width:620px;margin:0 14px 14px 0}.pm-hero-img img{aspect-ratio:1.45}.pm-browse{padding:45px 0 58px}.pm-browse-heading{align-items:flex-start;flex-direction:column}.pm-browse-post{width:100%}.pm-how{padding:45px 0 55px}.pm-how .cards{grid-template-columns:1fr}.pm-nav-links{padding:16px 20px}.pm-grid{grid-template-columns:repeat(auto-fill,minmax(245px,1fr));gap:14px}}
+@media(max-width:430px){.pm-site-header{height:65px}.pm-nav-links{top:65px}.pm-brand-logo{width:35px;height:35px}.pm-brand{font-size:12px;gap:7px}.pm-brand small{font-size:9px}.pm-nav-join{font-size:10px;padding:9px}.pm-nav-actions{gap:6px}.pm-head .lede{font-size:14px}.pm-head h1{font-size:38px}.pm-grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.pm-card,.btn{transition:none}}
+
+    </style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+    <header class="pm-site-header">
+  <div class="wrap pm-nav">
+    <a class="pm-brand" href="/" aria-label="The Tech Hut home"><img class="pm-brand-logo" src="data:image/png;base64,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" alt="" width="44" height="44"><span>THE TECH HUT<small>A home for tech people.</small></span></a>
+    <nav class="pm-nav-links" id="pmNavLinks" aria-label="Main navigation">
+      <a href="/">Home</a><a href="/communities/">Community</a><a href="/apprenticeship/">Apprenticeship</a><a href="/jobs/">Opportunities</a><a href="/games/">Games</a><a href="/blog/daily/">Insights</a><a href="/shop/">Shop</a>
+    </nav>
+    <div class="pm-nav-actions"><a class="pm-nav-join" href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" target="_blank" rel="noopener noreferrer">Join the community <span aria-hidden="true">↗</span></a><button type="button" class="pm-menu-toggle" id="pmMenuToggle" aria-expanded="false" aria-controls="pmNavLinks" aria-label="Toggle navigation">☰</button></div>
+  </div>
+</header>
+<main id="main">
+<header class="pagehead pm-head">
+  <div class="wrap pm-head-grid">
+    <div>
+      <span class="pm-pill">THE TECH HUT · PROMPT MARKETPLACE</span>
+      <h1>Better prompts.<br><em>Better possibilities.</em></h1>
+      <p class="lede">Discover practical AI prompts created by people who use them. Explore ideas for careers, code, content, data and more. Share your own and keep 90% of each sale.</p>
+      <div class="cta-row">
+        <button class="btn mint" type="button" data-act="sell">Sell or share a prompt</button>
+        <a class="btn ghost" href="#browse">Browse prompts</a>
+      </div>
+      <div class="pm-acct" aria-live="polite">
+        <p id="acctOut">No password needed. <button class="pm-link pm-strong" type="button" data-act="signin">Sign in or join with your email</button></p>
+        <p id="acctIn" hidden>Signed in as <b id="acctName"></b> <span id="acctMeta" class="pm-dim"></span> &middot; <button class="pm-link pm-strong" type="button" data-act="account">My account</button></p>
+      </div>
+    </div>
+    <figure class="pm-hero-img">
+      <img src="https://images.unsplash.com/photo-1604933762021-54a5858c9832?q=75&amp;w=1000&amp;h=760&amp;auto=format&amp;fit=crop" width="1000" height="760"
+           alt="A young woman with long braids working on a laptop at a desk; a stock photo" fetchpriority="high" decoding="async" onerror="this.parentNode.remove()">
+    </figure>
+  </div>
+</header>
+
+<section id="browse" class="pm-browse">
+  <div class="wrap">
+    <div class="pm-browse-heading"><div><span class="pm-section-kicker">EXPLORE THE MARKETPLACE</span><h2>Find your next great prompt.</h2><p>Search community-made prompts, filter by category, or start with a free one.</p></div><button class="pm-browse-post" type="button" data-act="sell">+ Share a prompt</button></div>
+    <div class="pm-tools">
+      <label class="pm-search"><span class="sr-only">Search prompts</span><input type="search" id="q" placeholder="Search prompts: cover letter, SQL, LinkedIn post…"></label>
+      <label class="pm-free"><input type="checkbox" id="freeOnly"> Free only</label>
+    </div>
+    <div class="pm-cats" id="cats" role="group" aria-label="Categories"></div>
+    <p class="pm-count" id="count" aria-live="polite">Loading prompts…</p>
+    <div class="pm-grid" id="grid"></div>
+  </div>
+</section>
+
+<section class="pm-how">
+  <div class="wrap">
+    <div class="section-head"><h2>How it works</h2></div>
+    <div class="cards">
+      <div class="card"><span class="n">01 &middot; Join in one click</span><h3>Email, then a link</h3><p>No password to remember. We email you a sign-in link; the first one creates your account.</p></div>
+      <div class="card"><span class="n">02 &middot; Post a prompt</span><h3>Free or paid</h3><p>Share a prompt for free, or set a price from KES 50. Buyers see your title, description and a short preview; the full prompt unlocks when they buy.</p></div>
+      <div class="card"><span class="n">03 &middot; Get paid</span><h3>90% to you, automatically</h3><p>Buyers pay by M-PESA or card through Paystack. Paystack sends 90% straight to your bank account; The Tech Hut keeps 10%.</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- Sign in -->
+<dialog class="pm-dlg pm-narrow" id="dlgSignin" aria-labelledby="siTitle">
+  <form method="dialog" class="pm-x"><button aria-label="Close">&times;</button></form>
+  <span class="eyebrow">Sign in or join</span>
+  <h2 id="siTitle">Just your email</h2>
+  <p id="siWhy" class="pm-dim">We'll email you a link. Click it and you're signed in. New here? The same link creates your account.</p>
+  <form id="siForm" novalidate>
+    <label class="pm-field">Email<input type="email" name="email" autocomplete="email" placeholder="you@email.com" required></label>
+    <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <button class="btn" type="submit" id="siBtn">Email me a sign-in link</button>
+  </form>
+  <p class="formmsg" id="siMsg" role="status"></p>
+</dialog>
+
+<!-- Account -->
+<dialog class="pm-dlg pm-wide" id="dlgAccount" aria-labelledby="acTitle">
+  <form method="dialog" class="pm-x"><button aria-label="Close">&times;</button></form>
+  <span class="eyebrow">My account</span>
+  <h2 id="acTitle">Your prompts</h2>
+  <nav class="pm-tabs" role="tablist">
+    <button type="button" role="tab" data-tab="sell" aria-selected="true">Sell or share</button>
+    <button type="button" role="tab" data-tab="mine">My prompts</button>
+    <button type="button" role="tab" data-tab="bought">Bought</button>
+    <button type="button" role="tab" data-tab="payout">Payouts</button>
+    <button type="button" role="tab" data-tab="profile">Profile</button>
+  </nav>
+
+  <div class="pm-tab" data-pane="sell">
+    <form id="sellForm" novalidate>
+      <input type="hidden" name="id">
+      <label class="pm-field">Title<input type="text" name="title" maxlength="90" placeholder="e.g. Cover letter that sounds like you" required></label>
+      <label class="pm-field">What it does<textarea name="desc" maxlength="600" rows="3" placeholder="Who it's for, what it produces, and what the buyer needs to paste in." required></textarea></label>
+      <div class="pm-row">
+        <label class="pm-field">Category<select name="cat" id="sellCat"></select></label>
+        <label class="pm-field">Works with<select name="model" id="sellModel"></select></label>
+        <label class="pm-field">Price (KES)<input name="price" type="number" min="0" max="20000" step="10" value="0" inputmode="numeric"><span class="pm-hint">0 = free. Paid: KES 50 to 20,000.</span></label>
+      </div>
+      <label class="pm-field">Preview <span class="pm-opt">(everyone sees this)</span><textarea name="preview" maxlength="400" rows="3" placeholder="The first lines, or an example of the output."></textarea></label>
+      <label class="pm-field">The full prompt <span class="pm-opt">(unlocks for buyers)</span><textarea name="body" maxlength="12000" rows="8" class="pm-mono" placeholder="Paste the prompt. Mark the parts buyers fill in, like {job ad} or {your CV}." required></textarea></label>
+      <div class="cta-row"><button class="btn mint" type="submit" id="sellBtn">Publish prompt</button><button class="btn ghost" type="button" id="sellReset" hidden>Cancel editing</button></div>
+      <p class="formmsg" id="sellMsg" role="status"></p>
+    </form>
+  </div>
+
+  <div class="pm-tab" data-pane="mine" hidden><ul class="pm-list" id="mineList"></ul></div>
+  <div class="pm-tab" data-pane="bought" hidden><ul class="pm-list" id="boughtList"></ul></div>
+
+  <div class="pm-tab" data-pane="payout" hidden>
+    <p>Where your 90% goes. Paystack checks the account name with your bank and pays you directly after each sale, on its normal settlement schedule.</p>
+    <p class="pm-dim" id="payoutNow"></p>
+    <form id="payoutForm" novalidate>
+      <div class="pm-row">
+        <label class="pm-field">Bank<select name="bank" id="bankSel"><option value="">Loading banks…</option></select></label>
+        <label class="pm-field">Account number<input type="text" name="account" inputmode="numeric" autocomplete="off" placeholder="Digits only"></label>
+      </div>
+      <button class="btn" type="submit" id="payoutBtn">Save payout account</button>
+      <p class="formmsg" id="payoutMsg" role="status"></p>
+    </form>
+  </div>
+
+  <div class="pm-tab" data-pane="profile" hidden>
+    <form id="profileForm" novalidate>
+      <label class="pm-field">Name shown on your prompts<input type="text" name="name" maxlength="30"></label>
+      <button class="btn" type="submit">Save</button>
+      <p class="formmsg" id="profileMsg" role="status"></p>
+    </form>
+    <p class="pm-dim" id="profileEmail"></p>
+    <button class="btn ghost" type="button" id="signOut">Sign out on this device</button>
+  </div>
+</dialog>
+
+<div class="pm-toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<footer class="sitefoot">
+        <div class="wrap">
+            <div class="sitefoot-grid">
+                <div>
+                    <a class="wordmark" href="/">The Tech Hut<span class="dot">.</span></a>
+                    <p>Helping Kenyans into tech work: jobs you can take from Nairobi, a daily read on the industry, and projects with mentors.</p>
+                </div>
+                <div>
+                    <h4>Read</h4>
+                    <ul>
+                        <li><a href="/blog/daily/">Daily Savannah</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">WhatsApp channel</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Find work</h4>
+                    <ul>
+                        <li><a href="/jobs/">Jobs board</a></li>
+                        <li><a href="/jobs/daily/">Daily job alert</a></li>
+                        <li><a href="/remote/">Remote-from-Kenya list</a></li>
+                        <li><a href="/cv-pack/">CV Pack</a></li>
+                        <li><a href="/early-access/">Early Access</a></li>
+                        <li><a href="/shop/">Everything we make</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="/apprenticeship/">Apprenticeship</a></li>
+                        <li><a href="/events/">Events</a></li>
+                        <li><a href="/hackathons/">Hackathons</a></li>
+                        <li><a href="/communities/">Tech communities</a></li>
+                        <li><a href="/tools/">Tools</a></li>
+                        <li><a href="/prompts/">Prompt marketplace</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Employers</h4>
+                    <ul>
+                        <li><a href="/advertise/">Advertise</a></li>
+                        <li><a href="/jobs-for-your-community/">A jobs board for your community</a></li>
+                        <li><a href="/recruiters/">Recruiters</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sitefoot-base">
+                <span>&copy; 2026 The Tech Hut Community</span>
+                <a href="mailto:info@thetechhut.co">info@thetechhut.co</a>
+                <span>+254 115 017 058</span>
+                <a href="/data_privacy_policy/">Privacy</a>
+                <a href="https://linkedin.com/company/digital-transformation-partner/" rel="noopener">LinkedIn</a>
+                <a href="https://x.com/Ekiprop_kimutai" rel="noopener">X</a>
+            </div>
+        </div>
+    </footer>
+<script>
+(function () {
+  var API = 'https://thetechhut-pay.thetechhut.workers.dev/market/';
+  var CATS = [['all', 'All'], ['writing', 'Writing'], ['coding', 'Coding'], ['career', 'Career & CVs'], ['marketing', 'Marketing'],
+              ['data', 'Data & analysis'], ['images', 'Images'], ['business', 'Business'], ['learning', 'Learning'], ['other', 'Other']];
+  var MODELS = [['any', 'Any AI'], ['chatgpt', 'ChatGPT'], ['claude', 'Claude'], ['gemini', 'Gemini'], ['copilot', 'Copilot'], ['midjourney', 'Midjourney'], ['other', 'Other']];
+  var catName = {}, modelName = {};
+  CATS.forEach(function (c) { catName[c[0]] = c[1]; });
+  MODELS.forEach(function (m) { modelName[m[0]] = m[1]; });
+  var $ = function (id) { return document.getElementById(id); };
+  var state = { cat: 'all', q: '', free: false, prompts: [], me: null, mine: [], bought: [] };
+
+  /* ---------- session (kept in this browser only) ---------- */
+  var KEY = 'tthMarketSession';
+  function sess() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function setSess(v) { try { if (v) localStorage.setItem(KEY, v); else localStorage.removeItem(KEY); } catch (e) {} }
+
+  function api(path, body) {
+    var opts = body ? { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) } : {};
+    return fetch(API + path, opts).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) { j._status = r.status; return j; });
+    });
+  }
+  function authed(path, body) {
+    body = body || {}; body.session = sess();
+    return api(path, body).then(function (j) {
+      if (j._status === 401) { setSess(null); state.me = null; drawAcct(); }
+      return j;
+    });
+  }
+  function toast(text) {
+    var t = $('toast'); t.textContent = text; t.hidden = false;
+    clearTimeout(toast.t); toast.t = setTimeout(function () { t.hidden = true; }, 4500);
+  }
+  function msg(node, text, ok) { node.textContent = text || ''; node.className = 'formmsg' + (text ? (ok ? ' ok' : ' bad') : ''); }
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function price(p) { return p > 0 ? 'KES ' + Number(p).toLocaleString('en-KE') : 'Free'; }
+  function open(d) { if (d.showModal) { if (!d.open) d.showModal(); } else d.setAttribute('open', ''); }
+  function close(d) { if (d.close) d.close(); else d.removeAttribute('open'); }
+
+  /* ---------- browse ---------- */
+  function drawCats() {
+    $('cats').innerHTML = '';
+    CATS.forEach(function (c) {
+      var b = el('button', null, c[1]); b.type = 'button'; b.setAttribute('aria-pressed', String(state.cat === c[0]));
+      b.addEventListener('click', function () { state.cat = c[0]; drawCats(); drawGrid(); });
+      $('cats').appendChild(b);
+    });
+  }
+  function drawGrid() {
+    var q = state.q.toLowerCase();
+    var list = state.prompts.filter(function (p) {
+      if (state.cat !== 'all' && p.cat !== state.cat) return false;
+      if (state.free && p.price > 0) return false;
+      return !q || (p.title + ' ' + p.desc + ' ' + p.seller + ' ' + (catName[p.cat] || '')).toLowerCase().indexOf(q) >= 0;
+    });
+    var g = $('grid'); g.innerHTML = '';
+    $('count').textContent = state.prompts.length ? list.length + (list.length === 1 ? ' prompt' : ' prompts') : '';
+    if (!state.prompts.length) {
+      var e = el('div', 'pm-empty');
+      e.appendChild(el('h3', null, 'Be the first to post a prompt.'));
+      e.appendChild(el('p', null, 'The marketplace is new. Share a prompt you rely on, free or paid, and it shows up here for the whole community.'));
+      var b = el('button', 'btn mint', 'Post the first prompt'); b.type = 'button'; b.setAttribute('data-act', 'sell');
+      e.appendChild(b); g.appendChild(e); return;
+    }
+    if (!list.length) { g.appendChild(el('p', 'pm-dim', 'No prompts match that. Try another word or category.')); return; }
+    list.forEach(function (p) {
+      // Each prompt has its own page: a real link, so it can be opened in a new tab, shared and found by search engines.
+      var a = el('a', 'pm-card'); a.href = p.path || ('/prompts/p/' + p.id + '/');
+      var top = el('div', 'pm-card-top');
+      top.appendChild(el('span', 'pm-cat', catName[p.cat] || 'Other'));
+      top.appendChild(el('span', 'tag' + (p.price > 0 ? '' : ' mint'), price(p.price)));
+      a.appendChild(top);
+      a.appendChild(el('h3', null, p.title));
+      a.appendChild(el('p', 'pm-card-desc', p.desc));
+      a.appendChild(el('p', 'pm-card-meta', 'by ' + p.seller + ' · ' + (modelName[p.model] || 'Any AI') + (p.sales ? ' · ' + p.sales + ' sold' : '')));
+      g.appendChild(a);
+    });
+  }
+  function load() {
+    return api('prompts').then(function (j) {
+      if (j._status !== 200) { $('count').textContent = j.error || 'The marketplace is switching on. Check back soon.'; state.prompts = []; return; }
+      state.prompts = j.prompts || []; drawGrid();
+    }).catch(function () { $('count').textContent = 'Could not load prompts. Check your connection and reload.'; });
+  }
+
+  function pagePath(p) { return p.path || ('/prompts/p/' + p.id + '/'); }
+
+  /* ---------- sign in ---------- */
+  var DEFAULT_WHY = "We'll email you a link. Click it and you're signed in. New here? The same link creates your account.";
+  function askSignin(why, then) {
+    $('siWhy').textContent = why || DEFAULT_WHY;
+    try { if (then) sessionStorage.setItem('tthMarketAfter', JSON.stringify(then)); } catch (e) {}
+    msg($('siMsg'), ''); $('siBtn').disabled = false; $('siBtn').textContent = 'Email me a sign-in link';
+    open($('dlgSignin'));
+    setTimeout(function () { $('siForm').email.focus(); }, 50);
+  }
+  $('siForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = e.target, email = f.email.value.trim();
+    var reset = function () { $('siBtn').disabled = false; $('siBtn').textContent = 'Email me a sign-in link'; };
+    if (!email || email.indexOf('@') < 1) { msg($('siMsg'), 'Enter your email address.'); return; }
+    $('siBtn').disabled = true; $('siBtn').textContent = 'Sending…';
+    api('login', { email: email, website: f.website.value }).then(function (j) {
+      if (j._status === 200) { msg($('siMsg'), 'Check your inbox: we sent a sign-in link to ' + email + '. It works once, for 20 minutes. Check spam if you do not see it.', true); $('siBtn').textContent = 'Link sent'; }
+      else { msg($('siMsg'), j.error || 'Could not send the link. Try again.'); reset(); }
+    }).catch(function () { msg($('siMsg'), 'Could not reach the server. Check your connection.'); reset(); });
+  });
+
+  /* ---------- account ---------- */
+  function drawAcct() {
+    var me = state.me;
+    $('acctOut').hidden = !!me; $('acctIn').hidden = !me;
+    if (!me) return;
+    $('acctName').textContent = me.name;
+    $('acctMeta').textContent = '(' + state.mine.length + ' posted, ' + state.bought.length + ' bought)';
+  }
+  function refreshMe() {
+    if (!sess()) { state.me = null; drawAcct(); return Promise.resolve(); }
+    return authed('me').then(function (j) {
+      if (j.user) { state.me = j.user; state.mine = j.mine || []; state.bought = j.bought || []; }
+      drawAcct(); drawMine(); drawBought(); drawPayout();
+    });
+  }
+  function tab(name) {
+    document.querySelectorAll('#dlgAccount [role=tab]').forEach(function (b) { b.setAttribute('aria-selected', String(b.getAttribute('data-tab') === name)); });
+    document.querySelectorAll('#dlgAccount .pm-tab').forEach(function (p) { p.hidden = p.getAttribute('data-pane') !== name; });
+    if (name === 'payout') loadBanks();
+  }
+  document.querySelectorAll('#dlgAccount [role=tab]').forEach(function (b) { b.addEventListener('click', function () { tab(b.getAttribute('data-tab')); }); });
+  function openAccount(which) {
+    if (!sess()) { askSignin(which === 'sell' ? 'Sign in to post a prompt. It takes one email and one click.' : null, { account: which || 'mine' }); return; }
+    $('profileForm').name.value = state.me ? state.me.name : '';
+    $('profileEmail').textContent = state.me ? 'Signed in with ' + state.me.email : '';
+    tab(which || 'mine'); open($('dlgAccount'));
+  }
+  function drawMine() {
+    var ul = $('mineList'); ul.innerHTML = '';
+    if (!state.mine.length) { ul.appendChild(el('li', 'pm-dim', 'Nothing posted yet. Use "Sell or share" to post your first prompt.')); return; }
+    state.mine.forEach(function (p) {
+      var li = el('li');
+      var h = el('div', 'pm-li-main'); h.appendChild(el('b', null, p.title));
+      h.appendChild(el('span', 'pm-dim', price(p.price) + ' · ' + (p.sales || 0) + ' sold' + (p.hidden ? ' · hidden' : '')));
+      li.appendChild(h);
+      var act = el('div', 'pm-li-act');
+      if (!p.hidden) { var view = el('a', 'pm-link', 'View'); view.href = pagePath(p); act.appendChild(view); }
+      var ed = el('button', 'pm-link', 'Edit'); ed.type = 'button'; ed.addEventListener('click', function () { editPrompt(p); });
+      var del = el('button', 'pm-link', 'Remove'); del.type = 'button';
+      del.addEventListener('click', function () {
+        if (!window.confirm('Remove "' + p.title + '"? People who bought it keep their copy.')) return;
+        authed('delete', { id: p.id }).then(function () { toast('Removed.'); refreshMe(); load(); });
+      });
+      act.appendChild(ed); act.appendChild(del); li.appendChild(act); ul.appendChild(li);
+    });
+  }
+  function drawBought() {
+    var ul = $('boughtList'); ul.innerHTML = '';
+    if (!state.bought.length) { ul.appendChild(el('li', 'pm-dim', 'Prompts you buy appear here, ready to copy, on any device you sign in on.')); return; }
+    state.bought.forEach(function (p) {
+      var li = el('li');
+      var h = el('div', 'pm-li-main'); h.appendChild(el('b', null, p.title));
+      h.appendChild(el('span', 'pm-dim', (modelName[p.model] || 'Any AI') + (p.amount ? ' · paid KES ' + p.amount : '')));
+      li.appendChild(h);
+      var act = el('div', 'pm-li-act'); var v = el('a', 'pm-link', 'Open'); v.href = pagePath(p);
+      act.appendChild(v); li.appendChild(act); ul.appendChild(li);
+    });
+  }
+  function drawPayout() {
+    var po = state.me && state.me.payout;
+    $('payoutNow').textContent = po ? 'Paid to ' + po.bank + ', account ending ' + po.last4 + (po.holder ? ' (' + po.holder + ')' : '') + '. Save a new one to change it.' : 'No payout account yet. You can post free prompts without one.';
+  }
+  var banksLoaded = false;
+  function loadBanks() {
+    if (banksLoaded) return; banksLoaded = true;
+    api('banks').then(function (j) {
+      var s = $('bankSel'); s.innerHTML = '';
+      var first = el('option', null, 'Choose your bank'); first.value = ''; s.appendChild(first);
+      (j.banks || []).forEach(function (b) { var o = el('option', null, b.name); o.value = b.code; s.appendChild(o); });
+      if (!(j.banks || []).length) { first.textContent = 'Banks could not load. Reload and try again.'; banksLoaded = false; }
+    });
+  }
+  $('payoutForm').addEventListener('submit', function (e) {
+    e.preventDefault(); var f = e.target;
+    $('payoutBtn').disabled = true; msg($('payoutMsg'), 'Checking the account with Paystack…', true);
+    authed('payout', { bank: f.bank.value, account: f.account.value }).then(function (j) {
+      $('payoutBtn').disabled = false;
+      if (j.user) { state.me = j.user; drawPayout(); drawAcct(); f.account.value = ''; msg($('payoutMsg'), 'Saved. You can now sell paid prompts.', true); }
+      else msg($('payoutMsg'), j.error || 'Could not save that account.');
+    });
+  });
+  $('profileForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    authed('profile', { name: e.target.name.value }).then(function (j) {
+      if (j.user) { state.me = j.user; drawAcct(); msg($('profileMsg'), 'Saved.', true); load(); } else msg($('profileMsg'), j.error || 'Could not save.');
+    });
+  });
+  $('signOut').addEventListener('click', function () {
+    setSess(null); state.me = null; state.mine = []; state.bought = []; drawAcct(); close($('dlgAccount')); toast('Signed out on this device.');
+  });
+
+  /* ---------- sell ---------- */
+  function fillSelect(sel, items, skipFirst) {
+    sel.innerHTML = '';
+    items.slice(skipFirst ? 1 : 0).forEach(function (c) { var o = el('option', null, c[1]); o.value = c[0]; sel.appendChild(o); });
+  }
+  fillSelect($('sellCat'), CATS, true); fillSelect($('sellModel'), MODELS);
+  var FIELDS = ['id', 'title', 'desc', 'cat', 'model', 'price', 'preview', 'body'];
+  function editPrompt(p) {
+    var f = $('sellForm');
+    FIELDS.forEach(function (k) { f[k].value = p[k] == null ? '' : p[k]; });
+    $('sellBtn').textContent = 'Save changes'; $('sellReset').hidden = false; tab('sell');
+  }
+  function resetSell() { var f = $('sellForm'); f.reset(); f.id.value = ''; $('sellBtn').textContent = 'Publish prompt'; $('sellReset').hidden = true; }
+  $('sellReset').addEventListener('click', resetSell);
+  $('sellForm').addEventListener('submit', function (e) {
+    e.preventDefault(); var f = e.target, data = {};
+    FIELDS.forEach(function (k) { data[k] = f[k].value; });
+    data.price = Number(data.price) || 0;
+    $('sellBtn').disabled = true; msg($('sellMsg'), '');
+    authed('save', data).then(function (j) {
+      $('sellBtn').disabled = false;
+      if (j.prompt) { msg($('sellMsg'), data.id ? 'Saved.' : 'Published. It is live in the marketplace now, and we have emailed you its link so you can share it.', true); resetSell(); refreshMe(); load(); return; }
+      if (j.error === 'payout') { msg($('sellMsg'), j.message); setTimeout(function () { tab('payout'); }, 1400); return; }
+      msg($('sellMsg'), j.error === 'signin' ? 'Your session ended. Sign in again.' : (j.error || 'Could not save. Try again.'));
+    });
+  });
+
+  /* ---------- buttons with data-act ---------- */
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-act]'); if (!b) return;
+    var a = b.getAttribute('data-act');
+    if (a === 'signin') askSignin();
+    if (a === 'account') openAccount('mine');
+    if (a === 'sell') openAccount('sell');
+  });
+  $('q').addEventListener('input', function (e) { state.q = e.target.value.trim(); drawGrid(); });
+  $('freeOnly').addEventListener('change', function (e) { state.free = e.target.checked; drawGrid(); });
+
+  /* ---------- arriving from an email link or back from Paystack ---------- */
+  function resume() {
+    var then = null;
+    try { then = JSON.parse(sessionStorage.getItem('tthMarketAfter') || 'null'); sessionStorage.removeItem('tthMarketAfter'); } catch (e) {}
+    if (!then) return;
+    if (then.account) openAccount(then.account);
+    if (then.buy) location.href = '/prompts/p/' + encodeURIComponent(then.buy) + '/';
+  }
+  function start() {
+    // Payments now return to the prompt's own page. Older links (and payments
+    // started before this change) still land here: send them on.
+    var q0 = new URLSearchParams(location.search);
+    if (q0.get('prompt') || q0.get('reference') || q0.get('trxref')) {
+      var pid = q0.get('prompt'); q0.delete('prompt');
+      location.replace('/prompts/p/' + (pid && /^[a-z0-9]{6,20}$/.test(pid) ? pid + '/' : '') + (q0.toString() ? '?' + q0 : '') + location.hash);
+      return;
+    }
+    drawCats();
+    var m = /[#&]login=([A-Za-z0-9._-]+)/.exec(location.hash || '');
+    var first = Promise.resolve();
+    if (m) {
+      history.replaceState(null, '', location.pathname + location.search);   // never leave the link in the address bar
+      first = api('session', { t: m[1] }).then(function (j) {
+        if (j.session) { setSess(j.session); toast('You are signed in. Welcome, ' + j.user.name + '.'); }
+        else toast(j.error || 'That sign-in link did not work. Ask for a new one.');
+      });
+    }
+    first.then(function () { return Promise.all([load(), refreshMe()]); }).then(function () {
+      if (m) resume();
+      else if (/^#(account|sell)$/.test(location.hash)) {   // links from a prompt's page
+        var which = location.hash === '#sell' ? 'sell' : 'mine';
+        history.replaceState(null, '', location.pathname);
+        openAccount(which);
+      }
+    });
+  }
+  // The sign-in link opened in a tab that already had the page: swap it without a reload.
+  window.addEventListener('hashchange', function () {
+    var m = /[#&]login=([A-Za-z0-9._-]+)/.exec(location.hash || '');
+    if (!m) return;
+    history.replaceState(null, '', location.pathname + location.search);
+    api('session', { t: m[1] }).then(function (j) {
+      if (j.session) { setSess(j.session); toast('You are signed in. Welcome, ' + j.user.name + '.'); }
+      else toast(j.error || 'That sign-in link did not work. Ask for a new one.');
+      if ($('dlgSignin').open) close($('dlgSignin'));
+      return refreshMe();
+    }).then(resume);
+  });
+  start();
+})();
+</script>
+<script>
+(function(){
+  var button=document.getElementById('pmMenuToggle');
+  var nav=document.getElementById('pmNavLinks');
+  if(!button||!nav)return;
+  button.addEventListener('click',function(){
+    var isOpen=nav.classList.toggle('open');
+    button.setAttribute('aria-expanded',String(isOpen));
+    button.setAttribute('aria-label',isOpen?'Close navigation':'Toggle navigation');
+  });
+  nav.addEventListener('click',function(event){if(event.target.closest('a')){nav.classList.remove('open');button.setAttribute('aria-expanded','false');}});
+  document.addEventListener('keydown',function(event){if(event.key==='Escape'){nav.classList.remove('open');button.setAttribute('aria-expanded','false');}});
+})();
+</script>
+</body>
+</html>
