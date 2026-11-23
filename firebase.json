@@ -28,6 +28,11 @@
         "type": 301
       },
       {
+        "source": "/prompts{,/}",
+        "destination": "/prompt-marketplace/",
+        "type": 301
+      },
+      {
         "source": "/subscribe{,/}",
         "destination": "/blog/daily/#subscribe",
         "type": 301

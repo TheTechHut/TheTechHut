@@ -118,11 +118,11 @@ jobs:
         continue-on-error: true
         run: node scripts/build_hackathon_pages.js
 
-      # prompt-marketplace/sitemap.xml is built, never committed: one URL per prompt page.
-      - name: Write the prompt marketplace sitemap
+      # One page and share card per prompt, plus prompt-marketplace/sitemap.xml: built, never committed.
+      - name: Write the prompt pages, share cards and sitemap
         if: steps.commit.outputs.changed == 'yes'
         continue-on-error: true
-        run: node scripts/build_prompt_sitemap.js
+        run: node scripts/build_prompt_pages.js
 
       # A push made with GITHUB_TOKEN does not trigger other workflows, so the
       # hosting deploy has to be called from here or the new data never goes live.

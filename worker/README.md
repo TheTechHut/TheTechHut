@@ -355,6 +355,12 @@ Community members post AI prompts, free or paid, and buy each other's. Code:
   sign-in, and members from before this feature never get one. Posting a new prompt
   (not editing one) emails the member its link with WhatsApp, LinkedIn and X share
   buttons; their first prompt gets a "welcome, seller" version.
+- **Share previews:** `scripts/build_prompt_pages.js` writes, before every deploy, a static
+  copy of the page for each prompt (`/prompt-marketplace/p/<id>/<slug>/index.html`) with its
+  own title, description and `og:image`, plus a 1200x630 share card (`p/<id>/card.png`, drawn
+  by `scripts/prompt_card.js` in the jobs-card design). Link previews on WhatsApp, LinkedIn
+  and X need these, because they never run the page's JavaScript. A prompt posted since the
+  last build uses the generic preview until the next one. It also writes the sitemap below.
 - **Sitemap:** `scripts/build_prompt_sitemap.js` writes `prompt-marketplace/sitemap.xml`
   (listed in robots.txt) from `GET /market/prompts` before every deploy; it is not
   committed. New prompts reach it with the next deploy, at most about 3 hours later.

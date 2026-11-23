@@ -44,10 +44,10 @@ jobs:
         continue-on-error: true
         run: node scripts/build_hackathon_pages.js
 
-      # prompt-marketplace/sitemap.xml is built, never committed: one URL per prompt page.
-      - name: Write the prompt marketplace sitemap
+      # One page and share card per prompt, plus prompt-marketplace/sitemap.xml: built, never committed.
+      - name: Write the prompt pages, share cards and sitemap
         continue-on-error: true
-        run: node scripts/build_prompt_sitemap.js
+        run: node scripts/build_prompt_pages.js
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
