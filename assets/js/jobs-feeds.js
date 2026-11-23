@@ -309,6 +309,9 @@
     // their other vacancies (nursing, finance, chaplaincy...) are left out like any employer's.
     // `country` is added to a location that does not name it (Ashesi lists only the town).
     { name: 'African Leadership University', ats: 'greenhouse', slug: 'alu', academic: true },
+    // SeamlessHiring (Kenyan ATS): the employer's public "View Jobs" board at <host>/h/advanced
+    // reads <host>/v2/jobs/job-list, which answers a server but not another site's browser.
+    { name: 'Strathmore University', ats: 'seamless', host: 'strathmore.seamlesshiring.com', location: 'Nairobi, Kenya', academic: true, server: true },
     { name: 'Ashesi University',  ats: 'bamboohr',   slug: 'ashesi', country: 'Ghana', academic: true, server: true },
     { name: 'AIMS (African Institute for Mathematical Sciences)', ats: 'workable', slug: 'aims', academic: true },
     { name: 'USIU-Africa',        ats: 'html', url: 'https://www.usiu.ac.ke/job-vacancies/', side: 'after',
@@ -470,6 +473,31 @@
         url: safeUrl(j.url || j.shortlink),
         date: j.published_on || j.created_at || '',
         workplace: j.telecommuting ? 'Remote' : '',   // the posting itself says on-site/hybrid; build_jobs_board.js reads it
+        source: co.name
+      };
+    });
+  }
+  // SeamlessHiring's public job list: { data: { jobs: { data: [ ... ] } } }, 20 a page.
+  function fromSeamless(d, co) {
+    var today = new Date().toISOString().slice(0, 10);
+    var rows = (d && d.data && d.data.jobs && d.data.jobs.data) || [];
+    return rows.filter(function (j) {
+      return j && j.title && (!j.status || j.status === 'ACTIVE') && !j.is_closed && !j.is_private &&
+        !((j.expiry_date || j.closing_date) && String(j.expiry_date || j.closing_date).slice(0, 10) < today);
+    }).map(function (j) {
+      var title = clean(j.title);
+      var deadline = String(j.expiry_date || j.closing_date || '').slice(0, 10);
+      var place = clean(j.city || j.location) || co.location || 'Kenya';
+      return {
+        id: 'sh-' + co.host.split('.')[0] + '-' + j.id,
+        title: title, company: co.name, logo: '',
+        location: place, types: j.job_type ? [clean(String(j.job_type).replace(/-/g, ' '))] : [],
+        cats: [catFromTitle(title)], level: '',
+        excerpt: clean(j.summary || j.details, 190),
+        body: IN_BROWSER ? '' : [j.summary, j.details, j.experience].filter(Boolean).join(''),
+        url: safeUrl('https://' + co.host + '/job/view/' + encodeURIComponent(j.id)),
+        date: String(j.post_date || '').slice(0, 10), deadline: deadline,
+        workplace: workplaceOf(j.work_style || ''),
         source: co.name
       };
     });
@@ -889,6 +917,7 @@
             : co.ats === 'smartrecruiters' ? 'https://api.smartrecruiters.com/v1/companies/' + co.slug + '/postings?limit=100'
             : co.ats === 'workable'   ? 'https://apply.workable.com/api/v1/widget/accounts/' + co.slug
             : co.ats === 'breezy'     ? 'https://' + co.slug + '.breezy.hr/json'
+            : co.ats === 'seamless'   ? 'https://' + co.host + '/v2/jobs/job-list?search=&page=1'
             : co.ats === 'wordpress'  ? 'https://' + co.site + '/wp-json/wp/v2/posts?categories=' + co.cat +
                                         '&per_page=20&_fields=id,date,modified,link,title,excerpt'
             :                           'https://api.ashbyhq.com/posting-api/job-board/' + co.slug;
@@ -905,6 +934,7 @@
                : co.ats === 'smartrecruiters' ? fromSmartRecruiters(d, co)
                : co.ats === 'workable'   ? fromWorkable(d, co)
                : co.ats === 'breezy'     ? fromBreezy(d, co)
+               : co.ats === 'seamless'   ? fromSeamless(d, co)
                : co.ats === 'wordpress'  ? fromWordPress(d, co)
                :                           fromAshby(d, co);
     }).then(function (j) { return finish(j, co); }).catch(function () { return []; });

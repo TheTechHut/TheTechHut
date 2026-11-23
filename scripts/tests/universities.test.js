@@ -32,6 +32,12 @@ var PAGES = {
     { id: '1', jobOpeningName: 'Faculty - Artificial Intelligence/Intelligent Systems', location: { city: 'Berekuso', state: 'Eastern Region' } },
     { id: '2', jobOpeningName: 'Medical Officer', location: { city: 'Berekuso', state: 'Eastern Region' } },
     { id: '3', jobOpeningName: 'IT Support Technician', location: { city: 'Berekuso', state: 'Eastern Region' } }] }),
+  'https://strathmore.seamlesshiring.com/v2/jobs/job-list?search=&page=1': JSON.stringify({ status_code: 200, data: { jobs: { current_page: 1, data: [
+    { id: 11495, title: 'ICT Support Officer', summary: 'Supports staff and students with university systems.', post_date: '2026-11-16', expiry_date: '2099-11-27', job_type: 'full-time', status: 'ACTIVE', city: null, location: null },
+    { id: 11496, title: 'Digital Innovation Officer', post_date: '2026-11-16', expiry_date: '2099-11-27', status: 'ACTIVE' },
+    { id: 11487, title: 'Data Protection Manager', post_date: '2026-11-19', expiry_date: '2001-11-30', job_type: 'full-time', status: 'ACTIVE' },
+    { id: 11600, title: 'Lecturer, Computer Science', post_date: '2026-11-20', expiry_date: '2099-12-10', status: 'ACTIVE' },
+    { id: 11601, title: 'Handball Coach', post_date: '2026-11-20', expiry_date: '2099-12-10', status: 'ACTIVE' }] } } }),
   'https://boards-api.greenhouse.io/v1/boards/alu/jobs?content=true': JSON.stringify({ jobs: [
     { id: 11, title: 'Software Engineer', location: { name: 'Kigali, Rwanda' }, absolute_url: 'https://job-boards.greenhouse.io/alu/jobs/11', updated_at: '2026-11-20' },
     { id: 12, title: 'Faculty, Computer Science', location: { name: 'Kigali, Rwanda' }, absolute_url: 'https://job-boards.greenhouse.io/alu/jobs/12', updated_at: '2026-11-20' },
@@ -79,6 +85,14 @@ async function t(name, fn) {
     assert.deepStrictEqual(j.map(function (x) { return x.title; }).sort(), ['Faculty - Artificial Intelligence/Intelligent Systems', 'IT Support Technician']);
     assert.strictEqual(j[0].location, 'Berekuso, Eastern Region, Ghana');
     assert.strictEqual(j[0].region, 'Rest of Africa');
+  });
+  await t('Strathmore (SeamlessHiring): open tech and computing roles, closed ones dropped, link to the posting', async function () {
+    var j = await F._loadOne(co('Strathmore University'));
+    assert.deepStrictEqual(j.map(function (x) { return x.title; }).sort(), ['ICT Support Officer', 'Lecturer, Computer Science']);
+    var d = j.find(function (x) { return x.title === 'ICT Support Officer'; });
+    assert.strictEqual(d.url, 'https://strathmore.seamlesshiring.com/job/view/11495');
+    assert.strictEqual(d.deadline, '2099-11-27'); assert.strictEqual(d.date, '2026-11-16');
+    assert.strictEqual(d.location, 'Nairobi, Kenya'); assert.strictEqual(d.region, 'Kenya');
   });
   await t('ALU: tech and computing faculty roles, not admissions', async function () {
     var j = await F._loadOne(co('African Leadership University'));
