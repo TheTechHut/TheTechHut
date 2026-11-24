@@ -72,19 +72,6 @@
         ]
       },
       {
-        "source": "/admin{,/**}",
-        "headers": [
-          {
-            "key": "X-Robots-Tag",
-            "value": "noindex, nofollow"
-          },
-          {
-            "key": "Cache-Control",
-            "value": "no-store"
-          }
-        ]
-      },
-      {
         "source": "**/*.@(jpg|jpeg|png|gif|webp|svg|ico|woff|woff2|ttf|otf)",
         "headers": [
           {
@@ -98,7 +85,7 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "public, max-age=604800"
+            "value": "public, max-age=86400, stale-while-revalidate=604800"
           }
         ]
       },
@@ -144,6 +131,50 @@
           {
             "key": "X-Robots-Tag",
             "value": "noindex"
+          },
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=300, stale-while-revalidate=86400"
+          }
+        ]
+      },
+      {
+        "source": "**/*.json",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=300, stale-while-revalidate=86400"
+          }
+        ]
+      },
+      {
+        "source": "**/*.xml",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=3600"
+          }
+        ]
+      },
+      {
+        "source": "/prompts/list.json",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=60, stale-while-revalidate=86400"
+          }
+        ]
+      },
+      {
+        "source": "/admin{,/**}",
+        "headers": [
+          {
+            "key": "X-Robots-Tag",
+            "value": "noindex, nofollow"
+          },
+          {
+            "key": "Cache-Control",
+            "value": "no-store"
           }
         ]
       }

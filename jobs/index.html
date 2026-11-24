@@ -1054,7 +1054,7 @@
   // several megabytes. If it is missing or more than a day and a half old, read
   // the feeds live as before.
   var STALE_MS = 36 * 36e5;
-  fetch('/data/jobs-board.json', { cache: 'no-cache' })
+  fetch('/data/jobs-board.json')
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (d) {
       var t = d && Date.parse(d.updated);
