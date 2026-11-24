@@ -1,0 +1,80 @@
+name: Capture community page OG screenshots
+
+on:
+  push:
+    branches:
+      - chore/redesign
+    paths:
+      - 'communities_test.html'
+      - 'communities_test_2.html'
+      - 'communities_test_3.html'
+      - '.github/workflows/community-og-screenshots.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: community-og-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  screenshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out current redesign branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Prepare desktop browser
+        run: |
+          npx --yes playwright install --with-deps chromium
+
+      - name: Render real pages at desktop viewport
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory . >/tmp/og-server.log 2>&1 &
+          sleep 2
+          for page in communities_test.html communities_test_2.html communities_test_3.html; do
+            npx --yes playwright screenshot \
+              --browser chromium \
+              --viewport-size "1440,756" \
+              --wait-for-timeout 2200 \
+              "http://127.0.0.1:8765/${page}" \
+              "/tmp/${page%.html}.png"
+          done
+
+      - name: Export 1200 by 630 social share images
+        run: |
+          python3 -m pip install --quiet pillow
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          dest = Path('assets/img/social')
+          dest.mkdir(parents=True, exist_ok=True)
+          for name in ('communities_test', 'communities_test_2', 'communities_test_3'):
+              source = Path('/tmp') / f'{name}.png'
+              target = dest / f'{name}-og.jpg'
+              with Image.open(source) as img:
+                  img.convert('RGB').resize((1200, 630), Image.Resampling.LANCZOS).save(
+                      target, 'JPEG', quality=88, optimize=True, progressive=True
+                  )
+              print(f'Generated {target}: {target.stat().st_size:,} bytes')
+          PY
+
+      - name: Commit screenshots to the redesign branch
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/img/social/communities_test-og.jpg \
+                  assets/img/social/communities_test_2-og.jpg \
+                  assets/img/social/communities_test_3-og.jpg
+          if git diff --cached --quiet; then
+            echo "OG screenshots are already up to date"
+          else
+            git commit -m "Capture desktop community-page OG images"
+            git push origin HEAD:chore/redesign
+          fi
