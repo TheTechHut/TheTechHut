@@ -1,9 +1,9 @@
 {
- "updated": "2026-11-23",
- "company_count": 60,
- "role_count": 483,
- "local_role_count": 234,
- "roles_scanned": 3715,
+ "updated": "2026-11-24",
+ "company_count": 59,
+ "role_count": 494,
+ "local_role_count": 221,
+ "roles_scanned": 3727,
  "sources": [
   "Himalayas",
   "Jobicy"
@@ -12,8 +12,8 @@
   {
    "company": "Canonical",
    "platform": "greenhouse",
-   "eligible": 239,
-   "total": 319,
+   "eligible": 238,
+   "total": 318,
    "locations": [
     "Home based - EMEA",
     "Home based - EMEA; Office Based - London, UK",
@@ -38,8 +38,8 @@
   {
    "company": "micro1",
    "platform": "himalayas",
-   "eligible": 40,
-   "total": 40,
+   "eligible": 34,
+   "total": 34,
    "locations": [
     "Worldwide"
    ]
@@ -47,8 +47,8 @@
   {
    "company": "Xperteez Technology",
    "platform": "himalayas",
-   "eligible": 27,
-   "total": 27,
+   "eligible": 33,
+   "total": 33,
    "locations": [
     "Worldwide"
    ]
@@ -56,8 +56,8 @@
   {
    "company": "Clera",
    "platform": "himalayas",
-   "eligible": 21,
-   "total": 21,
+   "eligible": 23,
+   "total": 23,
    "locations": [
     "Worldwide"
    ]
@@ -74,29 +74,47 @@
   {
    "company": "Oyster",
    "platform": "ashby",
-   "eligible": 9,
-   "total": 20,
+   "eligible": 8,
+   "total": 18,
    "locations": [
     "EMEA; Romania; Bulgaria; Portugal; Canada; United Kingdom; Spain; Poland",
-    "EMEA; Romania; Hungary; Bulgaria; Ireland; Slovakia; United Kingdom; Poland; Estonia; South Africa; Greece",
     "EMEA; Romania; Hungary; Netherlands; Portugal; Slovakia; Spain; Poland; South Africa; Greece",
     "EMEA; Toronto; Ireland; Portugal; United Kingdom; Spain",
     "Global; Portugal; Spain; Brazil; Colombia; Canada",
-    "EMEA; Romania; Portugal; Spain; Poland; South Africa"
+    "EMEA; Romania; Portugal; Spain; Poland; South Africa",
+    "EMEA; Portugal; Spain; Poland"
    ]
   },
   {
    "company": "ConsenSys",
    "platform": "greenhouse",
-   "eligible": 8,
-   "total": 12,
+   "eligible": 7,
+   "total": 11,
    "locations": [
     "EMEA - Remote, United States - Remote",
     "UNITED STATES - Remote, EMEA - Remote, LATAM - Remote",
     "UNITED STATES - Remote, LATAM - Remote, EMEA - Remote",
-    "United States - Remote, EMEA - Remote",
     "UNITED STATES - Remote, EMEA - Remote",
-    "EMEA - Remote"
+    "EMEA - Remote",
+    "EMEA - Remote, UNITED STATES - Remote"
+   ]
+  },
+  {
+   "company": "EdgeQ Technologies Private Limited",
+   "platform": "himalayas",
+   "eligible": 7,
+   "total": 7,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "Featherless AI",
+   "platform": "himalayas",
+   "eligible": 7,
+   "total": 7,
+   "locations": [
+    "Worldwide"
    ]
   },
   {
@@ -112,7 +130,7 @@
    "company": "Zapier",
    "platform": "ashby",
    "eligible": 3,
-   "total": 9,
+   "total": 8,
    "locations": [
     "NAMER; India; European Union; EMEA",
     "NAMER; EMEA"
@@ -137,12 +155,21 @@
    ]
   },
   {
-   "company": "Sun King",
-   "platform": "pinpoint",
+   "company": "G2i Inc.",
+   "platform": "himalayas",
    "eligible": 2,
-   "total": 194,
+   "total": 2,
    "locations": [
-    "Global"
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "ASG Company",
+   "platform": "himalayas",
+   "eligible": 2,
+   "total": 2,
+   "locations": [
+    "Worldwide"
    ]
   },
   {
@@ -159,15 +186,6 @@
    "platform": "himalayas",
    "eligible": 2,
    "total": 3,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "ASG Company",
-   "platform": "himalayas",
-   "eligible": 2,
-   "total": 2,
    "locations": [
     "Worldwide"
    ]
@@ -218,12 +236,31 @@
    ]
   },
   {
+   "company": "TRM Labs",
+   "platform": "jobicy",
+   "eligible": 2,
+   "total": 2,
+   "locations": [
+    "EMEA",
+    "EMEA,  Singapore"
+   ]
+  },
+  {
    "company": "Customer.io",
    "platform": "jobicy",
    "eligible": 2,
    "total": 2,
    "locations": [
     "EMEA"
+   ]
+  },
+  {
+   "company": "Zipline",
+   "platform": "greenhouse",
+   "eligible": 1,
+   "total": 318,
+   "locations": [
+    "Remote, EMEA; United Arab Emirates; United Kingdom"
    ]
   },
   {
@@ -263,6 +300,15 @@
    ]
   },
   {
+   "company": "Sun King",
+   "platform": "pinpoint",
+   "eligible": 1,
+   "total": 189,
+   "locations": [
+    "Global"
+   ]
+  },
+  {
    "company": "Taptap Send",
    "platform": "ashby",
    "eligible": 1,
@@ -272,7 +318,7 @@
    ]
   },
   {
-   "company": "G2i Inc.",
+   "company": "SafetyWing",
    "platform": "himalayas",
    "eligible": 1,
    "total": 1,
@@ -299,34 +345,7 @@
    ]
   },
   {
-   "company": "LaunchBrightly",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
    "company": "Askable",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Logos",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "Institute of Free Technology",
    "platform": "himalayas",
    "eligible": 1,
    "total": 1,
@@ -452,7 +471,7 @@
    ]
   },
   {
-   "company": "Featherless AI",
+   "company": "Search Atlas",
    "platform": "himalayas",
    "eligible": 1,
    "total": 1,
@@ -461,12 +480,12 @@
    ]
   },
   {
-   "company": "Search Atlas",
-   "platform": "himalayas",
+   "company": "RevenueCat",
+   "platform": "jobicy",
    "eligible": 1,
    "total": 1,
    "locations": [
-    "Worldwide"
+    "APAC,  EMEA,  LATAM,  Canada,  USA"
    ]
   },
   {
@@ -485,15 +504,6 @@
    "total": 1,
    "locations": [
     "EMEA"
-   ]
-  },
-  {
-   "company": "TRM Labs",
-   "platform": "jobicy",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "EMEA,  Singapore"
    ]
   },
   {
@@ -533,15 +543,6 @@
    ]
   },
   {
-   "company": "RevenueCat",
-   "platform": "jobicy",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "APAC,  EMEA,  LATAM,  Canada,  USA"
-   ]
-  },
-  {
    "company": "Elevenlabs",
    "platform": "jobicy",
    "eligible": 1,
@@ -552,15 +553,6 @@
   },
   {
    "company": "Softgic",
-   "platform": "jobicy",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Anywhere"
-   ]
-  },
-  {
-   "company": "Phantom",
    "platform": "jobicy",
    "eligible": 1,
    "total": 1,
