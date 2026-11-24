@@ -60,7 +60,7 @@ jobs:
               )
               for name, expected in pages.items():
                   url = base + name + '.html'
-                  response = page.goto(url, wait_until='networkidle', timeout=60000)
+                  response = page.goto(url, wait_until='domcontentloaded', timeout=60000)
                   if response is None or response.status != 200:
                       raise RuntimeError(f'{url}: expected HTTP 200, received {response.status if response else "no response"}')
                   actual = urlparse(page.url)
@@ -74,7 +74,7 @@ jobs:
                   if expected.lower() not in headline.lower():
                       raise RuntimeError(f'{url}: page heading mismatch: {headline!r}')
                   page.evaluate('document.fonts.ready')
-                  page.wait_for_timeout(1300)
+                  page.wait_for_timeout(1600)
                   png = Path('/tmp') / f'{name}-live.png'
                   page.screenshot(path=str(png), full_page=False, animations='disabled')
                   jpg = target / f'{name}-og.jpg'
