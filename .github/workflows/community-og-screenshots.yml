@@ -1,4 +1,4 @@
-name: Capture community page OG screenshots
+name: Capture LIVE community page OG screenshots
 
 on:
   push:
@@ -23,48 +23,70 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: Check out current redesign branch
+      - name: Check out redesign branch
         uses: actions/checkout@v4
         with:
           persist-credentials: true
 
-      - name: Prepare desktop browser
+      - name: Install desktop Chromium and image tools
         run: |
-          npx --yes playwright install --with-deps chromium
+          python3 -m pip install --quiet playwright pillow
+          python3 -m playwright install --with-deps chromium
 
-      - name: Render real pages at desktop viewport
+      - name: Capture the actual public pages (never localhost)
         run: |
-          set -euo pipefail
-          python3 -m http.server 8765 --bind 127.0.0.1 --directory . >/tmp/og-server.log 2>&1 &
-          sleep 2
-          for page in communities_test.html communities_test_2.html communities_test_3.html; do
-            npx --yes playwright screenshot \
-              --browser chromium \
-              --viewport-size "1440,756" \
-              --wait-for-timeout 2200 \
-              "http://127.0.0.1:8765/${page}" \
-              "/tmp/${page%.html}.png"
-          done
-
-      - name: Export 1200 by 630 social share images
-        run: |
-          python3 -m pip install --quiet pillow
           python3 - <<'PY'
           from pathlib import Path
+          from urllib.parse import urlparse
           from PIL import Image
-          dest = Path('assets/img/social')
-          dest.mkdir(parents=True, exist_ok=True)
-          for name in ('communities_test', 'communities_test_2', 'communities_test_3'):
-              source = Path('/tmp') / f'{name}.png'
-              target = dest / f'{name}-og.jpg'
-              with Image.open(source) as img:
-                  img.convert('RGB').resize((1200, 630), Image.Resampling.LANCZOS).save(
-                      target, 'JPEG', quality=88, optimize=True, progressive=True
-                  )
-              print(f'Generated {target}: {target.stat().st_size:,} bytes')
+          from playwright.sync_api import sync_playwright
+
+          pages = {
+              'communities_test': 'Your next opportunity',
+              'communities_test_2': 'Your shortcut to the right tech',
+              'communities_test_3': 'The Ultimate Tech Plug',
+          }
+          base = 'https://thetechhut.co/'
+          target = Path('assets/img/social')
+          target.mkdir(parents=True, exist_ok=True)
+          with sync_playwright() as p:
+              browser = p.chromium.launch(headless=True)
+              page = browser.new_page(
+                  viewport={'width': 1440, 'height': 756},
+                  device_scale_factor=1,
+                  color_scheme='light',
+                  locale='en-KE',
+                  reduced_motion='reduce',
+              )
+              for name, expected in pages.items():
+                  url = base + name + '.html'
+                  response = page.goto(url, wait_until='networkidle', timeout=60000)
+                  if response is None or response.status != 200:
+                      raise RuntimeError(f'{url}: expected HTTP 200, received {response.status if response else "no response"}')
+                  actual = urlparse(page.url)
+                  if actual.hostname not in ('thetechhut.co', 'www.thetechhut.co'):
+                      raise RuntimeError(f'{url}: unexpected redirect to {page.url}')
+                  if actual.path.rstrip('/') != '/' + name + '.html':
+                      raise RuntimeError(f'{url}: wrong landing page {page.url}')
+                  heading = page.locator('h1').first
+                  heading.wait_for(state='visible', timeout=10000)
+                  headline = heading.inner_text().strip()
+                  if expected.lower() not in headline.lower():
+                      raise RuntimeError(f'{url}: page heading mismatch: {headline!r}')
+                  page.evaluate('document.fonts.ready')
+                  page.wait_for_timeout(1300)
+                  png = Path('/tmp') / f'{name}-live.png'
+                  page.screenshot(path=str(png), full_page=False, animations='disabled')
+                  jpg = target / f'{name}-og.jpg'
+                  with Image.open(png) as im:
+                      im.convert('RGB').resize((1200, 630), Image.Resampling.LANCZOS).save(
+                          jpg, 'JPEG', quality=89, optimize=True, progressive=True
+                      )
+                  print(f'LIVE screenshot verified: {url} | heading: {headline} | file: {jpg} | bytes: {jpg.stat().st_size}')
+              browser.close()
           PY
 
-      - name: Commit screenshots to the redesign branch
+      - name: Commit the live screenshots
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
@@ -73,8 +95,8 @@ jobs:
                   assets/img/social/communities_test_2-og.jpg \
                   assets/img/social/communities_test_3-og.jpg
           if git diff --cached --quiet; then
-            echo "OG screenshots are already up to date"
+            echo "Images are unchanged"
           else
-            git commit -m "Capture desktop community-page OG images"
+            git commit -m "Replace local community OG images with screenshots of live website"
             git push origin HEAD:chore/redesign
           fi
