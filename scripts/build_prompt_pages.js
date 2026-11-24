@@ -64,6 +64,9 @@ function page(shell, p, image) {
     set(/<meta property="og:image:alt" content="[^"]*">/, '<meta property="og:image:alt" content="' + esc(title + ': ' + price + ' AI prompt by ' + (p.seller || 'a member') + ' on The Tech Hut') + '">');
     set(/<meta name="twitter:image" content="[^"]*">/, '<meta name="twitter:image" content="' + esc(image) + '">');
   }
+  // The public listing itself, so the page draws before the live copy arrives.
+  var data = JSON.stringify(p).replace(/</g, '\\u003c').replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
+  set(/<\/head>/, '<script type="application/json" id="ppData">' + data + '</script>\n</head>');
   return shell;
 }
 
@@ -81,6 +84,8 @@ async function main() {
   var mapFile = path.join(ROOT, 'prompts', 'sitemap.xml');
   fs.writeFileSync(mapFile, sitemap.build(prompts, Date.now()));
   if (!prompts) return;
+  // The whole public list, for /prompts/ to draw at once while it asks the Worker.
+  fs.writeFileSync(path.join(ROOT, 'prompts', 'list.json'), JSON.stringify({ updated: new Date().toISOString(), prompts: prompts }));
 
   var shell = fs.readFileSync(SHELL, 'utf8');
   var draw = cards.cardWriter();   // null without sharp: pages keep the generic image

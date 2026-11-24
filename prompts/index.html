@@ -26,6 +26,14 @@
     <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://thetechhut-pay.thetechhut.workers.dev" crossorigin>
+    <script>
+    // Ask for the prompt list before the rest of the page has loaded; the page's
+    // script picks this up instead of starting its own request.
+    try { window.__tthPrompts = fetch('https://thetechhut-pay.thetechhut.workers.dev/market/prompts').then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) { j._status = r.status; return j; });
+    }); } catch (e) {}
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/thh.css">
     <script src="/assets/js/motion.js?v=1"></script>
@@ -378,11 +386,32 @@
       g.appendChild(a);
     });
   }
-  function load() {
-    return api('prompts').then(function (j) {
-      if (j._status !== 200) { $('count').textContent = j.error || 'The marketplace is switching on. Check back soon.'; state.prompts = []; return; }
-      state.prompts = j.prompts || []; drawGrid();
-    }).catch(function () { $('count').textContent = 'Could not load prompts. Check your connection and reload.'; });
+  /* The list from the last visit (this browser) or from the last site build
+     (/prompts/list.json) is drawn straight away; the live list replaces it. */
+  var LIST_KEY = 'tthPromptList', live = false;
+  function remember(list) { try { localStorage.setItem(LIST_KEY, JSON.stringify({ t: Date.now(), prompts: list })); } catch (e) {} }
+  function early(list) {
+    if (live || !Array.isArray(list) || !list.length) return;
+    state.prompts = list; drawGrid();
+  }
+  function warmStart() {
+    try { var c = JSON.parse(localStorage.getItem(LIST_KEY) || 'null'); if (c && Date.now() - c.t < 7 * 864e5) early(c.prompts); } catch (e) {}
+    if (!state.prompts.length) fetch('/prompts/list.json').then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { if (j) early(j.prompts); }).catch(function () {});
+  }
+  // fresh: after this visitor changed something, skip the browser's copy of the list.
+  function load(fresh) {
+    var got = !fresh && window.__tthPrompts ? window.__tthPrompts : fresh
+      ? fetch(API + 'prompts', { cache: 'no-cache' }).then(function (r) { return r.json().then(function (j) { j._status = r.status; return j; }); })
+      : api('prompts');
+    window.__tthPrompts = null;
+    return got.then(function (j) {
+      if (j._status !== 200) {
+        if (state.prompts.length) return;   // keep the saved list on screen
+        $('count').textContent = j.error || 'The marketplace is switching on. Check back soon.'; state.prompts = []; return;
+      }
+      live = true; state.prompts = j.prompts || []; drawGrid(); remember(state.prompts);
+    }).catch(function () { if (!state.prompts.length) $('count').textContent = 'Could not load prompts. Check your connection and reload.'; });
   }
 
   function pagePath(p) { return p.path || ('/prompts/p/' + p.id + '/'); }
@@ -449,7 +478,7 @@
       var del = el('button', 'pm-link', 'Remove'); del.type = 'button';
       del.addEventListener('click', function () {
         if (!window.confirm('Remove "' + p.title + '"? People who bought it keep their copy.')) return;
-        authed('delete', { id: p.id }).then(function () { toast('Removed.'); refreshMe(); load(); });
+        authed('delete', { id: p.id }).then(function () { toast('Removed.'); refreshMe(); load(true); });
       });
       act.appendChild(ed); act.appendChild(del); li.appendChild(act); ul.appendChild(li);
     });
@@ -492,7 +521,7 @@
   $('profileForm').addEventListener('submit', function (e) {
     e.preventDefault();
     authed('profile', { name: e.target.name.value }).then(function (j) {
-      if (j.user) { state.me = j.user; drawAcct(); msg($('profileMsg'), 'Saved.', true); load(); } else msg($('profileMsg'), j.error || 'Could not save.');
+      if (j.user) { state.me = j.user; drawAcct(); msg($('profileMsg'), 'Saved.', true); load(true); } else msg($('profileMsg'), j.error || 'Could not save.');
     });
   });
   $('signOut').addEventListener('click', function () {
@@ -520,7 +549,7 @@
     $('sellBtn').disabled = true; msg($('sellMsg'), '');
     authed('save', data).then(function (j) {
       $('sellBtn').disabled = false;
-      if (j.prompt) { msg($('sellMsg'), data.id ? 'Saved.' : 'Published. It is live in the marketplace now, and we have emailed you its link so you can share it.', true); resetSell(); refreshMe(); load(); return; }
+      if (j.prompt) { msg($('sellMsg'), data.id ? 'Saved.' : 'Published. It is live in the marketplace now, and we have emailed you its link so you can share it.', true); resetSell(); refreshMe(); load(true); return; }
       if (j.error === 'payout') { msg($('sellMsg'), j.message); setTimeout(function () { tab('payout'); }, 1400); return; }
       msg($('sellMsg'), j.error === 'signin' ? 'Your session ended. Sign in again.' : (j.error || 'Could not save. Try again.'));
     });
@@ -555,6 +584,7 @@
       return;
     }
     drawCats();
+    warmStart();
     var m = /[#&]login=([A-Za-z0-9._-]+)/.exec(location.hash || '');
     var first = Promise.resolve();
     if (m) {

@@ -26,6 +26,7 @@
     <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://thetechhut-pay.thetechhut.workers.dev" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/thh.css">
     <script src="/assets/js/motion.js?v=1"></script>
@@ -446,15 +447,34 @@
     }).catch(function () { msg(''); return null; });
   }
 
+  // Draw at once from what this page already knows: the copy written into it when
+  // the site was built, or the marketplace list this browser saw last. The live
+  // prompt, fetched alongside, replaces it and adds the buttons.
+  function quickDraw() {
+    var p = null;
+    try { var d = $('ppData'); if (d) p = JSON.parse(d.textContent); } catch (e) {}
+    if (!p || p.id !== id) {
+      try {
+        var c = JSON.parse(localStorage.getItem('tthPromptList') || 'null');
+        (c && c.prompts || []).forEach(function (x) { if (x && x.id === id) p = x; });
+      } catch (e) {}
+    }
+    if (p && p.id === id && p.title) draw(p);
+  }
+
   function start() {
     var m = /[#&]login=([A-Za-z0-9._-]+)/.exec(location.hash || '');
     var q = new URLSearchParams(location.search), ref = q.get('reference') || q.get('trxref');
     if (m || ref) history.replaceState(null, '', location.pathname);   // never leave a sign-in link or reference in the address bar
+    if (id && !ref) quickDraw();
+    // The public prompt does not depend on who is signed in, so ask for it now, not after.
+    var livePrompt = id ? api('prompt?id=' + encodeURIComponent(id)) : null;
+    if (livePrompt) livePrompt.catch(function () {});
     var first = m ? swapLink(m[1]) : Promise.resolve();
     var paid = null;
     first.then(refreshMe).then(function () { return ref ? verify(ref).then(function (r) { paid = r; }) : null; }).then(function () {
       if (!id) { missing(); return; }
-      return api('prompt?id=' + encodeURIComponent(id)).then(function (j) {
+      return livePrompt.then(function (j) {
         if (!j.prompt) {
           if (paid && paid.body) {   // bought, then removed by its seller: buyers keep it
             draw({ id: id, title: 'Your prompt', desc: '', price: 0, path: location.pathname, created: Date.now() });
