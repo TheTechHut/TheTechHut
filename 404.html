@@ -52,6 +52,23 @@
             <li><a href="/blog/">Blog</a><span>/blog/</span></li>
             <li><a href="/shop/">Shop</a><span>/shop/</span></li>
         </ul>
+        <script>
+        // An old link to a role page: the role has closed, or its employer took it down.
+        (function () {
+            if (!/^\/jobs\/role\/[^/]+/.test(location.pathname)) return;
+            var main = document.getElementById('main');
+            main.querySelector('.eyebrow').textContent = 'Job no longer listed';
+            main.querySelector('h1').textContent = 'This job has closed';
+            main.querySelector('.lede').innerHTML = 'The employer has filled it or taken the posting down, so it is no longer on our board. ' +
+                'Here are the roles that are open today:';
+            main.querySelector('.index-list').innerHTML =
+                '<li><a href="/jobs/">All open tech jobs</a><span>/jobs/</span></li>' +
+                '<li><a href="/jobs/role/">Open roles by employer</a><span>/jobs/role/</span></li>' +
+                '<li><a href="/jobs/daily/">Get new jobs by email every morning</a><span>/jobs/daily/</span></li>' +
+                '<li><a href="https://whatsapp.com/channel/0029Va1RgQyFCCoV2JA0PL1H" rel="noopener">Follow our WhatsApp channel</a><span>WhatsApp</span></li>';
+            document.title = 'This job has closed | The Tech Hut';
+        })();
+        </script>
     </main>
 
 <footer class="sitefoot">

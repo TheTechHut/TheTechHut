@@ -73,6 +73,13 @@ function cleanBody(raw, id) {
   return h.length > MAX_BODY ? '' : h;   // a runaway feed is skipped rather than cut mid-tag
 }
 
+// A body from the feed is raw employer markup; one held over from the last build
+// ({ clean }, scripts/build_jobs_board.js) was cleaned when its page was built.
+function bodyOf(b, id) {
+  if (!b) return '';
+  return typeof b === 'object' ? (String(b.clean || '').length > MAX_BODY ? '' : String(b.clean || '')) : cleanBody(b, id);
+}
+
 function slugOf(j) {
   var base = (j.title + ' ' + j.company).toLowerCase()
     .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 70).replace(/-+$/, '');
@@ -263,7 +270,7 @@ async function main() {
         hasCard = true;
       } catch (e) { console.error('job pages: no card for %s: %s', slug, e.message); }
     }
-    fs.writeFileSync(path.join(dir, 'index.html'), page(pageJob, slug, bodies[j.id] ? cleanBody(bodies[j.id], j.id) : '', hasCard));
+    fs.writeFileSync(path.join(dir, 'index.html'), page(pageJob, slug, bodyOf(bodies[j.id], j.id), hasCard));
     if (indexable) urls.push({ loc: SITE + '/jobs/role/' + slug + '/', lastmod: (postedOn(pageJob) || board.updated).slice(0, 10) });
   }
   fs.writeFileSync(path.join(OUT, 'index.html'), hub(rows, board.updated));
