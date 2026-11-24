@@ -417,14 +417,14 @@ export async function handleMarket(req, env, url, origin, deps) {
 
   if (req.method === 'GET' && route === 'prompts') {
     const r = await call(env, { op: 'list' });
-    return new Response(JSON.stringify(r), { status: 200, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=30', ...deps.cors(origin) } });
+    return new Response(JSON.stringify(r), { status: 200, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=30, stale-while-revalidate=600', ...deps.cors(origin) } });
   }
   if (req.method === 'GET' && route === 'prompt') {
     const id = url.searchParams.get('id') || '';
     if (!/^[a-z0-9]{6,20}$/.test(id)) return json({ error: 'That prompt is no longer available.' }, 404, origin);
     const r = await call(env, { op: 'one', id });
     if (!r.prompt) return json({ error: 'That prompt is no longer available.' }, 404, origin);
-    return new Response(JSON.stringify({ prompt: r.prompt }), { status: 200, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=30', ...deps.cors(origin) } });
+    return new Response(JSON.stringify({ prompt: r.prompt }), { status: 200, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=30, stale-while-revalidate=600', ...deps.cors(origin) } });
   }
   if (req.method === 'GET' && route === 'banks') {
     const r = await paystack(env, '/bank?country=kenya&currency=KES&perPage=200');
