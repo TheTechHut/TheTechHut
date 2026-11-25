@@ -750,4 +750,10 @@
     <changefreq>never</changefreq>
     <priority>0.60</priority>
   </url>
+  <url>
+    <loc>https://thetechhut.co/blog/ngo-remote-jobs-kenya/</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
 </urlset>
