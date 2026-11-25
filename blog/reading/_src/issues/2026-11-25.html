@@ -1,0 +1,40 @@
+<!-- date: Wednesday, 25 November 2026 -->
+<!-- number: Nº 6 -->
+<!-- image: https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&amp;w=1200&amp;h=750&amp;auto=format&amp;fit=crop -->
+<!-- alt: A smartphone lying on a pale wooden surface, its home screen showing app icons such as Messages, Photos, Camera and Google Maps -->
+<p class="lede">This week: keeping a Flutter app recording GPS after the operating system kills it, what Flutter 3.50 changes, what really got in the way of moving a real Android app to Kotlin Multiplatform, a clear way to think about why LLM features fail, and five Java stacks squeezed onto a 512 MiB server.</p>
+
+<article class="pick">
+  <span class="kicker">Mobile</span>
+  <h3><a href="https://titogeo.substack.com/p/your-flutter-app-dies-in-the-middle" target="_blank" rel="noopener">Your Flutter app dies in the middle of the ride. So that’s how we kept recording anyway.</a></h3>
+  <p class="src">Tito George &middot; Substack &middot; 17 November 2026</p>
+  <p>Any team building a delivery, boda or field-agent app will recognise this bug: the phone runs short of memory, Android kills the app, and part of the route on the map becomes a straight line. Tito George, who builds the ride-recording app roadsrepublic, explains how his team kept recording anyway. Rather than reviving Flutter in the background, they wrote a small native recorder for each platform: a sticky foreground service on Android, and on iOS the system's relaunch on significant location changes. Both read the ride's state from SharedPreferences and write into the app's own SQLite queue, and the app takes the ride back through an explicit handover when it reopens. The gotchas, from Android 14's background-location rule to testing real kills on real devices, are worth the read alone. It closes with links to the author's app.</p>
+</article>
+
+<article class="pick">
+  <span class="kicker">Flutter</span>
+  <h3><a href="https://flutter.dev/blog/whats-new-in-flutter-3-50" target="_blank" rel="noopener">What's new in Flutter 3.50</a></h3>
+  <p class="src">Emma Twersky &middot; The Flutter Blog &middot; 11 November 2026</p>
+  <p>The headline in this long release post is that direct native interop is now stable: FFIgen for Objective-C and JNIgen for Java and Kotlin let Dart call platform APIs directly, even synchronously, instead of passing messages over platform channels. If you ship payment or banking apps, two smaller changes matter as well. Android release builds now ignore route and entrypoint values that other apps pass in through Intent extras, and the numeric keyboard gains a password option for PIN entry on Android. Note too that the bundled Material and Cupertino libraries are deprecated in favour of standalone packages, with a dart fix migration, and that the CocoaPods fallback is winding down as its trunk turns read-only in December. Read it before you run flutter upgrade.</p>
+</article>
+
+<article class="pick">
+  <span class="kicker">Android</span>
+  <h3><a href="https://proandroiddev.com/migrating-a-real-android-app-to-kotlin-multiplatform-3-4-sharing-the-ui-without-losing-safety-net-f74a6bf408ae" target="_blank" rel="noopener">Migrating a Real Android App to Kotlin Multiplatform</a></h3>
+  <p class="src">Daniel Voko &middot; ProAndroidDev &middot; 9 November 2026</p>
+  <p>Part three of Daniel Voko's series on moving BikeHub, a real Android app, to Kotlin Multiplatform makes a point worth hearing before you start a migration of your own: the composables moved easily, the tooling around them did not. Most screens went to shared code with little more than new imports, helped by having kept UI logic out of Android ViewModels from the start. The trouble came from resources, preview tooling and screenshot tests, all of which assumed an Android library module; he needed reflection in a build file and an extra sync task to get his Roborazzi tests working again. He also found that 70% of his supposedly Android-specific code was preview functions. Candid about the costs, including 55 MB of screenshots kept in the repository.</p>
+</article>
+
+<article class="pick">
+  <span class="kicker">AI</span>
+  <h3><a href="https://blog.bytebytego.com/p/evals-for-ai-engineers" target="_blank" rel="noopener">Evals for AI Engineers</a></h3>
+  <p class="src">Shreya Shankar and Hamel Husain &middot; ByteByteGo &middot; 18 November 2026</p>
+  <p>If you are adding a language model to a product, this free excerpt from Shreya Shankar and Hamel Husain's O'Reilly book gives you a practical way to think about why it fails. They describe three gaps: comprehension (you have not looked closely enough at real inputs and outputs), specification (your prompt leaves choices unstated, so the model guesses) and generalisation (the instructions are clear, yet the model still slips on some inputs). Each needs a different fix, from rewriting the prompt to measuring a failure rate with automated checks, and an analyse, measure, improve loop ties them together. The running example, an agent that summarises incoming email, maps neatly onto a customer-support bot. The post promotes the book and carries two sponsor slots.</p>
+</article>
+
+<article class="pick">
+  <span class="kicker">Backend</span>
+  <h3><a href="https://pvrlabs.xyz/articles/five-java-stacks-512mb-vps.html" target="_blank" rel="noopener">Five Java Stacks on a 512 MiB VPS: Same Business Logic, Different Footprints</a></h3>
+  <p class="src">Ted Kupolov &middot; PVR Labs &middot; 9 November 2026</p>
+  <p>Plenty of side projects and small client systems run on the cheapest VPS the budget allows, which makes this measured comparison useful. Ted Kupolov ran the same small Java service five ways, on Spring Boot, Javalin, Avaje Jex and two Micronaut variants, on one vCPU and 512 MiB of RAM with MariaDB on the same machine. All five fitted under light traffic. On the JVM, Spring Boot used roughly 180 to 188 MiB of resident memory against about 116 for Jex; GraalVM native images cut memory and start-up time further, but each took six to thirteen minutes to compile on a larger build machine. He is careful about the limits: two runs per stack and a synthetic workload. Three of the stacks use CoilBase, his own preview library.</p>
+</article>
