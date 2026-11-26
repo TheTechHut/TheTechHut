@@ -31,7 +31,7 @@ var cards = require('./prompt_card.js');
 
 var ROOT = path.join(__dirname, '..');
 var SHELL = path.join(ROOT, 'prompts', 'p', 'index.html');
-var API = process.env.MARKET_API || 'https://thetechhut-pay.thetechhut.workers.dev/market/prompts';
+var API = process.env.MARKET_API || 'https://api.thetechhut.co/market/prompts';
 var SITE = 'https://thetechhut.co';
 var CAT = { writing: 'Writing', coding: 'Coding', career: 'Career & CVs', marketing: 'Marketing', data: 'Data & analysis',
             images: 'Images', business: 'Business', learning: 'Learning', other: 'Other' };

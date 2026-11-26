@@ -18,7 +18,7 @@ var path = require('path');
 
 var ROOT = path.join(__dirname, '..');
 var OUT = path.join(ROOT, 'prompts', 'sitemap.xml');
-var API = process.env.MARKET_API || 'https://thetechhut-pay.thetechhut.workers.dev/market/prompts';
+var API = process.env.MARKET_API || 'https://api.thetechhut.co/market/prompts';
 var SITE = 'https://thetechhut.co';
 
 function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' }[c]; }); }

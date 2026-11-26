@@ -14,7 +14,7 @@
  * (localStorage). window.TTHArcade lets the directory manage that player.
  */
 (function () {
-  var API = 'https://thetechhut-pay.thetechhut.workers.dev';
+  var API = 'https://api.thetechhut.co';
   var EVERY = 30000;
   var KEY = 'tthArcadePlayer';
 

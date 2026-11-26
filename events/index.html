@@ -194,7 +194,7 @@
 <script>
 (function () {
   'use strict';
-  var API = 'https://thetechhut-pay.thetechhut.workers.dev/events/';
+  var API = 'https://api.thetechhut.co/events/';
   var $ = function (id) { return document.getElementById(id); };
   var session = null, me = '';
   try { var s = JSON.parse(localStorage.getItem('tthEventsSession') || 'null'); if (s && s.t) { session = s.t; me = s.e || ''; } } catch (e) {}

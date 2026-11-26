@@ -36,6 +36,12 @@ https://thetechhut-pay.<your-subdomain>.workers.dev
 
 Keep it. It goes into `API_BASE` in `assets/js/pay.js`.
 
+The live Worker also answers on **https://api.thetechhut.co** (a custom domain
+set in `wrangler.toml`; thetechhut.co's DNS is on Cloudflare, so `wrangler
+deploy` creates it). The site calls that address: only there does Cloudflare's
+edge cache work, which keeps the prompt and events lists fast. The workers.dev
+address keeps working, for Paystack's webhook and older links.
+
 ### 3. Set the secrets
 
 **Never put these in a file. Never paste them into a chat, including to me.**

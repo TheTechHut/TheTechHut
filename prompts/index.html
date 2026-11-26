@@ -26,11 +26,11 @@
     <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://thetechhut-pay.thetechhut.workers.dev" crossorigin>
+    <link rel="preconnect" href="https://api.thetechhut.co" crossorigin>
     <script>
     // Ask for the prompt list before the rest of the page has loaded; the page's
     // script picks this up instead of starting its own request.
-    try { window.__tthPrompts = fetch('https://thetechhut-pay.thetechhut.workers.dev/market/prompts').then(function (r) {
+    try { window.__tthPrompts = fetch('https://api.thetechhut.co/market/prompts').then(function (r) {
       return r.json().catch(function () { return {}; }).then(function (j) { j._status = r.status; return j; });
     }); } catch (e) {}
     </script>
@@ -309,7 +309,7 @@
     </footer>
 <script>
 (function () {
-  var API = 'https://thetechhut-pay.thetechhut.workers.dev/market/';
+  var API = 'https://api.thetechhut.co/market/';
   var CATS = [['all', 'All'], ['writing', 'Writing'], ['coding', 'Coding'], ['career', 'Career & CVs'], ['marketing', 'Marketing'],
               ['data', 'Data & analysis'], ['images', 'Images'], ['business', 'Business'], ['learning', 'Learning'], ['other', 'Other']];
   var MODELS = [['any', 'Any AI'], ['chatgpt', 'ChatGPT'], ['claude', 'Claude'], ['gemini', 'Gemini'], ['copilot', 'Copilot'], ['midjourney', 'Midjourney'], ['other', 'Other']];
@@ -402,7 +402,7 @@
   // fresh: after this visitor changed something, skip the browser's copy of the list.
   function load(fresh) {
     var got = !fresh && window.__tthPrompts ? window.__tthPrompts : fresh
-      ? fetch(API + 'prompts', { cache: 'no-cache' }).then(function (r) { return r.json().then(function (j) { j._status = r.status; return j; }); })
+      ? fetch(API + 'prompts?fresh=' + Date.now(), { cache: 'no-cache' }).then(function (r) { return r.json().then(function (j) { j._status = r.status; return j; }); })
       : api('prompts');
     window.__tthPrompts = null;
     return got.then(function (j) {
