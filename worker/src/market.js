@@ -407,6 +407,40 @@ export function saleEmail(p, { amount, sales, seller }) {
 }
 const MODEL_NAMES = { chatgpt: 'ChatGPT', claude: 'Claude', gemini: 'Gemini', copilot: 'Copilot', midjourney: 'Midjourney' };
 
+/*
+ * Public, read-only JSON kept for `ttl` seconds in Cloudflare's cache of the
+ * data centre that served it, so most visitors never wake the Durable Object.
+ * The Cache API works only on a custom domain (api.thetechhut.co), not on
+ * workers.dev, where this simply produces every time. The body is cached
+ * without CORS headers, which differ by origin, and they are added on the way
+ * out. `fresh` in the query (the page sends it after a visitor's own change)
+ * skips the cached copy and replaces it. `produce` returns the body text, or
+ * null for "not found", answered by `notFound()` and never cached.
+ */
+export async function edgeCached(req, url, origin, deps, ttl, produce, notFound) {
+  const cache = typeof caches !== 'undefined' && caches.default ? caches.default : null;
+  const keyUrl = new URL(url.toString());
+  const fresh = keyUrl.searchParams.has('fresh');
+  keyUrl.searchParams.delete('fresh');
+  const key = new Request(keyUrl.toString(), { method: 'GET' });
+  const out = (body, hit) => new Response(body, { status: 200, headers: {
+    'Content-Type': 'application/json',
+    'Cache-Control': 'public, max-age=30, stale-while-revalidate=600',
+    'X-Edge-Cache': hit ? 'HIT' : 'MISS',
+    ...deps.cors(origin) } });
+  if (cache && !fresh) {
+    const hit = await cache.match(key).catch(() => null);
+    if (hit) return out(await hit.text(), true);
+  }
+  const body = await produce();
+  if (body == null) return notFound ? notFound() : deps.json({ error: 'not found' }, 404, origin);
+  if (cache) {
+    const put = cache.put(key, new Response(body, { headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=' + ttl } })).catch(() => {});
+    if (req.ctx && req.ctx.waitUntil) req.ctx.waitUntil(put); else await put;
+  }
+  return out(body, false);
+}
+
 /** Returns a Response for /market/*, or null. */
 export async function handleMarket(req, env, url, origin, deps) {
   const { json, allowedOrigins } = deps;
@@ -416,15 +450,15 @@ export async function handleMarket(req, env, url, origin, deps) {
   if (!env.MARKET || !env.MARKET_SECRET) return json({ error: 'The marketplace is switching on. Try again soon.' }, 503, origin);
 
   if (req.method === 'GET' && route === 'prompts') {
-    const r = await call(env, { op: 'list' });
-    return new Response(JSON.stringify(r), { status: 200, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=30, stale-while-revalidate=600', ...deps.cors(origin) } });
+    return edgeCached(req, url, origin, deps, 60, async () => JSON.stringify(await call(env, { op: 'list' })));
   }
   if (req.method === 'GET' && route === 'prompt') {
     const id = url.searchParams.get('id') || '';
     if (!/^[a-z0-9]{6,20}$/.test(id)) return json({ error: 'That prompt is no longer available.' }, 404, origin);
-    const r = await call(env, { op: 'one', id });
-    if (!r.prompt) return json({ error: 'That prompt is no longer available.' }, 404, origin);
-    return new Response(JSON.stringify({ prompt: r.prompt }), { status: 200, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=30, stale-while-revalidate=600', ...deps.cors(origin) } });
+    return edgeCached(req, url, origin, deps, 60, async () => {
+      const r = await call(env, { op: 'one', id });
+      return r.prompt ? JSON.stringify({ prompt: r.prompt }) : null;
+    }, () => json({ error: 'That prompt is no longer available.' }, 404, origin));
   }
   if (req.method === 'GET' && route === 'banks') {
     const r = await paystack(env, '/bank?country=kenya&currency=KES&perPage=200');

@@ -1,3 +1,4 @@
+import { edgeCached } from './market.js';
 /**
  * Community events: the list on /events/, read from two places.
  *
@@ -175,8 +176,7 @@ export async function handleEvents(req, env, url, origin, deps) {
   if (!env.EVENTS || !env.MARKET_SECRET) return json({ error: 'The events list is switching on. Try again soon.' }, 503, origin);
 
   if (req.method === 'GET' && route === 'list') {
-    const r = await call(env, { op: 'list' });
-    return new Response(JSON.stringify(r), { status: 200, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=300', ...deps.cors(origin) } });
+    return edgeCached(req, url, origin, deps, 300, async () => JSON.stringify(await call(env, { op: 'list' })));
   }
   if (req.method !== 'POST') return json({ error: 'not found' }, 404, origin);
   const b = await req.json().catch(() => ({}));

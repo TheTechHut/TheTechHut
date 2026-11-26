@@ -2,6 +2,13 @@ name = "thetechhut-pay"
 main = "src/index.js"
 compatibility_date = "2026-10-01"
 
+# The API's own address on the site's domain. thetechhut.co's DNS is on
+# Cloudflare, so `wrangler deploy` creates the DNS record and certificate.
+# Cloudflare's edge cache (caches.default) works here, not on workers.dev.
+# workers.dev stays on for Paystack's webhook and older links.
+workers_dev = true
+routes = [{ pattern = "api.thetechhut.co", custom_domain = true }]
+
 # Nothing secret belongs in this file — it is committed. The three secrets are
 # set with `wrangler secret put <NAME>` and live only in Cloudflare:
 #
