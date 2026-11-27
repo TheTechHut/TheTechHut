@@ -121,6 +121,13 @@
         .pp-by { color: var(--dim); font-size: 15px; margin: 0 0 18px; }
         .pp-desc { font-size: 18.5px; line-height: 1.6; margin: 0 0 22px; white-space: pre-line; max-width: 62ch; }
         .pp-body { max-height: none; }
+        .pp-media { display: grid; gap: 12px; margin: 0 0 24px; max-width: 760px; }
+        .pp-media.n2, .pp-media.n3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+        .pp-media a { display: block; background: var(--rule); }
+        .pp-media img { display: block; width: 100%; height: auto; max-height: 520px; object-fit: contain; }
+        .pp-yt { position: relative; display: block; width: 100%; max-width: 760px; aspect-ratio: 16 / 9; margin: 0 0 24px; padding: 0; border: 0; background: #000 center / cover no-repeat; cursor: pointer; }
+        .pp-yt span { position: absolute; inset: 0; margin: auto; width: 74px; height: 52px; border-radius: 12px; background: rgba(7,59,76,.9); color: #fff; font-size: 22px; display: grid; place-items: center; }
+        .pp-yt iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
         .pp-buy { position: sticky; top: 18px; border-top: 2px solid var(--ink); padding-top: 14px; }
         .pp-price { font: 600 34px/1.1 var(--serif); color: var(--ink); margin: 0 0 6px; }
         .pp-note { color: var(--dim); font-size: 14.5px; margin: 0 0 14px; }
@@ -157,6 +164,8 @@
       <h1 id="ppTitle" class="pp-title">Loading the prompt…</h1>
       <p class="pp-by" id="ppBy"></p>
       <p class="pp-desc" id="ppDesc"></p>
+      <div class="pp-media" id="ppMedia" hidden></div>
+      <button type="button" class="pp-yt" id="ppYt" hidden aria-label="Play the seller's video"><span aria-hidden="true">&#9654;</span></button>
       <div class="pm-preview" id="ppPreviewWrap" hidden><span class="label">Preview</span><pre id="ppPreview"></pre></div>
       <div id="ppBodyWrap" hidden>
         <div class="pm-body-head"><span class="label">The prompt</span><button class="btn ghost pm-small" type="button" id="ppCopy">Copy</button></div>
@@ -332,6 +341,7 @@
     $('ppTitle').textContent = p.title; $('ppCrumb').textContent = p.title;
     $('ppBy').textContent = 'by ' + (p.seller || 'Member') + (p.sales ? ' · ' + p.sales + (p.price > 0 ? ' sold' : ' opened') : '');
     $('ppDesc').textContent = p.desc || '';
+    drawMedia(p);
     $('ppPreview').textContent = p.preview || ''; $('ppPreviewWrap').hidden = !p.preview;
     $('ppPrice').textContent = price(p.price);
     var facts = $('ppFacts'); facts.innerHTML = '';
@@ -340,6 +350,31 @@
       var li = el('li'); li.appendChild(el('span', null, f[0])); li.appendChild(el('b', null, f[1])); facts.appendChild(li);
     });
     $('ppBuy').hidden = false; $('ppFoot').hidden = false;
+  }
+  // The seller's example images, and their YouTube video. The video loads only
+  // when pressed, from youtube-nocookie.com, so a visit sends nothing to YouTube.
+  function drawMedia(p) {
+    var box = $('ppMedia'), list = (p.media || []).filter(function (k) { return /^m\/[a-z2-9]+\/[a-z2-9]+\.(jpg|png|webp)$/.test(k); }).slice(0, 3);
+    box.innerHTML = ''; box.className = 'pp-media n' + list.length; box.hidden = !list.length;
+    list.forEach(function (k, i) {
+      var a = el('a'); a.href = API + 'media/' + k; a.target = '_blank'; a.rel = 'noopener';
+      var img = el('img'); img.src = API + 'media/' + k; img.alt = 'Example ' + (i + 1) + ' from the seller of ' + (p.title || 'this prompt');
+      img.loading = i ? 'lazy' : 'eager'; img.decoding = 'async'; img.onerror = function () { a.remove(); };
+      a.appendChild(img); box.appendChild(a);
+    });
+    var yt = $('ppYt'), id = /^[A-Za-z0-9_-]{11}$/.test(p.yt || '') ? p.yt : '';
+    yt.hidden = !id;
+    if (!id || yt.getAttribute('data-id') === id) return;
+    yt.setAttribute('data-id', id);
+    yt.innerHTML = '<span aria-hidden="true">&#9654;</span>';
+    yt.style.backgroundImage = 'url(https://i.ytimg.com/vi/' + id + '/hqdefault.jpg)';
+    yt.onclick = function () {
+      if (yt.querySelector('iframe')) return;
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+      f.title = 'Video from the seller'; f.allow = 'autoplay; encrypted-media; picture-in-picture'; f.allowFullscreen = true;
+      yt.innerHTML = ''; yt.appendChild(f);
+    };
   }
   function showBody(text, note) {
     $('ppBody').textContent = text; $('ppBodyWrap').hidden = false;

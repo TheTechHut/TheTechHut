@@ -69,6 +69,44 @@ export const PRICE_MIN = 50, PRICE_MAX = 20000;     // KES; 0 means free
 export const CATS = ['writing', 'coding', 'career', 'marketing', 'data', 'images', 'video', 'business', 'learning', 'other'];
 export const MODELS = ['any', 'chatgpt', 'claude', 'gemini', 'copilot', 'midjourney', 'other'];
 const HIDE_AFTER_REPORTS = 5;
+/* Example images a seller adds to a prompt, kept in the R2 bucket bound as
+   MEDIA and served from /market/media/<key>. Browsers shrink them first; the
+   Worker still checks the bytes. No SVG: it can carry script. */
+export const MEDIA_MAX = 3, MEDIA_BYTES = 3 * 1024 * 1024, UPLOADS_PER_DAY = 30;
+const MEDIA_KEY = /^m\/[a-z2-9]{8,20}\/[a-z2-9]{16}\.(jpg|png|webp)$/;
+const MEDIA_TYPE = { jpg: 'image/jpeg', png: 'image/png', webp: 'image/webp' };
+/** The image type from its first bytes, or null: the declared type is not trusted. */
+export function sniffImage(u8) {
+  if (u8.length > 3 && u8[0] === 0xff && u8[1] === 0xd8 && u8[2] === 0xff) return 'jpg';
+  if (u8.length > 8 && u8[0] === 0x89 && u8[1] === 0x50 && u8[2] === 0x4e && u8[3] === 0x47) return 'png';
+  if (u8.length > 12 && String.fromCharCode(...u8.slice(0, 4)) === 'RIFF' && String.fromCharCode(...u8.slice(8, 12)) === 'WEBP') return 'webp';
+  return null;
+}
+/** The seller's own media keys, at most MEDIA_MAX, in their order. */
+export function cleanMedia(list, uid) {
+  if (!Array.isArray(list)) return [];
+  const out = [];
+  for (const k of list) {
+    if (typeof k === 'string' && MEDIA_KEY.test(k) && k.split('/')[1] === uid && !out.includes(k)) out.push(k);
+    if (out.length === MEDIA_MAX) break;
+  }
+  return out;
+}
+/** A YouTube video id from a link (watch, youtu.be, shorts, embed) or a bare id; '' if none. */
+export function youtubeId(s) {
+  if (typeof s !== 'string') return '';
+  const t = s.trim();
+  if (/^[A-Za-z0-9_-]{11}$/.test(t)) return t;
+  let u; try { u = new URL(t); } catch (e) { return ''; }
+  const host = u.hostname.replace(/^(www|m|music)\./, '');
+  let id = '';
+  if (host === 'youtu.be') id = u.pathname.slice(1).split('/')[0];
+  else if (host === 'youtube.com' || host === 'youtube-nocookie.com') {
+    if (u.pathname === '/watch') id = u.searchParams.get('v') || '';
+    else { const m = /^\/(shorts|embed|live|v)\/([^/?#]+)/.exec(u.pathname); if (m) id = m[2]; }
+  }
+  return /^[A-Za-z0-9_-]{11}$/.test(id) ? id : '';
+}
 
 /* ------------------------------------------------------------------ tokens */
 
@@ -121,6 +159,7 @@ export function cleanPrompt(b) {
 const publicPrompt = (p, sellers) => ({
   id: p.id, title: p.title, desc: p.desc, cat: p.cat, model: p.model, preview: p.preview, price: p.price,
   sales: p.sales || 0, created: p.created, updated: p.updated || p.created, seller: (sellers[p.uid] && sellers[p.uid].name) || 'Member', mine: false, path: promptPath(p),
+  media: p.media || [], yt: p.yt || '',
 });
 const ownPrompt = (p) => ({ ...p, reports: undefined, path: promptPath(p) });
 const meView = (u) => ({ id: u.id, name: u.name, email: u.email, payout: u.payout ? { bank: u.payout.bank, last4: u.payout.last4, holder: u.payout.holder } : null });
@@ -201,9 +240,11 @@ export class Market {
           p = { id: rid(10), uid: u.id, created: now, sales: 0, reports: 0, hidden: false };
           created = true; first = theirs.length === 0;
         }
+        const before = p.media || [];
         Object.assign(p, b.prompt, { updated: now });
         await st.put('p:' + p.id, p);
-        return ok({ prompt: ownPrompt(p), created, first, seller: created ? { name: u.name, email: u.email } : undefined });
+        const dropped = before.filter((k) => !(p.media || []).includes(k));
+        return ok({ prompt: ownPrompt(p), created, first, dropped, seller: created ? { name: u.name, email: u.email } : undefined });
       }
       case 'delete': {
         const p = await st.get('p:' + b.id);
@@ -211,8 +252,9 @@ export class Market {
         const u = await user(b.uid);
         if (!u || (p.uid !== u.id && !b.admin)) return ok({ error: 'not yours' });
         // Buyers keep what they paid for: a sold prompt is hidden, not erased.
-        if (p.sales > 0) { p.hidden = true; await st.put('p:' + p.id, p); } else await st.delete('p:' + p.id);
-        return ok({ ok: true });
+        if (p.sales > 0) { p.hidden = true; await st.put('p:' + p.id, p); return ok({ ok: true }); }
+        await st.delete('p:' + p.id);
+        return ok({ ok: true, dropped: p.media || [] });
       }
       case 'one': {             // the public view, for the prompt's own page
         const p = await st.get('p:' + b.id);
@@ -441,6 +483,44 @@ export async function edgeCached(req, url, origin, deps, ttl, produce, notFound)
   return out(body, false);
 }
 
+/* A seller's example image: multipart form with `session` and `file`.
+   -> { key }, which the Sell form then saves with the prompt. */
+async function uploadMedia(req, env, origin, deps, now) {
+  const { json, allowedOrigins } = deps;
+  if (!allowedOrigins.includes(origin)) return json({ error: 'forbidden' }, 403, origin);
+  if (!env.MEDIA) return json({ error: 'Image uploads are switching on. Try again soon.' }, 503, origin);
+  if (Number(req.headers.get('Content-Length') || 0) > MEDIA_BYTES + 64 * 1024) return json({ error: 'That image is too large. Use one under 3 MB.' }, 413, origin);
+  let form; try { form = await req.formData(); } catch (e) { return json({ error: 'Could not read that upload.' }, 400, origin); }
+  const u = await session(env, String(form.get('session') || ''), now);
+  if (!u) return json({ error: 'signin' }, 401, origin);
+  const file = form.get('file');
+  if (!file || typeof file.arrayBuffer !== 'function') return json({ error: 'Choose an image to upload.' }, 400, origin);
+  const bytes = new Uint8Array(await file.arrayBuffer());
+  if (bytes.length > MEDIA_BYTES) return json({ error: 'That image is too large. Use one under 3 MB.' }, 413, origin);
+  const ext = sniffImage(bytes);
+  if (!ext) return json({ error: 'Use a JPG, PNG or WebP image.' }, 415, origin);
+  const g = await guard(env, { op: 'hit', keys: [{ k: 'mup:' + u.id, limit: UPLOADS_PER_DAY, window: DAY }] });
+  if (g && g.ok === false) return json({ error: 'You have uploaded a lot of images today. Try again tomorrow.' }, 429, origin);
+  const key = 'm/' + u.id + '/' + rid(16) + '.' + ext;
+  await env.MEDIA.put(key, bytes, { httpMetadata: { contentType: MEDIA_TYPE[ext], cacheControl: 'public, max-age=31536000, immutable' }, customMetadata: { uid: u.id } });
+  return json({ key }, 200, origin);
+}
+
+/* The image itself. Keys are random and never reused, so it is cached for a
+   year; it is sent as an image only, never as a page that could run code. */
+async function serveMedia(env, key, url) {
+  const safety = { 'X-Content-Type-Options': 'nosniff', 'Content-Security-Policy': "default-src 'none'; sandbox", 'Cross-Origin-Resource-Policy': 'cross-origin' };
+  if (!MEDIA_KEY.test(key) || !env.MEDIA) return new Response('Not found', { status: 404, headers: safety });
+  const cache = typeof caches !== 'undefined' && caches.default ? caches.default : null;
+  const ck = new Request(url.origin + '/market/media/' + key);
+  if (cache) { const hit = await cache.match(ck).catch(() => null); if (hit) return hit; }
+  const obj = await env.MEDIA.get(key);
+  if (!obj) return new Response('Not found', { status: 404, headers: { ...safety, 'Cache-Control': 'public, max-age=60' } });
+  const res = new Response(obj.body, { headers: { ...safety, 'Content-Type': MEDIA_TYPE[key.split('.').pop()], 'Cache-Control': 'public, max-age=31536000, immutable', ETag: obj.httpEtag } });
+  if (cache) await cache.put(ck, res.clone()).catch(() => {});
+  return res;
+}
+
 /** Returns a Response for /market/*, or null. */
 export async function handleMarket(req, env, url, origin, deps) {
   const { json, allowedOrigins } = deps;
@@ -465,7 +545,9 @@ export async function handleMarket(req, env, url, origin, deps) {
     const banks = (r.body.data || []).filter((x) => x.active !== false).map((x) => ({ code: x.code, name: x.name }));
     return new Response(JSON.stringify({ banks }), { status: 200, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=3600', ...deps.cors(origin) } });
   }
+  if (req.method === 'GET' && route.startsWith('media/')) return serveMedia(env, route.slice(6), url);
   if (req.method !== 'POST') return json({ error: 'not found' }, 404, origin);
+  if (route === 'upload') return uploadMedia(req, env, origin, deps, now);
   const b = await req.json().catch(() => ({}));
   const ip = req.headers.get('CF-Connecting-IP') || '';
 
@@ -547,7 +629,15 @@ export async function handleMarket(req, env, url, origin, deps) {
   if (route === 'save') {
     const c = cleanPrompt(b);
     if (c.error) return json({ error: c.error }, 400, origin);
+    c.prompt.media = cleanMedia(b.media, u.id);
+    if (env.MEDIA && c.prompt.media.length) {   // only images that were really uploaded
+      const there = await Promise.all(c.prompt.media.map((k) => env.MEDIA.head(k).catch(() => null)));
+      c.prompt.media = c.prompt.media.filter((k, i) => there[i]);
+    }
+    c.prompt.yt = youtubeId(b.youtube);
+    if (typeof b.youtube === 'string' && b.youtube.trim() && !c.prompt.yt) return json({ error: 'That YouTube link does not look right. Paste the link from the video\'s Share button.' }, 400, origin);
     const r = await call(env, { op: 'save', uid: u.id, id: b.id ? String(b.id) : null, prompt: c.prompt });
+    if (r.dropped && r.dropped.length && env.MEDIA) await env.MEDIA.delete(r.dropped).catch(() => {});
     if (r.error === 'payout') return json({ error: 'payout', message: 'Add the bank account your earnings go to before you sell a paid prompt.' }, 400, origin);
     if (r.error === 'limit') return json({ error: 'You can post 20 prompts a day. Try again tomorrow.' }, 429, origin);
     if (r.error) return json({ error: 'You can only edit your own prompts.' }, 403, origin);
@@ -558,6 +648,7 @@ export async function handleMarket(req, env, url, origin, deps) {
 
   if (route === 'delete') {
     const r = await call(env, { op: 'delete', uid: u.id, id: String(b.id || ''), admin: admins(env).includes(u.email) });
+    if (r.dropped && r.dropped.length && env.MEDIA) await env.MEDIA.delete(r.dropped).catch(() => {});
     return r.error ? json({ error: 'You can only remove your own prompts.' }, 403, origin) : json({ ok: true }, 200, origin);
   }
 

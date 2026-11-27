@@ -67,6 +67,13 @@
         .pm-card { display: block; color: inherit; text-decoration: none; border-top: 2px solid var(--ink); padding: 12px 0 4px; outline: none; }
         .pm-card:hover h3, .pm-card:focus-visible h3 { color: var(--green); }
         .pm-card:focus-visible { box-shadow: 0 -2px 0 var(--mint); }
+        .pm-card-img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; background: var(--rule); margin: 0 0 10px; }
+        .pm-media { display: flex; flex-wrap: wrap; gap: 10px; }
+        .pm-thumb { position: relative; margin: 0; width: 110px; height: 80px; background: var(--rule); }
+        .pm-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .pm-thumb.busy { display: grid; place-items: center; font: 500 12px var(--mono); color: var(--dim); }
+        .pm-x { position: absolute; top: 4px; right: 4px; width: 26px; height: 26px; border: 0; border-radius: 50%; background: rgba(7,59,76,.85); color: #fff; font-size: 16px; line-height: 1; cursor: pointer; }
+        .pm-add { justify-self: start; cursor: pointer; }
         .pm-card-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
         .pm-cat { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--green); }
         .pm-card h3 { font-size: 21px; line-height: 1.22; margin: 10px 0 6px; }
@@ -214,6 +221,13 @@
         <label class="pm-field">Price (KES)<input name="price" type="number" min="0" max="20000" step="10" value="0" inputmode="numeric"><span class="pm-hint">0 = free. Paid: KES 50 to 20,000.</span></label>
       </div>
       <label class="pm-field">Preview <span class="pm-opt">(everyone sees this)</span><textarea name="preview" maxlength="400" rows="3" placeholder="The first lines, or an example of the output."></textarea></label>
+      <div class="pm-field" id="sellMediaField">
+        <span>Example images <span class="pm-opt">(optional, up to 3; everyone sees them)</span></span>
+        <div class="pm-media" id="sellMedia"></div>
+        <label class="btn ghost pm-add" id="sellAdd">Add images<input type="file" id="sellFiles" accept="image/jpeg,image/png,image/webp" multiple hidden></label>
+        <span class="pm-hint">Show what the prompt produces: a screenshot, a still or a before and after. JPG, PNG or WebP. Leave out anyone's personal details.</span>
+      </div>
+      <label class="pm-field">YouTube video <span class="pm-opt">(optional, everyone sees it)</span><input type="url" name="youtube" placeholder="https://youtu.be/..." inputmode="url"><span class="pm-hint">A demo or an example of what it makes. Paste the link from the video's Share button.</span></label>
       <label class="pm-field">The full prompt <span class="pm-opt">(unlocks for buyers)</span><textarea name="body" maxlength="12000" rows="8" class="pm-mono" placeholder="Paste the prompt. Mark the parts buyers fill in, like {job ad} or {your CV}." required></textarea></label>
       <div class="cta-row"><button class="btn mint" type="submit" id="sellBtn">Publish prompt</button><button class="btn ghost" type="button" id="sellReset" hidden>Cancel editing</button></div>
       <p class="formmsg" id="sellMsg" role="status"></p>
@@ -376,6 +390,13 @@
     list.forEach(function (p) {
       // Each prompt has its own page: a real link, so it can be opened in a new tab, shared and found by search engines.
       var a = el('a', 'pm-card'); a.href = p.path || ('/prompts/p/' + p.id + '/');
+      if (p.media && p.media[0]) {
+        var im = el('img', 'pm-card-img'); im.src = API + 'media/' + p.media[0]; im.alt = ''; im.loading = 'lazy'; im.decoding = 'async';
+        im.onerror = function () { this.remove(); }; a.appendChild(im);
+      } else if (p.yt) {
+        var yi = el('img', 'pm-card-img'); yi.src = 'https://i.ytimg.com/vi/' + p.yt + '/hqdefault.jpg'; yi.alt = ''; yi.loading = 'lazy'; yi.decoding = 'async';
+        yi.onerror = function () { this.remove(); }; a.appendChild(yi);
+      }
       var top = el('div', 'pm-card-top');
       top.appendChild(el('span', 'pm-cat', catName[p.cat] || 'Other'));
       top.appendChild(el('span', 'tag' + (p.price > 0 ? '' : ' mint'), price(p.price)));
@@ -535,17 +556,70 @@
   }
   fillSelect($('sellCat'), CATS, true); fillSelect($('sellModel'), MODELS);
   var FIELDS = ['id', 'title', 'desc', 'cat', 'model', 'price', 'preview', 'body'];
+  /* Example images: shrunk and re-encoded in the browser (which also strips
+     location data from phone photos), uploaded one by one, saved as keys. */
+  var MEDIA_MAX = 3, media = [], uploading = 0;
+  function drawMedia() {
+    var box = $('sellMedia'); box.innerHTML = '';
+    media.forEach(function (k, i) {
+      var fig = el('figure', 'pm-thumb'), img = el('img');
+      img.src = API + 'media/' + k; img.alt = 'Example image ' + (i + 1); fig.appendChild(img);
+      var x = el('button', 'pm-x', '\u00d7'); x.type = 'button'; x.setAttribute('aria-label', 'Remove example image ' + (i + 1));
+      x.addEventListener('click', function () { media.splice(i, 1); drawMedia(); });
+      fig.appendChild(x); box.appendChild(fig);
+    });
+    for (var u = 0; u < uploading; u++) box.appendChild(el('figure', 'pm-thumb busy', 'Uploading'));
+    $('sellAdd').hidden = media.length + uploading >= MEDIA_MAX;
+    $('sellBtn').disabled = uploading > 0;
+  }
+  function shrink(file) {
+    return new Promise(function (resolve, reject) {
+      var url = URL.createObjectURL(file), img = new Image();
+      img.onload = function () {
+        var k = Math.min(1, 1600 / Math.max(img.naturalWidth, img.naturalHeight));
+        var c = document.createElement('canvas'); c.width = Math.round(img.naturalWidth * k); c.height = Math.round(img.naturalHeight * k);
+        var ctx = c.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, c.width, c.height); ctx.drawImage(img, 0, 0, c.width, c.height);
+        URL.revokeObjectURL(url);
+        c.toBlob(function (b) {
+          if (b && b.type === 'image/webp') return resolve(b);
+          c.toBlob(function (j) { j ? resolve(j) : reject(new Error('encode')); }, 'image/jpeg', 0.85);
+        }, 'image/webp', 0.85);
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); reject(new Error('read')); };
+      img.src = url;
+    });
+  }
+  function uploadOne(file) {
+    uploading++; drawMedia();
+    return shrink(file).then(function (blob) {
+      var fd = new FormData(); fd.append('session', sess() || ''); fd.append('file', blob, 'image');
+      return fetch(API + 'upload', { method: 'POST', body: fd }).then(function (r) { return r.json().catch(function () { return {}; }); });
+    }).then(function (j) {
+      if (j.key && media.length < MEDIA_MAX) media.push(j.key);
+      else if (j.error === 'signin') msg($('sellMsg'), 'Your session ended. Sign in again.');
+      else if (!j.key) msg($('sellMsg'), j.error || 'Could not upload that image.');
+    }).catch(function () { msg($('sellMsg'), 'Could not read that image. Try a JPG or PNG.'); })
+      .then(function () { uploading--; drawMedia(); });
+  }
+  $('sellFiles').addEventListener('change', function (e) {
+    msg($('sellMsg'), '');
+    var files = [].slice.call(e.target.files || []).slice(0, Math.max(0, MEDIA_MAX - media.length - uploading));
+    e.target.value = '';
+    files.reduce(function (p, f) { return p.then(function () { return uploadOne(f); }); }, Promise.resolve());
+  });
   function editPrompt(p) {
     var f = $('sellForm');
     FIELDS.forEach(function (k) { f[k].value = p[k] == null ? '' : p[k]; });
+    media = (p.media || []).slice(); f.youtube.value = p.yt ? 'https://youtu.be/' + p.yt : ''; drawMedia();
     $('sellBtn').textContent = 'Save changes'; $('sellReset').hidden = false; tab('sell');
   }
-  function resetSell() { var f = $('sellForm'); f.reset(); f.id.value = ''; $('sellBtn').textContent = 'Publish prompt'; $('sellReset').hidden = true; }
+  function resetSell() { var f = $('sellForm'); f.reset(); f.id.value = ''; media = []; drawMedia(); $('sellBtn').textContent = 'Publish prompt'; $('sellReset').hidden = true; }
   $('sellReset').addEventListener('click', resetSell);
   $('sellForm').addEventListener('submit', function (e) {
     e.preventDefault(); var f = e.target, data = {};
     FIELDS.forEach(function (k) { data[k] = f[k].value; });
     data.price = Number(data.price) || 0;
+    data.media = media.slice(); data.youtube = f.youtube.value;
     $('sellBtn').disabled = true; msg($('sellMsg'), '');
     authed('save', data).then(function (j) {
       $('sellBtn').disabled = false;

@@ -84,3 +84,9 @@ new_sqlite_classes = ["Events"]
 # assets/js/games-arcade.js, and set the secret: wrangler secret put GAMES_SECRET
 [vars]
 GOOGLE_CLIENT_ID = "789355539846-91igvf3r339pv2k7acvvj0au6r4gtfc4.apps.googleusercontent.com"
+
+# Example images sellers add to their prompts (see MEDIA in src/market.js).
+# Create the bucket once: npx wrangler r2 bucket create thetechhut-media
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "thetechhut-media"
