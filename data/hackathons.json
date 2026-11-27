@@ -1,20 +1,7 @@
 {
- "updated": "2026-11-26T12:44:20.864Z",
- "count": 93,
+ "updated": "2026-11-27T12:33:42.250Z",
+ "count": 94,
  "hackathons": [
-  {
-   "id": "at-688",
-   "title": "Africa's Talking Open Hackathon: Hospitality & Tourism - Nairobi Kenya",
-   "host": "Africa’s Talking",
-   "url": "https://community.africastalking.com/events/details/africas-talking-africas-talking-open-community-east-africa-presents-africas-talking-open-hackathon-hospitality-amp-tourism-nairobi-kenya-1/",
-   "mode": "In person",
-   "place": "Nairobi, Kenya",
-   "starts": "2026-11-26",
-   "ends": "2026-11-26",
-   "deadline": "2026-11-26",
-   "source": "Africa’s Talking",
-   "page": "africa-s-talking-open-hackathon-hospitality-tourism-nairobi-688"
-  },
   {
    "id": "devpost-32133",
    "title": "Creators AI Winter Challenge ",
@@ -30,7 +17,7 @@
     "Fintech",
     "Productivity"
    ],
-   "joined": 112,
+   "joined": 121,
    "source": "Devpost",
    "excerpt": "Create , Build , Inspire !!",
    "prizes": [
@@ -83,7 +70,7 @@
     "Fintech",
     "Open Ended"
    ],
-   "joined": 50,
+   "joined": 58,
    "source": "Devpost",
    "excerpt": "截止延期至 11 月 28 日上午 10:00（香港時間）｜同日 Zoom 簡報。Deadline extended to 28 November, 10:00 AM HKT. Pitch Day moves to Zoom.",
    "prizes": [
@@ -151,7 +138,7 @@
    "themes": [
     "Machine Learning/AI"
    ],
-   "joined": 561,
+   "joined": 581,
    "source": "Devpost",
    "excerpt": "Build something that uses AI to help people learn, create, or make an everyday task easier.",
    "prizes": [
@@ -309,19 +296,6 @@
    "page": "global-ai-builder-s-challenge-31826"
   },
   {
-   "id": "at-708",
-   "title": "Africa's Talking Open Hackathon: Hospitality & Tourism - Dar es Salaam, Tanzania",
-   "host": "Africa’s Talking",
-   "url": "https://community.africastalking.com/events/details/africas-talking-africas-talking-open-community-east-africa-presents-africas-talking-open-hackathon-hospitality-amp-tourism-dar-es-salaam-tanzania/",
-   "mode": "In person",
-   "place": "Dar Es Salaam, Tanzania",
-   "starts": "2026-11-28",
-   "ends": "2026-11-28",
-   "deadline": "2026-11-28",
-   "source": "Africa’s Talking",
-   "page": "africa-s-talking-open-hackathon-hospitality-tourism-dar-es-s-708"
-  },
-  {
    "id": "at-686",
    "title": "THE FUTURE OF HOSPITALITY AND TOURISM : Hackathon - Kampala-Uganda",
    "host": "Africa’s Talking",
@@ -362,7 +336,7 @@
     "Education",
     "Web"
    ],
-   "joined": 771,
+   "joined": 785,
    "source": "Devpost",
    "excerpt": "Build AI-powered solutions to real-world challenges in education, healthcare, sustainability, scientific research, and community impact.",
    "prizes": [
@@ -405,7 +379,7 @@
     "Mobile",
     "Web"
    ],
-   "joined": 5604,
+   "joined": 5783,
    "source": "Devpost",
    "excerpt": "Build AI apps that run on-device and in the cloud with Firebase AI Logic.",
    "prizes": [
@@ -464,7 +438,7 @@
     "Open Ended",
     "Social Good"
    ],
-   "joined": 331,
+   "joined": 340,
    "source": "Devpost",
    "excerpt": "Build technology that brings people together or helps people support one another",
    "prizes": [
@@ -510,7 +484,7 @@
     "Machine Learning/AI",
     "Social Good"
    ],
-   "joined": 171,
+   "joined": 181,
    "source": "Devpost",
    "excerpt": "Observing Blocked Satellite Columns Using Remote-sensing and Auxiliary data",
    "prizes": [
@@ -552,7 +526,7 @@
     "Design",
     "Open Ended"
    ],
-   "joined": 124,
+   "joined": 134,
    "source": "Devpost",
    "excerpt": "A place for your next what-if. Build any idea into an app, game, tool, or creative prototype.",
    "prizes": [
@@ -594,7 +568,7 @@
     "Cybersecurity",
     "Education"
    ],
-   "joined": 68,
+   "joined": 69,
    "source": "Devpost",
    "excerpt": "305 Veterans Hackathon Edition November 2026",
    "prizes": [
@@ -647,7 +621,7 @@
     "Education",
     "Social Good"
    ],
-   "joined": 57,
+   "joined": 69,
    "source": "Devpost",
    "excerpt": "Create a project aligned to any SDG. Be creative and make it count!",
    "prizes": [
@@ -697,55 +671,36 @@
    "page": "code-for-dfw-31504"
   },
   {
-   "id": "devpost-32220",
-   "title": "Zero-G Hacks",
-   "host": "Zero-G CAD",
-   "url": "https://zero-g-hacks.devpost.com/",
+   "id": "devpost-32222",
+   "title": "National Hackathon 2026: AWS Student Builder Group COMSATS Sahiwal × ILC×Devsinc",
+   "host": "AWS SBG COMSATS Sahiwal",
+   "url": "https://aws-sbg-cui-sahiwal-hack-2026.devpost.com/",
    "mode": "Online",
    "place": "Online",
-   "starts": "2026-11-27",
+   "starts": "2026-11-26",
    "ends": "2026-11-30",
    "deadline": "2026-11-30",
-   "prize": "$120",
    "themes": [
-    "Beginner Friendly",
-    "Design",
-    "Open Ended"
+    "Machine Learning/AI",
+    "Open Ended",
+    "Productivity"
    ],
-   "joined": 17,
+   "joined": 10,
    "source": "Devpost",
-   "excerpt": "Layer by layer, turn weightless ideas into solid solutions that move the real world.",
+   "excerpt": "Spot an everyday problem? Team up, build a working tech solution, and bring your boldest idea to life, all skill levels welcome!",
    "prizes": [
     {
-     "title": "1st Place",
-     "value": "$60 in cash",
-     "winners": "1 winner",
-     "desc": "$60 Amazon Gift Card, a 1-month Hedwig AI Pro subscription, and an Official Winner Certificate."
+     "title": "Exclusive AWS Swag",
+     "winners": "2 winners",
+     "desc": "What Winning Teams Receive: • Exclusive AWS-branded swag packs for team members • Official Winner Certificates from Devsinc, AWS Student Builder Group CUI Sahiwal, and ILC • Live on-stage recognition at the Devsinc…"
     },
     {
-     "title": "2nd Place",
-     "value": "$40 in cash",
-     "winners": "1 winner",
-     "desc": "$40 Amazon Gift Card, a 1-month Hedwig AI Pro subscription, and an Official Winner Certificate."
-    },
-    {
-     "title": "3rd Place",
-     "value": "$20 in cash",
-     "winners": "1 winner",
-     "desc": "$20 Amazon Gift Card, a 1-month Hedwig AI Pro subscription, and an Official Winner Certificate."
-    },
-    {
-     "title": "Popularity Award",
-     "winners": "1 winner",
-     "desc": "Awarded to the project with the highest community vote count on Devpost. Includes a 1-month Hedwig AI Pro subscription and an Official Winner Certificate."
-    },
-    {
-     "title": "Honorary Innovation Award",
-     "winners": "1 winner",
-     "desc": "Awarded by the judging panel for standout mechanical creativity or clever design-for-manufacturing techniques. Includes a 1-month Hedwig AI Pro subscription and an Official Winner Certificate."
+     "title": "Grand Finale Finalists — AWS and Devsinc Official Certificate",
+     "winners": "20 winners",
+     "desc": "Awarded to all shortlisted finalist teams selected from Round 1 Devpost evaluations and invited to compete on-site at Devsinc on Friday, December 4. Each finalist receives an official certificate from Devsinc and…"
     }
    ],
-   "page": "zero-g-hacks-32220"
+   "page": "national-hackathon-2026-aws-student-builder-group-comsats-sa-32222"
   },
   {
    "id": "devpost-31794",
@@ -763,7 +718,7 @@
     "Open Ended",
     "Social Good"
    ],
-   "joined": 267,
+   "joined": 280,
    "source": "Devpost",
    "excerpt": "Build practical technology that creates positive change in communities.",
    "prizes": [
@@ -791,43 +746,6 @@
    "page": "code-for-change-31794"
   },
   {
-   "id": "devpost-32208",
-   "title": "Agents that act. Systems that answer.",
-   "host": "studentchakra",
-   "url": "https://accountable-agents.devpost.com/",
-   "mode": "Online",
-   "place": "Online",
-   "starts": "2026-11-28",
-   "ends": "2026-12-01",
-   "deadline": "2026-12-01",
-   "themes": [
-    "Education",
-    "Machine Learning/AI",
-    "Open Ended"
-   ],
-   "joined": 15,
-   "source": "Devpost",
-   "excerpt": "Action is easy. Accountability is the build. Build dependable AI agents that act, explain and know when to escalate.",
-   "prizes": [
-    {
-     "title": "1st Prize",
-     "winners": "1 winner",
-     "desc": "$500 worth of Apify Credits"
-    },
-    {
-     "title": "2nd Prize",
-     "winners": "1 winner",
-     "desc": "Cursor 3-month plan for 2 accounts"
-    },
-    {
-     "title": "3rd Prize",
-     "winners": "1 winner",
-     "desc": "Cursor 3-month plan for 1 account"
-    }
-   ],
-   "page": "agents-that-act-systems-that-answer-32208"
-  },
-  {
    "id": "devpost-32236",
    "title": "thanksgiving thank you hackathon",
    "host": "shrimat koti",
@@ -842,7 +760,7 @@
     "Social Good",
     "Web"
    ],
-   "joined": 3,
+   "joined": 8,
    "source": "Devpost",
    "excerpt": "create apps and websites that have the potential to help nonprofits.",
    "prizes": [
@@ -865,6 +783,43 @@
    "page": "thanksgiving-thank-you-hackathon-32236"
   },
   {
+   "id": "devpost-32208",
+   "title": "Agents that act. Systems that answer.",
+   "host": "studentchakra",
+   "url": "https://accountable-agents.devpost.com/",
+   "mode": "Online",
+   "place": "Online",
+   "starts": "2026-11-28",
+   "ends": "2026-12-01",
+   "deadline": "2026-12-01",
+   "themes": [
+    "Education",
+    "Machine Learning/AI",
+    "Open Ended"
+   ],
+   "joined": 22,
+   "source": "Devpost",
+   "excerpt": "Action is easy. Accountability is the build. Build dependable AI agents that act, explain and know when to escalate.",
+   "prizes": [
+    {
+     "title": "1st Prize",
+     "winners": "1 winner",
+     "desc": "$500 worth of Apify Credits"
+    },
+    {
+     "title": "2nd Prize",
+     "winners": "1 winner",
+     "desc": "Cursor 3-month plan for 2 accounts"
+    },
+    {
+     "title": "3rd Prize",
+     "winners": "1 winner",
+     "desc": "Cursor 3-month plan for 1 account"
+    }
+   ],
+   "page": "agents-that-act-systems-that-answer-32208"
+  },
+  {
    "id": "devpost-31960",
    "title": "ML Empowerment Build Challenge 4.0 (250K IN PRIZES!)",
    "host": "ML Empowerment Foundation",
@@ -879,7 +834,7 @@
     "Machine Learning/AI",
     "Social Good"
    ],
-   "joined": 276,
+   "joined": 285,
    "source": "Devpost",
    "excerpt": "Learn AI, build real-world projects, and create impact through guided resources, mentorship, and a global community of student innovators.",
    "prizes": [
@@ -914,7 +869,7 @@
    "themes": [
     "Machine Learning/AI"
    ],
-   "joined": 2,
+   "joined": 5,
    "source": "Devpost",
    "excerpt": "Turn 'I wish' into 'I built'",
    "prizes": [
@@ -952,7 +907,7 @@
     "Machine Learning/AI",
     "Open Ended"
    ],
-   "joined": 19514,
+   "joined": 19751,
    "source": "Devpost",
    "excerpt": "Build something wicked and git commit to the darkness.",
    "prizes": [
@@ -1063,7 +1018,7 @@
     "Beginner Friendly",
     "Open Ended"
    ],
-   "joined": 748,
+   "joined": 761,
    "source": "Devpost",
    "excerpt": "Build something worth launching. A beginner-friendly online student hackathon for bold ideas, and creative problem-solvers. JUDGES Fill Out: https://forms.gle/n3Wr7rdSdeJhwpKF7",
    "prizes": [
@@ -1105,7 +1060,7 @@
     "Health",
     "Machine Learning/AI"
    ],
-   "joined": 324,
+   "joined": 347,
    "source": "Devpost",
    "excerpt": "Build the thing that makes care cheaper, faster, or possible at all. Diagnosis, triage, monitoring, access; pick a real problem and show your work.",
    "prizes": [
@@ -1143,6 +1098,19 @@
    "page": "ai-for-medicine-a-global-student-hackathon-on-the-future-of-32009"
   },
   {
+   "id": "at-708",
+   "title": "Africa's Talking Open Hackathon: Hospitality & Tourism - Dar es Salaam, Tanzania",
+   "host": "Africa’s Talking",
+   "url": "https://community.africastalking.com/events/details/africas-talking-africas-talking-open-community-east-africa-presents-africas-talking-open-hackathon-hospitality-amp-tourism-dar-es-salaam-tanzania/",
+   "mode": "In person",
+   "place": "Dar Es Salaam, Tanzania",
+   "starts": "2026-12-05",
+   "ends": "2026-12-05",
+   "deadline": "2026-12-05",
+   "source": "Africa’s Talking",
+   "page": "africa-s-talking-open-hackathon-hospitality-tourism-dar-es-s-708"
+  },
+  {
    "id": "devpost-31973",
    "title": "Deck the Pixels",
    "host": "Google",
@@ -1158,7 +1126,7 @@
     "Machine Learning/AI",
     "Low/No Code"
    ],
-   "joined": 2309,
+   "joined": 2418,
    "source": "Devpost",
    "excerpt": "A holiday design challenge with Nano Banana in Adobe Photoshop",
    "prizes": [
@@ -1211,7 +1179,7 @@
     "Design",
     "Machine Learning/AI"
    ],
-   "joined": 646,
+   "joined": 665,
    "source": "Devpost",
    "excerpt": "Learn to design for glasses. Your coding agent builds the Lens, no SPECS required.",
    "prizes": [
@@ -1252,7 +1220,7 @@
     "Open Ended",
     "Machine Learning/AI"
    ],
-   "joined": 739,
+   "joined": 778,
    "source": "Devpost",
    "excerpt": "Build bold. Code creatively. Slay real-world challenges. A hackathon for curious beginners and passionate builders to turn fresh ideas into working projects.",
    "prizes": [
@@ -1304,7 +1272,7 @@
     "Open Ended",
     "Web"
    ],
-   "joined": 27,
+   "joined": 51,
    "source": "Devpost",
    "excerpt": "Architect, deploy, and scale next generation AI agents and autonomous SaaS.",
    "prizes": [
@@ -1315,6 +1283,57 @@
     }
    ],
    "page": "zyrelyx-global-ai-hackathon-32231"
+  },
+  {
+   "id": "devpost-32220",
+   "title": "Zero-G Hacks",
+   "host": "Zero-G CAD",
+   "url": "https://zero-g-hacks.devpost.com/",
+   "mode": "Online",
+   "place": "Online",
+   "starts": "2026-12-04",
+   "ends": "2026-12-07",
+   "deadline": "2026-12-07",
+   "prize": "$120",
+   "themes": [
+    "Beginner Friendly",
+    "Design",
+    "Open Ended"
+   ],
+   "joined": 19,
+   "source": "Devpost",
+   "excerpt": "Layer by layer, turn weightless ideas into solid solutions that move the real world.",
+   "prizes": [
+    {
+     "title": "1st Place",
+     "value": "$60 in cash",
+     "winners": "1 winner",
+     "desc": "$60 Amazon Gift Card, a 1-month Hedwig AI Pro subscription, and an Official Winner Certificate."
+    },
+    {
+     "title": "2nd Place",
+     "value": "$40 in cash",
+     "winners": "1 winner",
+     "desc": "$40 Amazon Gift Card, a 1-month Hedwig AI Pro subscription, and an Official Winner Certificate."
+    },
+    {
+     "title": "3rd Place",
+     "value": "$20 in cash",
+     "winners": "1 winner",
+     "desc": "$20 Amazon Gift Card, a 1-month Hedwig AI Pro subscription, and an Official Winner Certificate."
+    },
+    {
+     "title": "Popularity Award",
+     "winners": "1 winner",
+     "desc": "Awarded to the project with the highest community vote count on Devpost. Includes a 1-month Hedwig AI Pro subscription and an Official Winner Certificate."
+    },
+    {
+     "title": "Honorary Innovation Award",
+     "winners": "1 winner",
+     "desc": "Awarded by the judging panel for standout mechanical creativity or clever design-for-manufacturing techniques. Includes a 1-month Hedwig AI Pro subscription and an Official Winner Certificate."
+    }
+   ],
+   "page": "zero-g-hacks-32220"
   },
   {
    "id": "devpost-31644",
@@ -1331,7 +1350,7 @@
     "Beginner Friendly",
     "Gaming"
    ],
-   "joined": 2893,
+   "joined": 3023,
    "source": "Devpost",
    "excerpt": "Join Reddit to build incredible daily games!",
    "prizes": [
@@ -1379,7 +1398,7 @@
      "desc": "Cash Prize"
     }
    ],
-   "joined": 173,
+   "joined": 200,
    "source": "Devfolio",
    "page": "promptwaves-65d42f71"
   },
@@ -1398,7 +1417,7 @@
     "Machine Learning/AI",
     "Web"
    ],
-   "joined": 830,
+   "joined": 850,
    "source": "Devpost",
    "excerpt": "Build your first AI app in 30 days! Create chatbots, study and documents assistants. A tools, or productivity apps. Beginner-friendly, free to join, and open to creative ideas.",
    "prizes": [
@@ -1426,7 +1445,7 @@
     "Cybersecurity",
     "Social Good"
    ],
-   "joined": 549,
+   "joined": 555,
    "source": "Devpost",
    "excerpt": "Build a little more peace of mind. Create anything that helps people, communities, or systems stay safer.",
    "prizes": [
@@ -1454,31 +1473,39 @@
    "page": "safespace-hacks-judges-needed-31796"
   },
   {
-   "id": "devpost-31797",
-   "title": "Green Shift Hacks",
-   "host": "HackathonForEveryone",
-   "url": "https://green-shift-hacks.devpost.com/",
+   "id": "devpost-32251",
+   "title": "TechArenaX Vibe Coding Challenge — Season 01",
+   "host": "TecharenaX",
+   "url": "https://techarenax-vcc-s01.devpost.com/",
    "mode": "Online",
    "place": "Online",
-   "starts": "2026-10-18",
-   "ends": "2026-12-10",
-   "deadline": "2026-12-10",
-   "prize": "$125",
+   "starts": "2026-12-06",
+   "ends": "2026-12-09",
+   "deadline": "2026-12-09",
+   "prize": "$50",
    "themes": [
-    "Beginner Friendly",
-    "Social Good"
+    "Beginner Friendly"
    ],
-   "joined": 275,
    "source": "Devpost",
-   "excerpt": "Build practical technology for a more sustainable future.",
+   "excerpt": "Use your favorite AI coding tools to build a working web app that solves a real-world problem.",
    "prizes": [
     {
-     "title": "Green Shift Grand Prize",
-     "value": "$125 in cash",
+     "title": "Champion",
+     "value": "$25 in cash",
+     "winners": "1 winner"
+    },
+    {
+     "title": "1st Runner-up",
+     "value": "$15 in cash",
+     "winners": "1 winner"
+    },
+    {
+     "title": "2nd Runner-up",
+     "value": "$10 in cash",
      "winners": "1 winner"
     }
    ],
-   "page": "green-shift-hacks-31797"
+   "page": "techarenax-vibe-coding-challenge-season-01-32251"
   },
   {
    "id": "devpost-31994",
@@ -1496,7 +1523,7 @@
     "Machine Learning/AI",
     "Open Ended"
    ],
-   "joined": 268,
+   "joined": 285,
    "source": "Devpost",
    "excerpt": "Build anything with AI. Turn models, data, and bold ideas into working experiences.",
    "prizes": [
@@ -1514,6 +1541,33 @@
    "page": "ai-openbuild-31994"
   },
   {
+   "id": "devpost-31797",
+   "title": "Green Shift Hacks",
+   "host": "HackathonForEveryone",
+   "url": "https://green-shift-hacks.devpost.com/",
+   "mode": "Online",
+   "place": "Online",
+   "starts": "2026-10-18",
+   "ends": "2026-12-10",
+   "deadline": "2026-12-10",
+   "prize": "$125",
+   "themes": [
+    "Beginner Friendly",
+    "Social Good"
+   ],
+   "joined": 281,
+   "source": "Devpost",
+   "excerpt": "Build practical technology for a more sustainable future.",
+   "prizes": [
+    {
+     "title": "Green Shift Grand Prize",
+     "value": "$125 in cash",
+     "winners": "1 winner"
+    }
+   ],
+   "page": "green-shift-hacks-31797"
+  },
+  {
    "id": "devpost-31798",
    "title": "Taskforge",
    "host": "HackathonForEveryone",
@@ -1527,7 +1581,7 @@
     "Beginner Friendly",
     "Quantum"
    ],
-   "joined": 265,
+   "joined": 266,
    "source": "Devpost",
    "excerpt": "Build accessible tools that help people focus, organize, and get more done.",
    "prizes": [
@@ -1563,7 +1617,7 @@
     "Beginner Friendly",
     "Open Ended"
    ],
-   "joined": 31,
+   "joined": 32,
    "source": "Devpost",
    "excerpt": "Inspired by the Bay Area Peninsula. Build from anywhere and turn an idea from your everyday life into something people can try.",
    "prizes": [
@@ -1623,7 +1677,7 @@
      "desc": "Awarded to the top performing teams of HackOdisha."
     }
    ],
-   "joined": 2084,
+   "joined": 2102,
    "source": "Devfolio",
    "page": "hackodisha-6-0-c84b90d6"
   },
@@ -1643,7 +1697,7 @@
     "Productivity",
     "Web"
    ],
-   "joined": 571,
+   "joined": 582,
    "source": "Devpost",
    "excerpt": "Build the AI-First MSP: Run smarter, Deliver more",
    "prizes": [
@@ -1751,7 +1805,7 @@
     "Machine Learning/AI",
     "Productivity"
    ],
-   "joined": 902,
+   "joined": 941,
    "source": "Devpost",
    "excerpt": "An open source, embedded database for AI agents",
    "prizes": [
@@ -1788,7 +1842,7 @@
     "Beginner Friendly",
     "Low/No Code"
    ],
-   "joined": 67,
+   "joined": 74,
    "source": "Devpost",
    "excerpt": "Think Beyond. Build What Matters.",
    "prizes": [
@@ -1830,7 +1884,7 @@
     "Education",
     "Machine Learning/AI"
    ],
-   "joined": 104,
+   "joined": 113,
    "source": "Devpost",
    "excerpt": "CS4ALL is hosting BUILD 4 ALL, an online hackathon for students to compete and win prizes.",
    "prizes": [
@@ -1885,7 +1939,7 @@
     "Open Ended",
     "Social Good"
    ],
-   "joined": 195,
+   "joined": 208,
    "source": "Devpost",
    "excerpt": "Breaking barriers and empowering women and girls through technology, creativity, and innovation.",
    "prizes": [
@@ -1950,7 +2004,7 @@
     "Machine Learning/AI",
     "Open Ended"
    ],
-   "joined": 2639,
+   "joined": 2715,
    "source": "Devpost",
    "excerpt": "The power to shape the world",
    "prizes": [
@@ -2054,7 +2108,7 @@
     "Beginner Friendly",
     "Low/No Code"
    ],
-   "joined": 276,
+   "joined": 295,
    "source": "Devpost",
    "excerpt": "Take a rough idea off the workbench, turn it into a working prototype, and show what it can do at Silicon Valley Buildathon.",
    "prizes": [
@@ -2126,7 +2180,7 @@
     "Education",
     "Social Good"
    ],
-   "joined": 6,
+   "joined": 7,
    "source": "Devpost",
    "excerpt": "Alliances, betrayal, AI. Build the unthinkable.",
    "prizes": [
@@ -2154,7 +2208,7 @@
     "Machine Learning/AI",
     "Productivity"
    ],
-   "joined": 581,
+   "joined": 596,
    "source": "Devpost",
    "excerpt": "Create AI agents that give founders back their most valuable asset: time to think.",
    "prizes": [
@@ -2190,7 +2244,7 @@
    "themes": [
     "Education"
    ],
-   "joined": 104,
+   "joined": 108,
    "source": "Devpost",
    "excerpt": "Ideas into Impact.",
    "prizes": [
@@ -2271,7 +2325,7 @@
     "Education",
     "Social Good"
    ],
-   "joined": 331,
+   "joined": 336,
    "source": "Devpost",
    "excerpt": "Learning has no single doorway. Build tools that open more of them—across language, ability, connectivity, and cost.",
    "prizes": [
@@ -2314,7 +2368,7 @@
     "Design",
     "Music/Art"
    ],
-   "joined": 23,
+   "joined": 28,
    "source": "Devpost",
    "excerpt": "Create original drawings on the Perceive website and win cash prizes!",
    "prizes": [
@@ -2346,7 +2400,7 @@
     "Machine Learning/AI",
     "Productivity"
    ],
-   "joined": 83,
+   "joined": 91,
    "source": "Devpost",
    "excerpt": "One weekend, 36 hours, to build the AI teammate for the creator economy. Top 10 people get an interview at OVO Talent.",
    "prizes": [
@@ -2398,7 +2452,7 @@
     "Beginner Friendly",
     "Machine Learning/AI"
    ],
-   "joined": 16,
+   "joined": 17,
    "source": "Devpost",
    "excerpt": "Start your winter arc with Hackstead: Winterfest",
    "prizes": [
@@ -2455,7 +2509,7 @@
     "Machine Learning/AI",
     "Open Ended"
    ],
-   "joined": 1503,
+   "joined": 1531,
    "source": "Devpost",
    "excerpt": "Open innovation for all, submit projects that have potential impact and usability!",
    "prizes": [
@@ -2508,7 +2562,7 @@
     "Enterprise",
     "Productivity"
    ],
-   "joined": 5557,
+   "joined": 5722,
    "source": "Devpost",
    "excerpt": "Build on Forge, extend Atlassian products, and turn connected context into powerful new apps for teams — win your share of $120K.",
    "prizes": [
@@ -2573,7 +2627,7 @@
     "Education",
     "Web"
    ],
-   "joined": 75,
+   "joined": 83,
    "source": "Devpost",
    "excerpt": "Intelligence Unbound - Beyond Every Boundary",
    "prizes": [
@@ -2601,7 +2655,7 @@
     "IoT",
     "Machine Learning/AI"
    ],
-   "joined": 759,
+   "joined": 796,
    "source": "Devpost",
    "excerpt": "Welcome to GenHacks! The greatest virtual hackathon you have ever seen. Once in a generation.",
    "prizes": [
@@ -2658,7 +2712,7 @@
   {
    "id": "devpost-30359",
    "title": "CrackleHacks",
-   "host": "Deific Studios",
+   "host": "Hyperlattice",
    "url": "https://cracklehacks.devpost.com/",
    "mode": "Online",
    "place": "Online",
@@ -2671,7 +2725,7 @@
     "Gaming",
     "Web"
    ],
-   "joined": 1,
+   "joined": 6,
    "source": "Devpost",
    "excerpt": "Where lines of code turn into hours of laughter and experimental projects come to life.",
    "prizes": [
@@ -2679,6 +2733,11 @@
      "title": "1st Place Overall",
      "value": "$20 in cash",
      "winners": "1 winner"
+    },
+    {
+     "title": "Best Use of Graphify",
+     "winners": "1 winner",
+     "desc": "Awarded to the team that demonstrates the most innovative and effective use of Graphify in their hackathon project."
     }
    ],
    "page": "cracklehacks-30359"
@@ -2709,6 +2768,47 @@
     }
    ],
    "page": "evensonarisnord-27097"
+  },
+  {
+   "id": "devpost-32230",
+   "title": "HackTheFashion Global'26",
+   "host": "AI SKILLS LAB KIET",
+   "url": "https://hackthefashion-global-26.devpost.com/",
+   "mode": "Online",
+   "place": "Online",
+   "starts": "2026-12-08",
+   "ends": "2026-12-31",
+   "deadline": "2026-12-31",
+   "prize": "$10,000",
+   "themes": [
+    "AR/VR",
+    "Beginner Friendly",
+    "Machine Learning/AI"
+   ],
+   "joined": 22,
+   "source": "Devpost",
+   "excerpt": "Build what fashion needs next",
+   "prizes": [
+    {
+     "title": "Winner",
+     "value": "$5,000 in cash",
+     "winners": "1 winner",
+     "desc": "cash, swags and prizes"
+    },
+    {
+     "title": "1st Runner-up",
+     "value": "$3,000 in cash",
+     "winners": "1 winner",
+     "desc": "cash, swags and prizes"
+    },
+    {
+     "title": "2nd Runner-up",
+     "value": "$2,000 in cash",
+     "winners": "1 winner",
+     "desc": "cash, swags and prizes"
+    }
+   ],
+   "page": "hackthefashion-global-26-32230"
   },
   {
    "id": "devpost-31734",
@@ -2753,47 +2853,6 @@
    "page": "305-codefest-edition-december-2026-305hackathons-vercel-app-31734"
   },
   {
-   "id": "devpost-32230",
-   "title": "HackTheFashion Global'26",
-   "host": "AI SKILLS LAB KIET",
-   "url": "https://hackthefashion-global-26.devpost.com/",
-   "mode": "Online",
-   "place": "Online",
-   "starts": "2026-12-08",
-   "ends": "2026-12-31",
-   "deadline": "2026-12-31",
-   "prize": "$10,000",
-   "themes": [
-    "AR/VR",
-    "Beginner Friendly",
-    "Machine Learning/AI"
-   ],
-   "joined": 16,
-   "source": "Devpost",
-   "excerpt": "Build what fashion needs next",
-   "prizes": [
-    {
-     "title": "Winner",
-     "value": "$5,000 in cash",
-     "winners": "1 winner",
-     "desc": "cash, swags and prizes"
-    },
-    {
-     "title": "1st Runner-up",
-     "value": "$3,000 in cash",
-     "winners": "1 winner",
-     "desc": "cash, swags and prizes"
-    },
-    {
-     "title": "2nd Runner-up",
-     "value": "$2,000 in cash",
-     "winners": "1 winner",
-     "desc": "cash, swags and prizes"
-    }
-   ],
-   "page": "hackthefashion-global-26-32230"
-  },
-  {
    "id": "devpost-31108",
    "title": "InnovArt 2027: Art and Technology Hack Day",
    "host": "Binnovative",
@@ -2808,7 +2867,7 @@
     "Beginner Friendly",
     "Open Ended"
    ],
-   "joined": 392,
+   "joined": 396,
    "source": "Devpost",
    "excerpt": "Hack your artistic intelligence! Demonstrate your talent and showcase your hack for the arts",
    "prizes": [
@@ -2900,7 +2959,7 @@
     "Health",
     "Social Good"
    ],
-   "joined": 9,
+   "joined": 10,
    "source": "Devpost",
    "excerpt": "Bright and young innovators developing new ways to help cancer patients face everyday challenges with greater safety and comfort.",
    "prizes": [
@@ -2978,7 +3037,7 @@
     "Design",
     "Education"
    ],
-   "joined": 601,
+   "joined": 615,
    "source": "Devpost",
    "excerpt": "Showcase both your technical and presenting abilities and collaborate with like minded individuals to make and pitch a project during United Hacks V8.",
    "prizes": [
@@ -3046,7 +3105,7 @@
     "Machine Learning/AI",
     "Social Good"
    ],
-   "joined": 153,
+   "joined": 156,
    "source": "Devpost",
    "excerpt": "A free 48-hour AI-native online hackathon where builders aged 13–18 make games that do good in the world.",
    "prizes": [
@@ -3117,7 +3176,7 @@
     "Web",
     "Social Good"
    ],
-   "joined": 2113,
+   "joined": 2282,
    "source": "Devpost",
    "excerpt": "Join the global initiative to help build the infrastructure and first pages of the open agentic web",
    "prizes": [
@@ -3162,7 +3221,7 @@
     "Machine Learning/AI",
     "Social Good"
    ],
-   "joined": 34,
+   "joined": 35,
    "source": "Devpost",
    "excerpt": "Develop AI/ML solutions for applications across society, education, and environment",
    "prizes": [
@@ -3215,7 +3274,7 @@
     "Gaming",
     "Machine Learning/AI"
    ],
-   "joined": 1299,
+   "joined": 1385,
    "source": "Devpost",
    "excerpt": "Scout smarter. Draft sharper. Build with JetBrains.",
    "prizes": [
@@ -3279,7 +3338,7 @@
     "Machine Learning/AI",
     "Robotic Process Automation"
    ],
-   "joined": 463,
+   "joined": 469,
    "source": "Devpost",
    "excerpt": "Invent. Compile. Inspire.",
    "prizes": [
@@ -3331,7 +3390,7 @@
     "Machine Learning/AI",
     "Web"
    ],
-   "joined": 1034,
+   "joined": 1039,
    "source": "Devpost",
    "excerpt": "Build technology that reaches the people who need it the most.",
    "prizes": [
@@ -3402,7 +3461,7 @@
    "themes": [
     "Open Ended"
    ],
-   "joined": 58,
+   "joined": 68,
    "source": "Devpost",
    "excerpt": "Got an idea? Perfect. Got nothing? Even better. Build anything, ship the link, and win prizes!",
    "prizes": [
@@ -3460,7 +3519,7 @@
     "Open Ended",
     "Education"
    ],
-   "joined": 1582,
+   "joined": 1652,
    "source": "Devpost",
    "excerpt": "A free online student hackathon. Build around Tech for Student or Community Life from December 19, 2026 to January 18, 2027. Beginners welcome!",
    "prizes": [
@@ -3646,7 +3705,7 @@
     "Education",
     "Social Good"
    ],
-   "joined": 30,
+   "joined": 32,
    "source": "Devpost",
    "excerpt": "Build tools that expand access to education for girls, help communities adapt to climate change, and tackle air pollution and waste.",
    "prizes": [
@@ -3689,7 +3748,7 @@
     "Machine Learning/AI",
     "Web"
    ],
-   "joined": 12,
+   "joined": 13,
    "source": "Devpost",
    "excerpt": "Where Ideas Rise, Innovation Begins.",
    "prizes": [
@@ -3704,7 +3763,7 @@
   },
   {
    "id": "devpost-31886",
-   "title": "Build with AI - Pico Space Program",
+   "title": "Build with AI - PICO Space Program",
    "host": "XR Bootcamp",
    "url": "https://pico-space-program.devpost.com/",
    "mode": "Online",
@@ -3718,7 +3777,7 @@
     "Machine Learning/AI",
     "Web"
    ],
-   "joined": 427,
+   "joined": 449,
    "source": "Devpost",
    "excerpt": "Frontier AI can now do spatial design and development. Build with your favorite agents and the PICO CLI. 30+ ways to win. No Headset Needed.",
    "prizes": [
@@ -3816,7 +3875,7 @@
     "Beginner Friendly",
     "Social Good"
    ],
-   "joined": 128,
+   "joined": 138,
    "source": "Devpost",
    "excerpt": "Technology for Good",
    "prizes": [
@@ -3873,7 +3932,7 @@
     "Machine Learning/AI",
     "Productivity"
    ],
-   "joined": 8,
+   "joined": 13,
    "source": "Devpost",
    "excerpt": "A free online student hackathon. Build something that helps people start fresh in 2027.",
    "prizes": [
@@ -3941,7 +4000,7 @@
     "Databases",
     "DevOps"
    ],
-   "joined": 255,
+   "joined": 258,
    "source": "Devpost",
    "excerpt": "IWU Hackathon",
    "prizes": [
@@ -3970,7 +4029,7 @@
     "Machine Learning/AI",
     "Social Good"
    ],
-   "joined": 57,
+   "joined": 63,
    "source": "Devpost",
    "excerpt": "Build AI tools that tackle real challenges in health, education, accessibility, and sustainability. High school students from BASIS and beyond are welcome.",
    "prizes": [
@@ -4072,7 +4131,7 @@
     "Web",
     "Beginner Friendly"
    ],
-   "joined": 126,
+   "joined": 139,
    "source": "Devpost",
    "excerpt": "Build intelligent solutions for real-world problems. Shape the future using AI.",
    "prizes": [
@@ -4172,7 +4231,7 @@
     "Open Ended",
     "Social Good"
    ],
-   "joined": 12,
+   "joined": 14,
    "source": "Devpost",
    "excerpt": "Real world initiatives, now open-sourced.",
    "prizes": [
@@ -4204,6 +4263,7 @@
     "Design",
     "Open Ended"
    ],
+   "joined": 1,
    "source": "Devpost",
    "excerpt": "Kick off 2027 with two full months to build anything you want: open-ended, zero AI and exclusively for teen students aged 13–18.",
    "prizes": [
@@ -4308,7 +4368,7 @@
     "Open Ended",
     "Productivity"
    ],
-   "joined": 101,
+   "joined": 106,
    "source": "Devpost",
    "excerpt": "Where Builders Go Beyond.",
    "prizes": [
@@ -4336,7 +4396,7 @@
     "Education",
     "Social Good"
    ],
-   "joined": 68,
+   "joined": 70,
    "source": "Devpost",
    "excerpt": "Create projects benefiting UNSDGs for a chance to work along UN affiliated NGOs!",
    "prizes": [
@@ -4387,7 +4447,7 @@
    "themes": [
     "Machine Learning/AI"
    ],
-   "joined": 26,
+   "joined": 30,
    "source": "Devpost",
    "excerpt": "90 days. One global competition. Three winners.",
    "prizes": [
@@ -4483,7 +4543,7 @@
     "Health",
     "Open Ended"
    ],
-   "joined": 29,
+   "joined": 31,
    "source": "Devpost",
    "excerpt": "Move, Inspire and Innovate! Demonstrate your talent and showcase your hack for physical activity.",
    "prizes": [

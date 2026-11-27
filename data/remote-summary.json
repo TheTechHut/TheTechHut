@@ -1,9 +1,9 @@
 {
- "updated": "2026-11-26",
- "company_count": 53,
- "role_count": 480,
- "local_role_count": 220,
- "roles_scanned": 3715,
+ "updated": "2026-11-27",
+ "company_count": 54,
+ "role_count": 485,
+ "local_role_count": 219,
+ "roles_scanned": 3737,
  "sources": [
   "Himalayas",
   "Jobicy"
@@ -12,8 +12,8 @@
   {
    "company": "Canonical",
    "platform": "greenhouse",
-   "eligible": 238,
-   "total": 321,
+   "eligible": 239,
+   "total": 322,
    "locations": [
     "Home based - EMEA",
     "Home based - EMEA; Office Based - London, UK",
@@ -26,21 +26,12 @@
   {
    "company": "Supabase",
    "platform": "ashby",
-   "eligible": 53,
-   "total": 83,
+   "eligible": 52,
+   "total": 82,
    "locations": [
     "Remote, Global",
     "Remote, EMEA",
     "Remote, EMEA; Europe"
-   ]
-  },
-  {
-   "company": "micro1",
-   "platform": "himalayas",
-   "eligible": 42,
-   "total": 42,
-   "locations": [
-    "Worldwide"
    ]
   },
   {
@@ -53,10 +44,19 @@
    ]
   },
   {
+   "company": "micro1",
+   "platform": "himalayas",
+   "eligible": 37,
+   "total": 37,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
    "company": "Clera",
    "platform": "himalayas",
-   "eligible": 11,
-   "total": 11,
+   "eligible": 13,
+   "total": 13,
    "locations": [
     "Worldwide"
    ]
@@ -64,17 +64,40 @@
   {
    "company": "Banco Plata, S.A., Instituci\u00f3n de Banca M\u00faltiple",
    "platform": "himalayas",
-   "eligible": 10,
-   "total": 13,
+   "eligible": 12,
+   "total": 16,
    "locations": [
     "Worldwide"
    ]
   },
   {
+   "company": "Featherless AI",
+   "platform": "himalayas",
+   "eligible": 10,
+   "total": 10,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "ConsenSys",
+   "platform": "greenhouse",
+   "eligible": 9,
+   "total": 12,
+   "locations": [
+    "EMEA - Remote",
+    "UNITED STATES - Remote, EMEA - Remote, LATAM - Remote",
+    "UNITED STATES - Remote, LATAM - Remote, EMEA - Remote",
+    "UNITED STATES - Remote, EMEA - Remote",
+    "EMEA - Remote, UNITED STATES - Remote",
+    "United States - Remote, EMEA - Remote"
+   ]
+  },
+  {
    "company": "Oyster",
    "platform": "ashby",
-   "eligible": 9,
-   "total": 17,
+   "eligible": 8,
+   "total": 16,
    "locations": [
     "EMEA; Romania; Bulgaria; Portugal; Canada; United Kingdom; Spain; Poland",
     "EMEA; Romania; Hungary; Netherlands; Portugal; Slovakia; Spain; Poland; South Africa; Greece",
@@ -82,29 +105,6 @@
     "Global; Portugal; Spain; Brazil; Colombia; Canada",
     "EMEA; Romania; Portugal; Spain; Poland; South Africa",
     "EMEA; Portugal; Spain; Poland"
-   ]
-  },
-  {
-   "company": "ConsenSys",
-   "platform": "greenhouse",
-   "eligible": 7,
-   "total": 10,
-   "locations": [
-    "UNITED STATES - Remote, EMEA - Remote, LATAM - Remote",
-    "UNITED STATES - Remote, LATAM - Remote, EMEA - Remote",
-    "UNITED STATES - Remote, EMEA - Remote",
-    "EMEA - Remote",
-    "EMEA - Remote, UNITED STATES - Remote",
-    "United States - Remote, EMEA - Remote"
-   ]
-  },
-  {
-   "company": "Featherless AI",
-   "platform": "himalayas",
-   "eligible": 7,
-   "total": 7,
-   "locations": [
-    "Worldwide"
    ]
   },
   {
@@ -151,6 +151,16 @@
    "total": 3,
    "locations": [
     "Worldwide"
+   ]
+  },
+  {
+   "company": "Zipline",
+   "platform": "greenhouse",
+   "eligible": 2,
+   "total": 316,
+   "locations": [
+    "Remote, EMEA; United Arab Emirates; United Kingdom",
+    "Abidjan, C\u00f4te d\u2019Ivoire; Abuja, Nigeria; Accra, Ghana; Cape Town, South Africa; Kigali, Rwanda; Lagos, Nigeria; Nairobi, Kenya; Remote in Africa; Remote in Asia; Remote in Latin America; Remote, EMEA; South Africa"
    ]
   },
   {
@@ -217,15 +227,6 @@
    ]
   },
   {
-   "company": "Zipline",
-   "platform": "greenhouse",
-   "eligible": 1,
-   "total": 312,
-   "locations": [
-    "Remote, EMEA; United Arab Emirates; United Kingdom"
-   ]
-  },
-  {
    "company": "Cockroach Labs",
    "platform": "greenhouse",
    "eligible": 1,
@@ -265,7 +266,7 @@
    "company": "Sun King",
    "platform": "pinpoint",
    "eligible": 1,
-   "total": 186,
+   "total": 190,
    "locations": [
     "Global"
    ]
@@ -277,6 +278,24 @@
    "total": 27,
    "locations": [
     "Global"
+   ]
+  },
+  {
+   "company": "Finmid",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
+   ]
+  },
+  {
+   "company": "RevenueBase Inc",
+   "platform": "himalayas",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "Worldwide"
    ]
   },
   {
@@ -299,15 +318,6 @@
   },
   {
    "company": "Hire Initiatives, Inc.",
-   "platform": "himalayas",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "Worldwide"
-   ]
-  },
-  {
-   "company": "ASG Company",
    "platform": "himalayas",
    "eligible": 1,
    "total": 1,
@@ -451,12 +461,21 @@
    ]
   },
   {
-   "company": "Search Atlas",
-   "platform": "himalayas",
+   "company": "Phantom",
+   "platform": "jobicy",
    "eligible": 1,
    "total": 1,
    "locations": [
-    "Worldwide"
+    "EMEA,  LATAM,  Canada,  USA"
+   ]
+  },
+  {
+   "company": "Cobalt",
+   "platform": "jobicy",
+   "eligible": 1,
+   "total": 1,
+   "locations": [
+    "APAC,  EMEA,  LATAM,  Canada"
    ]
   },
   {
@@ -470,15 +489,6 @@
   },
   {
    "company": "TRM Labs",
-   "platform": "jobicy",
-   "eligible": 1,
-   "total": 1,
-   "locations": [
-    "EMEA"
-   ]
-  },
-  {
-   "company": "Customer.io",
    "platform": "jobicy",
    "eligible": 1,
    "total": 1,
