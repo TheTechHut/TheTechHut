@@ -61,7 +61,8 @@ async function adminSession(e, email = 'boss@thetechhut.co') {
 }
 async function marketSignIn(e, email) {
   mails = [];
-  await call(e, '/market/login', { email });
+  const lr = await call(e, '/market/login', { email });
+  if (!mails[0]) throw new Error('login ' + lr.status + ' ' + JSON.stringify(lr.body));
   const link = mails[0].htmlContent.match(/#login=([A-Za-z0-9._-]+)/)[1];
   return (await call(e, '/market/session', { t: link })).body;
 }
@@ -157,6 +158,48 @@ await t('posted events can be removed; Luma ids are refused', async () => {
   const { session } = await adminSession(e);
   assert.equal((await call(e, '/admin/event-delete', { session, id: 'luma-evt-123' })).status, 400);
   assert.equal((await call(e, '/admin/event-delete', { session, id: 'evabcdefghjk' })).status, 200);
+});
+
+console.log('\nannouncements');
+await t('a test goes only to the admin; the real send reaches each member once, with a working unsubscribe', async () => {
+  const e = env();
+  const a = await marketSignIn(e, 'ann@example.com');
+  await marketSignIn(e, 'ben@example.com');
+  await marketSignIn(e, 'cat@example.com');
+  const { session } = await adminSession(e);
+  mails = [];
+  const test = await call(e, '/admin/announce', { session, aid: 'media-2026-11', test: true });
+  assert.equal(test.status, 200, JSON.stringify(test.body));
+  assert.deepEqual(mails.map((m) => m.to[0].email), ['boss@thetechhut.co']);
+  assert.ok(/three example images/.test(mails[0].htmlContent));
+  let st = (await call(e, '/admin/announce', { session, status: true })).body.announcements[0];
+  assert.equal(st.sent, 0); assert.equal(st.remaining, 3);
+
+  mails = [];
+  const r = await call(e, '/admin/announce', { session, aid: 'media-2026-11' });
+  assert.equal(r.body.sent, 3); assert.equal(r.body.remaining, 0);
+  assert.deepEqual(mails.map((m) => m.to[0].email).sort(), ['ann@example.com', 'ben@example.com', 'cat@example.com']);
+  const annMail = mails.find((m) => m.to[0].email === 'ann@example.com');
+  assert.ok(annMail.headers['List-Unsubscribe'].includes('/market/unsubscribe?t='));
+  assert.equal(annMail.headers['List-Unsubscribe-Post'], 'List-Unsubscribe=One-Click');
+
+  mails = [];
+  const again = await call(e, '/admin/announce', { session, aid: 'media-2026-11' });
+  assert.equal(again.body.sent, 0, 'nobody gets it twice'); assert.equal(mails.length, 0);
+
+  const unsub = annMail.headers['List-Unsubscribe'].slice(1, -1).replace('https://api.thetechhut.co', 'https://api.test');
+  const u = await worker.fetch(new Request(unsub), e);
+  assert.equal(u.status, 200); assert.ok(/Done/.test(await u.text()));
+  st = (await call(e, '/admin/announce', { session, status: true })).body.announcements[0];
+  assert.equal(st.off, 1);
+  const bad = await worker.fetch(new Request('https://api.test/market/unsubscribe?t=forged'), e);
+  assert.equal(bad.status, 400);
+});
+await t('only admins can send announcements', async () => {
+  const e = env();
+  const m = await marketSignIn(e, 'ann@example.com');
+  const r = await call(e, '/admin/announce', { session: m.session, aid: 'media-2026-11' });
+  assert.equal(r.status, 401);
 });
 
 globalThis.fetch = realFetch;

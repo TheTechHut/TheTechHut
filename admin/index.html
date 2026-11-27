@@ -133,6 +133,9 @@
         <h3>Members</h3>
         <div class="db-tools"><input type="search" id="mkMq" placeholder="Search name or email"><button class="ab" type="button" id="mkCsv">Download members (CSV)</button></div>
         <div class="db-tw"><table class="db-t" id="mkMembers"><thead><tr><th>Joined</th><th>Name</th><th>Email</th><th class="n">Posted</th><th class="n">Bought</th><th>Payout</th></tr></thead><tbody></tbody></table></div>
+        <h3>Announcements</h3>
+        <p class="db-sub">One-off emails to every marketplace member. Send yourself a test first; the button to send to members unlocks after it. Each member gets each email once, and anyone who has unsubscribed is skipped.</p>
+        <div class="db-tw"><table class="db-t" id="mkAnn"><thead><tr><th>Email</th><th class="n">Sent</th><th class="n">Still to send</th><th class="n">Unsubscribed</th><th>Actions</th></tr></thead><tbody></tbody></table></div>
     </section>
 
     <section class="db-sec" id="lists">
@@ -227,6 +230,42 @@
     b.addEventListener('click', function () { b.disabled = true; Promise.resolve(fn()).then(function () { b.disabled = false; }, function () { b.disabled = false; }); });
     return b;
   }
+  /* ---------- announcements ---------- */
+  var tested = {};
+  function loadAnnouncements() {
+    return authed('announce', { status: true }).then(function (j) {
+      if (!j.announcements) { err('mkAnn', j.error || 'not available'); return; }
+      fill('mkAnn', j.announcements.map(function (a) {
+        var r = el('tr'); td(r, a.label); td(r, a.sent, 'n'); td(r, a.remaining, 'n'); td(r, a.off, 'n');
+        var c = el('td');
+        c.appendChild(btn('Send test to me', function () {
+          return authed('announce', { aid: a.id, test: true }).then(function (x) {
+            if (x.error) { toast(x.error); return; }
+            tested[a.id] = true; toast('Test sent to your inbox. Check it, then send to members.'); return loadAnnouncements();
+          });
+        }));
+        if (a.remaining > 0) {
+          var send = btn('Send to ' + a.remaining + ' member' + (a.remaining === 1 ? '' : 's'), function () {
+            if (!confirm('Email "' + a.label + '" to ' + a.remaining + ' marketplace members now? This cannot be undone.')) return;
+            var total = 0;
+            function batch() {
+              return authed('announce', { aid: a.id }).then(function (x) {
+                if (x.error) { toast(x.error); return loadAnnouncements(); }
+                total += x.sent; toast('Sent ' + total + (x.remaining > 0 ? ', ' + x.remaining + ' to go...' : '. Done.') + (x.failed ? ' ' + x.failed + ' failed; press again later to retry them.' : ''));
+                if (x.remaining > 0 && x.sent > 0) return batch();
+                return loadAnnouncements();
+              });
+            }
+            return batch();
+          }, 'danger');
+          send.disabled = !tested[a.id];
+          if (!tested[a.id]) send.title = 'Send yourself a test first';
+          c.appendChild(send);
+        } else c.appendChild(badge('ok', 'sent to everyone'));
+        r.appendChild(c); return r;
+      }), 'No announcements.', 5);
+    }).catch(function (e) { err('mkAnn', e); });
+  }
   function errorBox(sectionId, e) {
     var s = $(sectionId), p = s.querySelector('.db-err.box');
     if (!p) { p = el('p', 'db-err box'); s.insertBefore(p, s.children[1]); }
@@ -263,6 +302,7 @@
       $('whoAt').textContent = 'updated ' + when(j.at);
       $('sumAt').textContent = 'as of ' + when(j.at);
       drawPayments(j.payments); drawMarket(j.market); drawLists(j.newsletter); drawEvents(j.events); drawGames(j.games); drawConfig(j.config);
+      loadAnnouncements();
       return site.then(function (h) { drawSummary(j, h); });
     }).catch(function (e) { toast('Could not reach the Worker: ' + e.message); });
   }

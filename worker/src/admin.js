@@ -21,7 +21,7 @@
  * Site freshness (data files, GitHub Actions, scheduled articles) is read by
  * the page itself from public URLs and needs nothing here.
  */
-import { sign, unsign, adminMarket, adminPromptAction, resendPurchaseEmail, COMMISSION_PERCENT } from './market.js';
+import { sign, unsign, adminMarket, adminPromptAction, resendPurchaseEmail, sendAnnouncement, announcementStatus, COMMISSION_PERCENT } from './market.js';
 import { LIMITS, guard, emailDomainOk, sha256Hex } from './payguard.js';
 
 const SITE = 'https://thetechhut.co';
@@ -222,6 +222,13 @@ export async function handleAdmin(req, env, url, origin, deps) {
   if (route === 'resend') {
     const okSent = await resendPurchaseEmail(env, String(b.uid || ''), String(b.pid || ''), b.who === 'seller' ? 'seller' : 'buyer');
     return okSent ? json({ ok: true }, 200, origin) : json({ error: 'Could not send it. Check that Brevo is set up and the purchase exists.' }, 502, origin);
+  }
+  if (route === 'announce') {
+    // Test first (only to the signed-in admin), then send in batches; the page repeats until none remain.
+    const aid = String(b.aid || '');
+    if (b.status) return json({ announcements: await announcementStatus(env) }, 200, origin);
+    const r = await sendAnnouncement(env, aid, b.test ? { testTo: s.e } : { batch: 25 });
+    return json(r, r.error ? 400 : 200, origin);
   }
   if (route === 'event-delete') {
     const id = String(b.id || '');

@@ -269,6 +269,24 @@ export class Market {
         const owned = !!(b.uid && (p.uid === b.uid || (await st.get('b:' + b.uid + ':' + p.id))));
         return ok({ prompt: p, seller: seller ? { name: seller.name, payout: seller.payout || null } : null, owned });
       }
+      case 'audience': {        // members due an announcement: not yet sent it, not unsubscribed
+        const users = [...(await st.list({ prefix: 'u:' })).values()];
+        const due = users.filter((u) => u.email && !u.noNews && !(u.told || []).includes(b.aid));
+        const off = users.filter((u) => u.noNews).length;
+        return ok({ total: users.length, off, sent: users.filter((u) => (u.told || []).includes(b.aid)).length,
+          due: due.slice(0, b.limit || 0).map((u) => ({ id: u.id, email: u.email, name: u.name })), remaining: due.length });
+      }
+      case 'told': {            // mark an announcement as sent to these members
+        for (const id of b.ids || []) {
+          const u = await st.get('u:' + id); if (!u) continue;
+          u.told = [...new Set([...(u.told || []), b.aid])]; await st.put('u:' + u.id, u);
+        }
+        return ok({ ok: true });
+      }
+      case 'unsub': {           // no more marketplace announcements (sign-in links and receipts still come)
+        const u = await st.get('u:' + b.uid); if (!u) return ok({ ok: false });
+        u.noNews = true; await st.put('u:' + u.id, u); return ok({ ok: true });
+      }
       case 'admin': {           // everything, for the site dashboard (admin.js). Includes emails: admins only.
         const users = [...(await st.list({ prefix: 'u:' })).values()];
         const byId = Object.fromEntries(users.map((u) => [u.id, u]));
@@ -399,6 +417,87 @@ export function welcomeEmail(u) {
     + '3. Earn from your best ones: set a price from KES 50 and keep ' + (100 - COMMISSION_PERCENT) + '% of every sale.\n\n'
     + 'Post your first prompt: ' + SITE + '/prompts/#sell\nBrowse: ' + SITE + '/prompts/\n';
   return { subject: 'Welcome to The Tech Hut prompt marketplace', html, text };
+}
+
+/* ------------------------------------------------------------ announcements
+   One-off emails to every marketplace member, sent from the site dashboard
+   (admin.js). Each has an id; a member gets each id once, and none at all
+   after pressing the unsubscribe link in any of them. */
+const API_SITE = 'https://api.thetechhut.co';
+export async function unsubscribeUrl(env, uid) {
+  return API_SITE + '/market/unsubscribe?t=' + encodeURIComponent(await sign({ k: 'nu', u: uid, x: Date.now() + 3 * 365 * DAY }, env.MARKET_SECRET));
+}
+function footer(unsub) {
+  return '<p style="font-size:13px;color:#5B6B7B;border-top:1px solid #DCE3E8;padding-top:14px;margin-top:22px">You are getting this because you have an account on The Tech Hut prompt marketplace. '
+    + 'Questions? Reply to this email. <a href="' + esc(unsub) + '" style="color:#5B6B7B">Unsubscribe from marketplace announcements</a>.</p>';
+}
+export const ANNOUNCEMENTS = {
+  'media-2026-11': {
+    label: 'Example images and videos on prompts (Nov 2026)',
+    build(u, unsub) {
+      const hi = 'Hi' + (u && u.name ? ' ' + esc(u.name) : '') + ',';
+      const html = MAIL_TOP
+        + '<p style="margin:0 0 6px;font-family:Menlo,monospace;font-size:12px;letter-spacing:1px;color:#046B52">PROMPT MARKETPLACE &middot; NEW</p>'
+        + '<p style="font-family:Georgia,serif;font-size:26px;font-weight:700;margin:6px 0 12px">Your prompts can now show what they make</p>'
+        + '<p style="font-size:17px">' + hi + '</p>'
+        + '<p style="font-size:17px">From today you can add up to <b>three example images</b> and a <b>YouTube video</b> to any prompt on the marketplace. A screenshot of the result, a before and after, or a short demo shows people exactly what they get before they copy or buy.</p>'
+        + '<ul style="font-size:16.5px;padding-left:20px;margin:0 0 18px">'
+        + '<li style="margin-bottom:10px"><b>Two minutes per prompt.</b> Open My account, press Edit on a prompt, and add images under "Example images". Photos from your phone are shrunk, and their location details removed, before they upload.</li>'
+        + '<li style="margin-bottom:10px"><b>Seen everywhere.</b> Your first image becomes the prompt\'s picture in the marketplace, and every image and the video sit on its page.</li>'
+        + '<li style="margin-bottom:10px"><b>A new Video category</b> for prompts that make videos, animations and shorts.</li></ul>'
+        + '<p style="font-size:16.5px">Prompts that show their results are easier to trust. If you have posted one, this is a quick way to help it get found and bought.</p>'
+        + '<p style="margin:22px 0 10px">' + button(SITE + '/prompts/#account', 'Add images to my prompts', true) + button(SITE + '/prompts/', 'See the marketplace') + '</p>'
+        + footer(unsub) + '</div>';
+      const text = hi + '\n\nFrom today you can add up to three example images and a YouTube video to any prompt on The Tech Hut marketplace. A screenshot of the result, a before and after, or a short demo shows people exactly what they get before they copy or buy.\n\n'
+        + '- Two minutes per prompt: open My account, press Edit on a prompt, and add images under "Example images". Phone photos are shrunk, and their location details removed, before they upload.\n'
+        + '- Seen everywhere: your first image becomes the prompt\'s picture in the marketplace, and every image and the video sit on its page.\n'
+        + '- A new Video category for prompts that make videos, animations and shorts.\n\n'
+        + 'Add images to your prompts: ' + SITE + '/prompts/#account\nSee the marketplace: ' + SITE + '/prompts/\n\n'
+        + 'You are getting this because you have an account on The Tech Hut prompt marketplace. Unsubscribe from marketplace announcements: ' + unsub + '\n';
+      return { subject: 'New on the marketplace: show what your prompts make', html, text };
+    },
+  },
+};
+
+/* Sends one announcement to the next `batch` members who have not had it,
+   or only to `testTo` (the admin) without marking anyone.
+   -> { sent, failed, remaining, total, off } */
+export async function sendAnnouncement(env, aid, { testTo, batch = 25 } = {}) {
+  const a = ANNOUNCEMENTS[aid];
+  if (!a) return { error: 'Unknown announcement.' };
+  if (!env.BREVO_API_KEY || !env.BREVO_SENDER_EMAIL) return { error: 'Brevo is not set up.' };
+  const send = async (to, mail, unsub) => {
+    try {
+      const r = await fetch(BREVO + '/smtp/email', {
+        method: 'POST', headers: { 'api-key': env.BREVO_API_KEY, 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ sender: { name: env.BREVO_SENDER_NAME || 'The Tech Hut', email: env.BREVO_SENDER_EMAIL }, to: [{ email: to }],
+          replyTo: { email: 'info@thetechhut.co' }, subject: mail.subject, htmlContent: mail.html, textContent: mail.text, tags: ['market-news', aid],
+          headers: { 'List-Unsubscribe': '<' + unsub + '>', 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' } }),
+      });
+      return r.ok;
+    } catch (e) { return false; }
+  };
+  if (testTo) {
+    const unsub = API_SITE + '/market/unsubscribe?t=test';
+    const ok = await send(testTo, a.build({ name: 'there' }, unsub), unsub);
+    return ok ? { sent: 1, test: true } : { error: 'Brevo did not accept the test email.' };
+  }
+  const aud = await call(env, { op: 'audience', aid, limit: batch });
+  let sent = 0; const done = [];
+  for (const u of aud.due) {
+    const unsub = await unsubscribeUrl(env, u.id);
+    if (await send(u.email, a.build(u, unsub), unsub)) { sent++; done.push(u.id); }
+  }
+  if (done.length) await call(env, { op: 'told', aid, ids: done });
+  return { sent, failed: aud.due.length - sent, remaining: aud.remaining - sent, total: aud.total, off: aud.off, already: aud.sent + sent };
+}
+export async function announcementStatus(env) {
+  const out = [];
+  for (const [id, a] of Object.entries(ANNOUNCEMENTS)) {
+    const aud = await call(env, { op: 'audience', aid: id, limit: 0 });
+    out.push({ id, label: a.label, sent: aud.sent, remaining: aud.remaining, total: aud.total, off: aud.off });
+  }
+  return out;
 }
 
 /** Sent when a member posts a new prompt: its link, and buttons to share it. */
@@ -546,6 +645,18 @@ export async function handleMarket(req, env, url, origin, deps) {
     return new Response(JSON.stringify({ banks }), { status: 200, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=3600', ...deps.cors(origin) } });
   }
   if (req.method === 'GET' && route.startsWith('media/')) return serveMedia(env, route.slice(6), url);
+  if ((req.method === 'GET' || req.method === 'POST') && route === 'unsubscribe') {
+    // GET from the email's link, POST from mail apps' one-click unsubscribe (RFC 8058).
+    const t = await unsign(url.searchParams.get('t') || '', env.MARKET_SECRET, 'nu', now);
+    if (t) await call(env, { op: 'unsub', uid: t.u });
+    const msg = t ? 'You will not get marketplace announcements any more. Sign-in links, receipts and sale emails still arrive, because they are part of using your account.'
+      : 'That link is not valid. Email info@thetechhut.co and we will take you off the list.';
+    return new Response('<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Unsubscribed | The Tech Hut</title>'
+      + '<body style="font-family:Arial,sans-serif;max-width:520px;margin:60px auto;padding:0 20px;color:#073B4C;line-height:1.55">'
+      + '<p style="font-family:Georgia,serif;font-weight:700;font-size:22px">The Tech Hut<span style="color:#06D6A0">.</span></p>'
+      + '<h1 style="font-family:Georgia,serif;font-size:26px">' + (t ? 'Done.' : 'Hmm.') + '</h1><p>' + msg + '</p><p><a href="' + SITE + '/prompts/" style="color:#046B52">Back to the marketplace</a></p></body>',
+      { status: t ? 200 : 400, headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex' } });
+  }
   if (req.method !== 'POST') return json({ error: 'not found' }, 404, origin);
   if (route === 'upload') return uploadMedia(req, env, origin, deps, now);
   const b = await req.json().catch(() => ({}));
