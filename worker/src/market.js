@@ -66,7 +66,7 @@ const LINK_TTL = 20 * MIN;
 const SESSION_TTL = 60 * DAY;
 export const COMMISSION_PERCENT = 10;
 export const PRICE_MIN = 50, PRICE_MAX = 20000;     // KES; 0 means free
-export const CATS = ['writing', 'coding', 'career', 'marketing', 'data', 'images', 'business', 'learning', 'other'];
+export const CATS = ['writing', 'coding', 'career', 'marketing', 'data', 'images', 'video', 'business', 'learning', 'other'];
 export const MODELS = ['any', 'chatgpt', 'claude', 'gemini', 'copilot', 'midjourney', 'other'];
 const HIDE_AFTER_REPORTS = 5;
 

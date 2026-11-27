@@ -34,7 +34,7 @@ var SHELL = path.join(ROOT, 'prompts', 'p', 'index.html');
 var API = process.env.MARKET_API || 'https://api.thetechhut.co/market/prompts';
 var SITE = 'https://thetechhut.co';
 var CAT = { writing: 'Writing', coding: 'Coding', career: 'Career & CVs', marketing: 'Marketing', data: 'Data & analysis',
-            images: 'Images', business: 'Business', learning: 'Learning', other: 'Other' };
+            images: 'Images', video: 'Video', business: 'Business', learning: 'Learning', other: 'Other' };
 var MODEL = { any: 'Any AI', chatgpt: 'ChatGPT', claude: 'Claude', gemini: 'Gemini', copilot: 'Copilot', midjourney: 'Midjourney', other: 'Other' };
 var ID = /^[a-z0-9]{6,20}$/, PATH = /^\/prompts\/p\/[a-z0-9]{6,20}\/([a-z0-9-]{1,60}\/)?$/;
 
